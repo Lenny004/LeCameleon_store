@@ -60,7 +60,7 @@
 }
 
 #boton_categoria option:hover {
-    color: #2f6950;
+    color: #2f6950 ;
 }
 
 #buscador {
@@ -128,6 +128,10 @@
     border-radius: 100%!important;
     align-content: center!important;
     justify-content: center!important;
+}
+
+.material-tooltip{
+    background-color: #2f6950 !important;
 }
 
 #menu a {
@@ -251,6 +255,33 @@ footer {
 /*-Botones de links de redes sociales-*/
 #redes a {
     margin-right: 7px;
+}
+
+/*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
+.instagram:hover{
+    /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
+    filter: saturate(90%) opacity(0.3) drop-shadow(2px 2px 5px #bd00a7); 
+}
+
+/*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
+.facebook:hover{
+    /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
+    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #01c7ee); 
+}
+
+/*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
+.youtube:hover{
+    /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
+    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #f10000); 
+}
+
+.tiktok:hover{
+    /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
+    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #7c41da); 
 }
 
 /*-Le damos un tamaño al input donde se colocar un correo-*/
