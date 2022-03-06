@@ -43,6 +43,15 @@
 #usuario img{
     max-height: 45px;
     max-width: 45px;
+    cursor: pointer;
+}
+
+#usuario i{
+    cursor: pointer;
+}
+
+#dropdown_usuario{
+    width: 200px!important;
 }
 
 #opciones_movil img{
