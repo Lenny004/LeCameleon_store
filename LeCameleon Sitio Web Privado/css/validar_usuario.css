@@ -9,6 +9,7 @@ section{
     flex: 1 0 auto;
 }
 
+/*Alineamos la Card al centro de la página*/
 #contenido{
     display: flex;
     flex-direction: column;
@@ -22,7 +23,8 @@ section{
     max-height: 135px;
 }
 
-#tarjeta_login{
+/*Le asignamos un tamaño y otras propiedades a la card*/
+#tarjeta_validacion{
     height: 500px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
@@ -33,66 +35,49 @@ section{
     align-items: flex-start;
 }
 
-#imagen_usuario{
+/*Alineamos la imagen al centro de la card*/
+#imagen_mensaje{
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
     justify-content: center;
 }
 
-.card-content{
-    height: 420px;
-    width: 390px;
-}
-
-/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_login h5{
-    color: #282012;
-    font-weight: bold;
-}
-
-/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
-#tarjeta_login p{
-    color: #2f6950;
-    width: 100px;
-}
-
-#credenciales{
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-between;
-}
-
-#credenciales a{
-    color: #36465d;
-}
-
-#password{
-    width: 300px;
-}
-
-#contra{
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-between;
-}
-
-#contra img{
-    margin-top: 20px !important;
-    position: relative !important;
-    height: 25px !important;
-    width: 25px !important;
-    cursor: pointer;
-}
-
-/*Le damos un nuevo tamaño a la imagen del usuario*/
-#tarjeta_login img{
+/*Le damos un nuevo tamaño a la imagen del mensaje*/
+#imagen_mensaje img{
     height: 60px;
     width: 60px;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
+#tarjeta_validacion h5{
+    color: #282012;
+    font-weight: bold;
+}
+
+#anuncio{
+    font-size: small;
+    text-align: center;
+    color: #282012;
+}
+
+/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
+#codigo p{
+    color: #2f6950;
+}
+
+#reenviar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+#reenviar a{
+    color: #36465d;
 }
 
 #boton_iniciar{
@@ -168,21 +153,16 @@ footer {
 /*para celulares*/
 @media screen and (max-width: 374px){
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
+    #tarjeta_validacion{
+        max-height: 500px;
         max-width: 300px;
-    }
-
-    .card-content{
-        height: 350px;
-        width: 300px;
     }
 
     #boton_iniciar{
         width: 300px;   
     }
 
-    #tarjeta_login {
+    #tarjeta_validacion{
         font-size: smaller;
     }
 
@@ -218,13 +198,8 @@ footer {
 
 @media screen and (min-width:375px) and (max-width:576px){
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
-        max-width: 360px;
-    }
-
-    .card-content{
-        height: 380px;
+    #tarjeta_validacion{
+        height: 450px;
         width: 360px;
     }
 
@@ -234,7 +209,7 @@ footer {
         width: 360px;   
     }
 
-    #tarjeta_login{
+    #tarjeta_validacion{
         font-size: smaller;
     }
     

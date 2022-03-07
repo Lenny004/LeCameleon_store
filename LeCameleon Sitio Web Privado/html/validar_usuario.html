@@ -3,7 +3,7 @@
 
 <head>
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../css/login_privado.css" />
+    <link type="text/css" rel="stylesheet" href="../css/validar_usuario.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../css/fuente.css">
     <!--Import Google Icon Font-->
@@ -17,7 +17,7 @@
 </head>
 
 <!--Nombre de la página-->
-<title>Le Caméléon Iniciar Sesión</title>
+<title>Le Caméléon Validación</title>
 
 <body>
     <!--Contenido del sitio web-->
@@ -26,29 +26,31 @@
             <div id="logo">
                 <img src="../recursos/imagenes/logo_icon2.png" alt="logo">
             </div>
-            <div class="card" id="tarjeta_login">
+            <div class="card" id="tarjeta_validacion">
                 <div class="card-content white-text">
-                    <h5>Iniciar Sesión</h5>
+                    <h5>Validar Usuario</h5>
                     <li class="divider"></li>
-                    <div id="imagen_usuario">
-                        <img src="../recursos/iconografia/usuario_redondo.png" alt="usuario">
+                    <div id="imagen_mensaje">
+                        <img src="../recursos/iconografia/correo_validacion.png" alt="mensaje">
+                    </div>
+                    <div id="anuncio">
+                        <p>Se ha enviado un código de acceso a su correo brindado en el apartado anterior. Por favor ingresa tú código abajo</p>
                     </div>
                     <div class="input-field">
-                        <p>Usuario:</p>
-                        <input id="email" type="email" class="validate">
+                        <div id="codigo">
+                            <p>Código de acceso:</p>
+                        </div>
+                        <div>
+                            <input id="text" type="tel" class="validate">
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <div id="credenciales">
-                            <p>Contraseña</p>
-                            <a href="../html/recuperar_contra.html"><u>¿Olvidaste tu contraseña?</u></a>
-                        </div>
-                        <div id="contra">
-                            <input id="password" type="password" class="validate"><img src="../recursos/iconografia/ocultar.png" alt="mostrar">
-                        </div>
+                    <div id="reenviar">
+                        <a href=""><u>¿No recibiste ningún código?</u></a>
+                        <a href=""><u>Reenviar</u></a>
                     </div>
                 </div>
                 <div class="card-action" id="boton_iniciar">
-                    <a class="btn-small waves-effect waves-orange" href="../index.html">Iniciar Sesión</a>
+                    <a class="btn-small waves-effect waves-orange" href="../html/login_privado.html">Iniciar Sesión</a>
                 </div>
             </div>
         </div>

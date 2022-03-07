@@ -9,6 +9,7 @@ section{
     flex: 1 0 auto;
 }
 
+/*Alineamos la Card al centro de la página*/
 #contenido{
     display: flex;
     flex-direction: column;
@@ -22,8 +23,9 @@ section{
     max-height: 135px;
 }
 
-#tarjeta_login{
-    height: 500px;
+/*Le asignamos un tamaño y otras propiedades a la card*/
+#tarjeta_renovar{
+    height: 550px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
     margin-bottom: 45px;
@@ -33,69 +35,44 @@ section{
     align-items: flex-start;
 }
 
-#imagen_usuario{
+.card-content{
+    width: 99%;
+}
+
+/*Alineamos la imagen al centro de la card*/
+#imagen_mensaje{
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
     justify-content: center;
 }
 
-.card-content{
-    height: 420px;
-    width: 390px;
-}
-
-/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_login h5{
-    color: #282012;
-    font-weight: bold;
-}
-
-/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
-#tarjeta_login p{
-    color: #2f6950;
-    width: 100px;
-}
-
-#credenciales{
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-between;
-}
-
-#credenciales a{
-    color: #36465d;
-}
-
-#password{
-    width: 300px;
-}
-
-#contra{
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-between;
-}
-
-#contra img{
-    margin-top: 20px !important;
-    position: relative !important;
-    height: 25px !important;
-    width: 25px !important;
-    cursor: pointer;
-}
-
-/*Le damos un nuevo tamaño a la imagen del usuario*/
-#tarjeta_login img{
+/*Le damos un nuevo tamaño a la imagen del mensaje*/
+#imagen_mensaje img{
     height: 60px;
     width: 60px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-#boton_iniciar{
+/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
+#tarjeta_renovar h5{
+    color: #282012;
+    font-weight: bold;
+}
+
+#anuncio{
+    font-size: small;
+    text-align: center;
+    color: #282012;
+}
+
+/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
+#codigo p{
+    color: #2f6950;
+}
+
+#boton_renovar{
     width: 400px;
     display: flex;
     flex-direction: row;
@@ -104,16 +81,16 @@ section{
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_iniciar a{
-    background-color: #DA7D27;
+#boton_renovar a{
+    background-color: #b51d26;
     box-shadow: none;
 }
 
-#boton_iniciar a:hover{
+#boton_renovar a:hover{
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
-    border: 1.5px solid #DA7D27;
-    color: #DA7D27;
+    border: 1.5px solid #b51d26;
+    color: #b51d26;
 }
 
 /*---------------------------------Footer--------------------------------*/
@@ -168,21 +145,21 @@ footer {
 /*para celulares*/
 @media screen and (max-width: 374px){
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
+    #tarjeta_renovar{
+        max-height: 500px;
         max-width: 300px;
     }
 
     .card-content{
-        height: 350px;
-        width: 300px;
+        width: 99%;
     }
+    
 
-    #boton_iniciar{
+    #boton_renovar{
         width: 300px;   
     }
 
-    #tarjeta_login {
+    #tarjeta_renovar{
         font-size: smaller;
     }
 
@@ -218,24 +195,20 @@ footer {
 
 @media screen and (min-width:375px) and (max-width:576px){
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
-        max-width: 360px;
+    #tarjeta_renovar{
+        height: 500px;
+        width: 360px;
+        font-size: smaller;
     }
 
     .card-content{
-        height: 380px;
-        width: 360px;
+        width: 99%;
     }
 
-    #boton_iniciar{
+    #boton_renovar{
         margin: 0px;
         padding: 0px;
         width: 360px;   
-    }
-
-    #tarjeta_login{
-        font-size: smaller;
     }
     
     /*Editamos el footer*/
