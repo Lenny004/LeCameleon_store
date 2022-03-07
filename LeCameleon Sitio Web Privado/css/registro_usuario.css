@@ -12,11 +12,22 @@ section{
 
 #formulario{
     width: 100%;
+    margin-top: 50px;
     display: flex;
     flex-direction: row-reverse;
     align-content: space-between;
     align-items:center;
     justify-content: space-between;
+}
+
+#formulario h5{
+    color: #282012;
+    font-weight: 600;
+}
+
+#formulario li{
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
@@ -29,11 +40,20 @@ section{
     color:#36465d;
 }
 
+#datos img{
+    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
 #boton_registrar{
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
     justify-content: center;
+    margin-bottom: 25px;
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
@@ -75,7 +95,6 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    justify-content: center;
 }
 
 /*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
@@ -94,4 +113,137 @@ footer {
     font-weight: bolder;
     color: #282012;
     padding: 5px;
+}
+
+/*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
+
+/*para celulares*/
+@media screen and (max-width: 374px){
+    #formulario{
+        width: 95%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo img{
+        max-width: 250px;
+        max-height: 230px;
+    }
+
+    /*-Footer Terminos-*/
+    #pie{
+        position: relative;
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos{
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width:375px) and (max-width:576px){
+    #formulario{
+        width: 90%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo img{
+        max-width: 320px;
+        max-height: 245px;
+        margin-left: -15px;
+        position: relative;
+    }
+
+    /*Editamos el footer*/
+    #pie{
+        position: relative;
+        font-size: small;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos{
+        font-size: small;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width:577px) and (max-width:765px){
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo img{
+        max-width: 200px;
+        max-height: 245px;
+        margin-left: 35px;
+        position: relative;
+    }
+    
+    /*Editamos el footer*/
+    #pie{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos{
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
 }
