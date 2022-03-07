@@ -1,0 +1,97 @@
+/*Mantener fijo el footer abajo*/
+body {
+    display: flex;
+    /*100vh = altura del viewport*/
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+section{
+    flex: 1 0 auto;
+}
+
+#formulario{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: space-between;
+    align-items:center;
+    justify-content: space-between;
+}
+
+/*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+#logo img{
+    max-width: 340px;
+    max-height: 300px;
+}
+
+#datos span{
+    color:#36465d;
+}
+
+#boton_registrar{
+    display: flex;
+    flex-direction: row;
+    /* Alinear items en el centro */
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_registrar a{
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_registrar a:hover{
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+/*---------------------------------Footer--------------------------------*/
+
+/*-Colocamos un color al footer-*/
+footer {
+    background-color: #f8cc93;
+    bottom: 0;
+    position: relative;
+}
+
+/*-Footer Terminos-*/
+#pie{
+    position: relative;
+    font-size: smaller;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.terminos{
+    margin-left: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+}
+
+/*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
+.terminos p{
+    font-weight: bold;
+}
+
+#sitio_privado{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#sitio_privado a{
+    font-weight: bolder;
+    color: #282012;
+    padding: 5px;
+}
