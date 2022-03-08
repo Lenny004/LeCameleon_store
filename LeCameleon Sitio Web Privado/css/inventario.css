@@ -204,34 +204,39 @@ footer {
         max-width: 40px;
     }
 
-    .titulo_graficas{
+    .titulo_inventario{
         font-size: 35px;
+    }
+
+    #tarjetas{
+        text-align: center;
+        display: flex;
+        flex-direction: column ;
+        justify-content:center ;
+        align-items:center ;
     }
     
     #tarjetas a{
         font-size: 10px;
         margin-right: -8px;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        height: 20px !important;
-        padding: 0;
 
         display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items:center;
-        align-content: center;
-        align-self: center;
+        flex-direction: column ;
+        justify-content:center ;
+        align-items:center ;
     }
 
     #tarjetas span{
         font-size: 15px;
+        font-weight: 600;
+    }
+
+    #tarjetas p{
+        font-size: small;
     }
 
     .card {
-        padding: 5px;
+        padding: 8px;
     }
     
     .card img {
@@ -274,29 +279,34 @@ footer {
         max-width: 40px;
     }
 
-    .titulo_graficas{
+    .titulo_inventario{
         font-size: 40px;
+    }
+
+    #tarjetas{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
     }
     
     #tarjetas a{
-        color: #2f6950;
         font-size: 11px;
-        padding: 0px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin: 0;
+        margin-right: -8px;
 
         display: flex;
         flex-direction: column;
         justify-content:center;
         align-items:center;
-        align-content: center;
-        align-self: center;
     }
 
-    /*Titulos de las tarjetas*/
     #tarjetas span{
         font-size: 20px;
+    }
+
+    #tarjetas p{
+        font-size: small;
     }
 
 
@@ -334,28 +344,26 @@ footer {
         max-width: 40px;
     }
 
-    .titulo_graficas{
+    .titulo_inventario{
         font-size: 45px;
     }
 
     #tarjetas a{
-        font-size: 15px;
-        padding: 0px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin: 0;
+        font-size: 11px;
+        margin-right: -8px;
 
         display: flex;
         flex-direction: column;
         justify-content:center;
         align-items:center;
-        align-content: center;
-        align-self: center;
     }
 
-    /*Titulos de las tarjetas*/
     #tarjetas span{
         font-size: 22px;
+    }
+
+    #tarjetas p{
+        font-size: medium;
     }
 }
 
