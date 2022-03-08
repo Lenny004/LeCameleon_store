@@ -1,0 +1,1021 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+section {
+    min-height: 700px;
+    flex: 1 0 auto;
+}
+
+/*Barra de color que anuncia ofertas*/
+#barra_anuncio {
+    height: 42px;
+    background-color: #2f6950;
+}
+
+/*Modificamos del contenedor de logo, nombre, tipo usuario y imagen usuario*/
+#apartado_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+/*Le asignamos tamaño a la imagen del logo*/
+#logo_imagen img{
+    max-height: 75px;
+    max-width: 284px;
+}
+
+#usuario p{
+    font-weight: 600;
+    color: #36465d;
+    display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-content:flex-start;
+    margin-right: 25px;
+}
+
+#usuario{
+    padding: 10px 20px 5px 15px;
+    display: flex;
+	flex-direction: row;
+	align-items:center;
+	align-content: center;
+}
+
+/*Le asignamos tamaño a la imagen de usuario*/
+#usuario img{
+    max-height: 45px;
+    max-width: 45px;
+    cursor: pointer;
+}
+
+#usuario i{
+    cursor: pointer;
+}
+
+#dropdown_usuario{
+    width: 200px!important;
+}
+
+#dropdown_usuario img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    top: 4px;
+    position: relative;
+}
+
+#opciones_movil img{
+    width: 20px;
+    height: 20px;
+    top: 4px;
+    margin-right: 10px;
+    position:relative;
+}
+
+#menu a {
+    color: #4a4a4a;
+    min-width: 155px;
+    max-width: 250px;
+}
+
+/*Cuando se coloque el mouse encima de una opción del mouse, las letras cambian de color*/
+#menu a:hover {
+    color: #2f6950;
+}
+
+#menu.sticky {
+    position: fixed;
+    top: 0;
+}
+
+/*Menú para moviles le cambiamos el color de las letras en el sidenav*/
+.user-view a{
+    color: #ffffff;
+}
+
+/*---------------------------------SECTION--------------------------------*/
+
+section{
+    color: #282012;
+    position:relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+/*Colocamos el titulo y la caja con los estados a un extremo del otro*/
+#informacion{
+    padding: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#informacion h4{
+    font-weight: bold;
+}
+
+/*La caja de estado del pedido su contenido lo colocamos en fila*/
+#estado_pedido{
+    width: 720px;
+    border: solid 2px #bfbfbf;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+#estado_pedido p{
+    font-size: small;
+    margin-right: 15px;
+}
+
+#rojo{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#rojo a{
+    background-color: #b51d26;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#amarillo{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#amarillo a{
+    background-color: #da7d27;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#azul{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#azul a{
+    background-color: #36465d;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#verde{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#verde a{
+    background-color: #8cc43f;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+/*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+#pedidos{
+    width: 1280px;
+    height: 210px;
+    border: 1px solid #282012;
+    margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/*Le damos una posición y tamaño a la imagen del camión*/
+#pedidos img{
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: 45px;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar{
+    right: 5%;
+    position: relative;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar2{
+    right: 5%;
+    position: relative;
+}
+
+/*Se pueden tomar el pedido*/
+#tomar a{
+    background-color: #da7d27;
+}
+
+/*El pedido esta en camino*/
+#tomar2 a{
+    background-color: #8cc43f;
+}
+
+/*Movemos la información a la izquierda*/
+#direccion{
+    font-size: small;
+    left: 22%;
+    position:absolute;
+}
+
+/*Agregamos negrita a los titulos internos de la tarjeta*/
+#direccion h6{
+    font-weight: bold;
+}
+
+/*Colores de las tarjetas dependiendo de su estado*/
+#pendiente a{
+    background-color: #d32f2f;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#disponible a{
+    background-color: #da7d27;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#entregando a{
+    background-color: #8cc43f;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#no_disponible a{
+    background-color: #36465d;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+/*Le asignamos un color al toolstip*/
+.material-tooltip{
+    background-color: #2f6950 !important;
+}
+
+
+/*---------------------------------Footer--------------------------------*/
+
+/*-Colocamos un color al footer-*/
+footer {
+    background-color: #f8cc93;
+}
+
+/*-Footer Terminos-*/
+#pie{
+    position: relative;
+    font-size: smaller;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.terminos{
+    margin-left: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+}
+
+/*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
+.terminos p{
+    font-weight: bold;
+}
+
+#sitio_privado{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#sitio_privado a{
+    font-weight: bolder;
+    color: #282012;
+    padding: 5px;
+}
+
+/*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
+
+/*para celulares*/
+@media screen and (max-width: 374px){
+    #menu_desplegable{
+        max-width: 40px;
+    }
+
+    #titulo_buscador h4{
+        font-size: 20px;
+    }
+
+    /*-----------------------SECTION-----------------------*/
+
+    section{
+        color: #282012;
+        position:relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+    
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 270px;
+        height: 600px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        position: relative;
+    }
+    
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 200px;
+        max-height: 200px;
+        margin-left: 0px;
+    }
+    
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+    
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+    
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+    
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+    
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #disponible a{
+        background-color: #da7d27;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #entregando a{
+        background-color: #8cc43f;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #no_disponible a{
+        background-color: #36465d;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    /*------------------------------Footer Terminos------------------------*/
+    #pie{
+        position: relative;
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos{
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+
+@media screen and (min-width:375px) and (max-width:576px){
+    #menu_desplegable{
+        max-width: 40px;
+    }
+
+    /*-----------------------SECTION-----------------------*/
+
+    section{
+        color: #282012;
+        position:relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 330px;
+        height: 700px;
+        border: 1px solid #282012;
+        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 250px;
+        max-height: 250px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    /*Editamos el footer*/
+    #pie{
+        position: relative;
+        font-size: small;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos{
+        font-size: small;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width:577px) and (max-width:765px){
+    #menu_desplegable{
+        max-width: 40px;
+    }
+
+    section{
+        color: #282012;
+        position:relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 500px;
+        height: 700px;
+        border: 1px solid #282012;
+        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 400px;
+        max-height: 400px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+}
+
+@media screen and (min-width:766px) and (max-width:909px) {
+    #menu_desplegable{
+        max-width: 40px;
+    }
+    
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 740px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a{
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 12px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a{
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 5px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        font-size: small;
+        left: 22%;
+        position:absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+}
+
+@media screen and (min-width:910px) and (max-width:1133px){
+    #menu_desplegable{
+        max-width: 60px;
+    }
+
+    #informacion p{
+        font-size: smaller;
+    }
+
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 865px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a{
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a{
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -7px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        font-size: small;
+        left: 22%;
+        position:absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+}
+
+@media screen and (min-width:1134px) and (max-width:1333px) {
+    #pedidos{
+        width: 1080px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+}

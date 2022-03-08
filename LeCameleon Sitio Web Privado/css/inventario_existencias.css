@@ -102,54 +102,35 @@ section {
     color: #ffffff;
 }
 
-/*------------------------------------------SECTION------------------------------------------*/
+/*---------------------------------SECTION--------------------------------*/
 
-/*Alinea el titulo al lado izquierdo*/
-.titulo_inventario{
-    text-align: left;
+#titulo_buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/*Modificamos*/
-#tarjetas {
-    background-color: #e8d9d9;
-    margin-top: 20px;
-    margin-bottom: 20px;
+#buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-#tarjetas:hover{
-    box-shadow: 0px 0px 4px 4px rgba(47, 105, 80, 0.8);
+#buscador nav {
+    height: 40px;
 }
 
-#tarjetas a{
-    color: #2f6950;
+#buscador a {
+    margin-left: 5px;
 }
 
-#tarjetas a:hover{
-    color: #ffff;
+#buscador form {
+    max-width: 450px;
+    max-height: 40px;
+    color: #777676;
 }
 
-#tarjetas p{
-    font-size: small;
-}
-
-#tarjetas span{
-    font-size: 18px;
-}
-
-.card img {
-    height: 200px;
-    width: 250px;
-}
-
-.card a {
-    border: 2px solid #2f6950;
-    padding: 5px 35px 5px 35px;
-}
-
-.card a:hover {
-    background-color: #2f6950;
-}
 
 /*---------------------------------Footer--------------------------------*/
 
@@ -204,45 +185,28 @@ footer {
         max-width: 40px;
     }
 
-    .titulo_inventario{
-        font-size: 35px;
+    #titulo_buscador h4{
+        font-size: 20px;
     }
 
-    #tarjetas{
-        text-align: center;
+    /*-----------------------SECTION-----------------------*/
+
+    #titulo_buscador{
+        padding-bottom: 25px;
         display: flex;
-        flex-direction: column ;
-        justify-content:center ;
-        align-items:center ;
-    }
-    
-    #tarjetas a{
-        font-size: 10px;
-        margin-right: -8px;
-
-        display: flex;
-        flex-direction: column ;
-        justify-content:center ;
-        align-items:center ;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjetas span{
-        font-size: 15px;
-        font-weight: 600;
+    #tabla th{
+        font-size: 12px;
     }
 
-    #tarjetas p{
-        font-size: small;
+    #tabla td{
+        font-size: 12px;
     }
 
-    .card {
-        padding: 8px;
-    }
-    
-    .card img {
-        height: 100px;
-        width: 100px;
-    }
 
     /*-Footer Terminos-*/
     #pie{
@@ -279,37 +243,16 @@ footer {
         max-width: 40px;
     }
 
-    .titulo_inventario{
-        font-size: 40px;
-    }
+    /*-----------------------SECTION-----------------------*/
 
-    #tarjetas{
-        text-align: center;
+    #titulo_buscador{
+        padding-bottom: 25px;
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
     
-    #tarjetas a{
-        font-size: 11px;
-        margin-right: -8px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items:center;
-    }
-
-    #tarjetas span{
-        font-size: 20px;
-    }
-
-    #tarjetas p{
-        font-size: small;
-    }
-
-
     /*Editamos el footer*/
     #pie{
         position: relative;
@@ -343,53 +286,11 @@ footer {
     #menu_desplegable{
         max-width: 40px;
     }
-
-    .titulo_inventario{
-        font-size: 45px;
-    }
-
-    #tarjetas a{
-        font-size: 11px;
-        margin-right: -8px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items:center;
-    }
-
-    #tarjetas span{
-        font-size: 22px;
-    }
-
-    #tarjetas p{
-        font-size: medium;
-    }
 }
 
 @media screen and (min-width:766px) and (max-width:909px) {
     #menu_desplegable{
         max-width: 40px;
-    }
-
-    #tarjetas a{
-        font-size: 16px;
-        padding: 0px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin: 0;
-
-        display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items:center;
-        align-content: center;
-        align-self: center;
-    }
-
-    /*Titulos de las tarjetas*/
-    #tarjetas span{
-        font-size: 25px;
     }
 }
 
@@ -398,34 +299,13 @@ footer {
         max-width: 60px;
     }
 
-    #tarjetas a{
-        font-size: 15px;
-        padding: 0px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin: 0;
-
-        display: flex;
-        flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
-        align-content: center;
-        align-self: center;
-    }
+    .container{
+        padding-top: 70px;
+    }    
 }
 
 @media screen and (min-width:1134px) and (max-width:1333px) {
-    /*Le asignamos nuevos valores a las card*/
-    #tarjetas a{
-        font-size: 15px;
-        padding: 0px;
-        margin: 0;
-
-        display: flex;
-        flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
-        align-content: center;
-        align-self: center;
-    }
+    .container{
+        padding-top: 70px;
+    }    
 }
