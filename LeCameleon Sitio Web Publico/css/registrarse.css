@@ -1,0 +1,159 @@
+section{
+    align-items: center;
+}
+#Letras_usuario{
+    font-size: 42px;
+    padding-left: 20%;
+
+    display: flex;
+}
+#contenedorsito{
+    background-color: #f8cc93;
+    height: 5px;
+}
+#contenedores{
+    height: 770px;
+}
+
+#nomelacontainer{
+    position: relative;
+    padding-top: 1%;
+    padding-left: 15%;
+    width:45%;
+    float: left;
+}
+#containing{
+    height: 650px;
+}
+#loguito{
+    padding-top: 5%;
+    bottom: 250px;
+    max-width: 550px;
+    max-height: 550px;
+}
+#Boton_registrar{
+    background-color: coral;
+    bottom: 175px;
+    position: absolute;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 375px){
+    
+    /*Le asignamos un tamaño al texto*/
+
+   #Letras_usuario{
+       text-align: center;
+       font-size: 40px;
+       padding-left: 8%;
+       
+   }
+
+   #nomelacontainer{
+       padding-left: 2%;
+       width: 95%;
+
+}
+#Boton_registrar{
+    bottom: 175px;
+    text-align: center;
+    vertical-align: bottom;
+    left: 80px;
+}
+
+}
+/*Pantalla de celular1*/
+@media screen and (min-width:375px) and (max-width: 377px){
+
+
+    #Letras_usuario{
+        text-align: center;
+        font-size: 40px;        
+        
+    }
+    #nomelacontainer{
+        width: 100%;
+ 
+ }
+ #Boton_registrar{
+    bottom: 175px;
+    text-align: center;
+    vertical-align: bottom;
+    left: 100px;
+}
+
+}
+/*Pantalla de celular2*/
+@media screen and (min-width: 378px) and (max-width:700px
+){
+    
+   #Letras_usuario{
+    text-align: center;
+    font-size: 40px;
+    padding-left: 8%;
+    
+}
+
+#nomelacontainer{
+    padding-left: 2%;
+    width: 95%;
+
+}
+#Boton_registrar{
+ bottom: 100px;
+ left: 150px;
+ text-align: center;
+ vertical-align: bottom;
+}
+}
+/*Pantalla de tablet*/
+@media screen and (min-width:766px) and (max-width:909px) {
+    
+    #Letras_usuario{
+        text-align: center;
+        font-size: 40px;
+        padding-left: 8%;
+        
+    }
+    
+    #nomelacontainer{
+        width: 95%;
+        padding-left: 1%;
+    
+    }
+    #Boton_registrar{
+     bottom: 130px;
+     left: 300px;
+     text-align: center;
+     vertical-align: bottom;
+    }
+}
+/*Pantalla de laptop*/
+@media screen and (min-width: 910px) and (max-width: 1200px){
+    #Letras_usuario{
+        text-align: center;
+        font-size: 40px;
+        padding-left: 8%;
+        
+    }
+    
+    #nomelacontainer{
+        width: 40%;
+        padding-left: 1%;
+    
+    }
+    #Boton_registrar{
+     background-color: #2f6950;
+     bottom: 120px;
+     left: 400px;
+     text-align: center;
+     vertical-align: bottom;
+    }
+}
