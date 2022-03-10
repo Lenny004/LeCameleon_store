@@ -3,13 +3,13 @@
 
 <head>
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../css/inventario.css" />
+    <link type="text/css" rel="stylesheet" href="../css/estilo_categoria_priv.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../css/fuente.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection">
     <!--Importar un icono para el sitio web-->
     <link rel="icon" type="icon/png" href="../recursos/imagenes/logo_icon.png">
     <!--Let browser know website is optimized for mobile-->
@@ -17,7 +17,7 @@
 </head>
 
 <!--Nombre de la página-->
-<title>Le Caméléon Inventario</title>
+<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -41,21 +41,7 @@
                     <p>Administrador</p>
                 </div>
                 <div>
-                    <img href="../LeCameleon Sitio Web Privado/html/" src="../recursos/iconografia/usuario.png"
-                        alt="usuario">
-                    <i class="dropdown-trigger material-icons right" data-target="dropdown_usuario">arrow_drop_down</i>
-                    <!-- Estructura del Dropdown de Usuario-->
-                    <ul id="dropdown_usuario" class="dropdown-content">
-                        <li><a class="teal-text text-darken-4">Lenny Adrián Elías Sánchez</a></li>
-                        <li class="divider"></li>
-                        <li><a href="perfil.html" class="teal-text text-darken-4"><img src="../recursos/iconografia/usuario.png"
-                                    alt="perfil">Ver Perfil</a></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img
-                                    src="../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-                        <li class="divider"></li>
-                        <li><a href="../html/login_privado.html" class="teal-text text-darken-4"><img
-                                    src="../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
-                    </ul>
+                    <img src="../recursos/iconografia/usuario.png" alt="usuario">
                 </div>
             </div>
         </div>
@@ -81,7 +67,7 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Inventario -->
-                    <li><a class="dropdown-trigger" href="#"
+                    <li><a class="dropdown-trigger" href="inventario.html"
                             data-target="dropdown_inventarios">Inventario
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -95,7 +81,7 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Categorias -->
-                    <li><a class="dropdown-trigger" href="categoria_privado.html"
+                    <li><a class="dropdown-trigger" href="#"
                             data-target="dropdown_categorias">Categorias
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -107,7 +93,7 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Empleados y Usuarios -->
-                    <li><a class="dropdown-trigger" href="html/empleado_usuario.html"
+                    <li><a class="dropdown-trigger" href="empleado_usuario.html"
                             data-target="dropdown_empleados">Empleados y Usuarios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -152,7 +138,7 @@
                 <li class="divider"></li>
             </ul>
             <!-- Dropdown Trigger Inventario -->
-            <li><a class="dropdown-trigger" href="#" data-target="dropdown_inventario"><img
+            <li><a class="dropdown-trigger" href="inventario.html" data-target="dropdown_inventario"><img
                         src="recursos/iconografia/inventario.png" alt="inventario">Inventario
                     <i class="material-icons right">arrow_drop_down</i></a>
             </li>
@@ -166,30 +152,30 @@
                 <li class="divider"></li>
             </ul>
             <!-- Dropdown Trigger Categoria -->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown_accesorios"><img
+            <li><a class="dropdown-trigger" href="#" data-target="dropdown_accesorios"><img
                         src="recursos/iconografia/categorias.png" alt="categorias">Categorias
                     <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown de Categoria-->
             <ul id="dropdown_accesorios" class="dropdown-content">
-                <li><a href="#!">Categorias</a></li>
+                <li><a href="administrar_categorias_principales.html">Categorias</a></li>
                 <li class="divider"></li>
-                <li><a href="#!">Sub-Categorias</a></li>
+                <li><a href="administrar_subcategorias.html">Sub-Categorias</a></li>
                 <li class="divider"></li>
             </ul>
             <!-- Dropdown Trigger Empleados y Usuarios-->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown_artesanales"><img
+            <li><a class="dropdown-trigger" href="empleado_usuario.html" data-target="dropdown_artesanales"><img
                         src="recursos/iconografia/empleados_usuarios.png" alt="empleados">Empleados y
                     Usuarios <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown de Empleados y Usuarios-->
             <ul id="dropdown_artesanales" class="dropdown-content">
-                <li><a href="#!">Administrar Empleados</a></li>
+                <li><a href="administrar_empleados.html">Administrar Empleados</a></li>
                 <li class="divider"></li>
-                <li><a href="#!">Administrar Usuarios</a></li>
+                <li><a href="administrar_usuarios.html">Administrar Usuarios</a></li>
                 <li class="divider"></li>
             </ul>
-            <li><a href="#"><img src="recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
+            <li><a href="administrar_marca.html"><img src="recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
             <li><a href="proveedores.html"><img src="recursos/iconografia/distribuidor.png"
                         alt="distribuidor">Proveedores</a></li>
             <li><a href="monitorear_pedidos.html"><img src="recursos/iconografia/auto_pedidos.png"
@@ -198,76 +184,48 @@
                 <div class="divider"></div>
             </li>
             <li><a class="subheader">Configuración</a></li>
-            <li><a href="#"><img src="recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="perfil.html"><img src="recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
             <li><a href="#"><img src="recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-            <li><a href="#"><img src="recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
+            <li><a href="../index.html"><img src="recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <section>
-        <!--Tarjetas de Inventario-->
+        <!--Tarjetas de Categorias-->
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 xl12">
-                    <!--Titulo de tarjeta-->
-                    <h1 class="titulo_inventario">Inventario</h1>
+                    <!--Titulo de Categorias-->
+                    <h1 class="titulo_administrar">Categoria</h1>
                 </div>
                 <!--Card-->
-                <div class="col s12 m12 l6 xl6">
-                    <div class="card horizontal z-depth-3" id="tarjetas">
+
+                <div class="col s12 m8 l6 xl6">
+                    <div class="card horizontal" id="tarjetas">
                         <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../recursos/imagenes/inventario/visualizar_existencias.jpg">
+                            <img src="../recursos/imagenes/categorias/categorias.jpg">
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                                <!--Titulo de la Card-->
-                                <span class="card-title">Visualizar Existencias</span>
-                                <p>Visualizar datos y existencias de todos los productos.</p>
+                            <span class="card-title">Administrar Categorias Principales</span>
                             </div>
                             <div class="card-action">
-                                <!--Botón para redireccionar-->
-                                <a href="inventario_existencias.html">Visualizar</a>
+                                <a href="administrar_categorias_principales.html">Administrar</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--Card-->
-                <div class="col s12 m12 l6 xl6">
-                    <div class="card horizontal z-depth-3" id="tarjetas">
+                <div class="col s12 m8 l6 xl6">
+                    <div class="card horizontal" id="tarjetas">
                         <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../recursos/imagenes/inventario/inventario_administrar.png">
+                            <img src="../recursos/imagenes/categorias/subcategorias.png">
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                                <!--Titulo de la Card-->
-                                <span class="card-title">Administrar Productos</span>
-                                <p>Agrega, modifica y elimina datos de los productos existentes.</p>
+                                <span class="card-title">Administrar Subcategorias</span>
                             </div>
                             <div class="card-action">
-                                <!--Botón para redireccionar-->
-                                <a href="inventario_administrar.html">Administrar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s12 m12 l6 xl6">
-                    <div class="card horizontal z-depth-3" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../recursos/imagenes/inventario/registrar_entrega.jpg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <!--Titulo de la Card-->
-                                <span class="card-title">Registrar Entrega</span>
-                                <p>Registrar una entrega de un producto anteriormente agregado al inventario.</p>
-                            </div>
-                            <div class="card-action">
-                                <!--Botón para redireccionar-->
-                                <a href="inventario_entregas.html">Registrar</a>
+                                <a href="administrar_subcategorias.html">Administrar</a>
                             </div>
                         </div>
                     </div>
@@ -286,19 +244,19 @@
                 <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
             </div>
             <div id="sitio_privado">
-                <a href="../../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
-                <a href="../../LeCameleon Sitio Web Publico/index.html"><img
+                <a href="../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
+                <a href="../LeCameleon Sitio Web Publico/index.html"><img
                         src="../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/inventario.js"></script>
+    <script type="text/javascript" src="../js/categoria_privado.js"></script>
     <script>
         let menu = document.getElementById("menu");
         window.onscroll = function () {
-            if (window.pageYOffset >= 60) {
+            if (window.pageYOffset >= 130) {
                 menu.classList.add("sticky");
             }
             else {

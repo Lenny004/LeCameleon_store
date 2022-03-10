@@ -1,0 +1,51 @@
+#contenedor_2{
+    width: 20%;
+    height: 100%;
+    align-content: left;
+}
+#titulo_m{
+    font-size: 40px;
+    margin-left: 3%;
+    left: 10%;
+    display: flex;
+}
+#texto_m{
+    font-size: 18px;
+    margin-left: 0%;
+    display: flex;
+}
+#Boton_1{
+    background-color:rgb(255, 255, 255); 
+    border: 3px solid rgb(19, 97, 0);
+    color: black;
+    margin-bottom: 10%;
+    position: relative;
+    left: 3%;
+    bottom: 20%;
+    text-align: center;
+    vertical-align: bottom;
+}
+#Boton_2{
+    background-color:rgb(255, 255, 255); 
+    border: 3px solid rgb(73, 70, 70);
+    color: black;
+    margin-bottom: 10%;
+    position: relative;
+    left: 5%;
+    bottom: 20%;
+    text-align: center;
+    vertical-align: bottom;
+}
+.contenedor_img{
+    padding-top: 20%;
+    border-width: 5px;
+    border-color: black;
+    width: auto;
+}
+
+#contenedor_img{
+    border: 1px solid black;
+}
+#numeros_pag{
+    text-align: center;
+}
