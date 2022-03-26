@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Futura Book BT';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/futura_book_font.ttf') format('ttf');
+    /*ltr:El contenido, texto y otros elementos fluyen de izquierda a derecha.*/
+    direction: ltr;
+    line-height: 1; 
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.main{
+    font-family: 'Futura Book BT';
+}
