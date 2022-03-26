@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Importamos el css para manejar el estilo de nuestra pagina web ya sea containers, etc...-->
+    <link type="text/css" rel="stylesheet" href="../../css/politica_envio.css">
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Nombre de la página-->
+<title>Le Caméléon</title>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+        <!--Anuncios-->
+        <div id="barra_anuncio" class="z-depth-1">
+            <a href="#" class="mensaje_arriba">
+                <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
+                <p>Esta semana Descuento en la Decoracion de oficina</p>
+            </a>
+        </div>
+        <!--Logo, buscador, idioma, login y carrito de compras-->
+        <div id="apartado_buscador">
+            <!--Logo-->
+            <div id="logo_imagen">
+                <img src="../../recursos/img/logo2.png" alt="logo">
+            </div>
+            <!--Categoria de busqueda-->
+            <div id="boton_categoria" class="hide-on-med-and-down">
+                <div class="input-field grey lighten-2 z-depth-2">
+                    <select>
+                        <option value="" disabled selected>Todo</option>
+                        <option value="1">Decoración</option>
+                        <option value="2">Accesorios</option>
+                        <option value="3">Artesanales</option>
+                        <option value="4">Marcas</option>
+                        <option value="5">Color</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Buscador -->
+            <div id="buscador" class="hide-on-med-and-down">
+                <nav class="grey lighten-2">
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+            </div>
+            <!--Idioma-->
+            <div id="boton_idioma">
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-trigger btn grey lighten-2' href='#' data-target='dropdown_idioma'>
+                    <p>Español</p>
+                    <img src="../../recursos/iconografia/el_salvador.png" alt="español" width="20" height="20">
+                </a>
+                <!-- Dropdown Structure -->
+                <ul id='dropdown_idioma' class='dropdown-content'>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
+                                height="20"></a></li>
+                </ul>
+            </div>
+            <!--Login-->
+            <div id="boton_login" class="hide-on-med-and-down">
+                <a href="login_publico.html"><img class="tooltipped" data-position="bottom"
+                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+            </div>
+            <!--Carrito de Compras-->
+            <div id="boton_carrito">
+                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
+                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
+                        height="35"><span>1</span></a>
+            </div>
+        </div>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+        <nav class="nav-extended white">
+            <div class="nav-wrapper">
+                <a href="#" data-target="mobile" class="sidenav-trigger" id="menu_desplegable"><i
+                        class="material-icons">menu</i></a>
+                <!--Colocamos un buscador para tamaños moviles y de tablets-->
+                <div id="buscador2" class="hide-on-large-only">
+                    <nav class="grey lighten-2">
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                    <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+                </div>
+                <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
+                <ul class="left hide-on-med-and-down" id="opciones">
+                    <li><a href="index.html">Inicio</a></li>
+                    <!-- Dropdown Trigger Decoración -->
+                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown del decoración-->
+                    <ul id="dropdown_decoracion" class="dropdown-content">
+                        <li><a class="btn-flat disabled" id="desactivado">Exteriores del hogar</a></li>
+                        <li class="divider"></li>
+                        <li><a href="patio.html">Patio</a></li>
+                        <li><a href="terraza.html">Terraza</a></li>
+                        <li><a href="otros.html">Otros</a></li>
+                        <li><a class="btn-flat disabled" id="desactivado">Interiores del hogar</a></li>
+                        <li class="divider"></li>
+                        <li><a href="dormitorio.html">Dormitorio</a></li>
+                        <li><a href="cocina.html">Cocina</a></li>
+                        <li><a href="salon.html">Salón</a></li>
+                        <li><a href="baño.html">Baño</a></li>
+                        <li><a class="btn-flat disabled" id="desactivado">Oficina</a></li>
+                        <li class="divider"></li>
+                        <li><a href="tecnologicos.html">Accesorios Tecnológicos</a></li>
+                        <li><a href="escritorios.html">Decoración de Escritorios</a></li>
+                    </ul>
+                    <!-- Dropdown Trigger Accesorio -->
+                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                            data-target="dropdown_accesorios">Accesorios
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown del accesorio-->
+                    <ul id="dropdown_accesorios" class="dropdown-content">
+                        <li><a href="anillos.html">Anillos</a></li>
+                        <li class="divider"></li>
+                        <li><a href="aretes.html">Aretes</a></li>
+                        <li class="divider"></li>
+                        <li><a href="billeteras.html">Billeteras</a></li>
+                        <li class="divider"></li>
+                        <li><a href="collares.html">Collares</a></li>
+                        <li class="divider"></li>
+                        <li><a href="llaveros.html">Llaveros</a></li>
+                        <li class="divider"></li>
+                        <li><a href="pines.html">Pines</a></li>
+                        <li class="divider"></li>
+                        <li><a href="pulseras.html">Pulseras</a></li>
+                        <li class="divider"></li>
+                        <li><a href="relojes.html">Relojes</a></li>
+                        <li class="divider"></li>
+                        <li><a class="btn-flat disabled" id="desactivadoP">Playeras</a></li>
+                        <li class="divider"></li>
+                        <li><a href="playerasma.html">Masculinas</a></li>
+                        <li class="divider"></li>
+                        <li><a href="playerasfe.html">Femeninas</a></li>
+                    </ul>
+                    <!-- Dropdown Trigger Artesanales -->
+                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                            data-target="dropdown_artesanales">Artesanales
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown de artesanales -->
+                    <ul id="dropdown_artesanales" class="dropdown-content">
+                        <li><a href="artaccesorios.html">Accesorios Artesanales</a></li>
+                        <li class="divider"></li>
+                        <li><a href="artdecoracion.html">Decoración Artesanal</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                    <li><a href="marcas.html">Marcas</a></li>
+                    <li><a href="otros.html">Ofertas</a></li>
+                    <!-- Dropdown Trigger Servicio al cliente -->
+                    <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown del Servicio al cliente-->
+                    <ul id="dropdown_servicio" class="dropdown-content">
+                        <li><a href="contactanos.html">Contáctanos</a></li>
+                        <li class="divider"></li>
+                        <li><a href="condiciones_compra.html">Condiciones de Compra</a></li>
+                        <li class="divider"></li>
+                        <li><a href="devoluciones.html">Devoluciones y Reembolsos</a></li>
+                        <li class="divider"></li>
+                        <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
+                        <li class="divider"></li>
+                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="../../recursos/img/main_publico/nav3.jpg">
+                </div>
+                <a href="login_publico.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar
+                    Sesión</a>
+            </div>
+        </li>
+        <div id="opciones_movil">
+            <li><a class="subheader">Opciones Principales</a></li>
+            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
+                        alt="inicio">Inicio</a></li>
+            <!-- Dropdown Trigger Decoración -->
+            <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion_movil"><img
+                        src="../../recursos/iconografia/decoracion.png" alt="decoracion">Decoración
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown del decoración-->
+            <ul id="dropdown_decoracion_movil" class="dropdown-content">
+                <li><a class="btn-flat disabled" id="desactivado">Exteriores del hogar</a></li>
+                <li class="divider"></li>
+                <li><a href="patio.html" class="waves-effect waves-red">Patio</a></li>
+                <li><a href="terraza.html" class="waves-effect waves-red">Terraza</a></li>
+                <li><a href="otros.html" class="waves-effect waves-red">Otros</a></li>
+                <li><a class="btn-flat disabled" id="desactivado">Interiores del hogar</a></li>
+                <li class="divider"></li>
+                <li><a href="dormitorio.html" class="waves-effect waves-red">Dormitorio</a></li>
+                <li><a href="cocina.html" class="waves-effect waves-red">Cocina</a></li>
+                <li><a href="salon.html" class="waves-effect waves-red">Salón</a></li>
+                <li><a href="baño.html" class="waves-effect waves-red">Baño</a></li>
+                <li><a class="btn-flat disabled" id="desactivado">Oficina</a></li>
+                <li class="divider"></li>
+                <li><a href="tecnologicos.html" class="waves-effect waves-red">Accesorios Tecnológicos</a></li>
+                <li><a href="escritorios.html" class="waves-effect waves-red">Decoración de Escritorios</a></li>
+            </ul>
+            <!-- Dropdown Trigger Accesorio -->
+            <li><a class="dropdown-trigger" href="artaccesorios.html" data-target="dropdown_accesorios_movil"><img
+                        src="../../recursos/iconografia/accesorios.png" alt="accesorio">Accesorios
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown del accesorio-->
+            <ul id="dropdown_accesorios_movil" class="dropdown-content">
+                <li><a href="anillos.html" class="waves-effect waves-red">Anillos</a></li>
+                <li class="divider"></li>
+                <li><a href="aretes.html" class="waves-effect waves-red">Aretes</a></li>
+                <li class="divider"></li>
+                <li><a href="billeteras.html" class="waves-effect waves-red">Billeteras</a></li>
+                <li class="divider"></li>
+                <li><a href="collares.html" class="waves-effect waves-red">Collares</a></li>
+                <li class="divider"></li>
+                <li><a href="llaveros.html" class="waves-effect waves-red">Llaveros</a></li>
+                <li class="divider"></li>
+                <li><a href="pines.html" class="waves-effect waves-red">Pines</a></li>
+                <li class="divider"></li>
+                <li><a href="pulseras.html" class="waves-effect waves-red">Pulseras</a></li>
+                <li class="divider"></li>
+                <li><a href="relojes.html" class="waves-effect waves-red">Relojes</a></li>
+                <li class="divider"></li>
+                <li><a class="btn-flat disabled" id="desactivadoP">Playeras</a></li>
+                <li class="divider"></li>
+                <li><a href="playerasma.html" class="waves-effect waves-red">Masculinas</a></li>
+                <li class="divider"></li>
+                <li><a href="playerasfe.html" class="waves-effect waves-red">Femeninas</a></li>
+            </ul>
+            <!-- Dropdown Trigger Artesanales -->
+            <li><a class="dropdown-trigger" href="artaccesorios.html" data-target="dropdown_artesanales_movil"><img
+                        src="../../recursos/iconografia/artesanales.png" alt="artesanales">Artesanales
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown de artesanales -->
+            <ul id="dropdown_artesanales_movil" class="dropdown-content">
+                <li><a href="artaccesorios.html" class="waves-effect waves-red">Accesorios Artesanales</a></li>
+                <li class="divider"></li>
+                <li><a href="artdecoracion.html" class="waves-effect waves-red">Decoración Artesanal</a></li>
+                <li class="divider"></li>
+            </ul>
+            <li><a href="marcas.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/marcas.png"
+                        alt="marca">Marcas</a></li>
+            <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png"
+                        alt="ofertas">Ofertas</a></li>
+            <!-- Dropdown Trigger Servicio al cliente -->
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil"><img
+                        src="../../recursos/iconografia/servicio.png" alt="servicio">Servicio al Cliente
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown del Servicio al cliente-->
+            <ul id="dropdown_servicio_movil" class="dropdown-content">
+                <li><a href="contactanos.html" class="waves-effect waves-red">Contáctanos</a></li>
+                <li class="divider"></li>
+                <li><a href="condiciones_compra.html" class="waves-effect waves-red">Condiciones de Compra</a></li>
+                <li class="divider"></li>
+                <li><a href="devoluciones.html" class="waves-effect waves-red">Devoluciones y Reembolsos</a></li>
+                <li class="divider"></li>
+                <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+                <li class="divider"></li>
+            </ul>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Configuración</a></li>
+            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+            <li><a href="login_publico.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            </li>
+        </div>
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <!--Titulo de nuestra pagina web-->
+        <div>
+            <!--Creamos el id que sera nuestro contenedor-->
+            <div id="contenedor">
+                <div>
+                    <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                    <h3 id="titulo_principal">Politicas y zona de envio</h3>
+                </div>
+                <div>
+                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                    <h2 id="subtema_texto1">1. Los plazos aproximados para que el producto sea entregado inician desde
+                        la compra hasta una fecha establecida por el USUARIO/CLIENTE, dicha fecha no debé sobrepasar 2
+                        semanas máximo desde que se efectuo el pago.</h2>
+                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                    <p id="texto_inicial">El USUARIO/CLIENTE cuenta con 2 diferentes opciones de envio. El tipo de
+                        entrega de productos a
+                        centros comerciales tiene un costo de $0.00, siempre que sea en el área central de El
+                        Salvador,
+                        fuera de ella puede tener recargo dependiendo
+                        la zona. La segunda opción de tipo de entrega es a domicilio con un costo extra a la compra
+                        de
+                        $5.00 dólares americanos. El envio a domicio tendrá un costo de $0.00 si el USUARIO/CLIENTE
+                        realiza compras mayores a los $50.00 dólares americanos.
+                        Aplica para el territorio de El Salvador.<br><br>
+                        El administrador de la página web no será responsable de los errores causados en la entrega
+                        cuando la fecha y dirección de entrega introducida por el USUARIO/CLIENTE en el formulario
+                        de
+                        pedido no se ajuste a la realidad o hayan sido omitidos.
+                        Los plazos pueden variar por razones logísticas o de fuerza mayor. En casos de retrasos en
+                        las
+                        entregas, el admin id="texto_inicial"istrador de la página web informará a sus
+                        USUARIOS/CLIENTE,
+                        en cuanto tenga
+                        conocimiento de ellos. <br><br>
+                        Cada entrega se considera efectuada a partir del momento en el área de Gestión de la Entrega
+                        pone el producto a disposición del USUARIO/CLIENTE, que se materializa a través del sistema
+                        de
+                        control utilizado por el área de transporte propia de la empresa.<br><br>
+                        No se considerarán retrasos en la entrega aquellos casos en que el pedido haya sido puesto a
+                        disposición del USUARIO/CLIENTE, por parte del transportista dentro del plazo y no haya
+                        podido
+                        ser entregado por causa imputable al USUARIO/CLIENTE.
+                    </p>
+                    <h2 id="subtema_texto1">
+                        2. A – Datos de entrega, entregas no realizadas y pérdidas del producto
+                    </h2>
+                    <p id="texto_inicial">
+                        El administrador de la página web contrata como parte del servicio de entrega de mensajería o
+                        Correos de España, la realización de una serie de acciones de seguimiento, encaminadas a
+                        garantizar
+                        que la entrega se produce.<br><br>
+                        Si pasados 7 días después de la salida a reparto del pedido, no se ha concertado la entrega, el
+                        USUARIO/CLIENTE deberá ponerse en contacto con el administrador de la página web.<br><br>
+                        En caso de que el USUARIO/CLIENTE no proceda así, pasados 10 días hábiles desde la salida a
+                        reparto del pedido, éste será devuelto y el USUARIO/CLIENTE deberá de hacerse cargo de los
+                        gastos de envío y retorno del pedido, así como de los posibles
+                        gastos de gestión asociados.
+                    </p>
+                    <h2 id="subtema_texto1">
+                        2. B – Diligencia en la entrega
+                    </h2>
+                    <p id="texto_inicial">
+                        El USUARIO/CLIENTE, deberá comprobar el buen estado del pedido ante el transporte o correos
+                        que,
+                        por cuenta del administrador de la página web, realice la entrega del producto solicitado,
+                        indicando en el albarán de entrega cualquier anomalía que
+                        pudiera detectar en el pedido.
+                    </p>
+                </div>
+            </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--El aparte del sitio web (Información del sitio y otros apartados de términos y contactos)-->
+        <aside id="informacion">
+            <div>
+                <p>POLÍTICA DE SERVICIO</p>
+                <a href="Politica_envio.html">Política y Zona de envíos</a><br>
+                <a href="Condiciones_compra.html">Condiciones de Compra</a><br>
+                <a href="Terminos_servicio.html">Términos de Servicio</a><br>
+                <a href="Politica_privacidad.html">Política de Privacidad</a><br>
+                <a href="Legal.html">Legal</a>
+            </div>
+            <div>
+                <p>CONÓCENOS</p>
+                <a href="Acercade.html">Acerca de Le Caméléon</a><br>
+                <a href="">Contáctanos</a>
+            </div>
+            <div>
+                <p>SOPORTE</p>
+                <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
+                <a href="../Problema.html">Reportar un Problema</a><br>
+                <a href="">Tus Pedidos</a>
+            </div>
+            <div id="redes">
+                <p>SÍGUENOS EN TU RED FAVORITA</p>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram" height="30"
+                        class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
+            </div>
+            <div id="correo">
+                <p>E-MAIL DE SUSCRIPCIÓN</p>
+                <a>Obtenga las últimas actualizaciones</a><br>
+                <a>en productos y ofertas directamente</a>
+                <div class="ingresar_correo">
+                    <input type="email" class="validate white brown-text text-brown-darken-4"
+                        placeholder="email@gmail.com"><br>
+                    <a href="" class="btn tooltipped brown darken-4" data-position="top"
+                        data-tooltip="Suscribete para recibir notificaciones de ofertas y nuevos productos"><img
+                            src="../../recursos/iconografia/flecha_enviar.png" alt="enviar" height="35" width="35"></a>
+                </div>
+            </div>
+        </aside>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div class="terminos">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+            </div>
+            <div>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/servicio_cliente_general.js"></script>
+</body>
+
+</html>

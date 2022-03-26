@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Nombre de la página-->
+<title>Le Caméléon</title>
+
+<body>
+    <!--Contenido del sitio web-->
+    <main>
+        <div id="contenido_login">
+            <div id="logo_login">
+                <a href="index.html" class="tooltipped" data-position="bottom" data-tooltip="Inicio"><img src="../../recursos/img/logo_icon2.png" alt="logo"></a>
+            </div>
+            <div class="card" id="tarjeta_login">
+                <div class="card-content white-text">
+                    <h5>Iniciar Sesión</h5>
+                    <li class="divider"></li>
+                    <div id="imagen_usuario_login">
+                        <img src="../../recursos/iconografia/usuario_redondo.png" alt="usuario">
+                    </div>
+                    <div class="input-field">
+                        <p>Usuario:</p>
+                        <input id="email" type="email" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <div id="credenciales_login">
+                            <p>Contraseña</p>
+                            <a href="recuperar_contra.html"><u>¿Olvidaste tu contraseña?</u></a>
+                        </div>
+                        <div id="contra_login">
+                            <input id="password_login" type="password" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action" id="boton_iniciar_login">
+                    <a class="btn-small waves-effect waves-orange" href="index.html">Iniciar Sesión</a>
+                </div>
+                    <div id="registro_login">
+                        <a href="registro_usuario.html"><u>Registrarse</u></a>
+                    </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie_login">
+            <div>
+            </div>
+            <div class="terminos_login">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+</body>
+
+</html>

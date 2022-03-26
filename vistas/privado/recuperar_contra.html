@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Nombre de la página-->
+<title>Le Caméléon Recuperar Contraseña</title>
+
+<body>
+    <!--Contenido del sitio web-->
+    <main>
+        <div id="contenido">
+            <div id="logo">
+                <img src="../../recursos/img/logo_icon2.png" alt="logo">
+            </div>
+            <div class="card" id="tarjeta_recuperar">
+                <div class="card-content white-text">
+                    <h5>Recuperar Contraseña</h5>
+                    <li class="divider"></li>
+                    <div id="imagen_mensaje">
+                        <img src="../../recursos/iconografia/contra.png" alt="contra">
+                    </div>
+                    <div id="anuncio">
+                        <p>Se enviará un código de recuperación a su correo enlazado a su cuenta. Ingresa tu usuario y DUI</p>
+                    </div>
+                    <div class="input-field">
+                        <div id="codigo">
+                            <p>Usuario:</p>
+                        </div>
+                        <div>
+                            <input id="text" type="text" class="validate">
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div id="codigo">
+                            <p>DUI:</p>
+                        </div>
+                        <div>
+                            <input id="text" type="text" class="validate">
+                        </div>
+                    </div>
+                    <div id="reenviar">
+                        <a href=""><u>¿No recibiste ningún código?</u></a>
+                        <a href=""><u>Reenviar</u></a>
+                    </div>
+                </div>
+                <div class="card-action" id="boton_validar">
+                    <a class="btn-small waves-effect waves-orange" href="../renovar_contra.html">Enviar Código</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div>
+            </div>
+            <div class="terminos">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+            <div id="sitio_privado">
+                <a href="../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
+                <a href="../LeCameleon Sitio Web Publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                        alt="web" height="45"></a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+</body>
+
+</html>

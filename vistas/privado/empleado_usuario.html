@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/estilo_empleado_usuario.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection">
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Nombre de la página-->
+<title>Le Caméléon</title>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+        <!--Anuncios-->
+        <div id="barra_anuncio" class="z-depth-1">
+            <a href="#" class="mensaje_arriba">
+            </a>
+        </div>
+        <!--Logo, buscador, idioma, login y carrito de compras-->
+        <div id="apartado_header">
+            <!--Logo-->
+            <div id="logo_imagen">
+                <img src="../../recursos/img/logo2.png" alt="logo">
+            </div>
+            <!--Usuario y sus datos-->
+            <!--Ocultamos estos elementos para moviles y tablets-->
+            <div class="hide-on-med-and-down" id="usuario">
+                <div>
+                    <p>Lenny Adrián Elías Sánchez</p>
+                    <p>Administrador</p>
+                </div>
+                <div>
+                    <img src="../../recursos/iconografia/usuario.png" alt="usuario">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+        <nav class="nav-extended white">
+            <div class="nav-wrapper">
+                <a href="#" data-target="mobile" class="sidenav-trigger" id="menu_desplegable"><i
+                        class="material-icons">menu</i></a>
+                <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="index.html">Inicio</a></li>
+                    <!-- Dropdown Trigger Gráficas -->
+                    <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_graficas">Gráficas
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown de Gráficas-->
+                    <ul id="dropdown_graficas" class="dropdown-content">
+                        <li><a href="graficas_ventas.html">Gráficas de Ventas</a></li>
+                        <li class="divider"></li>
+                        <li><a href="graficas_empleados.html">Gráficas de Empleados</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- Dropdown Trigger Inventario -->
+                    <li><a class="dropdown-trigger" href="inventario.html" data-target="dropdown_inventarios">Inventario
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown del Inventario-->
+                    <ul id="dropdown_inventarios" class="dropdown-content">
+                        <li><a href="inventario_existencias.html">Visualizar Existencias</a></li>
+                        <li class="divider"></li>
+                        <li><a href="inventario_administrar.html">Administrar Productos</a></li>
+                        <li class="divider"></li>
+                        <li><a href="inventario_entregas.html">Registrar Entrega</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- Dropdown Trigger Categorias -->
+                    <li><a class="dropdown-trigger" href="categoria_privado.html"
+                            data-target="dropdown_categorias">Categorias
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown del Categorias-->
+                    <ul id="dropdown_categorias" class="dropdown-content">
+                        <li><a href="administrar_categorias_principales.html">Categorias</a></li>
+                        <li class="divider"></li>
+                        <li><a href="administrar_subcategorias.html">Sub-Categorias</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- Dropdown Trigger Empleados y Usuarios -->
+                    <li><a class="dropdown-trigger" href="#"
+                            data-target="dropdown_empleados">Empleados y Usuarios
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <!-- Estructura del Dropdown de Empleados y Usuarios-->
+                    <ul id="dropdown_empleados" class="dropdown-content">
+                        <li><a href="administrar_empleados.html">Administrar Empleados</a></li>
+                        <li class="divider"></li>
+                        <li><a href="administrar_usuarios.html">Administrar Usuarios</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                    <li><a href="administrar_marca.html">Marcas</a></li>
+                    <li><a href="proveedores.html">Proveedores</a></li>
+                    <li><a href="monitorear_pedidos.html">Monitorear Pedidos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="../../recursos/img/main_privado/nav2.png">
+                </div>
+                <a><img class="circle" src="../../recursos/iconografia/usuario.png">Lenny Adrián Elías
+                    Sánchez<br>Administrador</a>
+            </div>
+        </li>
+        <div id="opciones_movil">
+            <li><a class="subheader">Opciones Principales</a></li>
+            <li><a href="index.html"><img src="recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
+            <!-- Dropdown Trigger Graficas -->
+            <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_decoracion"><img
+                        src="recursos/iconografia/graficas.png" alt="graficas">Gráficas
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown de Graficas-->
+            <ul id="dropdown_decoracion" class="dropdown-content">
+                <li><a href="graficas_ventas.html">Gráficas de Ventas</a></li>
+                <li class="divider"></li>
+                <li><a href="graficas_empleados.html">Gráficas de Empleados</a></li>
+                <li class="divider"></li>
+            </ul>
+            <!-- Dropdown Trigger Inventario -->
+            <li><a class="dropdown-trigger" href="inventario.html" data-target="dropdown_inventario"><img
+                        src="recursos/iconografia/inventario.png" alt="inventario">Inventario
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown del Inventario-->
+            <ul id="dropdown_inventario" class="dropdown-content">
+                <li><a href="inventario_existencias.html">Visualizar Existencias</a></li>
+                <li class="divider"></li>
+                <li><a href="inventario_administrar.html">Administrar Productos</a></li>
+                <li class="divider"></li>
+                <li><a href="inventario_entregas.html">Registrar Entrega</a></li>
+                <li class="divider"></li>
+            </ul>
+            <!-- Dropdown Trigger Categoria -->
+            <li><a class="dropdown-trigger" href="categoria_privado.html" data-target="dropdown_accesorios"><img
+                        src="recursos/iconografia/categorias.png" alt="categorias">Categorias
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown de Categoria-->
+            <ul id="dropdown_accesorios" class="dropdown-content">
+                <li><a href="administrar_categorias_principales.html">Categorias</a></li>
+                <li class="divider"></li>
+                <li><a href="administrar_subcategorias.html">Sub-Categorias</a></li>
+                <li class="divider"></li>
+            </ul>
+            <!-- Dropdown Trigger Empleados y Usuarios-->
+            <li><a class="dropdown-trigger" href="empleado_usuario.html" data-target="dropdown_artesanales"><img
+                        src="recursos/iconografia/empleados_usuarios.png" alt="empleados">Empleados y
+                    Usuarios <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <!-- Estructura del Dropdown de Empleados y Usuarios-->
+            <ul id="dropdown_artesanales" class="dropdown-content">
+                <li><a href="administrar_empleados.html">Administrar Empleados</a></li>
+                <li class="divider"></li>
+                <li><a href="administrar_usuarios.html">Administrar Usuarios</a></li>
+                <li class="divider"></li>
+            </ul>
+            <li><a href="administrar_marca.html"><img src="recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
+            <li><a href="proveedores.html"><img src="recursos/iconografia/distribuidor.png"
+                        alt="distribuidor">Proveedores</a></li>
+            <li><a href="monitorear_pedidos.html"><img src="recursos/iconografia/auto_pedidos.png"
+                        alt="pedidos">Monitorear Pedidos</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Configuración</a></li>
+            <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+            <li><a href="index.html"><img src="recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
+        </div>
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <!--Tarjetas de Categorias-->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12 xl12">
+                    <!--Titulo de Categorias-->
+                    <h1 class="titulo_administrar">Empleado y usuario</h1>
+                </div>
+                <!--Card-->
+
+                <div class="col s12 m8 l6 xl6">
+                    <div class="card horizontal" id="tarjetas">
+                        <div class="card-image">
+                            <img src="../../recursos/img/empleados_usuarios/empleados.jpg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title">Administrar Empleados</span>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Administrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m8 l6 xl6">
+                    <div class="card horizontal" id="tarjetas">
+                        <div class="card-image">
+                            <img src="../../recursos/img/empleados_usuarios/usuarios.jpg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title">Administrar Usuarios</span>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Administrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div>
+            </div>
+            <div class="terminos">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+            <div id="sitio_privado">
+                <a href="../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
+                <a href="../LeCameleon Sitio Web Publico/index.html"><img
+                        src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/empleado_usuario.js"></script>
+    <script>
+        let menu = document.getElementById("menu");
+        window.onscroll = function () {
+            if (window.pageYOffset >= 130) {
+                menu.classList.add("sticky");
+            }
+            else {
+                menu.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+
+</html>
