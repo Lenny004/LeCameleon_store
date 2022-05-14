@@ -2,6 +2,9 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
     <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
@@ -9,15 +12,12 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../../css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
     <!--Importar un icono para el sitio web-->
     <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -33,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -71,8 +71,8 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown_idioma' class='dropdown-content'>
                     <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
-                                height="20"></a></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
                 </ul>
             </div>
             <!--Login-->
@@ -106,10 +106,9 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html"
-                            data-target="dropdown_decoracion">Decoración
+                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
@@ -131,7 +130,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -160,7 +159,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -172,7 +171,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -187,7 +186,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -227,8 +226,7 @@
             <li><a href="escritorios.html" class="waves-effect waves-red">Decoración de Escritorios</a></li>
         </ul>
         <!-- Dropdown Trigger Accesorio -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_accesorios_movil">Accesorios
+        <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios_movil">Accesorios
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown del accesorio-->
@@ -256,8 +254,7 @@
             <li><a href="playerasfe.html" class="waves-effect waves-red">Femeninas</a></li>
         </ul>
         <!-- Dropdown Trigger Artesanales -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_artesanales_movil">Artesanales
+        <li><a class="dropdown-trigger" href="artesanales.html" data-target="dropdown_artesanales_movil">Artesanales
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown de artesanales -->
@@ -268,7 +265,7 @@
             <li class="divider"></li>
         </ul>
         <li><a href="marcas.html" class="waves-effect waves-red">Marcas</a></li>
-        <li><a href="otros.html" class="waves-effect waves-red">Ofertas</a></li>
+        <li><a href="ofertas.html" class="waves-effect waves-red">Ofertas</a></li>
         <!-- Dropdown Trigger Servicio al cliente -->
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil">Servicio al Cliente
                 <i class="material-icons right">arrow_drop_down</i></a>
@@ -283,50 +280,42 @@
             <li class="divider"></li>
             <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a></li>
             <li class="divider"></li>
-            <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+            <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
             <li class="divider"></li>
         </ul>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <!--Titulo de nuestra pagina web-->
-        <div id="Politica_envio">
-            <!--Creamos el id que sera nuestro contenedor-->
-            <div id="Contenedoring">
-                <div>
-                    <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
-                    <h1 id="Titulo_principal">Acerca de Le Cameleon</h1>
-                </div>
-                <div>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <p id="texto_inicial">Le Cameleon, somos una tienda en linea de productos de decoración y accesorios
-                        Vintage, productos de origen extranjero y nacionales, incluyendo articulos artesanales como
-                        accesorios, prendas de ropa y alfarería y más al gusto de las personas que quieran darle un
-                        toque antiguo/clásico pero con un buen diseño atractivo para el cliente y crear una
-                        nueva atmósfera a su vida.
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">Nosotros los fundadores, Lenny Elías, Erick Chinchilla, Nelson Peña y Rodrigo
-                        Mangandi, decidimos crear esta tienda para aquellas personas que quieren encontrar productos
-                        para la decoración de interiores y exteriores de su hogar, y oficina con este estilo tan
-                        estetico y conservando los años a la que pertenece, por eso creamos Le Cameleon,
-                        Una innovación en el territorio Salvadoreño al referirse en decoración Vintage, Le Caméléon se
-                        ajusta a tu estilo de vida con nuevos productos Vintage para combinar y a
-                        todo lo que te puedas imaginar con solo dar un clik, puedes cambiar tu casa, tu forma de vestir
-                        eh incluso tus vibras serán mejores con nuestros productos.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="container; col l9">
+        <!--Creamos la clase que sera nuestro contenedor-->
+        <div class="container">
             <div class="row">
-                <div class="col l3 m3 s10">
-                    <div class="card hoverable" id="tarjeta_erick">
-                        <div class="card-image">
+                <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                <h1 id="titulo_principal">Acerca de Le Cameleon</h1>
+            </div>
+            <div class="row">
+                <p id="texto_inicial">Le Cameleon, somos una tienda en linea de productos de decoración y accesorios
+                    Vintage, productos de origen extranjero y nacionales, incluyendo articulos artesanales como
+                    accesorios, prendas de ropa y alfarería y más al gusto de las personas que quieran darle un
+                    toque antiguo/clásico pero con un buen diseño atractivo para el cliente y crear una
+                    nueva atmósfera a su vida.
+                </p>
+                <p id="texto_inicial">Nosotros los fundadores, Lenny Elías, Erick Chinchilla, Nelson Peña y Rodrigo
+                    Mangandi, decidimos crear esta tienda para aquellas personas que quieren encontrar productos
+                    para la decoración de interiores y exteriores de su hogar, y oficina con este estilo tan
+                    estetico y conservando los años a la que pertenece, por eso creamos Le Cameleon,
+                    Una innovación en el territorio Salvadoreño al referirse en decoración Vintage, Le Caméléon se
+                    ajusta a tu estilo de vida con nuevos productos Vintage para combinar y a
+                    todo lo que te puedas imaginar con solo dar un clik, puedes cambiar tu casa, tu forma de vestir
+                    eh incluso tus vibras serán mejores con nuestros productos.
+                </p>
+            </div>
+            <div class="row" id="tarjetas_fotos">
+                <div class="col-sm-3" id="tarjetas_integrantes">
+                    <div class="card hoverable">
+                        <div class="card-img-top">
                             <img src="../../recursos/img/integrantes/Erick.jpeg" class="materialboxed z-depth-2">
                         </div>
-                        <div class="card-content">
+                        <div class="card-body">
                             <span id="texto_span" class="card-title">Erick Chinchilla</span>
                             <p>Amable, responsable, graduado de cisco, conocimientos amplios en
                                 el área de programacion HTML y css
@@ -335,36 +324,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col l3 m3 s10">
-                    <div class="card hoverable" id="tarjetas_integrantes">
-                        <div class="card-image">
+                <div class="col-sm-3" id="tarjetas_integrantes">
+                    <div class="card hoverable">
+                        <div class="card-img-top">
                             <img src="../../recursos/img/integrantes/Lenny.jpg" class="materialboxed z-depth-2">
                         </div>
-                        <div class="card-content">
+                        <div class="card-body">
                             <span id="texto_span" class="card-title">Elias Sánchez </span>
                             <p>Altos conocimientos en el área de programacion HTML, CSS, Base de datos, C#, java,
                                 Graduado de cisco, siempre dispuesto a ayudar, investigador, trabajo perfecto.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col l3 m3 s10">
-                    <div class="card hoverable" id="tarjetas_integrantes">
-                        <div class="card-image">
+                <div class="col-sm-3" id="tarjetas_integrantes">
+                    <div class="card hoverable">
+                        <div class="card-img-top">
                             <img src="../../recursos/img/integrantes/Manga.jpeg" class="materialboxed z-depth-2">
                         </div>
-                        <div class="card-content">
+                        <div class="card-body">
                             <span id="texto_span" class="card-title">Rodrigo Mangandi</span>
                             <p>Atento a sus alrededores, investigador, graduado de cisco, trabajo rápido, conocimientos
                                 amplios y jugador profesional de Valorant.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col l3 m3 s10">
-                    <div class="card hoverable" id="tarjeta_nelson">
-                        <div class="card-image">
+                <div class="col-sm-3" id="tarjetas_integrantes">
+                    <div class="card hoverable">
+                        <div class="card-img-top">
                             <img src="../../recursos/img/integrantes/Nelson.jpg" class="materialboxed z-depth-2">
                         </div>
-                        <div class="card-content">
+                        <div class="card-body">
                             <span id="texto_span" class="card-title">Nelson Peña</span>
                             <p>Siempre dispuesto a ayudar a los demas, responsabe, se esfuerza siempre, conocimientos en
                                 el área de programación de Java, HTML y CSS, conocimiento en ingles, siempre atento y
@@ -390,12 +379,12 @@
             <div>
                 <p>CONÓCENOS</p>
                 <a href="Acercade.html">Acerca de Le Caméléon</a><br>
-                <a href="">Contáctanos</a>
+                <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
                 <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
@@ -429,26 +418,8 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script>
-        var options = {
-        };
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.materialboxed');
-            var instances = M.Materialbox.init(elems, options);
-        });
-
-        let menu = document.getElementById("menu");
-        window.onscroll = function () {
-            if (window.pageYOffset >= 130) {
-                menu.classList.add("sticky");
-            }
-            else {
-                menu.classList.remove("sticky");
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 
 </html>

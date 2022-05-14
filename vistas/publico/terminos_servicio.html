@@ -2,24 +2,22 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../../css/productos.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
-    <!--Importamos el css para manejar el estilo de nuestra pagina web ya sea containers, etc...-->
-    <link type="text/css" rel="stylesheet" href="../../css/Terminos_servicio.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../../css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
     <!--Importar un icono para el sitio web-->
     <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -35,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -73,17 +71,20 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown_idioma' class='dropdown-content'>
                     <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
-                                height="20"></a></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
                 </ul>
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="login_publico.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
+                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
-                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
+                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
+                        height="35"><span>1</span></a>
             </div>
         </div>
     </header>
@@ -108,10 +109,9 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html"
-                            data-target="dropdown_decoracion">Decoración
+                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
@@ -133,7 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -162,7 +162,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -174,7 +174,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -189,7 +189,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -229,8 +229,7 @@
             <li><a href="escritorios.html" class="waves-effect waves-red">Decoración de Escritorios</a></li>
         </ul>
         <!-- Dropdown Trigger Accesorio -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_accesorios_movil">Accesorios
+        <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios_movil">Accesorios
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown del accesorio-->
@@ -258,8 +257,7 @@
             <li><a href="playerasfe.html" class="waves-effect waves-red">Femeninas</a></li>
         </ul>
         <!-- Dropdown Trigger Artesanales -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_artesanales_movil">Artesanales
+        <li><a class="dropdown-trigger" href="artesanales.html" data-target="dropdown_artesanales_movil">Artesanales
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown de artesanales -->
@@ -270,7 +268,7 @@
             <li class="divider"></li>
         </ul>
         <li><a href="marcas.html" class="waves-effect waves-red">Marcas</a></li>
-        <li><a href="otros.html" class="waves-effect waves-red">Ofertas</a></li>
+        <li><a href="ofertas.html" class="waves-effect waves-red">Ofertas</a></li>
         <!-- Dropdown Trigger Servicio al cliente -->
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil">Servicio al Cliente
                 <i class="material-icons right">arrow_drop_down</i></a>
@@ -285,75 +283,58 @@
             <li class="divider"></li>
             <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a></li>
             <li class="divider"></li>
-            <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+            <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
             <li class="divider"></li>
         </ul>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <!--Titulo de nuestra pagina web-->
-        <div id="Politica_envio">
-            <!--Creamos el id que sera nuestro contenedor-->
-            <div id="Contenedoring">
-                <div>
-                    <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
-                    <h1 id="Titulo_principal">Terminos de servicios</h1>
-                </div>
-                <div>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <h2 id="Subtema_texto1">1. Información sobre el producto de venta</h2>
-                </div>
-                <div>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <p id="texto_inicial"> El SITIO WEB: leCameleon.com, es una empresa dedicada a la comercialización
-                        de productos decorativos como de accesorios vintage de origen extranjero y nacional.
-                        Para, Le Caméléon cada usuario de esta web, es un potencial cliente que se merece que nuestros
-                        productos estén a la altura de sus expectativas y tengan con Le Caméléon una relacion de
-                        calidad-precio .
-                    </p>
-                </div>
-                <div>
-                    <h2 id="Subtema_texto1">
-                        2. Precios de los productos
-                    </h2>
-                </div>
+        <!--Creamos el id que sera nuestro contenedor-->
+        <div class="container">
+            <div class="row">
+                <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                <h3 id="titulo_principal">Terminos de servicios</h3>
+            </div>
+            <div class="row">
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="subtema_texto">1. Información sobre el producto de venta</p>
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="texto_inicial"> El SITIO WEB: leCameleon.com, es una empresa dedicada a la comercialización
+                    de productos decorativos como de accesorios vintage de origen extranjero y nacional.
+                    Para, Le Caméléon cada usuario de esta web, es un potencial cliente que se merece que nuestros
+                    productos estén a la altura de sus expectativas y tengan con Le Caméléon una relacion de
+                    calidad-precio .
+                </p>
+                <p id="subtema_texto">
+                    2. Precios de los productos
+                </p>
                 <p id="texto_inicial">
                     Los precios expuestos que se indican a través del SITIO WEB, incluyen el IVA en todos sus productos.
                 </p>
-                <div>
-                    <h2 id="Subtema_texto1">
-                        3. Formalización de pedidos
-                    </h2>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        Una vez formalizado el pedido, es decir, con la aceptación de las condiciones de venta y
-                        condiciones de uso y la confirmación del proceso de compra en el apartado de Confirmación de
-                        Pedido
-                        el administrador del Sitio Web LeCaméléon.com, siempre enviará un correo electrónico al
-                        USUARIO/CLIENTE al correo vinculado a su cuenta, confirmando la compra.
-                    </p>
-                </div>
-                <div>
-                    <h2 id="Subtema_texto1">
-                        4. Formas de pago
-                    </h2>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        El USUARIO/CLIENTE, deberá realizar el pago en el momento que se realiza la entrega de los
-                        productos adquiridos. El comprobante de compra que corresponda al pedido, será dispuesto por
-                        parte del
-                        empleado que realizo su entrega.
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        El USUARIO/CLIENTE, deberá abonar el importe correspondiente a su pedido mediante un pago en
-                        efectivo o a través de una billetera digital (Chivo).
-                    </p>
-                </div>
-                <div>
+                <p id="subtema_texto">
+                    3. Formalización de pedidos
+                </p>
+                <p id="texto_inicial">
+                    Una vez formalizado el pedido, es decir, con la aceptación de las condiciones de venta y
+                    condiciones de uso y la confirmación del proceso de compra en el apartado de Confirmación de
+                    Pedido
+                    el administrador del Sitio Web LeCaméléon.com, siempre enviará un correo electrónico al
+                    USUARIO/CLIENTE al correo vinculado a su cuenta, confirmando la compra.
+                </p>
+                <p id="subtema_texto">
+                    4. Formas de pago
+                </p>
+                <p id="texto_inicial">
+                    El USUARIO/CLIENTE, deberá realizar el pago en el momento que se realiza la entrega de los
+                    productos adquiridos. El comprobante de compra que corresponda al pedido, será dispuesto por
+                    parte del
+                    empleado que realizo su entrega.
+                </p>
+                <p id="texto_inicial">
+                    El USUARIO/CLIENTE, deberá abonar el importe correspondiente a su pedido mediante un pago en
+                    efectivo o a través de una billetera digital (Chivo).
+                </p>
+                <div id="texto_espacio">
                     <p id="texto_inicial">
                         El USUARIO/CLIENTE, deberá notificar al administrador de la página web cualquier entrega erronea
                         o fraudulenta del pedido realizado mediante correo electrónico o mediante uno de los canales de
@@ -379,20 +360,24 @@
             <div>
                 <p>CONÓCENOS</p>
                 <a href="Acercade.html">Acerca de Le Caméléon</a><br>
-                <a href="">Contáctanos</a>
+                <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
                 <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="../Problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
                 <p>SÍGUENOS EN TU RED FAVORITA</p>
-                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram" height="30" class="instagram"></a>
-                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30" class="facebook"></a>
-                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30" class="youtube"></a>
-                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30" class="tiktok"></a>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
             </div>
             <div id="correo">
                 <p>E-MAIL DE SUSCRIPCIÓN</p>
@@ -418,19 +403,8 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script>
-        let menu = document.getElementById("menu");
-        window.onscroll = function () {
-            if (window.pageYOffset >= 130) {
-                menu.classList.add("sticky");
-            }
-            else {
-                menu.classList.remove("sticky");
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 
 </html>

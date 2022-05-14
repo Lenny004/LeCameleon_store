@@ -2,6 +2,9 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
     <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
@@ -22,11 +25,11 @@
 <body>
     <!--Contenido del sitio web-->
     <main>
-        <div id="contenido_login">
+        <div id="contenido_recuperar">
             <div id="logo_login">
-                <a href="index.html" class="tooltipped" data-position="bottom" data-tooltip="Inicio"><img src="../../recursos/img/logo_icon2.png" alt="logo"></a>
+                <a href="dashboard.html" class="tooltipped" data-position="bottom" data-tooltip="Inicio"><img src="../../recursos/img/logo_icon2.png" alt="logo"></a>
             </div>
-            <div class="card" id="tarjeta_login">
+            <div class="card" id="tarjeta_recuperar">
                 <div class="card-content white-text">
                     <h5>Recuperar Contraseña</h5>
                     <li class="divider"></li>
@@ -37,7 +40,7 @@
                         <p>Se enviará un código de recuperación a su correo enlazado a su cuenta. Ingresa tu usuario y DUI</p>
                     </div>
                     <div class="input-field">
-                        <div>
+                        <div id="codigo">
                             <p>Usuario:</p>
                         </div>
                         <div>
@@ -45,7 +48,7 @@
                         </div>
                     </div>
                     <div class="input-field">
-                        <div>
+                        <div id="codigo">
                             <p>DUI:</p>
                         </div>
                         <div>
@@ -58,7 +61,7 @@
                     </div>
                 </div>
                 <div class="card-action" id="boton_iniciar_login">
-                    <a class="btn-small waves-effect waves-orange" href="../renovar_contra.html">Enviar Código</a>
+                    <a class="btn-small waves-effect waves-orange" href="renovar_contra.html">Enviar Código</a>
                 </div>
             </div>
         </div>
@@ -77,6 +80,8 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    
 </body>
 
 </html>

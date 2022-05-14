@@ -2,24 +2,22 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../../css/productos.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
-    <!--Importamos el css para manejar el estilo de nuestra pagina web ya sea containers, etc...-->
-    <link type="text/css" rel="stylesheet" href="../../css/legal.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../../css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
     <!--Importar un icono para el sitio web-->
     <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -35,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -73,17 +71,20 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown_idioma' class='dropdown-content'>
                     <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
-                                height="20"></a></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
                 </ul>
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="login_publico.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
+                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
-                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
+                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
+                        height="35"><span>1</span></a>
             </div>
         </div>
     </header>
@@ -108,10 +109,9 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html"
-                            data-target="dropdown_decoracion">Decoración
+                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
@@ -133,7 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -162,7 +162,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -174,7 +174,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -189,7 +189,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -229,8 +229,7 @@
             <li><a href="escritorios.html" class="waves-effect waves-red">Decoración de Escritorios</a></li>
         </ul>
         <!-- Dropdown Trigger Accesorio -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_accesorios_movil">Accesorios
+        <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios_movil">Accesorios
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown del accesorio-->
@@ -258,8 +257,7 @@
             <li><a href="playerasfe.html" class="waves-effect waves-red">Femeninas</a></li>
         </ul>
         <!-- Dropdown Trigger Artesanales -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_artesanales_movil">Artesanales
+        <li><a class="dropdown-trigger" href="artesanales.html" data-target="dropdown_artesanales_movil">Artesanales
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown de artesanales -->
@@ -270,7 +268,7 @@
             <li class="divider"></li>
         </ul>
         <li><a href="marcas.html" class="waves-effect waves-red">Marcas</a></li>
-        <li><a href="otros.html" class="waves-effect waves-red">Ofertas</a></li>
+        <li><a href="ofertas.html" class="waves-effect waves-red">Ofertas</a></li>
         <!-- Dropdown Trigger Servicio al cliente -->
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil">Servicio al Cliente
                 <i class="material-icons right">arrow_drop_down</i></a>
@@ -285,80 +283,65 @@
             <li class="divider"></li>
             <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a></li>
             <li class="divider"></li>
-            <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+            <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
             <li class="divider"></li>
         </ul>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <!--Titulo de nuestra pagina web-->
-        <div id="Politica_envio">
-            <!--Creamos el id que sera nuestro contenedor-->
-            <div id="Contenedoring">
-                <div>
-                    <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
-                    <h1 id="Titulo_principal">Legal</h1>
-                </div>
-                <div>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <p id="texto_inicial">
-                        Usuario y régimen de responsabilidades
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        La navegación por acceso o uso de la página web y todos los subdominios y directorios incluidos
-                        bajo la misma, así como los servicios o contenidos que a través de él se puedan obtener y todos
-                        los portales
-                        de dominio propio bajo titularidad de Le Caméléon, otorga la Condición de Usuario, por la que se
-                        aceptan, al navegar por la página LeCaméléon.com, todas las condiciones de uso que se establecen
-                        aquí
-                        sin perjudicar la aplicación de la correspondiente normativa de obligado cumplimiento legal
-                        según el caso.
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        Por eso, si las consideraciones detalladas en este aviso legal no son de su conformidad, rogamos
-                        no haga uso del portal, ya que cualquier uso que haga del mismo o los servicios y contenidos en
-                        él incluidos
-                        implicará la aceptación de los términos legales recogidos en este texto.
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        La página web Le Caméléon proporciona gran diversidad de información, servicios y datos. El
-                        usuario asume su responsabilidad en el uso correcto de los sitios web. Esta responsabilidad se
-                        extenderá a:
-                        La veracidad y licitud de las informaciones aportadas por el usuario en los formularios emitidos
-                        por Le Caméléon para acceder a determinados contenidos o servicios ofrecidos por la web.
-
-                    </p>
-                </div>
-                <div>
-                    <p id="texto_inicial">
-                        El uso de la información, servicios y datos ofrecidos por Le Caméléon no irán contra las
-                        disposiciones de estas condiciones, la Ley, la moral, las buenas costumbres o el orden público o
-                        que, en otro caso,
-                        puedan suponer lesión de los derechos de terceros o del funcionamiento de los sitios web. A tal
-                        efecto, el Usuario se abstendrá de utilizar cualquiera de los contenidos con fines o efectos
-                        ilícitos, prohibidos
-                        en este texto, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan
-                        dañar, inutilizar, sobrecargar, deteriorar o impedir la normal utilización de los contenidos,
-                        otros Usuarios o
-                        de cualquier usuario de Internet (hardware y software).
-                    </p>
-                </div>
-
-                <div>
-                    <p id="texto_inicial">
-                        Los usuarios responderán de los daños y perjuicios de toda naturaleza que la empresa propietaria
-                        de la web pueda sufrir, directa o indirectamente, como consecuencia de incumplimiento de
-                        cualquiera
-                        de las obligaciones derivadas del uso de la Web y de esta política de privacidad.
-                    </p>
-                </div>
-                <div>
+        <!--Creamos el id que sera nuestro contenedor-->
+        <div class="container">
+            <div class="row">
+                <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                <h3 id="titulo_principal">Legal</h3>
+            </div>
+            <div class="row">
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="texto_inicial">
+                    Usuario y régimen de responsabilidades
+                </p>
+                <p id="texto_inicial">
+                    La navegación por acceso o uso de la página web y todos los subdominios y directorios incluidos
+                    bajo la misma, así como los servicios o contenidos que a través de él se puedan obtener y todos
+                    los portales
+                    de dominio propio bajo titularidad de Le Caméléon, otorga la Condición de Usuario, por la que se
+                    aceptan, al navegar por la página LeCaméléon.com, todas las condiciones de uso que se establecen
+                    aquí
+                    sin perjudicar la aplicación de la correspondiente normativa de obligado cumplimiento legal
+                    según el caso.
+                </p>
+                <p id="texto_inicial">
+                    Por eso, si las consideraciones detalladas en este aviso legal no son de su conformidad, rogamos
+                    no haga uso del portal, ya que cualquier uso que haga del mismo o los servicios y contenidos en
+                    él incluidos
+                    implicará la aceptación de los términos legales recogidos en este texto.
+                </p>
+                <p id="texto_inicial">
+                    La página web Le Caméléon proporciona gran diversidad de información, servicios y datos. El
+                    usuario asume su responsabilidad en el uso correcto de los sitios web. Esta responsabilidad se
+                    extenderá a:
+                    La veracidad y licitud de las informaciones aportadas por el usuario en los formularios emitidos
+                    por Le Caméléon para acceder a determinados contenidos o servicios ofrecidos por la web.
+                </p>
+                <p id="texto_inicial">
+                    El uso de la información, servicios y datos ofrecidos por Le Caméléon no irán contra las
+                    disposiciones de estas condiciones, la Ley, la moral, las buenas costumbres o el orden público o
+                    que, en otro caso,
+                    puedan suponer lesión de los derechos de terceros o del funcionamiento de los sitios web. A tal
+                    efecto, el Usuario se abstendrá de utilizar cualquiera de los contenidos con fines o efectos
+                    ilícitos, prohibidos
+                    en este texto, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan
+                    dañar, inutilizar, sobrecargar, deteriorar o impedir la normal utilización de los contenidos,
+                    otros Usuarios o
+                    de cualquier usuario de Internet (hardware y software).
+                </p>
+                <p id="texto_inicial">
+                    Los usuarios responderán de los daños y perjuicios de toda naturaleza que la empresa propietaria
+                    de la web pueda sufrir, directa o indirectamente, como consecuencia de incumplimiento de
+                    cualquiera
+                    de las obligaciones derivadas del uso de la Web y de esta política de privacidad.
+                </p>
+                <div id="texto_espacio">
                     <p id="texto_inicial">
                         En particular, ya título meramente indicativo y no exhaustivo, el Usuario se compromete a no
                         transmitir, difundir o poner a disposición de terceros informaciones, datos, contenidos,
@@ -384,20 +367,24 @@
             <div>
                 <p>CONÓCENOS</p>
                 <a href="Acercade.html">Acerca de Le Caméléon</a><br>
-                <a href="">Contáctanos</a>
+                <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
                 <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="../Problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
                 <p>SÍGUENOS EN TU RED FAVORITA</p>
-                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram" height="30" class="instagram"></a>
-                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30" class="facebook"></a>
-                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30" class="youtube"></a>
-                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30" class="tiktok"></a>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
             </div>
             <div id="correo">
                 <p>E-MAIL DE SUSCRIPCIÓN</p>
@@ -423,19 +410,8 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script>
-        let menu = document.getElementById("menu");
-        window.onscroll = function () {
-            if (window.pageYOffset >= 130) {
-                menu.classList.add("sticky");
-            }
-            else {
-                menu.classList.remove("sticky");
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 
 </html>
