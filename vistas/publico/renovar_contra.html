@@ -2,6 +2,9 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
     <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
@@ -23,17 +26,17 @@
     <!--Contenido del sitio web-->
     <main>
         <div id="contenido_login">
-            <div id="logo">
+            <div id="logo_login">
                 <img src="../../recursos/img/logo_icon2.png" alt="logo">
             </div>
-            <div class="card" id="tarjeta_renovar">
+            <div class="card" id="tarjeta_login">
                 <div class="card-content white-text">
                     <h5>Renovar Contraseña </h5>
                     <li class="divider"></li>
-                    <div id="imagen_mensaje">
+                    <div id="imagen_correo_validar">
                         <img src="../../recursos/iconografia/restaurar_contra.png" alt="mensaje">
                     </div>
-                    <div id="anuncio">
+                    <div id="anuncio_registrar">
                         <p>Se ha autentificado el código enviado.</p>
                     </div>
                     <div class="input-field">
@@ -55,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-action" id="boton_renovar">
-                    <a class="btn-small waves-effect waves-red" href="../login_privado.html">Renovar Contraseña</a>
+                    <a class="btn-small waves-effect waves-red" href="index_publico.html">Renovar Contraseña</a>
                 </div>
             </div>
         </div>
@@ -63,23 +66,17 @@
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
     <footer>
         <!--Terminos y condiciones-->
-        <div id="pie">
+        <div id="pie_login">
             <div>
             </div>
-            <div class="terminos">
+            <div class="terminos_login">
                 <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
                 <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
-            </div>
-            <div id="sitio_privado">
-                <a href="../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
-                <a href="../LeCameleon Sitio Web Publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
-                        alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/renovar_contra.js"></script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
 </body>
 
 </html>

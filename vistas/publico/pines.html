@@ -2,8 +2,11 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../../css/productos.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
     <!--Import Google Icon Font-->
@@ -16,14 +19,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
-
 <body>
     <!--Encabezado del sitio web-->
     <header>
         <!--Anuncios-->
-        <div id="barra_anuncio" class="z-depth-1">
+        <div id="barra_anuncio_accesorio" class="z-depth-1">
             <a href="#" class="mensaje_arriba">
                 <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
                 <p>Esta semana Descuento en la Decoración de oficina</p>
@@ -33,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -71,17 +71,20 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown_idioma' class='dropdown-content'>
                     <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
-                                height="20"></a></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
                 </ul>
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="login_publico.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
+                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
-                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
+                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
+                        height="35"><span>1</span></a>
             </div>
         </div>
     </header>
@@ -106,10 +109,9 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html"
-                            data-target="dropdown_decoracion">Decoración
+                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
@@ -131,7 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -160,7 +162,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -172,7 +174,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -187,7 +189,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -227,8 +229,7 @@
             <li><a href="escritorios.html" class="waves-effect waves-red">Decoración de Escritorios</a></li>
         </ul>
         <!-- Dropdown Trigger Accesorio -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_accesorios_movil">Accesorios
+        <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios_movil">Accesorios
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown del accesorio-->
@@ -256,8 +257,7 @@
             <li><a href="playerasfe.html" class="waves-effect waves-red">Femeninas</a></li>
         </ul>
         <!-- Dropdown Trigger Artesanales -->
-        <li><a class="dropdown-trigger" href="artaccesorios.html"
-                data-target="dropdown_artesanales_movil">Artesanales
+        <li><a class="dropdown-trigger" href="artesanales.html" data-target="dropdown_artesanales_movil">Artesanales
                 <i class="material-icons right">arrow_drop_down</i></a>
         </li>
         <!-- Estructura del Dropdown de artesanales -->
@@ -268,7 +268,7 @@
             <li class="divider"></li>
         </ul>
         <li><a href="marcas.html" class="waves-effect waves-red">Marcas</a></li>
-        <li><a href="otros.html" class="waves-effect waves-red">Ofertas</a></li>
+        <li><a href="ofertas.html" class="waves-effect waves-red">Ofertas</a></li>
         <!-- Dropdown Trigger Servicio al cliente -->
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil">Servicio al Cliente
                 <i class="material-icons right">arrow_drop_down</i></a>
@@ -283,208 +283,246 @@
             <li class="divider"></li>
             <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a></li>
             <li class="divider"></li>
-            <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+            <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
             <li class="divider"></li>
         </ul>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="container; col s12; row" id="contenidot">
-        <div class="container; col l3">
+        <div id="contenido">
             <div class="row">
-                <div class="col s6 m4 l4 xl4">
+                <div class="col s3 m3 l3 xl3">
                     <div>
-                        <h3 id="tituloiz">Accesorios</h3>
-                        <h4 id="apartadoiz">Apartados</h4>
-                        <li>Anillos</li>
-                        <li>Aretes</li>
-                        <li>Billeteras</li>
-                        <li>Collares</li>
-                        <li>Llaveras</li>
-                        <li>Pines</li>
-                        <li>Pulseras</li>
-                        <li>Relojeras</li>
-                        <li>Playeras</li>
+                        <h3 id="titulo_izquierdo">Accesorios Pines</h3>
+                        <h5 id="apartado_productos">Apartados</h5>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header"><i
+                                        class="material-icons">keyboard_arrow_down</i>Exteriores del hogar</div>
+                                <div class="collapsible-body">
+                                    <span>
+                                        <a href="">- Patio<br></a>
+                                        <a href="">- Terraza<br></a>
+                                        <a href="">- Otros</a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i
+                                        class="material-icons">keyboard_arrow_down</i>Interiores del hogar</div>
+                                <div class="collapsible-body">
+                                    <span>
+                                        <a href="">- Dormitorio<br></a>
+                                        <a href="">- Cocina<br></a>
+                                        <a href="">- Salón<br></a>
+                                        <a href="">- Baño</a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>Oficina
+                                </div>
+                                <div class="collapsible-body">
+                                    <span>
+                                        <a href="">- Accesorios Tecnológico<br></a>
+                                        <a href="">- Decoración de Escritorios</a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 m4 l4 xl4">
-                    <div>
-                        <h4 id="apartadoiz">Marcas</h4>
+                    <div class="marcas_productos">
+                        <h5>Marcas</h5>
                         <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>Maine_Furnitore_Co.</span>
-                          </label>
-                          <label>
+                        </label>
+                        <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>Rebecca_Mobili</span>
-                          </label>
-                          <label>
+                        </label>
+                        <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>Living_Nostalgia</span>
-                          </label>
-                          <label>
+                        </label>
+                        <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>Ariete</span>
-                          </label>
-                          <label>
+                        </label>
+                        <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>WedgWood</span>
-                          </label>
-                          <label>
+                        </label>
+                        <label>
                             <input type="checkbox" class="filled-in" checked="checked" />
                             <span>TENDANCE</span>
-                          </label>
-                          <p id="textolink"><a href="index.html">Ver más...</a></p>
+                        </label>
+                        <p id="textolink"><a href="dashboard.html">Ver más...</a></p>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 m4 l4 xl4">
-                    <div>
-                        <h4 id="apartadoiz">Precio</h4>
-                        <li id="contlis">$0 a $25</li>
-                        <li id="contlis">$25 a $50</li>
-                        <li id="contlis">$50 a $100</li>
-                        <li id="contlis">$100 y más</li>
+                    <div class="precio_cantidad" id="rango_precios">
+                        <h5>Precio</h5>
+                        <a href="">$0 a $25</a>
+                        <a href="">$25 a $50</a>
+                        <a href="">$50 a $100</a>
+                        <a href="">$100 y más</a>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <input id="icon_prefix" type="number" class="validate">
+                                        <label for="icon_prefix">$ Mín.</label>
+                                    </div>
+                                    <p class="input-field col s1"> - </p>
+                                    <div class="input-field col s5">
+                                        <input id="icon_telephone" type="number" class="validate">
+                                        <label for="icon_telephone">$ Máx.</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <form action="#">
                             <p class="range-field">
-                              <input type="range" id="test5" min="0" max="100" />
+                                <input type="range" id="test5" min="0" max="100" />
                             </p>
-                          </form>
+                        </form>
+                    </div>
+                    <div class="ofertas_descuentos">
+                        <h5>Ofertas y Descuentos</h5>
+                        <a href="ofertas.html">Todos los Descuentos</a>
+                    </div>
+                    <h5>Color</h5>
+                    <div class="row">
+                        <a class="coloriz uno col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz dos col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz tres col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz cuatro col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz cinco col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz seis col s1 button" href="billeteras.html"></a>
+                    </div>
+                    <div class="row">
+                        <a class="coloriz siete col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz ocho col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz nueve col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz diez col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz once col s1 button" href="billeteras.html"></a>
+                        <a class="coloriz doce col s1 button" href="billeteras.html"></a>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <h4 id="apartadoiz">Color</h4>
-                <div class="row">
-                    <a class="col s1 button" href="billeteras.html" id="coloriz"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz2"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz3"></a> 
-                    <a class="col s1 button" href="billeteras.html" id="coloriz4"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz5"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz6"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz7"></a>
-                    <a class="col s1 button" href="billeteras.html" id="coloriz8"></a>        
+                <div class="col s9 m9 l9 xl9" id="seccion_productos">
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/decoracion/baño/baño.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Baño</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/decoracion/accesorios_tecnologicos/tecnologico.png">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Accesorios tecnológicosAccesorios tecnológicos</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/decoracion/decoracion_escritorios/escritorios.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Decoración de escritorio</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/accesorios/anillos/anillos.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Anillos</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/decoracion/terraza/terraza.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Aretes</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Card-->
+                    <div class="col s6 m4 l4 xl4">
+                        <div class="card hoverable" id="tarjetas_producto">
+                            <div class="card-image">
+                                <!--Imagen de la tarjeta-->
+                                <img src="../../recursos/img/decoracion/otros/otros.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="nombre_producto">Billetera</p>
+                                <p class="precio_producto">$80.00</p>
+                            </div>
+                            <div class="card-action center-align">
+                                <!--Botón para redireccionar-->
+                                <a href="#">Vista previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="active"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!">4</a></li>
+                        <li class="waves-effect"><a href="#!">5</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
-        <!--Tarjetas de Categorias-->
-        <div class="container; col l9" >
-            <div class="row">
-                <div>
-                    <!--Titulo de Categorias-->
-                    <h1 class="titulo_categoria">Pines</h1>
-                </div>                              
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/decoracion/baño/baño.jpg">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Baño</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/decoracion/accesorios_tecnologicos/tecnologico.png">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Accesorios tecnológicos</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/decoracion/decoracion_escritorios/escritorios.jpg">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Decoración de escritorio</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/accesorios/anillos/anillos.jpg">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Anillos</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/decoracion/terraza/terraza.jpg">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Aretes</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="col s6 m4 l4 xl4">
-                    <div class="card hoverable" id="tarjetas">                        
-                        <div class="card-image">
-                            <!--Imagen de la tarjeta-->
-                            <img src="../../recursos/img/decoracion/otros/otros.jpg">
-                        </div>
-                        <div class="card-content">
-                            <p id="nombre_producto">Billetera</p>
-                            <p id="tprecio">$80.00</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <!--Botón para redireccionar-->
-                            <a href="#">Vista previa</a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-        </div>
-    </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
     <footer>
@@ -501,20 +539,24 @@
             <div>
                 <p>CONÓCENOS</p>
                 <a href="Acercade.html">Acerca de Le Caméléon</a><br>
-                <a href="">Contáctanos</a>
+                <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
                 <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="../Problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
                 <p>SÍGUENOS EN TU RED FAVORITA</p>
-                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram" height="30" class="instagram"></a>
-                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30" class="facebook"></a>
-                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30" class="youtube"></a>
-                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30" class="tiktok"></a>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
             </div>
             <div id="correo">
                 <p>E-MAIL DE SUSCRIPCIÓN</p>
@@ -540,19 +582,8 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script>
-        let menu = document.getElementById("menu");
-        window.onscroll = function () {
-            if (window.pageYOffset >= 130) {
-                menu.classList.add("sticky");
-            }
-            else {
-                menu.classList.remove("sticky");
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 
 </html>

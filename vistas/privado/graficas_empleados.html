@@ -2,8 +2,11 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../../css/graficas_empleados.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/privado.css"/>
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
     <!--Import Google Icon Font-->
@@ -15,9 +18,6 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon Gráfica Empleado</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -31,7 +31,7 @@
         <div id="apartado_header">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
             </div>
             <!--Usuario y sus datos-->
             <!--Ocultamos estos elementos para moviles y tablets-->
@@ -41,20 +41,16 @@
                     <p>Administrador</p>
                 </div>
                 <div>
-                    <img href="../LeCameleon Sitio Web Privado/" src="../../recursos/iconografia/usuario.png"
-                        alt="usuario">
+                    <a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" class="tooltipped" data-position="bottom" data-tooltip="Ver Perfil" alt="usuario"></a>
                     <i class="dropdown-trigger material-icons right" data-target="dropdown_usuario">arrow_drop_down</i>
                     <!-- Estructura del Dropdown de Usuario-->
                     <ul id="dropdown_usuario" class="dropdown-content">
                         <li><a class="teal-text text-darken-4">Lenny Adrián Elías Sánchez</a></li>
                         <li class="divider"></li>
-                        <li><a href="perfil.html" class="teal-text text-darken-4"><img
-                                    src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img
-                                    src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
+                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
                         <li class="divider"></li>
-                        <li><a href="login_privado.html" class="teal-text text-darken-4"><img
-                                    src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
+                        <li><a href="index.html" class="teal-text text-darken-4"><img src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -68,7 +64,7 @@
                         class="material-icons">menu</i></a>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Gráficas -->
                     <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_graficas">Gráficas
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -94,20 +90,18 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Categorias -->
-                    <li><a class="dropdown-trigger" href="categoria_privado.html"
-                            data-target="dropdown_categorias">Categorias
+                    <li><a class="dropdown-trigger" href="categoria_privado.html" data-target="dropdown_categorias">Categorias
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del Categorias-->
                     <ul id="dropdown_categorias" class="dropdown-content">
-                        <li><a href="administrar_categorias_principales.html">Categorias</a></li>
+                        <li><a href="categorias_principales.html">Categorias</a></li>
                         <li class="divider"></li>
-                        <li><a href="administrar_subcategorias.html">Sub-Categorias</a></li>
+                        <li><a href="subcategorias.html">Sub-Categorias</a></li>
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Empleados y Usuarios -->
-                    <li><a class="dropdown-trigger" href="empleado_usuario.html"
-                            data-target="dropdown_empleados">Empleados y Usuarios
+                    <li><a class="dropdown-trigger" href="empleado_usuario.html" data-target="dropdown_empleados">Empleados y Usuarios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown de Empleados y Usuarios-->
@@ -137,10 +131,10 @@
         </li>
         <div id="opciones_movil">
             <li><a class="subheader">Opciones Principales</a></li>
-            <li><a href="index.html"><img src="recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
+            <li><a href="dashboard.html"><img src="../../recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
             <!-- Dropdown Trigger Graficas -->
             <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_decoracion"><img
-                        src="recursos/iconografia/graficas.png" alt="graficas">Gráficas
+                        src="../../recursos/iconografia/graficas.png" alt="graficas">Gráficas
                     <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown de Graficas-->
@@ -152,7 +146,7 @@
             </ul>
             <!-- Dropdown Trigger Inventario -->
             <li><a class="dropdown-trigger" href="inventario.html" data-target="dropdown_inventario"><img
-                        src="recursos/iconografia/inventario.png" alt="inventario">Inventario
+                        src="../../recursos/iconografia/inventario.png" alt="inventario">Inventario
                     <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown del Inventario-->
@@ -165,20 +159,19 @@
                 <li class="divider"></li>
             </ul>
             <!-- Dropdown Trigger Categoria -->
-            <li><a class="dropdown-trigger" href="categoria_privado.html" data-target="dropdown_accesorios"><img
-                        src="recursos/iconografia/categorias.png" alt="categorias">Categorias
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown_accesorios"><img
+                        src="../../recursos/iconografia/categorias.png" alt="categorias">Categorias
                     <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown de Categoria-->
             <ul id="dropdown_accesorios" class="dropdown-content">
-                <li><a href="administrar_categorias_principales.html">Categorias</a></li>
+                <li><a href="#!">Categorias</a></li>
                 <li class="divider"></li>
-                <li><a href="administrar_subcategorias.html">Sub-Categorias</a></li>
+                <li><a href="#!">Sub-Categorias</a></li>
                 <li class="divider"></li>
             </ul>
-            <!-- Dropdown Trigger Empleados y Usuarios-->
             <li><a class="dropdown-trigger" href="empleado_usuario.html" data-target="dropdown_artesanales"><img
-                        src="recursos/iconografia/empleados_usuarios.png" alt="empleados">Empleados y
+                        src="../../recursos/iconografia/empleados_usuarios.png" alt="empleados">Empleados y
                     Usuarios <i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <!-- Estructura del Dropdown de Empleados y Usuarios-->
@@ -188,46 +181,44 @@
                 <li><a href="administrar_usuarios.html">Administrar Usuarios</a></li>
                 <li class="divider"></li>
             </ul>
-            <li><a href="administrar_marca.html"><img src="recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
-            <li><a href="proveedores.html"><img src="recursos/iconografia/distribuidor.png"
-                        alt="distribuidor">Proveedores</a></li>
-            <li><a href="monitorear_pedidos.html"><img src="recursos/iconografia/auto_pedidos.png"
-                        alt="pedidos">Monitorear Pedidos</a></li>
-            <li>
-                <div class="divider"></div>
-            </li>
+            <li><a href="#"><img src="../../recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
+            <li><a href="proveedores.html"><img src="../../recursos/iconografia/distribuidor.png" alt="distribuidor">Proveedores</a></li>
+            <li><a href="monitorear_pedidos.html"><img src="../../recursos/iconografia/auto_pedidos.png" alt="pedidos">Monitorear Pedidos</a></li>
+            <li><div class="divider"></div></li>
             <li><a class="subheader">Configuración</a></li>
             <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
             <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html"><img src="recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
+            <li><a href="#"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div id="contenedor">
-            <div id="titulo_buscador">
-                <h4>Gráficas de Empleados</h4>
-            </div>
-            <div id="graficas">
-                <div class="card grey lighten-2">
-                    <div class="card-content white-text">
-                        <h6>Porcentaje de empleados con más entregas</h6>
-                        <img src="../../recursos/img/graficas/grafica_empleados2.png" alt="grafica">
+        <div id="titulo_graficos">
+            <h3>Gráficas de Empleados</h3>
+        </div>
+        <div id="contenedor_graficos">
+            <div id="tarjeta_grafica_empleados">
+                <div id="graficas">
+                    <div class="card grey lighten-2">
+                        <div class="card-content white-text">
+                            <h6>Porcentaje de empleados con más entregas</h6>
+                            <img src="../../recursos/img/graficas/grafica_empleados2.png" alt="grafica">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="fechas">
-                <div id="select_fecha">
-                    <p>Fecha Inicio:</p>
-                    <input type="text" class="datepicker">
+                <div id="fechas_grafica_empleado">
+                    <div class="fecha_empleado">
+                        <p>Fecha Inicio:</p>
+                        <input type="text" class="datepicker">
+                    </div>
+                    <div class="fecha_empleado">
+                        <p>Fecha Fin:</p>
+                        <input type="text" class="datepicker">
+                    </div>
                 </div>
-                <div>
-                    <p>Fecha Fin:</p>
-                    <input type="text" class="datepicker">
+                <div id="boton_consultar">
+                    <a class="btn waves-effect waves-light" href="">Consultar</a>
                 </div>
-            </div>
-            <div id="boton_consultar">
-                <a class="btn waves-effect waves-light" href="">Consultar</a>
             </div>
         </div>
     </main>
@@ -237,31 +228,23 @@
         <div id="pie">
             <div>
             </div>
-            <div class="terminos">
-                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
-                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            <div id="texto_terminos">
+                <div class="terminos">
+                    <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                </div>
+                <div>
+                    <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+                </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../LeCameleon Sitio Web Publico/index.html">Ir a Sitio Web</a>
-                <a href="../../LeCameleon Sitio Web Publico/index.html"><img
-                        src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
+                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/graficas_empleado.js"></script>
-    <script>
-        let menu = document.getElementById("menu");
-        window.onscroll = function () {
-            if (window.pageYOffset >= 60) {
-                menu.classList.add("sticky");
-            }
-            else {
-                menu.classList.remove("sticky");
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
 </body>
 
 </html>

@@ -2,22 +2,22 @@
 <html lang="ES">
 
 <head>
-    <!--Importamos el css para manejar el estilo de nuestra pagina web ya sea containers, etc...-->
-    <link type="text/css" rel="stylesheet" href="../../css/politica_envio.css">
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../../css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
     <!--Importar un icono para el sitio web-->
     <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -33,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -71,13 +71,13 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown_idioma' class='dropdown-content'>
                     <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english" width="20"
-                                height="20"></a></li>
+                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
                 </ul>
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="login_publico.html"><img class="tooltipped" data-position="bottom"
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
                         data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
@@ -109,7 +109,7 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
                     <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -133,7 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -162,7 +162,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -174,7 +174,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -189,7 +189,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -203,13 +203,13 @@
                 <div class="background">
                     <img src="../../recursos/img/main_publico/nav3.jpg">
                 </div>
-                <a href="login_publico.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar
+                <a href="index_publico.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar
                     Sesión</a>
             </div>
         </li>
         <div id="opciones_movil">
             <li><a class="subheader">Opciones Principales</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
+            <li><a href="dashboard.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
                         alt="inicio">Inicio</a></li>
             <!-- Dropdown Trigger Decoración -->
             <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion_movil"><img
@@ -295,91 +295,100 @@
                 <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+                <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
                 <li class="divider"></li>
             </ul>
             <li>
                 <div class="divider"></div>
             </li>
             <li><a class="subheader">Configuración</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-            <li><a href="login_publico.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/usuario.png"
+                        alt="perfil">Perfil</a></li>
+            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
+                        alt="luna">Modo Nocturno</a></li>
+            <li><a href="index_publico.html" class="waves-effect waves-red"><img
+                        src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
             </li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <!--Titulo de nuestra pagina web-->
-        <div>
-            <!--Creamos el id que sera nuestro contenedor-->
-            <div id="contenedor">
-                <div>
-                    <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
-                    <h3 id="titulo_principal">Politicas y zona de envio</h3>
-                </div>
-                <div>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <h2 id="subtema_texto1">1. Los plazos aproximados para que el producto sea entregado inician desde
-                        la compra hasta una fecha establecida por el USUARIO/CLIENTE, dicha fecha no debé sobrepasar 2
-                        semanas máximo desde que se efectuo el pago.</h2>
-                    <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
-                    <p id="texto_inicial">El USUARIO/CLIENTE cuenta con 2 diferentes opciones de envio. El tipo de
-                        entrega de productos a
-                        centros comerciales tiene un costo de $0.00, siempre que sea en el área central de El
-                        Salvador,
-                        fuera de ella puede tener recargo dependiendo
-                        la zona. La segunda opción de tipo de entrega es a domicilio con un costo extra a la compra
-                        de
-                        $5.00 dólares americanos. El envio a domicio tendrá un costo de $0.00 si el USUARIO/CLIENTE
-                        realiza compras mayores a los $50.00 dólares americanos.
-                        Aplica para el territorio de El Salvador.<br><br>
-                        El administrador de la página web no será responsable de los errores causados en la entrega
-                        cuando la fecha y dirección de entrega introducida por el USUARIO/CLIENTE en el formulario
-                        de
-                        pedido no se ajuste a la realidad o hayan sido omitidos.
-                        Los plazos pueden variar por razones logísticas o de fuerza mayor. En casos de retrasos en
-                        las
-                        entregas, el admin id="texto_inicial"istrador de la página web informará a sus
-                        USUARIOS/CLIENTE,
-                        en cuanto tenga
-                        conocimiento de ellos. <br><br>
-                        Cada entrega se considera efectuada a partir del momento en el área de Gestión de la Entrega
-                        pone el producto a disposición del USUARIO/CLIENTE, que se materializa a través del sistema
-                        de
-                        control utilizado por el área de transporte propia de la empresa.<br><br>
-                        No se considerarán retrasos en la entrega aquellos casos en que el pedido haya sido puesto a
-                        disposición del USUARIO/CLIENTE, por parte del transportista dentro del plazo y no haya
-                        podido
-                        ser entregado por causa imputable al USUARIO/CLIENTE.
-                    </p>
-                    <h2 id="subtema_texto1">
-                        2. A – Datos de entrega, entregas no realizadas y pérdidas del producto
-                    </h2>
-                    <p id="texto_inicial">
-                        El administrador de la página web contrata como parte del servicio de entrega de mensajería o
-                        Correos de España, la realización de una serie de acciones de seguimiento, encaminadas a
-                        garantizar
-                        que la entrega se produce.<br><br>
-                        Si pasados 7 días después de la salida a reparto del pedido, no se ha concertado la entrega, el
-                        USUARIO/CLIENTE deberá ponerse en contacto con el administrador de la página web.<br><br>
-                        En caso de que el USUARIO/CLIENTE no proceda así, pasados 10 días hábiles desde la salida a
-                        reparto del pedido, éste será devuelto y el USUARIO/CLIENTE deberá de hacerse cargo de los
-                        gastos de envío y retorno del pedido, así como de los posibles
-                        gastos de gestión asociados.
-                    </p>
-                    <h2 id="subtema_texto1">
-                        2. B – Diligencia en la entrega
-                    </h2>
+        <!--Creamos el id que sera nuestro contenedor-->
+        <div class="container">
+            <div class="row">
+                <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                <h3 id="titulo_principal">Politicas y zona de envio</h3>
+            </div>
+            <div class="row">
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="subtema_texto">1. Los plazos aproximados para que el producto sea entregado inician desde
+                    la compra hasta una fecha establecida por el USUARIO/CLIENTE, dicha fecha no debé sobrepasar 2
+                    semanas máximo desde que se efectuo el pago.</p>
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="texto_inicial">El USUARIO/CLIENTE cuenta con 2 diferentes opciones de envio. El tipo de
+                    entrega de productos a
+                    centros comerciales tiene un costo de $0.00, siempre que sea en el área central de El
+                    Salvador,
+                    fuera de ella puede tener recargo dependiendo
+                    la zona. La segunda opción de tipo de entrega es a domicilio con un costo extra a la compra
+                    de
+                    $5.00 dólares americanos. El envio a domicio tendrá un costo de $0.00 si el USUARIO/CLIENTE
+                    realiza compras mayores a los $50.00 dólares americanos.
+                    Aplica para el territorio de El Salvador.<br><br>
+                    El administrador de la página web no será responsable de los errores causados en la entrega
+                    cuando la fecha y dirección de entrega introducida por el USUARIO/CLIENTE en el formulario
+                    de
+                    pedido no se ajuste a la realidad o hayan sido omitidos.
+                    Los plazos pueden variar por razones logísticas o de fuerza mayor. En casos de retrasos en
+                    las
+                    entregas, el admin id="texto_inicial"istrador de la página web informará a sus
+                    USUARIOS/CLIENTE,
+                    en cuanto tenga
+                    conocimiento de ellos. <br><br>
+                    Cada entrega se considera efectuada a partir del momento en el área de Gestión de la Entrega
+                    pone el producto a disposición del USUARIO/CLIENTE, que se materializa a través del sistema
+                    de
+                    control utilizado por el área de transporte propia de la empresa.<br><br>
+                    No se considerarán retrasos en la entrega aquellos casos en que el pedido haya sido puesto a
+                    disposición del USUARIO/CLIENTE, por parte del transportista dentro del plazo y no haya
+                    podido
+                    ser entregado por causa imputable al USUARIO/CLIENTE.
+                </p>
+                <p id="subtema_texto">
+                    2. A – Datos de entrega, entregas no realizadas y pérdidas del producto
+                </p>
+                <p id="texto_inicial">
+                    El administrador de la página web contrata como parte del servicio de entrega de mensajería o
+                    Correos de España, la realización de una serie de acciones de seguimiento, encaminadas a
+                    garantizar
+                    que la entrega se produce.<br><br>
+                    Si pasados 7 días después de la salida a reparto del pedido, no se ha concertado la entrega, el
+                    USUARIO/CLIENTE deberá ponerse en contacto con el administrador de la página web.<br><br>
+                    En caso de que el USUARIO/CLIENTE no proceda así, pasados 10 días hábiles desde la salida a
+                    reparto del pedido, éste será devuelto y el USUARIO/CLIENTE deberá de hacerse cargo de los
+                    gastos de envío y retorno del pedido, así como de los posibles
+                    gastos de gestión asociados.
+                </p>
+                <p id="subtema_texto">
+                    2. B – Diligencia en la entrega
+                </p>
+                <div id="texto_espacio">
                     <p id="texto_inicial">
                         El USUARIO/CLIENTE, deberá comprobar el buen estado del pedido ante el transporte o correos
                         que,
                         por cuenta del administrador de la página web, realice la entrega del producto solicitado,
                         indicando en el albarán de entrega cualquier anomalía que
-                        pudiera detectar en el pedido.
+                        pudiera detectar en el pedido.<br><br>
+                        **IMPORTANTE: Lugares adonde Le Caméléon NO presta servicio a domicilio: Las Margaritas, La
+                        Campanera,
+                        El Pepeto, El Limón, Apopa, Soyapango, San Martin, San Luis Talpa, Cuscatancingo, Ayutuxtepeque,
+                        San José (Soyapango se entregan en el Parqueo de Unicentro o Plaza Mundo), Ninguna Comunidad.
+                        El cliente debe dar la dirección EXACTA para confirmarle la entrega, si la zona es de riesgo el
+                        producto se entregará en Centros Comerciales.**
                     </p>
                 </div>
             </div>
+        </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
     <footer>
@@ -396,18 +405,18 @@
             <div>
                 <p>CONÓCENOS</p>
                 <a href="Acercade.html">Acerca de Le Caméléon</a><br>
-                <a href="">Contáctanos</a>
+                <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
                 <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="../Problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
                 <p>SÍGUENOS EN TU RED FAVORITA</p>
-                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram" height="30"
-                        class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
                 <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
                         class="facebook"></a>
                 <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
@@ -439,8 +448,8 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/servicio_cliente_general.js"></script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,9 @@
 <html lang="ES">
 
 <head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
     <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
@@ -15,9 +18,6 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
-<!--Nombre de la página-->
-<title>Le Caméléon</title>
 
 <body>
     <!--Encabezado del sitio web-->
@@ -33,7 +33,7 @@
         <div id="apartado_buscador">
             <!--Logo-->
             <div id="logo_imagen">
-                <img src="../../recursos/img/logo2.png" alt="logo">
+                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
             </div>
             <!--Categoria de busqueda-->
             <div id="boton_categoria" class="hide-on-med-and-down">
@@ -80,8 +80,8 @@
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="login_publico.html"><img class="tooltipped" data-position="bottom"
-                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
+                    data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
@@ -111,7 +111,7 @@
                 </div>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down" id="opciones">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
                     <li><a class="dropdown-trigger" href="decoracion.html"
                             data-target="dropdown_decoracion">Decoración
@@ -136,7 +136,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="artaccesorios.html"
+                    <li><a class="dropdown-trigger" href="accesorios.html"
                             data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -165,7 +165,7 @@
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artdecoracion.html"
+                    <li><a class="dropdown-trigger" href="artesanales.html"
                             data-target="dropdown_artesanales">Artesanales
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -177,7 +177,7 @@
                         <li class="divider"></li>
                     </ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="otros.html">Ofertas</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
                     <!-- Dropdown Trigger Servicio al cliente -->
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -192,7 +192,7 @@
                         <li class="divider"></li>
                         <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
                         <li class="divider"></li>
-                        <li><a href="problema.html">Reportar un problema</a></li>
+                        <li><a href="reportar_problema.html">Reportar un problema</a></li>
                         <li class="divider"></li>
                     </ul>
                 </ul>
@@ -206,12 +206,12 @@
                 <div class="background">
                     <img src="../../recursos/img/main_publico/nav3.jpg">
                 </div>
-                <a href="login_publico.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
+                <a href="index_publico.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
             </div>
         </li>
         <div id="opciones_movil">
             <li><a class="subheader">Opciones Principales</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
+            <li><a href="dashboard.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
                         alt="inicio">Inicio</a></li>
             <!-- Dropdown Trigger Decoración -->
             <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion_movil"><img
@@ -296,16 +296,16 @@
                 <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+                <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
                 <li class="divider"></li>
             </ul>
             <li>
                 <div class="divider"></div>
             </li>
             <li><a class="subheader">Configuración</a></li>
-            <li><a href="#"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
             <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-            <li><a href="login_publico.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
+            <li><a href="index_publico.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
@@ -785,7 +785,7 @@
             <div>
                 <p>SOPORTE</p>
                 <a href="devoluciones.html">Devoluciones y Reembolsos</a><br>
-                <a href="problema.html">Reportar un Problema</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">

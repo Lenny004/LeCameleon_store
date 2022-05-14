@@ -1,7 +1,18 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 /*Barra de color que anuncia ofertas*/
 #barra_anuncio {
     height: 42px;
     background-color: #2f6950;
+    color: #ffffff;
 }
 
 /*Modificamos del contenedor de logo, nombre, tipo usuario y imagen usuario*/
@@ -26,8 +37,8 @@
     color: #36465d;
     display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	align-content:flex-start;
+	align-items: flex-end;
+	align-content: center;
     margin-right: 25px;
 }
 
@@ -70,10 +81,15 @@
     position:relative;
 }
 
+.material-tooltip{
+    background-color: #2f6950 !important;
+}
+
 #menu a {
     color: #4a4a4a;
     min-width: 155px;
     max-width: 250px;
+    font-weight: 500;
 }
 
 /*Cuando se coloque el mouse encima de una opción del mouse, las letras cambian de color*/
@@ -86,10 +102,10 @@
     top: 0;
 }
 
-#slider_main h1{
-    color: #2f6950;
+.slides h1{
+    color: #ffffff;
     font-weight: bold;
-    text-shadow: #ffffff 1px 1px 0.5px;
+    background-color: rgba(119, 118, 118, 0.7) ;
 }
 
 /*Menú para moviles le cambiamos el color de las letras*/
@@ -111,9 +127,10 @@
     margin-bottom: 20px;
 }
 
-
+/*Sombreado a las tarjetas*/
 #tarjetas:hover{
-    box-shadow: 0px 0px 4px 4px rgba(47, 105, 80, 0.8);
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
 }
 
 #tarjetas a{
@@ -124,13 +141,13 @@
     color: #ffff;
 }
 
-.card {
+.container .card {
     padding: 7px;
 }
 
-.card img {
+.container .card img {
     height: 200px;
-    width: 300px;
+    width: 100%;
 }
 
 .card a {
@@ -160,12 +177,14 @@ footer {
     flex-wrap: wrap;
 }
 
+#texto_terminos{
+    margin-left: 10%;
+}
+
 .terminos{
-    margin-left: 45px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     justify-content: center;
 }
 
@@ -186,6 +205,892 @@ footer {
     color: #282012;
     padding: 5px;
 }
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+#contenido_login{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+/*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+#logo_login img{
+    max-width: 180px;
+    max-height: 135px;
+}
+
+#tarjeta_login{
+    height: 500px;
+    width: 400px;
+    box-shadow: 0px 1px 5px 2px #bfbfbf;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
+#tarjeta_login h5{
+    color: #282012;
+    font-weight: 500;
+}
+
+/*Le damos un nuevo tamaño a la imagen del usuario*/
+#tarjeta_login img{
+    height: 60px;
+    width: 60px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#anuncio_registrar{
+    font-size: small;
+    text-align: center;
+    color: #282012;
+}
+
+#anuncio_registrar p{
+    text-align: center;
+}
+
+#imagen_usuario_login{
+    display: flex;
+    flex-direction: row;
+    /* Alinear items en el centro */
+    justify-content: center;
+}
+
+#contenido_login .card-content{
+    height: 390px;
+    width: 390px;
+}
+
+/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
+#tarjeta_login p{
+    color: #2f6950;
+}
+
+#credenciales_login{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#credenciales_login a{
+    color: #36465d;
+    border: none;
+    padding: 0;
+}
+
+#credenciales_login a:hover{
+    background: none;
+}
+
+#contra_login{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#contra_login img{
+    margin-top: 20px !important;
+    position: relative !important;
+    height: 25px !important;
+    width: 25px !important;
+    cursor: pointer;
+}
+
+#boton_iniciar_login{
+    width: 390px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_iniciar_login a{
+    background-color: #DA7D27;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+#boton_iniciar_login a:hover{
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+#registro_login{
+    align-self: center;
+}
+
+#registro_login a{
+    color: #36465d !important;
+}
+
+
+#formulario_registro{
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: space-between;
+    align-items:center;
+    justify-content: space-between;
+}
+
+#logo_registro img{
+    width: 500px;
+    height: 350px;
+}
+
+#boton_registrar{
+    display: flex;
+    flex-direction: row;
+    /* Alinear items en el centro */
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_registrar a{
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_registrar a:hover{
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+/*------------------------------------------Main Gráficas------------------------------------------*/
+
+
+/*Alinea el titulo al lado izquierdo*/
+.titulo_graficas{
+    text-align: left;
+}
+
+/*Modificamos*/
+#tarjeta_grafica{
+    background-color: #e8d9d9;
+    margin-top: 20px;
+    margin-bottom: 40%;
+}
+
+#tarjeta_grafica span{
+    font-weight: 400;
+}
+
+#tarjeta_grafica:hover{
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+#tarjeta_grafica a{
+    color: #2f6950;
+}
+
+#tarjeta_grafica a:hover{
+    color: #ffff;
+}
+
+#tarjeta_grafica .card img {
+    height: 200px;
+    width: 250px;
+}
+
+#tarjeta_grafica a {
+    color: #2f6950;
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+#tarjeta_grafica a:hover {
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+/*------------------------------------------Main Gráficas VENTAS------------------------------------------*/
+
+#titulo_graficos{
+    margin-left: 8%;
+}
+
+#contenedor_graficos{
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+#tarjeta_grafica_venta{
+    width: 40%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content:center;
+    margin: 2%;
+}
+
+#fechas_grafica{
+    color: #2f6950;
+    display: flex;
+    flex-direction: row;
+}
+
+#fechas_grafica .input-field{
+    margin-top: 10%;
+}
+
+.clasificar_grafica{
+    width: 25%;
+    margin-right: 10%;
+}
+
+#graficas h6{
+    color: #21190a;
+}
+
+#graficas img{
+    max-width: 500px;
+    height: 100%;
+}
+
+#boton_consultar{
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#boton_consultar a{
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*------------------------------------------Main Gráficas EMPLEADOS------------------------------------------*/
+#tarjeta_grafica_empleados{
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content:center;
+    margin: 2%;
+}
+
+#fechas_grafica_empleado{
+    color: #2f6950;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+
+/*------------------------------------------Main INVENTARIO------------------------------------------*/
+#tarjeta_inventario{
+    background-color: #e8d9d9;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Sombreado a las tarjetas*/
+#tarjeta_inventario:hover{
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+#tarjeta_inventario a{
+    color: #2f6950;
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+#tarjeta_inventario a:hover {
+    background-color: #2f6950;
+    color: #ffff;
+}
+
+#tarjeta_inventario p{
+    font-size: small;
+}
+
+#tarjeta_inventario span{
+    font-size: 18px;
+}
+
+#tarjeta_inventario img {
+    height: 200px;
+    width: 250px;
+}
+
+/*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+#titulo_buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#buscador nav {
+    height: 40px;
+}
+
+#buscador a {
+    margin-left: 5px;
+}
+
+#buscador form {
+    max-width: 450px;
+    max-height: 40px;
+    color: #777676;
+}
+
+#tabla{
+    margin-bottom: 10%;
+}
+
+#tabla img{
+    width: 80px;
+}
+
+/*------------------------------------------Main INVENTARIO------------------------------------------*/
+#titulo_modal{
+    color: #282012;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#titulo_modal img{
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+#imagenes_modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#imagenes_modal p{
+    color: #36465d;
+    font-size: 12px;
+    text-align: center;
+}
+
+#imagenes_modal a{
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+#imagenes_modal a:hover{
+    background-color: #ffffff;
+    color: #36465d;
+    border: 2px solid #36465d;
+}
+
+#imagen_principal_modal img{
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#imagenes_secundarias img{
+    width: 40px;
+    height: 40px;
+}
+
+#contenido_credenciales{
+    margin-top: 15px;
+    height: 700px;
+    width: 570px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-content: space-between;
+}
+
+#agregarModal{
+    height: 90%;
+    width: 90%;
+}
+
+#editarModal{
+    height: 90%;
+    width: 90%;
+}
+
+#campos{
+    height: 99%;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#boton_agregar{
+    text-align: center;
+    padding: 15px;
+}
+
+#boton_agregar a{
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+.boton_verde{
+    background-color: #2f6950 !important;
+    color: #ffffff;
+}
+
+#acciones{
+    display: flex;
+    flex-direction: row;
+}
+
+#acciones img{
+    margin-left: 15px;
+    width: 35px;
+    height: 35px;
+}
+
+/*Modal 2*/
+#titulo_modal2{
+    color: #282012;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#titulo_modal2 img{
+    width: 30px !important;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: -5px;
+}
+
+#imagen_principal_modal2 img{
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#contenido_credenciales2{
+    margin-top: 15px;
+    height: 700px;
+    width: 570px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-content: space-between;
+}
+
+#editarModal{
+    height: 90%;
+    width: 90%;
+}
+
+#campos2{
+    height: 99%;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#boton_modificar{
+    text-align: center;
+    padding: 15px;
+}
+
+#boton_modificar a{
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+#boton_eliminar{
+    text-align: center;
+    padding: 15px;
+}
+
+#boton_eliminar p{
+    color: #d32f2f;
+}
+
+#boton_eliminar a{
+    background-color: #d32f2f;
+    color: #ffffff;
+}
+
+/*Modal 3*/
+#eliminarModal{
+    height: 90%;
+    width: 90%;
+}
+
+/*Modal 4*/
+#reseñaModal{
+    height: 90%;
+    width: 90%;
+}
+
+#estrellas{
+    display: flex;
+    flex-direction: row;
+}
+
+#estrellas img{
+    width: 25px;
+    height: 25px;
+}
+
+#estado_reseña{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between ;
+    justify-items: center;
+}
+
+/*Propiedades del boton de idioma*/
+#estado_reseña a {
+    width: 100px;
+    background-color: #36465d;
+    color: #ffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#estado_reseña img{
+    width: 15px;
+    height: 15px;
+}
+
+#estado_resenia a{
+    width: 95%;
+}
+
+
+/*------------------------------------------Monitorear Pedidos------------------------------------------*/
+/*Colocamos el titulo y la caja con los estados a un extremo del otro*/
+#informacion{
+    padding: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#informacion h4{
+    font-weight: bold;
+}
+
+/*La caja de estado del pedido su contenido lo colocamos en fila*/
+#estado_pedido{
+    width: 720px;
+    border: solid 2px #bfbfbf;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+#estado_pedido p{
+    font-size: small;
+    margin-right: 15px;
+}
+
+#rojo{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#rojo a{
+    background-color: #b51d26;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#amarillo{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#amarillo a{
+    background-color: #da7d27;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#azul{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#azul a{
+    background-color: #36465d;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#verde{
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#verde a{
+    background-color: #8cc43f;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+/*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+#pedidos{
+    width: 1280px;
+    height: 210px;
+    border: 1px solid #282012;
+    margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/*Le damos una posición y tamaño a la imagen del camión*/
+#pedidos img{
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: 45px;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar{
+    right: 5%;
+    position: relative;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar2{
+    right: 5%;
+    position: relative;
+}
+
+/*Se pueden tomar el pedido*/
+#tomar a{
+    background-color: #da7d27;
+}
+
+/*El pedido esta en camino*/
+#tomar2 a{
+    background-color: #8cc43f;
+}
+
+/*Movemos la información a la izquierda*/
+#direccion{
+    font-size: small;
+    left: 22%;
+    position:absolute;
+}
+
+/*Agregamos negrita a los titulos internos de la tarjeta*/
+#direccion h6{
+    font-weight: bold;
+}
+
+/*Colores de las tarjetas dependiendo de su estado*/
+#pendiente a{
+    background-color: #d32f2f;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#disponible a{
+    background-color: #da7d27;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#entregando a{
+    background-color: #8cc43f;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+#no_disponible a{
+    background-color: #36465d;
+    width: 20px;
+    height: 100%;
+    position:absolute;
+}
+
+/*------------------------------------------Registro de entregas------------------------------------------*/
+.contenedores_entrega{
+    border: 2px solid #777676;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 2%;
+}
+
+.contenedores_entrega2{ 
+    border: 2px solid #777676;
+    margin-bottom: 5%;
+}
+
+.texto_verde{
+    color: #2f6950;
+}
+
+#tabla_entregas{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+/*Tablas hijas de color blanco*/
+#tabla_entregas table.striped>tbody>tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/*------------------------------------------CATEGORIAS PRINCIPALES------------------------------------------*/
+
+#acciones_categorias{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#acciones_categorias img{
+    width: 45px;
+    height: 45px;
+}
+
+.boton_agregar_categoria{
+    position: absolute;
+    bottom: 5%;
+    margin-left: -25%;
+}
+
+.boton_azul{
+    background-color: #36465d !important;
+    color: #ffffff;
+}
+
+.boton_modificar_categoria{
+    position: absolute;
+    bottom: 5%;
+    margin-left: -25%;
+}
+
+/*------------------------------------------Administrar Empleados------------------------------------------*/
+
+#boton_agregar_centrado{
+    text-align: center;
+}
+
+
+/*------------------------------------------Administrar Marca------------------------------------------*/
+#agregar_modal_marca{
+    width:30%;
+}
+
+#modificar_modal_marca{
+    width:30%;
+}
+
+#eliminar_modal_marca{
+    width:30%;
+}
+
+
 /*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
 
 /*para celulares*/
@@ -206,7 +1111,7 @@ footer {
 
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
-        height: 220px;
+        height: 225px;
         margin-top: 2px;
         margin-bottom: 15px;
     }
@@ -215,8 +1120,8 @@ footer {
         color: #2f6950;
         font-size: 10px;
         width: 60px;
-
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         margin: 0;
 
         display: flex;
@@ -232,17 +1137,27 @@ footer {
         margin-bottom: 10px;
     }
 
+    .container .card {
+        padding: 5px;
+    }
+    
+    .container .card img {
+        height: 110px;
+        width: 100%;
+    }
+
     .card {
         padding: 5px;
     }
     
     .card img {
         height: 110px;
-        width: 200px;
+        width: 100%;
     }
 
     /*-Footer Terminos-*/
     #pie{
+        text-align: center;
         position: relative;
         font-size: smaller;
         display: flex;
@@ -252,9 +1167,13 @@ footer {
         flex-wrap: wrap;
     }
 
+    #texto_terminos{
+        margin-left: 0%;
+    }
+
     .terminos{
         font-size: smaller;
-        margin-left: 0px;
+        margin-left: none;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -267,6 +1186,252 @@ footer {
         flex-direction: column;
         align-content: center;
         align-items: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    
+    /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_login{
+        max-height: 450px;
+        max-width: 300px;
+    }
+
+    #contenido_login .card-content{
+        height: 350px;
+        width: 300px;
+    }
+
+    #boton_iniciar_login{
+        width: 300px;
+    }
+
+    #tarjeta_login{
+        font-size: smaller;
+    }
+
+    /*-Footer Terminos-*/
+    #pie_login{
+        position: relative;
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos_login{
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #formulario_registro{
+        width: 95%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registro img{
+        max-width: 250px;
+        max-height: 230px;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    .titulo_graficas{
+        font-size: 35px;
+    }
+
+    #tarjeta_grafica{
+        margin-bottom: 10%;
+    }
+    
+    #tarjeta_grafica a{
+        font-size: 10px;
+        margin-right: -8px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        height: 20px !important;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span{
+        font-size: 15px;
+    }
+
+    #tarjeta_grafica .card {
+        padding: 5px;
+    }
+    
+    #tarjeta_grafica.card img {
+        margin-top: 10%;
+        height: 80%;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica{
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario{
+        text-align: center;
+        display: flex;
+        flex-direction: column ;
+        justify-content:center ;
+        align-items:center ;
+    }
+
+    #tarjeta_inventario a{
+        font-size: 10px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column ;
+        justify-content:center ;
+        align-items:center ;
+    }
+
+    #tarjeta_inventario p{
+        font-size: small;
+    }
+
+    #tarjeta_inventario span{
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    #tarjeta_inventario img {
+        height: 100px;
+        width: 100px;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador{
+        padding-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tabla th{
+        font-size: 12px;
+    }
+
+    #tabla td{
+        font-size: 12px;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 270px;
+        height: 600px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        position: relative;
+    }
+    
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 200px;
+        max-height: 200px;
+        margin-left: 0px;
+    }
+    
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+    
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+    
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+    
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+    
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #disponible a{
+        background-color: #da7d27;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #entregando a{
+        background-color: #8cc43f;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+    
+    #no_disponible a{
+        background-color: #36465d;
+        width: 269px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
     }
 }
 
@@ -298,7 +1463,8 @@ footer {
     #tarjetas a{
         color: #2f6950;
         font-size: 10px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -317,6 +1483,15 @@ footer {
         margin-bottom: 10px;
     }
 
+    .container .card {
+        padding: 10px;
+    }
+    
+    .container .card img {
+        height: 120px;
+        width: 200px;
+    }
+
     .card {
         padding: 10px;
     }
@@ -330,6 +1505,7 @@ footer {
 
     /*Editamos el footer*/
     #pie{
+        text-align: center;
         position: relative;
         font-size: small;
         display: flex;
@@ -337,6 +1513,10 @@ footer {
         justify-content:center;
         align-items: center;
         flex-wrap: wrap;
+    }
+
+    #texto_terminos{
+        margin-left: 0%;
     }
 
     .terminos{
@@ -354,6 +1534,226 @@ footer {
         flex-direction: column;
         align-content: center;
         align-items: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_login{
+        max-height: 450px;
+        max-width: 360px;
+    }
+
+    #contenido_login .card-content{
+        height: 360px;
+        width: 360px;
+    }
+
+    #boton_iniciar_login{
+        margin: 0px;
+        padding-bottom: 10px;
+        width: 360px;   
+    }
+
+    #tarjeta_login{
+        font-size: smaller;
+    }
+
+    .terminos_login{
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #formulario_registro{
+        width: 90%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registro img{
+        max-width: 320px;
+        max-height: 245px;
+        margin-left: -15px;
+        position: relative;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    .titulo_graficas{
+        font-size: 40px;
+    }
+    
+    #tarjeta_grafica{
+        margin-bottom: 10%;
+    }
+    
+    #tarjeta_grafica a{
+        color: #2f6950;
+        font-size: 11px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span{
+        font-size: 20px;
+    }
+
+    #tarjeta_grafica.card img {
+        height: 95%;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica{
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    #tarjeta_inventario a{
+        font-size: 11px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    #tarjeta_inventario p{
+        font-size: small;
+    }
+
+    #tarjeta_inventario span{
+        font-size: 20px;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador{
+        padding-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 330px;
+        height: 700px;
+        border: 1px solid #282012;
+        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 250px;
+        max-height: 250px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
     }
 }
 
@@ -378,7 +1778,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -397,13 +1798,193 @@ footer {
         margin-bottom: 10px;
     }
 
-    .card {
+    .container .card {
         padding: 5px;
     }
     
-    .card img {
+    .container .card img {
         max-height: 160px;
-        max-width: 200px;
+        width: 100%;
+    }
+
+    /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
+
+    /*Editamos el footer*/
+    #pie{
+        text-align: center;
+        position: relative;
+        font-size: small;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #texto_terminos{
+        margin-left: 0%;
+    }
+
+    .terminos{
+        font-size: small;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+    
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    .titulo_graficas{
+        font-size: 35px;
+    }
+
+    #tarjeta_grafica{
+        margin-bottom: 10%;
+    }
+    
+    #tarjeta_grafica a{
+        font-size: 15px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span{
+        font-size: 22px;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica{
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario a{
+        font-size: 11px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    #tarjeta_inventario p{
+        font-size: medium;
+    }
+
+    #tarjeta_inventario span{
+        font-size: 22px;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 500px;
+        height: 700px;
+        border: 1px solid #282012;
+        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 400px;
+        max-height: 400px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2{
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position:absolute;
     }
 }
 
@@ -424,7 +2005,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -443,13 +2025,195 @@ footer {
         margin-bottom: 2px;
     }
 
-    .card {
+    .container .card {
         padding: 5px;
     }
     
-    .card img {
+    .container .card img {
         max-height: 160px;
-        max-width: 200px;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    #tarjeta_grafica{
+        margin-bottom: 10%;
+    }
+    
+    #tarjeta_grafica a{
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span{
+        font-size: 25px;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica .input-field{
+        margin-top: 12%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario a{
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_inventario span{
+        font-size: 25px;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 740px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a{
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 12px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a{
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 5px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        font-size: small;
+        left: 22%;
+        position:absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
     }
 }
 
@@ -470,7 +2234,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -489,13 +2254,191 @@ footer {
         margin-bottom: 10px;
     }
 
-    .card {
+    .container .card {
         padding: 5px;
     }
     
-    .card img {
+    .container .card img {
         max-height: 160px;
-        max-width: 200px;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    #tarjeta_grafica{
+        margin-bottom: 15%;
+    }
+    
+    #tarjeta_grafica a{
+        font-size: 15px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario{
+        min-height: 316px;
+    }
+    
+    #tarjeta_inventario a{
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        align-items:center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador{
+        margin-top: 10%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos{
+        width: 865px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a{
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a{
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -7px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position:absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion{
+        font-size: small;
+        left: 22%;
+        position:absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6{
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #pendiente a{
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #disponible a{
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #entregando a{
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
+    }
+
+    #no_disponible a{
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position:absolute;
     }
 }
 
@@ -510,6 +2453,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding: 0px;
         margin: 0;
 
@@ -519,5 +2464,23 @@ footer {
         align-items:center;
         align-content: center;
         align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador{
+        margin-top: 10%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    #pedidos{
+        width: 1080px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
     }
 }

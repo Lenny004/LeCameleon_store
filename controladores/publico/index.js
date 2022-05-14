@@ -29,4 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Instanciar ToolTips footer
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+
+    M.Collapsible.init(document.querySelectorAll('.collapsible'));
 });

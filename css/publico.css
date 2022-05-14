@@ -27,15 +27,67 @@ main {
     color: #ffffff;
 }
 
+#barra_anuncio_artesanales{
+    height: 42px;
+    background-color: #ea8f70;
+    color: #ffffff;
+}
+
+#barra_anuncio_ofertas{
+    height: 42px;
+    background-color: #C63637;
+    color: #ffffff;
+}
+
+#barra_anuncio_servicio{
+    height: 42px;
+    background-color: #36465d;
+    color: #ffffff;
+}
+
 /*Le asignamos un color al texto*/
-#barra_anuncio .mensaje_arriba {
+.mensaje_arriba p{
     color: #ffffff;
 }
 
 /*Le damos propiedades a la barra de arriba*/
 #barra_anuncio a {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#barra_anuncio_decoracion a {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#barra_anuncio_accesorio a {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#barra_anuncio_artesanales a{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#barra_anuncio_ofertas a {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#barra_anuncio_servicio a {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +97,27 @@ main {
 #barra_anuncio img {
     margin-right: 10px;
 }
+
+#barra_anuncio_decoracion img {
+    margin-right: 10px;
+}
+
+#barra_anuncio_accesorio img {
+    margin-right: 10px;
+}
+
+#barra_anuncio_artesanales img {
+    margin-right: 10px;
+}
+
+#barra_anuncio_ofertas img {
+    margin-right: 10px;
+}
+
+#barra_anuncio_servicio img {
+    margin-right: 10px;
+}
+
 
 /*Le asignamos tamaño a la imagen del logo*/
 #logo_imagen img{
@@ -155,8 +228,8 @@ main {
 
 #menu a {
     color: #4a4a4a;
-
     width: 190px;
+    font-weight: 500;
 }
 
 #opciones_movil img{
@@ -223,8 +296,10 @@ main {
     margin-bottom: 20px !important;
 }
 
+/*Sombreado a las tarjetas*/
 #tarjetas:hover{
-    box-shadow: 0px 0px 4px 4px rgba(47, 105, 80, 0.8);
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
 }
 
 #tarjetas a{
@@ -241,7 +316,7 @@ main {
 
 .container .card img {
     height: 200px;
-    width: 300px;
+    width: 100%;
 }
 
 .container .card a {
@@ -277,16 +352,28 @@ footer {
 
 /*-Titulos de los apartados en el footer-*/
 #informacion p {
-    color: #282012;
+    color: #21190A;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 /*-Botones(Enlaces) de los apartados en el footer-*/
 #informacion a {
-    color: #282012;
+    color: #504a3e;
     font-size: smaller;
 }
+
+/*-Botones(Enlaces) de los apartados en el footer-*/
+#informacion a:hover {
+    color: #504a3e;
+    text-decoration: underline;
+}
+
+
+#correo a:hover {
+    text-decoration: none;
+}
+
 
 /*-Botones de links de redes sociales-*/
 #redes a {
@@ -296,28 +383,28 @@ footer {
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
 .instagram:hover{
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
-    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: saturate(90%) opacity(0.3) drop-shadow(2px 2px 5px #bd00a7); 
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/ 
+    filter: drop-shadow(2px 2px 5px #bd00a7); 
 }
 
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
 .facebook:hover{
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #01c7ee); 
+    filter: drop-shadow(0px 0px 5px #01c7ee); 
 }
 
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
 .youtube:hover{
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #f10000); 
+    filter: drop-shadow(0px 0px 5px #f10000); 
 }
 
 .tiktok:hover{
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: saturate(90%) opacity(0.4) drop-shadow(0px 0px 5px #7c41da); 
+    filter: drop-shadow(0px 0px 5px #7c41da); 
 }
 
 /*-Le damos un tamaño al input donde se colocar un correo-*/
@@ -362,6 +449,255 @@ footer {
 }
 
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PRODUCTOS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------MAIN PRODUCTOS------------------------------------------------------*/
+/*El titulo izq le damos desbordamiento*/
+titulo_izquierdo{
+    white-space: initial;
+    overflow: hidden;
+}
+
+/*Le quitamos padding y margin a los collapsible*/
+.collapsible {
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    margin: 0 0 0 0 !important;
+    box-shadow: none !important;
+}
+
+/*Quitamos padding y border al collapsible*/
+.collapsible-header{
+    border-bottom: 0px none !important;
+    padding: 0 !important;
+}
+
+/*Le damos un color a los botones*/
+.collapsible-body a{
+    color: #21190A;
+}
+
+/*Le damos un underline cuando se pone encima el mouse*/
+.collapsible-body a:hover{
+    text-decoration: underline;
+}
+
+/*A las tarjetas le damos color de fondo y un margin*/
+#tarjetas_producto{
+    background-color: #e8d9d9;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/*Le damos una sombra al poner mouse encima*/
+#tarjetas_producto:hover{
+    box-shadow: 1px 2px 2rem rgba(47, 105, 80, 0.9);
+    transition: all 0.4s ease;
+}
+
+/*Le damos un color a las letras de los botones*/
+#tarjetas_producto a{
+    color: #2f6950;
+}
+
+/*Cambiamos el color del boton al poner el mouse encima*/
+#tarjetas_producto a:hover{
+    color: #ffff;
+}
+
+/*Le damos un padding interno a las card*/
+#seccion_productos .card {
+    padding: 7px;
+}
+
+/*Le damos tamaño a las img de las card*/
+#seccion_productos .card img {
+    height: 200px !important;
+    width: 100% !important;
+}
+
+/*Le damos color a los botones de las card*/
+#seccion_productos .card a {
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+/*Le damos un fondo al boton al poner el mouse encima*/
+#seccion_productos .card a:hover {
+    background-color: #2f6950;
+}
+
+/*Le damos una altura al espacio donde van las letras y precio*/
+#seccion_productos .card-content{
+    height: 90px;
+}
+
+/*Le damos un color al texto del precio*/
+.precio_producto{
+    color: #2f6950;
+}
+
+/*Le damos un overflow y color al nombre del producto*/
+.nombre_producto{
+    color: #472911;
+    white-space: initial;
+    overflow: hidden;
+}
+
+/*Le damos dirección en columna a las marcas*/
+.marcas_productos{
+    display: flex;
+    flex-direction: column;
+}
+
+/*Color al apartado marcas*/
+.marcas_productos label{
+    color: #472911 !important;
+}
+
+span::after{
+    background-color: #2f6950 !important;
+    border-color: #2f6950 !important;
+}
+
+/*Le cambiamos el boton de fondo del check*/
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after{
+    background-color: #e8d9d9 !important;
+}
+
+/*Ponemos el columna los precios*/
+#rango_precios{
+    display: flex;
+    flex-direction: column;
+}
+
+/*Ponemos underline al boton, cuando el mouse este encima*/
+#rango_precios a:hover{
+    text-decoration: underline;
+}
+
+/*Le agregamos un color a los botones de descuento*/
+.ofertas_descuentos a{
+    color: #472911 !important;
+}
+
+/*Le damos un underline al mouse estar encima*/
+.ofertas_descuentos a:hover{
+    text-decoration: underline;
+}
+
+/*Le damos un color a la cantidad*/
+.precio_cantidad a{
+    color: #472911;
+}
+
+/*Centramos el pagination*/
+.pagination{
+    text-align: center;
+}
+
+/*Le damos un color a los botones*/
+.pagination li.active a{
+    color: #472911 !important;
+    font-weight: bolder;
+}
+
+/*Le quitamos el color de fondo a los botones*/
+.pagination li.active{
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/*Le damos un tamaño a los botones*/
+.coloriz{
+    border: none;
+    color: white;
+    padding: 15px 15px !important;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 2px 2px !important;
+    cursor: pointer;
+}
+
+/*Colores de lo botones*/
+.uno{
+    background-color: #2F6950;
+}
+
+.dos{
+    background-color: #EC6E19;
+}
+
+.tres{
+    background-color: #F0F02E;
+}
+
+.cuatro{
+    background-color: #765AA8;
+}
+
+.cinco{
+    background-color: #36465D;
+}
+
+.seis{
+    background-color: #F0F0F0;
+    border: 1px solid #000;
+}
+
+.siete{
+    background-color: #C63637;
+}
+
+.ocho{
+    background-color: #FF6961;
+}
+
+.nueve{
+    background-color: #472911;
+}
+
+.diez{
+    background-color: #282828;
+}
+
+.once{
+    background-color: #7EB9E5;
+}
+
+.doce{
+    background-color: #131111;
+}
+
+.cuadro_marca{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #777676;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cuadro_marca img{
+    width: 100%;
+    height: 100%;
+}
+
+.imagen_marca{
+    width: 210px !important;
+    height: 140px !important;
+    margin: 10px;
+    border: 1px solid #777676;
+    padding: 0;
+    margin-left: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
 #contenido_login{
@@ -384,8 +720,8 @@ footer {
     margin-bottom: 45px;
     display: flex;
     flex-direction: column;
-    align-content: flex-start;
-    align-items: flex-start;
+    align-content: center;
+    align-items: center;
 }
 
 /*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
@@ -484,7 +820,7 @@ footer {
     color: #36465d !important;
 }
 
-/*----------------FOOTER LOGIN---------------*/
+/*-------------------------------------------------------FOOTER LOGIN------------------------------------------------------*/
 /*-Footer Terminos-*/
 #pie_login{
     position: relative;
@@ -532,10 +868,12 @@ footer {
     max-height: 300px;
 }
 
+/*Texto de requerir*/
 #datos span{
-    color:#36465d;
+    color:#36465d !important;
 }
 
+/*Imagen de ocultar*/
 #datos img{
     margin-top: 15px;
     width: 30px;
@@ -569,6 +907,13 @@ footer {
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
 
+#contenido_validar{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
 
 /*Le asignamos un tamaño y otras propiedades a la card*/
 #tarjeta_validar{
@@ -589,7 +934,7 @@ footer {
 }
 
 #tarjeta_validar p{
-    color: #2f6950;
+    color: #282012;
 }
 
 /*Alineamos la imagen al centro de la card*/
@@ -616,7 +961,7 @@ footer {
 
 /*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
 #codigo p{
-    color: #2f6950;
+    color: #2f6950 !important;
 }
 
 #reenviar{
@@ -631,6 +976,231 @@ footer {
     color: #36465d;
 }
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RECUPERAR CONTRA USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------MAIN RECUPERAR------------------------------------------------------*/
+
+#contenido_recuperar{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#contenido_recuperar .card-content{
+    height: 490px;
+    width: 390px;
+}
+
+/*Le asignamos un tamaño y otras propiedades a la card*/
+#tarjeta_recuperar{
+    height: 600px;
+    width: 400px;
+    box-shadow: 0px 1px 5px 2px #bfbfbf;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
+#tarjeta_recuperar h5{
+    color: #282012;
+    font-weight: 500;
+}
+
+#tarjeta_recuperar p{
+    color: #282012;
+}
+
+#boton_recuperar{
+    position:static;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_recuperar a{
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_recuperar a:hover{
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+#boton_renovar{
+    position:static;
+    margin-top: 15px;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_renovar a{
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_renovar a:hover{
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CONTACTANOS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------CONTACTANOS RECUPERAR------------------------------------------------------*/
+
+#cuadros_contacto{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#contacto{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: end;
+}
+
+#redes_sociales{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+}
+
+#redes_sociales img{
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+}
+
+#redes_sociales p{
+    color: #21190A;
+    text-decoration: underline;
+}
+
+#solicitar_informacion{
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#boton_enviar_contacto{
+    text-align: center;
+}
+
+#boton_enviar_contacto a{
+    background-color: #2f6950;
+    width: 25%;
+    margin-bottom: 5%;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEXTO SERVICIO AL CLIENTE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#titulo_principal{
+    color: #21190A;
+}
+
+#subtema_texto{
+    font-size:large;
+    font-weight: 500;
+    color: #21190A;
+}
+
+#texto_inicial{
+    color: #21190A;
+}
+
+#texto_espacio{
+    margin-bottom: 10%;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REPORTAR PROBLEMA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+#boton_enviar_reporte a{
+    border: 2px solid #2f6950;
+    background-color: #ffffff;
+    color: #2f6950;
+    margin-bottom: 8%;
+}
+
+#boton_enviar_reporte a:hover{
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SOBRE NOSOTROS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+#tarjetas_fotos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#tarjetas_integrantes{
+    width: 22%;
+}
+
+#tarjetas_integrantes .card{
+    height: 470px;
+}
+
+#tarjetas_integrantes .card img{
+    min-width: 0 !important;
+    min-height: 0 !important;
+    width: 100% !important;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Marcas++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.botones_busqueda{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.boton_filtrar{
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #2f6950;
+    background-color: #ffffff;
+    color: #2f6950;
+    margin-bottom: 8%;
+}
+
+.boton_filtrar:hover{
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+.boton_limpiar{
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #777676;
+    background-color: #ffffff;
+    color: #2f6950;
+    margin-bottom: 8%;
+}
+
+.boton_limpiar:hover{
+    background-color: #777676;
+    color: #ffffff;
+}
 
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RESPONSIVE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -763,8 +1333,8 @@ footer {
         color: #2f6950;
         font-size: 10px;
         width: 60px;
-
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         margin: 0;
 
         display: flex;
@@ -786,7 +1356,7 @@ footer {
     
     .container .card img {
         height: 110px;
-        width: 200px;
+        width: 100%;
     }
 
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
@@ -817,6 +1387,42 @@ footer {
         flex-direction: column;
         justify-content:center;
         align-items:center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
+    
+    #formulario_registrar{
+        width: 95%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registrar img{
+        max-width: 250px;
+        max-height: 230px;
+    }
+
+    #datos .input-field{
+        margin-bottom: 45px;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
+
+    #tarjeta_validar{
+        max-height: 500px;
+        max-width: 300px;
+    }
+
+    #boton_iniciar{
+        width: 300px;   
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -860,6 +1466,33 @@ footer {
         align-items: center;
         justify-content: center;
         justify-content: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    
+    /*-------------------------------------------------------SECTION VALIDAR------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_recuperar{
+        max-height: 600px;
+        max-width: 300px;
+    }
+
+    #tarjeta_recuperar .card-content{
+        height: 490px;
+        width: 300px;
+    }
+
+    #boton_iniciar_login{
+        width: 300px;
+    }
+
+    #boton_renovar{
+        width: 300px;
+        margin-top: 25px;
+    }
+
+    #tarjeta_recuperar{
+        font-size: smaller;
     }
 }
 
@@ -925,7 +1558,8 @@ footer {
     #tarjetas a{
         color: #2f6950;
         font-size: 10px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -950,7 +1584,7 @@ footer {
     
     .container .card img {
         height: 120px;
-        width: 200px;
+        width: 100%;
     }
 
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
@@ -993,13 +1627,13 @@ footer {
     }
 
     #contenido_login .card-content{
-        height: 380px;
+        height: 360px;
         width: 360px;
     }
 
     #boton_iniciar_login{
         margin: 0px;
-        padding: 0px;
+        padding-bottom: 10px;
         width: 360px;   
     }
 
@@ -1015,6 +1649,65 @@ footer {
         align-items: center;
         justify-content: center;
         justify-content: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
+
+    #tarjeta_validar{
+        height: 500px;
+        width: 360px;
+    }
+
+    #boton_iniciar{
+        width: 360px; 
+    }
+
+    #boton_renovar{
+        width: 360px; 
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
+    
+    #formulario_registrar{
+        width: 90%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registrar img{
+        max-width: 320px;
+        max-height: 245px;
+        margin-left: -15px;
+        position: relative;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_recuperar{
+        max-height: 550px;
+        max-width: 360px;
+    }
+
+    #contenido_recuperar .card-content{
+        height: 480px;
+        width: 360px;
+    }
+
+    #boton_recuperar{
+        width: 360px;   
+    }
+
+    #tarjeta_recuperar p{
+        font-size: smaller;
     }
 }
 
@@ -1064,7 +1757,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -1089,7 +1783,18 @@ footer {
     
     .container .card img {
         max-height: 160px;
+        width: 100%;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
+    
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registrar img{
         max-width: 200px;
+        max-height: 245px;
+        margin-left: 35px;
+        position: relative;
     }
 }
 
@@ -1133,7 +1838,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -1158,7 +1864,7 @@ footer {
     
     .container .card img {
         max-height: 160px;
-        max-width: 200px;
+        width: 100%;
     }
 }
 
@@ -1203,7 +1909,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
-        padding: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding-top: 4px;
         padding-bottom: 4px;
         margin: 0;
@@ -1228,7 +1935,7 @@ footer {
     
     .container .card img {
         max-height: 160px;
-        max-width: 200px;
+        width: 100%;
     }
 }
 
@@ -1243,6 +1950,8 @@ footer {
 
     #tarjetas a{
         font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
         padding: 0px;
         margin: 0;
 
@@ -1271,7 +1980,7 @@ footer {
 
     .container .card img {
         min-height: 200px !important;
-        min-width: 281px !important;
+        width: 100%;
     }
 
     .container .card .card-action:last-child{
@@ -1296,7 +2005,7 @@ footer {
 
     .container .card img {
         min-height: 210px !important;
-        max-width: 340px !important;
+        width: 100%;
     }
 
     .container .card .card-action:last-child{
