@@ -79,6 +79,7 @@ if (isset($_GET['action'])) {
                         }
                         //Verificaremos si existe una fecha de bloqueo para decirle al usuario el tiempo de espera
                         else{
+                            date_default_timezone_set('America/El_Salvador');
                             //Creamos un variable que almacene la hora local
                             $hora_actual = date('Y-m-d h:i:s', time());
                             //Si la hora actual es mayor a la fecha de activación le decimos que debe esperar
@@ -86,7 +87,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Tendrá 5 oportunidades dentro de 5 minutos desde la hora de bloqueo, por favor espere';
                             }
                             //Si la hora actual es menor a la fecha de activación, se actualizaran los intentos a 0 y se eliminara las fechas de bloqueo y desbloqueo 
-                            else{
+                            else if($usuario->getHoraActivacion() < $hora_actual){
                                 //Actualizamos los intentos a 0 y su estado a 1 que es activo
                                 if($usuario->HabilitarIntentos(0, 1)){
                                     $result['exception'] = 'Estado Actualizado. Ha acabado el tiempo de espera, tiene 5 intentos más';
