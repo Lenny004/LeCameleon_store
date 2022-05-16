@@ -34,55 +34,55 @@
                     <div class="row">
                         <h4>Crear Usuario Administrador</h4>
                         <li class="divider"></li>
-                        <form>
+                        <form method="post" id="register-form">
                             <div class="row" id="datos">
                                 <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="name" type="text" class="validate">
-                                    <label for="name">Nombres:</label>
+                                    <input id="nombre" type="text" name="nombre" class="validate" required>
+                                    <label for="nombre">Nombres:</label>
                                 </div>
                                 <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="last_name" type="text" class="validate">
-                                    <label for="last_name">Apellidos:</label>
+                                    <input id="apellidos" type="text" name="apellidos" class="validate" required>
+                                    <label for="apellidos">Apellidos:</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="dui" type="text" data-length="10">
+                                    <input id="dui" type="text" name="dui" placeholder="00000000-0" data-length="10" maxlength="10" class="validate" required>
                                     <label for="dui">DUI:</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="nit" type="text" data-length="17">
+                                    <input id="nit" type="text" name="nit" data-length="17" placeholder="0000-000000-000-0" maxlength="17"  class="validate" required>
                                     <label for="nit">NIT:</label>
                                 </div>
                                 <div class="input-field col s6 m6 l6 xl6 offset+s6">
-                                    <input id="telefono" type="text" class="validate">
+                                    <input id="telefono" type="text" name="telefono" class="validate" required>
                                     <label for="telefono">Teléfono:</label>
                                 </div>
                                 <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="email" type="email" class="validate">
+                                    <input id="email" type="email" name="email" class="validate" required>
                                     <label for="email">Correo:</label>
                                     <span class="helper-text" data-error="" data-success=""><u>Necesario para Ingresar y para enviar Código de acceso</u></span>
                                 </div>
                                 <div class="input-field col s10 m10 l10 xl10" id="contra">
-                                    <input id="password" type="password" class="validate">
+                                    <input id="password" type="password" name="password" class="validate" required>
                                     <label for="password">Contraseña:</label>
                                 </div>
                                 <div class="input-field col s2 m2 l2 xl2">
-                                    <img src="../../recursos/iconografia/ocultar.png" alt="mostrar">
+                                    <a href=""><img src="../../recursos/iconografia/ocultar.png" alt="mostrar"></a>
                                 </div>
                                 <div class="input-field col s10 m10 l10 xl10" id="contra">
-                                    <input id="confirmar_contra" type="password" class="validate">
+                                    <input id="confirmar_contra" type="password" name="confirmar_contra" class="validate" required>
                                     <label for="confirmar_contra">Confirmar Contraseña:</label>
                                 </div>
                                 <div class="input-field col s2 m2 l2 xl2">
-                                    <img src="../../recursos/iconografia/ocultar.png" alt="mostrar">
+                                    <a href=""><img src="../../recursos/iconografia/ocultar.png" alt="mostrar"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_registrar">
+                                    <a type="submit" class="btn-small waves-effect waves-orange" href="validar_usuario.html">Registrarse</a>
                                 </div>
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m12 l12 xl12" id="boton_registrar">
-                    <a class="btn-small waves-effect waves-orange" href="../validar_usuario.html">Registrarse</a>
                 </div>
             </div>
         </div>
@@ -99,13 +99,15 @@
             </div>
             <div id="sitio_privado">
                 <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img
-                        src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
+                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/registro_usuario.js"></script>
 </body>
 
 </html>

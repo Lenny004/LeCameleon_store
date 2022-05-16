@@ -1,7 +1,7 @@
 <?php
 require_once('../conexion/database.php');
 require_once('../conexion/validaciones.php');
-require_once('../modelo/usuarios.php');
+require_once('../modelo/registro_usuario_empleado.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -10,23 +10,15 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['id_usuario'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'verificarPrimerUso':
-                if ($usuario->validarExistenciaPrimerUsuario()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existe al menos un usuario registrado';
-                } else {
-                    $result['exception'] = 'No existen usuarios registrados';
-                }
-                break;
             case 'getUser':
                 if (isset($_SESSION['alias_usuario'])) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['username'] = $_SESSION['alias_usuario'];
                 } else {
                     $result['exception'] = 'Alias de usuario indefinido';
@@ -34,7 +26,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'logOut':
                 if (session_destroy()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Sesión eliminada correctamente';
                 } else {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
@@ -42,7 +34,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readProfile':
                 if ($result['dataset'] = $usuario->readProfile()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
@@ -58,7 +50,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setCorreo($_POST['correo'])) {
                     $result['exception'] = 'Correo incorrecto';
                 } elseif ($usuario->editProfile()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Perfil modificado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -75,7 +67,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setClave($_POST['nueva'])) {
                     $result['exception'] = $usuario->getPasswordError();
                 } elseif ($usuario->changePassword()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Contraseña cambiada correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -83,7 +75,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readAll':
                 if ($result['dataset'] = $usuario->readAll()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
@@ -95,7 +87,7 @@ if (isset($_GET['action'])) {
                 if ($_POST['search'] == '') {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 } elseif ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Valor encontrado';
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
@@ -118,7 +110,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setClave($_POST['clave'])) {
                     $result['exception'] = $usuario->getPasswordError();
                 } elseif ($usuario->createRow()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Usuario creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -128,7 +120,7 @@ if (isset($_GET['action'])) {
                 if (!$usuario->setId($_POST['id'])) {
                     $result['exception'] = 'Usuario incorrecto';
                 } elseif ($result['dataset'] = $usuario->readOne()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
@@ -148,7 +140,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setCorreo($_POST['correo'])) {
                     $result['exception'] = 'Correo incorrecto';
                 } elseif ($usuario->updateRow()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Usuario modificado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -162,7 +154,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->readOne()) {
                     $result['exception'] = 'Usuario inexistente';
                 } elseif ($usuario->deleteRow()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Usuario eliminado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -174,15 +166,7 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'readUsers':
-                if ($usuario->readAll()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existe al menos un usuario registrado';
-                } else {
-                    $result['exception'] = 'No existen usuarios registrados';
-                }
-                break;
-            case 'register':
+            case 'registro_usuario':
                 $_POST = $usuario->validateForm($_POST);
                 if (!$usuario->setNombres($_POST['nombres'])) {
                     $result['exception'] = 'Nombres incorrectos';
@@ -197,7 +181,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setClave($_POST['clave'])) {
                     $result['exception'] = $usuario->getPasswordError();
                 } elseif ($usuario->createRow()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Usuario registrado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -208,7 +192,7 @@ if (isset($_GET['action'])) {
                 if (!$usuario->checkUser($_POST['alias'])) {
                     $result['exception'] = 'Alias incorrecto';
                 } elseif ($usuario->checkPassword($_POST['clave'])) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'Autenticación correcta';
                     $_SESSION['id_usuario'] = $usuario->getId();
                     $_SESSION['alias_usuario'] = $usuario->getAlias();
