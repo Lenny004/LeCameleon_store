@@ -105,7 +105,7 @@ main {
 .slides h1{
     color: #ffffff;
     font-weight: bold;
-    background-color: rgba(119, 118, 118, 0.7) ;
+    background-color: rgba(119, 118, 118, 0.5);
 }
 
 /*Menú para moviles le cambiamos el color de las letras*/
@@ -315,14 +315,14 @@ footer {
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_iniciar_login a{
+#boton_iniciar_login button{
     background-color: #DA7D27;
     box-shadow: none;
     border: none;
     padding: 0px 18px 5px 18px;
 }
 
-#boton_iniciar_login a:hover{
+#boton_iniciar_login button:hover{
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
@@ -363,14 +363,14 @@ footer {
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
 #boton_registrar a{
-    background-color: #DA7D27;
+    background-color: #DA7D27 !important;
     box-shadow: none;
 }
 
 #boton_registrar a:hover{
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
-    border: 1.5px solid #DA7D27;
+    border: 1.5px solid #DA7D27 !important;
     color: #DA7D27;
 }
 

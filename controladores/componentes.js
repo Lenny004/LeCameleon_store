@@ -3,7 +3,7 @@
 */
 
 /*Constante para establecer la ruta del servidor.*/
-const SERVER = 'http://localhost/Le-Cameleon/api/';
+const SERVER = 'http://localhost/LeCameleon/api/';
 
 /*
 *   Función para obtener todos los registros disponibles en los mantenimientos de tablas (operación read).
@@ -11,11 +11,8 @@ const SERVER = 'http://localhost/Le-Cameleon/api/';
 *   Retorno: ninguno.
 */
 
-/*
-*   Función para validar la Existencia de un Primer Usuario
-*/
-function validarExistenciaPrimerUsuario(api, action) {
-    fetch(api + action, {
+function readRows(api) {
+    fetch(api + 'readAll', {
         method: 'get'
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
@@ -24,45 +21,7 @@ function validarExistenciaPrimerUsuario(api, action) {
             request.json().then(function (response) {
                 let data = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (!response.status) {
-                    swal({
-                        title:"Registro Requerido",
-                        text:"No existe un usuario Administrador",
-                        icon:"warning",
-                        buttons:["Continuar"],
-                        closeOnClickOutside: false,
-                        closeOnEsc: false,
-                    }).then(function(valor_registro){
-                        if(valor_registro){
-                            window.location = "http://localhost/Le-Cameleon/vistas/privado/registro_usuario.html";
-                        }
-                        else{
-                            console.log("Ya existen registros");
-                        }
-                    })
-                } 
-                else {
-                    sweetAlert(4, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.status + ' ' + request.statusText);
-        }
-    });
-}
-
-
-function readRows(api, action) {
-    fetch(api + action, {
-        method: 'get'
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                let data = [];
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     data = response.dataset;
                 } else {
                     sweetAlert(4, response.exception, null);
@@ -71,7 +30,7 @@ function readRows(api, action) {
                 fillTable(data);
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.estadoText);
         }
     });
 }
@@ -91,7 +50,7 @@ function searchRows(api, form) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Se envían los datos a la función del controlador para que llene la tabla en la vista y se muestra un mensaje de éxito.
                     fillTable(response.dataset);
                     sweetAlert(1, response.message, null);
@@ -100,7 +59,7 @@ function searchRows(api, form) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.estadoText);
         }
     });
 }
@@ -120,7 +79,7 @@ function saveRow(api, action, form, modal) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Se cierra la caja de dialogo (modal) del formulario.
                     M.Modal.getInstance(document.getElementById(modal)).close();
                     // Se cargan nuevamente las filas en la tabla de la vista después de guardar un registro y se muestra un mensaje de éxito.
@@ -131,7 +90,7 @@ function saveRow(api, action, form, modal) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.estadoText);
         }
     });
 }
@@ -161,7 +120,7 @@ function confirmDelete(api, data) {
                     // Se obtiene la respuesta en formato JSON.
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                        if (response.status) {
+                        if (response.estado) {
                             // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro y se muestra un mensaje de éxito.
                             readRows(api);
                             sweetAlert(1, response.message, null);
@@ -170,7 +129,7 @@ function confirmDelete(api, data) {
                         }
                     });
                 } else {
-                    console.log(request.status + ' ' + request.statusText);
+                    console.log(request.estado + ' ' + request.estadoText);
                 }
             });
         }
@@ -200,6 +159,11 @@ function sweetAlert(type, text, url) {
         case 4:
             title = 'Aviso';
             icon = 'info';
+            break;
+        case 5:
+            title = 'Campos Vacios';
+            icon = 'warning';
+            break;
     }
     // Si existe una ruta definida, se muestra el mensaje y se direcciona a dicha ubicación, de lo contrario solo se muestra el mensaje.
     if (url) {
@@ -240,7 +204,7 @@ function fillSelect(endpoint, select, selected) {
             request.json().then(function (response) {
                 let content = '';
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Si no existe un valor para seleccionar, se muestra una opción para indicarlo.
                     if (!selected) {
                         content += '<option disabled selected>Seleccione una opción</option>';
@@ -267,7 +231,7 @@ function fillSelect(endpoint, select, selected) {
                 M.FormSelect.init(document.querySelectorAll('select'));
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.estadoText);
         }
     });
 }
@@ -292,14 +256,14 @@ function logOut() {
                     // Se obtiene la respuesta en formato JSON.
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                        if (response.status) {
+                        if (response.estado) {
                             sweetAlert(1, response.message, 'index.html');
                         } else {
                             sweetAlert(2, response.exception, null);
                         }
                     });
                 } else {
-                    console.log(request.status + ' ' + request.statusText);
+                    console.log(request.estado + ' ' + request.estadoText);
                 }
             });
         } else {

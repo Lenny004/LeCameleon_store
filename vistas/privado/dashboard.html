@@ -22,39 +22,6 @@
 <body>
     <!--Encabezado del sitio web-->
     <header>
-        <!--Anuncios-->
-        <div id="barra_anuncio" class="z-depth-1">
-            <a href="#" class="mensaje_arriba">
-            </a>
-        </div>
-        <!--Logo, buscador, idioma, login y carrito de compras-->
-        <div id="apartado_header">
-            <!--Logo-->
-            <div id="logo_imagen">
-                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
-            </div>
-            <!--Usuario y sus datos-->
-            <!--Ocultamos estos elementos para moviles y tablets-->
-            <div class="hide-on-med-and-down" id="usuario">
-                <div>
-                    <p>Lenny Adrián Elías Sánchez</p>
-                    <p>Administrador</p>
-                </div>
-                <div>
-                    <a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" class="tooltipped" data-position="bottom" data-tooltip="Ver Perfil" alt="usuario"></a>
-                    <i class="dropdown-trigger material-icons right" data-target="dropdown_usuario">arrow_drop_down</i>
-                    <!-- Estructura del Dropdown de Usuario-->
-                    <ul id="dropdown_usuario" class="dropdown-content">
-                        <li><a class="teal-text text-darken-4">Lenny Adrián Elías Sánchez</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-                        <li class="divider"></li>
-                        <li><a href="index.html" class="teal-text text-darken-4"><img src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </header>
     <!--Menú de navegación del sitio web-->
     <div class="navbar-fixed" id="menu">
@@ -198,19 +165,19 @@
             <ul class="slides">
                 <li>
                     <img src="../../recursos/img/main_privado/trabajar1.jpg"><!-- random image -->
-                    <div class="caption right-align">
+                    <div class="caption left-align">
                         <h1>¡Bienvenido!<br>¡Comencemos a Trabajar!</h1>
                     </div>
                 </li>
                 <li>
                     <img src="../../recursos/img/main_privado/trabajar2.png"> <!-- random image -->
-                    <div class="caption right-align">
+                    <div class="caption left-align">
                         <h1>¡Bienvenido!<br>¡Comencemos a Trabajar!</h1>
                     </div>
                 </li>
                 <li>
                     <img src="../../recursos/img/main_privado/trabajar3.jpg"> <!-- random image -->
-                    <div class="caption right-align">
+                    <div class="caption left-align">
                         <h1>¡Bienvenido!<br>¡Comencemos a Trabajar!</h1>
                     </div>
                 </li>
@@ -451,8 +418,9 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/online.js"></script>
 </body>
 
 </html>

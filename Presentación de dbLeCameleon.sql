@@ -39,8 +39,8 @@ CREATE TABLE tbestado_usuario_e (
 
 CREATE TABLE tbusuario_cliente(
     idusuario_c SERIAL primary key,
-    usuario_c character varying(60) NOT NULL,
-    contraseña_c character varying(200) NOT NULL,
+    usuario_c character varying(75) NOT NULL,
+    contrasena_c character varying(200) NOT NULL,
     intentos_c integer,
     nombre_cliente character varying(50) NOT NULL,
     apellido_cliente character varying(50) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE tbusuario_cliente(
 CREATE TABLE tbusuario_empleado(
     idusuario_e SERIAL primary key,
     usuario_e character varying(75) NOT NULL,
-    contraseña_e character varying(75) NOT NULL,
+    contrasena_e character varying(100) NOT NULL,
     intentos_e integer,
     fecha_bloqueo_e timestamp without time zone,
     fecha_desbloqueo_e timestamp without time zone,
@@ -305,12 +305,12 @@ INSERT INTO public."tbestado_usuario_e"(
 	"estado_usuario_e")
 	VALUES ('Activo'), ('Inactivo');
 
-INSERT INTO public."tbusuario_empleado"("usuario_e", "contraseña_e", "idempleado", "idtipo_usuario_e", "idestado_usuario_e")
-	VALUES ('LennyE', '1234', 1, 1, 1),
+INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado", "idtipo_usuario_e", "idestado_usuario_e")
+	VALUES ('Lenny', '1234', 1, 1, 1),
 ('ErickE', '123', 2, 2, 1);
 
 
-INSERT INTO public."tbusuario_cliente"("usuario_c", "contraseña_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
+INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
 	VALUES ('Lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
 ('Fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),
 ('Aimee', '123', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', 1),
