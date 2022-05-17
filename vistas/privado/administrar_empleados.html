@@ -31,7 +31,8 @@
         <div id="apartado_header">
             <!--Logo-->
             <div id="logo_imagen">
-                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
+                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png"
+                            alt="logo"></a></a>
             </div>
             <!--Usuario y sus datos-->
             <!--Ocultamos estos elementos para moviles y tablets-->
@@ -213,194 +214,200 @@
                     <div id="buscador">
                         <nav class="grey lighten-2">
                             <div class="nav-wrapper">
-                                <form>
+                                <form method="post" id="thesearch">
                                     <div class="input-field">
                                         <input id="search" type="search" required>
                                     </div>
+                                    <button href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                            height="22"></button>
                                 </form>
                             </div>
                         </nav>
-                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-                        <a href="#agregar_modal_empleado"
-                            class="waves-effect waves-light btn modal-trigger boton_verde">Agregar Empleado<img
-                                src="../../recursos/iconografia/agregar.png" alt="agregar"></a>
+                        <a onclick="openCreate()"
+                            class="waves-effect waves-light btn modal-trigger boton_verde col s4 m4 l4 xl4">Agregar
+                            Empleado +</a>
                     </div>
                 </div>
                 <!-- Modal Agregar -->
-                <div id="agregar_modal_empleado" class="modal">
+                <div id="agregar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Agregar Empleado</h4>
-                            </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l6 xl6">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Apellido del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">DUI</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">NIT</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Telefono</label>
-                            </div>
-                            <div class="col s12 m12 l6 xl6">
-                                <div class="input-field col s12">
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Tipo de Empleado
-                                            </option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Entregador</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Estado Empleado
-                                            </option>
-                                            <option value="1">Activo</option>
-                                        </select>
-                                    </div>
+                        <form method="post" id="form_agregar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Empleado</h4>
                                 </div>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Correo del Empleado</label>
-                                <input id="first_name" type="text" class="datepicker">
-                                <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_verde">Agregar
-                                    Empleado</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input value="" id="nombre" name="nombre" type="text" class="validate" required>
+                                    <label class="active" for="first_name2">Nombre del empleado</label>
+                                    <input value="" id="apellido" name="apellido" type="text" class="validate" required>
+                                    <label class="active" for="first_name2">Apellido del empleado</label>
+                                    <input id="DUI" type="text" name="DUI" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">DUI</label>
+                                    <input id="NIT" name="NIT" type="text" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">NIT</label>
+                                    <input value="" id="telefono" name="telefono" type="text" class="validate" placeholder="7000-0000">
+                                    <label class="active" for="first_name2">Telefono</label>
+                                </div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <div class="input-field col s12">
+                                        <div class="input-field col s12">
+                                            <select id="tipo" name="tipo">
+                                            </select>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <select id="estado" name="estado">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input id="correo" name="correo" type="text" class="validate">
+                                    <label class="active" for="first_name2">Correo del Empleado</label>
+                                    <input id="fecha" name="fecha" type="text" class="datepicker">
+                                    <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <button id="boton_agregar" name="boton_agregar" type="submit"
+                                        class="waves-effect waves-light btn boton_verde">Agregar
+                                        Empleado</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Modificar -->
-                <div id="modal_modificar_empleado" class="modal">
+                <div id="modificar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Modificar Empleado</h4>
-                            </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l6 xl6">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Apellido del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">DUI</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">NIT</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Telefono</label>
-                            </div>
-                            <div class="col s12 m12 l6 xl6">
-                                <div class="input-field col s12">
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Tipo de Empleado
-                                            </option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Entregador</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Estado Empleado
-                                            </option>
-                                            <option value="1">Activo</option>
-                                        </select>
-                                    </div>
+                        <form enctype="multipart/form-data" method="post" id="form_modificar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar Empleado</h4>
                                 </div>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Correo del Empleado</label>
-                                <input id="first_name" type="text" class="datepicker">
-                                <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar
-                                    Empleado</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="nombreM" name="nombreM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre del empleado</label>
+                                    <input id="apellidoM" name="apellidoM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Apellido del empleado</label>
+                                    <input id="DUIM" type="text" name="DUIM" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">DUI</label>
+                                    <input id="NITM" name="NITM" type="text" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">NIT</label>
+                                    <input id="telefonoM" name="telefonoM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Telefono</label>
+                                </div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <div class="input-field col s12">
+                                        <div class="input-field col s12">
+                                            <select id="tipoM" name="tipoM">
+                                                <option disabled selected>Tipo de Empleado
+                                                </option>
+                                                <option value="1">Administrador</option>
+                                                <option value="2">Entregador</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <select id="estadoM" name="estadoM">
+                                                <option value="" disabled selected>Estado Empleado
+                                                </option>
+                                                <option value="1">Activo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input id="correoM" name="correoM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Correo del Empleado</label>
+                                    <input id="fechaM" name="fechaM" type="text" class="datepicker">
+                                    <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar
+                                        Empleado</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Eliminar -->
-                <div id="modal_eliminar_empleado" class="modal">
+                <div id="eliminar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Eliminar Empleado</h4>
-                            </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l6 xl6">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Apellido del empleado</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">DUI</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">NIT</label>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Telefono</label>
-                            </div>
-                            <div class="col s12 m12 l6 xl6">
-                                <div class="input-field col s12">
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Tipo de Empleado
-                                            </option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Entregador</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <select>
-                                            <option value="" disabled selected>Estado Empleado
-                                            </option>
-                                            <option value="1">Activo</option>
-                                        </select>
-                                    </div>
+                        <form enctype="multipart/form-data" method="post" id="form_eliminar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar Empleado</h4>
                                 </div>
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Correo del Empleado</label>
-                                <input id="first_name" type="text" class="datepicker">
-                                <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar
-                                    Empleado</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input id="nombreD" name="nombreD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre del empleado</label>
+                                    <input id="apellidoD" name="apellidoD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Apellido del empleado</label>
+                                    <input id="DUID" type="text" name="DUID" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">DUI</label>
+                                    <input id="NITD" name="NITD" type="text" class="validate" placeholder="00000000-0"
+                                        pattern="[0-9]{8}-[0-9]{1}" required>
+                                    <label class="active" for="first_name2">NIT</label>
+                                    <input id="telefonoD" name="telefonoD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Telefono</label>
+                                </div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <div class="input-field col s12">
+                                        <div class="input-field col s12">
+                                            <select id="tipoD" name="tipoD">
+                                                <option disabled selected>Tipo de Empleado
+                                                </option>
+                                                <option value="1">Administrador</option>
+                                                <option value="2">Entregador</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <select id="estadoD" name="estadoD">
+                                                <option value="" disabled selected>Estado Empleado
+                                                </option>
+                                                <option value="1">Activo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input id="correoM" name="correoM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Correo del Empleado</label>
+                                    <input id="fechaM" name="fechaM" type="text" class="datepicker">
+                                    <label class="active" for="first_name2">Fecha de Nacimiento</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar
+                                        Empleado</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -408,7 +415,6 @@
             <table class="centered striped teal darken-3 highlight responsive-table" id="tabla">
                 <thead>
                     <tr>
-                        <th>N° Empleado</th>
                         <th>Nombre Empleado</th>
                         <th>Apellido Empleado</th>
                         <th>Estado Empleado</th>
@@ -417,90 +423,9 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Lenny Adrian</td>
-                        <td>Elias Sanchez</td>
-                        <td>Activo</td>
-                        <td>Administrador</td>
-                        <td>5082-9526</td>
-                        <td>
-                            <div id="acciones">
-                                <a href="#modal_modificar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <a href="#modal_eliminar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Oliver Alejandro</td>
-                        <td>Erazo reyes</td>
-                        <td>Activo</td>
-                        <td>Entregador</td>
-                        <td>7418-5454</td>
-                        <td>
-                            <div id="acciones">
-                                <a href="#modal_modificar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <a href="#modal_eliminar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div id="acciones">
-                                <a href="#modal_modificar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <a href="#modal_eliminar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div id="acciones">
-                                <a href="#modal_modificar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <a href="#modal_eliminar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div id="acciones">
-                                <a href="#modal_modificar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <a href="#modal_eliminar_empleado" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                <tbody id="tbempleado"></tbody>
             </table>
-        </div>
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
@@ -525,8 +450,11 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/administrar_empleado.js"></script>
 </body>
 
 </html>

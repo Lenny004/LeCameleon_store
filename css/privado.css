@@ -545,13 +545,15 @@ footer {
 #titulo_buscador{
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
 }
 
 #buscador {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -559,14 +561,28 @@ footer {
     height: 40px;
 }
 
-#buscador a {
-    margin-left: 5px;
+#buscador button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#thesearch img{
+    margin-top: 2%;
 }
 
 #buscador form {
     max-width: 450px;
     max-height: 40px;
     color: #777676;
+}
+
+#thesearch{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #tabla{
@@ -668,7 +684,6 @@ footer {
 
 #boton_agregar{
     text-align: center;
-    padding: 15px;
 }
 
 #boton_agregar a{
@@ -684,12 +699,13 @@ footer {
 #acciones{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 #acciones img{
-    margin-left: 15px;
-    width: 35px;
-    height: 35px;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
 }
 
 /*Modal 2*/
@@ -1076,6 +1092,9 @@ footer {
     text-align: center;
 }
 
+#boton_agregar_centrado{
+    text-align: center;
+}
 
 /*------------------------------------------Administrar Marca------------------------------------------*/
 #agregar_modal_marca{

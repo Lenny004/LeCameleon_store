@@ -3,7 +3,7 @@
 */
 
 /*Constante para establecer la ruta del servidor.*/
-const SERVER = 'http://localhost/LeCameleon/api/';
+const SERVER = "http://localhost/LeCameleon/api/";
 
 /*
 *   Función para obtener todos los registros disponibles en los mantenimientos de tablas (operación read).
@@ -268,6 +268,29 @@ function logOut() {
             });
         } else {
             sweetAlert(4, 'Puede continuar con la sesión', null);
+        }
+    });
+}
+
+function eliminateRow(api, data) {
+    fetch(api + 'delete' , {
+        method: 'post',
+        body: data
+    }).then(function (request) {
+        // Se verifica si la petición es correcta.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria.
+                if (response.status) {
+                    readRows(api);
+                    sweetAlert(1, response.message, null);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
         }
     });
 }

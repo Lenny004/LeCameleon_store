@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'getUser':
                 if (isset($_SESSION['nombre_empleado'.' '.'apellido_empleado'])) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['username'] = $_SESSION['nombre_empleado'.' '.'apellido_empleado'];
                 } else {
                     $result['exception'] = 'Nombre de usuario indefinido';
