@@ -1,15 +1,10 @@
-/*
-*   Controlador de uso general en las páginas web del sitio privado cuando se ha iniciado sesión.
-*   Sirve para manejar las plantillas del encabezado y pie del documento.
-*/
-
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API = SERVER + 'sitio_privado/api_login.php?action=';
+const API_USUARIOS = "http://localhost/LeCameleon/api/sitio_privado/api_login.php?action=";
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Petición para obtener en nombre del usuario que ha iniciado sesión.
-    fetch(API + 'getUser', {
+    fetch(API_USUARIOS + 'getUser', {
         method: 'get'
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
@@ -19,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Se revisa si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
                 if (response.session) {
                     // Se comprueba si la respuesta es satisfactoria, de lo contrario se direcciona a la página web principal.
-                    if (response.status) {
-                        const header = `
+                    if (response.estado) {
+                        const Header = `
                         <!--Anuncios-->
                         <div id="barra_anuncio" class="z-depth-1">
                             <a href="#" class="mensaje_arriba">
@@ -55,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </div>
                         `;
-                        document.querySelector('header').innerHTML = header;
+                        document.querySelector('Header').innerHTML = Header;
                         //Instanciar el menú
                         M.Sidenav.init(document.querySelectorAll('.sidenav'));
 
@@ -83,14 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         //Instanciar Select 'Combobox'
                         M.FormSelect.init(document.querySelectorAll('select'));
                     } else {
-                        sweetAlert(3, response.exception, 'index.html');
+                        sweetAlert(3, response.exception, 'http://localhost/LeCameleon/vistas/privado/index.html');
                     }
                 } else {
-                    location.href = 'index.html';
+                    location.href = 'http://localhost/LeCameleon/vistas/privado/index.html';
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 });

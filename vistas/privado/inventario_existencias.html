@@ -6,7 +6,7 @@
     <title>Le Caméléon</title>
     <meta charset="UTF-8">
     <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
-    <link type="text/css" rel="stylesheet" href="../../css/privado.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/privado.css" />
     <!--Importamos el css para manejar la fuente del sitio web-->
     <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
     <!--Import Google Icon Font-->
@@ -31,7 +31,8 @@
         <div id="apartado_header">
             <!--Logo-->
             <div id="logo_imagen">
-                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
+                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png"
+                            alt="logo"></a></a>
             </div>
             <!--Usuario y sus datos-->
             <!--Ocultamos estos elementos para moviles y tablets-->
@@ -41,16 +42,21 @@
                     <p>Administrador</p>
                 </div>
                 <div>
-                    <a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" class="tooltipped" data-position="bottom" data-tooltip="Ver Perfil" alt="usuario"></a>
+                    <a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" class="tooltipped"
+                            data-position="bottom" data-tooltip="Ver Perfil" alt="usuario"></a>
                     <i class="dropdown-trigger material-icons right" data-target="dropdown_usuario">arrow_drop_down</i>
                     <!-- Estructura del Dropdown de Usuario-->
                     <ul id="dropdown_usuario" class="dropdown-content">
                         <li><a class="teal-text text-darken-4">Lenny Adrián Elías Sánchez</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
-                        <li><a href="#!" class="teal-text text-darken-4"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+                        <li><a href="#!" class="teal-text text-darken-4"><img
+                                    src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
+                        <li><a href="#!" class="teal-text text-darken-4"><img
+                                    src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a>
+                        </li>
                         <li class="divider"></li>
-                        <li><a href="index.html" class="teal-text text-darken-4"><img src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
+                        <li><a href="index.html" class="teal-text text-darken-4"><img
+                                    src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +96,8 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Categorias -->
-                    <li><a class="dropdown-trigger" href="categoria_privado.html" data-target="dropdown_categorias">Categorias
+                    <li><a class="dropdown-trigger" href="categoria_privado.html"
+                            data-target="dropdown_categorias">Categorias
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del Categorias-->
@@ -101,7 +108,8 @@
                         <li class="divider"></li>
                     </ul>
                     <!-- Dropdown Trigger Empleados y Usuarios -->
-                    <li><a class="dropdown-trigger" href="empleado_usuario.html" data-target="dropdown_empleados">Empleados y Usuarios
+                    <li><a class="dropdown-trigger" href="empleado_usuario.html"
+                            data-target="dropdown_empleados">Empleados y Usuarios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown de Empleados y Usuarios-->
@@ -182,9 +190,13 @@
                 <li class="divider"></li>
             </ul>
             <li><a href="#"><img src="../../recursos/iconografia/marcas.png" alt="marca">Marcas</a></li>
-            <li><a href="proveedores.html"><img src="../../recursos/iconografia/distribuidor.png" alt="distribuidor">Proveedores</a></li>
-            <li><a href="monitorear_pedidos.html"><img src="../../recursos/iconografia/auto_pedidos.png" alt="pedidos">Monitorear Pedidos</a></li>
-            <li><div class="divider"></div></li>
+            <li><a href="proveedores.html"><img src="../../recursos/iconografia/distribuidor.png"
+                        alt="distribuidor">Proveedores</a></li>
+            <li><a href="monitorear_pedidos.html"><img src="../../recursos/iconografia/auto_pedidos.png"
+                        alt="pedidos">Monitorear Pedidos</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
             <li><a class="subheader">Configuración</a></li>
             <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
             <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
@@ -200,14 +212,15 @@
                     <div id="buscador">
                         <nav class="grey lighten-2">
                             <div class="nav-wrapper">
-                                <form>
+                                <form method="post" id="thesearch">
                                     <div class="input-field">
                                         <input id="search" type="search" required>
                                     </div>
+                                    <button href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                            height="22"></button>
                                 </form>
                             </div>
                         </nav>
-                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
                     </div>
                 </div>
                 <div class="col s12 m12 l12 xl12" id="tabla">
@@ -226,128 +239,8 @@
                             </tr>
                         </thead>
                         <!--Filas de la tabla con sus elementos-->
-                        <tbody>
-                            <tr>
-                                <td>Camisa Lofi Color Negro</td>
-                                <td>Agotado</td>
-                                <td>Lofi Girl</td>
-                                <td>Playera Masculina</td>
-                                <td>Lofi Girl</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Blusa Rosada Vintage</td>
-                                <td>En Venta</td>
-                                <td>Laura Ashley</td>
-                                <td>Playera Femenina</td>
-                                <td>Laura Ashley</td>
-                                <td>15</td>
-                                <td>20</td>
-                                <td>27.00</td>
-                            </tr>
-                            <tr>
-                                <td>Skyler Stripe Outdoor Rug</td>
-                                <td>Agotado</td>
-                                <td>Laura Ashley</td>
-                                <td>Otros</td>
-                                <td>Laura Ashley</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>9.60</td>
-                            </tr>
-                            <tr>
-                                <td>LeiDrail</td>
-                                <td>Agotado</td>
-                                <td>Wedgwood</td>
-                                <td>Patio</td>
-                                <td>Wedgwood</td>
-                                <td>0</td>
-                                <td>20</td>
-                                <td>8.60</td>
-                            </tr>
-                            <tr>
-                                <td>Camisa Lofi Color Negro</td>
-                                <td>Agotado</td>
-                                <td>Lofi Girl</td>
-                                <td>Playera Masculina</td>
-                                <td>Lofi Girl</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Blusa Rosada Vintage</td>
-                                <td>En Venta</td>
-                                <td>Laura Ashley</td>
-                                <td>Playera Femenina</td>
-                                <td>Laura Ashley</td>
-                                <td>15</td>
-                                <td>20</td>
-                                <td>27.00</td>
-                            </tr>
-                            <tr>
-                                <td>Skyler Stripe Outdoor Rug</td>
-                                <td>Agotado</td>
-                                <td>Laura Ashley</td>
-                                <td>Otros</td>
-                                <td>Laura Ashley</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>9.60</td>
-                            </tr>
-                            <tr>
-                                <td>LeiDrail</td>
-                                <td>Agotado</td>
-                                <td>Wedgwood</td>
-                                <td>Patio</td>
-                                <td>Wedgwood</td>
-                                <td>0</td>
-                                <td>20</td>
-                                <td>8.60</td>
-                            </tr>
-                            <tr>
-                                <td>Camisa Lofi Color Negro</td>
-                                <td>Agotado</td>
-                                <td>Lofi Girl</td>
-                                <td>Playera Masculina</td>
-                                <td>Lofi Girl</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Blusa Rosada Vintage</td>
-                                <td>En Venta</td>
-                                <td>Laura Ashley</td>
-                                <td>Playera Femenina</td>
-                                <td>Laura Ashley</td>
-                                <td>15</td>
-                                <td>20</td>
-                                <td>27.00</td>
-                            </tr>
-                            <tr>
-                                <td>Skyler Stripe Outdoor Rug</td>
-                                <td>Agotado</td>
-                                <td>Laura Ashley</td>
-                                <td>Otros</td>
-                                <td>Laura Ashley</td>
-                                <td>0</td>
-                                <td>35</td>
-                                <td>9.60</td>
-                            </tr>
-                            <tr>
-                                <td>LeiDrail</td>
-                                <td>Agotado</td>
-                                <td>Wedgwood</td>
-                                <td>Patio</td>
-                                <td>Wedgwood</td>
-                                <td>0</td>
-                                <td>20</td>
-                                <td>8.60</td>
-                            </tr>
-                        </tbody>
+                        <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                        <tbody id="existencias"></tbody>
                     </table>
                 </div>
             </div>
@@ -369,13 +262,16 @@
             </div>
             <div id="sitio_privado">
                 <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png" alt="web" height="45"></a>
+                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                        alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/inventario_existencias.js"></script>
 </body>
 
 </html>

@@ -31,7 +31,8 @@
         <div id="apartado_header">
             <!--Logo-->
             <div id="logo_imagen">
-                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
+                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png"
+                            alt="logo"></a></a>
             </div>
             <!--Usuario y sus datos-->
             <!--Ocultamos estos elementos para moviles y tablets-->
@@ -220,11 +221,10 @@
                             <div id="buscador">
                                 <nav class="grey lighten-2">
                                     <div class="nav-wrapper">
-                                        <form>
-                                            <div class="input-field">
-                                                <input id="search" type="search" required>
-                                            </div>
-                                        </form>
+                                        <div class="input-field">
+                                            <input id="buscador_registro" type="search" name="buscador_registro"
+                                                required>
+                                        </div>
                                     </div>
                                 </nav>
                                 <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
@@ -232,64 +232,67 @@
                         </div>
                     </div>
                     <div class="row contenedores_entrega">
-                        <div class="col s12 m12 l12 xl12">
-                            <div class="col s6 m6 l6 xl6">
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Selecciona producto:</option>
-                                        <option value="1">Camisa Lofi</option>
-                                        <option value="2">Horno Vintage</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label>Nombre Producto:</label>
+                        <form id="formulario_entrega" method="post" nctype="multipart/form-data">
+                            <div class="col s12 m12 l12 xl12">
+                                <div class="col s6 m6 l6 xl6">
+                                    <input type="text" id="id_inventario" name="id_inventario" class="hide">
+                                    <div class="input-field col s12">
+                                        <select name="id_producto" id="id_producto">
+                                        </select>
+                                        <label>Nombre Producto:</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12 xl12">
+                                        <input id="cantidad_formulario" name="cantidad_formulario" type="number"
+                                            class="validate">
+                                        <label for="cantidad_formulario">Cantidad:</label>
+                                    </div>
+                                    <div>
+                                        <p>Fecha entrega del producto:</p>
+                                        <input type="text" id="fecha_entrega" name="fecha_entrega" class="datepicker">
+                                    </div>
+                                    <div>
+                                        <p>Fecha inicial para vender:</p>
+                                        <input type="text" id="fecha_inicio" name="fecha_inicio" class="datepicker">
+                                    </div>
                                 </div>
-                                <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="number" type="number" class="validate">
-                                    <label for="number">Cantidad:</label>
-                                </div>
-                                <div>
-                                    <p>Fecha entrega del producto:</p>
-                                    <input type="text" class="datepicker">
-                                </div>
-                                <div>
-                                    <p>Fecha inicial para vender:</p>
-                                    <input type="text" class="datepicker">
+                                <div class="col s6 m6 l6 xl6">
+                                    <div class="input-field col s12">
+                                        <select>
+                                            <option value="" disabled selected>Selecciona proveedor:</option>
+                                            <option value="1">Ariete</option>
+                                            <option value="2">Horno Vintage</option>
+                                            <option value="3">Option 3</option>
+                                        </select>
+                                        <label>Proveedores:</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12 xl12">
+                                        <input id="precio" type="text" name="precio" class="validate">
+                                        <label for="precio">Precio Unitario:</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12 xl12">
+                                        <input id="empleado" type="text" name="empleado" class="validate">
+                                        <label for="empleado">Empleado que registra:</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col s6 m6 l6 xl6">
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Selecciona proveedor:</option>
-                                        <option value="1">Ariete</option>
-                                        <option value="2">Horno Vintage</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label>Proveedores:</label>
-                                </div>
-                                <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="text" type="text" class="validate">
-                                    <label for="text">Precio Unitario:</label>
-                                </div>
-                                <div class="input-field col s12 m12 l12 xl12">
-                                    <input id="text2" type="text" class="validate">
-                                    <label for="text2">Empleado que registra:</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="row contenedores_entrega2">
                         <div class="col s12 m12 l12 xl12">
                             <h6>Acciones</h6>
                         </div>
                         <div class="col s12 m12 l12 xl12" id="titulo_buscador">
-                            <div  class="col s12 m12 l12 xl12" id="boton_agregar">
-                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agregar Registro</a>
+                            <div class="col s12 m12 l12 xl12" id="boton_agregar">
+                                <button id="crear" onclick="cambiar_variables1()" type="submit"
+                                    class="modal-close waves-effect waves-green btn-flat">Agregar
+                                    Registro</button>
                             </div>
                             <div class="col s12 m12 l12 xl12" id="boton_modificar">
-                                <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Modificar
-                                    Producto</a>
+                                <button id="actualizar" onclick="cambiar_variables2()" type="submit"
+                                    class="modal-close waves-effect waves-blue btn-flat">Modificar
+                                    Producto</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col s12 m12 l6 xl6 contenedores_entrega2">
@@ -303,7 +306,7 @@
                                 <div class="nav-wrapper">
                                     <form>
                                         <div class="input-field">
-                                            <input id="search" type="search" required>
+                                            <input id="buscador_inventario" type="search" required>
                                         </div>
                                     </form>
                                 </div>
@@ -324,7 +327,7 @@
                                 </tr>
                             </thead>
                             <!--Filas de la tabla con sus elementos-->
-                            <tbody>
+                            <tbody id="tabla_cuerpo">
                                 <tr>
                                     <td>1</td>
                                     <td>Blusa Rosada Vintage</td>
@@ -382,8 +385,10 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
-    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
+    <script type="text/javascript" src="../..//recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script src="../../controladores/componentes.js"></script>
+    <script src="../../controladores/privado/inventario_entrega.js"></script>
 </body>
 
 </html>

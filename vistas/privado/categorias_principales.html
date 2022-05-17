@@ -31,7 +31,7 @@
         <div id="apartado_header">
             <!--Logo-->
             <div id="logo_imagen">
-                <a href="dashboard.html"><a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
+                <a href="index.html"><a href="index.html"><img src="../../recursos/img/logo2.png" alt="logo"></a></a>
             </div>
             <!--Usuario y sus datos-->
             <!--Ocultamos estos elementos para moviles y tablets-->
@@ -54,7 +54,7 @@
                                     src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="index.html" class="teal-text text-darken-4"><img
+                        <li><a href="login_privado.html" class="teal-text text-darken-4"><img
                                     src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@
                         class="material-icons">menu</i></a>
                 <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                 <ul class="left hide-on-med-and-down">
-                    <li><a href="dashboard.html">Inicio</a></li>
+                    <li><a href="index.html">Inicio</a></li>
                     <!-- Dropdown Trigger Gráficas -->
                     <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_graficas">Gráficas
                             <i class="material-icons right">arrow_drop_down</i></a>
@@ -138,7 +138,7 @@
         </li>
         <div id="opciones_movil">
             <li><a class="subheader">Opciones Principales</a></li>
-            <li><a href="dashboard.html"><img src="../../recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
+            <li><a href="index.html"><img src="../../recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
             <!-- Dropdown Trigger Graficas -->
             <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_decoracion"><img
                         src="../../recursos/iconografia/graficas.png" alt="graficas">Gráficas
@@ -213,93 +213,125 @@
                 </div>
                 <div class="col s4 m4 l4 xl4">
                     <!-- Boton Modal Agregar -->
-                    <a class="waves-effect waves-light btn modal-trigger boton_verde"
-                        href="#modal_agregar_categoria">Agregar Categoría +</a>
+                    <a onclick="openCreate()" class="waves-effect waves-light btn modal-trigger boton_verde">Agregar
+                        Categoría +</a>
                 </div>
                 <!-- Modal Agregar-->
                 <div id="modal_agregar_categoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Agregar Categoria</h4>
+                        <form enctype="multipart/form-data" method="post" id="Agregar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivo" name="archivo" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input id="categoria_agregar" name="categoria_agregar" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_agregar_categoria">
+                                    <button type="submit" class="btn boton_verde">Agregar
+                                        Categoría</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/adjunto.jpg" alt="" width="60%" height="60%">
-                                <a href="#!" class="modal-close waves-effect blue waves-light btn">Adjuntar
-                                    imagen</a>
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Categoria</label>
-                            </div>
-                            <div class="modal-footer boton_agregar_categoria">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_verde">Agregar Categoría</a>
-                            </div>
-                        </div>
-                        
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Modificar -->
                 <div id="editar_modal_categoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Modificar Categoria</h4>
+                        <form enctype="multipart/form-data" method="post" id="modificar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivop" name="archivop" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="nombrearchivo" name="nombrearchivo" class="file-path validate"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="categoria_modificar" name="categoria_modificar" type="text"
+                                        class="validate">
+                                    <label class="active" for="first_name2">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_modificar_categoria">
+                                    <button type="submit" class="waves-effect waves-light btn blue">Modificar
+                                        Categoría</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/accesorios.jpg" alt="" width="60%" height="70%">
-                                <a href="#!" class="modal-close waves-effect blue waves-light btn">Adjuntar
-                                    imagen</a>
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Categoria</label>
-                            </div>
-                            <div class="modal-footer boton_modificar_categoria">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar Categoría</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Eliminar -->
                 <div id="eliminar_modal_categoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Eliminar Categoria</h4>
+                        <form enctype="multipart/form-data" method="post" id="eliminar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                            <div>
-                                <a href="#!"
-                                    class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivoe" name="archivoe" type="file" required disabled>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="namefile" name="namefile" class="file-path validate" type="text"
+                                                required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input id="categoria_eliminar" name="categoria_eliminar" type="text"
+                                        class="validate" required disabled>
+                                    <label class="active" for="categoria_eliminar">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_modificar_categoria">
+                                    <button type="submit" class="red btn">Eliminar
+                                        Categoría</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/accesorios.jpg" alt="" width="60%" height="70%">
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Categoria</label>
-                            </div>
-                            <div class="modal-footer boton_modificar_categoria">
-                                <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar Categoría</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -309,50 +341,14 @@
                     <!--Columnas de la tabla-->
                     <thead>
                         <tr>
-                            <th>Imagen Categoria</th>
+                            <th>imagen Categoria</th>
                             <th>Nombre Categoria</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <!--Filas de la tabla con sus elementos-->
-                    <tbody>
-                        <tr>
-                            <td><img src="../../recursos/img/decoracion/decoracion_vintage.jpg" alt="decoracion"></td>
-                            <td>Decoración</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="../../recursos/img/accesorios/accesorios_vintage.jpg" alt="accesorios"></td>
-                            <td>Accesorios</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="../../recursos/img/artesanales/artesanias_vintage.jpg" alt="artesania"></td>
-                            <td>Artesanales</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                    <tbody id="tbcategorias"></tbody>
                 </table>
             </div>
         </div>
@@ -372,15 +368,18 @@
                 </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
                         alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/dashboard.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/administrar_categoria_principales.js"></script>
 </body>
 
 </html>
