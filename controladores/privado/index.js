@@ -3,15 +3,6 @@ const API_USUARIOS = SERVER + "sitio_privado/api_login.php?action=";
 
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener("DOMContentLoaded", function () {
-    let menu = document.getElementById("menu");
-    window.onscroll = function () {
-        if (window.pageYOffset >= 100) {
-            menu.classList.add("sticky");
-        } else {
-            menu.classList.remove("sticky");
-        }
-    };
-
     // Petición para consultar si existen usuarios registrados.
     fetch(API_USUARIOS + "verificarPrimerUso", {
         method: "get",
@@ -24,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     location.href = "http://localhost/LeCameleon/vistas/privado/dashboard.html";
                 } else if (response.estado) {
                     sweetAlert(4, "Debe autenticarse para ingresar", null);
-                    //location.href = "http://localhost/LeCameleon/vistas/privado/registro_empleado.html";
                 } else {
                     sweetAlert(
                         3, response.exception, "http://localhost/LeCameleon/vistas/privado/registro_usuario.html"

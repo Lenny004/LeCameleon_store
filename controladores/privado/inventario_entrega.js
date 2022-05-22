@@ -4,6 +4,15 @@ const endpoint = SERVER + "sitio_privado/api_inventario_entrega.php?action=carga
 var accion = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+    let menu = document.getElementById("menu");
+    window.onscroll = function () {
+        if (window.pageYOffset >= 80) {
+            menu.classList.add("sticky");
+        }
+        else {
+            menu.classList.remove("sticky");
+        }
+    }
     //Se carga la tabla con los datos de la DB
     readRows(API_inventario_entrega);
 

@@ -2,6 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    transition: all .7s ease-in-out;
 }
 
 main {
@@ -40,6 +41,7 @@ main {
 	align-items: flex-end;
 	align-content: center;
     margin-right: 25px;
+    transition: all .7s ease-in-out;
 }
 
 #usuario{
@@ -81,25 +83,40 @@ main {
     position:relative;
 }
 
+#opciones_movil a{
+    width: 100%;
+}
+
 .material-tooltip{
     background-color: #2f6950 !important;
 }
 
+/*Botones del menú*/
 #menu a {
     color: #4a4a4a;
     min-width: 155px;
     max-width: 250px;
     font-weight: 500;
+    transition: all .7s ease-in-out;
 }
 
 /*Cuando se coloque el mouse encima de una opción del mouse, las letras cambian de color*/
 #menu a:hover {
     color: #2f6950;
+    transition: all .7s ease-in-out;
 }
 
 #menu.sticky {
     position: fixed;
     top: 0;
+}
+
+nav.nav-extended{
+    transition: all .7s ease-in-out;
+}
+
+.card-title {
+    transition: all .7s ease-in-out;
 }
 
 .slides h1{
@@ -125,6 +142,7 @@ main {
     background-color: #e8d9d9;
     margin-top: 20px;
     margin-bottom: 20px;
+    transition: all .7s ease-in-out;
 }
 
 /*Sombreado a las tarjetas*/
@@ -202,7 +220,7 @@ footer {
 
 #sitio_privado a{
     font-weight: bolder;
-    color: #282012;
+    color: #21190a;
     padding: 5px;
 }
 
@@ -237,6 +255,7 @@ footer {
 #tarjeta_login h5{
     color: #282012;
     font-weight: 500;
+    transition: all .7s ease-in-out;
 }
 
 /*Le damos un nuevo tamaño a la imagen del usuario*/
@@ -307,7 +326,6 @@ footer {
 }
 
 #boton_iniciar_login{
-    width: 390px;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -337,6 +355,17 @@ footer {
     color: #36465d !important;
 }
 
+#datos img {
+    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+#datos span{
+    color: #36465d;
+}
 
 #formulario_registro{
     width: 100%;
@@ -349,8 +378,8 @@ footer {
 }
 
 #logo_registro img{
-    width: 500px;
-    height: 350px;
+    max-width: 340px;
+    max-height: 300px;
 }
 
 #boton_registrar{
@@ -362,16 +391,28 @@ footer {
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_registrar a{
-    background-color: #DA7D27 !important;
+#boton_registrar button{
+    background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_registrar a:hover{
+#boton_registrar button:hover{
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27 !important;
     color: #DA7D27;
+}
+
+.datepicker-date-display{
+    background-color: #2f6950 !important;
+}
+
+.datepicker-date-display .year-text{
+    color: #ffffff !important;
+}
+
+.datepicker-date-display .date-text{
+    color: #ffffff !important;
 }
 
 /*------------------------------------------Main Gráficas------------------------------------------*/
@@ -686,7 +727,7 @@ footer {
     text-align: center;
 }
 
-#boton_agregar a{
+#boton_agregar button{
     background-color: #2f6950;
     color: #ffffff;
 }
@@ -766,7 +807,7 @@ footer {
     padding: 15px;
 }
 
-#boton_modificar a{
+#boton_modificar button{
     background-color: #36465d;
     color: #ffffff;
 }
@@ -996,6 +1037,7 @@ footer {
 /*Agregamos negrita a los titulos internos de la tarjeta*/
 #direccion h6{
     font-weight: bold;
+    transition: all .7s ease-in-out;
 }
 
 /*Colores de las tarjetas dependiendo de su estado*/
@@ -1028,16 +1070,34 @@ footer {
 }
 
 /*------------------------------------------Registro de entregas------------------------------------------*/
+.contenedor_entregas{
+    display: flex;
+    flex-direction: row;
+}
+
+#titulo_buscador h3{
+    margin-left: 5%;
+}
+
+.contenedores_izquierda{
+    width: 44%;
+    margin-left: 5%;
+    margin-right: 1%;
+}
+
 .contenedores_entrega{
     border: 2px solid #777676;
     padding-top: 5%;
     padding-bottom: 5%;
-    margin-bottom: 5%;
-    margin-left: 5%;
-    margin-right: 2%;
 }
 
-.contenedores_entrega2{ 
+.contenedores_entrega2{
+    width: 44%;
+    margin-right: 5%;
+    margin-left: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
     border: 2px solid #777676;
     margin-bottom: 5%;
 }
@@ -1051,7 +1111,26 @@ footer {
     padding-bottom: 5%;
 }
 
-/*Tablas hijas de color blanco*/
+/*Tablas hijas o pares de color blanco*/
+table.centered thead tr th{
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*Tablas hijas o pares de color blanco*/
+table.striped>tbody>tr:nth-child(even) {
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*Tablas hijas o impar de color blanco*/
+table.striped>tbody>tr:nth-child(odd) {
+    color: #ffffff;
+    background-color: #1f8753 !important;
+}
+
+
+/*Tablas hijas o impares de color blanco*/
 #tabla_entregas table.striped>tbody>tr:nth-child(odd) {
     background-color: #ffffff;
 }
@@ -1109,6 +1188,257 @@ footer {
     width:30%;
 }
 
+/*----------------------------------------------Modo Nocturno------------------------------------------------------------------*/
+
+body.dark{
+    background: #242221;
+    transition: all .7s ease-in-out;
+}
+
+body.dark nav.nav-extended{
+    background-color: #2b2c2d !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_imagen img{
+    content:url("../recursos/img/logo3.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a:hover {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #dropdown_usuario a{
+    color: #8cc43f !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .icono_perfil img{
+    content:url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .ver_perfil img{
+    content:url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+.modo_oscuro::after{
+    content: ' Oscuro';
+}
+
+
+body.dark .modo_oscuro::after{
+    content: ' Claro';
+}
+
+
+body.dark .modo_oscuro img{
+    content:url("../recursos/iconografia/sol.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .cerrar_sesion img{
+    content:url("../recursos/iconografia/logoutw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .inicio_icon img{
+    content:url("../recursos/iconografia/iniciow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .graficas_icon img{
+    content:url("../recursos/iconografia/graficasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .inventario_icon img{
+    content:url("../recursos/iconografia/inventariow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .categoria_icon img{
+    content:url("../recursos/iconografia/categoriasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .empleado_icon img{
+    content:url("../recursos/iconografia/empleados_usuariosw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .marca_icon img{
+    content:url("../recursos/iconografia/marcasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .distribuidor_icon img{
+    content:url("../recursos/iconografia/distribuidorw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .pedidos_icon img{
+    content:url("../recursos/iconografia/auto_pedidosw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas:hover{
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+body.dark #usuario p{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h1{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h3{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h4{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #direccion h6 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #direccion p {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .card-title {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .dropdown-content{
+    background-color: #2b2c2d;
+}
+
+body.dark .dropdown-content li:hover{
+    background-color: #242221 !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .sidenav{
+    background-color: #2b2c2d;
+}
+
+body.dark .sidenav a{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .sidenav a:hover {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #contenido_login .card{
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login h5{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login p{
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_login img{
+    content:url("../recursos/img/logo_icon.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #credenciales_login a{
+    color: #DA7D27;
+}
+
+body.dark #inicio_sesion_form input{
+    color: #ffffff;
+}
+
+body.dark #tarjeta_grafica{
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_inventario{
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_inventario p{
+    color: #ffffff;
+}
+
+body.dark .texto_verde p{
+    color: #8cc43f;
+}
+
+body.dark #titulo_buscador h6{
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega label{
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega p{
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega input{
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega .dropdown-content li>span{
+    color: #8cc43f;
+}
+
+body.dark .contenedores_entrega2 h5{
+    color: #ffffff;
+}
+
+body.dark .contenedores_entrega h5{
+    color: #ffffff;
+}
+
+body.dark #pedidos{
+    border: 1px solid #ffffff;
+}
+
+body.dark #estado_pedido p{
+    color: #ffffff;
+}
 
 /*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
 
@@ -1218,10 +1548,6 @@ footer {
 
     #contenido_login .card-content{
         height: 350px;
-        width: 300px;
-    }
-
-    #boton_iniciar_login{
         width: 300px;
     }
 
@@ -1367,14 +1693,39 @@ footer {
     #tabla td{
         font-size: 12px;
     }
+    
+    #titulo_buscador h3{
+        margin-left: 5%;
+    }
+
+    .contenedor_entregas{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
     #pedidos{
-        width: 270px;
+        width: 100%;
         height: 600px;
         border: 1px solid #282012;
-        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        margin-top: 2%;
+        margin-right: 1%;
+        margin-bottom: 2%;
+        margin-left: 1%;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -1419,7 +1770,7 @@ footer {
     /*Colores de las tarjetas dependiendo de su estado*/
     #pendiente a{
         background-color: #d32f2f;
-        width: 269px;
+        width: 100%;
         height: 20px;
         top: 0;
         left: 0;
@@ -1428,7 +1779,7 @@ footer {
     
     #disponible a{
         background-color: #da7d27;
-        width: 269px;
+        width: 100%;
         height: 20px;
         top: 0;
         left: 0;
@@ -1437,7 +1788,7 @@ footer {
     
     #entregando a{
         background-color: #8cc43f;
-        width: 269px;
+        width: 100%;
         height: 20px;
         top: 0;
         left: 0;
@@ -1446,7 +1797,7 @@ footer {
     
     #no_disponible a{
         background-color: #36465d;
-        width: 269px;
+        width: 100%;
         height: 20px;
         top: 0;
         left: 0;
@@ -1572,7 +1923,6 @@ footer {
     #boton_iniciar_login{
         margin: 0px;
         padding-bottom: 10px;
-        width: 360px;   
     }
 
     #tarjeta_login{
@@ -1688,19 +2038,39 @@ footer {
         align-items: center;
     }
 
+    #titulo_buscador h3{
+        margin-left: 5%;
+    }
+
+    .contenedor_entregas{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
     #pedidos{
         width: 330px;
         height: 700px;
-        border: 1px solid #282012;
         margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
         display: flex;
+        text-align: center;
         flex-direction: column;
-        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        align-content: center;
         position: relative;
     }
 
@@ -1917,6 +2287,28 @@ footer {
 
     #tarjeta_inventario span{
         font-size: 22px;
+    }
+
+    #titulo_buscador h3{
+        margin-left: 1%;
+    }
+
+    .contenedor_entregas{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
     }
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/

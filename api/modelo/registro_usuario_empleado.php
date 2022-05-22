@@ -3,33 +3,39 @@
 *	Clase para manejar la tabla usuarios de la base de datos.
 *   Es clase hija de Validator.
 */
-class Usuarios extends Validator
+class RegistroUsuarios extends Validator
 {
     // Declaración de atributos (propiedades).
-    private $id = null;
-    private $nombres = null;
-    private $apellidos = null;
-    private $correo = null;
-    private $alias = null;
-    private $clave = null;
+    private $idempleado = null;
+    private $nombre_empleado = null;
+    private $apellido_empleado = null;
+    private $dui = null;
+    private $nit = null;
+    private $telefono_empleado = null;
+    private $correo_empleado = null;
+    private $fecha_nacimiento_empleado = null;
+    private $idtipo_empleado = 1;
+    private $idestado_empleado = 1;
+    private $contrasena = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
     */
-    public function setId($value)
+    public function setIdEmpleado($value)
     {
-        if ($this->validateNaturalNumber($value)) {
-            $this->id = $value;
+        if ($this->validacionNumeroNaturales($value)) {
+            $this->idempleado = $value;
             return true;
         } else {
             return false;
         }
     }
 
+    /*Validar que el nombre tenga como longitud máxima 50 */
     public function setNombres($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
-            $this->nombres = $value;
+            $this->nombre_empleado = $value;
             return true;
         } else {
             return false;
@@ -39,37 +45,67 @@ class Usuarios extends Validator
     public function setApellidos($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
-            $this->apellidos = $value;
+            $this->apellido_empleado = $value;
             return true;
         } else {
             return false;
         }
     }
 
-    public function setCorreo($value)
+    public function setDUI($value)
+    {
+        if ($this->validateDUI($value)) {
+            $this->dui = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setNIT($value)
+    {
+        if ($this->validarNIT($value)) {
+            $this->nit = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setTelefono($value)
+    {
+        if ($this->validatePhone($value)) {
+            $this->telefono_empleado = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setCorreoEmpleado($value)
     {
         if ($this->validateEmail($value)) {
-            $this->correo = $value;
+            $this->correo_empleado = $value;
             return true;
         } else {
             return false;
         }
     }
 
-    public function setAlias($value)
+    public function setFechaNEmpleado($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
-            $this->alias = $value;
+        if ($this->validateDate($value)) {
+            $this->fecha_nacimiento_empleado = $value;
             return true;
         } else {
             return false;
         }
     }
 
-    public function setClave($value)
+    public function setContraEmpleado($value)
     {
         if ($this->validatePassword($value)) {
-            $this->clave = password_hash($value, PASSWORD_DEFAULT);
+            $this->contrasena = $value;
             return true;
         } else {
             return false;
@@ -79,9 +115,9 @@ class Usuarios extends Validator
     /*
     *   Métodos para obtener valores de los atributos.
     */
-    public function getId()
+    public function getIdempleado()
     {
-        return $this->id;
+        return $this->idempleado;
     }
 
     public function getNombres()
@@ -99,9 +135,9 @@ class Usuarios extends Validator
         return $this->correo;
     }
 
-    public function getAlias()
+    public function getDui()
     {
-        return $this->alias;
+        return $this->dui;
     }
 
     public function getClave()
@@ -109,113 +145,40 @@ class Usuarios extends Validator
         return $this->clave;
     }
 
-    /*
-    *   Métodos para gestionar la cuenta del usuario.
-    */
-    public function checkUser($alias)
+    /* Traer los datos de un usuario si el usuario ingresado existe */
+    public function ValidarExistenciaPrimerUsuario()
     {
-        $sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?';
-        $params = array($alias);
-        if ($data = Database::getRow($sql, $params)) {
-            $this->id = $data['id_usuario'];
-            $this->alias = $alias;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function checkPassword($password)
-    {
-        $sql = 'SELECT clave_usuario FROM usuarios WHERE id_usuario = ?';
-        $params = array($this->id);
-        $data = Database::getRow($sql, $params);
-        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
-        if (password_verify($password, $data['clave_usuario'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function changePassword()
-    {
-        $sql = 'UPDATE usuarios SET clave_usuario = ? WHERE id_usuario = ?';
-        $params = array($this->clave, $_SESSION['id_usuario']);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function readProfile()
-    {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
-                FROM usuarios
-                WHERE id_usuario = ?';
-        $params = array($_SESSION['id_usuario']);
-        return Database::getRow($sql, $params);
-    }
-
-    public function editProfile()
-    {
-        $sql = 'UPDATE usuarios
-                SET nombres_usuario = ?, apellidos_usuario = ?, correo_usuario = ?
-                WHERE id_usuario = ?';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $_SESSION['id_usuario']);
-        return Database::executeRow($sql, $params);
-    }
-
-    /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
-    public function searchRows($value)
-    {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
-                FROM usuarios
-                WHERE apellidos_usuario ILIKE ? OR nombres_usuario ILIKE ?
-                ORDER BY apellidos_usuario';
-        $params = array("%$value%", "%$value%");
-        return Database::getRows($sql, $params);
-    }
-
-    public function createRow()
-    {
-        $sql = 'INSERT INTO usuarios(nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario, clave_usuario)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $this->clave);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function readAll()
-    {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
-                FROM usuarios
-                ORDER BY apellidos_usuario';
+        $sql = 'SELECT idusuario_e, usuario_e, contrasena_e, intentos_e, fecha_bloqueo_e, fecha_desbloqueo_e, idempleado, idtipo_usuario_e, idestado_usuario_e
+                FROM tbusuario_empleado ORDER BY idusuario_e;';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::obtenerSentencias($sql, $params);
     }
 
-    public function readOne()
+    public function RegistrarEmpleado()
     {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
-                FROM usuarios
-                WHERE id_usuario = ?';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
+        $sql = 'INSERT INTO tbempleado(nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, idtipo_empleado, idestado_empleado)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        $params = array($this->nombre_empleado, $this->apellido_empleado, $this->dui, $this->nit, $this->telefono_empleado, $this->correo_empleado, $this->fecha_nacimiento_empleado, $this->idtipo_empleado, $this->idestado_empleado);
+        return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function updateRow()
+    public function ObtenerEmpleadoRegistrado()
     {
-        $sql = 'UPDATE usuarios 
-                SET nombres_usuario = ?, apellidos_usuario = ?, correo_usuario = ?
-                WHERE id_usuario = ?';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->id);
-        return Database::executeRow($sql, $params);
+        $sql = 'SELECT idempleado FROM tbempleado WHERE duiempleado = ?';
+        $params = array($this->dui);
+        if ($data = Database::obtenerSentencia($sql, $params)){
+            $this->idempleado = $data['idempleado'];
+            return true;
+        } else{
+            return false;
+        }
     }
 
-    public function deleteRow()
+    public function RegistrarUsuarioEmpleado()
     {
-        $sql = 'DELETE FROM usuarios
-                WHERE id_usuario = ?';
-        $params = array($this->id);
-        return Database::executeRow($sql, $params);
+        $sql = 'INSERT INTO tbusuario_empleado(usuario_e, contrasena_e, idempleado, idtipo_usuario_e, idestado_usuario_e)
+        VALUES (?, ?, ?, ?, ?)';
+        $params = array($this->correo_empleado, $this->contrasena, $this->idempleado, $this->idtipo_empleado, $this->idestado_empleado);
+        return Database::ejecutarSentencia($sql, $params);
     }
 }

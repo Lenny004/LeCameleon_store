@@ -263,7 +263,6 @@ INSERT INTO public."tbmarca"("nombre_marca")
     ('Nahanche'),
     ('Coco Canela');
 
-
 INSERT INTO public."tbestado_producto"("estado_producto")
     VALUES ('En venta'),
     ('Agotado');
@@ -288,8 +287,8 @@ INSERT INTO public."tbestado_empleado"("nombre_estado")
     VALUES ('Activo'), ('Inactivo'), ('Vacaciones');
 
 INSERT INTO public."tbempleado"("nombre_empleado", "apellido_empleado", "duiempleado", "nitempleado", "telefono_empleado", "correo_empleado", "fecha_nacimiento_empleado", "idtipo_empleado", "idestado_empleado")
-    VALUES ('Lenny', 'Elias', '85961246-9', '1234-123456-123-4', '8888-8888', 'lenny@gmail.com', '2003-08-08', 1, 1),
-    ('Fatima', 'Franco', '44518967-4', '5284-165489-521-2', '4444-4444', 'faty@gmail.com', '2004-06-19', 2, 1),
+    VALUES ('Lenny Adrián', 'Elías Sánchez', '85961246-9', '1234-123456-123-4', '8888-8888', 'lenny@gmail.com', '2003-08-08', 1, 1),
+    ('Aimee Vanessa', 'Osorio Canales', '44518967-4', '5284-165489-521-2', '4444-4444', 'canelita@gmail.com', '2004-05-07', 2, 1),
     ('Erick', 'Chinchilla', '26598743-8', '1568-689546-568-2', '7777-7777', 'erick@gmail.com', '2004-11-10', 2, 1),
     ('Mangandi', 'Cardona', '05864277-1', '6698-154879-354-3', '5555-5555', 'manga@gmail.com', '2003-10-04', 2, 1),
     ('Nelson', 'Peña', '45789954-1', '3214-658412-567-9', '9999-9999', 'nelson@gmail.com', '2003-04-12', 1, 1);
@@ -306,8 +305,8 @@ INSERT INTO public."tbestado_usuario_e"(
 	VALUES ('Activo'), ('Inactivo');
 
 INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado", "idtipo_usuario_e", "idestado_usuario_e")
-	VALUES ('Lenny', '1234', 1, 1, 1),
-('ErickE', '123', 2, 2, 1);
+	VALUES ('lenny', '1234', 1, 1, 1),
+('aimee', '1234', 2, 2, 1);
 
 
 INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")

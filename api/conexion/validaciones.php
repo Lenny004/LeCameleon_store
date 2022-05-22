@@ -199,16 +199,16 @@ class Validator
     public function validatePassword($value)
     {
         // Se verifica la longitud mínima.
-        if (strlen($value) >= 3) {
+        if (strlen($value) >= 4) {
             // Se verifica la longitud máxima.
-            if (strlen($value) <= 72) {
+            if (strlen($value) <= 60) {
                 return true;
             } else {
-                $this->passwordError = 'Clave mayor a 72 caracteres';
+                $this->passwordError = 'Clave mayor a 60 caracteres';
                 return false;
             }
         } else {
-            $this->passwordError = 'Clave menor a 3 caracteres';
+            $this->passwordError = 'Clave menor a 4 caracteres';
             return false;
         }
     }
@@ -222,6 +222,21 @@ class Validator
     {
         // Se verifica que el número tenga el formato 00000000-0.
         if (preg_match('/^[0-9]{8}[-][0-9]{1}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        /*
+    *   Método para validar el formato del DUI (Documento Único de Identidad).
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validarNIT($value)
+    {
+        // Se verifica que el número tenga el formato 0000-000000-000-0.
+        if (preg_match('/^[0-9]{4}[-][0-9]{6}[-][0-9]{3}[-][0-9]{1}$/', $value)) {
             return true;
         } else {
             return false;
