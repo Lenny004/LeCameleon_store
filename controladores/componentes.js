@@ -239,7 +239,7 @@ function fillSelect(endpoint, select, selected) {
 // Función para mostrar un mensaje de confirmación al momento de cerrar sesión.
 function logOut() {
     swal({
-        title: 'Advertencia',
+        title: 'Cerrar Sesión',
         text: '¿Está seguro de cerrar la sesión?',
         icon: 'warning',
         buttons: ['No', 'Sí'],
@@ -248,7 +248,7 @@ function logOut() {
     }).then(function (value) {
         // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
         if (value) {
-            fetch(API + 'logOut', {
+            fetch(API_USUARIOS + 'cerrarSesion', {
                 method: 'get'
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
@@ -270,6 +270,25 @@ function logOut() {
             sweetAlert(4, 'Puede continuar con la sesión', null);
         }
     });
+}
+
+function ModoNocturno(){
+    document.body.classList.toggle('dark');
+
+    //Guardamos el modo nocturno
+    if(document.body.classList.contains('dark')){
+        localStorage.setItem('dark-mode', 'true');
+    }
+    else{
+        localStorage.setItem('dark-mode', 'false');
+    }
+}
+
+if(localStorage.getItem('dark-mode') === 'true'){
+    document.body.classList.add('dark');
+}
+else{
+    document.body.classList.remove('dark');
 }
 
 function eliminateRow(api, data) {

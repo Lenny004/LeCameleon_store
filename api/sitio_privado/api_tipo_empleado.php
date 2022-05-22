@@ -20,9 +20,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         */
-
         switch ($_GET['action']) {
-
             case 'readAll':
                 if ($result['dataset'] = $tipos->readAll()) {
                     $result['estado'] = 1;
@@ -32,7 +30,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

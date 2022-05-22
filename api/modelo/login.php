@@ -14,62 +14,9 @@ class Usuarios extends Validator
     private $intentos_e = null; 
     private $idestadou_e = null;
     private $idtipo_usuario_e = null;
+    private $tipo_usuario_e = null;
     private $nombre_empleado = null;
     private $apellido_empleado = null;
-
-    /*
-    *   Métodos para validar y asignar valores de los atributos.
-    */
-    public function setIdUsuarioE($value)
-    {
-        if ($this->validacionNumeroNaturales($value)) {
-            $this->idusuario_e = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function setUsuario($value)
-    {
-        if ($this->validateAlphabetic($value, 1, 50)) {
-            $this->nombres = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function setCorreo($value)
-    {
-        if ($this->validateEmail($value)) {
-            $this->correo = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function setAlias($value)
-    {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
-            $this->alias = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function setClave($value)
-    {
-        if ($this->validatePassword($value)) {
-            $this->clave = $value;
-            /*$this->clave = password_hash($value, PASSWORD_DEFAULT);*/
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /*
     *   Métodos para obtener valores de los atributos.
@@ -109,9 +56,13 @@ class Usuarios extends Validator
         return $this->idestadou_e;
     }
 
-    public function getTipoU()
+    public function getIdTipoU()
     {
         return $this->idtipo_usuario_e;
+    }
+
+    public function getTipoUsuario(){
+        return $this->tipo_usuario_e;
     }
 
     public function getNombreEmpleado()
@@ -138,7 +89,7 @@ class Usuarios extends Validator
     */
     public function ValidarUsuarioEmpleado($usuario)
     {
-        $sql = 'SELECT tue.idusuario_e, tue.intentos_e, tue.fecha_bloqueo_e, tue.fecha_desbloqueo_e, tue.idestado_usuario_e, tue.idtipo_usuario_e, te.nombre_empleado, te.apellido_empleado FROM tbusuario_empleado tue, tbempleado te WHERE tue.idempleado = te.idempleado AND usuario_e = ?';
+        $sql = 'SELECT tue.idusuario_e, tue.intentos_e, tue.fecha_bloqueo_e, tue.fecha_desbloqueo_e, tue.idestado_usuario_e, tue.idtipo_usuario_e, ttue.tipo_usuario_e, te.nombre_empleado, te.apellido_empleado FROM tbusuario_empleado tue, tbempleado te, tbtipo_usuario_e ttue WHERE tue.idempleado = te.idempleado AND tue.idtipo_usuario_e = ttue.idtipo_usuario_e  AND usuario_e = ?';
         $params = array($usuario);
         if ($data = Database::obtenerSentencia($sql, $params)) {
             $this->idusuario_e = $data['idusuario_e'];
@@ -148,6 +99,7 @@ class Usuarios extends Validator
             $this->hora_activacion = $data['fecha_desbloqueo_e'];
             $this->idestadou_e = $data['idestado_usuario_e'];
             $this->idtipo_usuario_e = $data['idtipo_usuario_e'];
+            $this->tipo_usuario_e = $data['tipo_usuario_e'];
             $this->nombre_empleado = $data['nombre_empleado'];
             $this->apellido_empleado = $data['apellido_empleado'];
             return true;

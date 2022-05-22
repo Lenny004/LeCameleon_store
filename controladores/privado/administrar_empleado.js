@@ -1,5 +1,14 @@
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
+	let menu = document.getElementById("menu");
+    window.onscroll = function () {
+        if (window.pageYOffset >= 80) {
+            menu.classList.add("sticky");
+        }
+        else {
+            menu.classList.remove("sticky");
+        }
+    }
 	//Var se crea para variables globales
 	//let es variables locales
 
@@ -208,7 +217,7 @@ function openDelete(id) {
             console.log(request.status + ' ' + request.statusText);
         }
     });
-  }
+}
 document.getElementById('form_eliminar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();

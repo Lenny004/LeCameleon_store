@@ -10,25 +10,48 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'empleado'=> null, 'nivel_usuario' => null, 'tipo_usuario' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+    if (isset($_SESSION['idusuario_e'])) {
+        $result['session'] = 1;
+        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'getUser':
-                if (isset($_SESSION['nombre_empleado'.' '.'apellido_empleado'])) {
+            case 'cerrarSesion':
+                if (session_destroy()) {
                     $result['estado'] = 1;
-                    $result['username'] = $_SESSION['nombre_empleado'.' '.'apellido_empleado'];
+                    $result['message'] = 'Sesión eliminada correctamente';
                 } else {
+                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                }
+                break;
+            case 'obtenerUsuario':
+                if (isset($_SESSION['usuario_e'])) {
+                    $result['estado'] = 1;
+                    $result['username'] = $_SESSION['usuario_e'];
+                    $result['empleado'] = $_SESSION['nombre_empleado'] . " " . $_SESSION['apellido_empleado'];
+                    $result['nivel_usuario'] = $_SESSION['idtipo_usuario_e'];
+                    $result['tipo_usuario'] = $_SESSION['tipo_usuario_e'];
+                } 
+                else {
                     $result['exception'] = 'Nombre de usuario indefinido';
                 }
                 break;
+            default:
+                $result['exception'] = 'Acción no disponible fuera de la sesión';
+                break;
+        }
+    }
+    else{
+        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+        switch ($_GET['action']) {
             //Verificamos si existen usuarios
             case 'verificarPrimerUso':
                 //Si existen usuarios manda un mensaje de que se encontraron
                 if ($usuario->ValidarExistenciaPrimerUsuario()) {
                     $result['estado'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
-                } else {
+                }
+                else {
                     $result['exception'] = 'No existe un usuario administrador registrado';
                 }
                 break;
@@ -41,10 +64,13 @@ if (isset($_GET['action'])) {
                 //Si el usuario y la contraseña es la correcta y el número de intentos es menor a 5 y un estado activo manda una alerta
                 } else if ($usuario->ValidarContraUsuarioEmpleado($_POST['password_login']) && $usuario->getIntento() < 5 && $usuario->getEstadoU() == 1) {
                     $result['estado'] = 1;
-                    $result['session'] = 1;
                     $result['message'] = 'Autenticacion correcta';
                     $_SESSION['idusuario_e'] = $usuario->getIdUsuarioE();
                     $_SESSION['usuario_e'] = $usuario->getUsuario();
+                    $_SESSION['nombre_empleado'] = $usuario->getNombreEmpleado();
+                    $_SESSION['apellido_empleado'] = $usuario->getApellidoEmpleado();
+                    $_SESSION['idtipo_usuario_e'] = $usuario->getIdTipoU();
+                    $_SESSION['tipo_usuario_e'] = $usuario->getTipoUsuario();
                 }
                 //Si el usuario es el correcto pero la contra es incorrecta
                 else {
@@ -102,7 +128,9 @@ if (isset($_GET['action'])) {
                 break;
             default:
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
+                break;
         }
+    }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
