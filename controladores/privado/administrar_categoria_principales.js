@@ -1,14 +1,5 @@
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function() {
-    let menu = document.getElementById("menu");
-    window.onscroll = function () {
-        if (window.pageYOffset >= 80) {
-            menu.classList.add("sticky");
-        }
-        else {
-            menu.classList.remove("sticky");
-        }
-    }
     //Var se crea para variables globales
     //let es variables locales
 
@@ -154,6 +145,8 @@ function openDelete(id) {
     M.Modal.getInstance(document.getElementById('eliminar_modal_categoria')).open();
     document.getElementById('idd').value = '';
     document.getElementById('idd').value = id;
+
+    const data = new FormData();
     data.append('idd', id);
     
     fetch(API_CATEGORIA + 'readOneE', {
@@ -191,5 +184,3 @@ document.getElementById('eliminar_forms').addEventListener('submit', function (e
     // Se llama a la función para guardar el registro.
     eliminateRow(API_CATEGORIA, data);
 });
-
-

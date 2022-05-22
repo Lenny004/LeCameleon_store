@@ -15,7 +15,7 @@ class Existencias extends Validator
 
     public function setId($value)
     {
-        if ($this->validacionNumeroNaturales($value)) {
+        if ($this->validateNaturalNumber($value)) {
             $this->id = $value;
             return true;
         } else {
@@ -72,17 +72,17 @@ class Existencias extends Validator
 
     public function setExistencias($value)
     {
-        if ($this->validacionNumeroNaturales($value)) {
+        if ($this->validateNaturalNumber($value)) {
             $this->existencias = $value;
             return true;
         } else {
             return false;
         }
     }
-    
+
     public function setCantidad($value)
     {
-        if ($this->validacionNumeroNaturales($value)) {
+        if ($this->validateNaturalNumber($value)) {
             $this->cantidad = $value;
             return true;
         } else {
@@ -144,7 +144,6 @@ class Existencias extends Validator
         return $this->precio;
     }
 
-
     /*
     *  Metodo para realizar las operaciones SCRUD que en este caso solo se ocuparan dos, que serán SEARCH y READ.
     */
@@ -163,9 +162,9 @@ class Existencias extends Validator
                 ON tbproducto.idsubcategoria_producto = tbsubcategoria_producto.idsubcategoria_producto
                 INNER JOIN tbdistribuidor
                 ON tbproducto.iddistribuidor = tbdistribuidor.iddistribuidor
-                INNER JOIN tbinventario
+                LEFT JOIN tbinventario
                 ON tbproducto.idproducto = tbinventario.idproducto
-                ORDER BY nombre_producto;';
+                ORDER BY nombre_producto';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
@@ -173,7 +172,7 @@ class Existencias extends Validator
     public function searchRows($value)
     {
                 //se hace un inner join en este caso para poder unir tb para el funcionamiento de esta como la de producto, estado producto, marca, subcategoria, distribuidor, inventario y mandas a buscar datos mediante el nombre
-        $sql = 'SELECT nombre_producto, estado_producto, nombre_marca, subcategoria_producto, nombre_distribuidor, existencias, cantidad, precio_producto
+        $sql = 'SELECT tbproducto.idproducto, nombre_producto, estado_producto, nombre_marca, subcategoria_producto, nombre_distribuidor, existencias, cantidad, precio_producto
                 FROM tbproducto 
                 INNER JOIN tbestado_producto
                 ON tbproducto.idestado_producto = tbestado_producto.idestado_producto
@@ -183,15 +182,11 @@ class Existencias extends Validator
                 ON tbproducto.idsubcategoria_producto = tbsubcategoria_producto.idsubcategoria_producto
                 INNER JOIN tbdistribuidor
                 ON tbproducto.iddistribuidor = tbdistribuidor.iddistribuidor
-                INNER JOIN tbinventario
+                LEFT JOIN tbinventario
                 ON tbproducto.idproducto = tbinventario.idproducto
                 WHERE nombre_producto ILIKE ? OR nombre_distribuidor ILIKE ?
                 ORDER BY nombre_producto';         
         $params = array("%$value%", "%$value%");
         return Database::obtenerSentencias($sql, $params);
     }
-
-    
-
-    
 }

@@ -187,10 +187,10 @@ class Empleados extends Validator
 
     public function readAll()
     {
-        $sql = 'SELECT nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, tipo_empleado,nombre_estado
+        $sql = 'SELECT idempleado, nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, tipo_empleado,nombre_estado
         FROM tbempleado
         INNER JOIN tbtipo_empleado
-        ON tbempleado.idestado_empleado = tbtipo_empleado.idtipo_empleado
+        ON tbempleado.idtipo_empleado = tbtipo_empleado.idtipo_empleado
         INNER JOIN tbestado_empleado
         ON tbempleado.idestado_empleado = tbestado_empleado.idestado_empleado
         ORDER BY nombre_empleado';
@@ -213,7 +213,7 @@ class Empleados extends Validator
                 FROM tbempleado
                 WHERE idempleado = ?';
         $params = array($this->id);
-        return Database::getRow($sql, $params);
+        return Database::obtenerSentencia($sql, $params);
     }
 
     public function updateRow()
@@ -224,6 +224,7 @@ class Empleados extends Validator
         $params = array($this->nombre, $this->apellido, $this->dui, $this->nit, $this->telefono, $this->correo, $this->fecha, $this->tipo, $this->estado, $this->id);
         return Database::ejecutarSentencia($sql, $params);
     }
+
 
     public function deleteRow()
     {

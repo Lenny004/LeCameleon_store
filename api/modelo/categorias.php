@@ -102,7 +102,7 @@ class Categorias extends Validator
                 FROM tbcategoria
                 WHERE idcategoria_producto = ?';
         $params = array($this->id);
-        return Database::getRow($sql, $params);
+        return Database::obtenerSentencia($sql, $params);
     }
 
 
