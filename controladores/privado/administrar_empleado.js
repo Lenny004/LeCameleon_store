@@ -1,5 +1,14 @@
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
+	let menu = document.getElementById("menu");
+    window.onscroll = function () {
+        if (window.pageYOffset >= 80) {
+            menu.classList.add("sticky");
+        }
+        else {
+            menu.classList.remove("sticky");
+        }
+    }
 	//Var se crea para variables globales
 	//let es variables locales
 
@@ -32,10 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //hago que cuando se seleccione una fecha el calendario se cierre automatica, también cambie el formato de esta por yyyy-mm-dd
 document.addEventListener('DOMContentLoaded', function () {
-	var elems = document.querySelectorAll('.datepicker');
-	M.Datepicker.init(elems, {
-		autoClose: true,
-		format: 'yyyy-mm-dd'
+	//Instanciar Datepicker
+	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+		format: 'yyyy-mm-dd', i18n: {
+			months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
+			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+		}
 	});
 });
 
@@ -170,24 +183,24 @@ document.getElementById('form_modificar').addEventListener('submit', function (e
 	saveRow(API_EMPLEADO, action, 'form_modificar', 'modificar_modal');
 });
 function openDelete(id) {
-    // Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
-    M.Modal.getInstance(document.getElementById('eliminar_modal')).open();
-    document.getElementById('idd').value = '';
-    document.getElementById('idd').value = id;
-    const data = new FormData();
-    data.append('idd', id);
-    fetch(API_EMPLEADO + 'readOneE', {
-        method: 'post',
-        body: data
-		
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
-                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
+	// Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
+	M.Modal.getInstance(document.getElementById('eliminar_modal')).open();
+	document.getElementById('idd').value = '';
+	document.getElementById('idd').value = id;
+	const data = new FormData();
+	data.append('idd', id);
+	fetch(API_EMPLEADO + 'readOneE', {
+		method: 'post',
+		body: data
+
+	}).then(function (request) {
+		// Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+		if (request.ok) {
+			// Se obtiene la respuesta en formato JSON.
+			request.json().then(function (response) {
+				// Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+				if (response.estado) {
+					// Se inicializan los campos del formulario con los datos del registro seleccionado.
 					document.getElementById('idd').value = response.dataset.idempleado;
 					document.getElementById('nombreD').value = response.dataset.nombre_empleado;
 					document.getElementById('apellidoD').value = response.dataset.apellido_empleado;
@@ -198,26 +211,26 @@ function openDelete(id) {
 					document.getElementById('fechaD').value = response.dataset.fecha_nacimiento_empleado;
 					fillSelect(ENDPOINT_TIPO, 'tipoD', response.dataset.idtipo_empleado);
 					fillSelect(ENDPOINT_ESTADO, 'estadoD', response.dataset.idestado_empleado);
-                    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
-                    M.updateTextFields();
-                } else {
-                    sweetAlert(2, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.status + ' ' + request.statusText);
-        }
-    });
-  }
+					// Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
+					M.updateTextFields();
+				} else {
+					sweetAlert(2, response.exception, null);
+				}
+			});
+		} else {
+			console.log(request.estado + ' ' + request.statusText);
+		}
+	});
+}
 
 document.getElementById('form_eliminar').addEventListener('submit', function (event) {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    var valor = document.getElementById('idd').value;
+	// Se evita recargar la página web después de enviar el formulario.
+	event.preventDefault();
+	var valor = document.getElementById('idd').value;
 
-    const data = new FormData();
-    data.append('idd', valor);
-    // Se llama a la función para guardar el registro.
-    eliminateRow(API_EMPLEADO, data);
+	const data = new FormData();
+	data.append('idd', valor);
+	// Se llama a la función para guardar el registro.
+	eliminateRow(API_EMPLEADO, data);
 });
 

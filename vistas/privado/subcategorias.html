@@ -21,8 +21,7 @@
 
 <body>
     <!--Encabezado del sitio web-->
-    <header>
-    </header>
+    <header></header>
     <!--Menú de navegación del sitio web-->
     <div class="navbar-fixed" id="menu">
     </div>
@@ -40,118 +39,145 @@
                 </div>
                 <div class="col s4 m4 l4 xl4">
                     <!-- Boton Modal Agregar -->
-                    <a class="waves-effect waves-light btn modal-trigger boton_verde"
-                        href="#modal_agregar_subcategoria">Agregar Subcategoría +</a>
+                    <a onclick="openCreate()" class="waves-effect waves-light btn modal-trigger boton_verde">Agregar
+                        Subcategoria +</a>
                 </div>
                 <!-- Modal Agregar-->
                 <div id="modal_agregar_subcategoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Agregar Subcategoria</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/adjunto.jpg" alt="" width="60%" height="60%">
-                                <a href="#!" class="modal-close waves-effect blue waves-light btn">Adjuntar
-                                    imagen</a>
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Subcategoria</label>
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Seleccionar Categoria</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label>Seleccionar Categoria</label>
+                        <form enctype="multipart/form-data" method="post" id="Agregar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Subcategoria</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                            <div class="modal-footer boton_agregar_categoria">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_verde">Agregar
-                                    Subcategoria</a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivo" name="archivo" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="subcategoria_agregar" name="subcategoria_agregar" type="text"
+                                        class="validate">
+                                    <label class="active" for="subcategoria_agregar">Nombre Subcategoria</label>
+                                    <div class="input-field col s12">
+                                        <select id="select_categoria" name="select_categoria">
+                                        </select>
+                                        <label>Seleccionar categoría</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer boton_agregar_marca">
+                                    <button type="submit" class="btn boton_verde">Agregar
+                                        Subcategoria</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Modificar -->
-                <div id="editar_modal_subcategoria" class="modal">
+                <div id="modal_modificar_subcategoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Modificar Subcategoria</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/accesorios.jpg" alt="" width="60%" height="70%">
-                                <a href="#!" class="modal-close waves-effect blue waves-light btn">Adjuntar
-                                    imagen</a>
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Subcategoria</label>
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Seleccionar Categoria</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label>Seleccionar Categoria</label>
+                        <form enctype="multipart/form-data" method="post" id="modificar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar Subcategoria</h4>
+                                </div>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                            <div class="modal-footer boton_modificar_categoria">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar
-                                    Subcategoria</a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivop" name="archivop" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="nombrearchivo" name="nombrearchivo" class="file-path validate"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="id" name="ide">
+                                    <input id="subcategoria_modificar" name="subcategoria_modificar" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre Subcategoria</label>
+                                    <div class="input-field col s12">
+                                        <select id="select_subcategoria" name="select_subcategoria">
+                                            <option selected>Tipo de artículo</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        <label>Seleccionar Categoria</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer boton_agregar_marca">
+                                    <button type="submit" class="btn boton_verde">Modificar
+                                        Subcategoria</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Eliminar -->
-                <div id="eliminar_modal_categoria" class="modal">
+                <div id="modal_eliminar_subcategoria" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Eliminar Subcategoria</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s4 m4 l4 xl4">
-                                <img src="../../recursos/img/categorias/accesorios.jpg" alt="" width="60%" height="70%">
-                            </div>
-                            <div class="input-field col col s8 m8 l8 xl8">
-                                <input value="" id="first_name2" type="text" class="validate">
-                                <label class="active" for="first_name2">Nombre Subcategoria</label>
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Seleccionar Categoria</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label>Seleccionar Categoria</label>
+                        <form enctype="multipart/form-data" method="post" id="eliminar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar Subcategoria</h4>
+                                </div>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                            <div class="modal-footer boton_modificar_categoria">
-                                <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar Subcategoria</a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="btn">
+                                        <span>imagen</span>
+                                        <input id="archivoe" name="archivoe" type="file" required disabled>
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input id="namefile" name="namefile" class="file-path validate" type="text"
+                                            required disabled>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input id="subcategoria_eliminar" name="subcategoria_eliminar" type="text"
+                                        class="validate" required disabled>
+                                    <label class="active" for="first_name2">Nombre Subcategoria</label>
+                                    <div class="input-field col s12">
+                                        <select id="select_subcategoria">
+                                            <option value="" disabled selected>Seleccionar Categoria</option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                        </select>
+                                        <label>Seleccionar Subategoria</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer boton_agregar_marca">
+                                    <button type="submit" class="btn boton_verde">Modificar
+                                        Subcategoria</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -168,47 +194,7 @@
                         </tr>
                     </thead>
                     <!--Filas de la tabla con sus elementos-->
-                    <tbody>
-                        <tr>
-                            <td><img src="../../recursos/img/decoracion/decoracion_vintage.jpg" alt="decoracion"></td>
-                            <td>Patio</td>
-                            <td>Decoración</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_subcategoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="../../recursos/img/accesorios/accesorios_vintage.jpg" alt="accesorios"></td>
-                            <td>Anillos</td>
-                            <td>Accesorios</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_subcategoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="../../recursos/img/artesanales/artesanias_vintage.jpg" alt="artesania"></td>
-                            <td>Accesorios Artesanales</td>
-                            <td>Artesanales</td>
-                            <td>
-                                <div id="acciones_categorias">
-                                    <a href="#editar_modal_subcategoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                    <a href="#eliminar_modal_categoria" class="modal-trigger"><img
-                                            src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tabla_subcategoria"></tbody>
                 </table>
             </div>
         </div>
@@ -228,13 +214,14 @@
                 </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
                         alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>

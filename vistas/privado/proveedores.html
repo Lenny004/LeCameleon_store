@@ -35,144 +35,126 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 xl12" id="titulo_buscador">
-                    <h4>Administrar Proveedores</h4>
+                    <h3>Administrar proveedores</h3>
                     <div id="buscador">
-                        <nav class="grey lighten-2">
+                        <nav class="grey lighten-2 col s5 m5 l5 xl5">
                             <div class="nav-wrapper">
-                                <form>
+                                <form method="post" id="thesearch">
                                     <div class="input-field">
-                                        <input id="search" type="search" required>
+                                        <input name="search" id="search" type="search" required require type="text">
                                     </div>
-                                </form>
                             </div>
                         </nav>
-                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-                        <a href="#agregar_modal_marca"
-                            class="waves-effect waves-light btn modal-trigger boton_verde">Agregar Proveedor<img
-                                src="../../recursos/iconografia/agregar.png" alt="agregar"></a>
+                        <button id="boton_buscador" class="btn-floating " data-tooltip="Buscar" type="submit"
+                            name="action"> <i class="material-icons">search</i></button>
+                        </form>
+                        <a onclick="openCreate()"
+                            class="waves-effect waves-light btn modal-trigger boton_verde col s4 m4 l4 xl4">Agregar
+                            Empleado +</a>
                     </div>
                 </div>
-                <!-- Modal Agregar Proveedor -->
-                <div id="agregar_modal_marca" class="modal">
+                <!-- Modal Agregar -->
+                <div id="agregar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Agregar Proveedores</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <div class="input-field col s12">
-                                    <input id="nombre_proveedor" type="text" class="validate">
-                                    <label for="nombre_proveedor">Nombre Proveedor:</label>
+                        <form method="post" id="form_agregar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Proveedor</h4>
                                 </div>
-                                <form class="col s12">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea id="direc_proveedor" class="materialize-textarea"></textarea>
-                                            <label for="direc_proveedor">Dirección Proveedor</label>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="input-field col s12">
-                                    <input id="telefono_proveedor" type="text" class="validate">
-                                    <label for="telefono_proveedor">Telefono</label>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_verde">Agregar
-                                    Proveedores</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input value="" id="nombre" name="nombre" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre del proveedor</label>
+                                    <input id="direecion" name="direccion" type="text" class="validate">
+                                    <label class="active" for="first_name2">Dirección proveedor</label>
+                                    <input value="" id="telefono" name="telefono" type="text" class="validate">
+                                    <label class="active" for="first_name2">Teléfono del proveedor</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <button id="boton_agregar" name="boton_agregar" type="submit"
+                                        class="waves-effect waves-light btn boton_verde">Agregar
+                                        proveedor</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <!-- Modal Modificar Proveedor -->
-                <div id="modificar_modal_marca" class="modal">
+                <!-- Modal Modificar -->
+                <div id="modificar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Modificar Proveedores</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <div class="input-field col s12">
-                                    <input id="nombre_proveedor" type="text" class="validate">
-                                    <label for="nombre_proveedor">Nombre Proveedor:</label>
+                        <form method="post" id="form_modificar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar proveedor</h4>
                                 </div>
-                                <form class="col s12">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea id="direc_proveedor" class="materialize-textarea"></textarea>
-                                            <label for="direc_proveedor">Dirección Proveedor</label>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="input-field col s12">
-                                    <input id="telefono_proveedor" type="text" class="validate">
-                                    <label for="telefono_proveedor">Telefono</label>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar
-                                    Proveedores</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="nombreM" name="nombreM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre del proveedor</label>
+                                    <input id="direecionM" name="direccionM" type="text" class="validate">
+                                    <label class="active" for="first_name2">Dirección proveedor</label>
+                                    <input id="telefonoM" name="telefonoM" type="text" placeholder="0000-0000"
+                                        class="validate">
+                                    <label class="active" for="first_name2">Teléfono</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <button type="submit" class="waves-effect btn boton_azul">Modificar
+                                        proveedor</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <!-- Modal Eliminar Proveedor -->
-                <div id="eliminar_modal_marca" class="modal">
+                <!-- Modal Eliminar -->
+                <div id="eliminar_modal" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Eliminar Proveedores</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <div class="input-field col s12">
-                                    <input id="nombre_proveedor" type="text" class="validate">
-                                    <label for="nombre_proveedor">Nombre Proveedor:</label>
+                        <form method="post" id="form_eliminar">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar proveedor</h4>
                                 </div>
-                                <form class="col s12">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea id="direc_proveedor" class="materialize-textarea"></textarea>
-                                            <label for="direc_proveedor">Dirección Proveedor</label>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="input-field col s12">
-                                    <input id="telefono_proveedor" type="text" class="validate">
-                                    <label for="telefono_proveedor">Telefono</label>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar
-                                    Proveedores</a>
+                            <div class="row">
+                                <div class="divider"></div>
+                                <div class="col s12 m12 l6 xl6">
+                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input id="nombreD" name="nombreD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre del proveedor</label>
+                                    <input id="apellidoD" name="direccionD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Dirección del proveedor</label>
+                                    <input id="telefonoD" name="telefonoD" type="text" class="validate">
+                                    <label class="active" for="first_name2">Teléfono</label>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                    <button type="submit" class="waves-effect red btn">Eliminar
+                                        proveedor</button>
+
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -180,60 +162,16 @@
             <table class="centered striped teal darken-3 highlight responsive-table" id="tabla">
                 <thead>
                     <tr>
-                        <th>Nombre Distribuidor</th>
-                        <th>Dirección Distribuidor</th>
-                        <th>Teléfono Distribuidor</th>
+                        <th>Nombre proveedor</th>
+                        <th>Dirección proveedor</th>
+                        <th>Telefono proveedor</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>España, Barcelona, Beethoven 15</td>
-                        <td>+34 1578-8954</td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>España, Barcelona 26150 Arrúbal</td>
-                        <td>+15 2548-8971</td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                <tbody id="tbproveedor"></tbody>
             </table>
+        </div>
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
@@ -251,17 +189,20 @@
                 </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
                         alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/privado/online.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/administrar_proveedor.js"></script>
+
 </body>
 
 </html>

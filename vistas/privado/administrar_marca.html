@@ -37,141 +37,124 @@
                 <div class="col s12 m12 l12 xl12" id="titulo_buscador">
                     <h3>Administrar Marcas</h3>
                     <div id="buscador">
-                        <nav class="grey lighten-2">
-                            <div class="nav-wrapper">
-                                <form>
-                                    <div class="input-field">
-                                        <input id="search" type="search" required>
-                                    </div>
-                                </form>
-                            </div>
-                        </nav>
-                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-                        <a href="#agregar_modal_marca"
-                            class="waves-effect waves-light btn modal-trigger boton_verde">Agregar Marcas<img
-                                src="../../recursos/iconografia/agregar.png" alt="agregar"></a>
+                        <a onclick="openCreate()" class="waves-effect waves-light btn modal-trigger boton_verde">Agregar
+                            Marca +</a>
                     </div>
                 </div>
                 <!-- Modal Agregar Marca -->
-                <div id="agregar_modal_marca" class="modal">
+                <div id="modal_agregar_marca" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Agregar Marca</h4>
+                        <form enctype="multipart/form-data" method="post" id="Agregar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Marca</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
                             </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <img src="../../recursos/img/categoria_principal/adjunto.jpg" alt="">
-                                <form action="#">
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4 subir_imagen">
                                     <div class="file-field input-field">
                                         <div class="btn">
-                                            <span>Adjuntar Imagen</span>
-                                            <input type="file">
+                                            <span>imagen</span>
+                                            <input id="archivo" name="archivo" type="file">
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input class="file-path validate" type="text">
                                         </div>
                                     </div>
-                                </form>
-                                <div class="divider"></div>
-                                <div class="section">
-                                    <input value="" id="first_name2" type="text" class="validate">
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input id="marca_agregar" name="marca_agregar" type="text" class="validate">
                                     <label class="active" for="first_name2">Nombre Marca</label>
                                 </div>
+                                <div class="modal-footer boton_agregar_marca">
+                                    <button type="submit" class="btn boton_verde">Agregar
+                                        Marca</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_verde">Agregar
-                                    Marca</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Modificar Marca -->
-                <div id="modificar_modal_marca" class="modal">
+                <div id="editar_modal_marca" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Modificar Marca</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <img src="../../recursos/img/categoria_principal/adjunto.jpg" alt="">
-                                <form action="#">
-                                    <div class="file-field input-field">
-                                        <div class="btn">
-                                            <span>Adjuntar Imagen</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text">
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="divider"></div>
-                                <div class="section">
-                                    <input value="" id="first_name2" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre Marca</label>
+                        <form enctype="multipart/form-data" method="post" id="modificar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar Marca</h4>
+                                </div>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect waves-light btn boton_azul">Modificar
-                                    Marca</a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4 subir_imagen">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivop" name="archivop" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="nombrearchivo" name="nombrearchivo" class="file-path validate"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="marca_modificar" name="marca_modificar" type="text" class="validate">
+                                    <label class="active" for="first_name2">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_modificar_marca">
+                                    <button type="submit" class="waves-effect waves-light btn blue">Modificar
+                                        Marca</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Modal Eliminar Marca -->
                 <div id="eliminar_modal_marca" class="modal">
                     <div class="modal-content">
-                        <div id="titulo_modal2">
-                            <div>
-                                <h4>Eliminar Marca</h4>
-                            </div>
-                            <div>
-                                <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
-                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="divider"></div>
-                            <div class="col s12 m12 l12 xl12">
-                                <img src="../../recursos/img/categoria_principal/adjunto.jpg" alt="">
-                                <form action="#">
-                                    <div class="file-field input-field">
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text">
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="divider"></div>
-                                <div class="section">
-                                    <input value="" id="first_name2" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre Marca</label>
+                        <form enctype="multipart/form-data" method="post" id="eliminar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar Marca</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
-                                <a href="#!" class="modal-close waves-effect red waves-light btn">Eliminar
-                                    Marca</a>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4 subir_imagen">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivoe" name="archivoe" type="file" required disabled>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="namefile" name="namefile" class="file-path validate" type="text"
+                                                required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input id="marca_eliminar" name="marca_eliminar" type="text" class="validate"
+                                        required disabled>
+                                    <label class="active" for="marca_eliminar">Nombre Marca</label>
+                                </div>
+                                <div class="modal-footer boton_modificar_categoria">
+                                    <button type="submit" class="red btn">Eliminar
+                                        Marca</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -185,52 +168,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Ariete</td>
-                        <td><img src="../../recursos/img/marcas/marcas.jpg" alt=""></td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Lofi Girl</td>
-                        <td><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div id="acciones_categorias">
-                                <!-- Boton Modificar Marca -->
-                                <a href="#modificar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/editar.png" alt="editar"></a>
-                                <!-- Boton Eliminar Marca -->
-                                <a href="#eliminar_modal_marca" class="modal-trigger"><img
-                                        src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
-                            </div>
-                        </td>
-                    </tr>
+                <tbody id="tabla_marca">
                 </tbody>
             </table>
         </div>
@@ -250,13 +188,14 @@
                 </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
                         alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>

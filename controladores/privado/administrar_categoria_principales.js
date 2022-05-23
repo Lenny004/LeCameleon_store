@@ -1,5 +1,14 @@
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function() {
+    let menu = document.getElementById("menu");
+    window.onscroll = function () {
+        if (window.pageYOffset >= 80) {
+            menu.classList.add("sticky");
+        }
+        else {
+            menu.classList.remove("sticky");
+        }
+    }
     //Var se crea para variables globales
     //let es variables locales
 
@@ -158,7 +167,7 @@ function openDelete(id) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('idd').value = response.dataset.idcategoria_producto;
                     document.getElementById('categoria_eliminar').value = response.dataset.categoria_producto;
@@ -170,7 +179,7 @@ function openDelete(id) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }

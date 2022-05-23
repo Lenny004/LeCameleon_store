@@ -23,8 +23,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-                
             case 'search':
                 $_POST = $empleado->validateForm($_POST);
                 if ($_POST['search'] == '') {
@@ -80,7 +78,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'empleado inexistente';
                 }
                 break;
-
             case 'update':
                 $_POST = $empleado->validateForm($_POST);
                 if (!$empleado->setId($_POST['ide'])) {
@@ -112,26 +109,24 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
             case 'readOneE':
                 if (!$empleado->setId($_POST['idd'])) {
                     $result['exception'] = 'empleado incorrecta';
                 } elseif ($result['dataset'] = $empleado->readOneE()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
                     $result['exception'] = 'empleado inexistente';
                     }
                 break;
-
             case 'delete':
                 if (!$empleado->setId($_POST['idd'])) {
                     $result['exception'] = 'empleado incorrecto';
                 } elseif (!$data = $empleado->readOneE()) {
                     $result['exception'] = 'empleado inexistente';
                 } elseif ($empleado->deleteRow()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                     $result['message'] = 'empleado eliminado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
@@ -140,8 +135,8 @@ if (isset($_GET['action'])) {
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
-        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-        header('content-type: application/json; charset=utf-8');
-        // Se imprime el resultado en formato JSON y se retorna al controlador.
-        print(json_encode($result));
-    }
+    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+    header('content-type: application/json; charset=utf-8');
+    // Se imprime el resultado en formato JSON y se retorna al controlador.
+    print(json_encode($result));
+}

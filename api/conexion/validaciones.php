@@ -228,7 +228,7 @@ class Validator
         }
     }
 
-        /*
+    /*
     *   Método para validar el formato del DUI (Documento Único de Identidad).
     *   Parámetros: $value (dato a validar).
     *   Retorno: booleano (true si el valor es correcto o false en caso contrario).

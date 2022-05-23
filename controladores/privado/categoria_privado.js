@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_CATEGORIAS = SERVER + 'sitioprivado/categorias.php?action=';
+const API_CATEGORIAS = SERVER + 'sitio_privado/categorias.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -131,7 +131,7 @@ function openUpdate(id) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id').value = response.dataset.id_categoria;
                     document.getElementById('nombre').value = response.dataset.nombre_categoria;
@@ -143,7 +143,7 @@ function openUpdate(id) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }

@@ -59,7 +59,7 @@ class Empleados extends Validator
     }
     public function setNIT($value)
     {
-        if ($this->validateDUI($value)) {
+        if ($this->validarNIT($value)) {
             $this->nit = $value;
             return true;
         } else {
