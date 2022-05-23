@@ -301,7 +301,7 @@ function eliminateRow(api, data) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria.
-                if (response.status) {
+                if (response.estado) {
                     readRows(api);
                     sweetAlert(1, response.message, null);
                 } else {
@@ -309,7 +309,7 @@ function eliminateRow(api, data) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }

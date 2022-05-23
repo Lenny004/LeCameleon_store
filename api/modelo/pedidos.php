@@ -1,0 +1,154 @@
+<?php
+/*
+*	Clase para manejar la tabla usuarios de la base de datos.
+*   Es clase hija de Validator.
+*/
+class Pedidos extends Validator
+{
+    // Declaración de atributos (propiedades).
+    private $idusuario_e = null;
+
+    /*
+    *   Métodos para obtener valores de los atributos.
+    */
+    public function getIdUsuarioE()
+    {
+        return $this->idusuario_e;
+    }
+
+    public function getUsuario()
+    {
+        return $this->usuario_e;
+    }
+
+    public function getClaveUsuario()
+    {
+        return $this->clave_usuario;
+    }
+
+    public function getHoraInactivacion()
+    {
+        return $this->hora_inactivacion;
+    }
+
+    public function getHoraActivacion()
+    {
+        return $this->hora_activacion;
+    }
+
+    public function getIntento()
+    {
+        return $this->intentos_e;
+    }
+
+    public function getEstadoU()
+    {
+        return $this->idestadou_e;
+    }
+
+    public function getIdTipoU()
+    {
+        return $this->idtipo_usuario_e;
+    }
+
+    public function getTipoUsuario(){
+        return $this->tipo_usuario_e;
+    }
+
+    public function getNombreEmpleado()
+    {
+        return $this->nombre_empleado;
+    }
+
+    public function getApellidoEmpleado()
+    {
+        return $this->apellido_empleado;
+    }
+
+    /* Traer los datos de un usuario si el usuario ingresado existe */
+    public function ValidarExistenciaPedidos($fecha_actual)
+    {
+        $sql = 'SELECT tep.direccion_entrega_pedido, tep.fecha_entrega_pedido, tuc.nombre_cliente, tuc.apellido_cliente, tef.idestado_factura
+        FROM tbenvio_pedido tep, tbfactura tf, tbestado_factura  tef, tbusuario_cliente tuc 
+        WHERE tep.idfactura = tf.idfactura AND tf.idestado_factura = tef.idestado_factura AND tf.idusuario_c = tuc.idusuario_c AND (tep.fecha_entrega_pedido != ? AND tef.idestado_factura != 1) ORDER BY tep.fecha_entrega_pedido ASC;';
+        $params = $fecha_actual;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    /*
+    *   Métodos para gestionar la cuenta del usuario.
+    */
+    public function ValidarUsuarioEmpleado($usuario)
+    {
+        $sql = 'SELECT tue.idusuario_e, tue.intentos_e, tue.fecha_bloqueo_e, tue.fecha_desbloqueo_e, tue.idestado_usuario_e, tue.idtipo_usuario_e, ttue.tipo_usuario_e, te.nombre_empleado, te.apellido_empleado FROM tbusuario_empleado tue, tbempleado te, tbtipo_usuario_e ttue WHERE tue.idempleado = te.idempleado AND tue.idtipo_usuario_e = ttue.idtipo_usuario_e  AND usuario_e = ?';
+        $params = array($usuario);
+        if ($data = Database::obtenerSentencia($sql, $params)) {
+            $this->idusuario_e = $data['idusuario_e'];
+            $this->usuario_e = $usuario;
+            $this->intentos_e = $data['intentos_e'];
+            $this->hora_inactivacion = $data['fecha_bloqueo_e'];
+            $this->hora_activacion = $data['fecha_desbloqueo_e'];
+            $this->idestadou_e = $data['idestado_usuario_e'];
+            $this->idtipo_usuario_e = $data['idtipo_usuario_e'];
+            $this->tipo_usuario_e = $data['tipo_usuario_e'];
+            $this->nombre_empleado = $data['nombre_empleado'];
+            $this->apellido_empleado = $data['apellido_empleado'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function IntentosUsuarioEmpleado(){
+        $sql = 'UPDATE tbusuario_empleado SET intentos_e = ? WHERE usuario_e = ?';
+        $params = array(($this->intentos_e += 1), $this->usuario_e);
+        if($data = Database::ejecutarSentencia($sql, $params)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Traer los datos de un usuario si el usuario ingresado existe */
+    public function ExistenciaHoraBlock()
+    {
+        $sql = 'SELECT fecha_bloqueo_e, fecha_desbloqueo_e FROM tbusuario_empleado WHERE usuario_e = ?';
+        $params = array($this->usuario_e);
+        return Database::obtenerSentencia($sql, $params);
+    }
+
+    public function RegistrarHoraIntento($hora_block, $hora_desblock, $idestadoU){
+        $sql = 'UPDATE tbusuario_empleado SET fecha_bloqueo_e = ? , fecha_desbloqueo_e = ?, idestado_usuario_e = ? WHERE usuario_e = ?';
+        $params = array($hora_block, $hora_desblock, $idestadoU, $this->usuario_e);
+        if($data = Database::ejecutarSentencia($sql, $params)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Método para habilitar intentos
+    public function HabilitarIntentos($intento, $idEstadoU){
+        $sql = "UPDATE tbusuario_empleado SET fecha_bloqueo_e = NULL, fecha_desbloqueo_e = NULL, intentos_e = ?, idestado_usuario_e = ? WHERE usuario_e = ?";
+        $params = array($intento, $idEstadoU, $this->usuario_e);
+        if($data = Database::ejecutarSentencia($sql, $params)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ValidarContraUsuarioEmpleado($password)
+    {
+        $sql = 'SELECT contrasena_e FROM tbusuario_empleado WHERE idusuario_e = ?';
+        $params = array($this->idusuario_e);
+        $data = Database::obtenerSentencia($sql, $params);
+        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
+        // Solo se ocupa cuando no está encriptada
+        if ($password === $data['contrasena_e']) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

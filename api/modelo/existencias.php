@@ -15,7 +15,7 @@ class Existencias extends Validator
 
     public function setId($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->id = $value;
             return true;
         } else {
@@ -72,7 +72,7 @@ class Existencias extends Validator
 
     public function setExistencias($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->existencias = $value;
             return true;
         } else {
@@ -82,7 +82,7 @@ class Existencias extends Validator
 
     public function setCantidad($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->cantidad = $value;
             return true;
         } else {

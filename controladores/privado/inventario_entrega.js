@@ -170,7 +170,7 @@ document.getElementById("formulario_entrega").addEventListener('submit', functio
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     data = response.dataset;
                 } else {
                     data = response.dataset;
@@ -179,7 +179,7 @@ document.getElementById("formulario_entrega").addEventListener('submit', functio
                 fillTable(data);
             });
         } else {
-            console.log(request.status + " " + request.statusText);
+            console.log(request.estado + " " + request.statusText);
         }
     });
 });

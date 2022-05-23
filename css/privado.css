@@ -634,6 +634,7 @@ footer {
     width: 80px;
 }
 
+
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
 #titulo_modal{
     color: #282012;
@@ -1041,7 +1042,7 @@ footer {
 }
 
 /*Colores de las tarjetas dependiendo de su estado*/
-#pendiente a{
+#retrasado a{
     background-color: #d32f2f;
     width: 20px;
     height: 100%;
@@ -1176,17 +1177,34 @@ table.striped>tbody>tr:nth-child(odd) {
 }
 
 /*------------------------------------------Administrar Marca------------------------------------------*/
-#agregar_modal_marca{
-    width:30%;
+#modal_agregar_marca{
+    height: 280px;
 }
 
-#modificar_modal_marca{
-    width:30%;
+#marca_agregar{
+    margin-top: 8%;
+}
+
+.subir_imagen{
+    margin-top: 5%;
+}
+
+#editar_modal_marca{
+    height: 280px;
+}
+
+#marca_modificar{
+    margin-top: 8%;
 }
 
 #eliminar_modal_marca{
-    width:30%;
+    height: 280px;
 }
+
+#marca_eliminar{
+    margin-top: 8%;
+}
+
 
 /*----------------------------------------------Modo Nocturno------------------------------------------------------------------*/
 
@@ -1234,11 +1252,9 @@ body.dark .ver_perfil img{
     content: ' Oscuro';
 }
 
-
 body.dark .modo_oscuro::after{
     content: ' Claro';
 }
-
 
 body.dark .modo_oscuro img{
     content:url("../recursos/iconografia/sol.png");
@@ -1768,7 +1784,7 @@ body.dark #estado_pedido p{
     }
     
     /*Colores de las tarjetas dependiendo de su estado*/
-    #pendiente a{
+    #retrasado a{
         background-color: #d32f2f;
         width: 100%;
         height: 20px;
@@ -2109,7 +2125,7 @@ body.dark #estado_pedido p{
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #pendiente a{
+    #retrasado a{
         background-color: #d32f2f;
         width: 329px;
         height: 20px;
@@ -2362,7 +2378,7 @@ body.dark #estado_pedido p{
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #pendiente a{
+    #retrasado a{
         background-color: #d32f2f;
         width: 499px;
         height: 20px;
@@ -2591,7 +2607,7 @@ body.dark #estado_pedido p{
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #pendiente a{
+    #retrasado a{
         background-color: #d32f2f;
         width: 20px;
         height: 208px;
@@ -2816,7 +2832,7 @@ body.dark #estado_pedido p{
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #pendiente a{
+    #retrasado a{
         background-color: #d32f2f;
         width: 20px;
         height: 208px;

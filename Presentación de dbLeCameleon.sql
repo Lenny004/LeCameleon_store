@@ -308,7 +308,6 @@ INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado
 	VALUES ('lenny', '1234', 1, 1, 1),
 ('aimee', '1234', 2, 2, 1);
 
-
 INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
 	VALUES ('Lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
 ('Fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),

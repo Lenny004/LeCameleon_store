@@ -86,7 +86,7 @@ if (isset($_GET['action'])) {
                 if (!$categoria->setId($_POST['idd'])) {
                     $result['exception'] = 'Categoría incorrecta';
                 } elseif ($result['dataset'] = $categoria->readOne()) {
-                    $result['status'] = 1;
+                    $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
@@ -99,7 +99,7 @@ if (isset($_GET['action'])) {
             } elseif (!$data = $categoria->readOne()) {
                 $result['exception'] = 'Categoría inexistente';
             } elseif ($categoria->deleteRow()) {
-                $result['status'] = 1;
+                $result['estado'] = 1;
                 if ($categoria->deleteFile($categoria->getLink(), $data['imagen_categoria'])) {
                     $result['message'] = 'Categoría eliminada correctamente';
                 } else {

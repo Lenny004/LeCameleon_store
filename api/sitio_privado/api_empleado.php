@@ -1,7 +1,7 @@
 <?php
 require_once('../conexion/database.php');
 require_once('../conexion/validaciones.php');
-require_once('../modelo/empleados.php');
+require_once('../modelo/api_empleado.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -23,6 +23,8 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
+
+                
             case 'search':
                 $_POST = $empleado->validateForm($_POST);
                 if ($_POST['search'] == '') {
@@ -78,6 +80,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'empleado inexistente';
                 }
                 break;
+
             case 'update':
                 $_POST = $empleado->validateForm($_POST);
                 if (!$empleado->setId($_POST['ide'])) {
@@ -109,10 +112,11 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
+
             case 'readOneE':
                 if (!$empleado->setId($_POST['idd'])) {
                     $result['exception'] = 'empleado incorrecta';
-                } elseif ($result['dataset'] = $empleado->readOneE()) {
+                } elseif ($result['dataset'] = $empleado->readOne()) {
                     $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
@@ -120,6 +124,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'empleado inexistente';
                     }
                 break;
+
             case 'delete':
                 if (!$empleado->setId($_POST['idd'])) {
                     $result['exception'] = 'empleado incorrecto';
@@ -135,8 +140,8 @@ if (isset($_GET['action'])) {
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador.
-    print(json_encode($result));
-}
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador.
+        print(json_encode($result));
+    }
