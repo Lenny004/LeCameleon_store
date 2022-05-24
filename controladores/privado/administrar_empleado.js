@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	//Var se crea para variables globales
 	//let es variables locales
 
+	//Instanciar Datepicker
+	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+		format: 'yyyy-mm-dd', i18n: {
+			months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
+			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+	}});
+
 	//Instanciar el menú
 	M.Sidenav.init(document.querySelectorAll('.sidenav'));
 
@@ -29,27 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	//Instanciar ToolTips footer
 	M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 
-	M.Datepicker.init(document.querySelectorAll('.datepicker'));
-
 	//Instaciar el modal o pow up
 	M.Modal.init(document.querySelectorAll('.modal'));
-
-	M.Modal.init(document.querySelectorAll('.moda2'));
-
-	M.Modal.init(document.querySelectorAll('.moda3'));
-});
-
-//hago que cuando se seleccione una fecha el calendario se cierre automatica, también cambie el formato de esta por yyyy-mm-dd
-document.addEventListener('DOMContentLoaded', function () {
-	//Instanciar Datepicker
-	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
-		format: 'yyyy-mm-dd', i18n: {
-			months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-			monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
-			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
-			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
-		}
-	});
 });
 
 

@@ -40,8 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     sweetAlert(4, response.exception, null);
                 }
+
                 // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                fillTable(data);
+                CrearTarjetas(data);
             });
         } else {
             console.log(request.estado + ' ' + request.statusText);
@@ -50,32 +51,95 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
-function fillTable(dataset) {
-    let content = '';
+function CrearTarjetas(dataset) {
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
-        // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-        content += `
-            <tr>
-                <td><img src="${SERVER}images/categorias/${row.imagen_categoria}" class="materialboxed" height="100"></td>
-                <td>${row.nombre_categoria}</td>
-                <td>${row.descripcion_categoria}</td>
-                <td>
-                    <a onclick="openUpdate(${row.id_categoria})" class="btn-floating blue tooltipped" data-tooltip="Actualizar">
-                        <i class="material-icons">mode_edit</i>
-                    </a>
-                    <a onclick="openDelete(${row.id_categoria})" class="btn-floating red tooltipped" data-tooltip="Eliminar">
-                        <i class="material-icons">delete</i>
-                    </a>
-                    <a onclick="openReport(${row.id_categoria})" class="btn-floating amber tooltipped" data-tooltip="Reporte">
-                        <i class="material-icons">assignment</i>
-                    </a>
-                </td>
-            </tr>
-        `;
+        let contenido_retraso = '';
+        let contenido_entrega_hoy = '';
+        let contenido_entregandose = '';
+        let contenido_pedidos = '';
+        switch (4){
+            case 1://Cancelada
+                break;
+            case 2://Pendiente
+                contenido_pedidos += `
+                    <div id="pedidos">
+                        <div id="no_disponible">
+                            <a href=""></a>
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
+                        </div>
+                        <div id="direccion">
+                            <h6>Dirección de entrega:</h6>
+                            <p>${row.direccion_entrega_pedido}
+                            </p>
+                            <h6>Nombre Cliente:</h6>
+                            <p>${row.nombre_cliente}
+                            </p>
+                            <h6>Fecha y Hora de Entrega:</h6>
+                            <p>${row.fecha_entrega_pedido}
+                            </p>
+                        </div>
+                        <div id="tomar">
+                            <a class="waves-effect waves-light btn-small disabled">Tomar Pedido</a>
+                        </div>
+                    </div>`;
+                    document.getElementById('realizado_hoy').innerHTML = contenido_pedidos;
+                break;
+            case 3://Retrasada
+                contenido_retraso +=`
+                    <div id="pedidos">
+                        <div id="retrasado">
+                            <a href=""></a>
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
+                        </div>
+                        <div id="direccion">
+                            <h6>Dirección de entrega:</h6>
+                            <p>${row.direccion_entrega_pedido}
+                            </p>
+                            <h6>Nombre Cliente:</h6>
+                            <p>${row.nombre_cliente}
+                            </p>
+                            <h6>Fecha y Hora de Entrega:</h6>
+                            <p>${row.fecha_entrega_pedido}
+                            </p>
+                        </div>
+                        <div id="tomar">
+                            <a class="waves-effect waves-light btn-small">Tomar Pedido</a>
+                        </div>
+                    </div>`;
+                    document.getElementById('retrasado').innerHTML = contenido_retraso;
+                break;
+            case 4://Entregando
+                contenido_entregandose +=`
+                    <div id="pedidos">
+                        <div id="entregando">
+                            <a href=""></a>
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
+                        </div>
+                        <div id="direccion">
+                            <h6>Dirección de entrega:</h6>
+                            <p>${row.direccion_entrega_pedido}
+                            </p>
+                            <h6>Nombre Cliente:</h6>
+                            <p>${row.nombre_cliente}
+                            </p>
+                            <h6>Fecha y Hora de Entrega:</h6>
+                            <p>${row.fecha_entrega_pedido}
+                            </p>
+                        </div>
+                        <div id="tomar2">
+                            <a class="btn tooltipped waves-effect waves-light btn-small" data-position="left"
+                                data-tooltip="Ya estoy en camino. Alguien ya me ha tomado">Tomar Pedido</a>
+                        </div>
+                    </div>`;
+                    document.getElementById('entregandose').innerHTML = contenido_entregandose;
+                break;
+        }
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-    document.getElementById('tbody-rows').innerHTML = content;
+    document.getElementById('retrasado').innerHTML = contenido_retraso;
+    document.getElementById('realizado_hoy').innerHTML = contenido_pedidos;
+    document.getElementById('entregandose').innerHTML = contenido_entregandose;
     // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
     M.Materialbox.init(document.querySelectorAll('.materialboxed'));
     // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.

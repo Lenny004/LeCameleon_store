@@ -23,8 +23,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-                
             case 'search':
                 $_POST = $empleado->validateForm($_POST);
                 if ($_POST['search'] == '') {

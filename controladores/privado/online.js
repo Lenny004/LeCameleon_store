@@ -290,10 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         //Instanciar ToolTips footer
                         M.Tooltip.init(document.querySelectorAll('.tooltipped'));
                         //Instanciar Datepicker
-                        M.Datepicker.init(document.querySelectorAll('.datepicker'));
-                        //Instanciar Modal
-                        modal = document.querySelectorAll('.modal');
-                        M.Modal.init(modal);
                         //Instanciar Select 'Combobox'
                         M.FormSelect.init(document.querySelectorAll('select'));
                     } else {

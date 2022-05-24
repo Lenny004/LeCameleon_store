@@ -6,63 +6,38 @@
 class Pedidos extends Validator
 {
     // Declaración de atributos (propiedades).
-    private $idusuario_e = null;
+    private $direccionPedido = null;
+    private $nombreCliente = null;
+    private $apellidoCliente = null;
+    private $fechaEntrega = null;
+    private $idestado_pedido = null;
 
     /*
     *   Métodos para obtener valores de los atributos.
     */
-    public function getIdUsuarioE()
+    public function getDireccionPedido()
     {
-        return $this->idusuario_e;
+        return $this->direccionPedido;
     }
 
-    public function getUsuario()
+    public function getNombreCliente()
     {
-        return $this->usuario_e;
+        return $this->nombreCliente;
     }
 
-    public function getClaveUsuario()
+    public function getApellidoCliente()
     {
-        return $this->clave_usuario;
+        return $this->apellidoCliente;
     }
 
-    public function getHoraInactivacion()
+    public function getFechaEntrega()
     {
-        return $this->hora_inactivacion;
+        return $this->fechaEntrega;
     }
 
-    public function getHoraActivacion()
+    public function getIdPedido()
     {
-        return $this->hora_activacion;
-    }
-
-    public function getIntento()
-    {
-        return $this->intentos_e;
-    }
-
-    public function getEstadoU()
-    {
-        return $this->idestadou_e;
-    }
-
-    public function getIdTipoU()
-    {
-        return $this->idtipo_usuario_e;
-    }
-
-    public function getTipoUsuario(){
-        return $this->tipo_usuario_e;
-    }
-
-    public function getNombreEmpleado()
-    {
-        return $this->nombre_empleado;
-    }
-
-    public function getApellidoEmpleado()
-    {
-        return $this->apellido_empleado;
+        return $this->idestado_pedido;
     }
 
     /* Traer los datos de un usuario si el usuario ingresado existe */
@@ -70,8 +45,8 @@ class Pedidos extends Validator
     {
         $sql = 'SELECT tep.direccion_entrega_pedido, tep.fecha_entrega_pedido, tuc.nombre_cliente, tuc.apellido_cliente, tef.idestado_factura
         FROM tbenvio_pedido tep, tbfactura tf, tbestado_factura  tef, tbusuario_cliente tuc 
-        WHERE tep.idfactura = tf.idfactura AND tf.idestado_factura = tef.idestado_factura AND tf.idusuario_c = tuc.idusuario_c AND (tep.fecha_entrega_pedido != ? AND tef.idestado_factura != 1) ORDER BY tep.fecha_entrega_pedido ASC;';
-        $params = $fecha_actual;
+        WHERE tep.idfactura = tf.idfactura AND tf.idestado_factura = tef.idestado_factura AND tf.idusuario_c = tuc.idusuario_c AND (tep.fecha_entrega_pedido != ? AND tef.idestado_factura != 1) ORDER BY tep.fecha_entrega_pedido ASC';
+        $params = array($fecha_actual);
         return Database::obtenerSentencias($sql, $params);
     }
 
