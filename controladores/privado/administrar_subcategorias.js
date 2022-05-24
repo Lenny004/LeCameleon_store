@@ -95,7 +95,7 @@ document.getElementById("Agregar_forms").addEventListener("submit", function (ev
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     let action = "create";
-    saveRow(
+    saveRoww(
         API_SUBCATEGORIA,
         action,
         "Agregar_forms",

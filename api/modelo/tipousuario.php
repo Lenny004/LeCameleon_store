@@ -10,10 +10,9 @@ class TipoU extends Validator{
     private $tipo = null;
 
     /* Métodos para validar y asignar valores de los atributos. */
-
     public function setId($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->id = $value;
             return true;
         } else {
@@ -32,7 +31,6 @@ class TipoU extends Validator{
     }
 
     /* Métodos para obtener valores de los atributos. */
-
     public function getId()
     {
         return $this->id;
@@ -44,13 +42,12 @@ class TipoU extends Validator{
     }
 
     /* Métodos para realizar readAll */
-
     public function readAll()
     {
         $sql = 'SELECT idtipo_usuario_e, tipo_usuario_e
-        FROM tbTipoUsuarioE";';
+        FROM tbtipo_usuario_e';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::obtenerSentencias($sql, $params);
     }
 
 }

@@ -17,7 +17,7 @@ class Usuarios extends Validator
     */
     public function setId($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->id = $value;
             return true;
         } else {
@@ -73,7 +73,6 @@ class Usuarios extends Validator
             return false;
         }
     }
-
     
     /*
     *   Métodos para obtener valores de los atributos.
@@ -107,7 +106,6 @@ class Usuarios extends Validator
         return $this->estado;
     }
 
-
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
@@ -118,7 +116,7 @@ class Usuarios extends Validator
                 WHERE usuario_e ILIKE ?
                 ORDER BY usuario_e';
         $params = array("%$value%");
-        return Database::getRows($sql, $params);
+        return Database::obtenerSentencias($sql, $params);
     }
 
     public function createRow()
@@ -126,7 +124,7 @@ class Usuarios extends Validator
         $sql = 'INSERT INTO tbusuario_empleado(usuario_e, contrasena_e, idempleado, idtipo_usuario_e, idestado_usuario_e)
                 VALUES (?, ?, ?, ?, ?)';
         $params = array($this->usuario, $this->contrasena, $this->empleado, $this->tipo,  $this->estado);
-        return Database::executeRow($sql, $params);
+        return Database::ejecutarSentencia($sql, $params);
     }
 
  
@@ -142,7 +140,7 @@ class Usuarios extends Validator
         ON tbusuario_empleado.idestado_usuario_e = tbestado_usuario_e.idestado_usuario_e
         ORDER BY nombre_empleado';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::obtenerSentencias($sql, $params);
     }
 
     public function readOne()
@@ -151,7 +149,7 @@ class Usuarios extends Validator
                 FROM tbusuario_empleado
                 WHERE idusuario_e = ?';
         $params = array($this->id);
-        return Database::getRow($sql, $params);
+        return Database::obtenerSentencia($sql, $params);
     }
     public function readOneE()
     {
@@ -159,7 +157,7 @@ class Usuarios extends Validator
                 FROM tbusuario_empleado
                 WHERE idusuario_e = ?';
         $params = array($this->id);
-        return Database::getRow($sql, $params);
+        return Database::obtenerSentencia($sql, $params);
     }
 
     public function updateRow()
@@ -168,7 +166,7 @@ class Usuarios extends Validator
 	            SET usuario_e= ?, contrasena_e=?, idempleado=?, idtipo_usuario_e=?, idestado_usuario_e=?
 	            WHERE idusuario_e" = ?';
         $params = array($this->usuario, $this->contrasena, $this->empleado, $this->tipo, $this->estado, $this->id);
-        return Database::executeRow($sql, $params);
+        return Database::ejecutarSentencia($sql, $params);
     }
 
     public function deleteRow()
@@ -176,6 +174,6 @@ class Usuarios extends Validator
         $sql = 'DELETE FROM tbusuario_empleado
                 WHERE idusuario_e" = ?';
         $params = array($this->id);
-        return Database::executeRow($sql, $params);
+        return Database::ejecutarSentencia($sql, $params);
     }
 }

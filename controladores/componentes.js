@@ -30,7 +30,7 @@ function readRows(api) {
                 fillTable(data);
             });
         } else {
-            console.log(request.estado + ' ' + request.estadoText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }
@@ -59,7 +59,7 @@ function searchRows(api, form) {
                 }
             });
         } else {
-            console.log(request.estado + ' ' + request.estadoText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }
@@ -90,7 +90,33 @@ function saveRow(api, action, form, modal) {
                 }
             });
         } else {
-            console.log(request.estado + ' ' + request.estadoText);
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    });
+}
+
+function saveRoww(api, action, form, modal) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    sweetAlert(2, response.exception, null);
+                } else {
+                    // Se cierra la caja de dialogo (modal) del formulario.
+                    M.Modal.getInstance(document.getElementById(modal)).close();
+                    // Se cargan nuevamente las filas en la tabla de la vista después de guardar un registro y se muestra un mensaje de éxito.
+                    readRows(api);
+                    sweetAlert(1, response.message, null);
+                }
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }

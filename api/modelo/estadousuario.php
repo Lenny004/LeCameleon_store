@@ -13,7 +13,7 @@ class EstadoU extends Validator{
 
     public function setId($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if ($this->validacionNumeroNaturales($value)) {
             $this->id = $value;
             return true;
         } else {
@@ -44,13 +44,12 @@ class EstadoU extends Validator{
     }
 
     /* Métodos para realizar readAll */
-
     public function readAll()
     {
         $sql = 'SELECT idestado_usuario_e, estado_usuario_e
-        FROM tbEstadoUsuarioE"';
+        FROM tbestado_usuario_e';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::obtenerSentencias($sql, $params);
     }
 
 }

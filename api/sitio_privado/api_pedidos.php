@@ -10,19 +10,20 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $monitorear_pedidos = new Pedidos;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'estado_pedido' => null, 'nombre_cliente' => null, 'apellido_cliente' => null, 'direccion_pedido' => null, 'fecha_pedido' => null);
     // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
     switch ($_GET['action']){
         //Verificamos si existen usuarios
         case 'existenciaPedidos':
             //Si existen pedidos manda un mensaje de que se encontraron
             $fecha_actual = date('Y-m-d h:i:s', time());
-            if ($monitorear_pedidos->ValidarExistenciaPedidos($fecha_actual)) {
+            if ($result['dataset'] = $monitorear_pedidos->ValidarExistenciaPedidos($fecha_actual)) {
+                $_SESSION['estado_pedido'] = $monitorear_pedidos->getIdPedido();
                 $result['estado'] = 1;
                 $result['message'] = 'Existen pedidos registrados';
             }
             else {
-                $result['exception'] = 'No existe un usuario administrador registrado';
+                $result['exception'] = 'No existen pedidos registrados';
             }
             break;
         case 'registroUsuario':
