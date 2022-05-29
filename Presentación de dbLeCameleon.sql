@@ -74,7 +74,7 @@ CREATE TABLE tbsubcategoria_producto (
     idsubcategoria_producto SERIAL primary key,
     subcategoria_producto character varying(60) UNIQUE NOT NULL,
     imagen_subcategoria VARCHAR(1000),
-    idcategoria_producto integer NOT NULL
+    idcategoria_producto integer NOT NULL REFERENCES tbcategoria(idcategoria_producto)
 );
 
 CREATE TABLE tbdistribuidor(
@@ -89,7 +89,6 @@ CREATE TABLE tbmarca (
     nombre_marca character varying(35) UNIQUE NOT NULL,
     imagen_marca VARCHAR(1000)
 );
-
 
 CREATE TABLE tbcolor (
     idcolor SERIAL primary key,
@@ -326,25 +325,25 @@ INSERT INTO public."tbestado_factura"("estado_factura")
 INSERT INTO public."tbtipo_pago"("tipo_pago")
 	VALUES ('Debito'),('Chivo Wallet');
 
-INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura", "idusuario_c", "idusuario_e")
+INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura", "idusuario_c")
 	VALUES 
-    ('2022-03-14', 25.80, 2, 1, 1),
-	('2022-03-15', 17.20, 2, 2, 1),
-	('2022-03-16', 8.60, 2, 3, 2),
-	('2022-03-17', 8.60, 2, 4, 2),
-    ('2022-03-15', 17.20, 2, 5, 1),
-	('2022-03-16', 54.90, 3, 6, 1),
-	('2022-03-08', 250.00, 3, 7, 2),
-    ('2022-03-05', 20.00, 1, 8, 2),
-    ('2022-03-25', 44.90, 2, 9, 1),
-    ('2022-03-20', 11.00, 4, 10, 2),
-    ('2022-03-22', 500.00, 2, 1, 2),
-    ('2022-03-23', 98.58, 2, 2, 1),
-    ('2022-03-24', 20.00, 2, 3, 1),
-    ('2022-03-25', 68.5, 2, 5, 2),
-    ('2022-03-15', 290.99, 3, 4, 2),
-    ('2022-03-11', 48.19, 3, 5, 2),
-    ('2022-03-27', 49.90, 2, 6, 1);
+    ('2022-03-14', 25.80, 2, 1),
+	('2022-03-15', 17.20, 2, 2),
+	('2022-03-16', 8.60, 2, 3),
+	('2022-03-17', 8.60, 2, 4),
+    ('2022-03-15', 17.20, 2, 5),
+	('2022-03-16', 54.90, 3, 6),
+	('2022-03-08', 250.00, 3, 7),
+    ('2022-03-05', 20.00, 1, 8),
+    ('2022-03-25', 44.90, 2, 9),
+    ('2022-03-20', 11.00, 4, 10),
+    ('2022-03-22', 500.00, 2, 1),
+    ('2022-03-23', 98.58, 2, 2),
+    ('2022-03-24', 20.00, 2, 3),
+    ('2022-03-25', 68.5, 2, 5),
+    ('2022-03-15', 290.99, 3, 4),
+    ('2022-03-11', 48.19, 3, 5),
+    ('2022-03-27', 49.90, 2, 6);
 
 INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "cantidad_descuento", "cantidad_producto", "idfactura", "idproducto")
 	VALUES 
@@ -387,7 +386,12 @@ INSERT INTO public."tbenvio_pedido"("direccion_entrega_pedido", "fecha_entrega_p
     ('San Martin, San Salvador', '2022-03-29', 5),
 	('Santo Tomas AV 14 casa #12', '2022-03-20', 6),
 	('Colonia Monte Carmelo, Ilopango', '2022-03-17', 7),
-	('Residencia España, Av34 Casa #67', '2022-03-25', 8);
+	('Residencia España, Av34 Casa #67', '2022-03-25', 8),
+    ('Calle vista al lago en circulo cercano al restaurante, casa #89', '2022-05-25', 9),
+    ('Instituto Técnico Ricaldone', '2022-05-25', 10),
+    ('Monseñor Romero y Final Calle 5 de Noviembre entre 21ª y 23ª', '2022-05-29', 11),
+    ('SAN SALVADOR. Dirección: 87 Ave. Sur, No. 7, Colonia Escalón, San Salvador', '2022-05-29', 12),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 13);
 
 ---------------------------------------------------INNER JOIN---------------------------------------------------
 

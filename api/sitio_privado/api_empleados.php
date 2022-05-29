@@ -12,6 +12,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    if (isset($_SESSION['idusuario_e'])) {    
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
@@ -23,11 +24,29 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
+            case 'obtenerTipoEmpleados':
+                if ($result['dataset'] = $empleado->obtenerTipoEmpleados()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay datos registrados';
+                }
+                break;
+            case 'obtenerEstadoEmpleados':
+                if ($result['dataset'] = $empleado->obtenerEstadoEmpleados()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay datos registrados';
+                }
+                break;
             case 'search':
                 $_POST = $empleado->validateForm($_POST);
                 if ($_POST['search'] == '') {
                     $result['exception'] = 'Ingrese un valor para buscar';
-                } elseif ($result['dataset'] = $empleado->searchRows($_POST['search'])) {
+                } elseif ($result['dataset'] = $empleado->buscarEmpleado($_POST['search'])) {
                     $result['estado'] = 1;
                     $result['message'] = 'Valor encontrado';
                 } elseif (Database::getException()) {
@@ -60,7 +79,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Seleccione un Estado';
                 } elseif (!$empleado->setEstado($_POST['estado'])) {
                     $result['exception'] = 'estado incorrecto';
-                } elseif ($empleado->createRow()) {
+                } elseif ($empleado->crearEmpleado()) {
                     $result['estado'] = 1;
                     $result['message'] = 'Empleado creado correctamente';
                 } else {
@@ -69,7 +88,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readOne':
                 if (!$empleado->setId($_POST['ide'])) {
-                    $result['exception'] = 'empleado incorrecto';
+                    $result['exception'] = 'Empleado incorrecto';
                 } elseif ($result['dataset'] = $empleado->readOne()) {
                     $result['estado'] = 1;
                 } elseif (Database::getException()) {
@@ -102,32 +121,33 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Seleccione un tipo';
                 } elseif (!$empleado->setEstado($_POST['estadoM'])) {
                     $result['exception'] = 'Seleccione un estado';
-                } elseif ($empleado->updateRow()) {
+                } elseif ($empleado->actualizarEmpleado()) {
                     $result['estado'] = 1;
-                    $result['message'] = 'empleado modificado correctamente';
+                    $result['message'] = 'Empleado modificado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
                 }
                 break;
-            case 'readOneE':
-                if (!$empleado->setId($_POST['idd'])) {
-                    $result['exception'] = 'empleado incorrecta';
-                } elseif ($result['dataset'] = $empleado->readOneE()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'empleado inexistente';
-                    }
-                break;
             case 'delete':
-                if (!$empleado->setId($_POST['idd'])) {
-                    $result['exception'] = 'empleado incorrecto';
-                } elseif (!$data = $empleado->readOneE()) {
-                    $result['exception'] = 'empleado inexistente';
-                } elseif ($empleado->deleteRow()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'empleado eliminado correctamente';
+                if (!$empleado->setId($_POST['ide'])) {
+                    $result['exception'] = 'Empleado incorrecto';
+                } elseif (!$data = $empleado->readOne()) {
+                    $result['exception'] = 'Empleado inexistente';
+                } elseif ($empleado->eliminarEmpleado()) {
+                    if($empleado->encontrarUsuarioEmpleado()){
+                        if($empleado->actualizarUsuarioEmpleadoEliminado()){
+                            $result['estado'] = 1;
+                            $result['message'] = 'Empleado eliminado correctamente, su usuario ha sido deshabilitado';
+                        }
+                        else{
+                            $result['estado'] = 1;
+                            $result['message'] = 'Empleado eliminado correctamente, su usuario no se ha podido deshabilitar';
+                        }
+                    }
+                    else{
+                        $result['estado'] = 1;
+                        $result['message'] = 'Empleado eliminado correctamente, no poseia un usuario ligado';
+                    }
                 } else {
                     $result['exception'] = Database::getException();
                 }
@@ -135,8 +155,13 @@ if (isset($_GET['action'])) {
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador.
-    print(json_encode($result));
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador.
+        print(json_encode($result));
+    } else {
+        print(json_encode('Acceso denegado'));
+    }
+} else {
+    print(json_encode('Recurso no disponible'));
 }

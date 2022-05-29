@@ -61,7 +61,8 @@ class Usuarios extends Validator
         return $this->idtipo_usuario_e;
     }
 
-    public function getTipoUsuario(){
+    public function getTipoUsuario()
+    {
         return $this->tipo_usuario_e;
     }
 

@@ -109,7 +109,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <ul id="dropdown_empleados" class="dropdown-content">
                                                 <li><a href="administrar_empleados.html">Administrar Empleados</a></li>
                                                 <li class="divider"></li>
-                                                <li><a href="administrar_usuarios.html">Administrar Usuarios</a></li>
+                                                <li><a href="administrar_usuarios.html">Administrar Usuarios Empleados</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="administrar_usuarios_clientes.html">Administrar Usuarios Clientes</a></li>
                                                 <li class="divider"></li>
                                             </ul>
                                             <li><a href="administrar_marca.html">Marcas</a></li>

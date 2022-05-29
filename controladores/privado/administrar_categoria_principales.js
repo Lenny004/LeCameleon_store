@@ -31,12 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Instaciar el modal o pow up
     M.Modal.init(document.querySelectorAll('.modal'));
-
-    M.Modal.init(document.querySelectorAll('.moda2'));
-    
-    M.Modal.init(document.querySelectorAll('.moda3'));
 });
-
 
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_CATEGORIA = SERVER + 'sitio_privado/api_categorias.php?action=';
@@ -50,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dismissible: false,
         onOpenStart: function () {
             // Se restauran los elementos del formulario.
-            document.getElementById('Agregar_forms').reset();
+            document.getElementById('agregar_forms').reset();
             document.getElementById('modificar_forms').reset();
             document.getElementById('eliminar_forms').reset();
         }
@@ -60,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
     M.Modal.init(document.querySelectorAll('.modal'), options);
 });
+
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
 function fillTable(dataset) {
     let content = '';
@@ -90,6 +86,7 @@ function fillTable(dataset) {
     // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
+
 // Función para preparar el formulario al momento de insertar un registro.
 function openCreate() {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
@@ -97,11 +94,12 @@ function openCreate() {
     // Se establece el campo de archivo como obligatorio.
     document.getElementById('archivo').required = true;
 }
-document.getElementById('Agregar_forms').addEventListener('submit', function (event) {
+
+document.getElementById('agregar_forms').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     let action = 'create';
-    saveRow(API_CATEGORIA, action, 'Agregar_forms', 'modal_agregar_categoria');
+    saveRow(API_CATEGORIA, action, 'agregar_forms', 'modal_agregar_categoria');
 });
 
 // Función para preparar el formulario al momento de modificar un registro.
@@ -140,7 +138,6 @@ function openUpdate(id) {
     });
 }
 
-
 document.getElementById('modificar_forms').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
@@ -152,15 +149,13 @@ document.getElementById('modificar_forms').addEventListener('submit', function (
 function openDelete(id) {
     // Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
     M.Modal.getInstance(document.getElementById('eliminar_modal_categoria')).open();
-    document.getElementById('idd').value = '';
-    document.getElementById('idd').value = id;
-
-    const data = new FormData();
-    data.append('idd', id);
-    
-    fetch(API_CATEGORIA + 'readOneE', {
+    document.getElementById('ide').value = '';
+    document.getElementById('ide').value = id;
+    const DATA = new FormData();
+    DATA.append('ide', id);
+    fetch(API_CATEGORIA + 'readOne', {
         method: 'post',
-        body: data
+        body: DATA
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
@@ -169,7 +164,7 @@ function openDelete(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    document.getElementById('idd').value = response.dataset.idcategoria_producto;
+                    document.getElementById('ide').value = response.dataset.idcategoria_producto;
                     document.getElementById('categoria_eliminar').value = response.dataset.categoria_producto;
                     document.getElementById('namefile').value = response.dataset.imagen_categoria;
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
@@ -186,10 +181,9 @@ function openDelete(id) {
 document.getElementById('eliminar_forms').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    var valor = document.getElementById('idd').value;
-
-    const data = new FormData();
-    data.append('idd', valor);
-    // Se llama a la función para guardar el registro.
-    eliminateRow(API_CATEGORIA, data);
+    var valor = document.getElementById('ide').value;
+    const DATA = new FormData();
+    DATA.append('ide', valor);
+    // Se llama a la función para eliminar el registro.
+    confirmDelete(API_CATEGORIA, DATA, 'eliminar_modal_categoria');
 });

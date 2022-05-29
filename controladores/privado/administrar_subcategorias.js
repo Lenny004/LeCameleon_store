@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //Instanciar ToolTips footer
     M.Tooltip.init(document.querySelectorAll(".tooltipped"));
 });
-const API_SUBCATEGORIA = SERVER + "sitio_privado/api_subcategoria.php?action=";
-const ENDPOINT_CATEGORIA = SERVER + "sitio_privado/api_categorias.php?action=readAll";
 
 //Constantes Selects
+const API_SUBCATEGORIA = SERVER + "sitio_privado/api_subcategoria.php?action=";
+const ENDPOINT_CATEGORIA = SERVER + "sitio_privado/api_categorias.php?action=readAll";
 
 document.addEventListener("DOMContentLoaded", function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js
@@ -39,14 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
         dismissible: false,
         onOpenStart: function () {
             // Se restauran los elementos del formulario.
-            document.getElementById("Agregar_forms").reset();
+            document.getElementById("agregar_forms").reset();
             document.getElementById("modificar_forms").reset();
             document.getElementById("eliminar_forms").reset();
         },
     };
     // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
     M.Modal.init(document.querySelectorAll(".modal"), options);
-    // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
 });
 
 function fillTable(dataset) {
@@ -80,27 +79,28 @@ function fillTable(dataset) {
     M.Tooltip.init(document.querySelectorAll(".tooltipped"));
 }
 
+// Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar.
+document.getElementById('thesearch').addEventListener('submit', function (event) {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
+    searchRows(API_SUBCATEGORIA, 'thesearch');
+});
+
 //Funcion que permite abrir el modal de agregar subcategoria e insertar datos a la bd
 function openCreate() {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
-    M.Modal.getInstance(
-        document.getElementById("modal_agregar_subcategoria")
-    ).open();
+    M.Modal.getInstance(document.getElementById("modal_agregar_subcategoria")).open();
     // Se establece el campo de archivo como obligatorio.
     document.getElementById("archivo").required = true;
     fillSelect(ENDPOINT_CATEGORIA, "select_categoria", null);
 }
 
-document.getElementById("Agregar_forms").addEventListener("submit", function (event) {
+document.getElementById("agregar_forms").addEventListener("submit", function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    let action = "create";
-    saveRoww(
-        API_SUBCATEGORIA,
-        action,
-        "Agregar_forms",
-        "modal_agregar_subcategoria"
-    );
+    let action = "crearSubcategoria";
+    saveRow(API_SUBCATEGORIA, action, "agregar_forms", "modal_agregar_subcategoria");
 });
 
 //Funcion que permite abrir el modal de modificar subcategoria y haga un update en la bd
@@ -110,13 +110,12 @@ function openUpdate(id) {
     // Se asigna el título para la caja de diálogo (modal).
     document.getElementById('archivop').required = false;
     // Se define un objeto con los datos del registro seleccionado.
-    const data = new FormData();
-    console.log(id);
-    data.append('ide', id);
+    const DATA = new FormData();
+    DATA.append('ide', id);
     // Petición para obtener los datos del registro solicitado.
     fetch(API_SUBCATEGORIA + 'readOne', {
         method: 'post',
-        body: data
+        body: DATA
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
@@ -125,11 +124,9 @@ function openUpdate(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    console.log(id);
-                    document.getElementById('id').value = response.dataset.idsubcategoria_producto;
+                    document.getElementById('ide').value = response.dataset.idsubcategoria_producto;
                     document.getElementById('nombrearchivo').value = response.dataset.imagen_subcategoria;
-                    document.getElementById('subcategoria_modificar').value = response.dataset.subcategoria_producto;
-                    //fillSelect(ENDPOINT_CATEGORIA, "select_categoria", response.dataset.idCategoriaProducto);
+                    document.getElementById('subcategoria_eliminar').value = response.dataset.subcategoria_producto;
                     fillSelect(ENDPOINT_CATEGORIA, 'select_subcategoria', response.dataset.idcategoria_producto);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.      
                     M.updateTextFields();
@@ -151,35 +148,47 @@ document.getElementById('modificar_forms').addEventListener('submit', function (
     saveRow(API_SUBCATEGORIA, action, 'modificar_forms', 'modal_modificar_subcategoria');
 });
 
-// Método manejador de eventos que se ejecuta cuando se envía el formulario de guardar.
-
-document.getElementById('modificar_forms').addEventListener('submit', function (event) {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se define una variable para establecer la acción a realizar en la API.
-    let action = '';
-    // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
-    (document.getElementById('id').value) ? action = 'update' : action = 'create';
-    // Se llama a la función para guardar el registro. Se encuentra en el archivo components.js
-    saveRow(API_SUBCATEGORIA, action, 'modificar_forms', 'modal_modificar_subcategoria');
-});
-
 //funcion para elimnar subcategoria
 function openDelete(id) {
-    // Se define un objeto con los datos del registro seleccionado.
-    const data = new FormData();
-    data.append('idd', id);
-
-    // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
-    confirmDelete(API_SUBCATEGORIA, data);
+    // Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
+    M.Modal.getInstance(document.getElementById('modal_eliminar_subcategoria')).open();
+    document.getElementById('ide').value = '';
+    document.getElementById('ide').value = id;
+    const DATA = new FormData();
+    DATA.append('ide', id);
+    fetch(API_SUBCATEGORIA + 'readOne', {
+        method: 'post',
+        body: DATA
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
+                    document.getElementById('ide').value = response.dataset.idsubcategoria_producto;
+                    document.getElementById('namefile').value = response.dataset.imagen_subcategoria;
+                    document.getElementById('subcategoria_eliminar').value = response.dataset.subcategoria_producto;
+                    fillSelect(ENDPOINT_CATEGORIA, 'select_subcategoriae', response.dataset.idcategoria_producto);
+                    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.      
+                    M.updateTextFields();
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    });
 }
+
 document.getElementById('eliminar_forms').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    var valor = document.getElementById('idd').value;
-
-    const data = new FormData();
-    data.append('idd', valor);
-    // Se llama a la función para guardar el registro.
-    eliminateRow(API_SUBCATEGORIA, data);
+    var valor = document.getElementById('ide').value;
+    const DATA = new FormData();
+    DATA.append('ide', valor);
+    // Se llama a la función para eliminar el registro.
+    confirmDelete(API_SUBCATEGORIA, DATA, 'modal_eliminar_subcategoria');
 });

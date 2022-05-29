@@ -10,7 +10,6 @@ const SERVER = "http://localhost/LeCameleon/api/";
 *   Parámetros: api (ruta del servidor para obtener los datos).
 *   Retorno: ninguno.
 */
-
 function readRows(api) {
     fetch(api + 'readAll', {
         method: 'get'
@@ -95,38 +94,12 @@ function saveRow(api, action, form, modal) {
     });
 }
 
-function saveRoww(api, action, form, modal) {
-    fetch(api + action, {
-        method: 'post',
-        body: new FormData(document.getElementById(form))
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    sweetAlert(2, response.exception, null);
-                } else {
-                    // Se cierra la caja de dialogo (modal) del formulario.
-                    M.Modal.getInstance(document.getElementById(modal)).close();
-                    // Se cargan nuevamente las filas en la tabla de la vista después de guardar un registro y se muestra un mensaje de éxito.
-                    readRows(api);
-                    sweetAlert(1, response.message, null);
-                }
-            });
-        } else {
-            console.log(request.estado + ' ' + request.statusText);
-        }
-    });
-}
-
 /*
 *   Función para eliminar un registro seleccionado en los mantenimientos de tablas (operación delete). Requiere el archivo sweetalert.min.js para funcionar.
 *   Parámetros: api (ruta del servidor para enviar los datos) y data (objeto con los datos del registro a eliminar)
 *   Retorno: ninguno.
 */
-function confirmDelete(api, data) {
+function confirmDelete(api, data, modal) {
     swal({
         title: 'Advertencia',
         text: '¿Desea eliminar el registro?',
@@ -147,6 +120,7 @@ function confirmDelete(api, data) {
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.estado) {
+                            M.Modal.getInstance(document.getElementById(modal)).close();
                             // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro y se muestra un mensaje de éxito.
                             readRows(api);
                             sweetAlert(1, response.message, null);
@@ -257,7 +231,7 @@ function fillSelect(endpoint, select, selected) {
                 M.FormSelect.init(document.querySelectorAll('select'));
             });
         } else {
-            console.log(request.estado + ' ' + request.estadoText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }
@@ -315,27 +289,4 @@ if(localStorage.getItem('dark-mode') === 'true'){
 }
 else{
     document.body.classList.remove('dark');
-}
-
-function eliminateRow(api, data) {
-    fetch(api + 'delete' , {
-        method: 'post',
-        body: data
-    }).then(function (request) {
-        // Se verifica si la petición es correcta.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria.
-                if (response.estado) {
-                    readRows(api);
-                    sweetAlert(1, response.message, null);
-                } else {
-                    sweetAlert(2, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.estado + ' ' + request.statusText);
-        }
-    });
 }

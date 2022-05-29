@@ -28,7 +28,7 @@ class Subcategoria extends Validator
 
     public function setsubCategoriaProducto($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 60)) {
+        if ($this->validateAlphabetic($value, 1, 60)) {
             $this->subCategoriaProducto = $value;
             return true;
         } else {
@@ -87,22 +87,12 @@ class Subcategoria extends Validator
     /*
     *---------------------------------------------Metodos Query SQL------------------------------------------------
     */
-
-    public function createRow()
+    public function mostrarDatosTabla()
     {
-        $sql = 'INSERT INTO public.tbsubcategoria_producto(
-                subcategoria_producto, imagen_subcategoria, idcategoria_producto)
-                VALUES ( ?, ?, ?)';
-        $params = array($this->subCategoriaProducto,  $this->imagenSubCategoria, $this->idCategoriaProducto);
-        return Database::obtenerSentencia($sql, $params);
-    }
-
-    public function readAll()
-    {
-        $sql = 'SELECT "idsubcategoria_producto", "subcategoria_producto", "imagen_subcategoria", "categoria_producto"
-                FROM tbsubcategoria_producto
-                INNER JOIN tbcategoria ON tbcategoria."idcategoria_producto" = "tbsubcategoria_producto"."idcategoria_producto"
-                ORDER BY "idsubcategoria_producto" DESC';
+        $sql = 'SELECT idsubcategoria_producto, subcategoria_producto, imagen_subcategoria, categoria_producto
+        FROM tbsubcategoria_producto
+        INNER JOIN tbcategoria ON tbcategoria.idcategoria_producto = tbsubcategoria_producto.idcategoria_producto
+        ORDER BY categoria_producto ASC';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
@@ -116,21 +106,19 @@ class Subcategoria extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
-    public function readOneE()
+    public function crearSubcategoria()
     {
-
-        $sql = 'SELECT idsubcategoria_producto, subcategoria_producto, imagen_subcategoria, idcategoria_producto
-                FROM public.tbsubcategoria_producto
-                WHERE idsubcategoria_producto = ?';
-        $params = array($this->idSubCategoriaProducto);
-        return Database::obtenerSentencia($sql, $params);
+        $sql = 'INSERT INTO tbsubcategoria_producto(
+                subcategoria_producto, imagen_subcategoria, idcategoria_producto)
+                VALUES ( ?, ?, ?)';
+        $params = array($this->subCategoriaProducto,  $this->imagenSubCategoria, $this->idCategoriaProducto);
+        return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function updateRow($current_image)
+    public function actualizarSubcategoria($current_image)
     {
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
         ($this->imagenSubCategoria) ? $this->deleteFile($this->getrutaImagenS(), $current_image) : $this->imagenSubCategoria = $current_image;
-
         $sql = 'UPDATE public.tbsubcategoria_producto
                 SET subcategoria_producto=?, imagen_subcategoria=?, idcategoria_producto=?
                 WHERE idsubcategoria_producto=?';
@@ -138,28 +126,33 @@ class Subcategoria extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function deleteRow()
+    public function eliminarSubcategoria()
     {
-        $sql = 'DELETE FROM public.tbsubcategoria_producto
+        $sql = 'DELETE FROM tbsubcategoria_producto
         WHERE idsubcategoria_producto = ?';
         $params = array($this->idSubCategoriaProducto);
         return Database::ejecutarSentencia($sql, $params);
     }
-
-    public function mostrar_datos_tabla(){
-        $sql = 'SELECT "idsubcategoria_producto", "subcategoria_producto", "imagen_subcategoria", "categoria_producto"
-                FROM tbsubcategoria_producto
-                INNER JOIN tbcategoria ON tbcategoria."idcategoria_producto" = "tbsubcategoria_producto"."idcategoria_producto"
-                ORDER BY "idsubcategoria_producto" DESC';
-        $params = null;
-        return Database::obtenerSentencias($sql, $params);
-    }
     
     public function obtener_producto() {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
-                FROM public.tbcategoria
+                FROM tbcategoria
                 ORDER BY idcategoria_producto DESC';
         $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    /*
+    *   Métodos para search
+    */
+    public function buscarSubcategorias($value)
+    {
+        $sql = 'SELECT idsubcategoria_producto, subcategoria_producto, imagen_subcategoria, categoria_producto
+        FROM tbsubcategoria_producto
+        INNER JOIN tbcategoria ON tbcategoria.idcategoria_producto = tbsubcategoria_producto.idcategoria_producto
+        WHERE subcategoria_producto ILIKE ? OR categoria_producto ILIKE ?
+        ORDER BY categoria_producto ASC';
+        $params = array("%$value%","%$value%");
         return Database::obtenerSentencias($sql, $params);
     }
 }

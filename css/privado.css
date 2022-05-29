@@ -618,6 +618,15 @@ footer {
     color: #777676;
 }
 
+#buscador .input-field input[type=search] {
+    padding-left: 2% !important;
+    width: 100%;
+}
+
+nav .input-field{
+    width: 100%;
+}
+
 #thesearch{
     display: flex;
     flex-direction: row;
@@ -1042,11 +1051,11 @@ footer {
 }
 
 /*Colores de las tarjetas dependiendo de su estado*/
-#retrasado a{
+#pendiente a{
     background-color: #d32f2f;
     width: 20px;
     height: 100%;
-    position:absolute;
+    position: absolute;
 }
 
 #disponible a{
@@ -1166,6 +1175,18 @@ table.striped>tbody>tr:nth-child(odd) {
     margin-left: -25%;
 }
 
+#modal_agregar_subcategoria{
+    height: 300px;
+}
+
+#modal_modificar_subcategoria{
+    height: 300px;
+}
+
+#modal_eliminar_subcategoria{
+    height: 300px;
+}
+
 /*------------------------------------------Administrar Empleados------------------------------------------*/
 
 #boton_agregar_centrado{
@@ -1174,6 +1195,14 @@ table.striped>tbody>tr:nth-child(odd) {
 
 #boton_agregar_centrado{
     text-align: center;
+}
+
+#estado_usuario_cliente .btn{
+    background-color: #36465d;
+}
+
+#modificar_modal_usuarioC{
+    width: 30%;
 }
 
 /*------------------------------------------Administrar Marca------------------------------------------*/

@@ -51,7 +51,6 @@ function fillTable(dataset) {
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
-        //////////////Tabla////////////////
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
         <tr>
@@ -71,7 +70,7 @@ function fillTable(dataset) {
     // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
-//////////// Buscador.///////////////
+
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar.
 document.getElementById('thesearch').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.

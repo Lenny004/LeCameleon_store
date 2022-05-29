@@ -37,6 +37,19 @@
                 <div class="col s12 m12 l12 xl12" id="titulo_buscador">
                     <h3>Administrar Marcas</h3>
                     <div id="buscador">
+                        <nav class="grey lighten-2">
+                            <div class="nav-wrapper">
+                                <form method="post" id="thesearch">
+                                    <div class="input-field">
+                                        <input name="buscador_input" id="buscador_input" type="search" required
+                                            type="text">
+                                    </div>
+                                    <button id="boton_buscador" class="tooltipped" data-position="top" data-tooltip="Buscar por nombre"
+                                        type="submit"><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                        height="22"></button>
+                                </form>
+                            </div>
+                        </nav>
                         <a onclick="openCreate()" class="waves-effect waves-light btn modal-trigger boton_verde">Agregar
                             Marca +</a>
                     </div>
@@ -44,7 +57,7 @@
                 <!-- Modal Agregar Marca -->
                 <div id="modal_agregar_marca" class="modal">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" method="post" id="Agregar_forms">
+                        <form enctype="multipart/form-data" method="post" id="agregar_forms">
                             <div id="titulo_modal2">
                                 <div>
                                     <h4>Agregar Marca</h4>
@@ -144,7 +157,7 @@
                                     </div>
                                 </div>
                                 <div class="input-field col col s8 m8 l8 xl8">
-                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input class="hide" type="number" id="ide" name="ide">
                                     <input id="marca_eliminar" name="marca_eliminar" type="text" class="validate"
                                         required disabled>
                                     <label class="active" for="marca_eliminar">Nombre Marca</label>
@@ -163,7 +176,7 @@
                 <thead>
                     <tr>
                         <th>N° de marca</th>
-                        <th>nombre Marca</th>
+                        <th>Nombre Marca</th>
                         <th>Imagen Marca</th>
                         <th>Acciones</th>
                     </tr>

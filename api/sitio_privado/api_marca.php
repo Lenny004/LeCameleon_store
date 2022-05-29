@@ -12,6 +12,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'message' => null, 'exception' => null, 'dataset' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    if (isset($_SESSION['idusuario_e'])) {   
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
@@ -23,102 +24,104 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-                case 'create':
-                    $_POST = $admin_marca->validateForm($_POST);
-                    if (!$admin_marca->setnombreMarca($_POST['marca_agregar'])) {
-                        $result['exception'] = 'Nombre incorrecto';
-                    } elseif (!is_uploaded_file($_FILES['archivo']['tmp_name'])) {
-                        $result['exception'] = 'Seleccione una imagen';
-                    } elseif (!$admin_marca->setimagenMarca($_FILES['archivo'])) {
-                        $result['exception'] = $admin_marca->getFileError();
-                    } elseif ($admin_marca->createRow()) {
+            case 'search':
+                $_POST = $admin_marca->validateForm($_POST);
+                if ($_POST['buscador_input'] == '') {
+                    $result['exception'] = 'Ingrese un valor para buscar';
+                } elseif ($result['dataset'] = $admin_marca->buscarMarcas($_POST['buscador_input'])) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Marca encontrada';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay coincidencias';
+                }
+                break;
+            case 'readOne':
+                if (!$admin_marca->setidMarca($_POST['ide'])) {
+                    $result['exception'] = 'Categoría incorrecta';
+                } elseif ($result['dataset'] = $admin_marca->readOne()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'Categoría inexistente';
+                }
+                break;
+            case 'create':
+                $_POST = $admin_marca->validateForm($_POST);
+                if (!$admin_marca->setnombreMarca($_POST['marca_agregar'])) {
+                    $result['exception'] = 'Nombre incorrecto';
+                } elseif (!is_uploaded_file($_FILES['archivo']['tmp_name'])) {
+                    $result['exception'] = 'Seleccione una imagen';
+                } elseif (!$admin_marca->setimagenMarca($_FILES['archivo'])) {
+                    $result['exception'] = $admin_marca->getFileError();
+                } elseif ($admin_marca->crearMarca()) {
+                    $result['estado'] = 1;
+                    if ($admin_marca->saveFile($_FILES['archivo'], $admin_marca->getrutaImagen(), $admin_marca->getimagenMarca())) {
+                        $result['message'] = 'Categoría creada correctamente';
+                    } else {
+                        $result['message'] = 'Categoría creada pero no se guardó la imagen';
+                    }
+                } else {
+                    $result['exception'] = Database::getException();
+                }
+                break;
+            case 'update':
+                $_POST = $admin_marca->validateForm($_POST);
+                if (!$admin_marca->setidMarca($_POST['ide'])) {
+                    $result['exception'] = 'Marca incorrecta';
+                } elseif (!$data = $admin_marca->readOne()) {
+                    $result['exception'] = 'Marca inexistente';
+                } elseif (!$admin_marca->setnombreMarca($_POST['marca_modificar'])) {
+                    $result['exception'] = 'Nombre incorrecto';
+                } elseif (!is_uploaded_file($_FILES['archivop']['tmp_name'])) {
+                    if ($admin_marca->actualizarMarca($data['imagen_marca'])) {
                         $result['estado'] = 1;
-                        if ($admin_marca->saveFile($_FILES['archivo'], $admin_marca->getrutaImagen(), $admin_marca->getimagenMarca())) {
-                            $result['message'] = 'Categoría creada correctamente';
-                        } else {
-                            $result['message'] = 'Categoría creada pero no se guardó la imagen';
-                        }
+                        $result['message'] = 'Marca modificada correctamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }
-
-                    break;
-                case 'readOne':
-                    if (!$admin_marca->setidMarca($_POST['ide'])) {
-                        $result['exception'] = 'Categoría incorrecta';
-                    } elseif ($result['dataset'] = $admin_marca->readOne()) {
-                        $result['estado'] = 1;
-                    } elseif (Database::getException()) {
-                        $result['exception'] = Database::getException();
+                } elseif (!$admin_marca->setimagenMarca($_FILES['archivop'])) {
+                    $result['exception'] = $admin_marca->getFileError();
+                } elseif ($admin_marca->actualizarMarca($data['imagen_marca'])) {
+                    $result['estado'] = 1;
+                    if ($admin_marca->saveFile($_FILES['archivop'], $admin_marca->getrutaImagen(), $admin_marca->getimagenMarca())) {
+                        $result['message'] = 'Categoría modificada correctamente';
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['message'] = 'Categoría modificada pero no se guardó la imagen';
                     }
-                    break;
-
-                case 'update':
-                    $_POST = $admin_marca->validateForm($_POST);
-                    if (!$admin_marca->setidMarca($_POST['ide'])) {
-                        $result['exception'] = 'Marca incorrecta';
-                    } elseif (!$data = $admin_marca->readOne()) {
-                        $result['exception'] = 'Marca inexistente';
-                    } elseif (!$admin_marca->setnombreMarca($_POST['marca_modificar'])) {
-                        $result['exception'] = 'Nombre incorrecto';
-                    } elseif (!is_uploaded_file($_FILES['archivop']['tmp_name'])) {
-                        if ($admin_marca->updateRow($data['imagen_marca'])) {
-                            $result['estado'] = 1;
-                            $result['message'] = 'Marca modificada correctamente';
-                        } else {
-                            $result['exception'] = Database::getException();
-                        }
-                    } elseif (!$admin_marca->setimagenMarca($_FILES['archivop'])) {
-                        $result['exception'] = $admin_marca->getFileError();
-                    } elseif ($admin_marca->updateRow($data['imagen_marca'])) {
-                        $result['estado'] = 1;
-                        if ($admin_marca->saveFile($_FILES['archivop'], $admin_marca->getrutaImagen(), $admin_marca->getimagenMarca())) {
-                            $result['message'] = 'Categoría modificada correctamente';
-                        } else {
-                            $result['message'] = 'Categoría modificada pero no se guardó la imagen';
-                        }
+                } else {
+                    $result['exception'] = Database::getException();
+                }
+                break;
+            case 'delete':
+                if (!$admin_marca->setidMarca($_POST['ide'])) {
+                    $result['exception'] = 'Categoría incorrecta';
+                } elseif (!$data = $admin_marca->readOne()) {
+                    $result['exception'] = 'Categoría inexistente';
+                } elseif ($admin_marca->eliminarMarca()) {
+                    $result['estado'] = 1;
+                    if ($admin_marca->deleteFile($admin_marca->getrutaImagen(), $data['imagen_marca'])) {
+                        $result['message'] = 'Categoría eliminada correctamente';
                     } else {
-                        $result['exception'] = Database::getException();
+                        $result['message'] = 'Categoría eliminada pero no se borró la imagen';
                     }
-                    break;
-
-                    case 'readOneE':
-                        if (!$admin_marca->setidMarca($_POST['idd'])) {
-                            $result['exception'] = 'Categoría incorrecta';
-                        } elseif ($result['dataset'] = $admin_marca->readOne()) {
-                            $result['estado'] = 1;
-                        } elseif (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Categoría inexistente';
-                        }
-                        break;
-
-                case 'delete':
-                    if (!$admin_marca->setidMarca($_POST['idd'])) {
-                        $result['exception'] = 'Categoría incorrecta';
-                    } elseif (!$data = $admin_marca->readOne()) {
-                        $result['exception'] = 'Categoría inexistente';
-                    } elseif ($admin_marca->deleteRow()) {
-                        $result['estado'] = 1;
-                        if ($admin_marca->deleteFile($admin_marca->getLink(), $data['imagen_marca'])) {
-                            $result['message'] = 'Categoría eliminada correctamente';
-                        } else {
-                            $result['message'] = 'Categoría eliminada pero no se borró la imagen';
-                        }
-                    } else {
-                        $result['exception'] = Database::getException();
-                    }
-                    break;
-
+                } else {
+                    $result['exception'] = Database::getException();
+                }
+                break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
+                break;
         }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.
         print(json_encode($result));
-} 
+    } else {
+        print(json_encode('Acceso denegado'));
+    }    
+} else {
+    print(json_encode('Recurso no disponible'));
+}

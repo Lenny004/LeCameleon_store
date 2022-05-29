@@ -12,10 +12,11 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    if (isset($_SESSION['idusuario_e'])) {    
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                if ($result['dataset'] = $usuario->readAll()) {
+                if ($result['dataset'] = $usuario->obtenerUsuarios()) {
                     $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
@@ -23,8 +24,35 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-                
+            case 'obtenerEstadoU':
+                if ($result['dataset'] = $usuario->obtenerEstadoUsuarioE()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay datos registrados';
+                }
+                break;
+            case 'obtenerTipoU':
+                if ($result['dataset'] = $usuario->obtenerTipoUsuarioE()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay datos registrados';
+                }
+                break;
+            case 'readOne':
+                if (!$usuario->setId($_POST['ide'])) {
+                    $result['exception'] = 'Usuario empleado incorrecto';
+                } elseif ($result['dataset'] = $usuario->LeerUnUsuario()) {
+                    $result['estado'] = 1;
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'Usuario inexistente';
+                }
+                break;
             case 'search':
                 $_POST = $usuario->validateForm($_POST);
                 if ($_POST['search'] == '') {
@@ -38,10 +66,10 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay coincidencias';
                 }
                 break;
-            case 'create':
+            case 'crearUsuarioE':
                 $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setUsuario($_POST['usuario'])) {
-                    $result['exception'] = 'Usuario incorrecto';
+                if (!$usuario->setUsuario($_POST['usuario_e'])) {
+                    $result['exception'] = 'El usuario empleado es incorrecto';
                 } elseif (!$usuario->setContrasena($_POST['contrasena'])) {
                     $result['exception'] = 'Contraseña incorrecta';
                 } elseif (!isset($_POST['empleado'])) {
@@ -63,26 +91,11 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
-                
-
-            case 'readOne':
-                if (!$usuario->setId($_POST['ide'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif ($result['dataset'] = $usuario->readOne()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'Usuario inexistente';
-                }
-                break;
-
-            case 'update':
+            case 'actualizarUsuarioE':
                 $_POST = $usuario->validateForm($_POST);
                 if (!$usuario->setId($_POST['ide'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif (!$data = $usuario->readOne()) {
+                    $result['exception'] = 'Usuario empleado incorrecto';
+                } elseif (!$data = $usuario->LeerUnUsuario()) {
                     $result['exception'] = 'Usuario inexistente';
                 } elseif (!$usuario->setUsuario($_POST['usuarioeM'])) {
                     $result['exception'] = 'Usuario incorrecto';
@@ -91,35 +104,22 @@ if (isset($_GET['action'])) {
                 } elseif (!$usuario->setEmpleado($_POST['empleadoM'])) {
                     $result['exception'] = 'Seleccion un empleado';
                 } elseif (!$usuario->setTipo($_POST['tipoM'])) {
-                    $result['exception'] = 'Seleccion un tipo';
+                    $result['exception'] = 'Seleccion un tipo de usuario';
                 } elseif (!$usuario->setEstado($_POST['estadoM'])) {
-                    $result['exception'] = 'Seleccion un estado';
-                } elseif ($usuario->updateRow()) {
+                    $result['exception'] = 'Seleccion un estado del usuario';
+                } elseif ($usuario->actualizarUsuarioEmpleado()) {
                     $result['estado'] = 1;
-                    $result['message'] = 'Usuario modificado correctamente';
+                    $result['message'] = 'Usuario empleado modificado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
-            case 'readOneE':
-                if (!$usuario->setId($_POST['idd'])) {
-                    $result['exception'] = 'Usuario incorrecta';
-                } elseif ($result['dataset'] = $usuario->readOne()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'Usuario inexistente';
-                    }
-                break;
-
             case 'delete':
-                if (!$usuario->setId($_POST['idd'])) {
+                if (!$usuario->setId($_POST['ide'])) {
                     $result['exception'] = 'Usuario incorrecto';
-                } elseif (!$data = $usuario->readOneE()) {
+                } elseif (!$data = $usuario->LeerUnUsuario()) {
                     $result['exception'] = 'Usuario inexistente';
-                } elseif ($usuario->deleteRow()) {
+                } elseif ($usuario->eliminarUsuarioEmpleado()) {
                     $result['estado'] = 1;
                     $result['message'] = 'Usuario eliminado correctamente';
                 } else {
@@ -133,4 +133,9 @@ if (isset($_GET['action'])) {
         header('content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.
         print(json_encode($result));
-    }
+    } else {
+        print(json_encode('Acceso denegado'));
+    }    
+} else {
+    print(json_encode('Recurso no disponible'));
+}

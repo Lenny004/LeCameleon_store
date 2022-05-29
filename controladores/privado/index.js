@@ -1,10 +1,10 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_USUARIOS = SERVER + "sitio_privado/api_login.php?action=";
+const API_LOGIN = SERVER + "sitio_privado/api_login.php?action=";
 
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener("DOMContentLoaded", function () {
     // Petición para consultar si existen usuarios registrados.
-    fetch(API_USUARIOS + "verificarPrimerUso", {
+    fetch(API_LOGIN + "verificarPrimerUso", {
         method: "get",
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
@@ -35,7 +35,7 @@ document.getElementById("inicio_sesion_form").addEventListener("submit", functio
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Petición para revisar si el administrador se encuentra registrado.
-    fetch(API_USUARIOS + "logIn", {
+    fetch(API_LOGIN + "logIn", {
         method: "post",
         body: new FormData(document.getElementById("inicio_sesion_form"))
     }).then(function (request) {
