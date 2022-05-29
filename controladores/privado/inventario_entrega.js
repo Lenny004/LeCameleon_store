@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función para cargar los datos en la tabla
-
 function fillTable(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
@@ -108,7 +107,7 @@ document.getElementById("buscador_inventario").addEventListener("keyup", functio
 });
 
 //Método para cargar los datos en el formulario
-document.getElementById("buscador_registro").addEventListener("keyup", function () {
+document.getElementById("thesearch").addEventListener("submit", function () {
     //Se crea el dato de tipo formulario a enviar
     let datos = new FormData();
     //Se crea la variable para obtener la información del buscador
@@ -124,11 +123,9 @@ document.getElementById("buscador_registro").addEventListener("keyup", function 
         if (request.ok) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
-                //Se crea la variable donde se guardarán los datos
-                let data = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    //Se cargan los datos en el fomrulario
+                if (response.estado){
+                    //Se cargan los datos en el formulario
                     document.getElementById("id_inventario").value = response.dataset.idinventario;
                     document.getElementById("cantidad_formulario").value =
                         response.dataset.cantidad;

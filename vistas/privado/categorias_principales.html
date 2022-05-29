@@ -46,7 +46,7 @@
                 <!-- Modal Agregar-->
                 <div id="modal_agregar_categoria" class="modal">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" method="post" id="Agregar_forms">
+                        <form enctype="multipart/form-data" method="post" id="agregar_forms">
                             <div id="titulo_modal2">
                                 <div>
                                     <h4>Agregar Categoria</h4>
@@ -64,13 +64,13 @@
                                             <input id="archivo" name="archivo" type="file">
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text">
+                                            <input class="file-path validate" type="text" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="input-field col col s8 m8 l8 xl8">
-                                    <input id="categoria_agregar" name="categoria_agregar" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre Categoria</label>
+                                    <input id="categoria_agregar" name="categoria_agregar" type="text" class="validate" required>
+                                    <label class="active" for="categoria_agregar">Nombre Categoria</label>
                                 </div>
                                 <div class="modal-footer boton_agregar_categoria">
                                     <button type="submit" class="btn boton_verde">Agregar
@@ -102,16 +102,15 @@
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input id="nombrearchivo" name="nombrearchivo" class="file-path validate"
-                                                type="text">
+                                                type="text" required>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="input-field col col s8 m8 l8 xl8">
                                     <input class="hide" type="number" id="ide" name="ide">
                                     <input id="categoria_modificar" name="categoria_modificar" type="text"
-                                        class="validate">
-                                    <label class="active" for="first_name2">Nombre Categoria</label>
+                                        class="validate" required>
+                                    <label class="active" for="categoria_modificar">Nombre Categoria</label>
                                 </div>
                                 <div class="modal-footer boton_modificar_categoria">
                                     <button type="submit" class="waves-effect waves-light btn blue">Modificar
@@ -148,12 +147,12 @@
                                     </div>
                                 </div>
                                 <div class="input-field col col s8 m8 l8 xl8">
-                                    <input class="hide" type="number" id="idd" name="idd">
+                                    <input class="hide" type="number" id="ide" name="ide">
                                     <input id="categoria_eliminar" name="categoria_eliminar" type="text"
                                         class="validate" required disabled>
                                     <label class="active" for="categoria_eliminar">Nombre Categoria</label>
                                 </div>
-                                <div class="modal-footer boton_modificar_categoria">
+                                <div class="modal-footer">
                                     <button type="submit" class="red btn">Eliminar
                                         Categoría</button>
                                 </div>

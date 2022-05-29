@@ -26,7 +26,7 @@ class Categorias extends Validator
 
     public function setCategoria($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
+        if ($this->validateAlphabetic($value, 1, 50)) {
             $this->categoria = $value;
             return true;
         } else {
@@ -71,7 +71,7 @@ class Categorias extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function createRow()
+    public function crearCategoria()
     {
         $sql = 'INSERT INTO tbcategoria(categoria_producto, imagen_categoria)
                 VALUES (?, ?)';
@@ -79,7 +79,7 @@ class Categorias extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function readAll()
+    public function mostrarDatosTabla()
     {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
                 FROM tbcategoria
@@ -96,21 +96,11 @@ class Categorias extends Validator
         $params = array($this->id);
         return Database::obtenerSentencia($sql, $params);
     }
-    public function readOneE()
-    {
-        $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
-                FROM tbcategoria
-                WHERE idcategoria_producto = ?';
-        $params = array($this->id);
-        return Database::obtenerSentencia($sql, $params);
-    }
-
 
     public function updateRow($current_image)
     {
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
         ($this->imagen) ? $this->deleteFile($this->getLink(), $current_image) : $this->imagen = $current_image;
-
         $sql = 'UPDATE tbcategoria
                 SET categoria_producto=?, imagen_categoria=?
                 WHERE idcategoria_producto=?';

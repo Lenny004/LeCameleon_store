@@ -152,7 +152,9 @@ class Existencias extends Validator
     public function readAll()
     {
         //se hace un inner join en este caso para poder unir tb para el funcionamiento de esta como la de producto, estado producto, marca, subcategoria, distribuidor, inventario y se ordenan por el nombre del producto
-        $sql = 'SELECT tbproducto.idproducto, nombre_producto, estado_producto, nombre_marca, subcategoria_producto, nombre_distribuidor, existencias, cantidad, precio_producto
+        //Se hace también Left join a la tabal inventario, porque a pesar que no exista nada en esta tabla, se debe mostrar lo demás
+        //COALESCE Sirve para reemplazar en caso sea null y necesito que me lo reemplace por un valor por defecto (0) y le colocamos un as para identificar el valor de la columna
+        $sql = 'SELECT tbproducto.idproducto, nombre_producto, estado_producto, nombre_marca, subcategoria_producto, nombre_distribuidor, existencias, COALESCE(cantidad,0) as cantidad, precio_producto
                 FROM tbproducto 
                 INNER JOIN tbestado_producto
                 ON tbproducto.idestado_producto = tbestado_producto.idestado_producto

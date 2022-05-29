@@ -14,7 +14,7 @@ if (isset($_GET['action'])) {
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idusuario_e'])) {
         $result['session'] = 1;
-        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+        // Se compara la acción a realizar cuando el administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'cerrarSesion':
                 if (session_destroy()) {
@@ -76,8 +76,12 @@ if (isset($_GET['action'])) {
                 else {
                     //Si el número de intentos es menor a 5
                     if ($usuario->getIntento() < 5){
+                        //Validamos si tiene intentos pero si posee un estado 2 (inactivo) es orque el empleado ha sido deshabilitado
+                        if ($usuario->getEstadoU() == 2){
+                            $result['exception'] = 'El usuario esta inactivo';
+                        }
                         //Se agrega un intento al usuario que está ingresando
-                        if ($usuario->IntentosUsuarioEmpleado()){
+                        else if ($usuario->IntentosUsuarioEmpleado()){
                             $result['exception'] = 'Contraseña incorrecta. Tienes ' . (5 - $usuario->getIntento()) . ' intentos restantes';
                         }
                         //Si ocurre un fallo al actualizar

@@ -6,12 +6,14 @@
     require_once('../modelo/inventario_entrega.php');
 
 if(isset($_GET['action'])) {
-        //Se crea o reiniciar una sesión
-        session_start();
-        //Se instancia la clase correspondiente en la variable
-        $inventario = new inventario_entrega;
-        //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
-        $result = array('estado'=>0, 'message'=>null, 'dataset' =>null, 'exception'=> null);
+    //Se crea o reiniciar una sesión
+    session_start();
+    //Se instancia la clase correspondiente en la variable
+    $inventario = new inventario_entrega;
+    //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
+    $result = array('estado'=>0, 'message'=>null, 'dataset' =>null, 'exception'=> null);
+    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    if (isset($_SESSION['idusuario_e'])) {    
         //Se escoge el proceso que se ejecutará en el modelo
         switch($_GET['action']){
             case 'readAll':
@@ -30,23 +32,18 @@ if(isset($_GET['action'])) {
                 if(!$inventario->set_id_producto($_POST['id_producto']))
                 {
                     $result['exception'] = 'Hay problemas el producto';
-
                 }elseif(!$inventario->set_cantidad($_POST['cantidad_formulario']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la cantidad';
-
                 }elseif(!$inventario->set_precio($_POST['precio']))
                 {
                     $result['exception'] = 'Hay problemas al cargar el precio';
-
                 }elseif(!$inventario->set_fecha_entrega($_POST['fecha_entrega']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la fecha de entrega';
-
                 }elseif(!$inventario->set_fecha_inicio($_POST['fecha_inicio']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la fecha de inicio';
-
                 }elseif($result['dataset'] = $inventario->crear_entrega())
                 {
                     $result['estado'] = 1;
@@ -66,11 +63,10 @@ if(isset($_GET['action'])) {
                 }
                 break;
             case 'buscador':
-                 $_POST = $inventario->validateForm($_POST);
+                $_POST = $inventario->validateForm($_POST);
                 if($result['dataset'] = $inventario->buscar($_POST['buscador']))
                 {
                     $result['estado'] = 1;
-
                 }elseif(Database::getException())
                 {
                     $result['exception'] = Database::getException();
@@ -79,11 +75,10 @@ if(isset($_GET['action'])) {
                 }
                 break;
             case 'seleccionar':
-                 $_POST = $inventario->validateForm($_POST);
+                $_POST = $inventario->validateForm($_POST);
                 if($result['dataset'] = $inventario->buscador_seleccionador($_POST['buscador']))
                 {
                     $result['estado'] = 1;
-
                 }elseif(Database::getException())
                 {
                     $result['exception'] = Database::getException();
@@ -96,27 +91,21 @@ if(isset($_GET['action'])) {
                 if(!$inventario->set_id_producto($_POST['id_producto']))
                 {
                     $result['exception'] = 'Hay problemas el producto';
-
                 }elseif(!$inventario->set_id_inventario($_POST['id_inventario']))
                 {
                     $result['exception'] = 'Hay problemas al cargar el identificador';
-
                 }elseif(!$inventario->set_cantidad($_POST['cantidad_formulario']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la cantidad';
-
                 }elseif(!$inventario->set_precio($_POST['precio']))
                 {
                     $result['exception'] = 'Hay problemas al cargar el precio';
-
                 }elseif(!$inventario->set_fecha_entrega($_POST['fecha_entrega']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la fecha de entrega';
-
                 }elseif(!$inventario->set_fecha_inicio($_POST['fecha_inicio']))
                 {
                     $result['exception'] = 'Hay problemas al cargar la fecha de inicio';
-
                 }elseif($result['dataset'] = $inventario->actualizar_entrega())
                 {
                     $result['estado'] = 1;
@@ -124,12 +113,17 @@ if(isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
+            default:
+                $result['exception'] = 'Acción no disponible dentro de la sesión';
+                break;
         }
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador.
-    print(json_encode($result));
-}else{
-
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador.
+        print(json_encode($result));
+    } else {
+        print(json_encode('Acceso denegado'));
+    }    
+} else {
+    print(json_encode('Recurso no disponible'));
 }
-?>

@@ -37,17 +37,19 @@
                 <div class="col s12 m12 l12 xl12" id="titulo_buscador">
                     <h3>Administrar proveedores</h3>
                     <div id="buscador">
-                        <nav class="grey lighten-2 col s5 m5 l5 xl5">
+                        <nav class="grey lighten-2">
                             <div class="nav-wrapper">
                                 <form method="post" id="thesearch">
                                     <div class="input-field">
-                                        <input name="search" id="search" type="search" required require type="text">
+                                        <input name="buscador_input" id="buscador_input" type="search" required
+                                            type="text">
                                     </div>
+                                    <button id="boton_buscador" class="tooltipped" data-position="top" data-tooltip="Buscar por nombre"
+                                        type="submit"><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                        height="22"></button>
+                                </form>
                             </div>
                         </nav>
-                        <button id="boton_buscador" class="btn-floating " data-tooltip="Buscar" type="submit"
-                            name="action"> <i class="material-icons">search</i></button>
-                        </form>
                         <a onclick="openCreate()"
                             class="waves-effect waves-light btn modal-trigger boton_verde col s4 m4 l4 xl4">Agregar
                             Empleado +</a>
@@ -69,12 +71,13 @@
                             <div class="row">
                                 <div class="divider"></div>
                                 <div class="col s12 m12 l6 xl6">
-                                    <input value="" id="nombre" name="nombre" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre del proveedor</label>
-                                    <input id="direecion" name="direccion" type="text" class="validate">
-                                    <label class="active" for="first_name2">Dirección proveedor</label>
-                                    <input value="" id="telefono" name="telefono" type="text" class="validate">
-                                    <label class="active" for="first_name2">Teléfono del proveedor</label>
+                                    <input value="" id="nombre" name="nombre" type="text" class="validate" required>
+                                    <label class="active" for="nombre">Nombre del proveedor</label>
+                                    <input id="direcion" name="direccion" type="text" class="validate" required>
+                                    <label class="active" for="direccion">Dirección proveedor</label>
+                                    <input value="" id="telefono" name="telefono" type="text" class="validate"
+                                        placeholder="+000-00000000" required>
+                                    <label class="active" for="telefono">Teléfono del proveedor</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -104,13 +107,13 @@
                                 <div class="divider"></div>
                                 <div class="col s12 m12 l6 xl6">
                                     <input class="hide" type="number" id="ide" name="ide">
-                                    <input id="nombreM" name="nombreM" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre del proveedor</label>
-                                    <input id="direecionM" name="direccionM" type="text" class="validate">
-                                    <label class="active" for="first_name2">Dirección proveedor</label>
-                                    <input id="telefonoM" name="telefonoM" type="text" placeholder="0000-0000"
-                                        class="validate">
-                                    <label class="active" for="first_name2">Teléfono</label>
+                                    <input id="nombreM" name="nombreM" type="text" class="validate" required>
+                                    <label class="active" for="nombreM">Nombre del proveedor</label>
+                                    <input id="direccionM" name="direccionM" type="text" class="validate" required>
+                                    <label class="active" for="direccionM">Dirección proveedor</label>
+                                    <input id="telefonoM" name="telefonoM" type="text" placeholder="+000-00000000"
+                                        class="validate" required>
+                                    <label class="active" for="telefonoM">Teléfono</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -138,20 +141,20 @@
                             <div class="row">
                                 <div class="divider"></div>
                                 <div class="col s12 m12 l6 xl6">
-                                    <input class="hide" type="number" id="idd" name="idd">
-                                    <input id="nombreD" name="nombreD" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre del proveedor</label>
-                                    <input id="apellidoD" name="direccionD" type="text" class="validate">
-                                    <label class="active" for="first_name2">Dirección del proveedor</label>
-                                    <input id="telefonoD" name="telefonoD" type="text" class="validate">
-                                    <label class="active" for="first_name2">Teléfono</label>
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="nombreD" name="nombreD" type="text" class="validate" disabled required>
+                                    <label class="active" for="nombreD">Nombre del proveedor</label>
+                                    <input id="direccionD" name="direccionD" type="text" class="validate" disabled required>
+                                    <label class="active" for="direccionD">Dirección del proveedor</label>
+                                    <input id="telefonoD" name="telefonoD" type="text" class="validate"
+                                        placeholder="+000-00000000" disabled required>
+                                    <label class="active" for="telefonoD">Teléfono</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
                                     <button type="submit" class="waves-effect red btn">Eliminar
                                         proveedor</button>
-
                                 </div>
                             </div>
                         </form>
@@ -164,7 +167,7 @@
                     <tr>
                         <th>Nombre proveedor</th>
                         <th>Dirección proveedor</th>
-                        <th>Telefono proveedor</th>
+                        <th>Teléfono proveedor</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

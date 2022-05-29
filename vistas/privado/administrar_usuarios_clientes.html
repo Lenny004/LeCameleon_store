@@ -31,10 +31,11 @@
     </ul>
     <!--Contenido del sitio web-->
     <main>
+        <!--Tarjetas de Categorias-->
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 xl12" id="titulo_buscador">
-                    <h4>Visualizar Existencias</h4>
+                    <h3>Administrar Usuarios Clientes</h3>
                     <div id="buscador">
                         <nav class="grey lighten-2">
                             <div class="nav-wrapper">
@@ -49,27 +50,59 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col s12 m12 l12 xl12" id="tabla">
-                    <table class="centered striped teal darken-3 highlight responsive-table">
-                        <!--Columnas de la tabla-->
-                        <thead>
-                            <tr>
-                                <th>Nombre Producto</th>
-                                <th>Estado</th>
-                                <th>Marca</th>
-                                <th>SubCategoria</th>
-                                <th>Distribuidor</th>
-                                <th>Existencias</th>
-                                <th>Cantidad en inventario</th>
-                                <th>Precio</th>
-                            </tr>
-                        </thead>
-                        <!--Filas de la tabla con sus elementos-->
-                        <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
-                        <tbody id="existencias"></tbody>
-                    </table>
+            </div>
+            <!-- Modal Modificar -->
+            <div id="modificar_modal_usuarioC" class="modal">
+                <div class="modal-content">
+                    <form method="post" id="form_modificar">
+                        <div id="titulo_modal2">
+                            <div>
+                                <h4>Modificar Estado del Usuario</h4>
+                            </div>
+                            <div>
+                                <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="divider"></div>
+                            <div class="col s12 m12 l12 xl12">
+                                <input class="hide" type="number" id="ide" name="ide">
+                                <input id="usuarioC" name="usuarioC" type="text" class="validate" readonly="readonly">
+                                <label class="active" for="usuarioC">Usuario del cliente</label>
+                            </div>
+                            <div class="col s12 m12 l12 xl12">
+                                <div class="input-field col s12">
+                                    <div class="input-field col s12">
+                                        <select id="estadoUsuarioC" name="estadoUsuarioC">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                <button type="submit" class="waves-effect btn boton_azul">Modificar
+                                    Usuario Cliente</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+            <!--Table-->
+            <table class="centered striped teal darken-3 highlight responsive-table" id="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario Cliente</th>
+                        <th>Estado usuario</th>
+                        <th>Modificar Estado</th>
+                    </tr>
+                </thead>
+                <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                <tbody id="tbusuarioc"></tbody>
+            </table>
+        </div>
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
@@ -87,18 +120,19 @@
                 </div>
             </div>
             <div id="sitio_privado">
-                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
-                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
                         alt="web" height="45"></a>
             </div>
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/privado/online.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/inventario_existencias.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/administrar_usuarios_clientes.js"></script>
 </body>
 
 </html>

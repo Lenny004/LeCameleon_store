@@ -1,3 +1,10 @@
+// Constantes para establecer las rutas y parámetros de comunicación con la API.
+const API_USUARIO = SERVER + 'sitio_privado/api_usuarios.php?action=';
+// Estas constantes son para establecer conexión con los SELECT
+const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleados.php?action=readAll';
+const ENDPOINT_TIPOU = SERVER + 'sitio_privado/api_usuarios.php?action=obtenerTipoU';
+const ENDPOINT_ESTADOU = SERVER + 'sitio_privado/api_usuarios.php?action=obtenerEstadoU';
+
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
     let menu = document.getElementById("menu");
@@ -26,20 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let options = { indicators: false, height: 500 };
     M.Slider.init(document.querySelectorAll('.slider'), options);
 
-    //Instaciar el modal o pow up
-    M.Modal.init(document.querySelectorAll('.modal'));
+    // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
+    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
 
-    M.Modal.init(document.querySelectorAll('.moda2'));
-
-    M.Modal.init(document.querySelectorAll('.moda3'));
+    // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 });
-
-// Constantes para establecer las rutas y parámetros de comunicación con la API.
-const API_USUARIO = SERVER + 'sitio_privado/usuarios.php?action=';
-// Estas constantes son para establecer conexión con lo SELECT
-const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleado.php?action=readAll';
-const ENDPOINT_TIPOU = SERVER + 'sitio_privado/api_tipousuario.php?action=readAll';
-const ENDPOINT_ESTADOU = SERVER + 'sitio_privado/api_estadousuario.php?action=readAll';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -67,27 +66,26 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td>${row.usuarioE}</td>
-                <td>${row.nombreEmpleado}</td>
+                <td>${row.idusuario_e}</td>
+                <td>${row.usuario_e}</td>
+                <td>${row.nombre_empleado + " " + row.apellido_empleado}</td>
                 <td>${row.tipo_usuario_e}</td>
                 <td>${row.estado_usuario_e}</td>
                 <td>
-                    <a onclick="openUpdate(${row.idusuario_e})" class="btn green tooltipped" data-tooltip="Actualizar">
-                    <i class="large material-icons">mode_edit</i>
-                    </a>
-                    <a onclick="openDelete(${row.idusuario_e})" class="btn  brown tooltipped" data-tooltip="Eliminar">
-                    <i class="large material-icons">delete</i>
-                    </a>
+                    <div id="acciones">
+                        <a onclick="openUpdate(${row.idusuario_e})" class="tooltipped" data-tooltip="Actualizar">
+                        <img src="../../recursos/iconografia/editar.png" alt="editar">
+                        </a>
+                        <a onclick="openDelete(${row.idusuario_e})" class="tooltipped" data-tooltip="Eliminar">
+                        <img src="../../recursos/iconografia/eliminar.png" alt="eliminar"></a>
+                        </a>
+                    </div>
                 </td>
             </tr>
         `;
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     document.getElementById('tbusuarioe').innerHTML = content;
-    // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
-    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
-    // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
 
 // Función para preparar el formulario al momento de insertar un registro.
@@ -100,10 +98,11 @@ function openCreate() {
     fillSelect(ENDPOINT_TIPOU, 'tipo', null);
     fillSelect(ENDPOINT_ESTADOU, 'estado', null);
 }
+
 document.getElementById('form_agregar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    let action = 'create';
+    let action = 'crearUsuarioE';
     saveRow(API_USUARIO, action, 'form_agregar', 'agregar_modal_usuario');
 });
 
@@ -142,21 +141,22 @@ function openUpdate(id) {
         }
     });
 }
+
 document.getElementById('form_modificar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    let action = 'update';
+    let action = 'actualizarUsuarioE';
     saveRow(API_USUARIO, action, 'form_modificar', 'modal_modificar_usuario');
 });
 
 function openDelete(id) {
     // Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
     M.Modal.getInstance(document.getElementById('modal_eliminar_usuario')).open();
-    document.getElementById('idd').value = '';
-    document.getElementById('idd').value = id;
+    document.getElementById('ide').value = '';
+    document.getElementById('ide').value = id;
     const data = new FormData();
-    data.append('idd', id);
-    fetch(API_USUARIO + 'readOneE', {
+    data.append('ide', id);
+    fetch(API_USUARIO + 'readOne', {
         method: 'post',
         body: data
     }).then(function (request) {
@@ -165,9 +165,9 @@ function openDelete(id) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    document.getElementById('idd').value = response.dataset.idusuario_e;
+                    document.getElementById('ide').value = response.dataset.idusuario_e;
                     document.getElementById('usuarioD').value = response.dataset.usuario_e;
                     document.getElementById('contrasenaD').value = response.dataset.contrasena_e;
                     fillSelect(ENDPOINT_EMPLEADOS, 'empleadoD', response.dataset.idempleado);
@@ -180,17 +180,16 @@ function openDelete(id) {
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.estado + ' ' + request.statusText);
         }
     });
 }
 document.getElementById('form_eliminar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    var valor = document.getElementById('idd').value;
-
-    const data = new FormData();
-    data.append('idd', valor);
-    // Se llama a la función para guardar el registro.
-    eliminateRow(API_USUARIO, data);
+    var valor = document.getElementById('ide').value;
+    const DATA = new FormData();
+    DATA.append('ide', valor);
+    // Se llama a la función para eliminar el registro.
+    confirmDelete(API_USUARIO, DATA, 'modal_eliminar_usuario');
 });

@@ -31,7 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 
     //Instanciar Datepicker
-    M.Datepicker.init(document.querySelectorAll('.datepicker'));
+	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+		format: 'yyyy-mm-dd', i18n: {
+			months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
+			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+	}});
 
     //Instanciar Modal
     modal = document.querySelectorAll('.modal');

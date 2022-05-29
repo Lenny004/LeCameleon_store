@@ -166,5 +166,5 @@ function openDelete(id) {
     const data = new FormData();
     data.append('id', id);
     // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
-    confirmDelete(API_CATEGORIAS, data);
+    confirmDelete(API_CATEGORIAS, data, 'eliminar_modal');
 }

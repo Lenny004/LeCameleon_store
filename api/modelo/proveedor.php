@@ -26,7 +26,7 @@ class Proveedor extends Validator
 
     public function setNombre($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
+        if ($this->validateString($value, 1, 35)) {
             $this->nombre = $value;
             return true;
         } else {
@@ -36,7 +36,7 @@ class Proveedor extends Validator
 
     public function setDireccion($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
+        if ($this->validateDireccion($value, 1, 500)) {
             $this->direccion = $value;
             return true;
         } else {
@@ -46,7 +46,7 @@ class Proveedor extends Validator
 
     public function setTelefono($value)
     {
-        if ($this->validatePhone($value)) {
+        if ($this->validarNumeroExtranjero($value)) {
             $this->telefono = $value;
             return true;
         } else {
@@ -81,7 +81,7 @@ class Proveedor extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function createRow()
+    public function crearProveedor()
     {
         $sql = 'INSERT INTO tbdistribuidor(nombre_distribuidor, direccion_distribuidor, telefono_distribuidor)
                 VALUES (?, ?, ?)';
@@ -106,17 +106,8 @@ class Proveedor extends Validator
         $params = array($this->id);
         return Database::obtenerSentencia($sql, $params);
     }
-    public function readOneE()
-    {
-        
-        $sql = 'SELECT iddistribuidor, nombre_distribuidor, direccion_distribuidor, telefono_distribuidor
-                FROM tbdistribuidor
-                WHERE iddistribuidor = ?';
-        $params = array($this->id);
-        return Database::obtenerSentencia($sql, $params);
-    }
 
-    public function updateRow()
+    public function actualizarProveedor()
     {
         $sql = 'UPDATE tbdistribuidor
                 SET nombre_distribuidor=?, direccion_distribuidor=?, telefono_distribuidor=?
@@ -125,11 +116,24 @@ class Proveedor extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function deleteRow()
+    public function eliminarProveedor()
     {
         $sql = 'DELETE FROM tbdistribuidor
                 WHERE iddistribuidor = ?';
         $params = array($this->id);
         return Database::ejecutarSentencia($sql, $params);
+    }
+
+    /*
+    *   Métodos para search
+    */
+    public function buscarProveedores($value)
+    {
+        $sql = 'SELECT iddistribuidor, nombre_distribuidor, direccion_distribuidor, telefono_distribuidor
+                FROM tbdistribuidor
+                WHERE nombre_distribuidor ILIKE ?
+                ORDER BY iddistribuidor';
+        $params = array("%$value%");
+        return Database::obtenerSentencias($sql, $params);
     }
 }

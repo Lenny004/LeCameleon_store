@@ -43,8 +43,8 @@
                                     <div class="input-field">
                                         <input id="search" name="search" type="search" required>
                                     </div>
-                                    <button href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa"
-                                            height="22"></button>
+                                    <button class="tooltipped" data-position="top" data-tooltip="Buscar por datos del empleado" href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                        height="22"></button>
                                 </form>
                             </div>
                         </nav>
@@ -70,15 +70,14 @@
                                 <div class="divider"></div>
                                 <div class="col s12 m12 l6 xl6">
                                     <input value="" id="nombre" name="nombre" type="text" class="validate" required>
-                                    <label class="active" for="first_name2">Nombre del empleado</label>
+                                    <label class="active" for="nombre">Nombre del empleado</label>
                                     <input value="" id="apellido" name="apellido" type="text" class="validate" required>
-                                    <label class="active" for="first_name2">Apellido del empleado</label>
+                                    <label class="active" for="apellido">Apellido del empleado</label>
                                     <input id="DUI" type="text" name="DUI" class="validate" size="10" placeholder="00000000-0" data-length="10" maxlength="10" required>
-                                    <label class="active" for="first_name2">DUI</label>
+                                    <label class="active" for="DUI">DUI</label>
                                     <input id="NIT" name="NIT" type="text" class="validate" data-length="17" size="17" placeholder="0000-000000-000-0" maxlength="17" required>
-                                    <label class="active" for="first_name2">NIT</label>
-                                    <input value="" id="telefono" name="telefono" type="text" class="validate"
-                                        placeholder="7000-0000">
+                                    <label class="active" for="NIT">NIT</label>
+                                    <input value="" id="telefono" name="telefono" type="text" class="validate" placeholder="7000-0000" required>
                                     <label class="active" for="telefono">Teléfono</label>
                                 </div>
                                 <div class="col s12 m12 l6 xl6">
@@ -126,32 +125,25 @@
                                 <div class="col s12 m12 l6 xl6">
                                     <input class="hide" type="number" id="ide" name="ide">
                                     <input id="nombreM" name="nombreM" type="text" class="validate">
-                                    <label class="active" for="first_name2">Nombre del empleado</label>
+                                    <label class="active" for="nombreM">Nombre del empleado</label>
                                     <input id="apellidoM" name="apellidoM" type="text" class="validate">
-                                    <label class="active" for="first_name2">Apellido del empleado</label>
+                                    <label class="active" for="apellidoM">Apellido del empleado</label>
                                     <input id="DUIM" type="text" name="DUIM" class="validate" size="10" placeholder="00000000-0" data-length="10" maxlength="10" required>
-                                    <label class="active" for="first_name2">DUI</label>
+                                    <label class="active" for="DUIM">DUI</label>
                                     <input id="NITM" name="NITM" type="text" class="validate" data-length="17" size="17" placeholder="0000-000000-000-0" maxlength="17" required>
-                                    <label class="active" for="first_name2">NIT</label>
+                                    <label class="active" for="NITM">NIT</label>
                                     <input id="telefonoM" name="telefonoM" type="text" placeholder="0000-0000"
                                         class="validate">
-                                    <label class="active" for="first_name2">Telefono</label>
+                                    <label class="active" for="telefonoM">Teléfono</label>
                                 </div>
                                 <div class="col s12 m12 l6 xl6">
                                     <div class="input-field col s12">
                                         <div class="input-field col s12">
                                             <select id="tipoM" name="tipoM">
-                                                <option disabled selected>Tipo de Empleado
-                                                </option>
-                                                <option value="1">Administrador</option>
-                                                <option value="2">Entregador</option>
                                             </select>
                                         </div>
                                         <div class="input-field col s12">
                                             <select id="estadoM" name="estadoM">
-                                                <option value="" disabled selected>Estado Empleado
-                                                </option>
-                                                <option value="1">Activo</option>
                                             </select>
                                         </div>
                                     </div>
@@ -186,39 +178,38 @@
                             <div class="row">
                                 <div class="divider"></div>
                                 <div class="col s12 m12 l6 xl6">
-                                    <input id="idd" name="idd" class="hide" type="number">
-                                    <input id="nombreD" name="nombreD" type="text" class="validate">
+                                    <input id="ide" name="ide" class="hide" type="number">
+                                    <input id="nombreD" name="nombreD" type="text" class="validate" disabled>
                                     <label class="active" for="first_name2">Nombre del empleado</label>
-                                    <input id="apellidoD" name="apellidoD" type="text" class="validate">
+                                    <input id="apellidoD" name="apellidoD" type="text" class="validate" disabled>
                                     <label class="active" for="first_name2">Apellido del empleado</label>
-                                    <input id="DUID" type="text" name="DUID" class="validate" placeholder="00000000-0" data-length="10" maxlength="10" required>
+                                    <input id="DUID" type="text" name="DUID" class="validate" placeholder="00000000-0" data-length="10" maxlength="10" disabled required>
                                     <label class="active" for="first_name2">DUI</label>
-                                    <input id="NITD" name="NITD" type="text" class="validate" data-length="17" size="17" placeholder="0000-000000-000-0" maxlength="17" required>
+                                    <input id="NITD" name="NITD" type="text" class="validate" data-length="17" size="17" placeholder="0000-000000-000-0" maxlength="17" disabled required>
                                     <label class="active" for="first_name2">NIT</label>
-                                    <input id="telefonoD" name="telefonoD" type="text" class="validate">
+                                    <input id="telefonoD" name="telefonoD" type="text" disabled class="validate">
                                     <label class="active" for="first_name2">Telefono</label>
                                 </div>
                                 <div class="col s12 m12 l6 xl6">
                                     <div class="input-field col s12">
                                         <div class="input-field col s12">
-                                            <select id="tipoD" name="tipoD">
-                                                <option disabled selected>Tipo de Empleado
-                                                </option>
+                                            <select id="tipoD" name="tipoD" disabled>
+                                                <option selected>Tipo de Empleado</option>
                                                 <option value="1">Administrador</option>
                                                 <option value="2">Entregador</option>
                                             </select>
                                         </div>
                                         <div class="input-field col s12">
-                                            <select id="estadoD" name="estadoD">
-                                                <option value="" disabled selected>Estado Empleado
+                                            <select id="estadoD" name="estadoD" disabled>
+                                                <option value="" selected>Estado Empleado
                                                 </option>
                                                 <option value="1">Activo</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <input id="correoD" name="correoD" type="text" class="validate">
+                                    <input id="correoD" name="correoD" type="text" class="validate" disabled>
                                     <label class="active" for="first_name2">Correo del Empleado</label>
-                                    <input id="fechaD" name="fechaD" type="text" class="datepicker">
+                                    <input id="fechaD" name="fechaD" type="text" class="datepicker" disabled>
                                     <label class="active" for="first_name2">Fecha de Nacimiento</label>
                                 </div>
                             </div>
@@ -232,7 +223,7 @@
                     </div>
                 </div>
             </div>
-            <!--Table-->
+            <!--Tabla-->
             <table class="centered striped teal darken-3 highlight responsive-table" id="tabla">
                 <thead>
                     <tr>
@@ -240,7 +231,7 @@
                         <th>Apellido Empleado</th>
                         <th>Estado Empleado</th>
                         <th>Tipo Empleado</th>
-                        <th>Telefono Empleado</th>
+                        <th>Teléfono Empleado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

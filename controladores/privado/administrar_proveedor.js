@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
     //Instanciar ToolTips footer
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 
-    M.Datepicker.init(document.querySelectorAll('.datepicker'));
-
-    //Instaciar el modal o pow up
-    M.Modal.init(document.querySelectorAll('.modal'));
-
-    M.Modal.init(document.querySelectorAll('.moda2'));
-
-    M.Modal.init(document.querySelectorAll('.moda3'));
+    //Instanciar Datepicker
+	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+		format: 'yyyy-mm-dd', i18n: {
+			months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
+			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+	}});
 });
 
 // Constantes para establecer las rutas y parámetros de comunicación con la API.
@@ -107,6 +107,7 @@ function openCreate() {
     M.Modal.getInstance(document.getElementById('agregar_modal')).open();
     // Se asigna el título para la caja de diálogo (modal).
 }
+
 document.getElementById('form_agregar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
@@ -114,19 +115,17 @@ document.getElementById('form_agregar').addEventListener('submit', function (eve
     saveRow(API_PROVEEDOR, action, 'form_agregar', 'agregar_modal');
 });
 
-
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdate(id) {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modificar_modal')).open();
     // Se define un objeto con los datos del registro seleccionado.
-    const data = new FormData();
-    data.append('ide', id);
-    console.log(ide);
+    const DATA = new FormData();
+    DATA.append('ide', id);
     // Petición para obtener los datos del registro solicitado.
     fetch(API_PROVEEDOR + 'readOne', {
         method: 'post',
-        body: data
+        body: DATA
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
@@ -137,7 +136,6 @@ function openUpdate(id) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('ide').value = response.dataset.iddistribuidor;
                     document.getElementById('nombreM').value = response.dataset.nombre_distribuidor;
-
                     document.getElementById('telefonoM').value = response.dataset.telefono_distribuidor;
                     document.getElementById('direccionM').value = response.dataset.direccion_distribuidor;
                     M.updateTextFields();
@@ -150,20 +148,22 @@ function openUpdate(id) {
         }
     });
 }
+
 document.getElementById('form_modificar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     let action = 'update';
     saveRow(API_PROVEEDOR, action, 'form_modificar', 'modificar_modal');
 });
+
 function openDelete(id) {
     // Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
     M.Modal.getInstance(document.getElementById('eliminar_modal')).open();
-    document.getElementById('idd').value = '';
-    document.getElementById('idd').value = id;
+    document.getElementById('ide').value = '';
+    document.getElementById('ide').value = id;
     const data = new FormData();
-    data.append('idd', id);
-    fetch(API_EMPLEADO + 'readOneE', {
+    data.append('ide', id);
+    fetch(API_PROVEEDOR + 'readOne', {
         method: 'post',
         body: data
     }).then(function (request) {
@@ -174,7 +174,7 @@ function openDelete(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    document.getElementById('idd').value = response.dataset.iddistribuidor;
+                    document.getElementById('ide').value = response.dataset.iddistribuidor;
                     document.getElementById('nombreD').value = response.dataset.nombre_distribuidor;
                     document.getElementById('direccionD').value = response.dataset.direccion_distribuidor;
                     document.getElementById('telefonoD').value = response.dataset.telefono_distribuidor;
@@ -189,13 +189,14 @@ function openDelete(id) {
         }
     });
 }
+
 document.getElementById('form_eliminar').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    var valor = document.getElementById('idd').value;
+    var valor = document.getElementById('ide').value;
 
     const data = new FormData();
-    data.append('idd', valor);
-    // Se llama a la función para guardar el registro.
-    eliminateRow(API_PROVEEDOR, data);
+    data.append('ide', valor);
+    // Se llama a la función para eliminar el registro.
+    confirmDelete(API_PROVEEDOR, data, 'eliminar_modal');
 });

@@ -42,12 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	M.Modal.init(document.querySelectorAll('.modal'));
 });
 
-
 // Constantes para establecer las rutas y parámetros de comunicación con la API.
 const API_EMPLEADO = SERVER + 'sitio_privado/api_empleados.php?action=';
 // Estas constantes son para establecer conexión con lo SELECT
-const ENDPOINT_TIPO = SERVER + 'sitio_privado/api_tipo_empleado.php?action=readAll';
-const ENDPOINT_ESTADO = SERVER + 'sitio_privado/api_estado_empleado.php?action=readAll';
+const ENDPOINT_TIPO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerTipoEmpleados';
+const ENDPOINT_ESTADO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerEstadoEmpleados';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -118,13 +117,13 @@ function openCreate() {
 	fillSelect(ENDPOINT_TIPO, 'tipo', null);
 	fillSelect(ENDPOINT_ESTADO, 'estado', null);
 }
+
 document.getElementById('form_agregar').addEventListener('submit', function (event) {
 	// Se evita recargar la página web después de enviar el formulario.
 	event.preventDefault();
 	let action = 'create';
 	saveRow(API_EMPLEADO, action, 'form_agregar', 'agregar_modal');
 });
-
 
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdate(id) {
@@ -166,23 +165,24 @@ function openUpdate(id) {
 		}
 	});
 }
+
 document.getElementById('form_modificar').addEventListener('submit', function (event) {
 	// Se evita recargar la página web después de enviar el formulario.
 	event.preventDefault();
 	let action = 'update';
 	saveRow(API_EMPLEADO, action, 'form_modificar', 'modificar_modal');
 });
+
 function openDelete(id) {
 	// Se abre la caja de diálogo (modal) que contiene el formulario de eliminar registro.
 	M.Modal.getInstance(document.getElementById('eliminar_modal')).open();
-	document.getElementById('idd').value = '';
-	document.getElementById('idd').value = id;
+	document.getElementById('ide').value = '';
+	document.getElementById('ide').value = id;
 	const data = new FormData();
-	data.append('idd', id);
-	fetch(API_EMPLEADO + 'readOneE', {
+	data.append('ide', id);
+	fetch(API_EMPLEADO + 'readOne', {
 		method: 'post',
 		body: data
-
 	}).then(function (request) {
 		// Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
 		if (request.ok) {
@@ -191,7 +191,7 @@ function openDelete(id) {
 				// Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
 				if (response.estado) {
 					// Se inicializan los campos del formulario con los datos del registro seleccionado.
-					document.getElementById('idd').value = response.dataset.idempleado;
+					document.getElementById('ide').value = response.dataset.idempleado;
 					document.getElementById('nombreD').value = response.dataset.nombre_empleado;
 					document.getElementById('apellidoD').value = response.dataset.apellido_empleado;
 					document.getElementById('DUID').value = response.dataset.duiempleado;
@@ -216,11 +216,10 @@ function openDelete(id) {
 document.getElementById('form_eliminar').addEventListener('submit', function (event) {
 	// Se evita recargar la página web después de enviar el formulario.
 	event.preventDefault();
-	var valor = document.getElementById('idd').value;
-
-	const data = new FormData();
-	data.append('idd', valor);
+	var valor = document.getElementById('ide').value;
+	const DATA = new FormData();
+	DATA.append('ide', valor);
 	// Se llama a la función para guardar el registro.
-	eliminateRow(API_EMPLEADO, data);
+	confirmDelete(API_EMPLEADO, DATA, 'eliminar_modal');
 });
 
