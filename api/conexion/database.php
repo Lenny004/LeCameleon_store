@@ -136,7 +136,7 @@ class Database{
                 self::$error = 'Nombre de tabla desconocido';
                 break;
             case '23503':
-                self::$error = 'Registro ocupado, es un dato padre y no se puede eliminar';
+                self::$error = 'Registro ocupado, es un dato padre y no se puede eliminar // Verifique que los datos padres requeridos existen';
                 break;
             default:
                 self::$error = 'Ocurrió un problema en la base de datos';

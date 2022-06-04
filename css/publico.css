@@ -2,6 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    transition: all .7s ease-in-out;
 }
 
 main {
@@ -15,38 +16,38 @@ main {
     color: #ffffff;
 }
 
-#barra_anuncio_decoracion{
+#barra_anuncio_decoracion {
     height: 42px;
     background-color: #472911;
     color: #ffffff;
 }
 
-#barra_anuncio_accesorio{
+#barra_anuncio_accesorio {
     height: 42px;
     background-color: #90a57e;
     color: #ffffff;
 }
 
-#barra_anuncio_artesanales{
+#barra_anuncio_artesanales {
     height: 42px;
     background-color: #ea8f70;
     color: #ffffff;
 }
 
-#barra_anuncio_ofertas{
+#barra_anuncio_ofertas {
     height: 42px;
     background-color: #C63637;
     color: #ffffff;
 }
 
-#barra_anuncio_servicio{
+#barra_anuncio_servicio {
     height: 42px;
     background-color: #36465d;
     color: #ffffff;
 }
 
 /*Le asignamos un color al texto*/
-.mensaje_arriba p{
+.mensaje_arriba p {
     color: #ffffff;
 }
 
@@ -72,7 +73,7 @@ main {
     align-items: center;
 }
 
-#barra_anuncio_artesanales a{
+#barra_anuncio_artesanales a {
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -118,14 +119,14 @@ main {
     margin-right: 10px;
 }
 
-
 /*Le asignamos tamaño a la imagen del logo*/
-#logo_imagen img{
+#logo_imagen img {
     max-height: 75px;
     max-width: 284px;
+    transition: all .7s ease-in-out;
 }
 
-#boton_categoria a{
+#boton_categoria a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,13 +152,14 @@ main {
 }
 
 /*Cambiar el color de los option del Select de Categorias*/
-.dropdown-content li>span{
+.dropdown-content li>span {
     color: #2f6950 !important;
 }
 
 #buscador {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -165,14 +167,37 @@ main {
     height: 40px;
 }
 
-#buscador a {
-    margin-left: 5px;
+#buscador button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#thesearch img {
+    margin-top: 2%;
 }
 
 #buscador form {
     max-width: 450px;
     max-height: 40px;
     color: #777676;
+}
+
+#buscador .input-field input[type=search] {
+    padding-left: 2% !important;
+    width: 100%;
+}
+
+#thesearch {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-field {
+    width: 100%;
 }
 
 /*Propiedades del boton de idioma*/
@@ -193,19 +218,19 @@ main {
 
 
 /*Le asignamos tamaño al boton de login*/
-#boton_login img{
-    max-height:35px;
-    max-width:35px;
+#boton_login img {
+    max-height: 35px;
+    max-width: 35px;
 }
 
 /*Le asignamos tamaño al boton de Carrito*/
-#boton_carrito img{
-    max-height:35px;
-    max-width:35px;
+#boton_carrito img {
+    max-height: 35px;
+    max-width: 35px;
 }
 
 /*Le asignamos propiedades al boton de cantidad productos*/
-#boton_carrito span{
+#boton_carrito span {
     color: #ffff;
     background-color: #b51d26;
     width: 20px;
@@ -217,27 +242,44 @@ main {
     elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
     position: relative;
     display: flex;
-    border-radius: 100%!important;
-    align-content: center!important;
-    justify-content: center!important;
+    border-radius: 100% !important;
+    align-content: center !important;
+    justify-content: center !important;
 }
 
-.material-tooltip{
+.material-tooltip {
     background-color: #2f6950 !important;
 }
 
 #menu a {
     color: #4a4a4a;
-    width: 190px;
+    min-width: 190px;
     font-weight: 500;
+    transition: all .7s ease-in-out;
 }
 
-#opciones_movil img{
+#opciones_movil img {
     width: 20px;
     height: 20px;
     top: 4px;
     margin-right: 10px;
-    position:relative;
+    position: relative;
+}
+
+#dropdown_usuario {
+    width: 180px !important;
+}
+
+.icono_perfil img{
+    transition: all .7s ease-in-out;
+}
+
+#dropdown_usuario img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    top: 4px;
+    position: relative;
 }
 
 /*Cuando se coloque el mouse encima de una opción del mouse, las letras cambian de color*/
@@ -250,7 +292,7 @@ main {
     top: 0;
 }
 
-.user-view a{
+.user-view a {
     color: #ffffff;
 }
 
@@ -274,17 +316,17 @@ main {
 }
 
 /*Le cambiamos el fondo a las letras del slider para que puedan ser visibles*/
-.slides h1{
-    background-color: rgba(119, 118, 118, 0.7) ;
+.slides h1 {
+    background-color: rgba(119, 118, 118, 0.7);
     width: 77%;
 }
 
-.slides h3{
-    background-color: rgba(119, 118, 118, 0.7) ;
+.slides h3 {
+    background-color: rgba(119, 118, 118, 0.7);
     width: 23%;
 }
 
-.titulo_categoria{
+.titulo_categoria {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -297,16 +339,16 @@ main {
 }
 
 /*Sombreado a las tarjetas*/
-#tarjetas:hover{
+#tarjetas:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-#tarjetas a{
+#tarjetas a {
     color: #2f6950;
 }
 
-#tarjetas a:hover{
+#tarjetas a:hover {
     color: #ffff;
 }
 
@@ -335,18 +377,18 @@ footer {
 }
 
 /*-Al contenido en el aside le agregamos la propiedad flex y en filas, luego-*/
-#informacion{
+#informacion {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
-    align-items:baseline;
+    align-items: baseline;
     /*Permite el desbordamiento, util para el tamaño de diferentes dispositivos*/
     flex-wrap: wrap;
 }
 
 /*-El div que contiene el E-mail de suscripción le damos un tamaño-*/
-#correo{
+#correo {
     width: 250px;
 }
 
@@ -381,60 +423,60 @@ footer {
 }
 
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
-.instagram:hover{
+.instagram:hover {
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
-    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/ 
-    filter: drop-shadow(2px 2px 5px #bd00a7); 
+    /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
+    filter: drop-shadow(2px 2px 5px #bd00a7);
 }
 
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
-.facebook:hover{
+.facebook:hover {
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: drop-shadow(0px 0px 5px #01c7ee); 
+    filter: drop-shadow(0px 0px 5px #01c7ee);
 }
 
 /*Le cambiamos el color a las imagenes de redes al colocarse encima el mouse*/
-.youtube:hover{
+.youtube:hover {
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: drop-shadow(0px 0px 5px #f10000); 
+    filter: drop-shadow(0px 0px 5px #f10000);
 }
 
-.tiktok:hover{
+.tiktok:hover {
     /*filter: dota de efectos gráficos como el desenfoque o cambio de color*/
     /*drop-shadow añade efectos de sombra alrededor del marco de un elemento*/
-    filter: drop-shadow(0px 0px 5px #7c41da); 
+    filter: drop-shadow(0px 0px 5px #7c41da);
 }
 
 /*-Le damos un tamaño al input donde se colocar un correo-*/
-#informacion input{
+#informacion input {
     max-width: 180px;
 }
 
 /*Le damos un formato al boton de enviar*/
-.ingresar_correo{
+.ingresar_correo {
     display: flex;
-	flex-direction: row;
-	justify-content: center;
+    flex-direction: row;
+    justify-content: center;
     /*Flex-star alinea los ítems al principio del eje secundario*/
-	align-items: flex-start;
-	align-content: center;
+    align-items: flex-start;
+    align-content: center;
 }
 
 /*Le damos un tamaño al boton de enviar*/
-.ingresar_correo a{
+.ingresar_correo a {
     height: 46px;
 }
 
 /*Le damos la posición relativa para ajustarlo a las medidas exactas y quede centrado*/
-.ingresar_correo img{
-    position:relative;
-    top:10%;
+.ingresar_correo img {
+    position: relative;
+    top: 10%;
 }
 
 /*-Footer Terminos-*/
-#pie{
+#pie {
     font-size: smaller;
 
     display: flex;
@@ -444,7 +486,7 @@ footer {
 }
 
 /*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
-.terminos p{
+.terminos p {
     font-weight: bold;
 }
 
@@ -452,7 +494,7 @@ footer {
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PRODUCTOS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN PRODUCTOS------------------------------------------------------*/
 /*El titulo izq le damos desbordamiento*/
-titulo_izquierdo{
+titulo_izquierdo {
     white-space: initial;
     overflow: hidden;
 }
@@ -467,41 +509,41 @@ titulo_izquierdo{
 }
 
 /*Quitamos padding y border al collapsible*/
-.collapsible-header{
+.collapsible-header {
     border-bottom: 0px none !important;
     padding: 0 !important;
 }
 
 /*Le damos un color a los botones*/
-.collapsible-body a{
+.collapsible-body a {
     color: #21190A;
 }
 
 /*Le damos un underline cuando se pone encima el mouse*/
-.collapsible-body a:hover{
+.collapsible-body a:hover {
     text-decoration: underline;
 }
 
 /*A las tarjetas le damos color de fondo y un margin*/
-#tarjetas_producto{
+#tarjetas_producto {
     background-color: #e8d9d9;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
 }
 
 /*Le damos una sombra al poner mouse encima*/
-#tarjetas_producto:hover{
+#tarjetas_producto:hover {
     box-shadow: 1px 2px 2rem rgba(47, 105, 80, 0.9);
     transition: all 0.4s ease;
 }
 
 /*Le damos un color a las letras de los botones*/
-#tarjetas_producto a{
+#tarjetas_producto a {
     color: #2f6950;
 }
 
 /*Cambiamos el color del boton al poner el mouse encima*/
-#tarjetas_producto a:hover{
+#tarjetas_producto a:hover {
     color: #ffff;
 }
 
@@ -528,87 +570,87 @@ titulo_izquierdo{
 }
 
 /*Le damos una altura al espacio donde van las letras y precio*/
-#seccion_productos .card-content{
+#seccion_productos .card-content {
     height: 90px;
 }
 
 /*Le damos un color al texto del precio*/
-.precio_producto{
+.precio_producto {
     color: #2f6950;
 }
 
 /*Le damos un overflow y color al nombre del producto*/
-.nombre_producto{
+.nombre_producto {
     color: #472911;
     white-space: initial;
     overflow: hidden;
 }
 
 /*Le damos dirección en columna a las marcas*/
-.marcas_productos{
+.marcas_productos {
     display: flex;
     flex-direction: column;
 }
 
 /*Color al apartado marcas*/
-.marcas_productos label{
+.marcas_productos label {
     color: #472911 !important;
 }
 
-span::after{
+span::after {
     background-color: #2f6950 !important;
     border-color: #2f6950 !important;
 }
 
 /*Le cambiamos el boton de fondo del check*/
-[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after{
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
     background-color: #e8d9d9 !important;
 }
 
 /*Ponemos el columna los precios*/
-#rango_precios{
+#rango_precios {
     display: flex;
     flex-direction: column;
 }
 
 /*Ponemos underline al boton, cuando el mouse este encima*/
-#rango_precios a:hover{
+#rango_precios a:hover {
     text-decoration: underline;
 }
 
 /*Le agregamos un color a los botones de descuento*/
-.ofertas_descuentos a{
+.ofertas_descuentos a {
     color: #472911 !important;
 }
 
 /*Le damos un underline al mouse estar encima*/
-.ofertas_descuentos a:hover{
+.ofertas_descuentos a:hover {
     text-decoration: underline;
 }
 
 /*Le damos un color a la cantidad*/
-.precio_cantidad a{
+.precio_cantidad a {
     color: #472911;
 }
 
 /*Centramos el pagination*/
-.pagination{
+.pagination {
     text-align: center;
 }
 
 /*Le damos un color a los botones*/
-.pagination li.active a{
+.pagination li.active a {
     color: #472911 !important;
     font-weight: bolder;
 }
 
 /*Le quitamos el color de fondo a los botones*/
-.pagination li.active{
+.pagination li.active {
     background-color: rgba(0, 0, 0, 0) !important;
 }
 
 /*Le damos un tamaño a los botones*/
-.coloriz{
+.coloriz {
     border: none;
     color: white;
     padding: 15px 15px !important;
@@ -620,56 +662,56 @@ span::after{
 }
 
 /*Colores de lo botones*/
-.uno{
+.uno {
     background-color: #2F6950;
 }
 
-.dos{
+.dos {
     background-color: #EC6E19;
 }
 
-.tres{
+.tres {
     background-color: #F0F02E;
 }
 
-.cuatro{
+.cuatro {
     background-color: #765AA8;
 }
 
-.cinco{
+.cinco {
     background-color: #36465D;
 }
 
-.seis{
+.seis {
     background-color: #F0F0F0;
     border: 1px solid #000;
 }
 
-.siete{
+.siete {
     background-color: #C63637;
 }
 
-.ocho{
+.ocho {
     background-color: #FF6961;
 }
 
-.nueve{
+.nueve {
     background-color: #472911;
 }
 
-.diez{
+.diez {
     background-color: #282828;
 }
 
-.once{
+.once {
     background-color: #7EB9E5;
 }
 
-.doce{
+.doce {
     background-color: #131111;
 }
 
-.cuadro_marca{
+.cuadro_marca {
     text-align: center;
     width: 100%;
     height: 100%;
@@ -680,12 +722,12 @@ span::after{
     flex-wrap: wrap;
 }
 
-.cuadro_marca img{
+.cuadro_marca img {
     width: 100%;
     height: 100%;
 }
 
-.imagen_marca{
+.imagen_marca {
     width: 210px !important;
     height: 140px !important;
     margin: 10px;
@@ -696,11 +738,517 @@ span::after{
     right: 0 !important;
 }
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DETALLE PRODUCTO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------MAIN DETALLE----------------------------------------------------------*/
 
+.contenedor_detalle {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 4%;
+    display: flex;
+    flex-direction: row;
+}
+
+.detalle_imagenes {
+    width: 50%;
+    border: 1px solid #777676;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    margin-right: 2%;
+}
+
+.detalle_imagenes .imagenes {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+img.imagen_muestra {
+    border: 1px solid #777676;
+    width: 100%;
+}
+
+.detalle_imagenes .imagen_principal {
+    width: 85%;
+}
+
+.material-placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.detalle_imagenes .imagen_principal img {
+    width: 100%;
+}
+
+.detalle_datos {
+    width: 50%;
+    border: 1px solid #777676;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+}
+
+.detalle_datos p {
+    color: #472911;
+}
+
+.detalle_datos hr {
+    background-color: #777676;
+    width: 100%;
+}
+
+.detalle_datos .reseñas {
+    display: flex;
+    flex-direction: column;
+}
+
+.detalle_datos .reseñas a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #472911;
+}
+
+.detalle_datos .reseñas img {
+    width: 20px;
+}
+
+.detalle_datos .precio h5 {
+    color: #2f6950;
+}
+
+.detalle_datos button {
+    background-color: #2f6950;
+    width: 35% !important;
+    margin-bottom: 5%;
+}
+
+.enviar_carrito {
+    text-align: center;
+    margin-top: 4%;
+}
+
+.detalle_datos button:hover {
+    background-color: #ffffff;
+    border: 1px solid #2f6950;
+    color: #2f6950;
+    width: 35% !important;
+    margin-bottom: 5%;
+}
+
+.contenedor_reseñas {
+    width: 92%;
+    border: 1px solid #777676;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 4%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.contenedor_reseñas h5 {
+    text-align: start;
+}
+
+.contenedor_reseñas hr {
+    background-color: #777676;
+    width: 100%;
+}
+
+.contenedor_reseñas .usuario {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: center;
+}
+
+.foto_usuario {
+    width: 5%;
+}
+
+.foto_usuario img {
+    width: 100%;
+}
+
+.nombre_usuario {
+    width: 93%;
+    margin-left: 2%;
+}
+
+.nombre_usuario p {
+    margin: 0;
+}
+
+.nombre_usuario h6 {
+    font-weight: 500;
+}
+
+.nombre_usuario img {
+    width: 20px;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------MAIN CARRITO----------------------------------------------------------*/
+.contenedor_carrito {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.contenedor_producto_carrito {
+    width: 75%;
+    margin-right: 5%;
+}
+
+.contenedor_producto_carrito h3 {
+    color: #282012;
+}
+
+.contenedor_producto_carrito a {
+    color: #2f6950;
+}
+
+.contenedor_producto_carrito .precio_unitario p {
+    text-align: end;
+}
+
+.producto_datos {
+    border: 2px solid #777676;
+    padding: 2%;
+}
+
+.producto_datos form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.producto_imagen {
+    width: 20%;
+}
+
+.detalle_producto {
+    width: 60%;
+    padding: 2%;
+}
+
+.detalle_producto h6 {
+    font-weight: 500;
+}
+
+.detalle_producto p {
+    color: #2f6950;
+}
+
+.cantidad {
+    width: 80px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cantidad span {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cantidad span.numero {
+    font-size: 15px;
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.precio_producto {
+    width: 20%;
+    text-align: end;
+}
+
+.producto_imagen img {
+    width: 100%;
+    height: 100%;
+}
+
+.eliminar_producto {
+    width: 100%;
+    text-align: end;
+}
+
+.eliminar_producto a {
+    color: #C63637;
+}
+
+.eliminar_producto a:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.subtotal_productos {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10%;
+    justify-content: end;
+}
+
+.contenedor_subtotal_carrito {
+    width: 20%;
+    height: 30%;
+    padding: 2%;
+    background-color: #e8d9d9;
+}
+
+.contenedor_subtotal_carrito form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.contenedor_subtotal_carrito h5 {
+    font-weight: 700;
+    color: #2f6950;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+.contenedor_subtotal_carrito button {
+    background-color: #DA7D27;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+.contenedor_subtotal_carrito button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Perfil+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------Perfil LOGIN------------------------------------------------------*/
+
+.contenedor_perfil {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.nombre_edit_cliente {
+    width: 100%;
+    background-color: #e8d9d9;
+    border-radius: 12px;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nombre_edit_cliente a {
+    color: #21190A;
+    ;
+}
+
+.nombre_edit_cliente img {
+    width: 18px;
+}
+
+.contenedor_perfil form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.datos_cliente {
+    width: 50%;
+    padding: 2%;
+}
+
+.datos_cliente .input-field {
+    margin-bottom: 2%;
+}
+
+.modificar_perfil {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+.modificar_perfil button {
+    background-color: #36465d;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+.modificar_perfil button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #36465d;
+    color: #36465d;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Tus Pedidos+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------Pedidos MAIN------------------------------------------------------*/
+
+.tabs .tab a {
+    background-color: transparent;
+    color: #36465d !important;
+}
+
+.tabs .tab a.active {
+    background-color: transparent;
+    border: 2px solid #36465d;
+    border-radius: 4px;
+    color: #36465d !important;
+}
+
+.tabs .indicator {
+    background-color: #DA7D27 !important;
+}
+
+.tus_pedidos {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 5%;
+}
+
+#pedidos {
+    width: 100%;
+    background-color: #bfbfbf;
+    border-radius: 8px;
+    margin-top: 2%;
+    margin-right: 1%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/*Le damos una posición y tamaño a la imagen del camión*/
+#pedidos img {
+    padding-top: 4%;
+    max-width: 200px;
+    max-height: 200px;
+    padding-bottom: 4%;
+}
+
+.imagen_producto{
+    width: 25%;
+    text-align: center;
+}
+
+.datos_producto{
+    width: 60%;
+}
+
+.datos_producto p{
+    margin: 0.3em;
+}
+
+/*Agregamos negrita a los titulos internos de la tarjeta*/
+#direccion h6{
+    font-weight: bold;
+    transition: all .7s ease-in-out;
+}
+
+.boton_azul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+.boton_azul button {
+    background-color: #36465d;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+.boton_azul button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #36465d;
+    color: #36465d;
+}
+
+/*Modal de pedidos*/
+#titulo_modal{
+    color: #282012;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#titulo_modal img{
+    width: 30px !important;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: -5px;
+}
+
+#modal_resenia_producto{
+    width: 40%;
+}
+
+.contenido_modal_resenia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido_modal_resenia .producto{
+    text-align: center;
+}
+
+.valoraciones{
+    display: flex;
+    flex-direction: row;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.valoraciones img{
+    width: 45px;
+    cursor: pointer;
+}
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
-#contenido_login{
+#contenido_login {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -708,12 +1256,12 @@ span::after{
 }
 
 /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-#logo_login img{
+#logo_login img {
     max-width: 180px;
     max-height: 135px;
 }
 
-#tarjeta_login{
+#tarjeta_login {
     height: 500px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
@@ -725,65 +1273,65 @@ span::after{
 }
 
 /*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_login h5{
+#tarjeta_login h5 {
     color: #282012;
     font-weight: 500;
 }
 
 /*Le damos un nuevo tamaño a la imagen del usuario*/
-#tarjeta_login img{
+#tarjeta_login img {
     height: 60px;
     width: 60px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-#anuncio_registrar{
+#anuncio_registrar {
     font-size: small;
     text-align: center;
     color: #282012;
 }
 
-#anuncio_registrar p{
+#anuncio_registrar p {
     text-align: center;
 }
 
-#imagen_usuario_login{
+#imagen_usuario_login {
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
     justify-content: center;
 }
 
-#contenido_login .card-content{
+#contenido_login .card-content {
     height: 390px;
     width: 390px;
 }
 
 /*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
-#tarjeta_login p{
+#tarjeta_login p {
     color: #2f6950;
 }
 
-#credenciales_login{
+#credenciales_login {
     display: flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
 }
 
-#credenciales_login a{
+#credenciales_login a {
     color: #36465d;
 }
 
-#contra_login{
+#contra_login {
     display: flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
 }
 
-#contra_login img{
+#contra_login img {
     margin-top: 20px !important;
     position: relative !important;
     height: 25px !important;
@@ -791,8 +1339,7 @@ span::after{
     cursor: pointer;
 }
 
-#boton_iniciar_login{
-    width: 390px;
+#boton_iniciar_login {
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -800,38 +1347,40 @@ span::after{
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_iniciar_login a{
+#boton_iniciar_login button {
     background-color: #DA7D27;
     box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
 }
 
-#boton_iniciar_login a:hover{
+#boton_iniciar_login button:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
     color: #DA7D27;
 }
 
-#registro_login{
-    align-self: center;
+#registro_login {
+    text-align: center;
 }
 
-#registro_login a{
+#registro_login a {
     color: #36465d !important;
 }
 
 /*-------------------------------------------------------FOOTER LOGIN------------------------------------------------------*/
 /*-Footer Terminos-*/
-#pie_login{
+#pie_login {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.terminos_login{
+.terminos_login {
     margin-left: 0px;
     display: flex;
     flex-direction: column;
@@ -842,39 +1391,39 @@ span::after{
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
-#formulario_registrar{
+#formulario_registrar {
     width: 100%;
     margin-top: 50px;
     display: flex;
     flex-direction: row-reverse;
     align-content: space-between;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
 }
 
-#formulario_registrar h5{
+#formulario_registrar h5 {
     color: #282012;
     font-weight: 600;
 }
 
-#formulario_registrar li{
+#formulario_registrar li {
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
 /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-#logo_registrar img{
+#logo_registrar img {
     max-width: 340px;
     max-height: 300px;
 }
 
 /*Texto de requerir*/
-#datos span{
-    color:#36465d !important;
+#datos span {
+    color: #36465d !important;
 }
 
 /*Imagen de ocultar*/
-#datos img{
+#datos img {
     margin-top: 15px;
     width: 30px;
     height: 30px;
@@ -882,7 +1431,7 @@ span::after{
     cursor: pointer;
 }
 
-#boton_registrar{
+#boton_registrar {
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
@@ -891,12 +1440,12 @@ span::after{
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_registrar a{
+#boton_registrar a {
     background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_registrar a:hover{
+#boton_registrar a:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
@@ -907,7 +1456,7 @@ span::after{
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
 
-#contenido_validar{
+#contenido_validar {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -916,7 +1465,7 @@ span::after{
 
 
 /*Le asignamos un tamaño y otras propiedades a la card*/
-#tarjeta_validar{
+#tarjeta_validar {
     height: 500px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
@@ -928,17 +1477,17 @@ span::after{
 }
 
 /*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_validar h5{
+#tarjeta_validar h5 {
     color: #282012;
     font-weight: 500;
 }
 
-#tarjeta_validar p{
+#tarjeta_validar p {
     color: #282012;
 }
 
 /*Alineamos la imagen al centro de la card*/
-#imagen_correo_validar{
+#imagen_correo_validar {
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
@@ -946,25 +1495,25 @@ span::after{
 }
 
 /*Le damos un nuevo tamaño a la imagen del mensaje*/
-#imagen_correo_validar img{
+#imagen_correo_validar img {
     height: 60px;
     width: 60px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-#anuncio_validar{
+#anuncio_validar {
     font-size: small;
     text-align: center;
     color: #282012;
 }
 
 /*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
-#codigo p{
+#codigo p {
     color: #2f6950 !important;
 }
 
-#reenviar{
+#reenviar {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -972,27 +1521,27 @@ span::after{
     justify-content: center;
 }
 
-#reenviar a{
+#reenviar a {
     color: #36465d;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RECUPERAR CONTRA USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN RECUPERAR------------------------------------------------------*/
 
-#contenido_recuperar{
+#contenido_recuperar {
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
 }
 
-#contenido_recuperar .card-content{
+#contenido_recuperar .card-content {
     height: 490px;
     width: 390px;
 }
 
 /*Le asignamos un tamaño y otras propiedades a la card*/
-#tarjeta_recuperar{
+#tarjeta_recuperar {
     height: 600px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
@@ -1004,17 +1553,17 @@ span::after{
 }
 
 /*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_recuperar h5{
+#tarjeta_recuperar h5 {
     color: #282012;
     font-weight: 500;
 }
 
-#tarjeta_recuperar p{
+#tarjeta_recuperar p {
     color: #282012;
 }
 
-#boton_recuperar{
-    position:static;
+#boton_recuperar {
+    position: static;
     width: 400px;
     display: flex;
     flex-direction: row;
@@ -1024,20 +1573,20 @@ span::after{
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_recuperar a{
+#boton_recuperar a {
     background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_recuperar a:hover{
+#boton_recuperar a:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
     color: #DA7D27;
 }
 
-#boton_renovar{
-    position:static;
+#boton_renovar {
+    position: static;
     margin-top: 15px;
     width: 400px;
     display: flex;
@@ -1048,12 +1597,12 @@ span::after{
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_renovar a{
+#boton_renovar a {
     background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_renovar a:hover{
+#boton_renovar a:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
@@ -1063,13 +1612,13 @@ span::after{
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CONTACTANOS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------CONTACTANOS RECUPERAR------------------------------------------------------*/
 
-#cuadros_contacto{
+#cuadros_contacto {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-#contacto{
+#contacto {
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -1078,91 +1627,99 @@ span::after{
     text-align: end;
 }
 
-#redes_sociales{
+#redes_sociales {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-#redes_sociales img{
+#redes_sociales img {
     width: 35px;
     height: 35px;
     margin-right: 15px;
 }
 
-#redes_sociales p{
+#redes_sociales p {
     color: #21190A;
     text-decoration: underline;
 }
 
-#solicitar_informacion{
+#solicitar_informacion {
     padding-left: 2%;
     padding-right: 2%;
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-#boton_enviar_contacto{
+#boton_enviar_contacto {
     text-align: center;
 }
 
-#boton_enviar_contacto a{
+#boton_enviar_contacto a {
     background-color: #2f6950;
     width: 25%;
     margin-bottom: 5%;
 }
 
+#boton_enviar_contacto a:hover {
+    border: 1px solid #2f6950;
+    background-color: #ffffff;
+    color: #2f6950;
+    width: 25%;
+    margin-bottom: 5%;
+}
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEXTO SERVICIO AL CLIENTE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-#titulo_principal{
+#titulo_principal {
     color: #21190A;
 }
 
-#subtema_texto{
-    font-size:large;
+#subtema_texto {
+    font-size: large;
     font-weight: 500;
     color: #21190A;
 }
 
-#texto_inicial{
+#texto_inicial {
     color: #21190A;
 }
 
-#texto_espacio{
+#texto_espacio {
     margin-bottom: 10%;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REPORTAR PROBLEMA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#boton_enviar_reporte a{
+#boton_enviar_reporte a {
     border: 2px solid #2f6950;
     background-color: #ffffff;
     color: #2f6950;
     margin-bottom: 8%;
 }
 
-#boton_enviar_reporte a:hover{
+#boton_enviar_reporte a:hover {
     background-color: #2f6950;
     color: #ffffff;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SOBRE NOSOTROS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#tarjetas_fotos{
+#tarjetas_fotos {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#tarjetas_integrantes{
+#tarjetas_integrantes {
     width: 22%;
 }
 
-#tarjetas_integrantes .card{
+#tarjetas_integrantes .card {
     height: 470px;
 }
 
-#tarjetas_integrantes .card img{
+#tarjetas_integrantes .card img {
     min-width: 0 !important;
     min-height: 0 !important;
     width: 100% !important;
@@ -1170,13 +1727,13 @@ span::after{
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Marcas++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-.botones_busqueda{
+.botones_busqueda {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.boton_filtrar{
+.boton_filtrar {
     padding: 2% 8% 2% 8%;
     border: 2px solid #2f6950;
     background-color: #ffffff;
@@ -1184,12 +1741,12 @@ span::after{
     margin-bottom: 8%;
 }
 
-.boton_filtrar:hover{
+.boton_filtrar:hover {
     background-color: #2f6950;
     color: #ffffff;
 }
 
-.boton_limpiar{
+.boton_limpiar {
     padding: 2% 8% 2% 8%;
     border: 2px solid #777676;
     background-color: #ffffff;
@@ -1197,17 +1754,154 @@ span::after{
     margin-bottom: 8%;
 }
 
-.boton_limpiar:hover{
+.boton_limpiar:hover {
     background-color: #777676;
     color: #ffffff;
 }
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Modo Nocturno+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+body.dark{
+    background: #242221;
+    transition: all .7s ease-in-out;
+}
+
+body.dark nav.nav-extended{
+    background-color: #2b2c2d !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_imagen img{
+    content:url("../recursos/img/logo3.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a:hover {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #dropdown_usuario a{
+    color: #8cc43f !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .icono_perfil img{
+    content:url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .ver_perfil img{
+    content:url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+.modo_oscuro::after{
+    content: ' Oscuro';
+}
+
+body.dark .modo_oscuro::after{
+    content: ' Claro';
+}
+
+body.dark .modo_oscuro img{
+    content:url("../recursos/iconografia/sol.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .cerrar_sesion img{
+    content:url("../recursos/iconografia/logoutw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .pedidos_icon img{
+    content:url("../recursos/iconografia/pedidosw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .carrito_compras img{
+    content:url("../recursos/iconografia/carritow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas:hover{
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+body.dark h1{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h3{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h4{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .card-title {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .dropdown-content{
+    background-color: #2b2c2d;
+}
+
+body.dark .dropdown-content li:hover{
+    background-color: #242221 !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #contenido_login .card{
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login h5{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login p{
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_login img{
+    content:url("../recursos/img/logo_icon.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #credenciales_login a{
+    color: #DA7D27;
+}
+
+body.dark #inicio_sesion_form input{
+    color: #ffffff;
+}
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RESPONSIVE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 /*para celulares*/
-@media screen and (max-width: 374px){
+@media screen and (max-width: 374px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     /*Le asignamos un tamaño al texto*/
     #barra_anuncio p {
@@ -1215,13 +1909,13 @@ span::after{
     }
 
     /*Le asignamos tamaño a la imagen del logo*/
-    #logo_imagen img{
+    #logo_imagen img {
         height: 45px;
         width: 150px;
     }
 
     /*Modificamos del contenedor de logo, categoria, buscador, idioma, login y carrito*/
-    #apartado_buscador{
+    #apartado_buscador {
         display: flex;
         justify-content: space-around;
         align-content: space-around;
@@ -1251,13 +1945,13 @@ span::after{
     }
 
     /*Le asignamos tamaño al boton de Carrito*/
-    #boton_carrito img{
-        max-height:30px;
-        max-width:30px;
+    #boton_carrito img {
+        max-height: 30px;
+        max-width: 30px;
     }
 
     /*Le asignamos propiedades al boton de cantidad productos*/
-    #boton_carrito span{
+    #boton_carrito span {
         color: #ffff;
         background-color: #b51d26;
         margin-left: 22px;
@@ -1265,21 +1959,21 @@ span::after{
         margin-bottom: 10px;
         position: relative;
         /*Important es una función que se antepone a cualquier otro estilo del componente*/
-        display: flex!important;
-        width: 20px!important;
-        height: 20px!important;
-        border-radius: 100%!important;
-        align-content: center!important;
-        justify-content: center!important;
+        display: flex !important;
+        width: 20px !important;
+        height: 20px !important;
+        border-radius: 100% !important;
+        align-content: center !important;
+        justify-content: center !important;
     }
 
-    .container .input-field{
+    .container .input-field {
         max-width: 280px;
         max-height: 40px;
     }
 
 
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
 
@@ -1297,7 +1991,7 @@ span::after{
         width: 180px;
     }
 
-    #buscador2 img{
+    #buscador2 img {
         margin-bottom: -8px;
         margin-left: 180px;
     }
@@ -1310,15 +2004,15 @@ span::after{
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Editar el titulo del slider*/
-    #slider_main h1{
+    #slider_main h1 {
         font-size: 45px;
     }
 
-    #slider_main h3{
+    #slider_main h3 {
         font-size: 25px;
     }
 
-    .titulo_categoria{
+    .titulo_categoria {
         font-size: 35px;
     }
 
@@ -1328,8 +2022,8 @@ span::after{
         margin-top: 2px;
         margin-bottom: 15px;
     }
-    
-    #tarjetas a{
+
+    #tarjetas a {
         color: #2f6950;
         font-size: 10px;
         width: 60px;
@@ -1339,13 +2033,13 @@ span::after{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjetas span{
+    #tarjetas span {
         font-size: 15px;
         margin-bottom: 10px;
     }
@@ -1353,7 +2047,7 @@ span::after{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         height: 110px;
         width: 100%;
@@ -1361,104 +2055,100 @@ span::after{
 
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
     /*Editamos el footer*/
-    #redes{
+    #redes {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #informacion div{
+    #informacion div {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        align-items:center;
+        align-items: center;
         align-content: center;
         padding: 25px;
     }
 
     /*-Footer Terminos-*/
-    #pie p{
+    #pie p {
         font-size: smaller;
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
-    
-    #formulario_registrar{
+
+    #formulario_registrar {
         width: 95%;
         margin-top: 0px;
         display: flex;
         flex-direction: column;
         align-content: center;
-        align-items:center;
+        align-items: center;
         justify-content: center;
         flex-wrap: wrap;
     }
 
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-    #logo_registrar img{
+    #logo_registrar img {
         max-width: 250px;
         max-height: 230px;
     }
 
-    #datos .input-field{
+    #datos .input-field {
         margin-bottom: 45px;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
 
-    #tarjeta_validar{
+    #tarjeta_validar {
         max-height: 500px;
         max-width: 300px;
     }
 
-    #boton_iniciar{
-        width: 300px;   
+    #boton_iniciar {
+        width: 300px;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    
+
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
+    #tarjeta_login {
+        max-height: 500px;
         max-width: 300px;
     }
 
-    #contenido_login .card-content{
+    #contenido_login .card-content {
         height: 350px;
         width: 300px;
     }
 
-    #boton_iniciar_login{
-        width: 300px;
-    }
-
-    #tarjeta_login{
+    #tarjeta_login {
         font-size: smaller;
     }
 
     /*-Footer Terminos-*/
-    #pie_login{
+    #pie_login {
         position: relative;
         font-size: smaller;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    .terminos_login{
+    .terminos_login {
         font-size: smaller;
         margin-left: 0px;
         display: flex;
@@ -1469,49 +2159,46 @@ span::after{
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    
+
     /*-------------------------------------------------------SECTION VALIDAR------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_recuperar{
+    #tarjeta_recuperar {
         max-height: 600px;
         max-width: 300px;
     }
 
-    #tarjeta_recuperar .card-content{
+    #tarjeta_recuperar .card-content {
         height: 490px;
         width: 300px;
     }
 
-    #boton_iniciar_login{
-        width: 300px;
-    }
-
-    #boton_renovar{
+    #boton_renovar {
         width: 300px;
         margin-top: 25px;
     }
 
-    #tarjeta_recuperar{
+    #tarjeta_recuperar {
         font-size: smaller;
     }
 }
 
 
-@media screen and (min-width:375px) and (max-width:576px){
+@media screen and (min-width:375px) and (max-width:576px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     /*Le asignamos tamaño a la imagen del logo*/
-    #logo_imagen img{
+    #logo_imagen img {
         height: 60px;
         width: 200px;
     }
-    
-    #menu_desplegable{
+
+    #menu_desplegable {
         max-width: 40px;
     }
-    
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
-        display:flex;
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
@@ -1523,7 +2210,7 @@ span::after{
         max-width: 280px;
     }
 
-    #buscador2 img{
+    #buscador2 img {
         margin-bottom: -8px;
         margin-left: 285px;
     }
@@ -1536,15 +2223,15 @@ span::after{
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Editar el titulo del slider*/
-    #slider_main h1{
+    #slider_main h1 {
         font-size: 55px;
     }
 
-    #slider_main h3{
+    #slider_main h3 {
         font-size: 35px;
     }
 
-    .titulo_categoria{
+    .titulo_categoria {
         font-size: 40px;
     }
 
@@ -1554,8 +2241,8 @@ span::after{
         margin-top: 2px;
         margin-bottom: 20px;
     }
-    
-    #tarjetas a{
+
+    #tarjetas a {
         color: #2f6950;
         font-size: 10px;
         padding-right: 0px;
@@ -1566,14 +2253,14 @@ span::after{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 18px;
         margin-bottom: 10px;
     }
@@ -1581,7 +2268,7 @@ span::after{
     .container .card {
         padding: 10px;
     }
-    
+
     .container .card img {
         height: 120px;
         width: 100%;
@@ -1589,59 +2276,53 @@ span::after{
 
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
     /*Editamos el footer*/
-    #redes{
+    #redes {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #informacion div{
+    #informacion div {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        align-items:center;
+        align-items: center;
         align-content: center;
         padding: 25px;
     }
 
     /*-Footer Terminos-*/
-    #pie p{
+    #pie p {
         font-size: smaller;
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
-        max-height: 450px;
+    #tarjeta_login {
+        max-height: 500px;
         max-width: 360px;
     }
 
-    #contenido_login .card-content{
-        height: 360px;
+    #contenido_login .card-content {
+        height: 400px;
         width: 360px;
     }
 
-    #boton_iniciar_login{
-        margin: 0px;
-        padding-bottom: 10px;
-        width: 360px;   
-    }
-
-    #tarjeta_login{
+    #tarjeta_login {
         font-size: smaller;
     }
 
-    .terminos_login{
+    .terminos_login {
         font-size: smaller;
         margin-left: 0px;
         display: flex;
@@ -1654,34 +2335,34 @@ span::after{
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
 
-    #tarjeta_validar{
+    #tarjeta_validar {
         height: 500px;
         width: 360px;
     }
 
-    #boton_iniciar{
-        width: 360px; 
+    #boton_iniciar {
+        width: 360px;
     }
 
-    #boton_renovar{
-        width: 360px; 
+    #boton_renovar {
+        width: 360px;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
-    
-    #formulario_registrar{
+
+    #formulario_registrar {
         width: 90%;
         margin-top: 0px;
         display: flex;
         flex-direction: column;
         align-content: center;
-        align-items:center;
+        align-items: center;
         justify-content: center;
     }
 
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-    #logo_registrar img{
+    #logo_registrar img {
         max-width: 320px;
         max-height: 245px;
         margin-left: -15px;
@@ -1692,46 +2373,47 @@ span::after{
 
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_recuperar{
+    #tarjeta_recuperar {
         max-height: 550px;
         max-width: 360px;
     }
 
-    #contenido_recuperar .card-content{
+    #contenido_recuperar .card-content {
         height: 480px;
         width: 360px;
     }
 
-    #boton_recuperar{
-        width: 360px;   
+    #boton_recuperar {
+        width: 360px;
     }
 
-    #tarjeta_recuperar p{
+    #tarjeta_recuperar p {
         font-size: smaller;
     }
 }
 
-@media screen and (min-width:577px) and (max-width:765px){
+@media screen and (min-width:577px) and (max-width:765px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
-    
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
-        display:flex;
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
-    
+
     #buscador2 nav {
         height: 25px;
         width: 450px;
     }
 
-    #buscador2 img{
+    #buscador2 img {
         margin-bottom: -8px;
         margin-left: 455px;
     }
@@ -1742,20 +2424,21 @@ span::after{
         max-width: 700px;
         color: #777676;
     }
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
 
-    .titulo_categoria{
+    .titulo_categoria {
         font-size: 45px;
     }
 
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 300px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -1765,14 +2448,14 @@ span::after{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
@@ -1780,7 +2463,7 @@ span::after{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
@@ -1788,9 +2471,9 @@ span::after{
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
-    
+
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-    #logo_registrar img{
+    #logo_registrar img {
         max-width: 200px;
         max-height: 245px;
         margin-left: 35px;
@@ -1799,14 +2482,15 @@ span::after{
 }
 
 @media screen and (min-width:766px) and (max-width:909px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
-    
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
-        display:flex;
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
@@ -1818,7 +2502,7 @@ span::after{
         width: 600px;
     }
 
-    #buscador2 img{
+    #buscador2 img {
         margin-bottom: -8px;
         margin-left: 605px;
     }
@@ -1830,13 +2514,13 @@ span::after{
     }
 
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 260px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -1846,14 +2530,14 @@ span::after{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 15px;
         margin-bottom: 2px;
     }
@@ -1861,22 +2545,23 @@ span::after{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
 }
 
-@media screen and (min-width:910px) and (max-width:1133px){
+@media screen and (min-width:910px) and (max-width:1133px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 60px;
     }
-    
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
-        display:flex;
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
@@ -1888,7 +2573,7 @@ span::after{
         width: 780px;
     }
 
-    #buscador2 img{
+    #buscador2 img {
         margin-bottom: -8px;
         margin-left: 785px;
     }
@@ -1901,13 +2586,13 @@ span::after{
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 270px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -1917,14 +2602,14 @@ span::after{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
@@ -1932,7 +2617,7 @@ span::after{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
@@ -1940,15 +2625,16 @@ span::after{
 }
 
 @media screen and (min-width:1134px) and (max-width:1365px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 340px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -1957,23 +2643,24 @@ span::after{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 }
 
 @media screen and (min-width:1366px) and (max-width:1600px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         min-height: 320px !important;
         margin-top: 2px !important;
         margin-bottom: 20px !important;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         max-width: 110px;
     }
@@ -1983,22 +2670,23 @@ span::after{
         width: 100%;
     }
 
-    .container .card .card-action:last-child{
+    .container .card .card-action:last-child {
         text-align: center;
     }
 }
 
 @media screen and (min-width:1600px) and (max-width:1920px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         min-height: 330px !important;
         max-width: 355px !important;
         margin-top: 2px !important;
         margin-bottom: 20px !important;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         max-width: 110px;
     }
@@ -2008,7 +2696,7 @@ span::after{
         width: 100%;
     }
 
-    .container .card .card-action:last-child{
+    .container .card .card-action:last-child {
         text-align: center;
     }
 }

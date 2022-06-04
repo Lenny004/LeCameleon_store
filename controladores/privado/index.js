@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(request.estado + " " + request.statusText);
         }
     });
-
     //Var se crea para variables globales
     //let es variables locales
 });

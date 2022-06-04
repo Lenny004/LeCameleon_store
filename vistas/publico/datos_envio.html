@@ -77,8 +77,8 @@
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom"
-                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión"
+                        src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
@@ -133,8 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="accesorios.html"
-                            data-target="dropdown_accesorios">Accesorios
+                    <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del accesorio-->
@@ -307,60 +306,14 @@
                         alt="perfil">Perfil</a></li>
             <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
                         alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img
-                        src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png"
+                        alt="cerrar">Cerrar Sesión</a>
             </li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="container">
-            <div class="row">
-                <h3 id="Letras_usuario">Reportar un problema</h3>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="first_name" type="text" class="validate">
-                    <label for="first_name">Escribe el problema: *</label>
-                </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <select>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                    <label>Categoria del problema:*</label>
-                </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Detalles del problema:*</label>
-                </div>
-                <div class="col s12 m12 l12 xl12">
-                    <form action="#">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Examinar</span>
-                                <input type="file" multiple>
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text"
-                                    placeholder="Imagen del problema (Opcional)">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Correo electrónico:*</label>
-                    <span class="helper-text" data-error="Formato equivocado" data-success="Formato Correcto">El correo
-                        se utilizará para responder al problema presentado</span>
-                </div>
-                <div id="boton_enviar_reporte">
-                    <a href="" class="btn waves-effect waves-green z-depth-2">Enviar reporte</a>
-                </div>
-            </div>
-        </div>
+        
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
     <footer>
@@ -421,7 +374,9 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/carrito.js"></script>
 </body>
 
 </html>

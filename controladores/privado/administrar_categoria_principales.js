@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
     M.Modal.init(document.querySelectorAll('.modal'), options);
-    // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
-    M.Modal.init(document.querySelectorAll('.modal'), options);
 });
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().

@@ -77,8 +77,8 @@
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom"
-                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión"
+                        src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
@@ -133,8 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="accesorios.html"
-                            data-target="dropdown_accesorios">Accesorios
+                    <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del accesorio-->
@@ -307,58 +306,104 @@
                         alt="perfil">Perfil</a></li>
             <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
                         alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img
-                        src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png"
+                        alt="cerrar">Cerrar Sesión</a>
             </li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="container">
+        <div class="tus_pedidos">
+            <h3>Tus Pedidos</h3>
             <div class="row">
-                <h3 id="Letras_usuario">Reportar un problema</h3>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="first_name" type="text" class="validate">
-                    <label for="first_name">Escribe el problema: *</label>
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#realizados">Realizados</a></li>
+                        <li class="tab col s3"><a href="#entregados">Entregados</a></li>
+                    </ul>
                 </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <select>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                    <label>Categoria del problema:*</label>
-                </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Detalles del problema:*</label>
-                </div>
-                <div class="col s12 m12 l12 xl12">
-                    <form action="#">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Examinar</span>
-                                <input type="file" multiple>
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text"
-                                    placeholder="Imagen del problema (Opcional)">
-                            </div>
+                <input class="hide" type="number" id="id" name="id">
+                <div id="realizados">
+                    <div id="pedidos">
+                        <div class="imagen_producto">
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
                         </div>
-                    </form>
+                        <div class="datos_producto">
+                            <p><b>Reloj Rolex 702</b></p>
+                            <p><b>Dirección de entrega:</b> Monseñor Romero y Final Calle 5 de Noviembre entre 21a y 23a</p>
+                            <p><b>Fecha de entrega:</b> 2022-06-04</p>
+                            <p><b>Cantidad:</b> 6</p>
+                            <p><b>Total:</b> $89.99</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Correo electrónico:*</label>
-                    <span class="helper-text" data-error="Formato equivocado" data-success="Formato Correcto">El correo
-                        se utilizará para responder al problema presentado</span>
+                <div id="entregados">
+                    <div id="pedidos">
+                        <div class="imagen_producto">
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
+                        </div>
+                        <div class="datos_producto">
+                            <p><b>Reloj Rolex 702</b></p>
+                            <p><b>Entregado el 2022-06-04</b></p>
+                            <p><b>Cantidad:</b> 6</p>
+                            <p><b>Total:</b> $89.99</p>
+                        </div>
+                    </div>
+                    <div id="pedidos">
+                        <div class="imagen_producto">
+                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
+                        </div>
+                        <div class="datos_producto">
+                            <p><b>Reloj Rolex 702</b></p>
+                            <p><b>Entregado el 2022-06-04</b></p>
+                            <p><b>Cantidad:</b> 6</p>
+                            <p><b>Total:</b> $89.99</p>
+                        </div>
+                        <div class="boton_azul">
+                            <button class="btn-small waves-effect waves-blue modal-trigger" href="#modal_resenia_producto" type="submit">Escribir Reseña</button>
+                        </div>
+                    </div>
                 </div>
-                <div id="boton_enviar_reporte">
-                    <a href="" class="btn waves-effect waves-green z-depth-2">Enviar reporte</a>
-                </div>
+            </div>
+        </div>
+        <!-- Agregar Reseña Producto -->
+        <div id="modal_resenia_producto" class="modal">
+            <div class="modal-content">
+                <form method="post" id="form_modificar">
+                    <div id="titulo_modal">
+                        <div>
+                            <h4>Reseña del Producto</h4>
+                        </div>
+                        <div>
+                            <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                    src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                        </div>
+                    </div>
+                    <div class="row contenido_modal_resenia">
+                        <div class="divider"></div>
+                        <div class="col s12 m12 l12 xl12 producto">
+                            <input class="hide" type="number" id="ide" name="ide">
+                            <label class="active" for="nombreM">Producto:</label>
+                            <input id="nombreM" name="nombreM" type="text" class="validate" disabled>
+                        </div>
+                        <div class="valoraciones">
+                            <a onclick="valoraciones(1)" class="tooltipped" data-position="top" data-tooltip="Muy malo"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella1" alt="estrella"></a>
+                            <a onclick="valoraciones(2)" class="tooltipped" data-position="top" data-tooltip="Malo"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella2" alt="estrella"></a>
+                            <a onclick="valoraciones(3)" class="tooltipped" data-position="top" data-tooltip="Bueno"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella3" alt="estrella"></a>
+                            <a onclick="valoraciones(4)" class="tooltipped" data-position="top" data-tooltip="Muy bueno"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella4" alt="estrella"></a>
+                            <a onclick="valoraciones(5)" class="tooltipped" data-position="top" data-tooltip="Excelente"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella5" alt="estrella"></a>
+                        </div>
+                        <div class="col s12 m12 l12 xl12">
+                            <label class="active" for="resenia">Reseña:</label>
+                            <textarea id="resenia" class="materialize-textarea" maxlength="500"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12 boton_azul">
+                            <button type="submit" class="btn-small waves-effect waves-blue">Publicar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
@@ -421,7 +466,9 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/carrito.js"></script>
 </body>
 
 </html>

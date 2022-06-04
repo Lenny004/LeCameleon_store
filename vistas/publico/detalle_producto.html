@@ -77,8 +77,8 @@
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom"
-                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+                <a href="index.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión"
+                        src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
             <div id="boton_carrito">
@@ -133,8 +133,7 @@
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="accesorios.html"
-                            data-target="dropdown_accesorios">Accesorios
+                    <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios">Accesorios
                             <i class="material-icons right">arrow_drop_down</i></a>
                     </li>
                     <!-- Estructura del Dropdown del accesorio-->
@@ -307,58 +306,98 @@
                         alt="perfil">Perfil</a></li>
             <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
                         alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img
-                        src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png"
+                        alt="cerrar">Cerrar Sesión</a>
             </li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="container">
-            <div class="row">
-                <h3 id="Letras_usuario">Reportar un problema</h3>
+        <div class="contenedor_detalle">
+            <div class="detalle_imagenes">
+                <div class="imagenes">
+                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_2.png"
+                        alt="">
+                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_3.png"
+                        alt="">
+                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_4.png"
+                        alt="">
+                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_5.png"
+                        alt="">
+                    <img class="imagen_muestra materialboxed" src="../../recursos/img/marcas/lofi_girl.png" alt="">
+                </div>
+                <div class="imagen_principal materialboxed">
+                    <img src="../../recursos/img/decoracion/cocina/horno_1.png" alt="">
+                </div>
             </div>
-            <div class="row">
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="first_name" type="text" class="validate">
-                    <label for="first_name">Escribe el problema: *</label>
+            <div class="detalle_datos">
+                <form action="">
+                    <h5>Candelabro en forma de Linterna Vela Decoración para habitación</h5>
+                    <p>Candelabro en forma de linterna Vela, 14x15.5 cm y 16x18cm portavelas decorativo de metal de
+                        linterna, Candelabro decorativo Vintage para boda de Navidad, Fiesta de halloween, jardín
+                        familiar, color negro</p>
+                    <div class="reseñas">
+                        <a>
+                            <div id="estrellas">
+                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                            </div>(41)<u>Valoraciones</u>
+                        </a>
+                        <a><img src="../../recursos/iconografia/reseña_mensaje.png" alt="reseña">(1)<u>Reseñas</u></a>
+                    </div>
+                    <p><b>Color: </b>Negro</p>
+                    <p><b>Marca: </b>Ivintage</p>
+                    <p><b>Tamaño: </b>14x15.5cm y 16x18cm</p>
+                    <p><b>Material: </b>Metal</p>
+                </form>
+                <hr>
+                <div class="precio">
+                    <h5>$22.99</h5>
+                    <div class="cantidad">
+                        <span onclick="restar()" class="menos">-</span>
+                        <span class="numero">1</span>
+                        <span onclick="suma()" class="mas">+</span>
+                    </div>
                 </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <select>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                    <label>Categoria del problema:*</label>
+                <hr>
+                <div>
+                    <h5>Total: <b>$45.98</b></h5>
                 </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Detalles del problema:*</label>
+                <hr>
+                <div class="enviar_carrito">
+                    <button class="btn-small waves-effect waves-green" type="submit">Agregar al Carrito</button>
                 </div>
-                <div class="col s12 m12 l12 xl12">
-                    <form action="#">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Examinar</span>
-                                <input type="file" multiple>
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text"
-                                    placeholder="Imagen del problema (Opcional)">
-                            </div>
+            </div>
+        </div>
+        <div class="contenedor_reseñas">
+            <h5>Reseñas</h5>
+            <hr>
+            <div id="resenias_usuarios">
+                <div class="usuario">
+                    <div class="foto_usuario">
+                        <img src="../../recursos/iconografia/usuario_redondo.png" alt="user">
+                    </div>
+                    <div class="nombre_usuario">
+                        <h6>Aimee Vanessa Osorio Canales</h6>
+                        <div id="estrellas_usuario">
+                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
+                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                         </div>
-                    </form>
+                        <p>Viernes 24 de Junio de 2022</p>
+                    </div>
                 </div>
-                <div class="input-field col s12 m12 l12 xl12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Correo electrónico:*</label>
-                    <span class="helper-text" data-error="Formato equivocado" data-success="Formato Correcto">El correo
-                        se utilizará para responder al problema presentado</span>
+                <div class="comentario">
+                    <p>Llego en la fecha indicada, todo en perfectas condiciones y mejor de lo que esperaba. 
+                        Yo le he puesto sobre mi cocina y queda muy bonito con los demás electrodomesticos, 
+                        queda super genial y trabaja de maravilla</p>
                 </div>
-                <div id="boton_enviar_reporte">
-                    <a href="" class="btn waves-effect waves-green z-depth-2">Enviar reporte</a>
-                </div>
+                <hr>
             </div>
         </div>
     </main>
@@ -421,7 +460,8 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
 </body>
 
 </html>
