@@ -24,7 +24,8 @@
     <main>
         <div id="contenido_login">
             <div id="logo_login">
-                <a href="dashboard.html" class="tooltipped" data-position="bottom" data-tooltip="Inicio"><img src="../../recursos/img/logo_icon2.png" alt="logo"></a>
+                <a href="dashboard.html" class="tooltipped" data-position="bottom" data-tooltip="Inicio"><img
+                        src="../../recursos/img/logo_icon2.png" alt="logo"></a>
             </div>
             <div class="card" id="tarjeta_login">
                 <div class="card-content white-text">
@@ -33,26 +34,29 @@
                     <div id="imagen_usuario_login">
                         <img src="../../recursos/iconografia/usuario_redondo.png" alt="usuario">
                     </div>
-                    <div class="input-field">
-                        <p>Usuario:</p>
-                        <input id="email" type="email" class="validate">
-                    </div>
-                    <div class="input-field">
-                        <div id="credenciales_login">
-                            <p>Contraseña</p>
-                            <a href="recuperar_contra.html"><u>¿Olvidaste tu contraseña?</u></a>
+                    <form id="inicio_sesion_form" method="post" class="col s12">
+                        <div class="input-field">
+                            <p>Usuario:</p>
+                            <input id="usuario_login" name="usuario_login" type="text" class="validate" data-length="75" size="75" maxlength="75" required>
                         </div>
-                        <div id="contra_login">
-                            <input id="password_login" type="password" class="validate">
+                        <div class="input-field">
+                            <div id="credenciales_login">
+                                <p>Contraseña</p>
+                                <a href="recuperar_contra.html"><u>¿Olvidaste tu contraseña?</u></a>
+                            </div>
+                            <div id="contra_login">
+                                <input id="password_login" name="password_login" type="password" class="validate" data-length="60" size="60" maxlength="60" required/><img
+                                    src="../../recursos/iconografia/ocultar.png" id="ocultar" alt="mostrar" onclick="mostrarContrasena()"/>
+                            </div>
                         </div>
-                    </div>
+                        <div class="card-action" id="boton_iniciar_login">
+                            <button class="btn-small waves-effect waves-orange" type="submit">Iniciar Sesión</button>
+                        </div>
+                        <div id="registro_login">
+                            <a href="registro_usuario.html"><u>Registrarse</u></a>
+                        </div>
+                    </form>
                 </div>
-                <div class="card-action" id="boton_iniciar_login">
-                    <a class="btn-small waves-effect waves-orange" href="dashboard.html">Iniciar Sesión</a>
-                </div>
-                    <div id="registro_login">
-                        <a href="registro_usuario.html"><u>Registrarse</u></a>
-                    </div>
             </div>
         </div>
     </main>
@@ -69,7 +73,9 @@
         </div>
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/publico/index.js"></script>
 </body>
 

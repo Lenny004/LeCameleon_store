@@ -10,6 +10,7 @@ class Categorias extends Validator
     private $categoria = null;
     private $imagen = null;
     private $link = '../images/categorias/';
+    private $cantidadCategorias = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
@@ -65,6 +66,11 @@ class Categorias extends Validator
     public function getLink()
     {
         return $this->link;
+    }    
+    
+    public function getSumaCategoria()
+    {
+        return $this->cantidadCategorias;
     }
 
     /*
@@ -78,6 +84,17 @@ class Categorias extends Validator
         $params = array($this->categoria, $this->imagen);
         return Database::ejecutarSentencia($sql, $params);
     }
+
+    public function sumaCategorias(){
+        $sql = 'SELECT COUNT(idcategoria_producto) as suma FROM tbcategoria';
+        $params = null;
+        if ($data = Database::obtenerSentencia($sql, $params)) {
+            $this->cantidadCategorias = $data['suma'];
+            return true;
+        } else {
+            return false;
+        }
+    } 
 
     public function mostrarDatosTabla()
     {

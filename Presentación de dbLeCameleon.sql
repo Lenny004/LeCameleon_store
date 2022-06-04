@@ -279,6 +279,16 @@ INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "t
     ('Brazalete de cuero', 'Brazalete de cuero color cafe', 'cuero', 'M', 10, 20, 5.00, 9, 1, 1, 1, 16),
     ('Camiseta de hombre Sivar', 'Camiseta de algodon de hombre', 'algodon', 'M', 10, 20, 11.00, 2, 14, 14, 1, 18);
 
+INSERT INTO public."tbimagen_producto"("imagen_producto", "idproducto")
+VALUES ('image1.png',2),
+('image2.png',2),
+('image3.png', 2),
+('image4.png',2),
+('image11.png', 6),
+('image2.png',6),
+('image21.png', 7),
+('image22.png',7);
+
 INSERT INTO public."tbtipo_empleado"("tipo_empleado")
     VALUES ('Administrador'), ('Repartidor');
 
@@ -305,19 +315,24 @@ INSERT INTO public."tbestado_usuario_e"(
 
 INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado", "idtipo_usuario_e", "idestado_usuario_e")
 	VALUES ('lenny', '1234', 1, 1, 1),
-('aimee', '1234', 2, 2, 1);
+('aimee', '1234', 2, 2, 1),
+('erick', '1234', 3, 1, 1),
+('mangandi', '1234', 4, 1, 1),
+('nelson', '1234', 5, 1, 1);
 
 INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
-	VALUES ('Lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
-('Fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),
-('Aimee', '123', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', 1),
-('Sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', 1),
-('Gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', 1),
-('Oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', 1),
-('Erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', 1),
-('Jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', 1),
-('Sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', 1),
-('Geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', 1);
+	VALUES ('lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
+('aimee', '1234', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', 1),
+('nelson', '1234', 'Nelson Daniel', 'Peña Pineda', 'nelson@gmail.com', '7895-9467' ,'Mejicanos, San Salvador', 1),
+('mangandi', '1234', 'Rodrigo Gabriel', 'Mangandi Cardona', 'mangandi@gmail.com', '6952-5487', 'Mejicanos, San Salvador', 1),
+('fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),
+('sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', 1),
+('gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', 1),
+('oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', 1),
+('erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', 1),
+('jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', 1),
+('sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', 1),
+('geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', 1);
 
 INSERT INTO public."tbestado_factura"("estado_factura")
 	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando');

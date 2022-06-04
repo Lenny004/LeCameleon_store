@@ -164,6 +164,10 @@ function sweetAlert(type, text, url) {
             title = 'Campos Vacios';
             icon = 'warning';
             break;
+        case 6:
+            title = 'Bienvenido';
+            icon = 'info';
+            break;
     }
     // Si existe una ruta definida, se muestra el mensaje y se direcciona a dicha ubicación, de lo contrario solo se muestra el mensaje.
     if (url) {
@@ -249,6 +253,43 @@ function logOut() {
         // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
         if (value) {
             fetch(API_USUARIOS + 'cerrarSesion', {
+                method: 'get'
+            }).then(function (request) {
+                // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+                if (request.ok) {
+                    // Se obtiene la respuesta en formato JSON.
+                    request.json().then(function (response) {
+                        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                        if (response.estado) {
+                            sweetAlert(1, response.message, 'index.html');
+                        } else {
+                            sweetAlert(2, response.exception, null);
+                        }
+                    });
+                } else {
+                    console.log(request.estado + ' ' + request.estadoText);
+                }
+            });
+        } else {
+            sweetAlert(4, 'Puede continuar con la sesión', null);
+        }
+    });
+}
+
+
+// Función para mostrar un mensaje de confirmación al momento de cerrar sesión en el sitio público.
+function cerrarSesion() {
+    swal({
+        title: 'Cerrar Sesión',
+        text: '¿Está seguro de cerrar la sesión?',
+        icon: 'warning',
+        buttons: ['No', 'Sí'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    }).then(function (value) {
+        // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
+        if (value) {
+            fetch(API_LOGIN_CLIENTE + 'cerrarSesion', {
                 method: 'get'
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.

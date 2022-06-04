@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     //Var se crea para variables globales
     //let es variables locales
+    M.AutoInit();
 
     //Instanciar el menú
     M.Sidenav.init(document.querySelectorAll('.sidenav'));
-
     //Instanciar Dropdown Menú
     var elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, { coverTrigger: false, hover: true });
