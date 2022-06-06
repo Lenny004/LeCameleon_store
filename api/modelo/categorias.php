@@ -37,7 +37,7 @@ class Categorias extends Validator
 
     public function setImagen($file)
     {
-        if ($this->validateImageFile($file, 500, 500)) {
+        if ($this->validateImageFile($file, 2000, 2000)) {
             $this->imagen = $this->getFileName();
             return true;
         } else {

@@ -22,71 +22,6 @@
 <body>
     <!--Encabezado del sitio web-->
     <header>
-        <!--Anuncios-->
-        <div id="barra_anuncio" class="z-depth-1">
-            <a href="#" class="mensaje_arriba">
-                <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
-                <p>Esta semana Descuento en la Decoracion de oficina</p>
-            </a>
-        </div>
-        <!--Logo, buscador, idioma, login y carrito de compras-->
-        <div id="apartado_buscador">
-            <!--Logo-->
-            <div id="logo_imagen">
-                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
-            </div>
-            <!--Categoria de busqueda-->
-            <div id="boton_categoria" class="hide-on-med-and-down">
-                <div class="input-field grey lighten-2 z-depth-2">
-                    <select>
-                        <option value="" disabled selected>Todo</option>
-                        <option value="1">Decoración</option>
-                        <option value="2">Accesorios</option>
-                        <option value="3">Artesanales</option>
-                        <option value="4">Marcas</option>
-                        <option value="5">Color</option>
-                    </select>
-                </div>
-            </div>
-            <!-- Buscador -->
-            <div id="buscador" class="hide-on-med-and-down">
-                <nav class="grey lighten-2">
-                    <div class="nav-wrapper">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-            </div>
-            <!--Idioma-->
-            <div id="boton_idioma">
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-trigger btn grey lighten-2' href='#' data-target='dropdown_idioma'>
-                    <p>Español</p>
-                    <img src="../../recursos/iconografia/el_salvador.png" alt="español" width="20" height="20">
-                </a>
-                <!-- Dropdown Structure -->
-                <ul id='dropdown_idioma' class='dropdown-content'>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
-                                width="20" height="20"></a></li>
-                </ul>
-            </div>
-            <!--Login-->
-            <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión"
-                        src="../../recursos/iconografia/usuario.png" alt="login"></a>
-            </div>
-            <!--Carrito de Compras-->
-            <div id="boton_carrito">
-                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
-                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
-                        height="35"><span>1</span></a>
-            </div>
-        </div>
     </header>
     <!--Menú de navegación del sitio web-->
     <div class="navbar-fixed" id="menu">
@@ -111,33 +46,33 @@
                 <ul class="left hide-on-med-and-down" id="opciones">
                     <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown1">
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
-                    <ul id="dropdown_decoracion" class="dropdown-content">
-                        <li><a class="btn-flat disabled" id="desactivado">Exteriores del hogar</a></li>
-                        <li class="divider"></li>
+                    <ul id="dropdown_1" class="dropdown-content">
                         <li><a href="patio.html">Patio</a></li>
+                        <li class="divider"></li>
                         <li><a href="terraza.html">Terraza</a></li>
+                        <li class="divider"></li>
                         <li><a href="otros.html">Otros</a></li>
-                        <li><a class="btn-flat disabled" id="desactivado">Interiores del hogar</a></li>
                         <li class="divider"></li>
                         <li><a href="dormitorio.html">Dormitorio</a></li>
+                        <li class="divider"></li>
                         <li><a href="cocina.html">Cocina</a></li>
+                        <li class="divider"></li>
                         <li><a href="salon.html">Salón</a></li>
+                        <li class="divider"></li>
                         <li><a href="baño.html">Baño</a></li>
-                        <li><a class="btn-flat disabled" id="desactivado">Oficina</a></li>
                         <li class="divider"></li>
                         <li><a href="tecnologicos.html">Accesorios Tecnológicos</a></li>
+                        <li class="divider"></li>
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios">Accesorios
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown2">
                     </li>
                     <!-- Estructura del Dropdown del accesorio-->
-                    <ul id="dropdown_accesorios" class="dropdown-content">
+                    <ul id="dropdown_2" class="dropdown-content">
                         <li><a href="anillos.html">Anillos</a></li>
                         <li class="divider"></li>
                         <li><a href="aretes.html">Aretes</a></li>
@@ -154,19 +89,15 @@
                         <li class="divider"></li>
                         <li><a href="relojes.html">Relojes</a></li>
                         <li class="divider"></li>
-                        <li><a class="btn-flat disabled" id="desactivadoP">Playeras</a></li>
-                        <li class="divider"></li>
                         <li><a href="playerasma.html">Masculinas</a></li>
                         <li class="divider"></li>
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artesanales.html"
-                            data-target="dropdown_artesanales">Artesanales
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown3">
                     </li>
                     <!-- Estructura del Dropdown de artesanales -->
-                    <ul id="dropdown_artesanales" class="dropdown-content">
+                    <ul id="dropdown_3" class="dropdown-content">
                         <li><a href="artaccesorios.html">Accesorios Artesanales</a></li>
                         <li class="divider"></li>
                         <li><a href="artdecoracion.html">Decoración Artesanal</a></li>
@@ -202,9 +133,7 @@
                 <div class="background">
                     <img src="../../recursos/img/main_publico/nav3.jpg">
                 </div>
-                <a href="index.html" class="waves-effect waves-red"><img class="circle"
-                        src="../../recursos/iconografia/usuario.png">Iniciar
-                    Sesión</a>
+                <a href="index.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
             </div>
         </li>
         <div id="opciones_movil">
@@ -277,8 +206,7 @@
             </ul>
             <li><a href="marcas.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/marcas.png"
                         alt="marca">Marcas</a></li>
-            <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png"
-                        alt="ofertas">Ofertas</a></li>
+            <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png" alt="ofertas">Ofertas</a></li>
             <!-- Dropdown Trigger Servicio al cliente -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil"><img
                         src="../../recursos/iconografia/servicio.png" alt="servicio">Servicio al Cliente
@@ -302,13 +230,9 @@
                 <div class="divider"></div>
             </li>
             <li><a class="subheader">Configuración</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/usuario.png"
-                        alt="perfil">Perfil</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
-                        alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png"
-                        alt="cerrar">Cerrar Sesión</a>
-            </li>
+            <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+            <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
@@ -324,52 +248,16 @@
                 </div>
                 <input class="hide" type="number" id="id" name="id">
                 <div id="realizados">
-                    <div id="pedidos">
-                        <div class="imagen_producto">
-                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
-                        </div>
-                        <div class="datos_producto">
-                            <p><b>Reloj Rolex 702</b></p>
-                            <p><b>Dirección de entrega:</b> Monseñor Romero y Final Calle 5 de Noviembre entre 21a y 23a</p>
-                            <p><b>Fecha de entrega:</b> 2022-06-04</p>
-                            <p><b>Cantidad:</b> 6</p>
-                            <p><b>Total:</b> $89.99</p>
-                        </div>
-                    </div>
                 </div>
                 <div id="entregados">
-                    <div id="pedidos">
-                        <div class="imagen_producto">
-                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
-                        </div>
-                        <div class="datos_producto">
-                            <p><b>Reloj Rolex 702</b></p>
-                            <p><b>Entregado el 2022-06-04</b></p>
-                            <p><b>Cantidad:</b> 6</p>
-                            <p><b>Total:</b> $89.99</p>
-                        </div>
-                    </div>
-                    <div id="pedidos">
-                        <div class="imagen_producto">
-                            <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
-                        </div>
-                        <div class="datos_producto">
-                            <p><b>Reloj Rolex 702</b></p>
-                            <p><b>Entregado el 2022-06-04</b></p>
-                            <p><b>Cantidad:</b> 6</p>
-                            <p><b>Total:</b> $89.99</p>
-                        </div>
-                        <div class="boton_azul">
-                            <button class="btn-small waves-effect waves-blue modal-trigger" href="#modal_resenia_producto" type="submit">Escribir Reseña</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
         <!-- Agregar Reseña Producto -->
         <div id="modal_resenia_producto" class="modal">
             <div class="modal-content">
-                <form method="post" id="form_modificar">
+                <form method="post" id="form-resenia">
                     <div id="titulo_modal">
                         <div>
                             <h4>Reseña del Producto</h4>
@@ -382,9 +270,10 @@
                     <div class="row contenido_modal_resenia">
                         <div class="divider"></div>
                         <div class="col s12 m12 l12 xl12 producto">
-                            <input class="hide" type="number" id="ide" name="ide">
-                            <label class="active" for="nombreM">Producto:</label>
-                            <input id="nombreM" name="nombreM" type="text" class="validate" disabled>
+                            <input class="hide" type="number" id="idpedido" name="idpedido">
+                            <input class="hide" type="number" id="valoracion" name="valoracion">
+                            <label class="active" for="nombre_producto">Producto:</label>
+                            <input id="nombre_producto" name="nombre_producto" type="text" class="validate" disabled>
                         </div>
                         <div class="valoraciones">
                             <a onclick="valoraciones(1)" class="tooltipped" data-position="top" data-tooltip="Muy malo"><img src="../../recursos/iconografia/estrella_borde.png" id="estrella1" alt="estrella"></a>
@@ -395,7 +284,7 @@
                         </div>
                         <div class="col s12 m12 l12 xl12">
                             <label class="active" for="resenia">Reseña:</label>
-                            <textarea id="resenia" class="materialize-textarea" maxlength="500"></textarea>
+                            <textarea id="resenia" name="resenia" class="materialize-textarea" maxlength="500" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -467,8 +356,9 @@
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/carrito.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/tus_pedidos.js"></script>
 </body>
 
 </html>

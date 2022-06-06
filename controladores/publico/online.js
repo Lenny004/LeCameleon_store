@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <option value="1">Decoración</option>
                                 <option value="2">Accesorios</option>
                                 <option value="3">Artesanales</option>
-                                <option value="4">Marcas</option>                                    <option value="5">Color</option>
+                                <option value="4">Marcas</option>
+                                <option value="5">Color</option>
                             </select>
                         </div>
                     </div>
@@ -49,8 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <form method="post" id="thesearch">
                                     <div class="input-field">
                                         <input id="search" name="search" type="search" required>
+                                        <input id="ide" name="ide" class="hide" type="number">
                                     </div>
-                                    <button href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></button>
+                                    <button href="" type="submit" onclick="buscar(event)" ><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></button>
                                 </form>
                             </div>
                         </nav>
@@ -115,18 +117,19 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </div>
                         <!-- Buscador -->
-                        <div id="buscador" class="hide-on-med-and-down">
-                            <nav class="grey lighten-2">
-                                <div class="nav-wrapper">
-                                    <form>
-                                        <div class="input-field">
-                                            <input id="search" type="search" required>
-                                        </div>
-                                    </form>
-                                </div>
-                            </nav>
-                            <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-                        </div>
+                    <div id="buscador" class="hide-on-med-and-down">
+                        <nav class="grey lighten-2">
+                            <div class="nav-wrapper">
+                                <form method="post" id="thesearch">
+                                    <div class="input-field">
+                                        <input id="search" name="search" type="search" required>
+                                        <input id="ide" name="ide" class="hide" type="number">
+                                    </div>
+                                    <button href="" onclick="buscar(event)" type="submit"><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></button>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
                         <!--Idioma-->
                         <div id="boton_idioma">
                             <!-- Dropdown Trigger -->
@@ -148,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         <!--Carrito de Compras-->
                         <div id="boton_carrito">
-                            <a href=""><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Login Necesario para el Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                            <a href="index.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Login Necesario para el Carrito de Compras" alt="login" height="35"><span>1</span></a>
                         </div>
                     </div>`;
                 }
@@ -166,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 //Instanciar Dropdown Menú
                 var elems = document.querySelectorAll('.dropdown-trigger');
                 M.Dropdown.init(elems, { coverTrigger: false, hover: false });
+                M.Collapsible.init(document.querySelectorAll('.collapsible'));
             });
         } else {
             console.log(request.estado + ' ' + request.statusText);
@@ -212,7 +216,6 @@ function agregarCategoria(dataset) {
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     total = response.suma_categorias;
-                    console.log(total);
                     dropdown1 = '';
                     dropdown2 = '';
                     dropdown3 = '';

@@ -313,6 +313,8 @@ function cerrarSesion() {
     });
 }
 
+
+
 function ModoNocturno(){
     document.body.classList.toggle('dark');
 

@@ -206,7 +206,8 @@
             </ul>
             <li><a href="marcas.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/marcas.png"
                         alt="marca">Marcas</a></li>
-            <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png" alt="ofertas">Ofertas</a></li>
+            <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png"
+                        alt="ofertas">Ofertas</a></li>
             <!-- Dropdown Trigger Servicio al cliente -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil"><img
                         src="../../recursos/iconografia/servicio.png" alt="servicio">Servicio al Cliente
@@ -232,61 +233,145 @@
             <li><a class="subheader">Configuración</a></li>
             <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
             <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>
+            <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
+            </li>
         </div>
     </ul>
     <!--Contenido del sitio web-->
-    <main>
-        <!--Slider para mostrar imagenes en el main-->
-        <div class="slider z-depth-3" id="slider_main">
-            <ul class="slides">
-                <li>
-                    <img src="../../recursos/img/main_publico/sala1.jpg"><!-- random image -->
-                    <div class="caption left-align">
-                        <h1>Nueva Colección Vintage</h1>
-                        <h3 class="light grey-text text-lighten-3">Disponible</h3>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../recursos/img/main_publico/sala2.jpeg"> <!-- random image -->
-                    <div class="caption left-align">
-                        <h1>Nueva Colección Vintage</h1>
-                        <h3 class="light grey-text text-lighten-3">Disponible</h3>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../recursos/img/main_publico/sala3.jpg"> <!-- random image -->
-                    <div class="caption left-align">
-                        <h1>Nueva Colección Vintage</h1>
-                        <h3 class="light grey-text text-lighten-3">Disponible</h3>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../recursos/img/main_publico/escritorio.jpeg"> <!-- random image -->
-                    <div class="caption left-align">
-                        <h1>Nueva Colección Vintage</h1>
-                        <h3 class="light grey-text text-lighten-3">Disponible</h3>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <!--Tarjetas de Categorias-->
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m12 l12 xl12">
-                    <!--Titulo de Categorias-->
-                    <h1 class="titulo_categoria">Categorias</h1>
+    <main class="contenido">
+        <input id="id" name="id" class="hide" type="number">
+        <div class="row">
+            <div class="col s3 m3 l3 xl3">
+                <div>
+                    <h3 class="titulo_categoria" id="title"></h3>
+                    <h5 id="apartado_productos">Apartados</h5>
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>Exteriores
+                                del hogar</div>
+                            <div class="collapsible-body">
+                                <span>
+                                    <a href="">- Patio<br></a>
+                                    <a href="">- Terraza<br></a>
+                                    <a href="">- Otros</a>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>Interiores
+                                del hogar</div>
+                            <div class="collapsible-body">
+                                <span>
+                                    <a href="">- Dormitorio<br></a>
+                                    <a href="">- Cocina<br></a>
+                                    <a href="">- Salón<br></a>
+                                    <a href="">- Baño</a>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>Oficina
+                            </div>
+                            <div class="collapsible-body">
+                                <span>
+                                    <a href="">- Accesorios Tecnológico<br></a>
+                                    <a href="">- Decoración de Escritorios</a>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div id="categorias">
+                <div class="marcas_productos">
+                    <h5>Marcas</h5>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>Maine_Furnitore_Co.</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>Rebecca_Mobili</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>Living_Nostalgia</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>Ariete</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>WedgWood</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <span>TENDANCE</span>
+                    </label>
+                    <p id="textolink"><a href="dashboard.html">Ver más...</a></p>
                 </div>
-                <div class="col s12 m12 l12 xl12">
-                    <!--Titulo de Categorias-->
-                    <h1 class="titulo_categoria">Sub-Categorias</h1>
-                    <h4 class="titulo_categoria" id="title"></h4>
+                <div class="precio_cantidad" id="rango_precios">
+                    <h5>Precio</h5>
+                    <a href="">$0 a $25</a>
+                    <a href="">$25 a $50</a>
+                    <a href="">$50 a $100</a>
+                    <a href="">$100 y más</a>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    <input id="icon_prefix" type="number" class="validate">
+                                    <label for="icon_prefix">$ Mín.</label>
+                                </div>
+                                <p class="input-field col s1"> - </p>
+                                <div class="input-field col s5">
+                                    <input id="icon_telephone" type="number" class="validate">
+                                    <label for="icon_telephone">$ Máx.</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <form action="#">
+                        <p class="range-field">
+                            <input type="range" id="test5" min="0" max="100" />
+                        </p>
+                    </form>
                 </div>
-                <div id="subcategoria">
+                <div class="ofertas_descuentos">
+                    <h5>Ofertas y Descuentos</h5>
+                    <a href="ofertas.html">Todos los Descuentos</a>
+                </div>
+                <h5>Color</h5>
+                <div class="row">
+                    <a class="coloriz uno col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz dos col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz tres col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz cuatro col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz cinco col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz seis col s1 button" href="billeteras.html"></a>
+                </div>
+                <div class="row">
+                    <a class="coloriz siete col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz ocho col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz nueve col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz diez col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz once col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz doce col s1 button" href="billeteras.html"></a>
                 </div>
             </div>
+            <div class="col s9 m9 l9 xl9" id="seccion_productos">
+                <!--Card-->
+                <div class="row" id="productosc"></div>
+            </div>
+            <!-- Fila para mostrar los productos disponibles 
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>-->
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
@@ -295,32 +380,33 @@
         <aside id="informacion">
             <div>
                 <p>POLÍTICA DE SERVICIO</p>
-                <a href="politica_envio.html">Política y Zona de envíos</a><br>
-                <a href="condiciones_compra.html">Condiciones de Compra</a><br>
-                <a href="terminos_servicio.html">Términos de Servicio</a><br>
-                <a href="politica_privacidad.html">Política de Privacidad</a><br>
-                <a href="legal.html">Legal</a>
+                <a href="Politica_envio.html">Política y Zona de envíos</a><br>
+                <a href="Condiciones_compra.html">Condiciones de Compra</a><br>
+                <a href="Terminos_servicio.html">Términos de Servicio</a><br>
+                <a href="Politica_privacidad.html">Política de Privacidad</a><br>
+                <a href="Legal.html">Legal</a>
             </div>
             <div>
                 <p>CONÓCENOS</p>
-                <a href="acercade.html">Acerca de Le Caméléon</a><br>
+                <a href="Acercade.html">Acerca de Le Caméléon</a><br>
                 <a href="contactanos.html">Contáctanos</a>
             </div>
             <div>
                 <p>SOPORTE</p>
-                <a href="devoluciones.html">Devoluciones y Reembolsos</a><br>
+                <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
                 <a href="reportar_problema.html">Reportar un Problema</a><br>
                 <a href="">Tus Pedidos</a>
             </div>
             <div id="redes">
                 <p>SÍGUENOS EN TU RED FAVORITA</p>
-                <a href=""><img src="../../recursos/iconografia/instagram.png" alt="instagram" height="30"
-                        class="instagram"></a>
-                <a href=""><img src="../../recursos/iconografia/facebook.png" alt="facebook" height="30"
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
                         class="facebook"></a>
-                <a href=""><img src="../../recursos/iconografia/youtube.png" alt="youtube" height="30"
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
                         class="youtube"></a>
-                <a href=""><img src="../../recursos/iconografia/tiktok.png" alt="tiktok" height="30" class="tiktok"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
             </div>
             <div id="correo">
                 <p>E-MAIL DE SUSCRIPCIÓN</p>
@@ -349,8 +435,8 @@
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
     <script type="text/javascript" src="../../controladores/publico/online.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/productosc.js"></script>
 </body>
 
 </html>

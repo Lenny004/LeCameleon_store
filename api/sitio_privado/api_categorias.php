@@ -17,7 +17,6 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'readAll':
                 if ($result['dataset'] = $categoria->mostrarDatosTabla()) {
-                    echo($result['dataset']);
                     $result['estado'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();

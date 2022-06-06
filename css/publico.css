@@ -494,7 +494,12 @@ footer {
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PRODUCTOS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN PRODUCTOS------------------------------------------------------*/
 /*El titulo izq le damos desbordamiento*/
-titulo_izquierdo {
+#title {
+    white-space: initial;
+    overflow: hidden;
+}
+
+#apartado_productos {
     white-space: initial;
     overflow: hidden;
 }
@@ -562,6 +567,7 @@ titulo_izquierdo {
 #seccion_productos .card a {
     border: 2px solid #2f6950;
     padding: 5px 35px 5px 35px;
+    margin-right: 0;
 }
 
 /*Le damos un fondo al boton al poner el mouse encima*/
@@ -843,6 +849,10 @@ img.imagen_muestra {
     margin-bottom: 5%;
 }
 
+.detalle_del_producto p{
+    font-weight: 700;
+}
+
 .contenedor_reseñas {
     width: 92%;
     border: 1px solid #777676;
@@ -983,7 +993,6 @@ img.imagen_muestra {
 
 .precio_producto {
     width: 20%;
-    text-align: end;
 }
 
 .producto_imagen img {
@@ -1153,12 +1162,38 @@ img.imagen_muestra {
     align-items: center;
 }
 
+#pedidos_entrega_hoy{
+    width: 100%;
+    background-color: #bbd6ea;
+    border-radius: 8px;
+    margin-top: 2%;
+    margin-right: 1%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/*Le damos una posición y tamaño a la imagen del camión*/
+#pedidos_entrega_hoy img {
+    padding-top: 4%;
+    max-width: 200px;
+    max-height: 200px;
+    padding-bottom: 4%;
+}
+
 /*Le damos una posición y tamaño a la imagen del camión*/
 #pedidos img {
     padding-top: 4%;
     max-width: 200px;
     max-height: 200px;
     padding-bottom: 4%;
+}
+
+.anuncio_entrega_hoy{
+    background-color: #C63637;
 }
 
 .imagen_producto{
@@ -1244,6 +1279,10 @@ img.imagen_muestra {
 .valoraciones img{
     width: 45px;
     cursor: pointer;
+}
+
+#resenias_usuarios{
+    width: 100%;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
