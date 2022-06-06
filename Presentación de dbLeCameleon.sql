@@ -102,7 +102,7 @@ CREATE TABLE tbestado_producto (
 
 CREATE TABLE tbproducto (
     idproducto SERIAL primary key,
-    nombre_producto character varying(150) NOT NULL,
+    nombre_producto character varying(75) NOT NULL,
     descripcion character varying(1000) NOT NULL,
     material character varying(50) NOT NULL,
     tamaño character varying(50),
@@ -155,7 +155,7 @@ CREATE TABLE tbdetalle_factura (
     iddetalle_factura SERIAL primary key,
     total_producto numeric(7,2) NOT NULL,
     precio_actual numeric(6,2) NOT NULL,
-    cantidad_descuento numeric(6,2) NOT NULL,
+    cantidad_descuento numeric(6,2) DEFAULT 0 NULL,
     cantidad_producto smallint NOT NULL,
     idfactura integer NOT NULL REFERENCES tbfactura(idfactura),
     idproducto integer NOT NULL REFERENCES tbproducto(idproducto)
@@ -202,32 +202,32 @@ INSERT INTO public."tbdistribuidor"("nombre_distribuidor", "direccion_distribuid
     ('Nahanche','Metrocentro, Tercera Etapa Local 74 y 75 San Salvador CP, 1101', '+503 2260 1581'),
     ('Coco Canela', '9° Calle Poniente #4036, Local #6, Plaza La Novena, Colonia Escalón entre la 77° y la, 79 Avenida Nte., San Salvador', '+503 2223 8088');
 
-INSERT INTO public."tbcategoria"("categoria_producto")
-    VALUES ('Decoración'), ('Accesorios'),('Artesanales');
+INSERT INTO public."tbcategoria"("categoria_producto", "imagen_categoria")
+    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629be06ae1845.jpg'),('Artesanales', '629be073b2933.jpg');
 
 
-INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "idcategoria_producto")
-    VALUES ('Patio', 1),
-    ('Terraza', 1),
-    ('Otros', 1), 
-    ('Dormitorio', 1),
-    ('Cocina', 1),
-    ('Salón', 1),
-    ('Baño', 1),
-    ('Accesorios tecnológicos', 1),
-    ('Decoración de escritorios', 1),
-    ('Anillos', 2),
-    ('Aretes', 2),
-    ('Billeteras', 2),
-    ('Collares', 2),
-    ('Llaveros', 2),
-    ('Pines', 2),
-    ('Pulseras', 2),
-    ('Relojes', 2),
-    ('Playeras Masculinas', 2),
-    ('Playeras Femeninas', 2),
-    ('Accesorios Artesanales', 3),
-    ('Decoración Artesanal', 3);
+INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "imagen_subcategoria","idcategoria_producto")
+    VALUES ('Patio', '629c97600f700.jpg', 1),
+    ('Terraza', '629c973194afc.jpg', 1),
+    ('Otros', '629c973b1963c.jpg', 1), 
+    ('Dormitorio', '629c9743ad46e.jpg', 1),
+    ('Cocina', '629c974c8919b.jpeg', 1),
+    ('Salón', '629c9755e9fee.jpg', 1),
+    ('Baño', '629c9724c9951.jpg', 1),
+    ('Accesorios tecnológicos', '629c97f978565.png', 1),
+    ('Decoración de escritorios', '629c97d7e17e2.jpg', 1),
+    ('Anillos', '629be63b8951e.jpg', 2),
+    ('Aretes', '629be6230ffda.jpg', 2),
+    ('Billeteras', '629be65082eaa.jpg', 2),
+    ('Collares', '629be897cf087.jpg', 2),
+    ('Llaveros', '629be69a1d41b.jpg', 2),
+    ('Pines', '629be8a13b854.jpg', 2),
+    ('Pulseras', '629be8aaf0092.jpg', 2),
+    ('Relojes', '629c1d108f17e.jpg', 2),
+    ('Playeras Masculinas', '629c1cf1d5fda.png', 2),
+    ('Playeras Femeninas', '629be8bc89ab6.jpg', 2),
+    ('Accesorios Artesanales', '629be68c37a81.jpg', 3),
+    ('Decoración Artesanal', '629c96e0f1fd1.jpg', 3);
 
 INSERT INTO public."tbcolor"("color")
     VALUES ('rojo'),
@@ -335,14 +335,18 @@ INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_clie
 ('geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', 1);
 
 INSERT INTO public."tbestado_factura"("estado_factura")
-	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando');
+	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando'), ('Editando');
 
 INSERT INTO public."tbtipo_pago"("tipo_pago")
 	VALUES ('Debito'),('Chivo Wallet');
 
 INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura", "idusuario_c")
-	VALUES 
-    ('2022-03-14', 25.80, 2, 1),
+	VALUES
+    ('2022-06-05', 66.39, 2, 1),
+    ('2022-06-05', 45.00, 1, 1),
+    ('2022-06-05', 44.90, 1, 1),
+    ('2022-06-05', 54.90, 1, 1),
+
 	('2022-03-15', 17.20, 2, 2),
 	('2022-03-16', 8.60, 2, 3),
 	('2022-03-17', 8.60, 2, 4),
@@ -362,9 +366,13 @@ INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura
 
 INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "cantidad_descuento", "cantidad_producto", "idfactura", "idproducto")
 	VALUES 
-    (8.60, 8.60, 0, 3, 1, 2),
-	(8.60, 8.60, 0, 2, 2, 2),
-	(8.60, 8.60, 0, 1, 3, 2),
+    (19.20, 9.60, 0, 2, 1, 1),
+    (17.20, 8.60, 0, 2, 1, 2),
+    (29.99, 29.99, 0, 1, 1, 3),
+	(8.60, 8.60, 0, 1, 2, 2),
+	(44.90, 44.90, 0, 1, 3, 4),
+	(54.90, 54.90, 0, 1, 4, 5),
+
 	(8.60, 8.60, 0, 1, 4, 2),
 	(8.60, 8.60, 0, 1, 5, 2),
     (54.90, 54.90, 0, 1, 6, 5),
@@ -395,18 +403,30 @@ INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "canti
 
 INSERT INTO public."tbenvio_pedido"("direccion_entrega_pedido", "fecha_entrega_pedido", "idfactura")
 	VALUES ('Metrocentro', '2022-03-21', 1),
-	('Colonia Escalon Av23 Casa#14', '2022-03-22', 2),
-	('Plaza Mundo', '2022-03-23', 3),
-	('Mejicanos, Colonia Zacamil residencial universitaria', '2022-03-24', 4),
-    ('San Martin, San Salvador', '2022-03-29', 5),
-	('Santo Tomas AV 14 casa #12', '2022-03-20', 6),
-	('Colonia Monte Carmelo, Ilopango', '2022-03-17', 7),
-	('Residencia España, Av34 Casa #67', '2022-03-25', 8),
-    ('Calle vista al lago en circulo cercano al restaurante, casa #89', '2022-05-25', 9),
-    ('Instituto Técnico Ricaldone', '2022-05-25', 10),
-    ('Monseñor Romero y Final Calle 5 de Noviembre entre 21ª y 23ª', '2022-05-29', 11),
-    ('SAN SALVADOR. Dirección: 87 Ave. Sur, No. 7, Colonia Escalón, San Salvador', '2022-05-29', 12),
-    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 13);
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 2),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 3),
+    ('Colonia Escalon Av23 Casa#14', '2022-03-22', 4),
+    
+	('Plaza Mundo', '2022-03-23', 5),
+	('Mejicanos, Colonia Zacamil residencial universitaria', '2022-03-24', 6),
+    ('San Martin, San Salvador', '2022-03-29', 7),
+	('Santo Tomas AV 14 casa #12', '2022-03-20', 8),
+	('Colonia Monte Carmelo, Ilopango', '2022-03-17', 9),
+	('Residencia España, Av34 Casa #67', '2022-03-25', 10),
+    ('Calle vista al lago en circulo cercano al restaurante, casa #89', '2022-05-25', 11),
+    ('Instituto Técnico Ricaldone', '2022-05-25', 12),
+    ('Monseñor Romero y Final Calle 5 de Noviembre entre 21ª y 23ª', '2022-05-29', 13),
+    ('SAN SALVADOR. Dirección: 87 Ave. Sur, No. 7, Colonia Escalón, San Salvador', '2022-05-29', 14),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 15);
+
+INSERT INTO public."tbestado_valoracion"(
+	"estado_valoracion")
+	VALUES ('Visible'),('Invisible');
+
+INSERT INTO public.tbvaloraciones(
+	valoraciones, "reseña", fecha_publicacion, idproducto, idestado_valoracion, idusuario_c)
+	VALUES (4, 'Me ha gustado el producto','2022-05-06', 2, 1, 1),
+    (4, 'Me ha gustado el producto','2022-05-06', 3, 1, 1);
 
 ---------------------------------------------------INNER JOIN---------------------------------------------------
 

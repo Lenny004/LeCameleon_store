@@ -126,7 +126,7 @@ function openUpdate(id) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('ide').value = response.dataset.idsubcategoria_producto;
                     document.getElementById('nombrearchivo').value = response.dataset.imagen_subcategoria;
-                    document.getElementById('subcategoria_eliminar').value = response.dataset.subcategoria_producto;
+                    document.getElementById('subcategoria_modificar').value = response.dataset.subcategoria_producto;
                     fillSelect(ENDPOINT_CATEGORIA, 'select_subcategoria', response.dataset.idcategoria_producto);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.      
                     M.updateTextFields();

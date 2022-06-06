@@ -38,7 +38,7 @@ class Subcategoria extends Validator
 
     public function setimagenSubCategoria($file)
     {
-        if ($this->validateImageFile($file, 1000, 1000)) {
+        if ($this->validateImageFile($file, 2000, 2000)) {
             $this->imagenSubCategoria = $this->getFileName();
             return true;
         } else {

@@ -43,6 +43,11 @@ class UsuarioCliente extends Validator
         }
     }
 
+    public function getIdUsuarioC()
+    {
+        return $this->idusuario_c;
+    }
+
     /* Traer los datos de un usuario si el usuario ingresado existe */
     public function obtenerUsuariosClientes()
     {

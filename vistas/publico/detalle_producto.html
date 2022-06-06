@@ -22,71 +22,6 @@
 <body>
     <!--Encabezado del sitio web-->
     <header>
-        <!--Anuncios-->
-        <div id="barra_anuncio" class="z-depth-1">
-            <a href="#" class="mensaje_arriba">
-                <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
-                <p>Esta semana Descuento en la Decoracion de oficina</p>
-            </a>
-        </div>
-        <!--Logo, buscador, idioma, login y carrito de compras-->
-        <div id="apartado_buscador">
-            <!--Logo-->
-            <div id="logo_imagen">
-                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
-            </div>
-            <!--Categoria de busqueda-->
-            <div id="boton_categoria" class="hide-on-med-and-down">
-                <div class="input-field grey lighten-2 z-depth-2">
-                    <select>
-                        <option value="" disabled selected>Todo</option>
-                        <option value="1">Decoración</option>
-                        <option value="2">Accesorios</option>
-                        <option value="3">Artesanales</option>
-                        <option value="4">Marcas</option>
-                        <option value="5">Color</option>
-                    </select>
-                </div>
-            </div>
-            <!-- Buscador -->
-            <div id="buscador" class="hide-on-med-and-down">
-                <nav class="grey lighten-2">
-                    <div class="nav-wrapper">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-            </div>
-            <!--Idioma-->
-            <div id="boton_idioma">
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-trigger btn grey lighten-2' href='#' data-target='dropdown_idioma'>
-                    <p>Español</p>
-                    <img src="../../recursos/iconografia/el_salvador.png" alt="español" width="20" height="20">
-                </a>
-                <!-- Dropdown Structure -->
-                <ul id='dropdown_idioma' class='dropdown-content'>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English <img src="../../recursos/iconografia/inglaterra.png" alt="english"
-                                width="20" height="20"></a></li>
-                </ul>
-            </div>
-            <!--Login-->
-            <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom" data-tooltip="Iniciar Sesión"
-                        src="../../recursos/iconografia/usuario.png" alt="login"></a>
-            </div>
-            <!--Carrito de Compras-->
-            <div id="boton_carrito">
-                <a href="carrito.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped"
-                        data-position="bottom" data-tooltip="Carrito de Compras" alt="login"
-                        height="35"><span>1</span></a>
-            </div>
-        </div>
     </header>
     <!--Menú de navegación del sitio web-->
     <div class="navbar-fixed" id="menu">
@@ -111,33 +46,33 @@
                 <ul class="left hide-on-med-and-down" id="opciones">
                     <li><a href="dashboard.html">Inicio</a></li>
                     <!-- Dropdown Trigger Decoración -->
-                    <li><a class="dropdown-trigger" href="decoracion.html" data-target="dropdown_decoracion">Decoración
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown1">
                     </li>
                     <!-- Estructura del Dropdown del decoración-->
-                    <ul id="dropdown_decoracion" class="dropdown-content">
-                        <li><a class="btn-flat disabled" id="desactivado">Exteriores del hogar</a></li>
-                        <li class="divider"></li>
+                    <ul id="dropdown_1" class="dropdown-content">
                         <li><a href="patio.html">Patio</a></li>
+                        <li class="divider"></li>
                         <li><a href="terraza.html">Terraza</a></li>
+                        <li class="divider"></li>
                         <li><a href="otros.html">Otros</a></li>
-                        <li><a class="btn-flat disabled" id="desactivado">Interiores del hogar</a></li>
                         <li class="divider"></li>
                         <li><a href="dormitorio.html">Dormitorio</a></li>
+                        <li class="divider"></li>
                         <li><a href="cocina.html">Cocina</a></li>
+                        <li class="divider"></li>
                         <li><a href="salon.html">Salón</a></li>
+                        <li class="divider"></li>
                         <li><a href="baño.html">Baño</a></li>
-                        <li><a class="btn-flat disabled" id="desactivado">Oficina</a></li>
                         <li class="divider"></li>
                         <li><a href="tecnologicos.html">Accesorios Tecnológicos</a></li>
+                        <li class="divider"></li>
                         <li><a href="escritorios.html">Decoración de Escritorios</a></li>
                     </ul>
                     <!-- Dropdown Trigger Accesorio -->
-                    <li><a class="dropdown-trigger" href="accesorios.html" data-target="dropdown_accesorios">Accesorios
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown2">
                     </li>
                     <!-- Estructura del Dropdown del accesorio-->
-                    <ul id="dropdown_accesorios" class="dropdown-content">
+                    <ul id="dropdown_2" class="dropdown-content">
                         <li><a href="anillos.html">Anillos</a></li>
                         <li class="divider"></li>
                         <li><a href="aretes.html">Aretes</a></li>
@@ -154,19 +89,15 @@
                         <li class="divider"></li>
                         <li><a href="relojes.html">Relojes</a></li>
                         <li class="divider"></li>
-                        <li><a class="btn-flat disabled" id="desactivadoP">Playeras</a></li>
-                        <li class="divider"></li>
                         <li><a href="playerasma.html">Masculinas</a></li>
                         <li class="divider"></li>
                         <li><a href="playerasfe.html">Femeninas</a></li>
                     </ul>
                     <!-- Dropdown Trigger Artesanales -->
-                    <li><a class="dropdown-trigger" href="artesanales.html"
-                            data-target="dropdown_artesanales">Artesanales
-                            <i class="material-icons right">arrow_drop_down</i></a>
+                    <li id="dropdown3">
                     </li>
                     <!-- Estructura del Dropdown de artesanales -->
-                    <ul id="dropdown_artesanales" class="dropdown-content">
+                    <ul id="dropdown_3" class="dropdown-content">
                         <li><a href="artaccesorios.html">Accesorios Artesanales</a></li>
                         <li class="divider"></li>
                         <li><a href="artdecoracion.html">Decoración Artesanal</a></li>
@@ -202,9 +133,7 @@
                 <div class="background">
                     <img src="../../recursos/img/main_publico/nav3.jpg">
                 </div>
-                <a href="index.html" class="waves-effect waves-red"><img class="circle"
-                        src="../../recursos/iconografia/usuario.png">Iniciar
-                    Sesión</a>
+                <a href="index.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
             </div>
         </li>
         <div id="opciones_movil">
@@ -302,12 +231,9 @@
                 <div class="divider"></div>
             </li>
             <li><a class="subheader">Configuración</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/usuario.png"
-                        alt="perfil">Perfil</a></li>
-            <li><a href="#" class="waves-effect waves-red"><img src="../../recursos/iconografia/luna_estrellas.png"
-                        alt="luna">Modo Nocturno</a></li>
-            <li><a href="index.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/logout.png"
-                        alt="cerrar">Cerrar Sesión</a>
+            <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+            <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+            <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a>
             </li>
         </div>
     </ul>
@@ -327,77 +253,53 @@
                     <img class="imagen_muestra materialboxed" src="../../recursos/img/marcas/lofi_girl.png" alt="">
                 </div>
                 <div class="imagen_principal materialboxed">
-                    <img src="../../recursos/img/decoracion/cocina/horno_1.png" alt="">
+                    <img id="imagen_principal" src="../../recursos/img/decoracion/cocina/horno_1.png" alt="">
                 </div>
             </div>
             <div class="detalle_datos">
-                <form action="">
-                    <h5>Candelabro en forma de Linterna Vela Decoración para habitación</h5>
-                    <p>Candelabro en forma de linterna Vela, 14x15.5 cm y 16x18cm portavelas decorativo de metal de
-                        linterna, Candelabro decorativo Vintage para boda de Navidad, Fiesta de halloween, jardín
-                        familiar, color negro</p>
+                <form method="post" id="detalle-form">
+                    <input id="idproducto" name="idproducto" class="hide" type="number">
+                    <input id="precio_total" name="precio_total" class="hide" type="number" step="0.01">
+                    <input id="precio_actual" name="precio_actual" class="hide" type="number" step="0.01">
+                    <input type="number" class="hide" id="cantidad" name="cantidad">
+                    <h5 id="nombre"></h5>
+                    <p id="descripcion"></p>
                     <div class="reseñas">
-                        <a>
-                            <div id="estrellas">
-                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                                <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                            </div>(41)<u>Valoraciones</u>
+                        <a id="total_valoraciones">
                         </a>
-                        <a><img src="../../recursos/iconografia/reseña_mensaje.png" alt="reseña">(1)<u>Reseñas</u></a>
+                        <a id="total_resenias"></a>
                     </div>
-                    <p><b>Color: </b>Negro</p>
-                    <p><b>Marca: </b>Ivintage</p>
-                    <p><b>Tamaño: </b>14x15.5cm y 16x18cm</p>
-                    <p><b>Material: </b>Metal</p>
+                    <div class="detalle_del_producto">
+                        <p id="color">Color: </p>
+                        <p id="marca"><b>Marca: </b></p>
+                        <p id="tamanio"><b>Tamaño: </b></p>
+                        <p id="material"><b>Material: </b></p>
+                    </div>
+                    <hr>
+                    <div class="precio">
+                        <h5 id="precio" name="precio"></h5>
+                        <div class="cantidad">
+                            <span onclick="resta()" class="menos">-</span>
+                            <span class="numero">1</span>
+                            <span onclick="sumar()" class="mas">+</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <h5>Total: <b id="total_cantidad" name="total_cantidad">$</b></h5>
+                    </div>
+                    <hr>
+                    <div class="enviar_carrito">
+                        <button class="btn-small waves-effect waves-green" type="submit">Agregar al Carrito</button>
+                    </div>
                 </form>
-                <hr>
-                <div class="precio">
-                    <h5>$22.99</h5>
-                    <div class="cantidad">
-                        <span onclick="restar()" class="menos">-</span>
-                        <span class="numero">1</span>
-                        <span onclick="suma()" class="mas">+</span>
-                    </div>
-                </div>
-                <hr>
-                <div>
-                    <h5>Total: <b>$45.98</b></h5>
-                </div>
-                <hr>
-                <div class="enviar_carrito">
-                    <button class="btn-small waves-effect waves-green" type="submit">Agregar al Carrito</button>
-                </div>
             </div>
         </div>
         <div class="contenedor_reseñas">
             <h5>Reseñas</h5>
             <hr>
             <div id="resenias_usuarios">
-                <div class="usuario">
-                    <div class="foto_usuario">
-                        <img src="../../recursos/iconografia/usuario_redondo.png" alt="user">
-                    </div>
-                    <div class="nombre_usuario">
-                        <h6>Aimee Vanessa Osorio Canales</h6>
-                        <div id="estrellas_usuario">
-                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                            <img src="../../recursos/iconografia/estrella.png" alt="estrella">
-                        </div>
-                        <p>Viernes 24 de Junio de 2022</p>
-                    </div>
-                </div>
-                <div class="comentario">
-                    <p>Llego en la fecha indicada, todo en perfectas condiciones y mejor de lo que esperaba. 
-                        Yo le he puesto sobre mi cocina y queda muy bonito con los demás electrodomesticos, 
-                        queda super genial y trabaja de maravilla</p>
-                </div>
-                <hr>
+
             </div>
         </div>
     </main>
@@ -461,7 +363,9 @@
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/detalle_producto.js"></script>
 </body>
 
 </html>
