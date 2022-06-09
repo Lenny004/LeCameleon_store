@@ -15,6 +15,7 @@ class Categorias extends Validator
     /*
     *   Métodos para validar y asignar valores de los atributos.
     */
+    //Le asignamos un valor al id de Categoria
     public function setId($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
@@ -25,6 +26,7 @@ class Categorias extends Validator
         }
     }
 
+    //Le asignamos el nombre de la Categoria
     public function setCategoria($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -35,6 +37,7 @@ class Categorias extends Validator
         }
     }
 
+    //Validamos la imagen de la categoria
     public function setImagen($file)
     {
         if ($this->validateImageFile($file, 2000, 2000)) {
@@ -76,7 +79,7 @@ class Categorias extends Validator
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
-
+    //Creamos la categoria
     public function crearCategoria()
     {
         $sql = 'INSERT INTO tbcategoria(categoria_producto, imagen_categoria)
@@ -85,6 +88,7 @@ class Categorias extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Sumamos el id de las categorias para obtener cuantas categorias existen para ser mostradas en el dropdown
     public function sumaCategorias(){
         $sql = 'SELECT COUNT(idcategoria_producto) as suma FROM tbcategoria';
         $params = null;
@@ -96,6 +100,7 @@ class Categorias extends Validator
         }
     } 
 
+    //Metodo para mostrar las categorias en la tabla
     public function mostrarDatosTabla()
     {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
@@ -105,6 +110,7 @@ class Categorias extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Leer solo una Categoria para Modificar o eliminar
     public function readOne()
     {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
@@ -114,6 +120,7 @@ class Categorias extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    //Actualizamos la categoria
     public function updateRow($current_image)
     {
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
@@ -125,6 +132,7 @@ class Categorias extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Borramos la categoria
     public function deleteRow()
     {
         $sql = 'DELETE FROM tbcategoria

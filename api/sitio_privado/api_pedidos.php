@@ -38,6 +38,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No existen pedidos por entregar este día';
                 }
                 break;
+            //Se le asigna un empleado a la factura
             case 'asignarFacturaEmpleado':
                 $_POST = $monitorear_pedidos->validateForm($_POST);
                     if (!$monitorear_pedidos->setIdEnvioPedido($_POST['id'])) {

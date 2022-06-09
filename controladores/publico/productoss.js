@@ -54,7 +54,7 @@ function readProductossubCategoria(id, subcategorias) {
                             <div class="card hoverable" id="tarjetas_producto">
                                 <div class="card-image">
                                     <!--Imagen de la tarjeta-->
-                                    <img src="${SERVER}images/productos/${row.imagen_producto}">
+                                    <img src="${SERVER}images/productos/${row.imagen_principal}">
                                 </div>
                                 <div class="card-content">
                                     <p class="nombre_producto">${row.nombre_producto}</p>
@@ -62,7 +62,7 @@ function readProductossubCategoria(id, subcategorias) {
                                 </div>
                                 <div class="card-action center-align">
                                     <!--Botón para redireccionar-->
-                                    <a href="${row.idproducto}">Vista previa</a>
+                                    <a href="detalle_producto.html?id=${row.idproducto}">Vista previa</a>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ function readProductossubCategoria(id, subcategorias) {
 function buscar(event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    let valorInput = document.getElementById("id").value; 
+    let valorInput = document.getElementById("id").value;
     document.getElementById('ide').value = valorInput;
     // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
     fetch(API_CATALOGO + 'searchS', {
@@ -115,7 +115,7 @@ function buscar(event) {
                             <div class="card hoverable" id="tarjetas_producto">
                                 <div class="card-image">
                                     <!--Imagen de la tarjeta-->
-                                    <img src="${SERVER}images/productos/${row.imagen_producto}">
+                                    <img src="${SERVER}images/productos/${row.imagen_principal}">
                                 </div>
                                 <div class="card-content">
                                     <p class="nombre_producto">${row.nombre_producto}</p>
@@ -139,4 +139,80 @@ function buscar(event) {
             console.log(request.status + ' ' + request.statusText);
         }
     });
+}
+
+
+// Función para buscar por rango de precios ya sea 0 - 25, 25 - 50, 50 -100 y 100 a 999
+function busquedaRangos(action, form) {
+    fetch(API_CATALOGO + action, {
+        method: 'post',
+        body: form
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    sweetAlert(1, response.message, null);
+                    let content = '';
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se crean y concatenan las tarjetas con los datos de cada producto.
+                        content += `
+                        <!--Card-->
+                        <div class="col s6 m4 l4 xl4">
+                            <div class="card hoverable" id="tarjetas_producto">
+                                <div class="card-image">
+                                    <!--Imagen de la tarjeta-->
+                                    <img src="${SERVER}images/productos/${row.imagen_principal}">
+                                </div>
+                                <div class="card-content">
+                                    <p class="nombre_producto">${row.nombre_producto}</p>
+                                    <p class="precio_producto">${row.precio_producto}</p>
+                                </div>
+                                <div class="card-action center-align">
+                                    <!--Botón para redireccionar-->
+                                    <a href="detalle_producto.html?id=${row.idproducto}">Vista previa</a>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                    // Se asigna como título la categoría de los productos.
+                    // document.getElementById('title').textContent = 'Descuentos'
+                    // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
+                    document.getElementById('productoss').innerHTML = content;
+                    // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
+                    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+                    // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
+                    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+function Rango(min, max) {
+    let action = 'rangoSubcategoria';
+    let valor = document.getElementById('id').value;
+    const data = new FormData();
+    data.append('id', valor);
+    data.append('min', min);
+    data.append('max', max);
+    // Se llama a la función que realiza la búsqueda por categoria
+    busquedaRangos(action, data);
+}
+
+function RangoMax() {
+    let action = 'rangoMaxProductoSubcategoria';
+    let valor = document.getElementById('id').value;
+    const data = new FormData();
+    data.append('id', valor);
+    // Se llama a la función que realiza la búsqueda.
+    busquedaRangos(action, data);
 }

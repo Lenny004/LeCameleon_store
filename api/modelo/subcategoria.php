@@ -16,6 +16,7 @@ class Subcategoria extends Validator
     /*
     *   Métodos para validar y asignar valores de los atributos.
     */
+    //Le asignamos un valor al ID de la subcategoria
     public function setidSubCategoriaProducto($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
@@ -26,6 +27,7 @@ class Subcategoria extends Validator
         }
     }
 
+    //Le asignaos un valor al nombre de la subcategoria
     public function setsubCategoriaProducto($value)
     {
         if ($this->validateAlphabetic($value, 1, 60)) {
@@ -36,6 +38,7 @@ class Subcategoria extends Validator
         }
     }
 
+    //Le asignamos un valor a la subcategoria
     public function setimagenSubCategoria($file)
     {
         if ($this->validateImageFile($file, 2000, 2000)) {
@@ -46,6 +49,7 @@ class Subcategoria extends Validator
         }
     }
 
+    //Le asignamos un valor al Id de la Categoria
     public function setidCategoriaProducto($value)
     {
         if ($this->validateBoolean($value)) {
@@ -87,6 +91,7 @@ class Subcategoria extends Validator
     /*
     *---------------------------------------------Metodos Query SQL------------------------------------------------
     */
+    //Método para mostrar las subcategorias en una tabla
     public function mostrarDatosTabla()
     {
         $sql = 'SELECT idsubcategoria_producto, subcategoria_producto, imagen_subcategoria, categoria_producto
@@ -97,6 +102,7 @@ class Subcategoria extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Función para obtener los valores de una subcategoria 
     public function readOne()
     {
         $sql = 'SELECT idsubcategoria_producto, subcategoria_producto, imagen_subcategoria, idcategoria_producto
@@ -106,6 +112,7 @@ class Subcategoria extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    //Creamos una subcategoria
     public function crearSubcategoria()
     {
         $sql = 'INSERT INTO tbsubcategoria_producto(
@@ -115,6 +122,7 @@ class Subcategoria extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Actualizamos una Subcategoria
     public function actualizarSubcategoria($current_image)
     {
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
@@ -126,6 +134,7 @@ class Subcategoria extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Eliminamos un subcategoria
     public function eliminarSubcategoria()
     {
         $sql = 'DELETE FROM tbsubcategoria_producto
@@ -134,6 +143,7 @@ class Subcategoria extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
     
+    //Obtenemos los valores de categoria para mostrarse en el select para modificar la subcategoria
     public function obtener_producto() {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
                 FROM tbcategoria

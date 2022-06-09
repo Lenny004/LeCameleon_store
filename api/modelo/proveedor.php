@@ -14,6 +14,7 @@ class Proveedor extends Validator
     /*
     *   Métodos para validar y asignar valores de los atributos.
     */
+    //Le asignamos un valor a la ID del proveedor
     public function setId($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
@@ -24,6 +25,7 @@ class Proveedor extends Validator
         }
     }
 
+    //Le asignamos un nombre al proveedor
     public function setNombre($value)
     {
         if ($this->validateString($value, 1, 35)) {
@@ -34,6 +36,7 @@ class Proveedor extends Validator
         }
     }
 
+    //Le asignamos un valor a la dirección del empleado
     public function setDireccion($value)
     {
         if ($this->validateDireccion($value, 1, 500)) {
@@ -44,6 +47,7 @@ class Proveedor extends Validator
         }
     }
 
+    //Le asignamos un valor al proveedor
     public function setTelefono($value)
     {
         if ($this->validarNumeroExtranjero($value)) {
@@ -80,7 +84,7 @@ class Proveedor extends Validator
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
-
+    //Creamos un proveedor
     public function crearProveedor()
     {
         $sql = 'INSERT INTO tbdistribuidor(nombre_distribuidor, direccion_distribuidor, telefono_distribuidor)
@@ -89,6 +93,7 @@ class Proveedor extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Obtenemos todos los proveedores para mostrarse en las tablas
     public function readAll()
     {
         $sql = 'SELECT iddistribuidor, nombre_distribuidor, direccion_distribuidor, telefono_distribuidor
@@ -98,6 +103,7 @@ class Proveedor extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Se obtienen los valores de un proveedor para ser editado
     public function readOne()
     {
         $sql = 'SELECT iddistribuidor, nombre_distribuidor, direccion_distribuidor, telefono_distribuidor
@@ -107,6 +113,7 @@ class Proveedor extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    //Se actualizan los proveedores
     public function actualizarProveedor()
     {
         $sql = 'UPDATE tbdistribuidor
@@ -116,6 +123,7 @@ class Proveedor extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Se elimina al proveedor
     public function eliminarProveedor()
     {
         $sql = 'DELETE FROM tbdistribuidor

@@ -118,6 +118,7 @@ class Pedidos extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    
     public function leerUnPedido()
     {
         $sql = 'SELECT tep.idenvio_pedido, tep.direccion_entrega_pedido, tep.fecha_entrega_pedido, tuc.nombre_cliente, tuc.apellido_cliente, tf.idestado_factura
@@ -128,7 +129,7 @@ class Pedidos extends Validator
     }
 
     /*-------------------------------------------Pedidos Cliente-------------------------------------------*/
-
+    //Metodo para cargar los pedidos realizados
     public function pedidosCliente($idusuario_cliente, $fecha_actual){
         $sql = 'SELECT distinct tep.idenvio_pedido , tep.direccion_entrega_pedido, tep.fecha_entrega_pedido, tf.idestado_factura, tdf.cantidad_producto, tdf.total_producto, tp.idproducto, tp.nombre_producto, tef.idestado_factura FROM tbenvio_pedido tep
         INNER JOIN tbfactura tf
@@ -144,6 +145,7 @@ class Pedidos extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Método para cargar pedidos con fecha de entrega actual
     public function pedidosClienteEntregaHoy($idusuario_cliente, $fecha_actual){
         $sql = 'SELECT distinct tep.idenvio_pedido , tep.direccion_entrega_pedido, tep.fecha_entrega_pedido, tf.idestado_factura, tdf.cantidad_producto, tdf.total_producto, tp.idproducto, tp.nombre_producto, tef.idestado_factura FROM tbenvio_pedido tep
         INNER JOIN tbfactura tf
@@ -159,6 +161,7 @@ class Pedidos extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Método para traer los pedidos entregados con anterioridad
     public function pedidosEntregadosCliente($idusuario_cliente){
         $sql = 'SELECT distinct tep.idenvio_pedido, tep.fecha_entrega_pedido, tf.idestado_factura, tdf.cantidad_producto, tf.idfactura, tdf.total_producto, tp.idproducto, tp.nombre_producto, tv.idusuario_c FROM tbenvio_pedido tep
         INNER JOIN tbfactura tf
@@ -177,6 +180,7 @@ class Pedidos extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Traer el nombre para saber el dato a actualizar
     public function traerProducto()
     {
         $sql = 'SELECT idproducto, nombre_producto FROM tbproducto WHERE idproducto = ?';
@@ -184,6 +188,7 @@ class Pedidos extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    //Proceso para agregar reseñas del cliente a un producto
     public function agregarResenia($fecha_actual){
         $sql = 'INSERT INTO tbvaloraciones(
             valoraciones, "reseña", fecha_publicacion, idproducto, idestado_valoracion, idusuario_c)

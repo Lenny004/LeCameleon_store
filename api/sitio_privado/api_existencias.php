@@ -15,6 +15,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idusuario_e'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.    
         switch ($_GET['action']) {
+            //Obtener los datos a mostrar en la tabla
             case 'readAll':
                 if ($result['dataset'] = $existencia->readAll()) {
                     $result['estado'] = 1;
@@ -24,6 +25,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
+            //Función para buscar existencias
             case 'search':
                 $_POST = $existencia->validateForm($_POST);
                 if ($_POST['search'] == '') {

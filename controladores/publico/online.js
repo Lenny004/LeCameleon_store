@@ -170,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 var elems = document.querySelectorAll('.dropdown-trigger');
                 M.Dropdown.init(elems, { coverTrigger: false, hover: false });
                 M.Collapsible.init(document.querySelectorAll('.collapsible'));
+                //Instanciar MaterialBox
+                M.Materialbox.init(document.querySelectorAll('.materialboxed'));
             });
         } else {
             console.log(request.estado + ' ' + request.statusText);

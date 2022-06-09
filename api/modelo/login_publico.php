@@ -66,6 +66,7 @@ class UsuarioCliente extends Validator
     /*
     *   Métodos para gestionar la cuenta del usuario.
     */
+    //Función que obtiene los datos del usuario si escribe un usuario existente en la base
     public function validarUsuarioCliente($usuario)
     {
         $sql = 'SELECT tuc.idusuario_c, tuc.intentos_c, tuc.fecha_bloqueo_c, tuc.fecha_desbloqueo_c, teuc.idestado_usuario_c, tuc.nombre_cliente, tuc.apellido_cliente 
@@ -87,6 +88,7 @@ class UsuarioCliente extends Validator
         }
     }
 
+    //Actualizamos los intentos del usuario cliente cuando se equivoque
     public function intentosUsuarioCliente(){
         $sql = 'UPDATE tbusuario_cliente SET intentos_c = ? WHERE usuario_c = ?';
         $params = array(($this->intentos_c += 1), $this->usuario_c);
@@ -97,6 +99,7 @@ class UsuarioCliente extends Validator
         }
     }
 
+    //Registramos la hora del bloqueo y la hora de desbloqueo
     public function registrarHoraIntento($hora_block, $hora_desblock, $idestadoU){
         $sql = 'UPDATE tbusuario_cliente SET fecha_bloqueo_c = ? , fecha_desbloqueo_c = ?, idestado_usuario_c = ? WHERE usuario_c = ?';
         $params = array($hora_block, $hora_desblock, $idestadoU, $this->usuario_c);
@@ -118,6 +121,7 @@ class UsuarioCliente extends Validator
         }
     }
 
+    //Función para entrar al sistema, evalua si las credenciales son correctas
     public function validarContraUsuarioCliente($password)
     {
         $sql = 'SELECT contrasena_c FROM tbusuario_cliente WHERE idusuario_c = ?';

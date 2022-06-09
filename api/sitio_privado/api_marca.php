@@ -12,9 +12,10 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'message' => null, 'exception' => null, 'dataset' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idusuario_e'])) {   
+    if (isset($_SESSION['idusuario_e'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+                //Cargamos las marcas en la tabla
             case 'readAll':
                 if ($result['dataset'] = $admin_marca->mostrar_datos_tabla()) {
                     $result['estado'] = 1;
@@ -24,6 +25,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
+                //Buscador de marcas
             case 'search':
                 $_POST = $admin_marca->validateForm($_POST);
                 if ($_POST['buscador_input'] == '') {
@@ -37,6 +39,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay coincidencias';
                 }
                 break;
+                //Obtener los valores de marca para actualizar o eliminar
             case 'readOne':
                 if (!$admin_marca->setidMarca($_POST['ide'])) {
                     $result['exception'] = 'Categoría incorrecta';
@@ -48,6 +51,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Categoría inexistente';
                 }
                 break;
+                //Crear una marca
             case 'create':
                 $_POST = $admin_marca->validateForm($_POST);
                 if (!$admin_marca->setnombreMarca($_POST['marca_agregar'])) {
@@ -67,6 +71,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
+                //Actualizar una marca
             case 'update':
                 $_POST = $admin_marca->validateForm($_POST);
                 if (!$admin_marca->setidMarca($_POST['ide'])) {
@@ -95,6 +100,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
+                //Eliminar una Marca
             case 'delete':
                 if (!$admin_marca->setidMarca($_POST['ide'])) {
                     $result['exception'] = 'Categoría incorrecta';
@@ -121,7 +127,7 @@ if (isset($_GET['action'])) {
         print(json_encode($result));
     } else {
         print(json_encode('Acceso denegado'));
-    }    
+    }
 } else {
     print(json_encode('Recurso no disponible'));
 }

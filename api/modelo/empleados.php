@@ -21,6 +21,7 @@ class Empleados extends Validator
     /*
     *   Métodos para validar y asignar valores de los atributos.
     */
+    //Le asignamos un valor al Id del Empleado
     public function setId($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
@@ -31,6 +32,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al nombre del empleado
     public function setNombre($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -41,6 +43,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al apellido del empleado
     public function setApellido($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -51,6 +54,7 @@ class Empleados extends Validator
         }
     }
     
+    //Le asignamos un valor al DUI del empleado
     public function setDUI($value)
     {
         if ($this->validateDUI($value)) {
@@ -61,6 +65,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al NIT del empleado
     public function setNIT($value)
     {
         if ($this->validarNIT($value)) {
@@ -71,6 +76,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al telefono del empleado
     public function setTelefono($value)
     {
         if ($this->validatePhone($value)) {
@@ -81,6 +87,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al correo del empleado
     public function setCorreo($value)
     {
         if ($this->validateEmail($value)) {
@@ -91,6 +98,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor a la fecha de nacimiento del empleado
     public function setFecha($value)
     {
         if ($this->validateDate($value)) {
@@ -101,6 +109,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al tipo de empleado
     public function setTipo($value)
     {
         if ($this->validateBoolean($value)) {
@@ -111,6 +120,7 @@ class Empleados extends Validator
         }
     }
 
+    //Le asignamos un valor al estado del empleado
     public function setEstado($value)
     {
         if ($this->validateBoolean($value)) {
@@ -182,6 +192,7 @@ class Empleados extends Validator
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
+    //Función del buscador
     public function buscarEmpleado($value)
     {
         $sql = 'SELECT te.idempleado, te.nombre_empleado, te.apellido_empleado, te.duiempleado, te.nitempleado, te.telefono_empleado, te.correo_empleado, te.fecha_nacimiento_empleado, tte.tipo_empleado, tee.nombre_estado
@@ -196,6 +207,7 @@ class Empleados extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Creamos los empleados
     public function crearEmpleado()
     {
         $sql = 'INSERT INTO tbempleado(nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, idtipo_empleado, idestado_empleado)
@@ -204,6 +216,7 @@ class Empleados extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Obtenemos sus valores para ser mostrados en la tabla
     public function readAll()
     {
         $sql = 'SELECT idempleado, nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, tipo_empleado,nombre_estado
@@ -218,6 +231,7 @@ class Empleados extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Obtenemos los tipo de empleados para los selects
     public function obtenerTipoEmpleados()
     {
         $sql = 'SELECT idtipo_empleado, tipo_empleado
@@ -226,6 +240,7 @@ class Empleados extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Obtenemos los estado del empleados para los selects
     public function obtenerEstadoEmpleados()
     {
         $sql = 'SELECT idestado_empleado, nombre_estado
@@ -234,6 +249,7 @@ class Empleados extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Obtenemos los datos de un empleado para ser modificado o eliminado
     public function readOne()
     {
         $sql = 'SELECT idempleado, nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, idtipo_empleado, idestado_empleado
@@ -243,6 +259,7 @@ class Empleados extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    //Actualizamos al empleado
     public function actualizarEmpleado()
     {
         $sql = 'UPDATE tbempleado
@@ -252,6 +269,7 @@ class Empleados extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Eliminamos al empleado
     public function eliminarEmpleado()
     {
         $sql = 'UPDATE tbempleado set idestado_empleado = 2
@@ -260,18 +278,20 @@ class Empleados extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Encontramos el id del Usuario Empleado para que cuando se cambie el estado
+    //del empleado pueda cambiar también el estado de su usuario
     public function encontrarUsuarioEmpleado(){
         $sql = 'SELECT idusuario_e FROM tbusuario_empleado WHERE idempleado =?';
         $params = array($this->getId());
-        if ($data = Database::obtenerSentencia($sql, $params)){
+        if ($data = Database::obtenerSentencia($sql, $params)) {
             $this->idusuario = $data['idusuario_e'];
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
+    //Desactivamos el usuario ligado al empleado deshabilitado
     public function actualizarUsuarioEmpleadoEliminado(){
         $sql = 'UPDATE tbusuario_empleado SET idestado_usuario_e = 2 WHERE idusuario_e = ?';
         $params = array($this->getIdUsuario());

@@ -109,6 +109,7 @@ class Usuarios extends Validator
         }
     }
 
+    //Se actualizan los intentos del usuario empleado al equivocarse de contra
     public function IntentosUsuarioEmpleado(){
         $sql = 'UPDATE tbusuario_empleado SET intentos_e = ? WHERE usuario_e = ?';
         $params = array(($this->intentos_e += 1), $this->usuario_e);
@@ -127,6 +128,7 @@ class Usuarios extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    /* Registrar la hora de bloqueo y la hora de desbloqueo del usuario empleado */
     public function RegistrarHoraIntento($hora_block, $hora_desblock, $idestadoU){
         $sql = 'UPDATE tbusuario_empleado SET fecha_bloqueo_e = ? , fecha_desbloqueo_e = ?, idestado_usuario_e = ? WHERE usuario_e = ?';
         $params = array($hora_block, $hora_desblock, $idestadoU, $this->usuario_e);
@@ -148,6 +150,7 @@ class Usuarios extends Validator
         }
     }
 
+    /*Validamos la contra del usuario empleado para acceder al sitio */
     public function ValidarContraUsuarioEmpleado($password)
     {
         $sql = 'SELECT contrasena_e FROM tbusuario_empleado WHERE idusuario_e = ?';

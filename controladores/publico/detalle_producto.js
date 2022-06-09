@@ -42,7 +42,7 @@ function leerUnProducto(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
                     // Se colocan los datos en la tarjeta de acuerdo al producto seleccionado previamente.
-                    document.getElementById('imagen_principal').setAttribute('src', SERVER + 'images/productos/' + response.dataset.imagen_producto);
+                    document.getElementById('imagen_principal').setAttribute('src', SERVER + 'images/productos/' + response.dataset.imagen_principal);
                     document.getElementById('nombre').textContent = response.dataset.nombre_producto;
                     document.getElementById('descripcion').textContent = response.dataset.descripcion;
                     document.getElementById('color').textContent += response.dataset.color;

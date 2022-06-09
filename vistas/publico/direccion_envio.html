@@ -239,66 +239,96 @@
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="contenedor_detalle">
-            <div class="detalle_imagenes">
-                <div class="imagenes">
-                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_2.png"
-                        alt="">
-                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_3.png"
-                        alt="">
-                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_4.png"
-                        alt="">
-                    <img class="imagen_muestra materialboxed" src="../../recursos/img/decoracion/cocina/horno_5.png"
-                        alt="">
-                    <img class="imagen_muestra materialboxed" src="../../recursos/img/marcas/lofi_girl.png" alt="">
-                </div>
-                <div class="imagen_principal materialboxed">
-                    <img id="imagen_principal" src="../../recursos/img/decoracion/cocina/horno_1.png" alt="">
+        <div class="container">
+            <div class="contenedor_envio">
+                <h3>Seleccionar una dirección de envío</h3>
+                <p>Seleccionar el tipo de entrega que prefiera. *Si realizaste una compra superior a $50.00 dólares
+                    tendras envío a domicilio gratis*</p>
+                <div>
+                    <form action="#">
+                        <p><b>Selecciona el Tipo de Entrega:</b></p>
+                        <p>
+                            <label>
+                                <input class="with-gap" name="group1" type="radio" onclick="centroComercial()" checked/>
+                                <span>Centro Comercial</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input class="with-gap" name="group1" type="radio" onclick="domicilio()" />
+                                <span>Servicio a Domicilio</span>
+                            </label>
+                        </p>
+                    </form>
                 </div>
             </div>
-            <div class="detalle_datos">
-                <form method="post" id="detalle-form">
-                    <input id="idproducto" name="idproducto" class="hide" type="number">
-                    <input id="precio_total" name="precio_total" class="hide" type="number" step="0.01">
-                    <input id="precio_actual" name="precio_actual" class="hide" type="number" step="0.01">
-                    <input type="number" class="hide" id="cantidad" name="cantidad">
-                    <h5 id="nombre"></h5>
-                    <p id="descripcion"></p>
-                    <div class="reseñas">
-                        <a id="total_valoraciones">
-                        </a>
-                        <a id="total_resenias"></a>
-                    </div>
-                    <div class="detalle_del_producto">
-                        <p id="color">Color: </p>
-                        <p id="marca"><b>Marca: </b></p>
-                        <p id="tamanio"><b>Tamaño: </b></p>
-                        <p id="material"><b>Material: </b></p>
-                    </div>
-                    <hr>
-                    <div class="precio">
-                        <h5 id="precio" name="precio"></h5>
-                        <div class="cantidad">
-                            <span onclick="resta()" class="menos">-</span>
-                            <span class="numero">1</span>
-                            <span onclick="sumar()" class="mas">+</span>
+            <div class="contenedor_envio_cuerpo">
+                <form id="register-form" method="post">
+                    <div class="input-field col s12">
+                        <div class="input-field col s12" id="centro_comercial">
+                            <select required>
+                                <option value="" disabled selected>Elige un centro comercial cercano:</option>
+                                <option value="1">MetroCentro(SS)</option>
+                                <option value="2">Plaza Merliot</option>
+                                <option value="3">Multiplaza</option>
+                                <option value="4">Plaza Mundo</option>
+                                <option value="5">Centro Comercial Galerias</option>
+                                <option value="6">SOMA Plaza</option>
+                                <option value="7">La Gran Vía</option>
+                                <option value="8">Centro Comerial El Paseo</option>
+                                <option value="9">Centro Comercial San Luis</option>
+                                <option value="10">Centro Comercial Las Cascadas</option>
+                                <option value="11">Centro Comercial Masferrer</option>
+                                <option value="12">Presidente Plaza</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s12 hide" id="servicio_domicilio">
+                            <input id="direccion_entrega" name="direccion_entrega" type="text" class="validate">
+                            <label for="direccion_entrega"><b>Dirección de entrega:</b></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="nombre" name="nombre" type="text" class="validate" disabled>
+                            <label for="nombre"><b>Nombres Completos:</b></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="apellidos" name="apellidos" type="text" class="validate" disabled>
+                            <label for="apellidos"><b>Apellidos Completos:</b></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="telefono" name="telefono" type="text" class="validate" disabled>
+                            <label for="telefono"><b>Telefono:</b></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="fecha" name="fecha" type="text" class="datepicker" required>
+                            <label class="active" for="fecha"><b>Fecha de Entrega:</b></label>
+                        </div>
+                        <select required>
+                            <option value="" disabled selected>Elige una hora de entrega:</option>
+                            <option value="1">7:00</option>
+                            <option value="2">7:30</option>
+                            <option value="3">8:00</option>
+                            <option value="4">8:30</option>
+                            <option value="5">9:00</option>
+                            <option value="6">9:30</option>
+                            <option value="7">10:00</option>
+                            <option value="8">10:30</option>
+                            <option value="9">11:00</option>
+                            <option value="10">11:30</option>
+                            <option value="11">12:00</option>
+                            <option value="12">12:30</option>
+                            <option value="13">1:00</option>
+                            <option value="14">1:30</option>
+                            <option value="15">2:00</option>
+                            <option value="16">3:30</option>
+                        </select>
+                        <div class="boton_naranja_envio2 hide" id="boton_naranja_envio2">
+                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio()" href="revisar_pedido.html" type="submit">Confirmar Pedido</button>
+                        </div>
+                        <div class="boton_naranja_envio" id="boton_naranja_envio">
+                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio()" href="revisar_pedido.html" type="submit">Confirmar Pedido</button>
                         </div>
                     </div>
-                    <hr>
-                    <div>
-                        <h5>Total: <b id="total_cantidad" name="total_cantidad">$</b></h5>
-                    </div>
-                    <hr>
-                    <div class="enviar_carrito">
-                        <button class="btn-small waves-effect waves-green" type="submit">Agregar al Carrito</button>
-                    </div>
                 </form>
-            </div>
-        </div>
-        <div class="contenedor_reseñas">
-            <h5>Reseñas</h5>
-            <hr>
-            <div id="resenias_usuarios">
             </div>
         </div>
     </main>
@@ -364,7 +394,7 @@
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/publico/online.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/detalle_producto.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/direccion_envio.js"></script>
 </body>
 
 </html>
