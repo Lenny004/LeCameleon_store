@@ -12,7 +12,7 @@ if (isset($_GET['action'])) {
     $producto = new Productos;
     $subcategorias = new Subcategoria;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'idcategoria' => null, 'promedio_valoraciones' => null, 'total_resenias'=>null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'idcategoria' => null, 'promedio_valoraciones' => null, 'total_resenias' => null);
     // Se compara la acción a realizar según la petición del controlador.
     switch ($_GET['action']) {
         case 'readAll':
@@ -56,7 +56,7 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No existen productos para mostrar';
             }
             break;
-        //Buscador pero por categoria
+            //Buscador pero por categoria
         case 'search':
             $_POST = $producto->validateForm($_POST);
             if ($_POST['search'] == '') {
@@ -84,19 +84,19 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay coincidencias';
             }
             break;
-        //Leer los datos de un producto para visualizarlo
+            //Leer los datos de un producto para visualizarlo
         case 'leerUnProducto':
             if (!$producto->setId($_POST['id_producto'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif ($result['dataset'] = $producto->leerUnProducto()) {
                 //Obtener el promedio de valoraciones entre clientes de un producto
-                if($producto->promedioValoraciones()){
+                if ($producto->promedioValoraciones()) {
                     $result['promedio_valoraciones'] = $producto->getPromedio();
                     //Obtener el total de reseñas realizadas al producto
-                    if($producto->totalResenias()){
+                    if ($producto->totalResenias()) {
                         $result['total_resenias'] = $producto->getTotalResenia();
                     }
-                }else{
+                } else {
                     $result['exception'] = 'El producto no posee valoraciones por el momento';
                 }
                 $result['status'] = 1;
@@ -106,7 +106,7 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Producto inexistente';
             }
             break;
-        //Obtener las reseñas escritas por los usuarios y que están ligados al producto visto
+            //Obtener las reseñas escritas por los usuarios y que están ligados al producto visto
         case 'resenias':
             if (!$producto->setId($_POST['id_producto'])) {
                 $result['exception'] = 'Producto incorrecto';
@@ -118,7 +118,72 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Este producto no posee reseñas';
             }
             break;
-        
+        case 'Descuento':
+            if ($result['dataset'] = $producto->Descuento()) {
+                $result['status'] = 1;
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos en descuento para mostrar';
+            }
+            break;
+        case 'searchO':
+            $_POST = $producto->validateForm($_POST);
+            if ($_POST['search'] == '') {
+                $result['exception'] = 'Ingrese un valor para buscar';
+            } elseif ($result['dataset'] = $producto->SearchOferta($_POST['search'])) {
+                $result['status'] = 1;
+                $result['message'] = 'Valor encontrado';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No hay coincidencias';
+            }
+            break;
+        case 'rangoSubcategoria':
+            if (!$producto->setId($_POST['id'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif (!$producto->setMin($_POST['min'])) {
+                $result['exception'] = 'Ingrese un valor minimo valido para buscar';
+            } elseif (!$producto->setMin($_POST['max'])) {
+                $result['exception'] = 'Ingrese un valor máximo valido para buscar';
+            } elseif ($result['dataset'] = $producto->RangoProductoSubcategoria()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
+        case 'rangoCategoria':
+            if (!$producto->setIdCategoria($_POST['id'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif (!$producto->setMin($_POST['min'])) {
+                $result['exception'] = 'Ingrese un valor minimo valido para buscar';
+            } elseif (!$producto->setMax($_POST['max'])) {
+                $result['exception'] = 'Ingrese un valor máximo valido para buscar';
+            } elseif ($result['dataset'] = $producto->RangoProductoCategoria()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
+        case 'rangoMaxCategoria':
+            if (!$producto->setIdCategoria($_POST['id'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->RangoMaxProductoCategoria()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
         default:
             $result['exception'] = 'Acción no disponible';
     }

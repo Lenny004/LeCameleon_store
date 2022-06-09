@@ -32,18 +32,20 @@ function leerDetalleOrden() {
                     let subtotal1 = '';
                     let subtotal2 = '';
                     // Se declara e inicializa una variable para calcular el importe por cada producto.
+                    var precio = 0;
                     var subtotal = 0;
                     // Se declara e inicializa una variable para ir sumando cada subtotal y obtener el monto final a pagar.
                     var totalP = 0;
                     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
                     response.dataset.map(function (row) {
-                        subtotal += row.total_producto * row.cantidad_producto;
+                        precio = (row.precio_producto * row.cantidad_producto);
+                        subtotal += precio;
                         totalP += row.cantidad_producto;
                         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                         producto += `
                             <form>
                                 <div class="producto_imagen">
-                                    <img src="${SERVER}images/productos/${row.imagen_categoria}"
+                                    <img src="${SERVER}images/productos/${row.imagen_principal}"
                                         alt="producto">
                                 </div>
                                 <div class="detalle_producto">
@@ -74,7 +76,7 @@ function leerDetalleOrden() {
                         <form method="post">
                             <h6>Subtotal (${totalP} Productos):</h6>
                             <h5>US $${subtotal.toFixed(2)}</h5>
-                            <button class="btn-small waves-effect waves-orange" type="submit">Confirmar Pedido</button>
+                            <a class="btn-small waves-effect waves-orange" href="direccion_envio.html">Confirmar Pedido</a>
                         </form>`;
                     // Se agregan las los campos del subtotal
                     document.getElementById('subtotal_productos').innerHTML = subtotal1;

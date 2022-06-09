@@ -8,18 +8,23 @@ class Carrito extends Validator
     // Declaración de atributos (propiedades).
     private $idfactura = null;
     private $id_detalle = null;
-    private $cliente = null;
+    private $idcliente = null;
     private $producto = null;
     private $cantidad = null;
     private $total_producto = null;
     private $precio_a_producto = null;
     private $estado = null;
+    private $direccion_entrega = null;
+    private $monto_total = null;
+    private $fecha_entrega = null;
+
     /*
     *   ESTADOS PARA UN PEDIDO
-    *   1: Pendiente. Es cuando el pedido esta en proceso por parte del cliente y se puede modificar el detalle.
-    *   2: Finalizado. Es cuando el cliente finaliza el pedido y ya no es posible modificar el detalle.
-    *   3: Entregado. Es cuando la tienda ha entregado el pedido al cliente.
-    *   4: Anulado. Es cuando el cliente se arrepiente de haber realizado el pedido.
+    *   1: Cancelado. Es cuando el pedido ya ha sido entregado al cliente
+    *   2: Pendiente. Es cuando el pedido esta en espera de que sea la fecha de entrega.
+    *   3: Retrasada. Es cuando la fecha de entrega ya ha pasado.
+    *   4: Entregando. Es cuando el pedido esta en camino de ser entregado al cliente.
+    *   5: Editando. Es cuando el cliente se encuentra en el proceso de compra y ha seleccionado el producto.
     */
 
     /*
@@ -45,10 +50,11 @@ class Carrito extends Validator
         }
     }
 
+    //
     public function setCliente($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
-            $this->cliente = $value;
+            $this->idcliente = $value;
             return true;
         } else {
             return false;
@@ -97,6 +103,26 @@ class Carrito extends Validator
         }
     }
 
+    public function setDireccion($value)
+    {
+        if ($this->validateString($value, 10, 500)) {
+            $this->direccion_entrega = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setFechaEntrega($value)
+    {
+        if ($this->validateDate($value)) {
+            $this->fecha_entrega = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -134,17 +160,16 @@ class Carrito extends Validator
     // Método para agregar un producto al carrito de compras.
     public function crearDetalleFactura()
     {
-        // Se realiza una subconsulta para obtener el precio del producto.
         $sql = 'INSERT INTO tbdetalle_factura(total_producto, precio_actual, cantidad_descuento, cantidad_producto, idfactura, idproducto)
         VALUES(?, ?, ?, ?, ?, ?)';
         $params = array($this->total_producto, $this->precio_a_producto, 0 , $this->cantidad, $this->idfactura, $this->producto);
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    // Método para obtener los productos que se encuentran en el carrito de compras.
+    // Método para obtener los datos del producto y se muestren en el detalle
     public function leerDetallePedido()
     {
-        $sql = 'SELECT tdf.iddetalle_factura, tip.imagen_producto, tp.nombre_producto, tp.existencias, tep.estado_producto, tdf.total_producto, tdf.cantidad_producto 
+        $sql = 'SELECT tdf.iddetalle_factura, tp.nombre_producto, tp.imagen_principal tp.existencias, tp.precio_producto , tep.estado_producto, tdf.total_producto, tdf.cantidad_producto 
         FROM tbdetalle_factura tdf
         INNER JOIN tbfactura tf
         ON tf.idfactura = tdf.idfactura
@@ -152,8 +177,6 @@ class Carrito extends Validator
         ON tp.idproducto = tdf.idproducto
         INNER JOIN tbestado_producto tep
         ON tp.idestado_producto = tep.idestado_producto
-        LEFT JOIN tbimagen_producto tip
-        ON tip.idproducto = tp.idproducto
         WHERE tdf.idfactura = ?';
         $params = array($this->idfactura);
         return Database::obtenerSentencias($sql, $params);
@@ -173,16 +196,6 @@ class Carrito extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    // Método para actualizar la cantidad de un producto agregado al carrito de compras.
-    public function updateDetail()
-    {
-        $sql = 'UPDATE detalle_pedido
-                SET cantidad_producto = ?
-                WHERE id_detalle = ? AND id_pedido = ?';
-        $params = array($this->cantidad, $this->id_detalle, $_SESSION['id_pedido']);
-        return Database::obtenerSentencia($sql, $params);
-    }
-
     // Método para eliminar un producto que se encuentra en el carrito de compras.
     public function eliminarDetalle()
     {
@@ -198,6 +211,31 @@ class Carrito extends Validator
         $sql = 'DELETE FROM tbdetalle_factura
                 WHERE idfactura = ?';
         $params = array($_SESSION['idfactura']);
+        return Database::ejecutarSentencia($sql, $params);
+    }
+
+    // Método para los datos del usuario cliente, y se muestren en el formulario de dirección de envio
+    public function traerDatosUsuarioCliente()
+    {
+        $sql = 'SELECT nombre_cliente, apellido_cliente, telefono_cliente FROM tbusuario_cliente WHERE idusuario_c = ?';
+        $params = array($_SESSION['idusuario_c']);
+        return Database::obtenerSentencia($sql, $params);
+    }
+
+    //Método que actualiza los campos faltantes de la factura
+    public function actualizarFactura()
+    {
+        $sql = 'UPDATE tbfactura SET monto_total = ?, idestado_factura = ? WHERE idfactura = ?';
+        $params = array($this->total_producto, 2, $_SESSION['idfactura']);
+        return Database::ejecutarSentencia($sql, $params);
+    }
+
+    //Crear el pedido una vez se finalice el proceso de pedido
+    public function crearPedidoCliente()
+    {
+        $sql = 'INSERT INTO tbenvio_pedido(direccion_entrega_pedido, fecha_entrega_pedido, idfactura)
+        VALUES (?, ?, ?)';
+        $params = array($this->direccion_entrega, $this->fecha_entrega, $_SESSION['idfactura']);
         return Database::ejecutarSentencia($sql, $params);
     }
 }

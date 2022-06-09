@@ -47,19 +47,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No tiene productos en el carrito';
                 }
                 break;
-            case 'updateDetail':
-                $_POST = $pedido->validateForm($_POST);
-                if (!$pedido->setIdDetalle($_POST['id_detalle'])) {
-                    $result['exception'] = 'Detalle incorrecto';
-                } elseif (!$pedido->setCantidad($_POST['cantidad'])) {
-                    $result['exception'] = 'Cantidad incorrecta';
-                } elseif ($pedido->updateDetail()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Cantidad modificada correctamente';
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al modificar la cantidad';
-                }
-                break;
             case 'eliminarDetalle':
                 if (!$pedido->setIdDetalleF($_POST['id_detalle'])) {
                     $result['exception'] = 'Detalle incorrecto';
@@ -74,12 +61,45 @@ if (isset($_GET['action'])) {
                 if ($pedido->eliminarDetalles()) {
                     $result['estado'] = 1;
                     $result['message'] = 'Productos removidos correctamente';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
                 } else {
                     $result['exception'] = 'Ocurrió un problema al remover los productos';
                 }
                 break;
-            case 'finishOrder':
-                if ($pedido->finishOrder()) {
+            case 'traerDatosCliente':
+                if ($result['dataset'] = $pedido->traerDatosUsuarioCliente()) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Datos del usuario obtenidos';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al remover los productos';
+                }
+                break;
+            case 'finalizarPedido':
+                if (!$pedido->setDireccion($_POST['id_detalle'])) {
+                    $result['exception'] = 'Detalle incorrecto';
+                } else if ($pedido->actualizarFactura()) {
+                    if($pedido->crearPedidoCliente())
+                    $result['estado'] = 1;
+                    $result['message'] = 'Pedido finalizado correctamente';
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                }
+                break;
+            case 'guardarDatos':
+                $_POST = $pedido->validateForm($_POST);
+                $fecha_actual = date('d');
+                $fecha = explode('-', $_POST['fecha']);
+                if (!$pedido->setDireccion($_POST['direccion_entrega'])) {
+                    $result['exception'] = 'Dirección incorrecta';
+                } elseif (!$pedido->setFechaEntrega($_POST['fecha'])) {
+                    $result['exception'] = 'Formato de fecha ingresado es incorrecto';
+                } elseif (intval($fecha[2]) <= intval($fecha_actual + 2)) {
+                    $result['exception'] = 'La fecha de entrega debe tener 2 días minimo desde la fecha en que se realiza el pedido';
+                } else if ($pedido->actualizarFactura()) {
+                    if($pedido->crearPedidoCliente())
                     $result['estado'] = 1;
                     $result['message'] = 'Pedido finalizado correctamente';
                 } else {

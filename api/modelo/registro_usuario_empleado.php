@@ -42,6 +42,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos los apellidos del empleado
     public function setApellidos($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -52,6 +53,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor de NIT
     public function setDUI($value)
     {
         if ($this->validateDUI($value)) {
@@ -62,6 +64,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor de NIT
     public function setNIT($value)
     {
         if ($this->validarNIT($value)) {
@@ -72,6 +75,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor del telefono de empleado
     public function setTelefono($value)
     {
         if ($this->validatePhone($value)) {
@@ -82,6 +86,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor de correo
     public function setCorreoEmpleado($value)
     {
         if ($this->validateEmail($value)) {
@@ -92,6 +97,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor de fecha
     public function setFechaNEmpleado($value)
     {
         if ($this->validateDate($value)) {
@@ -102,6 +108,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Le asignamos el valor de empleado
     public function setContraEmpleado($value)
     {
         if ($this->validatePassword($value)) {
@@ -154,6 +161,7 @@ class RegistroUsuarios extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //Función para registrar un empleado 
     public function RegistrarEmpleado()
     {
         $sql = 'INSERT INTO tbempleado(nombre_empleado, apellido_empleado, duiempleado, nitempleado, telefono_empleado, correo_empleado, fecha_nacimiento_empleado, idtipo_empleado, idestado_empleado)
@@ -162,6 +170,7 @@ class RegistroUsuarios extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
+    //Función para obtener el IdEmpleado del empleado por ID
     public function ObtenerEmpleadoRegistrado()
     {
         $sql = 'SELECT idempleado FROM tbempleado WHERE duiempleado = ?';
@@ -174,6 +183,7 @@ class RegistroUsuarios extends Validator
         }
     }
 
+    //Función para registrar un usuario del empleado
     public function RegistrarUsuarioEmpleado()
     {
         $sql = 'INSERT INTO tbusuario_empleado(usuario_e, contrasena_e, idempleado, idtipo_usuario_e, idestado_usuario_e)

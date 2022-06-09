@@ -41,11 +41,11 @@ CREATE TABLE tbusuario_cliente(
     idusuario_c SERIAL primary key,
     usuario_c character varying(75) NOT NULL,
     contrasena_c character varying(200) NOT NULL,
-    intentos_c integer,
+    intentos_c integer NULL,
     nombre_cliente character varying(50) NOT NULL,
     apellido_cliente character varying(50) NOT NULL,
     correo_cliente character varying(60) NOT NULL,
-    telefono_cliente varchar(9) NOT NULL,
+    telefono_cliente varchar(9) UNIQUE NOT NULL,
     direccion_cliente character varying(1000) NULL,
     fecha_bloqueo_c timestamp without time zone,
     fecha_desbloqueo_c timestamp without time zone,
@@ -109,6 +109,7 @@ CREATE TABLE tbproducto (
     existencias smallint NOT NULL,
     porcentaje_descuento smallint DEFAULT 0 NOT NULL,
     precio_producto numeric(6,2) NOT NULL,
+    imagen_principal VARCHAR(1000),
     idcolor integer NULL REFERENCES tbcolor(idcolor),
     id_marca integer NOT NULL REFERENCES tbmarca(id_marca),
     iddistribuidor integer NOT NULL REFERENCES tbdistribuidor(iddistribuidor),
@@ -280,14 +281,14 @@ INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "t
     ('Camiseta de hombre Sivar', 'Camiseta de algodon de hombre', 'algodon', 'M', 10, 20, 11.00, 2, 14, 14, 1, 18);
 
 INSERT INTO public."tbimagen_producto"("imagen_producto", "idproducto")
-VALUES ('image1.png',2),
-('image2.png',2),
-('image3.png', 2),
-('image4.png',2),
-('image11.png', 6),
-('image2.png',6),
-('image21.png', 7),
-('image22.png',7);
+    VALUES ('image1.png',2),
+    ('image2.png',2),
+    ('image3.png', 2),
+    ('image4.png',2),
+    ('image11.png', 6),
+    ('image2.png',6),
+    ('image21.png', 7),
+    ('image22.png',7);
 
 INSERT INTO public."tbtipo_empleado"("tipo_empleado")
     VALUES ('Administrador'), ('Repartidor');
@@ -402,11 +403,10 @@ INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "canti
     (5.00, 5.00, 0, 1, 17, 9);
 
 INSERT INTO public."tbenvio_pedido"("direccion_entrega_pedido", "fecha_entrega_pedido", "idfactura")
-	VALUES ('Metrocentro', '2022-03-21', 1),
-    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 2),
+	VALUES ('Metrocentro', '2022-06-06', 1),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-06-06', 2),
     ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 3),
     ('Colonia Escalon Av23 Casa#14', '2022-03-22', 4),
-    
 	('Plaza Mundo', '2022-03-23', 5),
 	('Mejicanos, Colonia Zacamil residencial universitaria', '2022-03-24', 6),
     ('San Martin, San Salvador', '2022-03-29', 7),
@@ -423,7 +423,7 @@ INSERT INTO public."tbestado_valoracion"(
 	"estado_valoracion")
 	VALUES ('Visible'),('Invisible');
 
-INSERT INTO public.tbvaloraciones(
+INSERT INTO tbvaloraciones(
 	valoraciones, "reseña", fecha_publicacion, idproducto, idestado_valoracion, idusuario_c)
 	VALUES (4, 'Me ha gustado el producto','2022-05-06', 2, 1, 1),
     (4, 'Me ha gustado el producto','2022-05-06', 3, 1, 1);

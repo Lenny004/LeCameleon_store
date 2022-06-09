@@ -311,30 +311,10 @@
                 </div>
                 <div class="precio_cantidad" id="rango_precios">
                     <h5>Precio</h5>
-                    <a href="">$0 a $25</a>
-                    <a href="">$25 a $50</a>
-                    <a href="">$50 a $100</a>
-                    <a href="">$100 y más</a>
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s5">
-                                    <input id="icon_prefix" type="number" class="validate">
-                                    <label for="icon_prefix">$ Mín.</label>
-                                </div>
-                                <p class="input-field col s1"> - </p>
-                                <div class="input-field col s5">
-                                    <input id="icon_telephone" type="number" class="validate">
-                                    <label for="icon_telephone">$ Máx.</label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <form action="#">
-                        <p class="range-field">
-                            <input type="range" id="test5" min="0" max="100" />
-                        </p>
-                    </form>
+                    <a onclick="Rango(0, 25)" href="#">$0 a $25</a>
+                    <a onclick="Rango(25, 50)" href="#">$25 a $50</a>
+                    <a onclick="Rango(50, 100)" href="#">$50 a $100</a>
+                    <a onclick="RangoMax()" href="#">$100 y más</a>
                 </div>
                 <div class="ofertas_descuentos">
                     <h5>Ofertas y Descuentos</h5>

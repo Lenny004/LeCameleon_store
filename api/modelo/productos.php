@@ -7,23 +7,12 @@ class Productos extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idproducto = null;
-    private $nombre = null;
-    private $descripcion = null;
-    private $material = null;
-    private $tamaño = null;
-    private $existencias = null;
-    private $descuento = null;
-    private $precio = null;
-    private $color = null;
-    private $marca = null;
-    private $distribuidor = null;
-    private $estado = null;
-    private $subc = null;
-    private $imagen = null;
     private $idcategoria = null;
     private $link = '../images/productos/';
     private $promedio = null;
     private $total_resenia = null;
+    private $min = 0;
+    private $max = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
@@ -168,7 +157,8 @@ class Productos extends Validator
         }
     }
 
-    public function setBuscador($value){
+    public function setBuscador($value)
+    {
         if ($this->validateString($value, 1, 35)) {
             $this->buscador = $value;
             return true;
@@ -186,7 +176,7 @@ class Productos extends Validator
             return false;
         }
     }
-    
+
     public function setPromedio($value)
     {
         $this->promedio = $value;
@@ -202,89 +192,25 @@ class Productos extends Validator
         }
     }
 
+    public function setMin($value)
+    {
+        $this->min = $value;
+        return true;
+    }
+
+    public function setMax($value)
+    {
+        if ($this->validacionNumeroNaturales($value)) {
+            $this->max = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
-    public function getId()
-    {
-        return $this->idproducto;
-    }
-
-    public function getIdCategoria()
-    {
-        return $this->idcategoria;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    public function getMaterial()
-    {
-        return $this->material;
-    }
-
-    public function getTamaño()
-    {
-        return $this->tamaño;
-    }
-
-    public function getExistencias()
-    {
-        return $this->existencias;
-    }
-
-    public function getDescuento()
-    {
-        return $this->descuento;
-    }
-
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
-
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    public function getMarca()
-    {
-        return $this->marca;
-    }
-
-    public function getDistribuidor()
-    {
-        return $this->distribuidor;
-    }
-
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    public function getSubc()
-    {
-        return $this->subc;
-    }
-
-    public function getImagen()
-    {
-        return $this->imagen;
-    }
-
-    public function getLink()
-    {
-        return $this->link;
-    }
-
     public function getPromedio()
     {
         return $this->promedio;
@@ -315,19 +241,16 @@ class Productos extends Validator
                 LEFT JOIN tbinventario
                 ON tbproducto.idproducto = tbinventario.idproducto
                 WHERE nombre_producto ILIKE ? OR nombre_distribuidor ILIKE ?
-                ORDER BY nombre_producto';         
+                ORDER BY nombre_producto';
         $params = array("%$value%", "%$value%");
         return Database::obtenerSentencias($sql, $params);
     }
-    //funcionamiento para cargar las cards de productos
 
-    
+    //funcionamiento para cargar las cards de productos
     public function readProductosCategoria($id, $buscador)
     {
-        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tip.imagen_producto, tc.idcategoria_producto
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal, tc.idcategoria_producto
             FROM tbproducto tp
-            LEFT JOIN tbimagen_producto tip
-            ON tp.idproducto = tip.idproducto
             LEFT JOIN tbsubcategoria_producto tsc
             ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
             LEFT JOIN tbcategoria tc
@@ -341,13 +264,11 @@ class Productos extends Validator
         $params = array($id, "%$buscador%");
         return Database::obtenerSentencias($sql, $params);
     }
-    
+
     public function readProductossubCategoria($id, $buscador)
     {
-        $sql = 'SELECT tp.idproducto, tp.nombre_producto , tp.precio_producto, tip.imagen_producto
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto , tp.precio_producto, tp.imagen_principal
                 FROM tbproducto tp
-                LEFT JOIN tbimagen_producto tip
-                ON tp.idproducto = tip.idproducto
                 LEFT JOIN tbinventario ti
                 ON tp.idproducto = ti.idproducto
                 LEFT JOIN tbsubcategoria_producto tsc
@@ -364,13 +285,13 @@ class Productos extends Validator
 
     public function leerUnProducto()
     {
-        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.descripcion, tp.material, tp.tamaño, tp.existencias, tp.porcentaje_descuento, tp.precio_producto, tc.color, tm.nombre_marca, idestado_producto
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.imagen_principal, tp.descripcion, tp.material, tp.tamaño, tp.existencias, tp.porcentaje_descuento, tp.precio_producto, tc.color, tm.nombre_marca, idestado_producto
         FROM tbproducto tp
         INNER JOIN tbcolor tc
         ON tp.idcolor = tc.idcolor
         INNER JOIN tbmarca tm
         ON tp.id_marca = tm.id_marca
-        WHERE idproducto = ?';
+        WHERE tp.idproducto = ?';
         $params = array($this->idproducto);
         return Database::obtenerSentencia($sql, $params);
     }
@@ -379,10 +300,10 @@ class Productos extends Validator
     {
         $sql = 'SELECT AVG(valoraciones) as promedio FROM public.tbvaloraciones WHERE idproducto = ?';
         $params = array($this->idproducto);
-        if($data = Database::obtenerSentencia($sql, $params)){
+        if ($data = Database::obtenerSentencia($sql, $params)) {
             $this->setPromedio($data['promedio']);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -391,21 +312,140 @@ class Productos extends Validator
     {
         $sql = 'SELECT COUNT(reseña) as total_resenia FROM public.tbvaloraciones WHERE idproducto = ?';
         $params = array($this->idproducto);
-        if($data = Database::obtenerSentencia($sql, $params)){
+        if ($data = Database::obtenerSentencia($sql, $params)) {
             $this->setTotalResenias($data['total_resenia']);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function valoracionesProducto(){
+    public function valoracionesProducto()
+    {
         $sql = 'SELECT tv.idvaloracion, tv.valoraciones, tv.reseña, tv.fecha_publicacion, tuc.nombre_cliente, tuc.apellido_cliente
         FROM tbvaloraciones tv
         INNER JOIN tbusuario_cliente tuc
         ON tuc.idusuario_c = tv.idusuario_c
         WHERE tv.idestado_valoracion = 1 AND idproducto = ?';
         $params = array($this->getId());
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //función para mostrar una pagina de descuento, donde mostrara todos los productos que se encuentran en descuento
+    public function Descuento()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+                AND tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND tp.porcentaje_descuento >0
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function SearchOferta($buscador)
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+                AND tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND porcentaje_descuento >= 1
+                AND tp.nombre_producto ILIKE ?
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = array("%$buscador%");
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function RangoProductoCategoria()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+				AND tp.existencias > 0
+				AND tp.idestado_producto = 1
+                AND tc.idcategoria_producto = ?
+                AND precio_producto BETWEEN ? AND ?
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = array($this->idcategoria, $this->min, $this->max);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function RangoMaxProductoCategoria()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+				AND tp.existencias > 0
+				AND tp.idestado_producto = 1
+                AND tc.idcategoria_producto = ?
+                AND precio_producto > 100
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = array($this->idcategoria);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function RangoProductoSubcategoria()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+                AND tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND tp.idsubcategoria_producto = ?
+                AND precio_producto BETWEEN ? AND ?
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = array($this->idproducto, $this->min, $this->max);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function RangoMaxProductoSubcategoria()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+                AND tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND tp.idsubcategoria_producto = ?
+                AND precio_producto BETWEEN ? AND ?
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = array($this->idproducto, $this->min, $this->max);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function oferta()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                WHERE tp.idproducto not in (SELECT idproducto FROM tbproducto LIMIT 0)
+                AND tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND precio_producto BETWEEN ? AND ?
+                AND tp.porcentaje_descuento >0
+                ORDER BY idproducto ASC LIMIT 6';
+        $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
 }

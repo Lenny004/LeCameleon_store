@@ -52,14 +52,16 @@
             <div id="buscador" class="hide-on-med-and-down">
                 <nav class="grey lighten-2">
                     <div class="nav-wrapper">
-                        <form>
+                        <form method="post" id="thesearch">
                             <div class="input-field">
-                                <input id="search" type="search" required>
+                                <input id="search" name="search" type="search" required>
                             </div>
+                            <button href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa"
+                                    height="22"></button>
+                            <input id="id" name="id" class="hide" type="number">
                         </form>
                     </div>
                 </nav>
-                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
             </div>
             <!--Idioma-->
             <div id="boton_idioma">
@@ -77,7 +79,7 @@
             </div>
             <!--Login-->
             <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom"
+                <a href="index_publico.html"><img class="tooltipped" data-position="bottom"
                         data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
             </div>
             <!--Carrito de Compras-->
@@ -292,102 +294,14 @@
             <div class="row">
                 <div class="col s3 m3 l3 xl3">
                     <div>
-                        <h3 id="titulo_izquierdo">Artesanales</h3>
-                        <h5 id="apartado_productos">Apartados</h5>
-                        <ul class="collapsible">
-                            <li>
-                                <div class="collapsible-header"><i
-                                        class="material-icons">keyboard_arrow_down</i>Exteriores del hogar</div>
-                                <div class="collapsible-body">
-                                    <span>
-                                        <a href="">- Patio<br></a>
-                                        <a href="">- Terraza<br></a>
-                                        <a href="">- Otros</a>
-                                    </span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i
-                                        class="material-icons">keyboard_arrow_down</i>Interiores del hogar</div>
-                                <div class="collapsible-body">
-                                    <span>
-                                        <a href="">- Dormitorio<br></a>
-                                        <a href="">- Cocina<br></a>
-                                        <a href="">- Salón<br></a>
-                                        <a href="">- Baño</a>
-                                    </span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>Oficina
-                                </div>
-                                <div class="collapsible-body">
-                                    <span>
-                                        <a href="">- Accesorios Tecnológico<br></a>
-                                        <a href="">- Decoración de Escritorios</a>
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="marcas_productos">
-                        <h5>Marcas</h5>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>Maine_Furnitore_Co.</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>Rebecca_Mobili</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>Living_Nostalgia</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>Ariete</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>WedgWood</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filled-in" checked="checked" />
-                            <span>TENDANCE</span>
-                        </label>
-                        <p id="textolink"><a href="dashboard.html">Ver más...</a></p>
+                        <h3 id="title">Descuentos</h3>
                     </div>
                     <div class="precio_cantidad" id="rango_precios">
                         <h5>Precio</h5>
-                        <a href="">$0 a $25</a>
-                        <a href="">$25 a $50</a>
-                        <a href="">$50 a $100</a>
-                        <a href="">$100 y más</a>
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s5">
-                                        <input id="icon_prefix" type="number" class="validate">
-                                        <label for="icon_prefix">$ Mín.</label>
-                                    </div>
-                                    <p class="input-field col s1"> - </p>
-                                    <div class="input-field col s5">
-                                        <input id="icon_telephone" type="number" class="validate">
-                                        <label for="icon_telephone">$ Máx.</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <form action="#">
-                            <p class="range-field">
-                                <input type="range" id="test5" min="0" max="100" />
-                            </p>
-                        </form>
-                    </div>
-                    <div class="ofertas_descuentos">
-                        <h5>Ofertas y Descuentos</h5>
-                        <a href="ofertas.html">Todos los Descuentos</a>
+                        <a onclick="Rango1()" href="#">$0 a $25</a>
+                        <a onclick="Rango2()" href="#">$25 a $50</a>
+                        <a onclick="Rango3()" href="#">$50 a $100</a>
+                        <a onclick="Rango4()" href="#">$100 y más</a>
                     </div>
                     <h5>Color</h5>
                     <div class="row">
@@ -409,116 +323,7 @@
                 </div>
                 <div class="col s9 m9 l9 xl9" id="seccion_productos">
                     <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/decoracion/baño/baño.jpg">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Baño</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/decoracion/accesorios_tecnologicos/tecnologico.png">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Accesorios tecnológicosAccesorios tecnológicos</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/decoracion/decoracion_escritorios/escritorios.jpg">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Decoración de escritorio</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/accesorios/anillos/anillos.jpg">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Anillos</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/decoracion/terraza/terraza.jpg">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Aretes</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Card-->
-                    <div class="col s6 m4 l4 xl4">
-                        <div class="card hoverable" id="tarjetas_producto">
-                            <div class="card-image">
-                                <!--Imagen de la tarjeta-->
-                                <img src="../../recursos/img/decoracion/otros/otros.jpg">
-                            </div>
-                            <div class="card-content">
-                                <p class="nombre_producto">Billetera</p>
-                                <p class="precio_producto">$80.00</p>
-                            </div>
-                            <div class="card-action center-align">
-                                <!--Botón para redireccionar-->
-                                <a href="#">Vista previa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                    </ul>
+                    <div class="row" id="descuentos"></div>
                 </div>
             </div>
         </div>
@@ -582,7 +387,9 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/ofertas.js"></script>
 </body>
 
 </html>
