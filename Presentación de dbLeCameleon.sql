@@ -105,7 +105,7 @@ CREATE TABLE tbproducto (
     nombre_producto character varying(75) NOT NULL,
     descripcion character varying(1000) NOT NULL,
     material character varying(50) NOT NULL,
-    tamaño character varying(50),
+    tamanio character varying(50),
     existencias smallint NOT NULL,
     porcentaje_descuento smallint DEFAULT 0 NOT NULL,
     precio_producto numeric(6,2) NOT NULL,
@@ -265,9 +265,10 @@ INSERT INTO public."tbmarca"("nombre_marca")
 
 INSERT INTO public."tbestado_producto"("estado_producto")
     VALUES ('En venta'),
-    ('Agotado');
+    ('Agotado'),
+    ('Eliminado');
 
-INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamaño", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
+INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
     VALUES 
     ('Skyler Stripe Outdoor Rug', 'Para las mesas de afuera', 'Tela de algodón', 'Grande 18x12', 4, 0, 9.60, 2, 3, 3, 1, 3),
     ('LeiDrail', 'Luces solares para exteriores, recargan con luz solar', 'Metal', 'pequeño 20x7', 4, 0, 8.60, 4, 2, 2, 1, 1),

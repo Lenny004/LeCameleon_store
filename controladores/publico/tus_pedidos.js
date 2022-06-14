@@ -103,7 +103,7 @@ function crearPedidosRealizados(dataset) {
     let pedidos_realizados = '';
     dataset.map(function (row) {
         pedidos_realizados += `
-        <div id="pedidos">
+        <div id="pedidos" class="z-depth-2">
             <div class="imagen_producto">
                 <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
             </div>
@@ -124,7 +124,7 @@ function crearPedidoEntregaHoy(dataset) {
     let pedido_entrega_hoy = '';
     dataset.map(function (row) {
         pedido_entrega_hoy += `
-        <div id="pedidos_entrega_hoy">
+        <div id="pedidos_entrega_hoy" class="z-depth-2">
             <div class="imagen_producto">
                 <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
             </div>
@@ -147,7 +147,7 @@ function crearPedidosEntregados(dataset) {
     dataset.map(function (row) {
         //Si el producto ya posee una reseña por este cliente
         pedidos_entregados += `
-            <div id="pedidos">
+            <div id="pedidos" class="z-depth-2">
                 <div class="imagen_producto">
                     <img src="../../recursos/img/pedidos/camion_pedidos.jpg" alt="camnion">
                 </div>

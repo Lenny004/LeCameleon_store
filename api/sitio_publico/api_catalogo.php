@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'readProductosCategoria':
-            if (!$producto->setId($_POST['idcategoria_producto'])) {
+            if (!$producto->setIdCategoria($_POST['idcategoria_producto'])) {
                 $result['exception'] = 'Categoría incorrecta';
             } elseif ($result['dataset'] = $producto->readProductosCategoria($_POST['idcategoria_producto'], '')) {
                 $result['status'] = 1;
@@ -46,7 +46,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'readProductossubCategoria':
-            if (!$producto->setId($_POST['idsubcategoria_producto'])) {
+            if (!$producto->setIdSubcategoria($_POST['idsubcategoria_producto'])) {
                 $result['exception'] = 'Categoría incorrecta';
             } elseif ($result['dataset'] = $producto->readProductossubCategoria($_POST['idsubcategoria_producto'], '')) {
                 $result['status'] = 1;
@@ -86,7 +86,7 @@ if (isset($_GET['action'])) {
             break;
             //Leer los datos de un producto para visualizarlo
         case 'leerUnProducto':
-            if (!$producto->setId($_POST['id_producto'])) {
+            if (!$producto->setIdProducto($_POST['id_producto'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif ($result['dataset'] = $producto->leerUnProducto()) {
                 //Obtener el promedio de valoraciones entre clientes de un producto
@@ -108,7 +108,7 @@ if (isset($_GET['action'])) {
             break;
             //Obtener las reseñas escritas por los usuarios y que están ligados al producto visto
         case 'resenias':
-            if (!$producto->setId($_POST['id_producto'])) {
+            if (!$producto->setIdProducto($_POST['id_producto'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif ($result['dataset'] = $producto->valoracionesProducto()) {
                 $result['status'] = 1;
@@ -141,11 +141,11 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'rangoSubcategoria':
-            if (!$producto->setId($_POST['id'])) {
+            if (!$producto->setIdSubcategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif (!$producto->setMin($_POST['min'])) {
                 $result['exception'] = 'Ingrese un valor minimo valido para buscar';
-            } elseif (!$producto->setMin($_POST['max'])) {
+            } elseif (!$producto->setMax($_POST['max'])) {
                 $result['exception'] = 'Ingrese un valor máximo valido para buscar';
             } elseif ($result['dataset'] = $producto->RangoProductoSubcategoria()) {
                 $result['status'] = 1;
@@ -176,6 +176,18 @@ if (isset($_GET['action'])) {
             if (!$producto->setIdCategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif ($result['dataset'] = $producto->RangoMaxProductoCategoria()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
+        case 'rangoMaxProductoSubcategoria':
+            if (!$producto->setIdSubcategoria($_POST['id'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->RangoMaxProductoSubcategoria()) {
                 $result['status'] = 1;
                 $result['message'] = 'Se han encontrado productos';
             } elseif (Database::getException()) {

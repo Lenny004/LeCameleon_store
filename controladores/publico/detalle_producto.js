@@ -47,7 +47,7 @@ function leerUnProducto(id) {
                     document.getElementById('descripcion').textContent = response.dataset.descripcion;
                     document.getElementById('color').textContent += response.dataset.color;
                     document.getElementById('marca').textContent += response.dataset.nombre_marca;
-                    document.getElementById('tamanio').textContent += response.dataset.tamaño;
+                    document.getElementById('tamanio').textContent += response.dataset.tamanio;
                     document.getElementById('material').textContent += response.dataset.material;
                     document.getElementById('precio').textContent += ('$' + response.dataset.precio_producto);
                     document.getElementById('total_cantidad').textContent += response.dataset.precio_producto;

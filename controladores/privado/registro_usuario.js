@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
             request.json().then(function (response) {
                 // Se comprueba si existe una sesión, de lo contrario se revisa si la respuesta es satisfactoria.
                 if (response.session) {
-                    location.href = 'http://localhost/LeCameleon/vistas/privado/dashboard.html';
+                    location.href = 'dashboard.html';
                 } else if (response.estado) {
-                    sweetAlert(3, response.message, 'http://localhost/LeCameleon/vistas/privado/index.html');
+                    sweetAlert(3, response.message, 'index.html');
                 } else {
                     sweetAlert(4, 'Debe crear un usuario para comenzar', null);
                 }
@@ -49,7 +49,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
-                    sweetAlert(1, response.message, 'http://localhost/LeCameleon/vistas/privado/index.html');
+                    sweetAlert(1, response.message, 'index.html');
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

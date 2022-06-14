@@ -12,12 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
             request.json().then(function (response) {
                 // Se comprueba si existe una sesión, de lo contrario se revisa si la respuesta es satisfactoria.
                 if (response.session) {
-                    location.href = "http://localhost/LeCameleon/vistas/privado/dashboard.html";
+                    location.href = "dashboard.html";
                 } else if (response.estado) {
                     sweetAlert(4, "Debe autenticarse para ingresar", null);
                 } else {
                     sweetAlert(
-                        3, response.exception, "http://localhost/LeCameleon/vistas/privado/registro_usuario.html"
+                        3, response.exception, "registro_usuario.html"
                     );
                 }
             });
@@ -44,7 +44,7 @@ document.getElementById("inicio_sesion_form").addEventListener("submit", functio
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     //Si las credenciales son las correctas mostrará un mensaje de credenciales correctas y nos redirecciona al main
-                    sweetAlert(1, response.message, "http://localhost/LeCameleon/vistas/privado/dashboard.html");
+                    sweetAlert(1, response.message, "dashboard.html");
                 } else {
                     //Si alguna de las credenciales es incorrecta mostrará un mensaje de error diciendo que credencial es la mala
                     sweetAlert(2, response.exception, null);

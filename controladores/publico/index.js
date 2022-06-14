@@ -21,7 +21,7 @@ document.getElementById("inicio_sesion_form").addEventListener("submit", functio
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     //Si las credenciales son las correctas mostrará un mensaje de credenciales correctas y nos redirecciona al main
-                    sweetAlert(1, response.message, "http://localhost/LeCameleon/vistas/publico/dashboard.html");
+                    sweetAlert(1, response.message, "dashboard.html");
                 } else {
                     //Si alguna de las credenciales es incorrecta mostrará un mensaje de error diciendo que credencial es la mala
                     sweetAlert(2, response.exception, null);

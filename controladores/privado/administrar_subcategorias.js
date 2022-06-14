@@ -93,7 +93,7 @@ function openCreate() {
     M.Modal.getInstance(document.getElementById("modal_agregar_subcategoria")).open();
     // Se establece el campo de archivo como obligatorio.
     document.getElementById("archivo").required = true;
-    fillSelect(ENDPOINT_CATEGORIA, "select_categoria", null);
+    fillSelect(ENDPOINT_CATEGORIA, "una categoría", "select_categoria", null);
 }
 
 document.getElementById("agregar_forms").addEventListener("submit", function (event) {
@@ -127,7 +127,7 @@ function openUpdate(id) {
                     document.getElementById('ide').value = response.dataset.idsubcategoria_producto;
                     document.getElementById('nombrearchivo').value = response.dataset.imagen_subcategoria;
                     document.getElementById('subcategoria_modificar').value = response.dataset.subcategoria_producto;
-                    fillSelect(ENDPOINT_CATEGORIA, 'select_subcategoria', response.dataset.idcategoria_producto);
+                    fillSelect(ENDPOINT_CATEGORIA, "una subcategoría", 'select_subcategoria', response.dataset.idcategoria_producto);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.      
                     M.updateTextFields();
                 } else {
@@ -170,7 +170,7 @@ function openDelete(id) {
                     document.getElementById('ide').value = response.dataset.idsubcategoria_producto;
                     document.getElementById('namefile').value = response.dataset.imagen_subcategoria;
                     document.getElementById('subcategoria_eliminar').value = response.dataset.subcategoria_producto;
-                    fillSelect(ENDPOINT_CATEGORIA, 'select_subcategoriae', response.dataset.idcategoria_producto);
+                    fillSelect(ENDPOINT_CATEGORIA, "una subcategoria", 'select_subcategoriae', response.dataset.idcategoria_producto);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.      
                     M.updateTextFields();
                 } else {

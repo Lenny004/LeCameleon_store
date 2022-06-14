@@ -2,12 +2,14 @@
 require_once('../conexion/database.php');
 require_once('../conexion/validaciones.php');
 require_once('../modelo/login_publico.php');
+require_once('../modelo/carrito.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    // Se instancia la clase correspondiente.
+// Se instancia la clase correspondiente.
+    $pedido = new Carrito;
     $usuario_cliente = new UsuarioCliente;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'cliente' => null);
@@ -17,12 +19,9 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando el administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'cerrarSesion':
-                if (session_destroy()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
-                }
+                unset($_SESSION['idusuario_c']);
+                $result['estado'] = 1;
+                $result['message'] = 'Sesión eliminada correctamente';
                 break;
             case 'obtenerUsuario':
                 if (isset($_SESSION['usuario_c'])) {
@@ -30,6 +29,14 @@ if (isset($_GET['action'])) {
                     $result['session'] = 1;
                     $result['username'] = $_SESSION['usuario_c'];
                     $result['cliente'] = $_SESSION['nombre_cliente'] . " " . $_SESSION['apellido_cliente'];
+                    if ($result['dataset'] = $pedido->totalProductosDetalle()) {
+                        $result['estado'] = 1;
+                        $result['message'] = 'Datos del usuario obtenidos';
+                    } elseif (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema al remover los productos';
+                    }
                 } else {
                     $result['exception'] = 'Nombre de usuario indefinido';
                 }

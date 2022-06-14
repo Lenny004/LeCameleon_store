@@ -1,4 +1,4 @@
-const API_CARRITO = SERVER + 'sitio_publico/api_carrito.php?action=';
+const API_CARRITO = SERVER + "sitio_publico/api_carrito.php?action=";
 
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {

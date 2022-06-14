@@ -94,9 +94,9 @@ function openCreate() {
     M.Modal.getInstance(document.getElementById('agregar_modal_usuario')).open();
     // Se asigna el título para la caja de diálogo (modal).
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
-    fillSelect(ENDPOINT_EMPLEADOS, 'empleado', null);
-    fillSelect(ENDPOINT_TIPOU, 'tipo', null);
-    fillSelect(ENDPOINT_ESTADOU, 'estado', null);
+    fillSelect(ENDPOINT_EMPLEADOS, 'un empleado', 'empleado', null);
+    fillSelect(ENDPOINT_TIPOU, 'un tipo', 'tipo', null);
+    fillSelect(ENDPOINT_ESTADOU, 'un estado','estado', null);
 }
 
 document.getElementById('form_agregar').addEventListener('submit', function (event) {
@@ -128,9 +128,9 @@ function openUpdate(id) {
                     document.getElementById('ide').value = response.dataset.idusuario_e;
                     document.getElementById('usuarioeM').value = response.dataset.usuario_e;
                     document.getElementById('contrasenaM').value = response.dataset.contrasena_e;
-                    fillSelect(ENDPOINT_EMPLEADOS, 'empleadoM', response.dataset.idempleado);
-                    fillSelect(ENDPOINT_TIPOU, 'tipoM', response.dataset.idtipo_usuario_e);
-                    fillSelect(ENDPOINT_ESTADOU, 'estadoM', response.dataset.idestado_usuario_e);
+                    fillSelect(ENDPOINT_EMPLEADOS, 'un empleado', 'empleadoM', response.dataset.idempleado);
+                    fillSelect(ENDPOINT_TIPOU, 'un tipo' ,'tipoM', response.dataset.idtipo_usuario_e);
+                    fillSelect(ENDPOINT_ESTADOU, 'un estado', 'estadoM', response.dataset.idestado_usuario_e);
                     M.updateTextFields();
                 } else {
                     sweetAlert(2, response.exception, null);
@@ -170,9 +170,9 @@ function openDelete(id) {
                     document.getElementById('ide').value = response.dataset.idusuario_e;
                     document.getElementById('usuarioD').value = response.dataset.usuario_e;
                     document.getElementById('contrasenaD').value = response.dataset.contrasena_e;
-                    fillSelect(ENDPOINT_EMPLEADOS, 'empleadoD', response.dataset.idempleado);
-                    fillSelect(ENDPOINT_TIPOU, 'tipoD', response.dataset.idtipo_usuario_e);
-                    fillSelect(ENDPOINT_ESTADOU, 'estadoD', response.dataset.idestado_usuario_e);
+                    fillSelect(ENDPOINT_EMPLEADOS, 'un empleado', 'empleadoD', response.dataset.idempleado);
+                    fillSelect(ENDPOINT_TIPOU, 'un tipo', 'tipoD', response.dataset.idtipo_usuario_e);
+                    fillSelect(ENDPOINT_ESTADOU, 'un estado', 'estadoD', response.dataset.idestado_usuario_e);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {

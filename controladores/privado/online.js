@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         sweetAlert(3, response.exception, 'index.html');
                     }
                 } else {
-                    location.href = 'http://localhost/LeCameleon/vistas/privado/index.html';
+                    location.href = 'index.html';
                 }
             });
         } else {

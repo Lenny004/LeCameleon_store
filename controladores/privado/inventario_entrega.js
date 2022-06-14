@@ -1,6 +1,6 @@
 //Se crea la ruta constante para la API
 const API_inventario_entrega = SERVER + "sitio_privado/api_inventario_entrega.php?action=";
-const endpoint = SERVER + "sitio_privado/api_inventario_entrega.php?action=cargar_productos";
+const ENDPOINT = SERVER + "sitio_privado/api_inventario_entrega.php?action=cargar_productos";
 var accion = null;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     readRows(API_inventario_entrega);
 
     //Se cargan los productos en el select
-    fillSelect(endpoint, "id_producto", null);
+    fillSelect(ENDPOINT, 'un producto', "id_producto", null);
 });
 
 //Función para cargar los datos en la tabla
@@ -133,7 +133,7 @@ document.getElementById("thesearch").addEventListener("submit", function () {
                     document.getElementById("fecha_inicio").value =
                         response.dataset.fecha_inicio_ventas;
                     document.getElementById("precio").value = response.dataset.precio_producto;
-                    fillSelect(endpoint, "id_producto", response.dataset.idproducto);
+                    fillSelect(ENDPOINT, "un producto", "id_producto", response.dataset.idproducto);
                 } else {
                 }
             });
