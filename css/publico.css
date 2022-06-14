@@ -16,33 +16,27 @@ main {
     color: #ffffff;
 }
 
-#barra_anuncio_decoracion {
+.categoria {
     height: 42px;
-    background-color: #472911;
+    background-color: #90a57e !important ;
     color: #ffffff;
 }
 
-#barra_anuncio_accesorio {
+.subcategorias {
     height: 42px;
-    background-color: #90a57e;
+    background-color: #ea8f70 !important;
     color: #ffffff;
 }
 
-#barra_anuncio_artesanales {
+.ofertas {
     height: 42px;
-    background-color: #ea8f70;
+    background-color: #C63637 !important;
     color: #ffffff;
 }
 
-#barra_anuncio_ofertas {
+.servicio{
     height: 42px;
-    background-color: #C63637;
-    color: #ffffff;
-}
-
-#barra_anuncio_servicio {
-    height: 42px;
-    background-color: #36465d;
+    background-color: #36465d !important;
     color: #ffffff;
 }
 
@@ -1796,7 +1790,7 @@ img.imagen_muestra {
     color: #21190A;
 }
 
-#texto_espacio {
+.texto_espacio {
     margin-bottom: 10%;
 }
 

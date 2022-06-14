@@ -173,6 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 M.Collapsible.init(document.querySelectorAll('.collapsible'));
                 //Instanciar MaterialBox
                 M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+                //Al cargar cambia el color de la barra de anuncios
+                ColorBarra();
             });
         } else {
             console.log(request.estado + ' ' + request.statusText);
@@ -317,26 +319,3 @@ function subcategoria() {
         }
     });
 }
-/*
-function obtenerCantidadPedidos(){
-    // Petición para consultar cuantos productos tiene el usuario en el carrito
-    fetch(API_CARRITO + 'totalpedidos', {
-        method: 'get'
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    cantidad_pedidos = response.dataset.cantidad_producto;
-                    console.log("lol"+ cantidad_pedidos);
-                } else {
-                    sweetAlert(4, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.estado + ' ' + request.statusText);
-        }
-    });
-}*/

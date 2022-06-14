@@ -208,3 +208,9 @@ function RangoMax() {
     // Se llama a la función que realiza la búsqueda.
     busquedaRangos(action, data);
 }
+
+//Cambiar el color de la barra de anuncios
+function ColorBarra(){
+    barra = document.getElementById("barra_anuncio");
+    barra.classList.add('categoria');
+}

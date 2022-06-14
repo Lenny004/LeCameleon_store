@@ -133,6 +133,75 @@ class Validator
         }
     }
 
+    public function validateImages($file, $maxWidth, $maxHeigth)
+    {
+        // Se verifica si el archivo existe, de lo contrario se establece el mensaje de error correspondiente.
+        if ($file) {
+            // Se comprueba si el archivo tiene un tamaño menor o igual a 2MB, de lo contrario se establece el mensaje de error correspondiente.
+            if ($file['size'] <= 2097152) {
+                // Se obtienen las dimensiones de la imagen y su tipo.
+                list($width, $height, $type) = getimagesize($file['tmp_name']);
+                // Se verifica si la imagen cumple con las dimensiones máximas, de lo contrario se establece el mensaje de error correspondiente.
+                if ($width <= $maxWidth && $height <= $maxHeigth) {
+                    // Se comprueba si el tipo de imagen es permitido (2 - JPG y 3 - PNG), de lo contrario se establece el mensaje de error correspondiente.
+                    if ($type == 2 || $type == 3) {
+                        // Se obtiene la extensión del archivo y se convierte a minúsculas.
+                        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                        // Se establece un nombre único para el archivo.
+                        $this->fileName = uniqid() . '.' . $extension;
+                        return true;
+                    } else {
+                        $this->fileError = 'El tipo de imagen debe ser jpg o png';
+                        return false;
+                    }
+                } else {
+                    $this->fileError = 'La dimensión de la imagen es incorrecta';
+                    return false;
+                }
+            } else {
+                $this->fileError = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            }
+        } else {
+            $this->fileError = 'El archivo de la imagen no existe';
+            return false;
+        }
+    }
+
+    
+    public function validarImagenes($file, $tamanio, $anchura, $altura, $tipo, $nombre_archivo)
+    {
+        // Se verifica si el archivo existe, de lo contrario se establece el mensaje de error correspondiente.
+        if ($file) {
+            // Se comprueba si el archivo tiene un tamaño menor o igual a 2MB, de lo contrario se establece el mensaje de error correspondiente.
+            if ($tamanio <= 2097152) {
+                // Se verifica si la imagen cumple con las dimensiones máximas, de lo contrario se establece el mensaje de error correspondiente.
+                if ($anchura <= 2000 && $altura <= 2000) {
+                    // Se comprueba si el tipo de imagen es permitido (2 - JPG y 3 - PNG), de lo contrario se establece el mensaje de error correspondiente.
+                    if ($tipo == 2 || $tipo == 3) {
+                        // Se obtiene la extensión del archivo y se convierte a minúsculas.
+                        $extension = strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
+                        // Se establece un nombre único para el archivo.
+                        $this->fileName = uniqid() . '.' . $extension;
+                        return true;
+                    } else {
+                        $this->fileError = 'El tipo de imagen debe ser jpg o png';
+                        return false;
+                    }
+                } else {
+                    $this->fileError = 'La dimensión de la imagen es incorrecta';
+                    return false;
+                }
+            } else {
+                $this->fileError = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            }
+        } else {
+            $this->fileError = 'El archivo de la imagen no existe';
+            return false;
+        }
+    }
+
     /*
     *   Método para validar un correo electrónico.
     *   Parámetros: $value (dato a validar).
@@ -345,6 +414,21 @@ class Validator
         if (file_exists($path)) {
             // Se verifica que el archivo sea movido al servidor.
             if (move_uploaded_file($file['tmp_name'], $path . $name)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function saveImagen($file, $path, $name)
+    {
+        // Se comprueba que la ruta en el servidor exista.
+        if (file_exists($path)) {
+            // Se verifica que el archivo sea movido al servidor.
+            if (move_uploaded_file($file, $path . $name)) {
                 return true;
             } else {
                 return false;
