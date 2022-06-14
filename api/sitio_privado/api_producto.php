@@ -84,16 +84,28 @@ if (isset($_GET['action'])) {
                 $result['exception'] = $producto->getFileError();
             } elseif ($producto->crearProducto()) {
                 $result['estado'] = 1;
+                $result['message'] = 'Producto creado correctamente';
                 //Si se pudo crear el producto se guarda la imagen principal
                 if ($producto->saveFile($_FILES['archivo'], $producto->getLink(), $producto->getImagen())) {
                     //Mandamos a traer el último ID
                     if ($producto->obtenerIdUltimoProducto()) {
-                        $result['message'] = 'Producto creado correctamente';
-                        //print_r($_FILES['archivos']);
+                        //Si existen imagenes extras en el input multiple, procede a continuar
                         if (is_uploaded_file($_FILES['archivos']['tmp_name'][0])) {
-                            foreach ($_FILES['archivos'] as $filas) {
-                                print_r($filas);
+                            $files = 0;
+                            foreach ($_FILES['archivos']['tmp_name'] as $clave => $valor) {
+                                $tmp = $_FILES['archivos']['tmp_name'][$clave];
+                                $nombre_archivo = $_FILES['archivos']['name'][$clave];
+                                $tamanio = ($_FILES['archivos']['size'][$clave]);
+                                list($anchura, $altura, $tipo) = getimagesize($_FILES['archivos']['tmp_name'][$clave]);
+                                if($producto->setImagenes($tmp, $tamanio, $anchura,  $altura, $tipo, $nombre_archivo)){
+                                    if ($producto->saveImagen($tmp, $producto->getLink(), $producto->getImagenes())) {
+                                        if($producto->subirImagenesExtras()) {
+                                            $files++;
+                                        }
+                                    }
+                                }
                             }
+                            $result['message'] = 'Producto creado correctamente. Se subieron '.$files.' imagenes extras';
                         }
                     } else {
                         $result['exception'] = 'Producto creado correctamente. Pero no se pudo obtener el identificador del último producto ingresado';
@@ -103,25 +115,6 @@ if (isset($_GET['action'])) {
                 }
             } else {
                 $result['exception'] = Database::getException();
-            }
-            break;
-        case 'agregarImagenesExtras':
-            $cantidad = count($_FILES["img_extra"]["tmp_name"]);
-            printf($cantidad);
-            //Por cada imagen se realizará un insert en la tabla de tbimagen_producto
-            for ($i = 0; $i < $cantidad; $i++) {
-                //Se guarda la imagen
-                if (!$producto->setImagenes($_FILES['img_extra'][$i])) {
-                    $result['exception'] = $producto->getFileError();
-                } else {
-                    //Agrega las imagenes extras ligadas al último producto
-                    if ($producto->subirImagenesExtras) {
-                        $result['estado'] = 1;
-                        $result['message'] = 'Producto con imagenes extras creado correctamente';
-                    } else {
-                        $result['exception'] = 'Las imagenes extras no pudieron ser ingresadas';
-                    }
-                }
             }
             break;
         case 'obtenerUnProducto':

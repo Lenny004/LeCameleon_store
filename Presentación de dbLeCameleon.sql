@@ -123,7 +123,7 @@ CREATE TABLE tbimagen_producto (
     idproducto integer NOT NULL REFERENCES tbproducto(idproducto)
 );
 
-CREATE TABLE tbinventario (
+CREATE TABLE tbinventario(
     idinventario SERIAL primary key,
     cantidad smallint NOT NULL,
     precio_unitario numeric(7,2) NOT NULL,
@@ -204,7 +204,7 @@ INSERT INTO public."tbdistribuidor"("nombre_distribuidor", "direccion_distribuid
     ('Coco Canela', '9° Calle Poniente #4036, Local #6, Plaza La Novena, Colonia Escalón entre la 77° y la, 79 Avenida Nte., San Salvador', '+503 2223 8088');
 
 INSERT INTO public."tbcategoria"("categoria_producto", "imagen_categoria")
-    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629be06ae1845.jpg'),('Artesanales', '629be073b2933.jpg');
+    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629e07f09310e.jpg'),('Artesanales', '629be073b2933.jpg');
 
 
 INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "imagen_subcategoria","idcategoria_producto")

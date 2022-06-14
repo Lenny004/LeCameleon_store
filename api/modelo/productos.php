@@ -19,7 +19,7 @@ class Productos extends Validator
     private $estado = null;
     private $subcategoria = null;
     private $imagen = null;
-    private $imagenes = null;
+    //private $imagenes = null;
     private $link = '../images/productos/';
     private $idvaloracion = null;
     private $estado_valoracion = null;
@@ -205,9 +205,9 @@ class Productos extends Validator
         }
     }
 
-    public function setImagenes($file)
+    public function setImagenes($file, $tamanio, $anchura, $altura, $tipo, $nombre_archivo)
     {
-        if ($this->validateImageFile($file, 2000, 2000)) {
+        if ($this->validarImagenes($file, $tamanio, $anchura, $altura, $tipo, $nombre_archivo)) {
             $this->imagenes = $this->getFileName();
             return true;
         } else {
@@ -279,6 +279,10 @@ class Productos extends Validator
         return $this->imagen;
     }
 
+    public function getImagenes()
+    {
+        return $this->imagenes;
+    }
 
     public function getPromedio()
     {
@@ -589,7 +593,7 @@ class Productos extends Validator
                 WHERE tp.existencias > 0
 				AND tp.idestado_producto = 1
                 AND tc.idcategoria_producto = ?
-                AND precio_producto > 100
+                AND precio_producto >= 100
                 ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
         $params = array($this->idcategoria);
         return Database::obtenerSentencias($sql, $params);
@@ -623,20 +627,33 @@ class Productos extends Validator
                 WHERE tp.existencias > 0
                 AND tp.idestado_producto = 1
                 AND tp.idsubcategoria_producto = ?
-                AND precio_producto > 100
+                AND precio_producto >= 100
                 ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
         $params = array($this->idsubcategoria);
         return Database::obtenerSentencias($sql, $params);
     }
 
-    public function oferta()
+    public function rangoOferta()
     {
         $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
                 FROM tbproducto tp
                 WHERE tp.existencias > 0
                 AND tp.idestado_producto = 1
                 AND precio_producto BETWEEN ? AND ?
-                AND tp.porcentaje_descuento >0
+                AND tp.porcentaje_descuento > 0
+                ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
+        $params = array($this->min, $this->max);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function RangoMaxOfertas()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                WHERE tp.existencias > 0
+                AND tp.idestado_producto = 1
+                AND precio_producto >= 100
+                AND tp.porcentaje_descuento > 0
                 ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
         $params = null;
         return Database::obtenerSentencias($sql, $params);

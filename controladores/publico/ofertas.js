@@ -147,11 +147,11 @@ document.getElementById('thesearch').addEventListener('submit', function (event)
     });
 });
 
-
 // Función para buscar por rango de precios ya sea 0 - 25, 25 - 50, 50 -100 y 100 a 999
-function Rangop(action) {
-    fetch(API_OFERTA + action, {
-        method: 'post'
+function busquedaRangos(action, form) {
+    fetch(API_DESCUENTO + action, {
+        method: 'post',
+        body: form
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
@@ -184,8 +184,6 @@ function Rangop(action) {
                         </div>
                         `;
                     });
-                    // Se asigna como título la categoría de los productos.
-                    // document.getElementById('title').textContent = 'Descuentos'
                     // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
                     document.getElementById('descuentos').innerHTML = content;
                     // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
@@ -202,26 +200,24 @@ function Rangop(action) {
     });
 }
 
-function Rango1(){
-    let action = 'rangop';
-    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    Rangop(action);
+function Rango(min, max) {
+    let action = 'rangoOfertas';
+    const data = new FormData();
+    data.append('min', min);
+    data.append('max', max);
+    // Se llama a la función que realiza la búsqueda por categoria
+    busquedaRangos(action, data);
 }
 
-function Rango2(){
-    let action = 'rangos';
-    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    Rangop(action);
+function RangoMax() {
+    let action = 'rangoMaxOfertas';
+    const data = new FormData();
+    // Se llama a la función que realiza la búsqueda.
+    busquedaRangos(action, data);
 }
 
-function Rango3(){
-    let action = 'rangot';
-    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    Rangop(action);
-}
-
-function Rango4(){
-    let action = 'rangoc';
-    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    Rangop(action);
+//Cambiar el color de la barra de anuncios
+function ColorBarra(){
+    barra = document.getElementById("barra_anuncio");
+    barra.classList.add('ofertas');
 }

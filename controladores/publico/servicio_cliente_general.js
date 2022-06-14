@@ -9,20 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
             menu.classList.remove("sticky");
         }
     }
-
     //Var se crea para variables globales
     //let es variables locales
-
-    //Instanciar el menú
-    M.Sidenav.init(document.querySelectorAll('.sidenav'));
-    
-    //Instanciar Dropdown Menú
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    M.Dropdown.init(elems, {coverTrigger:false, hover: true});
-
-    //Instanciar Select
-    M.FormSelect.init(document.querySelectorAll('select'));
-    
-    //Instanciar ToolTips footer
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 });
+
+
+//Cambiar el color de la barra de anuncios
+function ColorBarra(){
+    barra = document.getElementById("barra_anuncio");
+    barra.classList.add('servicio');
+}

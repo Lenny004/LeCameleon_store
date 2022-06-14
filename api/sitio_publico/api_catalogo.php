@@ -172,6 +172,20 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No existen productos con esos precios';
             }
             break;
+        case 'rangoOfertas':
+            if (!$producto->setMin($_POST['min'])) {
+                $result['exception'] = 'Ingrese un valor minimo valido para buscar';
+            } elseif (!$producto->setMax($_POST['max'])) {
+                $result['exception'] = 'Ingrese un valor máximo valido para buscar';
+            } elseif ($result['dataset'] = $producto->rangoOferta()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
         case 'rangoMaxCategoria':
             if (!$producto->setIdCategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';
@@ -188,6 +202,16 @@ if (isset($_GET['action'])) {
             if (!$producto->setIdSubcategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';
             } elseif ($result['dataset'] = $producto->RangoMaxProductoSubcategoria()) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
+        case 'rangoMaxOfertas':
+            if ($result['dataset'] = $producto->RangoMaxOfertas()) {
                 $result['status'] = 1;
                 $result['message'] = 'Se han encontrado productos';
             } elseif (Database::getException()) {
