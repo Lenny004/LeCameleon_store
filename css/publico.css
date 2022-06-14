@@ -270,7 +270,7 @@ main {
     width: 180px !important;
 }
 
-.icono_perfil img{
+.icono_perfil img {
     transition: all .7s ease-in-out;
 }
 
@@ -807,6 +807,7 @@ img.imagen_muestra {
 
 .detalle_datos hr {
     background-color: #777676;
+    box-shadow: 0px 2px 10px 2px #bfbfbf;
     width: 100%;
 }
 
@@ -849,7 +850,7 @@ img.imagen_muestra {
     margin-bottom: 5%;
 }
 
-.detalle_del_producto p{
+.detalle_del_producto p {
     font-weight: 700;
 }
 
@@ -949,6 +950,11 @@ img.imagen_muestra {
     flex-wrap: wrap;
 }
 
+.producto_datos hr {
+    box-shadow: 0px 2px 7px 2px #bfbfbf;
+    margin-bottom: 4% !important;
+}
+
 .producto_imagen {
     width: 20%;
 }
@@ -1026,6 +1032,7 @@ img.imagen_muestra {
     height: 30%;
     padding: 2%;
     background-color: #e8d9d9;
+    box-shadow: 0px 2px 6px 2px #bfbfbf;
 }
 
 .contenedor_subtotal_carrito form {
@@ -1162,7 +1169,7 @@ img.imagen_muestra {
     align-items: center;
 }
 
-#pedidos_entrega_hoy{
+#pedidos_entrega_hoy {
     width: 100%;
     background-color: #bbd6ea;
     border-radius: 8px;
@@ -1192,30 +1199,30 @@ img.imagen_muestra {
     padding-bottom: 4%;
 }
 
-.anuncio_entrega_hoy{
+.anuncio_entrega_hoy {
     background-color: #C63637;
 }
 
-.imagen_producto{
+.imagen_producto {
     width: 25%;
     text-align: center;
 }
 
-.datos_producto{
+.datos_producto {
     width: 60%;
 }
 
-.datos_producto p{
+.datos_producto p {
     margin: 0.3em;
 }
 
 /*Agregamos negrita a los titulos internos de la tarjeta*/
-#direccion h6{
+#direccion h6 {
     font-weight: bold;
     transition: all .7s ease-in-out;
 }
 
-.boton_azul{
+.boton_azul {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1237,7 +1244,7 @@ img.imagen_muestra {
 }
 
 /*Modal de pedidos*/
-#titulo_modal{
+#titulo_modal {
     color: #282012;
     display: flex;
     flex-direction: row;
@@ -1247,75 +1254,76 @@ img.imagen_muestra {
     align-self: center;
 }
 
-#titulo_modal img{
+#titulo_modal img {
     width: 30px !important;
     height: 30px;
     margin-top: 5px;
     margin-left: -5px;
 }
 
-#modal_resenia_producto{
+#modal_resenia_producto {
     width: 40%;
 }
 
-.contenido_modal_resenia{
+.contenido_modal_resenia {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.contenido_modal_resenia .producto{
+.contenido_modal_resenia .producto {
     text-align: center;
 }
 
-.valoraciones{
+.valoraciones {
     display: flex;
     flex-direction: row;
     margin-top: 4%;
     margin-bottom: 4%;
 }
 
-.valoraciones img{
+.valoraciones img {
     width: 45px;
     cursor: pointer;
 }
 
-#resenias_usuarios{
+#resenias_usuarios {
     width: 100%;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Direccion envio Pedido+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------MAIN Direccion envio Pedido------------------------------------------------------*/
 
-.contenedor_envio{
+.contenedor_envio {
     color: #21190A;
     margin-top: 6%;
 }
 
-.contenedor_envio p{
+.contenedor_envio p {
     color: #2f6950;
 }
 
-.contenedor_envio_cuerpo{
+.contenedor_envio_cuerpo {
     border: 2px solid #777676;
+    box-shadow: 5px 10px 15px #bfbfbf;
     padding: 3%;
     margin-bottom: 10%;
 }
 
-.contenedor_envio_cuerpo .input-field{
+.contenedor_envio_cuerpo .input-field {
     margin-top: 2%;
 }
 
-.datepicker-date-display{
+.datepicker-date-display {
     background-color: #2f6950 !important;
 }
 
-.datepicker-date-display .year-text{
+.datepicker-date-display .year-text {
     color: #ffffff !important;
 }
 
-.datepicker-date-display .date-text{
+.datepicker-date-display .date-text {
     color: #ffffff !important;
 }
 
@@ -1543,12 +1551,12 @@ img.imagen_muestra {
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_registrar a {
+#boton_registrar button {
     background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_registrar a:hover {
+#boton_registrar button:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
@@ -1864,18 +1872,18 @@ img.imagen_muestra {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Modo Nocturno+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-body.dark{
+body.dark {
     background: #242221;
     transition: all .7s ease-in-out;
 }
 
-body.dark nav.nav-extended{
+body.dark nav.nav-extended {
     background-color: #2b2c2d !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark #logo_imagen img{
-    content:url("../recursos/img/logo3.png");
+body.dark #logo_imagen img {
+    content: url("../recursos/img/logo3.png");
     transition: all .7s ease-in-out;
 }
 
@@ -1889,46 +1897,46 @@ body.dark #menu a:hover {
     transition: all .7s ease-in-out;
 }
 
-body.dark #dropdown_usuario a{
+body.dark #dropdown_usuario a {
     color: #8cc43f !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark .icono_perfil img{
-    content:url("../recursos/iconografia/usuariow.png");
+body.dark .icono_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .ver_perfil img{
-    content:url("../recursos/iconografia/usuariow.png");
+body.dark .ver_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
     transition: all .7s ease-in-out;
 }
 
-.modo_oscuro::after{
+.modo_oscuro::after {
     content: ' Oscuro';
 }
 
-body.dark .modo_oscuro::after{
+body.dark .modo_oscuro::after {
     content: ' Claro';
 }
 
-body.dark .modo_oscuro img{
-    content:url("../recursos/iconografia/sol.png");
+body.dark .modo_oscuro img {
+    content: url("../recursos/iconografia/sol.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .cerrar_sesion img{
-    content:url("../recursos/iconografia/logoutw.png");
+body.dark .cerrar_sesion img {
+    content: url("../recursos/iconografia/logoutw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .pedidos_icon img{
-    content:url("../recursos/iconografia/pedidosw.png");
+body.dark .pedidos_icon img {
+    content: url("../recursos/iconografia/pedidosw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .carrito_compras img{
-    content:url("../recursos/iconografia/carritow.png");
+body.dark .carrito_compras img {
+    content: url("../recursos/iconografia/carritow.png");
     transition: all .7s ease-in-out;
 }
 
@@ -1937,22 +1945,22 @@ body.dark #tarjetas {
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjetas:hover{
+body.dark #tarjetas:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-body.dark h1{
+body.dark h1 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark h3{
+body.dark h3 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark h4{
+body.dark h4 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
@@ -1962,40 +1970,40 @@ body.dark .card-title {
     transition: all .7s ease-in-out;
 }
 
-body.dark .dropdown-content{
+body.dark .dropdown-content {
     background-color: #2b2c2d;
 }
 
-body.dark .dropdown-content li:hover{
+body.dark .dropdown-content li:hover {
     background-color: #242221 !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark #contenido_login .card{
+body.dark #contenido_login .card {
     background-color: #2b2c2d;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_login h5{
+body.dark #tarjeta_login h5 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_login p{
+body.dark #tarjeta_login p {
     color: #8cc43f;
     transition: all .7s ease-in-out;
 }
 
-body.dark #logo_login img{
-    content:url("../recursos/img/logo_icon.png");
+body.dark #logo_login img {
+    content: url("../recursos/img/logo_icon.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark #credenciales_login a{
+body.dark #credenciales_login a {
     color: #DA7D27;
 }
 
-body.dark #inicio_sesion_form input{
+body.dark #inicio_sesion_form input {
     color: #ffffff;
 }
 

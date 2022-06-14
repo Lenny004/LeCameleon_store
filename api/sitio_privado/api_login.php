@@ -10,21 +10,16 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'empleado'=> null, 'nivel_usuario' => null, 'tipo_usuario' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'empleado' => null, 'nivel_usuario' => null, 'tipo_usuario' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idusuario_e'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando el administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'cerrarSesion':
-                if (session_destroy()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
-                } else if (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
-                }
+                unset($_SESSION['idusuario_e']);
+                $result['estado'] = 1;
+                $result['message'] = 'Sesión eliminada correctamente';
                 break;
             case 'obtenerUsuario':
                 if (isset($_SESSION['usuario_e'])) {
@@ -35,8 +30,7 @@ if (isset($_GET['action'])) {
                     $result['tipo_usuario'] = $_SESSION['tipo_usuario_e'];
                 } else if (Database::getException()) {
                     $result['exception'] = Database::getException();
-                }
-                else {
+                } else {
                     $result['exception'] = 'Nombre de usuario indefinido';
                 }
                 break;
@@ -44,11 +38,10 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
                 break;
         }
-    }
-    else{
+    } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
-            //Verificamos si existen usuarios
+                //Verificamos si existen usuarios
             case 'verificarPrimerUso':
                 //Si existen usuarios manda un mensaje de que se encontraron
                 if ($usuario->ValidarExistenciaPrimerUsuario()) {
@@ -56,19 +49,18 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Existe al menos un usuario registrado';
                 } else if (Database::getException()) {
                     $result['exception'] = Database::getException();
-                }
-                else {
+                } else {
                     $result['exception'] = 'No existe un usuario administrador registrado';
                 }
                 break;
-            //Proceso para ingresar en el login
+                //Proceso para ingresar en el login
             case 'logIn':
                 $_POST = $usuario->validateForm($_POST);
                 //Si el usuario no es correcto manda una alerta
                 if (!$usuario->ValidarUsuarioEmpleado($_POST['usuario_login'])) {
                     $result['exception'] = 'El usuario ingresado no existe';
-                //Si el usuario y la contraseña es la correcta y el número de intentos es menor a 5 y un estado activo manda una alerta
-                }  else if (Database::getException()) {
+                    //Si el usuario y la contraseña es la correcta y el número de intentos es menor a 5 y un estado activo manda una alerta
+                } else if (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else if ($usuario->ValidarContraUsuarioEmpleado($_POST['password_login']) && $usuario->getIntento() < 5 && $usuario->getEstadoU() == 1) {
                     $result['estado'] = 1;
@@ -83,62 +75,60 @@ if (isset($_GET['action'])) {
                 //Si el usuario es el correcto pero la contra es incorrecta
                 else {
                     //Si el número de intentos es menor a 5
-                    if ($usuario->getIntento() < 5){
+                    if ($usuario->getIntento() < 5) {
                         //Validamos si tiene intentos pero si posee un estado 2 (inactivo) es orque el empleado ha sido deshabilitado
-                        if ($usuario->getEstadoU() == 2){
+                        if ($usuario->getEstadoU() == 2) {
                             $result['exception'] = 'El usuario esta inactivo';
                         }
                         //Se agrega un intento al usuario que está ingresando
-                        else if ($usuario->IntentosUsuarioEmpleado()){
+                        else if ($usuario->IntentosUsuarioEmpleado()) {
                             $result['exception'] = 'Contraseña incorrecta. Tienes ' . (5 - $usuario->getIntento()) . ' intentos restantes';
                         } else if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         }
                         //Si ocurre un fallo al actualizar
-                        else{
+                        else {
                             $result['exception'] = 'No se pudo actualizar los intentos';
                         }
                     } elseif (Database::getException()) {
                         $result['exception'] = Database::getException();
                     }
                     //Si el número de intentos es igual a 5
-                    else if($usuario->getIntento() == 5){
+                    else if ($usuario->getIntento() == 5) {
                         //Verificaremos si no existe una fecha de bloqueo para poder agregar una
-                        if ($usuario->getHoraInactivacion() == null && $usuario->getHoraActivacion()== null){
+                        if ($usuario->getHoraInactivacion() == null && $usuario->getHoraActivacion() == null) {
                             //Crearemos los valores de hora de bloqueo y desbloqueo
                             date_default_timezone_set('America/El_Salvador');
                             $hora_inactivacion = date('Y-m-d h:i:s', time());
                             $hora_actual = date('Y-m-d h:i:s', time());
                             //La hora de activación es la fecha y hora actual + 5 min que tendrá que esperar para volver a tener 5 intentos
-                            $hora_activacion = date('Y-m-d h:i:s',strtotime($hora_actual)+300);
+                            $hora_activacion = date('Y-m-d h:i:s', strtotime($hora_actual) + 300);
                             //Mandamos la hora de bloqueo, la hora de desbloqueo y el 2 que es para poner estado inactiva a la cuenta
-                            if($usuario->RegistrarHoraIntento($hora_inactivacion, $hora_activacion, 2)){
+                            if ($usuario->RegistrarHoraIntento($hora_inactivacion, $hora_activacion, 2)) {
                                 $result['exception'] = 'Tendrá 5 oportunidades dentro de 5 minutos, por favor espere';
                             } else if (Database::getException()) {
                                 $result['exception'] = Database::getException();
-                            }
-                            else{
+                            } else {
                                 $result['exception'] = 'No se pudo actualizar la hora de bloqueo';
                             }
                         }
                         //Verificaremos si existe una fecha de bloqueo para decirle al usuario el tiempo de espera
-                        else{
+                        else {
                             date_default_timezone_set('America/El_Salvador');
                             //Creamos un variable que almacene la hora local
                             $hora_actual = date('Y-m-d h:i:s', time());
                             //Si la hora actual es mayor a la fecha de activación le decimos que debe esperar
-                            if($usuario->getHoraActivacion() > $hora_actual){
+                            if ($usuario->getHoraActivacion() > $hora_actual) {
                                 $result['exception'] = 'Tendrá 5 oportunidades dentro de 5 minutos desde la hora de bloqueo, por favor espere';
-                            } 
+                            }
                             //Si la hora actual es menor a la fecha de activación, se actualizaran los intentos a 0 y se eliminara las fechas de bloqueo y desbloqueo 
-                            else if($usuario->getHoraActivacion() < $hora_actual){
+                            else if ($usuario->getHoraActivacion() < $hora_actual) {
                                 //Actualizamos los intentos a 0 y su estado a 1 que es activo
-                                if($usuario->HabilitarIntentos(0, 1)){
+                                if ($usuario->HabilitarIntentos(0, 1)) {
                                     $result['exception'] = 'Estado Actualizado. Ha acabado el tiempo de espera, tiene 5 intentos más';
                                 } else if (Database::getException()) {
                                     $result['exception'] = Database::getException();
-                                }
-                                else{
+                                } else {
                                     $result['exception'] = 'Error de Actualización. Ha ocurrido un error en el momento de actualizar intentos';
                                 }
                             } else {

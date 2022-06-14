@@ -198,7 +198,7 @@ function sweetAlert(type, text, url) {
 *   Parámetros: endpoint (ruta específica del servidor para obtener los datos), select (identificador del select en el formulario) y selected (valor seleccionado).
 *   Retorno: ninguno.
 */
-function fillSelect(endpoint, select, selected) {
+function fillSelect(endpoint, opcion, select, selected) {
     fetch(endpoint, {
         method: 'get'
     }).then(function (request) {
@@ -211,7 +211,7 @@ function fillSelect(endpoint, select, selected) {
                 if (response.estado) {
                     // Si no existe un valor para seleccionar, se muestra una opción para indicarlo.
                     if (!selected) {
-                        content += '<option disabled selected>Seleccione una opción</option>';
+                        content += `<option disabled selected>Seleccione ${opcion}</option>`;
                     }
                     // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
                     response.dataset.map(function (row) {

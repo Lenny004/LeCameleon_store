@@ -17,10 +17,10 @@ main {
 }
 
 /*Modificamos del contenedor de logo, nombre, tipo usuario y imagen usuario*/
-#apartado_header{
+#apartado_header {
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
     margin-top: 10px;
     margin-bottom: 5px;
     margin-right: 15px;
@@ -28,46 +28,46 @@ main {
 }
 
 /*Le asignamos tamaño a la imagen del logo*/
-#logo_imagen img{
+#logo_imagen img {
     max-height: 75px;
     max-width: 284px;
 }
 
-#usuario p{
+#usuario p {
     font-weight: 600;
     color: #36465d;
     display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	align-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    align-content: center;
     margin-right: 25px;
     transition: all .7s ease-in-out;
 }
 
-#usuario{
+#usuario {
     padding: 10px 20px 5px 15px;
     display: flex;
-	flex-direction: row;
-	align-items:center;
-	align-content: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
 }
 
 /*Le asignamos tamaño a la imagen de usuario*/
-#usuario img{
+#usuario img {
     max-height: 45px;
     max-width: 45px;
     cursor: pointer;
 }
 
-#usuario i{
+#usuario i {
     cursor: pointer;
 }
 
-#dropdown_usuario{
-    width: 200px!important;
+#dropdown_usuario {
+    width: 200px !important;
 }
 
-#dropdown_usuario img{
+#dropdown_usuario img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -75,19 +75,19 @@ main {
     position: relative;
 }
 
-#opciones_movil img{
+#opciones_movil img {
     width: 20px;
     height: 20px;
     top: 4px;
     margin-right: 10px;
-    position:relative;
+    position: relative;
 }
 
-#opciones_movil a{
+#opciones_movil a {
     width: 100%;
 }
 
-.material-tooltip{
+.material-tooltip {
     background-color: #2f6950 !important;
 }
 
@@ -111,7 +111,7 @@ main {
     top: 0;
 }
 
-nav.nav-extended{
+nav.nav-extended {
     transition: all .7s ease-in-out;
 }
 
@@ -119,19 +119,19 @@ nav.nav-extended{
     transition: all .7s ease-in-out;
 }
 
-.slides h1{
+.slides h1 {
     color: #ffffff;
     font-weight: bold;
     background-color: rgba(119, 118, 118, 0.5);
 }
 
 /*Menú para moviles le cambiamos el color de las letras*/
-.user-view a{
+.user-view a {
     color: #ffffff;
 }
 
 /*Alinea el titulo al centro*/
-.titulo_administrar{
+.titulo_administrar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,16 +146,16 @@ nav.nav-extended{
 }
 
 /*Sombreado a las tarjetas*/
-#tarjetas:hover{
+#tarjetas:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-#tarjetas a{
+#tarjetas a {
     color: #2f6950;
 }
 
-#tarjetas a:hover{
+#tarjetas a:hover {
     color: #ffff;
 }
 
@@ -185,21 +185,21 @@ footer {
 }
 
 /*-Footer Terminos-*/
-#pie{
+#pie {
     position: relative;
     font-size: smaller;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
 
-#texto_terminos{
+#texto_terminos {
     margin-left: 10%;
 }
 
-.terminos{
+.terminos {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -207,18 +207,18 @@ footer {
 }
 
 /*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
-.terminos p{
+.terminos p {
     font-weight: bold;
 }
 
-#sitio_privado{
+#sitio_privado {
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
 }
 
-#sitio_privado a{
+#sitio_privado a {
     font-weight: bolder;
     color: #21190a;
     padding: 5px;
@@ -227,7 +227,7 @@ footer {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
-#contenido_login{
+#contenido_login {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -235,12 +235,12 @@ footer {
 }
 
 /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-#logo_login img{
+#logo_login img {
     max-width: 180px;
     max-height: 135px;
 }
 
-#tarjeta_login{
+#tarjeta_login {
     height: 500px;
     width: 400px;
     box-shadow: 0px 1px 5px 2px #bfbfbf;
@@ -252,72 +252,72 @@ footer {
 }
 
 /*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
-#tarjeta_login h5{
+#tarjeta_login h5 {
     color: #282012;
     font-weight: 500;
     transition: all .7s ease-in-out;
 }
 
 /*Le damos un nuevo tamaño a la imagen del usuario*/
-#tarjeta_login img{
+#tarjeta_login img {
     height: 60px;
     width: 60px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-#anuncio_registrar{
+#anuncio_registrar {
     font-size: small;
     text-align: center;
     color: #282012;
 }
 
-#anuncio_registrar p{
+#anuncio_registrar p {
     text-align: center;
 }
 
-#imagen_usuario_login{
+#imagen_usuario_login {
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
     justify-content: center;
 }
 
-#contenido_login .card-content{
+#contenido_login .card-content {
     height: 390px;
     width: 390px;
 }
 
 /*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
-#tarjeta_login p{
+#tarjeta_login p {
     color: #2f6950;
 }
 
-#credenciales_login{
+#credenciales_login {
     display: flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
 }
 
-#credenciales_login a{
+#credenciales_login a {
     color: #36465d;
     border: none;
     padding: 0;
 }
 
-#credenciales_login a:hover{
+#credenciales_login a:hover {
     background: none;
 }
 
-#contra_login{
+#contra_login {
     display: flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
 }
 
-#contra_login img{
+#contra_login img {
     margin-top: 20px !important;
     position: relative !important;
     height: 25px !important;
@@ -325,7 +325,7 @@ footer {
     cursor: pointer;
 }
 
-#boton_iniciar_login{
+#boton_iniciar_login {
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -333,25 +333,25 @@ footer {
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_iniciar_login button{
+#boton_iniciar_login button {
     background-color: #DA7D27;
     box-shadow: none;
     border: none;
     padding: 0px 18px 5px 18px;
 }
 
-#boton_iniciar_login button:hover{
+#boton_iniciar_login button:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27;
     color: #DA7D27;
 }
 
-#registro_login{
+#registro_login {
     align-self: center;
 }
 
-#registro_login a{
+#registro_login a {
     color: #36465d !important;
 }
 
@@ -363,26 +363,26 @@ footer {
     cursor: pointer;
 }
 
-#datos span{
+#datos span {
     color: #36465d;
 }
 
-#formulario_registro{
+#formulario_registro {
     width: 100%;
     margin-top: 50px;
     display: flex;
     flex-direction: row-reverse;
     align-content: space-between;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
 }
 
-#logo_registro img{
+#logo_registro img {
     max-width: 340px;
     max-height: 300px;
 }
 
-#boton_registrar{
+#boton_registrar {
     display: flex;
     flex-direction: row;
     /* Alinear items en el centro */
@@ -391,27 +391,27 @@ footer {
 }
 
 /*Cambiamos las propiedades del boton iniciar sesion*/
-#boton_registrar button{
+#boton_registrar button {
     background-color: #DA7D27;
     box-shadow: none;
 }
 
-#boton_registrar button:hover{
+#boton_registrar button:hover {
     padding: 0px 18px 5px 18px;
     background-color: #ffff;
     border: 1.5px solid #DA7D27 !important;
     color: #DA7D27;
 }
 
-.datepicker-date-display{
+.datepicker-date-display {
     background-color: #2f6950 !important;
 }
 
-.datepicker-date-display .year-text{
+.datepicker-date-display .year-text {
     color: #ffffff !important;
 }
 
-.datepicker-date-display .date-text{
+.datepicker-date-display .date-text {
     color: #ffffff !important;
 }
 
@@ -419,31 +419,31 @@ footer {
 
 
 /*Alinea el titulo al lado izquierdo*/
-.titulo_graficas{
+.titulo_graficas {
     text-align: left;
 }
 
 /*Modificamos*/
-#tarjeta_grafica{
+#tarjeta_grafica {
     background-color: #e8d9d9;
     margin-top: 20px;
     margin-bottom: 40%;
 }
 
-#tarjeta_grafica span{
+#tarjeta_grafica span {
     font-weight: 400;
 }
 
-#tarjeta_grafica:hover{
+#tarjeta_grafica:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-#tarjeta_grafica a{
+#tarjeta_grafica a {
     color: #2f6950;
 }
 
-#tarjeta_grafica a:hover{
+#tarjeta_grafica a:hover {
     color: #ffff;
 }
 
@@ -465,11 +465,11 @@ footer {
 
 /*------------------------------------------Main Gráficas VENTAS------------------------------------------*/
 
-#titulo_graficos{
+#titulo_graficos {
     margin-left: 8%;
 }
 
-#contenedor_graficos{
+#contenedor_graficos {
     max-width: 100%;
     text-align: center;
     display: flex;
@@ -480,64 +480,64 @@ footer {
     justify-content: space-around;
 }
 
-#tarjeta_grafica_venta{
+#tarjeta_grafica_venta {
     width: 40%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content:center;
+    justify-content: center;
     margin: 2%;
 }
 
-#fechas_grafica{
+#fechas_grafica {
     color: #2f6950;
     display: flex;
     flex-direction: row;
 }
 
-#fechas_grafica .input-field{
+#fechas_grafica .input-field {
     margin-top: 10%;
 }
 
-.clasificar_grafica{
+.clasificar_grafica {
     width: 25%;
     margin-right: 10%;
 }
 
-#graficas h6{
+#graficas h6 {
     color: #21190a;
 }
 
-#graficas img{
+#graficas img {
     max-width: 500px;
     height: 100%;
 }
 
-#boton_consultar{
+#boton_consultar {
     margin-top: 20px;
     margin-bottom: 15px;
 }
 
-#boton_consultar a{
+#boton_consultar a {
     color: #ffffff;
     background-color: #2f6950;
 }
 
 /*------------------------------------------Main Gráficas EMPLEADOS------------------------------------------*/
-#tarjeta_grafica_empleados{
+#tarjeta_grafica_empleados {
     width: 50%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content:center;
+    justify-content: center;
     margin: 2%;
 }
 
-#fechas_grafica_empleado{
+#fechas_grafica_empleado {
     color: #2f6950;
     width: 80%;
     display: flex;
@@ -546,19 +546,19 @@ footer {
 }
 
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
-#tarjeta_inventario{
+#tarjeta_inventario {
     background-color: #e8d9d9;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 /*Sombreado a las tarjetas*/
-#tarjeta_inventario:hover{
+#tarjeta_inventario:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-#tarjeta_inventario a{
+#tarjeta_inventario a {
     color: #2f6950;
     border: 2px solid #2f6950;
     padding: 5px 35px 5px 35px;
@@ -569,11 +569,11 @@ footer {
     color: #ffff;
 }
 
-#tarjeta_inventario p{
+#tarjeta_inventario p {
     font-size: small;
 }
 
-#tarjeta_inventario span{
+#tarjeta_inventario span {
     font-size: 18px;
 }
 
@@ -583,7 +583,7 @@ footer {
 }
 
 /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
-#titulo_buscador{
+#titulo_buscador {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -608,7 +608,7 @@ footer {
     cursor: pointer;
 }
 
-#thesearch img{
+#thesearch img {
     margin-top: 2%;
 }
 
@@ -623,11 +623,11 @@ footer {
     width: 100%;
 }
 
-nav .input-field{
+nav .input-field {
     width: 100%;
 }
 
-#thesearch{
+#thesearch {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -635,17 +635,17 @@ nav .input-field{
     align-items: center;
 }
 
-#tabla{
+#tabla {
     margin-bottom: 10%;
 }
 
-#tabla img{
+#tabla img {
     width: 80px;
 }
 
 
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
-#titulo_modal{
+#titulo_modal {
     color: #282012;
     display: flex;
     flex-direction: row;
@@ -655,7 +655,7 @@ nav .input-field{
     align-self: center;
 }
 
-#titulo_modal img{
+#titulo_modal img {
     width: 30px;
     height: 30px;
     margin-top: 5px;
@@ -671,36 +671,36 @@ nav .input-field{
     flex-wrap: wrap;
 }
 
-#imagenes_modal p{
+#imagenes_modal p {
     color: #36465d;
     font-size: 12px;
     text-align: center;
 }
 
-#imagenes_modal a{
+#imagenes_modal a {
     background-color: #36465d;
     color: #ffffff;
 }
 
-#imagenes_modal a:hover{
+#imagenes_modal a:hover {
     background-color: #ffffff;
     color: #36465d;
     border: 2px solid #36465d;
 }
 
-#imagen_principal_modal img{
+#imagen_principal_modal img {
     width: 200px;
     height: 200px;
     margin-top: 15px;
     padding: 15px;
 }
 
-#imagenes_secundarias img{
+#imagenes_secundarias img {
     width: 40px;
     height: 40px;
 }
 
-#contenido_credenciales{
+#contenido_credenciales {
     margin-top: 15px;
     height: 700px;
     width: 570px;
@@ -710,17 +710,50 @@ nav .input-field{
     align-content: space-between;
 }
 
-#agregarModal{
+#agregar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#modificar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#eliminar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#reseniasModal {
     height: 90%;
     width: 90%;
 }
 
-#editarModal{
+#reseniasModal table.centered thead tr th {
+    color: #21190a;
+    background-color: #ffffff;
+}
+
+/*Tablas hijas o pares de color blanco*/
+#reseniasModal table.striped>tbody>tr:nth-child(even) {
+    color: #21190a;
+    background-color: #ffffff;
+}
+
+/*Tablas hijas o impar de color blanco*/
+#reseniasModal table.striped>tbody>tr:nth-child(odd) {
+    color: #21190a;
+    background-color: #ffffff !important;
+}
+
+
+#editarModal {
     height: 90%;
     width: 90%;
 }
 
-#campos{
+#campos {
     height: 99%;
     width: 99%;
     display: flex;
@@ -733,34 +766,36 @@ nav .input-field{
     flex-wrap: wrap;
 }
 
-#boton_agregar{
+#boton_agregar {
     text-align: center;
 }
 
-#boton_agregar button{
+#boton_agregar button {
     background-color: #2f6950;
     color: #ffffff;
 }
 
-.boton_verde{
+.boton_verde {
     background-color: #2f6950 !important;
     color: #ffffff;
+    margin-top: 2%;
+    margin-bottom: 5%;
 }
 
-#acciones{
+#acciones {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-#acciones img{
+#acciones img {
     cursor: pointer;
     width: 45px;
     height: 45px;
 }
 
 /*Modal 2*/
-#titulo_modal2{
+#titulo_modal2 {
     color: #282012;
     display: flex;
     flex-direction: row;
@@ -770,21 +805,21 @@ nav .input-field{
     align-self: center;
 }
 
-#titulo_modal2 img{
+#titulo_modal2 img {
     width: 30px !important;
     height: 30px;
     margin-top: 5px;
     margin-left: -5px;
 }
 
-#imagen_principal_modal2 img{
+#imagen_principal_modal2 img {
     width: 200px;
     height: 200px;
     margin-top: 15px;
     padding: 15px;
 }
 
-#contenido_credenciales2{
+#contenido_credenciales2 {
     margin-top: 15px;
     height: 700px;
     width: 570px;
@@ -794,12 +829,12 @@ nav .input-field{
     align-content: space-between;
 }
 
-#editarModal{
+#editarModal {
     height: 90%;
     width: 90%;
 }
 
-#campos2{
+#campos2 {
     height: 99%;
     width: 99%;
     display: flex;
@@ -812,115 +847,111 @@ nav .input-field{
     flex-wrap: wrap;
 }
 
-#boton_modificar{
+#boton_modificar {
     text-align: center;
     padding: 15px;
 }
 
-#boton_modificar button{
+#boton_modificar button {
     background-color: #36465d;
     color: #ffffff;
 }
 
-#boton_eliminar{
+#boton_eliminar {
     text-align: center;
     padding: 15px;
 }
 
-#boton_eliminar p{
+#boton_eliminar p {
     color: #d32f2f;
 }
 
-#boton_eliminar a{
+#boton_eliminar button {
     background-color: #d32f2f;
     color: #ffffff;
+    margin-bottom: 2%;
 }
 
 /*Modal 3*/
-#eliminarModal{
+#eliminarModal {
     height: 90%;
     width: 90%;
 }
 
 /*Modal 4*/
-#reseñaModal{
+#reseñaModal {
     height: 90%;
     width: 90%;
 }
 
-#estrellas{
+#estrellas {
     display: flex;
     flex-direction: row;
 }
 
-#estrellas img{
+#estrellas img {
     width: 25px;
     height: 25px;
 }
 
-#estado_reseña{
+#estado_reseña {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:space-between ;
+    justify-content: center;
     justify-items: center;
 }
 
 /*Propiedades del boton de idioma*/
 #estado_reseña a {
-    width: 100px;
     background-color: #36465d;
     color: #ffff;
-
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
-#estado_reseña img{
+#estado_reseña img {
     width: 15px;
     height: 15px;
-}
-
-#estado_resenia a{
-    width: 95%;
 }
 
 
 /*------------------------------------------Monitorear Pedidos------------------------------------------*/
 /*Colocamos el titulo y la caja con los estados a un extremo del otro*/
-#informacion{
-    padding: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+#informacion {
+    padding: 25px 30px 25px 30px;
+    /*Arriba, drecha, abajo, izquierda*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#informacion h4{
+#informacion h4 {
     font-weight: bold;
 }
 
 /*La caja de estado del pedido su contenido lo colocamos en fila*/
-#estado_pedido{
+#estado_pedido {
     width: 720px;
     border: solid 2px #bfbfbf;
     display: flex;
     flex-direction: row;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-#estado_pedido p{
+#estado_pedido p {
     font-size: small;
     margin-right: 15px;
 }
 
-#rojo{
+#rojo {
     position: relative;
 }
 
 /*Le asignamos un color a los 'a' para que sean cuadrados*/
-#rojo a{
+#rojo a {
     background-color: #b51d26;
     width: 20px;
     height: 20px;
@@ -929,18 +960,18 @@ nav .input-field{
     margin-right: -10px;
     /*Establecer las propiedades top, right, bottom y left de un 
     elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-content: center;
 }
 
-#amarillo{
+#amarillo {
     position: relative;
 }
 
 /*Le asignamos un color a los 'a' para que sean cuadrados*/
-#amarillo a{
+#amarillo a {
     background-color: #da7d27;
     width: 20px;
     height: 20px;
@@ -949,18 +980,18 @@ nav .input-field{
     margin-right: -10px;
     /*Establecer las propiedades top, right, bottom y left de un 
     elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-content: center;
 }
 
-#azul{
+#azul {
     position: relative;
 }
 
 /*Le asignamos un color a los 'a' para que sean cuadrados*/
-#azul a{
+#azul a {
     background-color: #36465d;
     width: 20px;
     height: 20px;
@@ -969,18 +1000,18 @@ nav .input-field{
     margin-right: -10px;
     /*Establecer las propiedades top, right, bottom y left de un 
     elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-content: center;
 }
 
-#verde{
+#verde {
     position: relative;
 }
 
 /*Le asignamos un color a los 'a' para que sean cuadrados*/
-#verde a{
+#verde a {
     background-color: #8cc43f;
     width: 20px;
     height: 20px;
@@ -989,18 +1020,19 @@ nav .input-field{
     margin-right: -10px;
     /*Establecer las propiedades top, right, bottom y left de un 
     elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-content: center;
 }
 
 /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-#pedidos{
+#pedidos {
     width: 1280px;
     height: 210px;
     border: 1px solid #282012;
-    margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+    margin: 25px 30px 25px 30px;
+    /*Arriba, drecha, abajo, izquierda*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1009,99 +1041,136 @@ nav .input-field{
 }
 
 /*Le damos una posición y tamaño a la imagen del camión*/
-#pedidos img{
+#pedidos img {
     max-width: 200px;
     max-height: 200px;
     margin-left: 45px;
 }
 
 /*Separamos el boton de tomar pedido de la derecha*/
-#tomar{
+#tomar {
     right: 5%;
     position: relative;
 }
 
 /*Separamos el boton de tomar pedido de la derecha*/
-#tomar2{
+#tomar2 {
     right: 5%;
     position: relative;
 }
 
 /*Se pueden tomar el pedido*/
-#tomar a{
+#tomar a {
     background-color: #da7d27;
 }
 
 /*El pedido esta en camino*/
-#tomar2 a{
+#tomar2 a {
     background-color: #8cc43f;
 }
 
 /*Movemos la información a la izquierda*/
-#direccion{
+#direccion {
     font-size: small;
     left: 22%;
-    position:absolute;
+    position: absolute;
 }
 
 /*Agregamos negrita a los titulos internos de la tarjeta*/
-#direccion h6{
+#direccion h6 {
     font-weight: bold;
     transition: all .7s ease-in-out;
 }
 
 /*Colores de las tarjetas dependiendo de su estado*/
-#pendiente a{
+#pendiente a {
     background-color: #d32f2f;
     width: 20px;
     height: 100%;
     position: absolute;
 }
 
-#disponible a{
+#disponible a {
     background-color: #da7d27;
     width: 20px;
     height: 100%;
-    position:absolute;
+    position: absolute;
 }
 
-#entregando a{
+#entregando a {
     background-color: #8cc43f;
     width: 20px;
     height: 100%;
-    position:absolute;
+    position: absolute;
 }
 
-#no_disponible a{
+#no_disponible a {
     background-color: #36465d;
     width: 20px;
     height: 100%;
-    position:absolute;
+    position: absolute;
+}
+
+/**/
+
+#imagenes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+.imagen_principal img {
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#imagenes p {
+    color: #36465d;
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#imagenes a {
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+
+.imagenes_secundarias img {
+    width: 40px;
+    height: 40px;
 }
 
 /*------------------------------------------Registro de entregas------------------------------------------*/
-.contenedor_entregas{
+.contenedor_entregas {
     display: flex;
     flex-direction: row;
 }
 
-#titulo_buscador h3{
+#titulo_buscador h3 {
     margin-left: 5%;
 }
 
-.contenedores_izquierda{
+.contenedores_izquierda {
     width: 44%;
     margin-left: 5%;
     margin-right: 1%;
 }
 
-.contenedores_entrega{
+.contenedores_entrega {
     border: 2px solid #777676;
     padding-top: 5%;
     padding-bottom: 5%;
 }
 
-.contenedores_entrega2{
+.contenedores_entrega2 {
     width: 44%;
     margin-right: 5%;
     margin-left: 1%;
@@ -1112,17 +1181,17 @@ nav .input-field{
     margin-bottom: 5%;
 }
 
-.texto_verde{
+.texto_verde {
     color: #2f6950;
 }
 
-#tabla_entregas{
+#tabla_entregas {
     padding-top: 5%;
     padding-bottom: 5%;
 }
 
 /*Tablas hijas o pares de color blanco*/
-table.centered thead tr th{
+table.centered thead tr th {
     color: #ffffff;
     background-color: #2f6950;
 }
@@ -1147,108 +1216,108 @@ table.striped>tbody>tr:nth-child(odd) {
 
 /*------------------------------------------CATEGORIAS PRINCIPALES------------------------------------------*/
 
-#acciones_categorias{
+#acciones_categorias {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-#acciones_categorias img{
+#acciones_categorias img {
     width: 45px;
     height: 45px;
 }
 
-.boton_agregar_categoria{
+.boton_agregar_categoria {
     position: absolute;
     bottom: 5%;
     margin-left: -25%;
 }
 
-.boton_azul{
+.boton_azul {
     background-color: #36465d !important;
     color: #ffffff;
 }
 
-.boton_modificar_categoria{
+.boton_modificar_categoria {
     position: absolute;
     bottom: 5%;
     margin-left: -25%;
 }
 
-#modal_agregar_subcategoria{
+#modal_agregar_subcategoria {
     height: 300px;
 }
 
-#modal_modificar_subcategoria{
+#modal_modificar_subcategoria {
     height: 300px;
 }
 
-#modal_eliminar_subcategoria{
+#modal_eliminar_subcategoria {
     height: 300px;
 }
 
 /*------------------------------------------Administrar Empleados------------------------------------------*/
 
-#boton_agregar_centrado{
+#boton_agregar_centrado {
     text-align: center;
 }
 
-#boton_agregar_centrado{
+#boton_agregar_centrado {
     text-align: center;
 }
 
-#estado_usuario_cliente .btn{
+#estado_usuario_cliente .btn {
     background-color: #36465d;
 }
 
-#modificar_modal_usuarioC{
+#modificar_modal_usuarioC {
     width: 30%;
 }
 
 /*------------------------------------------Administrar Marca------------------------------------------*/
-#modal_agregar_marca{
+#modal_agregar_marca {
     height: 280px;
 }
 
-#marca_agregar{
+#marca_agregar {
     margin-top: 8%;
 }
 
-.subir_imagen{
+.subir_imagen {
     margin-top: 5%;
 }
 
-#editar_modal_marca{
+#editar_modal_marca {
     height: 280px;
 }
 
-#marca_modificar{
+#marca_modificar {
     margin-top: 8%;
 }
 
-#eliminar_modal_marca{
+#eliminar_modal_marca {
     height: 280px;
 }
 
-#marca_eliminar{
+#marca_eliminar {
     margin-top: 8%;
 }
 
 
 /*----------------------------------------------Modo Nocturno------------------------------------------------------------------*/
 
-body.dark{
+body.dark {
     background: #242221;
     transition: all .7s ease-in-out;
 }
 
-body.dark nav.nav-extended{
+body.dark nav.nav-extended {
     background-color: #2b2c2d !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark #logo_imagen img{
-    content:url("../recursos/img/logo3.png");
+body.dark #logo_imagen img {
+    content: url("../recursos/img/logo3.png");
     transition: all .7s ease-in-out;
 }
 
@@ -1262,76 +1331,76 @@ body.dark #menu a:hover {
     transition: all .7s ease-in-out;
 }
 
-body.dark #dropdown_usuario a{
+body.dark #dropdown_usuario a {
     color: #8cc43f !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark .icono_perfil img{
-    content:url("../recursos/iconografia/usuariow.png");
+body.dark .icono_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .ver_perfil img{
-    content:url("../recursos/iconografia/usuariow.png");
+body.dark .ver_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
     transition: all .7s ease-in-out;
 }
 
-.modo_oscuro::after{
+.modo_oscuro::after {
     content: ' Oscuro';
 }
 
-body.dark .modo_oscuro::after{
+body.dark .modo_oscuro::after {
     content: ' Claro';
 }
 
-body.dark .modo_oscuro img{
-    content:url("../recursos/iconografia/sol.png");
+body.dark .modo_oscuro img {
+    content: url("../recursos/iconografia/sol.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .cerrar_sesion img{
-    content:url("../recursos/iconografia/logoutw.png");
+body.dark .cerrar_sesion img {
+    content: url("../recursos/iconografia/logoutw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .inicio_icon img{
-    content:url("../recursos/iconografia/iniciow.png");
+body.dark .inicio_icon img {
+    content: url("../recursos/iconografia/iniciow.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .graficas_icon img{
-    content:url("../recursos/iconografia/graficasw.png");
+body.dark .graficas_icon img {
+    content: url("../recursos/iconografia/graficasw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .inventario_icon img{
-    content:url("../recursos/iconografia/inventariow.png");
+body.dark .inventario_icon img {
+    content: url("../recursos/iconografia/inventariow.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .categoria_icon img{
-    content:url("../recursos/iconografia/categoriasw.png");
+body.dark .categoria_icon img {
+    content: url("../recursos/iconografia/categoriasw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .empleado_icon img{
-    content:url("../recursos/iconografia/empleados_usuariosw.png");
+body.dark .empleado_icon img {
+    content: url("../recursos/iconografia/empleados_usuariosw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .marca_icon img{
-    content:url("../recursos/iconografia/marcasw.png");
+body.dark .marca_icon img {
+    content: url("../recursos/iconografia/marcasw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .distribuidor_icon img{
-    content:url("../recursos/iconografia/distribuidorw.png");
+body.dark .distribuidor_icon img {
+    content: url("../recursos/iconografia/distribuidorw.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark .pedidos_icon img{
-    content:url("../recursos/iconografia/auto_pedidosw.png");
+body.dark .pedidos_icon img {
+    content: url("../recursos/iconografia/auto_pedidosw.png");
     transition: all .7s ease-in-out;
 }
 
@@ -1340,27 +1409,27 @@ body.dark #tarjetas {
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjetas:hover{
+body.dark #tarjetas:hover {
     box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
     transition: all 0.4s ease;
 }
 
-body.dark #usuario p{
+body.dark #usuario p {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark h1{
+body.dark h1 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark h3{
+body.dark h3 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark h4{
+body.dark h4 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
@@ -1380,20 +1449,20 @@ body.dark .card-title {
     transition: all .7s ease-in-out;
 }
 
-body.dark .dropdown-content{
+body.dark .dropdown-content {
     background-color: #2b2c2d;
 }
 
-body.dark .dropdown-content li:hover{
+body.dark .dropdown-content li:hover {
     background-color: #242221 !important;
     transition: all .7s ease-in-out;
 }
 
-body.dark .sidenav{
+body.dark .sidenav {
     background-color: #2b2c2d;
 }
 
-body.dark .sidenav a{
+body.dark .sidenav a {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
@@ -1403,103 +1472,104 @@ body.dark .sidenav a:hover {
     transition: all .7s ease-in-out;
 }
 
-body.dark #contenido_login .card{
+body.dark #contenido_login .card {
     background-color: #2b2c2d;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_login h5{
+body.dark #tarjeta_login h5 {
     color: #ffffff;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_login p{
+body.dark #tarjeta_login p {
     color: #8cc43f;
     transition: all .7s ease-in-out;
 }
 
-body.dark #logo_login img{
-    content:url("../recursos/img/logo_icon.png");
+body.dark #logo_login img {
+    content: url("../recursos/img/logo_icon.png");
     transition: all .7s ease-in-out;
 }
 
-body.dark #credenciales_login a{
+body.dark #credenciales_login a {
     color: #DA7D27;
 }
 
-body.dark #inicio_sesion_form input{
+body.dark #inicio_sesion_form input {
     color: #ffffff;
 }
 
-body.dark #tarjeta_grafica{
+body.dark #tarjeta_grafica {
     background-color: #2b2c2d;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_inventario{
+body.dark #tarjeta_inventario {
     background-color: #2b2c2d;
     transition: all .7s ease-in-out;
 }
 
-body.dark #tarjeta_inventario p{
+body.dark #tarjeta_inventario p {
     color: #ffffff;
 }
 
-body.dark .texto_verde p{
+body.dark .texto_verde p {
     color: #8cc43f;
 }
 
-body.dark #titulo_buscador h6{
+body.dark #titulo_buscador h6 {
     color: #ffffff;
 }
 
-body.dark #formulario_entrega label{
+body.dark #formulario_entrega label {
     color: #ffffff;
 }
 
-body.dark #formulario_entrega p{
+body.dark #formulario_entrega p {
     color: #ffffff;
 }
 
-body.dark #formulario_entrega input{
+body.dark #formulario_entrega input {
     color: #ffffff;
 }
 
-body.dark #formulario_entrega .dropdown-content li>span{
+body.dark #formulario_entrega .dropdown-content li>span {
     color: #8cc43f;
 }
 
-body.dark .contenedores_entrega2 h5{
+body.dark .contenedores_entrega2 h5 {
     color: #ffffff;
 }
 
-body.dark .contenedores_entrega h5{
+body.dark .contenedores_entrega h5 {
     color: #ffffff;
 }
 
-body.dark #pedidos{
+body.dark #pedidos {
     border: 1px solid #ffffff;
 }
 
-body.dark #estado_pedido p{
+body.dark #estado_pedido p {
     color: #ffffff;
 }
 
 /*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
 
 /*para celulares*/
-@media screen and (max-width: 374px){
+@media screen and (max-width: 374px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
 
     /*Editar el titulo del slider*/
-    #slider_main h1{
+    #slider_main h1 {
         font-size: 45px;
     }
 
-    .titulo_administrar{
+    .titulo_administrar {
         font-size: 35px;
     }
 
@@ -1509,8 +1579,8 @@ body.dark #estado_pedido p{
         margin-top: 2px;
         margin-bottom: 15px;
     }
-    
-    #tarjetas a{
+
+    #tarjetas a {
         color: #2f6950;
         font-size: 10px;
         width: 60px;
@@ -1520,13 +1590,13 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjetas span{
+    #tarjetas span {
         font-size: 15px;
         margin-bottom: 10px;
     }
@@ -1534,7 +1604,7 @@ body.dark #estado_pedido p{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         height: 110px;
         width: 100%;
@@ -1543,29 +1613,29 @@ body.dark #estado_pedido p{
     .card {
         padding: 5px;
     }
-    
+
     .card img {
         height: 110px;
         width: 100%;
     }
 
     /*-Footer Terminos-*/
-    #pie{
+    #pie {
         text-align: center;
         position: relative;
         font-size: smaller;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    #texto_terminos{
+    #texto_terminos {
         margin-left: 0%;
     }
 
-    .terminos{
+    .terminos {
         font-size: smaller;
         margin-left: none;
         display: flex;
@@ -1575,7 +1645,7 @@ body.dark #estado_pedido p{
         justify-content: center;
     }
 
-    #sitio_privado{
+    #sitio_privado {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -1583,35 +1653,35 @@ body.dark #estado_pedido p{
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    
+
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
+    #tarjeta_login {
         max-height: 450px;
         max-width: 300px;
     }
 
-    #contenido_login .card-content{
+    #contenido_login .card-content {
         height: 350px;
         width: 300px;
     }
 
-    #tarjeta_login{
+    #tarjeta_login {
         font-size: smaller;
     }
 
     /*-Footer Terminos-*/
-    #pie_login{
+    #pie_login {
         position: relative;
         font-size: smaller;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    .terminos_login{
+    .terminos_login {
         font-size: smaller;
         margin-left: 0px;
         display: flex;
@@ -1621,32 +1691,32 @@ body.dark #estado_pedido p{
         justify-content: center;
     }
 
-    #formulario_registro{
+    #formulario_registro {
         width: 95%;
         margin-top: 0px;
         display: flex;
         flex-direction: column;
         align-content: center;
-        align-items:center;
+        align-items: center;
         justify-content: center;
     }
 
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-    #logo_registro img{
+    #logo_registro img {
         max-width: 250px;
         max-height: 230px;
     }
 
     /*------------------------------------------Main Gráficas------------------------------------------*/
-    .titulo_graficas{
+    .titulo_graficas {
         font-size: 35px;
     }
 
-    #tarjeta_grafica{
+    #tarjeta_grafica {
         margin-bottom: 10%;
     }
-    
-    #tarjeta_grafica a{
+
+    #tarjeta_grafica a {
         font-size: 10px;
         margin-right: -8px;
         padding-left: 10px !important;
@@ -1658,20 +1728,20 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjeta_grafica span{
+    #tarjeta_grafica span {
         font-size: 15px;
     }
 
     #tarjeta_grafica .card {
         padding: 5px;
     }
-    
+
     #tarjeta_grafica.card img {
         margin-top: 10%;
         height: 80%;
@@ -1679,40 +1749,40 @@ body.dark #estado_pedido p{
     }
 
     /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
-    #fechas_grafica{
+    #fechas_grafica {
         display: flex;
         flex-direction: column;
     }
 
-    .clasificar_grafica{
+    .clasificar_grafica {
         width: 100%;
         margin-right: 0%;
     }
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
-    #tarjeta_inventario{
+    #tarjeta_inventario {
         text-align: center;
         display: flex;
-        flex-direction: column ;
-        justify-content:center ;
-        align-items:center ;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjeta_inventario a{
+    #tarjeta_inventario a {
         font-size: 10px;
         margin-right: -8px;
 
         display: flex;
-        flex-direction: column ;
-        justify-content:center ;
-        align-items:center ;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjeta_inventario p{
+    #tarjeta_inventario p {
         font-size: small;
     }
 
-    #tarjeta_inventario span{
+    #tarjeta_inventario span {
         font-size: 15px;
         font-weight: 600;
     }
@@ -1723,7 +1793,7 @@ body.dark #estado_pedido p{
     }
 
     /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
-    #titulo_buscador{
+    #titulo_buscador {
         padding-bottom: 25px;
         display: flex;
         flex-direction: column;
@@ -1731,31 +1801,31 @@ body.dark #estado_pedido p{
         align-items: center;
     }
 
-    #tabla th{
+    #tabla th {
         font-size: 12px;
     }
 
-    #tabla td{
+    #tabla td {
         font-size: 12px;
     }
-    
-    #titulo_buscador h3{
+
+    #titulo_buscador h3 {
         margin-left: 5%;
     }
 
-    .contenedor_entregas{
+    .contenedor_entregas {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .contenedores_izquierda{
+    .contenedores_izquierda {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
     }
 
-    .contenedores_entrega2{
+    .contenedores_entrega2 {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
@@ -1763,7 +1833,7 @@ body.dark #estado_pedido p{
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-    #pedidos{
+    #pedidos {
         width: 100%;
         height: 600px;
         border: 1px solid #282012;
@@ -1777,94 +1847,95 @@ body.dark #estado_pedido p{
         align-items: center;
         position: relative;
     }
-    
+
     /*Le damos una posición y tamaño a la imagen del camión*/
-    #pedidos img{
+    #pedidos img {
         max-width: 200px;
         max-height: 200px;
         margin-left: 0px;
     }
-    
+
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar{
+    #tomar {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
-    
+
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar2{
+    #tomar2 {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
-    
+
     /*Movemos la información a la izquierda*/
-    #direccion{
+    #direccion {
         text-align: center;
         font-size: small;
         left: 0;
         position: relative;
     }
-    
+
     /*Agregamos negrita a los titulos internos de la tarjeta*/
-    #direccion h6{
+    #direccion h6 {
         font-weight: bold;
     }
-    
+
     /*Colores de las tarjetas dependiendo de su estado*/
-    #retrasado a{
+    #retrasado a {
         background-color: #d32f2f;
         width: 100%;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
-    
-    #disponible a{
+
+    #disponible a {
         background-color: #da7d27;
         width: 100%;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
-    
-    #entregando a{
+
+    #entregando a {
         background-color: #8cc43f;
         width: 100%;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
-    
-    #no_disponible a{
+
+    #no_disponible a {
         background-color: #36465d;
         width: 100%;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 }
 
 
-@media screen and (min-width:375px) and (max-width:576px){
+@media screen and (min-width:375px) and (max-width:576px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
 
     /*Editar el titulo del slider*/
-    #slider_main h1{
+    #slider_main h1 {
         font-size: 50px;
     }
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
 
-    .titulo_administrar{
+    .titulo_administrar {
         font-size: 40px;
     }
 
@@ -1874,8 +1945,8 @@ body.dark #estado_pedido p{
         margin-top: 2px;
         margin-bottom: 20px;
     }
-    
-    #tarjetas a{
+
+    #tarjetas a {
         color: #2f6950;
         font-size: 10px;
         padding-right: 0px;
@@ -1886,14 +1957,14 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 18px;
         margin-bottom: 10px;
     }
@@ -1901,7 +1972,7 @@ body.dark #estado_pedido p{
     .container .card {
         padding: 10px;
     }
-    
+
     .container .card img {
         height: 120px;
         width: 200px;
@@ -1910,7 +1981,7 @@ body.dark #estado_pedido p{
     .card {
         padding: 10px;
     }
-    
+
     .card img {
         height: 120px;
         width: 200px;
@@ -1919,22 +1990,22 @@ body.dark #estado_pedido p{
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
 
     /*Editamos el footer*/
-    #pie{
+    #pie {
         text-align: center;
         position: relative;
         font-size: small;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    #texto_terminos{
+    #texto_terminos {
         margin-left: 0%;
     }
 
-    .terminos{
+    .terminos {
         font-size: small;
         margin-left: 0px;
         display: flex;
@@ -1944,7 +2015,7 @@ body.dark #estado_pedido p{
         justify-content: center;
     }
 
-    #sitio_privado{
+    #sitio_privado {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -1955,26 +2026,26 @@ body.dark #estado_pedido p{
 
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
-    #tarjeta_login{
+    #tarjeta_login {
         max-height: 450px;
         max-width: 360px;
     }
 
-    #contenido_login .card-content{
+    #contenido_login .card-content {
         height: 360px;
         width: 360px;
     }
 
-    #boton_iniciar_login{
+    #boton_iniciar_login {
         margin: 0px;
         padding-bottom: 10px;
     }
 
-    #tarjeta_login{
+    #tarjeta_login {
         font-size: smaller;
     }
 
-    .terminos_login{
+    .terminos_login {
         font-size: smaller;
         margin-left: 0px;
         display: flex;
@@ -1984,18 +2055,18 @@ body.dark #estado_pedido p{
         justify-content: center;
     }
 
-    #formulario_registro{
+    #formulario_registro {
         width: 90%;
         margin-top: 0px;
         display: flex;
         flex-direction: column;
         align-content: center;
-        align-items:center;
+        align-items: center;
         justify-content: center;
     }
 
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
-    #logo_registro img{
+    #logo_registro img {
         max-width: 320px;
         max-height: 245px;
         margin-left: -15px;
@@ -2003,15 +2074,15 @@ body.dark #estado_pedido p{
     }
 
     /*------------------------------------------Main Gráficas------------------------------------------*/
-    .titulo_graficas{
+    .titulo_graficas {
         font-size: 40px;
     }
-    
-    #tarjeta_grafica{
+
+    #tarjeta_grafica {
         margin-bottom: 10%;
     }
-    
-    #tarjeta_grafica a{
+
+    #tarjeta_grafica a {
         color: #2f6950;
         font-size: 11px;
         padding: 0px;
@@ -2021,13 +2092,13 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjeta_grafica span{
+    #tarjeta_grafica span {
         font-size: 20px;
     }
 
@@ -2037,45 +2108,45 @@ body.dark #estado_pedido p{
     }
 
     /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
-    #fechas_grafica{
+    #fechas_grafica {
         display: flex;
         flex-direction: column;
     }
 
-    .clasificar_grafica{
+    .clasificar_grafica {
         width: 100%;
         margin-right: 0%;
     }
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
-    #tarjeta_inventario{
+    #tarjeta_inventario {
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjeta_inventario a{
+    #tarjeta_inventario a {
         font-size: 11px;
         margin-right: -8px;
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjeta_inventario p{
+    #tarjeta_inventario p {
         font-size: small;
     }
 
-    #tarjeta_inventario span{
+    #tarjeta_inventario span {
         font-size: 20px;
     }
 
     /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
-    #titulo_buscador{
+    #titulo_buscador {
         padding-bottom: 25px;
         display: flex;
         flex-direction: column;
@@ -2083,23 +2154,23 @@ body.dark #estado_pedido p{
         align-items: center;
     }
 
-    #titulo_buscador h3{
+    #titulo_buscador h3 {
         margin-left: 5%;
     }
 
-    .contenedor_entregas{
+    .contenedor_entregas {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .contenedores_izquierda{
+    .contenedores_izquierda {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
     }
 
-    .contenedores_entrega2{
+    .contenedores_entrega2 {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
@@ -2107,10 +2178,11 @@ body.dark #estado_pedido p{
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-    #pedidos{
+    #pedidos {
         width: 330px;
         height: 700px;
-        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        margin: 20px 25px 20px 25px;
+        /*Arriba, drecha, abajo, izquierda*/
         display: flex;
         text-align: center;
         flex-direction: column;
@@ -2120,28 +2192,28 @@ body.dark #estado_pedido p{
     }
 
     /*Le damos una posición y tamaño a la imagen del camión*/
-    #pedidos img{
+    #pedidos img {
         max-width: 250px;
         max-height: 250px;
         margin-left: 0px;
     }
 
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar{
+    #tomar {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
 
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar2{
+    #tomar2 {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
 
     /*Movemos la información a la izquierda*/
-    #direccion{
+    #direccion {
         text-align: center;
         font-size: small;
         left: 0;
@@ -2149,12 +2221,12 @@ body.dark #estado_pedido p{
     }
 
     /*Agregamos negrita a los titulos internos de la tarjeta*/
-    #direccion h6{
+    #direccion h6 {
         font-weight: bold;
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #retrasado a{
+    #retrasado a {
         background-color: #d32f2f;
         width: 329px;
         height: 20px;
@@ -2163,54 +2235,55 @@ body.dark #estado_pedido p{
         position: absolute;
     }
 
-    #disponible a{
+    #disponible a {
         background-color: #da7d27;
         width: 329px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #entregando a{
+    #entregando a {
         background-color: #8cc43f;
         width: 329px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #no_disponible a{
+    #no_disponible a {
         background-color: #36465d;
         width: 329px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 }
 
-@media screen and (min-width:577px) and (max-width:765px){
+@media screen and (min-width:577px) and (max-width:765px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
 
-    .titulo_administrar{
+    .titulo_administrar {
         font-size: 45px;
     }
 
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 300px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -2220,14 +2293,14 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
@@ -2235,7 +2308,7 @@ body.dark #estado_pedido p{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
@@ -2244,22 +2317,22 @@ body.dark #estado_pedido p{
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
 
     /*Editamos el footer*/
-    #pie{
+    #pie {
         text-align: center;
         position: relative;
         font-size: small;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    #texto_terminos{
+    #texto_terminos {
         margin-left: 0%;
     }
 
-    .terminos{
+    .terminos {
         font-size: small;
         margin-left: 0px;
         display: flex;
@@ -2269,23 +2342,23 @@ body.dark #estado_pedido p{
         justify-content: center;
     }
 
-    #sitio_privado{
+    #sitio_privado {
         display: flex;
         flex-direction: column;
         align-content: center;
         align-items: center;
     }
-    
+
     /*------------------------------------------Main Gráficas------------------------------------------*/
-    .titulo_graficas{
+    .titulo_graficas {
         font-size: 35px;
     }
 
-    #tarjeta_grafica{
+    #tarjeta_grafica {
         margin-bottom: 10%;
     }
-    
-    #tarjeta_grafica a{
+
+    #tarjeta_grafica a {
         font-size: 15px;
         padding: 0px;
         padding-top: 4px;
@@ -2294,63 +2367,63 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjeta_grafica span{
+    #tarjeta_grafica span {
         font-size: 22px;
     }
 
     /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
-    #fechas_grafica{
+    #fechas_grafica {
         display: flex;
         flex-direction: column;
     }
 
-    .clasificar_grafica{
+    .clasificar_grafica {
         width: 100%;
         margin-right: 0%;
     }
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
-    #tarjeta_inventario a{
+    #tarjeta_inventario a {
         font-size: 11px;
         margin-right: -8px;
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
-    #tarjeta_inventario p{
+    #tarjeta_inventario p {
         font-size: medium;
     }
 
-    #tarjeta_inventario span{
+    #tarjeta_inventario span {
         font-size: 22px;
     }
 
-    #titulo_buscador h3{
+    #titulo_buscador h3 {
         margin-left: 1%;
     }
 
-    .contenedor_entregas{
+    .contenedor_entregas {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .contenedores_izquierda{
+    .contenedores_izquierda {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
     }
 
-    .contenedores_entrega2{
+    .contenedores_entrega2 {
         width: 98%;
         margin-left: 1%;
         margin-right: 1%;
@@ -2358,11 +2431,12 @@ body.dark #estado_pedido p{
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-    #pedidos{
+    #pedidos {
         width: 500px;
         height: 700px;
         border: 1px solid #282012;
-        margin: 20px 25px 20px 25px; /*Arriba, drecha, abajo, izquierda*/
+        margin: 20px 25px 20px 25px;
+        /*Arriba, drecha, abajo, izquierda*/
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -2373,28 +2447,28 @@ body.dark #estado_pedido p{
     }
 
     /*Le damos una posición y tamaño a la imagen del camión*/
-    #pedidos img{
+    #pedidos img {
         max-width: 400px;
         max-height: 400px;
         margin-left: 0px;
     }
 
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar{
+    #tomar {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
 
     /*Separamos el boton de tomar pedido de la derecha*/
-    #tomar2{
+    #tomar2 {
         right: 0;
         position: static;
         margin-bottom: 25px;
     }
 
     /*Movemos la información a la izquierda*/
-    #direccion{
+    #direccion {
         text-align: center;
         font-size: small;
         left: 0;
@@ -2402,12 +2476,12 @@ body.dark #estado_pedido p{
     }
 
     /*Agregamos negrita a los titulos internos de la tarjeta*/
-    #direccion h6{
+    #direccion h6 {
         font-weight: bold;
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #retrasado a{
+    #retrasado a {
         background-color: #d32f2f;
         width: 499px;
         height: 20px;
@@ -2416,50 +2490,51 @@ body.dark #estado_pedido p{
         position: absolute;
     }
 
-    #disponible a{
+    #disponible a {
         background-color: #da7d27;
         width: 499px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #entregando a{
+    #entregando a {
         background-color: #8cc43f;
         width: 499px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #no_disponible a{
+    #no_disponible a {
         background-color: #36465d;
         width: 499px;
         height: 20px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 }
 
 @media screen and (min-width:766px) and (max-width:909px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 40px;
     }
-    
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
 
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 260px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -2469,14 +2544,14 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 15px;
         margin-bottom: 2px;
     }
@@ -2484,18 +2559,18 @@ body.dark #estado_pedido p{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
 
     /*------------------------------------------Main Gráficas------------------------------------------*/
-    #tarjeta_grafica{
+    #tarjeta_grafica {
         margin-bottom: 10%;
     }
-    
-    #tarjeta_grafica a{
+
+    #tarjeta_grafica a {
         font-size: 16px;
         padding: 0px;
         padding-top: 4px;
@@ -2504,23 +2579,23 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjeta_grafica span{
+    #tarjeta_grafica span {
         font-size: 25px;
     }
 
     /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
-    #fechas_grafica .input-field{
+    #fechas_grafica .input-field {
         margin-top: 12%;
     }
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
-    #tarjeta_inventario a{
+    #tarjeta_inventario a {
         font-size: 16px;
         padding: 0px;
         padding-top: 4px;
@@ -2529,23 +2604,24 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: column;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
-    #tarjeta_inventario span{
+    #tarjeta_inventario span {
         font-size: 25px;
     }
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-    #pedidos{
+    #pedidos {
         width: 740px;
         height: 210px;
         border: 1px solid #282012;
-        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -2554,7 +2630,7 @@ body.dark #estado_pedido p{
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #rojo a{
+    #rojo a {
         background-color: #b51d26;
         width: 20px;
         height: 20px;
@@ -2563,14 +2639,14 @@ body.dark #estado_pedido p{
         margin-right: 12px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #amarillo a{
+    #amarillo a {
         background-color: #da7d27;
         width: 20px;
         height: 20px;
@@ -2579,14 +2655,14 @@ body.dark #estado_pedido p{
         margin-right: 0px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #azul a{
+    #azul a {
         background-color: #36465d;
         width: 20px;
         height: 20px;
@@ -2595,14 +2671,14 @@ body.dark #estado_pedido p{
         margin-right: 0px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #verde a{
+    #verde a {
         background-color: #8cc43f;
         width: 20px;
         height: 20px;
@@ -2611,84 +2687,85 @@ body.dark #estado_pedido p{
         margin-right: 5px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*  Le damos una posición y tamaño a la imagen del camión*/
-    #pedidos img{
+    #pedidos img {
         max-width: 100px;
         max-height: 100px;
     }
 
     /*Movemos la información a la izquierda*/
-    #direccion{
+    #direccion {
         font-size: small;
         left: 22%;
-        position:absolute;
+        position: absolute;
     }
 
     /*Agregamos negrita a los titulos internos de la tarjeta*/
-    #direccion h6{
+    #direccion h6 {
         font-weight: bold;
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #retrasado a{
+    #retrasado a {
         background-color: #d32f2f;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #disponible a{
+    #disponible a {
         background-color: #da7d27;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #entregando a{
+    #entregando a {
         background-color: #8cc43f;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #no_disponible a{
+    #no_disponible a {
         background-color: #36465d;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 }
 
-@media screen and (min-width:910px) and (max-width:1133px){
+@media screen and (min-width:910px) and (max-width:1133px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
-    #menu_desplegable{
+    #menu_desplegable {
         max-width: 60px;
     }
 
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
 
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 270px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -2698,14 +2775,14 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*Titulos de las tarjetas*/
-    #tarjetas span{
+    #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
@@ -2713,18 +2790,18 @@ body.dark #estado_pedido p{
     .container .card {
         padding: 5px;
     }
-    
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
 
     /*------------------------------------------Main Gráficas------------------------------------------*/
-    #tarjeta_grafica{
+    #tarjeta_grafica {
         margin-bottom: 15%;
     }
-    
-    #tarjeta_grafica a{
+
+    #tarjeta_grafica a {
         font-size: 15px;
         padding: 0px;
         padding-top: 4px;
@@ -2733,18 +2810,18 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
-    #tarjeta_inventario{
+    #tarjeta_inventario {
         min-height: 316px;
     }
-    
-    #tarjeta_inventario a{
+
+    #tarjeta_inventario a {
         font-size: 16px;
         padding: 0px;
         padding-top: 4px;
@@ -2753,24 +2830,25 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
-    #titulo_buscador{
+    #titulo_buscador {
         margin-top: 10%;
     }
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
-    #pedidos{
+    #pedidos {
         width: 865px;
         height: 210px;
         border: 1px solid #282012;
-        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -2779,7 +2857,7 @@ body.dark #estado_pedido p{
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #rojo a{
+    #rojo a {
         background-color: #b51d26;
         width: 20px;
         height: 20px;
@@ -2788,14 +2866,14 @@ body.dark #estado_pedido p{
         margin-right: -10px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #amarillo a{
+    #amarillo a {
         background-color: #da7d27;
         width: 20px;
         height: 20px;
@@ -2804,14 +2882,14 @@ body.dark #estado_pedido p{
         margin-right: -10px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #azul a{
+    #azul a {
         background-color: #36465d;
         width: 20px;
         height: 20px;
@@ -2820,14 +2898,14 @@ body.dark #estado_pedido p{
         margin-right: -10px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*Le asignamos un color a los 'a' para que sean cuadrados*/
-    #verde a{
+    #verde a {
         background-color: #8cc43f;
         width: 20px;
         height: 20px;
@@ -2836,78 +2914,79 @@ body.dark #estado_pedido p{
         margin-right: -7px;
         /*Establecer las propiedades top, right, bottom y left de un 
         elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
-        position:absolute;
+        position: absolute;
         display: flex;
         flex-direction: row;
         align-content: center;
     }
 
     /*  Le damos una posición y tamaño a la imagen del camión*/
-    #pedidos img{
+    #pedidos img {
         max-width: 100px;
         max-height: 100px;
     }
 
     /*Movemos la información a la izquierda*/
-    #direccion{
+    #direccion {
         font-size: small;
         left: 22%;
-        position:absolute;
+        position: absolute;
     }
 
     /*Agregamos negrita a los titulos internos de la tarjeta*/
-    #direccion h6{
+    #direccion h6 {
         font-weight: bold;
     }
 
     /*Colores de las tarjetas dependiendo de su estado*/
-    #retrasado a{
+    #retrasado a {
         background-color: #d32f2f;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #disponible a{
+    #disponible a {
         background-color: #da7d27;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #entregando a{
+    #entregando a {
         background-color: #8cc43f;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 
-    #no_disponible a{
+    #no_disponible a {
         background-color: #36465d;
         width: 20px;
         height: 208px;
         top: 0;
         left: 0;
-        position:absolute;
+        position: absolute;
     }
 }
 
 @media screen and (min-width:1134px) and (max-width:1333px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
-    #tarjetas{
+    #tarjetas {
         height: 340px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
 
-    #tarjetas a{
+    #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
         padding-left: 0px;
@@ -2916,23 +2995,24 @@ body.dark #estado_pedido p{
 
         display: flex;
         flex-direction: row;
-        justify-content:space-around;
-        align-items:center;
+        justify-content: space-around;
+        align-items: center;
         align-content: center;
         align-self: center;
     }
 
     /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
-    #titulo_buscador{
+    #titulo_buscador {
         margin-top: 10%;
     }
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
-    #pedidos{
+    #pedidos {
         width: 1080px;
         height: 210px;
         border: 1px solid #282012;
-        margin: 25px 30px 25px 30px; /*Arriba, drecha, abajo, izquierda*/
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
         display: flex;
         flex-direction: row;
         justify-content: space-between;

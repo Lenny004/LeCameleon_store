@@ -47,7 +47,7 @@ if (isset($_GET['action'])) {
                 //Verificamos si existen pedidos que ya se hayan entregado
             case 'pedidosEntregadosCliente':
                 //Si existen pedidos manda un mensaje de que se encontraron
-                if ($result['dataset'] = $monitorear_pedidos->pedidosEntregadosCliente(1)) {
+                if ($result['dataset'] = $monitorear_pedidos->pedidosEntregadosCliente($_SESSION['idusuario_c'])) {
                     $result['estado'] = 1;
                     $result['message'] = 'Se te ha entregado pedidos';
                 }

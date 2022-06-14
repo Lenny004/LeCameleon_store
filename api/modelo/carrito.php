@@ -169,7 +169,7 @@ class Carrito extends Validator
     // Método para obtener los datos del producto y se muestren en el detalle
     public function leerDetallePedido()
     {
-        $sql = 'SELECT tdf.iddetalle_factura, tp.nombre_producto, tp.imagen_principal tp.existencias, tp.precio_producto , tep.estado_producto, tdf.total_producto, tdf.cantidad_producto 
+        $sql = 'SELECT tdf.iddetalle_factura, tp.nombre_producto, tp.imagen_principal, tp.existencias, tp.precio_producto , tep.estado_producto, tdf.total_producto, tdf.cantidad_producto 
         FROM tbdetalle_factura tdf
         INNER JOIN tbfactura tf
         ON tf.idfactura = tdf.idfactura
@@ -237,5 +237,15 @@ class Carrito extends Validator
         VALUES (?, ?, ?)';
         $params = array($this->direccion_entrega, $this->fecha_entrega, $_SESSION['idfactura']);
         return Database::ejecutarSentencia($sql, $params);
+    }
+
+    //Función que cuenta cuantos productos tiene en el detalle un usuario
+    public function totalProductosDetalle(){
+        $sql = 'SELECT COUNT(iddetalle_factura) as cantidad_producto FROM tbdetalle_factura tdf
+        INNER JOIN tbfactura tf
+        ON tdf.idfactura = tf.idfactura
+        WHERE tf.idusuario_c = ? AND tf.idestado_factura = 5';
+        $params = array($_SESSION['idusuario_c']);
+        return Database::obtenerSentencia($sql, $params);
     }
 }

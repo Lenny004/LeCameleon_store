@@ -104,7 +104,7 @@ function openUpdate(id) {
 					// Se inicializan los campos del formulario con los datos del registro seleccionado.
 					document.getElementById('ide').value = response.dataset.idusuario_c;
 					document.getElementById('usuarioC').value = response.dataset.usuario_c;
-					fillSelect(ENDPOINT_ESTADOU, 'estadoUsuarioC', response.dataset.idestado_usuario_c);
+					fillSelect(ENDPOINT_ESTADOU, "un estado",'estadoUsuarioC', response.dataset.idestado_usuario_c);
 					// Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
 					M.updateTextFields();
 				} else {

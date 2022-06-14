@@ -1,7 +1,7 @@
 <?php
 require_once('../conexion/database.php');
 require_once('../conexion/validaciones.php');
-require_once('../modelo/producto.php');
+require_once('../modelo/productos.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -14,9 +14,8 @@ if (isset($_GET['action'])) {
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
     switch ($_GET['action']) {
-
         case 'readAll':
-            if ($result['dataset'] = $producto->readAll()) {
+            if ($result['dataset'] = $producto->obtenerDatosProductos()) {
                 $result['estado'] = 1;
             } elseif (Database::getException()) {
                 $result['exception'] = Database::getException();
@@ -42,20 +41,21 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay datos registrados';
             }
             break;
-        case 'create':
+        case 'crearProducto':
+            
             $_POST = $producto->validateForm($_POST);
-            if (!$producto->setNombre($_POST['nombre'])) {
-                $result['exception'] = 'Nombre incorrecto';
+            if (!$producto->setNombreP($_POST['nombre'])) {
+                $result['exception'] = 'El nombre del producto posee caracteres no válidos';
             } elseif (!$producto->setDescripcion($_POST['descripcion'])) {
-                $result['exception'] = 'Descripción incorrecta';
+                $result['exception'] = 'Descripción contiene caracteres no válidos';
             } elseif (!$producto->setMaterial($_POST['material'])) {
-                $result['exception'] = 'Material incorrecto';
-            } elseif (!$producto->setTamaño($_POST['tamaño'])) {
-                $result['exception'] = 'Tamaño incorrecto';
+                $result['exception'] = 'Los datos ingresados en materiales no son válidos';
+            } elseif (!$producto->setTamanio($_POST['tamaño'])) {
+                $result['exception'] = 'Los datos ingresados en tamaño contienen caracteres no válidos';
             } elseif (!$producto->setExistencias($_POST['existencias'])) {
-                $result['exception'] = 'Existencias incorrectas';
+                $result['exception'] = 'Ingrese un valor en existencias';
             } elseif (!$producto->setDescuento($_POST['descuento'])) {
-                $result['exception'] = 'Descuento incorrecto';
+                $result['exception'] = 'Ingrese un descuento de 0% a 100%';
             } elseif (!$producto->setPrecio($_POST['precio'])) {
                 $result['exception'] = 'Precio incorrecto';
             } elseif (!isset($_POST['color'])) {
@@ -76,16 +76,28 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'estado incorrecto';
             } elseif (!isset($_POST['subc'])) {
                 $result['exception'] = 'Seleccione una sub-categoría';
-            } elseif (!$producto->setSubc($_POST['subc'])) {
+            } elseif (!$producto->setSubcategoria($_POST['subc'])) {
                 $result['exception'] = 'Sub-categoría incorrecta';
             } elseif (!is_uploaded_file($_FILES['archivo']['tmp_name'])) {
                 $result['exception'] = 'Seleccione una imagen';
             } elseif (!$producto->setImagen($_FILES['archivo'])) {
                 $result['exception'] = $producto->getFileError();
-            } elseif ($producto->createRow()) {
+            } elseif ($producto->crearProducto()) {
                 $result['estado'] = 1;
+                //Si se pudo crear el producto se guarda la imagen principal
                 if ($producto->saveFile($_FILES['archivo'], $producto->getLink(), $producto->getImagen())) {
-                    $result['message'] = 'Producto creado correctamente';
+                    //Mandamos a traer el último ID
+                    if ($producto->obtenerIdUltimoProducto()) {
+                        $result['message'] = 'Producto creado correctamente';
+                        //print_r($_FILES['archivos']);
+                        if (is_uploaded_file($_FILES['archivos']['tmp_name'][0])) {
+                            foreach ($_FILES['archivos'] as $filas) {
+                                print_r($filas);
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Producto creado correctamente. Pero no se pudo obtener el identificador del último producto ingresado';
+                    }
                 } else {
                     $result['message'] = 'Producto creado pero no se guardó la imagen';
                 }
@@ -93,11 +105,29 @@ if (isset($_GET['action'])) {
                 $result['exception'] = Database::getException();
             }
             break;
-
-        case 'readOne':
-            if (!$producto->setId($_POST['ide'])) {
+        case 'agregarImagenesExtras':
+            $cantidad = count($_FILES["img_extra"]["tmp_name"]);
+            printf($cantidad);
+            //Por cada imagen se realizará un insert en la tabla de tbimagen_producto
+            for ($i = 0; $i < $cantidad; $i++) {
+                //Se guarda la imagen
+                if (!$producto->setImagenes($_FILES['img_extra'][$i])) {
+                    $result['exception'] = $producto->getFileError();
+                } else {
+                    //Agrega las imagenes extras ligadas al último producto
+                    if ($producto->subirImagenesExtras) {
+                        $result['estado'] = 1;
+                        $result['message'] = 'Producto con imagenes extras creado correctamente';
+                    } else {
+                        $result['exception'] = 'Las imagenes extras no pudieron ser ingresadas';
+                    }
+                }
+            }
+            break;
+        case 'obtenerUnProducto':
+            if (!$producto->setIdProducto($_POST['ide'])) {
                 $result['exception'] = 'Producto incorrecto';
-            } elseif ($result['dataset'] = $producto->readOne()) {
+            } elseif ($result['dataset'] = $producto->obtenerUnProducto()) {
                 $result['estado'] = 1;
             } elseif (Database::getException()) {
                 $result['exception'] = Database::getException();
@@ -105,20 +135,32 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Producto inexistente';
             }
             break;
-
-        case 'update':
+        case 'buscarProducto':
             $_POST = $producto->validateForm($_POST);
-            if (!$producto->setId($_POST['ide'])) {
+            if ($_POST['search'] == '') {
+                $result['exception'] = 'Ingrese un valor para buscar';
+            } elseif ($result['dataset'] = $producto->buscarProducto($_POST['search'])) {
+                $result['estado'] = 1;
+                $result['message'] = 'Valor encontrado';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No hay coincidencias';
+            }
+            break;
+        case 'actualizarProducto':
+            $_POST = $producto->validateForm($_POST);
+            if (!$producto->setIdProducto($_POST['ide'])) {
                 $result['exception'] = 'Producto incorrecto';
-            } elseif (!$data = $producto->readOne()) {
+            } elseif (!$data = $producto->leerUnProducto()) {
                 $result['exception'] = 'Producto inexistente';
-            } elseif (!$producto->setNombre($_POST['nombreM'])) {
+            } elseif (!$producto->setNombreP($_POST['nombreM'])) {
                 $result['exception'] = 'Nombre incorrecto';
             } elseif (!$producto->setDescripcion($_POST['descripcionM'])) {
                 $result['exception'] = 'Descripción incorrecta';
             } elseif (!$producto->setMaterial($_POST['materialM'])) {
                 $result['exception'] = 'Material incorrecto';
-            } elseif (!$producto->setTamaño($_POST['tamañoM'])) {
+            } elseif (!$producto->setTamanio($_POST['tamañoM'])) {
                 $result['exception'] = 'Tamaño incorrecto';
             } elseif (!$producto->setExistencias($_POST['existenciasM'])) {
                 $result['exception'] = 'Existencias incorrectas';
@@ -134,10 +176,10 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Distribuidor incorrecto';
             } elseif (!$producto->setEstado($_POST['estadoM'])) {
                 $result['exception'] = 'Estado incorrecto';
-            } elseif (!$producto->setSubc($_POST['subcM'])) {
+            } elseif (!$producto->setSubcategoria($_POST['subcM'])) {
                 $result['exception'] = 'Sub-categoría incorrecta';
             } elseif (!is_uploaded_file($_FILES['archivop']['tmp_name'])) {
-                if ($producto->updateRow($data['imagen'])) {
+                if ($producto->actualizarProducto($data['imagen_principal'])) {
                     $result['estado'] = 1;
                     $result['message'] = 'Producto modificado correctamente';
                 } else {
@@ -145,7 +187,7 @@ if (isset($_GET['action'])) {
                 }
             } elseif (!$producto->setImagen($_FILES['archivop'])) {
                 $result['exception'] = $producto->getFileError();
-            } elseif ($producto->updateRow($data['imagen'])) {
+            } elseif ($producto->actualizarProducto($data['imagen_principal'])) {
                 $result['estado'] = 1;
                 if ($producto->saveFile($_FILES['archivop'], $producto->getLink(), $producto->getImagen())) {
                     $result['message'] = 'Producto modificado correctamente';
@@ -157,13 +199,13 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'delete':
-            if (!$producto->setId($_POST['ide'])) {
+            if (!$producto->setIdProducto($_POST['ide'])) {
                 $result['exception'] = 'Producto incorrecto';
-            } elseif (!$data = $producto->readOne()) {
+            } elseif (!$data = $producto->leerUnProducto()) {
                 $result['exception'] = 'Producto inexistente';
-            } elseif ($producto->deleteRow()) {
+            } elseif ($producto->eliminarProducto()) {
                 $result['estado'] = 1;
-                if ($producto->deleteFile($producto->getLink(), $data['imagen'])) {
+                if ($producto->deleteFile($producto->getLink(), $data['imagen_principal'])) {
                     $result['message'] = 'Producto eliminado correctamente';
                 } else {
                     $result['message'] = 'Producto eliminado pero no se borró la imagen';
@@ -172,7 +214,31 @@ if (isset($_GET['action'])) {
                 $result['exception'] = Database::getException();
             }
             break;
-
+        case 'obtenerReseniasProducto':
+            if (!$producto->setIdProducto($_POST['idproducto'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->reseniasProductos()) {
+                $result['estado'] = 1;
+            } else if (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'Este producto no posee reseñas';
+            }
+            break;
+        case 'actualizarValoracion':
+            if (!$producto->setIdValoracion($_POST['idvaloracion'])) {
+                $result['exception'] = 'Identificador de la valoración incorrecta';
+            } elseif (!$producto->setEstadoValoracion($_POST['estado_valoracion'])) {
+                $result['exception'] = 'Estado de la valoración incorrecta';
+            } elseif ($result['dataset'] = $producto->actualizarReseniasProductos()) {
+                $result['estado'] = 1;
+                $result['message'] = 'Reseña actualizada correctamente';
+            } else if (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'Este producto no posee reseñas';
+            }
+            break;
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';
     }

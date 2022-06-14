@@ -18,7 +18,7 @@ class Database
         $server = 'localhost';
         $database = 'dblecameleon';
         $username = 'postgres';
-        $password = '1234';
+        $password = 'Bumblebee';
         // Self hace referencia a la clase actual y se esta usando cuando instancia dicha clase, es decir se usan métodos estáticos. 
         // This hace referencia al objeto actual, es decir, cuando una clase si tiene instancia. No se puede hacer referencia a métodos estáticos usando this pero si a métodos públicos, privados y protegidos.
         // Se crea la conexión mediante la extensión PDO y el controlador para PostgreSQL.
@@ -125,7 +125,7 @@ class Database
         // Se compara el código del error para establecer un error personalizado.
         switch ($code) {
             case '7':
-                self::$error = utf8_encode($mensaje);
+                self::$error = 'Existe un problema al conectar con el servidor';
                 break;
             case '42703':
                 self::$error = 'Nombre de campo desconocido';
@@ -140,7 +140,7 @@ class Database
                 self::$error = 'Registro ocupado, es un dato padre y no se puede eliminar // Verifique que los datos padres requeridos existen';
                 break;
             default:
-                self::$error = 'Ocurrió un problema en la base de datos';
+                self::$error = utf8_encode($mensaje);
         }
     }
 

@@ -56,7 +56,37 @@ class Validator
     public function validacionNumeroNaturales($value)
     {
         // Se verifica que el valor sea un número entero mayor o igual a uno.
-        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' => 1))) {
+        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' >= 1))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+    *   Método para validar un número natural con 0
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validacionNumeroNaturalesConCero($value)
+    {
+        // Se verifica que el valor sea un número entero mayor o igual a uno.
+        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' >= 0))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        /*
+    *   Método para validar un número natural como porcentaje
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validacionPorcentaje($value)
+    {
+        // Se verifica que el valor sea un número entero mayor o igual a uno.
+        if ($value >= 0 && $value <=100){
             return true;
         } else {
             return false;
@@ -139,7 +169,7 @@ class Validator
     public function validateString($value, $minimum, $maximum)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.]{' . $minimum . ',' . $maximum . '}$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\:]{' . $minimum . ',' . $maximum . '}$/', $value)) {
             return true;
         } else {
             return false;
@@ -154,7 +184,7 @@ class Validator
     public function validateDireccion($value, $minimum, $maximum)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\#]{' . $minimum . ',' . $maximum . '}$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\%\;\.\#]{' . $minimum . ',' . $maximum . '}$/', $value)) {
             return true;
         } else {
             return false;

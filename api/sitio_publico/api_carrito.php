@@ -106,6 +106,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
                 }
                 break;
+            //Cuenta cuantos productos existen en detalle
+            case 'totalpedidos':
+                if ($result['dataset'] = $pedido->totalProductosDetalle()) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Datos del usuario obtenidos';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al remover los productos';
+                }
+                break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

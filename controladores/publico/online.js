@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 mostrarCategorias();
                 // Se revisa si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
                 if (response.session) {
+                    //Si el usuario tiene productos en el carrito, le contara cuantos productos diferentes tiene (No cuenta la cantidad de productos de cada uno)
                     Header += `
                     <!--Anuncios-->
                     <div id="barra_anuncio" class="z-depth-1">
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>            
                     <!--Carrito de Compras-->
                     <div id="boton_carrito">
-                        <a href="carrito.html" class="carrito_compras"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                        <a href="carrito.html" class="carrito_compras"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Carrito de Compras" alt="login" height="35"><span>${response.dataset.cantidad_producto}</span></a>
                     </div>`;
                 } else {
                     Header += `
@@ -151,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         <!--Carrito de Compras-->
                         <div id="boton_carrito">
-                            <a href="index.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Login Necesario para el Carrito de Compras" alt="login" height="35"><span>1</span></a>
+                            <a href="index.html"><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom" data-tooltip="Login Necesario para el Carrito de Compras" alt="login" height="35"><span>0</span></a>
                         </div>
                     </div>`;
                 }
@@ -316,3 +317,26 @@ function subcategoria() {
         }
     });
 }
+/*
+function obtenerCantidadPedidos(){
+    // Petición para consultar cuantos productos tiene el usuario en el carrito
+    fetch(API_CARRITO + 'totalpedidos', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    cantidad_pedidos = response.dataset.cantidad_producto;
+                    console.log("lol"+ cantidad_pedidos);
+                } else {
+                    sweetAlert(4, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    });
+}*/

@@ -1,3 +1,9 @@
+// Constantes para establecer las rutas y parámetros de comunicación con la API.
+const API_EMPLEADO = SERVER + 'sitio_privado/api_empleados.php?action=';
+// Estas constantes son para establecer conexión con lo SELECT
+const ENDPOINT_TIPO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerTipoEmpleados';
+const ENDPOINT_ESTADO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerEstadoEmpleados';
+
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
 	let menu = document.getElementById("menu");
@@ -41,12 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	//Instaciar el modal o pow up
 	M.Modal.init(document.querySelectorAll('.modal'));
 });
-
-// Constantes para establecer las rutas y parámetros de comunicación con la API.
-const API_EMPLEADO = SERVER + 'sitio_privado/api_empleados.php?action=';
-// Estas constantes son para establecer conexión con lo SELECT
-const ENDPOINT_TIPO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerTipoEmpleados';
-const ENDPOINT_ESTADO = SERVER + 'sitio_privado/api_empleados.php?action=obtenerEstadoEmpleados';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -114,8 +114,8 @@ function openCreate() {
 	M.Modal.getInstance(document.getElementById('agregar_modal')).open();
 	// Se asigna el título para la caja de diálogo (modal).
 	// Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
-	fillSelect(ENDPOINT_TIPO, 'tipo', null);
-	fillSelect(ENDPOINT_ESTADO, 'estado', null);
+	fillSelect(ENDPOINT_TIPO, 'un tipo','tipo', null);
+	fillSelect(ENDPOINT_ESTADO, 'un estado', 'estado', null);
 }
 
 document.getElementById('form_agregar').addEventListener('submit', function (event) {
@@ -152,8 +152,8 @@ function openUpdate(id) {
 					document.getElementById('telefonoM').value = response.dataset.telefono_empleado;
 					document.getElementById('correoM').value = response.dataset.correo_empleado;
 					document.getElementById('fechaM').value = response.dataset.fecha_nacimiento_empleado;
-					fillSelect(ENDPOINT_TIPO, 'tipoM', response.dataset.idtipo_empleado);
-					fillSelect(ENDPOINT_ESTADO, 'estadoM', response.dataset.idestado_empleado);
+					fillSelect(ENDPOINT_TIPO, 'un tipo', 'tipoM', response.dataset.idtipo_empleado);
+					fillSelect(ENDPOINT_ESTADO, 'un estado', 'estadoM', response.dataset.idestado_empleado);
 					// Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
 					M.updateTextFields();
 				} else {
@@ -199,8 +199,8 @@ function openDelete(id) {
 					document.getElementById('telefonoD').value = response.dataset.telefono_empleado;
 					document.getElementById('correoD').value = response.dataset.correo_empleado;
 					document.getElementById('fechaD').value = response.dataset.fecha_nacimiento_empleado;
-					fillSelect(ENDPOINT_TIPO, 'tipoD', response.dataset.idtipo_empleado);
-					fillSelect(ENDPOINT_ESTADO, 'estadoD', response.dataset.idestado_empleado);
+					fillSelect(ENDPOINT_TIPO, 'un tipo', 'tipoD', response.dataset.idtipo_empleado);
+					fillSelect(ENDPOINT_ESTADO, 'un estado', 'estadoD', response.dataset.idestado_empleado);
 					// Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
 					M.updateTextFields();
 				} else {
