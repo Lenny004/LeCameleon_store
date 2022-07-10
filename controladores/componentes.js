@@ -120,7 +120,7 @@ function confirmDelete(api, data, modal) {
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.estado) {
-                            M.Modal.getInstance(document.getElementById(modal)).close();
+                            modal.hide();
                             // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro y se muestra un mensaje de éxito.
                             readRows(api);
                             sweetAlert(1, response.message, null);
@@ -315,7 +315,6 @@ function cerrarSesion() {
 
 function ModoNocturno(){
     document.body.classList.toggle('dark');
-
     //Guardamos el modo nocturno
     if(document.body.classList.contains('dark')){
         localStorage.setItem('dark-mode', 'true');

@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
 			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
 	}});
-
     readAllCategorias();
     readAllsubCategorias();
 });
