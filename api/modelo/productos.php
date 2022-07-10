@@ -67,7 +67,7 @@ class Productos extends Validator
 
     public function setNombreP($value)
     {
-        if ($this->validateAlphabetic($value, 1, 75)) {
+        if ($this->validateAlphanumeric($value, 1, 75)) {
             $this->nombre_producto = $value;
             return true;
         } else {
