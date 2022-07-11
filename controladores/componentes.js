@@ -120,7 +120,7 @@ function confirmDelete(api, data, modal) {
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.estado) {
-                            modal.hide();
+                            M.Modal.getInstance(document.getElementById(modal)).close();
                             // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro y se muestra un mensaje de éxito.
                             readRows(api);
                             sweetAlert(1, response.message, null);
