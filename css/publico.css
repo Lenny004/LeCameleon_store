@@ -34,6 +34,10 @@ main {
     color: #ffffff;
 }
 
+.precio_oferta{
+    color: #C63637;
+}
+
 .servicio {
     height: 42px;
     background-color: #36465d !important;
@@ -1299,14 +1303,18 @@ img.imagen_muestra {
 }
 
 .contenedor_envio_cuerpo {
-    border: 2px solid #777676;
-    box-shadow: 5px 10px 15px #bfbfbf;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-radius: 25px;
     padding: 3%;
     margin-bottom: 10%;
 }
 
+.input-field.col label {
+    left: 0rem !important;
+}
+
 .contenedor_envio_cuerpo .input-field {
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 .datepicker-date-display {

@@ -249,7 +249,8 @@
                         <p><b>Selecciona el Tipo de Entrega:</b></p>
                         <p>
                             <label>
-                                <input class="with-gap" name="group1" type="radio" onclick="centroComercial()" checked/>
+                                <input class="with-gap" name="group1" type="radio" onclick="centroComercial()"
+                                    checked />
                                 <span>Centro Comercial</span>
                             </label>
                         </p>
@@ -266,20 +267,20 @@
                 <form id="register-form" method="post">
                     <div class="input-field col s12">
                         <div class="input-field col s12" id="centro_comercial">
-                            <select required>
+                            <select id="centros_comerciales" name="centros_comerciales" required>
                                 <option value="" disabled selected>Elige un centro comercial cercano:</option>
-                                <option value="1">MetroCentro(SS)</option>
-                                <option value="2">Plaza Merliot</option>
-                                <option value="3">Multiplaza</option>
-                                <option value="4">Plaza Mundo</option>
-                                <option value="5">Centro Comercial Galerias</option>
-                                <option value="6">SOMA Plaza</option>
-                                <option value="7">La Gran Vía</option>
-                                <option value="8">Centro Comerial El Paseo</option>
-                                <option value="9">Centro Comercial San Luis</option>
-                                <option value="10">Centro Comercial Las Cascadas</option>
-                                <option value="11">Centro Comercial Masferrer</option>
-                                <option value="12">Presidente Plaza</option>
+                                <option value="MetroCentro(SS)">MetroCentro(SS)</option>
+                                <option value="Plaza Merliot">Plaza Merliot</option>
+                                <option value="Multiplaza">Multiplaza</option>
+                                <option value="Plaza Mundo">Plaza Mundo</option>
+                                <option value="Centro Comercial Galerias">Centro Comercial Galerias</option>
+                                <option value="SOMA Plaza">SOMA Plaza</option>
+                                <option value="La Gran Vía">La Gran Vía</option>
+                                <option value="Centro Comerial El Paseo">Centro Comerial El Paseo</option>
+                                <option value="Centro Comercial San Luis">Centro Comercial San Luis</option>
+                                <option value="Centro Comercial Las Cascadas">Centro Comercial Las Cascadas</option>
+                                <option value="Centro Comercial Masferrer">Centro Comercial Masferrer</option>
+                                <option value="Presidente Plaza">Presidente Plaza</option>
                             </select>
                         </div>
                         <div class="input-field col s12 hide" id="servicio_domicilio">
@@ -302,30 +303,37 @@
                             <input id="fecha" name="fecha" type="text" class="datepicker" required>
                             <label class="active" for="fecha"><b>Fecha de Entrega:</b></label>
                         </div>
-                        <select required>
+                        <select name="hora_entrega" required>
                             <option value="" disabled selected>Elige una hora de entrega:</option>
-                            <option value="1">7:00</option>
-                            <option value="2">7:30</option>
-                            <option value="3">8:00</option>
-                            <option value="4">8:30</option>
-                            <option value="5">9:00</option>
-                            <option value="6">9:30</option>
-                            <option value="7">10:00</option>
-                            <option value="8">10:30</option>
-                            <option value="9">11:00</option>
-                            <option value="10">11:30</option>
-                            <option value="11">12:00</option>
-                            <option value="12">12:30</option>
-                            <option value="13">1:00</option>
-                            <option value="14">1:30</option>
-                            <option value="15">2:00</option>
-                            <option value="16">3:30</option>
+                            <option value="08:00:00">8:00 AM</option>
+                            <option value="08:30:00">8:30 AM</option>
+                            <option value="09:00:00">9:00 AM</option>
+                            <option value="09:30:00">9:30 AM</option>
+                            <option value="10:00:00">10:00 AM</option>
+                            <option value="10:30:00">10:30 AM</option>
+                            <option value="11:00:00">11:00 AM</option>
+                            <option value="11:30:00">11:30 AM</option>
+                            <option value="12:00:00">12:00 PM</option>
+                            <option value="12:30:00">12:30 PM</option>
+                            <option value="13:00:00">13:00 PM</option>
+                            <option value="13:30:00">13:30 PM</option>
+                            <option value="14:00:00">14:00 PM</option>
+                            <option value="14:30:00">14:00 PM</option>
+                            <option value="15:00:00">15:00 PM</option>
+                            <option value="15:30:00">15:30 PM</option>
+                            <option value="16:00:00">16:00 PM</option>
+                            <option value="16:30:00">16:30 PM</option>
+                            <option value="17:00:00">17:00 PM</option>
+                            <option value="17:30:00">17:30 PM</option>
+                            <option value="18:00:00">18:00 PM</option>
                         </select>
-                        <div class="boton_naranja_envio2 hide" id="boton_naranja_envio2">
-                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio()" href="revisar_pedido.html" type="submit">Confirmar Pedido</button>
+                        <div class="boton_naranja_envio2" id="boton_naranja_envio2">
+                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio2(event)"
+                                type="submit">Confirmar Pedido</button>
                         </div>
-                        <div class="boton_naranja_envio" id="boton_naranja_envio">
-                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio()" href="revisar_pedido.html" type="submit">Confirmar Pedido</button>
+                        <div class="boton_naranja_envio hide" id="boton_naranja_envio">
+                            <button class="btn-small waves-effect waves-orange" onclick="guardarDatosEnvio(event)"
+                                type="submit">Confirmar Pedido</button>
                         </div>
                     </div>
                 </form>

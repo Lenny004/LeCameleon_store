@@ -1,6 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_DESCUENTO = SERVER + 'sitio_publico/api_catalogo.php?action=';
-const API_OFERTA = SERVER + 'sitio_publico/api_oferta.php?action=';
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
     let menu = document.getElementById("menu");

@@ -404,6 +404,21 @@ class Validator
     }
 
     /*
+    * Método para validar un formato de hora
+    * Parámetros: $value (dato a validar)
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validarHora($value)
+    {
+        // Se verifica que la hora tenga el formato 00-00-00.
+        if (preg_match('/^[0-9]{2}[:][0-9]{2}[:][0-9]{2}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
     *   Método para validar la ubicación de un archivo antes de subirlo al servidor.
     *   Parámetros: $file (archivo), $path (ruta del archivo) y $name (nombre del archivo).
     *   Retorno: booleano (true si el archivo fue subido al servidor o false en caso contrario).

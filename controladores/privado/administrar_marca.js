@@ -140,6 +140,8 @@ function openUpdate(id) {
                     document.getElementById('ide').value = response.dataset.id_marca;
                     document.getElementById('marca_modificar').value = response.dataset.nombre_marca;
                     document.getElementById('nombrearchivo').value = response.dataset.imagen_marca;
+                    imagen_principal = document.getElementById("imagen_principal_modificar");
+                    imagen_principal.src = `${SERVER}images/marca/${response.dataset.imagen_marca}`;
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {
@@ -180,6 +182,8 @@ function openDelete(id) {
                     document.getElementById('ide').value = response.dataset.id_marca;
                     document.getElementById('marca_eliminar').value = response.dataset.nombre_marca;
                     document.getElementById('namefile').value = response.dataset.imagen_marca;
+                    imagen_principal = document.getElementById("imagen_principal_eliminar");
+                    imagen_principal.src = `${SERVER}images/marca/${response.dataset.imagen_marca}`;
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {
@@ -201,3 +205,29 @@ document.getElementById('eliminar_forms').addEventListener('submit', function (e
     // Se llama a la función para eliminar el registro.
     confirmDelete(API_ADMIN_MARCA, DATA, 'eliminar_modal_marca');
 });
+
+//Función para validar la vista preliminar de una imagen
+function preliminar(event) {
+    let leer_img = new FileReader();
+    let id_img = document.getElementById("imagen_principal");
+    //Onload es un método que al cargar las imagenes seleccionadas procede a realizar una accion
+    leer_img.onload = () => {
+        if (leer_img.readyState == 2) {
+            id_img.src = leer_img.result
+        }
+    }
+    leer_img.readAsDataURL(event.target.files[0])
+}
+
+//Función para validar la vista preliminar de una imagen al modificar y eliminar
+function preliminar2(event) {
+    let leer_img = new FileReader();
+    let id_img = document.getElementById("imagen_principal_modificar");
+    //Onload es un método que al cargar las imagenes seleccionadas procede a realizar una accion
+    leer_img.onload = () => {
+        if (leer_img.readyState == 2) {
+            id_img.src = leer_img.result
+        }
+    }
+    leer_img.readAsDataURL(event.target.files[0])
+}

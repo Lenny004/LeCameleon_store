@@ -9,7 +9,7 @@ class Carrito extends Validator
     private $idfactura = null;
     private $id_detalle = null;
     private $idcliente = null;
-    private $producto = null;
+    private $idproducto = null;
     private $cantidad = null;
     private $total_producto = null;
     private $precio_a_producto = null;
@@ -17,6 +17,7 @@ class Carrito extends Validator
     private $direccion_entrega = null;
     private $monto_total = null;
     private $fecha_entrega = null;
+    private $hora_entrega = null;
 
     /*
     *   ESTADOS PARA UN PEDIDO
@@ -61,10 +62,10 @@ class Carrito extends Validator
         }
     }
 
-    public function setProducto($value)
+    public function setIdProducto($value)
     {
         if ($this->validacionNumeroNaturales($value)) {
-            $this->producto = $value;
+            $this->idproducto = $value;
             return true;
         } else {
             return false;
@@ -113,10 +114,31 @@ class Carrito extends Validator
         }
     }
 
+    public function setCentroComercial($value)
+    {
+        if ($this->validateBoolean($value)) {
+            $this->direccion_entrega = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setFechaEntrega($value)
     {
         if ($this->validateDate($value)) {
             $this->fecha_entrega = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Validamos la hora que se ha realizado la reservación
+    public function setHoraEntrega($value)
+    {
+        if ($this->validarHora($value)) {
+            $this->hora_entrega = $value;
             return true;
         } else {
             return false;
@@ -146,7 +168,7 @@ class Carrito extends Validator
             $this->idfactura = $data['idfactura'];
             return true;
         } else {
-            $sql = 'INSERT INTO tbfactura(fecha_factura,idestado_factura, idusuario_c) VALUES(?, ?, ?)';
+            $sql = 'INSERT INTO tbfactura(fecha_factura,idestado_factura, idusuario_c) VALUES (?, ?, ?)';
             $params = array($fecha_actual, $this->estado, $_SESSION['idusuario_c']);
             // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
             if ($this->idfactura = Database::ultimaSentencia($sql, $params)) {
@@ -160,16 +182,42 @@ class Carrito extends Validator
     // Método para agregar un producto al carrito de compras.
     public function crearDetalleFactura()
     {
-        $sql = 'INSERT INTO tbdetalle_factura(total_producto, precio_actual, cantidad_descuento, cantidad_producto, idfactura, idproducto)
-        VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->total_producto, $this->precio_a_producto, 0 , $this->cantidad, $this->idfactura, $this->producto);
-        return Database::ejecutarSentencia($sql, $params);
+        //Traemos los valores de un productos ligados a una factura
+        $sql = 'SELECT tdf.total_producto, tdf.precio_actual, tdf.cantidad_descuento, tdf.cantidad_producto, tp.existencias FROM tbdetalle_factura tdf INNER JOIN tbproducto tp ON tdf.idproducto = tp.idproducto WHERE tdf.idfactura = ? AND tdf.idproducto = ?';
+        $params = array($this->idfactura, $this->idproducto);
+        $data = Database::obtenerSentencia($sql, $params);
+        //Si existen datos, no se agregará al carrito, solo actualizará la cantidad de estos
+        if ($data != null) {
+            $sql = 'UPDATE tbdetalle_factura SET total_producto = ?, precio_actual = ?, cantidad_descuento = ?, cantidad_producto = ? WHERE idfactura = ? AND idproducto = ?';
+            $params = array(($data['total_producto'] + $this->total_producto), $this->precio_a_producto, ($data['cantidad_descuento'] + 0), ($data['cantidad_producto'] + $this->cantidad), $this->idfactura, $this->idproducto);
+            if ($this->cantidad <= ($data['existencias'] - $data['cantidad_producto'])) {
+                if(Database::ejecutarSentencia($sql, $params)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } 
+        //Si no existen datos se agregan al carrito de compras
+        else {
+            $sql = 'INSERT INTO tbdetalle_factura(total_producto, precio_actual, cantidad_descuento, cantidad_producto, idfactura, idproducto)
+            VALUES(?, ?, ?, ?, ?, ?)';
+            $params = array($this->total_producto, $this->precio_a_producto, 0, $this->cantidad, $this->idfactura, $this->idproducto);
+            if (Database::ejecutarSentencia($sql, $params)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     // Método para obtener los datos del producto y se muestren en el detalle
     public function leerDetallePedido()
     {
-        $sql = 'SELECT tdf.iddetalle_factura, tp.nombre_producto, tp.imagen_principal, tp.existencias, tp.precio_producto , tep.estado_producto, tdf.total_producto, tdf.cantidad_producto 
+        $sql = 'SELECT tdf.iddetalle_factura, tp.nombre_producto, tp.imagen_principal, tp.existencias, tp.precio_producto, tp.porcentaje_descuento, tep.estado_producto, tdf.total_producto, tdf.cantidad_producto
         FROM tbdetalle_factura tdf
         INNER JOIN tbfactura tf
         ON tf.idfactura = tdf.idfactura
@@ -235,12 +283,13 @@ class Carrito extends Validator
     {
         $sql = 'INSERT INTO tbenvio_pedido(direccion_entrega_pedido, fecha_entrega_pedido, idfactura)
         VALUES (?, ?, ?)';
-        $params = array($this->direccion_entrega, $this->fecha_entrega, $_SESSION['idfactura']);
+        $params = array($this->direccion_entrega, ($this->fecha_entrega . " " . $this->hora_entrega), $_SESSION['idfactura']);
         return Database::ejecutarSentencia($sql, $params);
     }
 
     //Función que cuenta cuantos productos tiene en el detalle un usuario
-    public function totalProductosDetalle(){
+    public function totalProductosDetalle()
+    {
         $sql = 'SELECT COUNT(iddetalle_factura) as cantidad_producto FROM tbdetalle_factura tdf
         INNER JOIN tbfactura tf
         ON tdf.idfactura = tf.idfactura

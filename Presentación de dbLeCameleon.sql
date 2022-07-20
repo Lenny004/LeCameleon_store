@@ -47,6 +47,7 @@ CREATE TABLE tbusuario_cliente(
     correo_cliente character varying(60) NOT NULL,
     telefono_cliente varchar(9) UNIQUE NOT NULL,
     direccion_cliente character varying(1000) NULL,
+    fecha_creacion timestamp NOT NULL,
     fecha_bloqueo_c timestamp without time zone,
     fecha_desbloqueo_c timestamp without time zone,
     idestado_usuario_c integer NOT NULL REFERENCES tbestado_usuario_c(idestado_usuario_c)
@@ -144,7 +145,7 @@ CREATE TABLE tbtipo_pago (
 
 CREATE TABLE tbfactura (
     idfactura SERIAL primary key,
-    fecha_factura timestamp without time zone NOT NULL,
+    fecha_factura timestamp NOT NULL,
     monto_total numeric(7,2) NULL,
     idestado_factura integer NOT NULL REFERENCES tbestado_factura(idestado_factura),
     idtipo_pago integer NULL REFERENCES tbtipo_pago(idtipo_pago),
@@ -165,7 +166,7 @@ CREATE TABLE tbdetalle_factura (
 CREATE TABLE tbenvio_pedido (
     idenvio_pedido SERIAL primary key,
     direccion_entrega_pedido character varying(500) NOT NULL,
-    fecha_entrega_pedido timestamp without time zone NOT NULL,
+    fecha_entrega_pedido timestamp NOT NULL,
     idfactura integer NOT NULL REFERENCES tbfactura(idfactura)
 );
 
@@ -204,7 +205,7 @@ INSERT INTO public."tbdistribuidor"("nombre_distribuidor", "direccion_distribuid
     ('Coco Canela', '9° Calle Poniente #4036, Local #6, Plaza La Novena, Colonia Escalón entre la 77° y la, 79 Avenida Nte., San Salvador', '+503 2223 8088');
 
 INSERT INTO public."tbcategoria"("categoria_producto", "imagen_categoria")
-    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629e07f09310e.jpg'),('Artesanales', '629be073b2933.jpg');
+    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629e07f09310e.png'),('Artesanales', '629be073b2933.jpg');
 
 
 INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "imagen_subcategoria","idcategoria_producto")
@@ -244,29 +245,50 @@ INSERT INTO public."tbcolor"("color")
     ('negro'),
     ('blanco');
 
-INSERT INTO public."tbmarca"("nombre_marca")
+INSERT INTO public."tbmarca"("nombre_marca", "imagen_marca")
     VALUES 
-    ('Lofi Girl'),
-    ('Ariete'),
-    ('Laura Ashley'),
-    ('TENDANCE'),
-    ('Maine Furniture Co.'),
-    ('Rebecca Mobili'),
-    ('Living Nostalgia'),
-    ('WedgWood'),
-    ('Missoni Home'),
-    ('MisterWils'),
-    ('Ruzafa Vintage'),
-    ('Francisco Segarra'),
-    ('Trouve'),
-    ('Hilda Herrera'),
-    ('Nahanche'),
-    ('Coco Canela');
+    ('Lofi Girl', '62d4ca6e57136.png'),
+    ('Ariete', '62d4cbb4f287e.jpg'),
+    ('Laura Ashley', '62d4cc03c842f.png'),
+    ('TENDANCE', '62d4d0771c9cf.png'),
+    ('Maine Furniture Co', '62d4d0fc9aa10.png'),
+    ('Rebecca Mobili', '62d4d26c987d7.jpg'),
+    ('KitchenCraft', '62d4d2bdab07a.png'),
+    ('WedgWood', '62d4d360569be.png'),
+    ('Missoni Home', '62d4d3c2e8388.jpg'),
+    ('MisterWils', '62d4d47e8bc44.jpg'),
+    ('Ruzafa Vintage', '62d4d4e97b040.jpg'),
+    ('Francisco Segarra', '62d4d5279194f.png'),
+    ('Trouve', '62d4d569cd75c.png'),
+    ('Hilda Herrera', '62d4d6eceed0d.jpg'),
+    ('Nahanche', '62d4df449a6fe.png'),
+    ('Coco Canela', '62d4df73c8572.png');
 
 INSERT INTO public."tbestado_producto"("estado_producto")
     VALUES ('En venta'),
     ('Agotado'),
     ('Eliminado');
+
+INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "imagen_principal", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
+    VALUES 
+    ('KitchenCraft Colección Cascanueces', 'Utencilios de cocina', '62d039a5cffca.png', 'Madera', '30 cm', 5, 0, 19.60, 1, 7, 3, 1, 3),
+	('Pete Cromer Echidna Tea Towel', 'Utencilios de cocina', '62d03b5b488c5.png', 'Algodon', '50cm x 70cm', 15, 0, 8.60, 1, 7, 3, 1, 3),
+	('Pete Cromer Echidna Tote Bag', 'Utencilios de cocina', '62d04a9aca8d3.png', 'Algodon', '41cm x 42cm', 20, 0, 9.00, 1, 7, 3, 1, 3),
+	('Pete Cromer Kookaburra Tote Bag', 'Utencilios de cocina', '62d03bbb0efbe.png', 'Algodon', '41cm x 42cm', 16, 0, 7.60, 7, 13, 3, 1, 3),
+	('Eco-Friendly Bamboo Fibre Compost Bin', 'Accesorios', '62d03e2f493c8.png', 'fibras de bambú', '50 cm', 5, 0, 39.60, 1, 7, 3, 1, 3),
+	('Estante colgante de utensilios de acero inoxidable', 'Utencilios de cocina', '62d04c4dad34c.png', 'Metal', '52cm', 15, 0, 5.60, 1, 7, 3, 1, 3),
+	('Pulsera con piedras de mar', 'Accesorios', '62d04c9746c93.png', 'Malaquita', '6 cm', 5, 0, 49.60, 1, 13, 3, 1, 3),
+	('Prendedor Estilo Art Decó', 'Accesorios', '62d04cd90358d.png', 'Metal', '2.2cm x 5cm', 15, 0, 48.60, 1, 13, 3, 1, 3),
+	('Collar con cuentas de vidrio', 'Accesorios', '62d04d02de258.png', 'vidrio marroquí', '70cm', 2, 0, 99.00, 1, 13, 3, 1, 3),
+	('Reloj Mach 2000 Dark Empire', 'Accesorios', '62d04d34487bd.png', 'Metal', '23.5cm', 16, 0, 87.60, 1, 13, 3, 1, 3),
+	('Reloj Himalaya Automatic White.', 'Accesorios', '62d042b066c1f.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 13, 3, 1, 3),
+	(' Reloj para dama Milanese Type 18', 'Accesorios', '62d04d7061cd1.png', 'Metal', '23cmM', 15, 0, 5.60, 1, 13, 3, 1, 3),
+	('Yogurella', 'Utencilios de cocina', '62d0443e83c14.png', 'Metal', '15cm', 15, 0, 65.60, 1, 2, 3, 1, 3),
+	('POPCORN POPPER XL', 'Utencilios de cocina', '62d0453bbb40f.png', 'Metal', '34 x 52 x 29 cm.', 5, 0, 89.60, 1, 2, 3, 1, 3),
+	('PIMMY 700W ORANGE', 'Utencilios de cocina', '62d045d0f1bc6.png', 'Metal', '20cm', 15, 0, 38.60, 1, 2, 3, 1, 3),
+	('BLENDY METAL', 'Utencilios de cocina', '62d04e1b2a79a.png', 'Metal', '18 x 36 x 15 cm.', 2, 0, 59.00, 1, 2, 3, 1, 3),
+	('SPREMÌ METAL', 'Utencilios de cocina', '62d04741ad581.png', 'Metal', '29.5cm', 16, 0, 87.60, 1, 2, 3, 1, 3),
+	('CENTRIKA METAL.', 'Utencilios de cocina', '62d047891d3d9.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 2, 3, 1, 3);
 
 INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
     VALUES 
@@ -322,19 +344,19 @@ INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado
 ('mangandi', '1234', 4, 1, 1),
 ('nelson', '1234', 5, 1, 1);
 
-INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
-	VALUES ('lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
-('aimee', '1234', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', 1),
-('nelson', '1234', 'Nelson Daniel', 'Peña Pineda', 'nelson@gmail.com', '7895-9467' ,'Mejicanos, San Salvador', 1),
-('mangandi', '1234', 'Rodrigo Gabriel', 'Mangandi Cardona', 'mangandi@gmail.com', '6952-5487', 'Mejicanos, San Salvador', 1),
-('fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),
-('sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', 1),
-('gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', 1),
-('oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', 1),
-('erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', 1),
-('jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', 1),
-('sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', 1),
-('geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', 1);
+INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "fecha_creacion", "idestado_usuario_c")
+	VALUES ('lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', '2022-07-20', 1),
+('aimee', '1234', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', '2022-07-17', 1),
+('nelson', '1234', 'Nelson Daniel', 'Peña Pineda', 'nelson@gmail.com', '7895-9467' ,'Mejicanos, San Salvador', '2022-07-16', 1),
+('mangandi', '1234', 'Rodrigo Gabriel', 'Mangandi Cardona', 'mangandi@gmail.com', '6952-5487', 'Mejicanos, San Salvador', '2022-07-15', 1),
+('fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', '2022-07-14', 1),
+('sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', '2022-07-14', 1),
+('gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', '2022-07-14', 1),
+('oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', '2022-07-8', 1),
+('erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', '2022-07-8', 1),
+('jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', '2022-07-1', 1),
+('sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', '2022-07-3', 1),
+('geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', '2022-07-25', 1);
 
 INSERT INTO public."tbestado_factura"("estado_factura")
 	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando'), ('Editando');
@@ -770,8 +792,8 @@ where "porcentaje_descuento" != 0
 
 --------------------------------------------------CONSULTAS DE REPORTES CON RANGO DE FECHAS--------------------------------------------------
 /*Reporte para mostrar lo que ha vendido un empleado en un rango de fechas*/
-SELECT SUM("monto_total") AS Monto_Total, "tbusuario_empleado"."usuario_e" 
-FROM public."tbfactura", public."tbusuario_empleado" 
+SELECT SUM("monto_total") AS Monto_Total, "tbusuario_empleado"."usuario_e"
+FROM public."tbfactura", public."tbusuario_empleado"
 WHERE "tbfactura"."idusuario_e" = "tbusuario_empleado"."idusuario_e" AND ("tbfactura"."fecha_factura" BETWEEN '2022-03-01' AND '2022-03-30') GROUP BY "usuario_e"
 
 /*Reporte para saber los envios de pedido en una fecha exacta*/

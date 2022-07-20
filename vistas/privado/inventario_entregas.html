@@ -50,7 +50,7 @@
                                         <div class="input-field">
                                             <input id="buscador_registro" type="search" name="buscador_registro" required>
                                         </div>
-                                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+                                        <button type="submit"><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></button>
                                     </form>
                                 </div>
                             </nav>
@@ -58,12 +58,12 @@
                     </div>
                 </div>
                 <div class="row contenedores_entrega">
-                    <form id="formulario_entrega" method="post" nctype="multipart/form-data">
+                    <form id="formulario_entrega" method="post">
                         <div class="col s12 m12 l12 xl12">
                             <div class="col s6 m6 l6 xl6">
                                 <input type="text" id="id_inventario" name="id_inventario" class="hide">
                                 <div class="input-field col s12">
-                                    <select name="id_producto" id="id_producto">
+                                    <select name="producto" id="producto">
                                     </select>
                                     <label>Nombre Producto:</label>
                                 </div>
@@ -83,13 +83,9 @@
                             </div>
                             <div class="col s6 m6 l6 xl6">
                                 <div class="input-field col s12">
-                                    <select>
-                                        <option value="" disabled selected>Selecciona proveedor:</option>
-                                        <option value="1">Ariete</option>
-                                        <option value="2">Horno Vintage</option>
-                                        <option value="3">Option 3</option>
+                                    <select name="proveedores" id="proveedores">
                                     </select>
-                                    <label>Proveedores:</label>
+                                    <label>Proveedor:</label>
                                 </div>
                                 <div class="input-field col s12 m12 l12 xl12">
                                     <input id="precio" type="text" name="precio" class="validate">
