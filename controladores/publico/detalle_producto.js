@@ -4,7 +4,11 @@ const API_CARRITO = SERVER + 'sitio_publico/api_carrito.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
+    existencias_productos = 0;
+    precio_productos = 0;
+    aumentar = 1;
     document.getElementById('cantidad').value = 1;
+    document.getElementById('total_cantidad').value = 0;
     let menu = document.getElementById("menu");
     window.onscroll = function () {
         if (window.pageYOffset >= 80) {
@@ -41,6 +45,29 @@ function leerUnProducto(id) {
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
+                    if (response.dataset.porcentaje_descuento > 0) {
+                        document.getElementById('precio_sin_descuento').classList.remove("hide");
+                        let total_descuento = response.dataset.precio_producto * (response.dataset.porcentaje_descuento / 100);
+                        document.getElementById('precio_sin_descuento').innerHTML += ('<s>' + '$' + response.dataset.precio_producto + '</s>');
+                        document.getElementById('precio').textContent += ('$' + (response.dataset.precio_producto - total_descuento).toFixed(2));
+                        document.getElementById('total_cantidad').textContent += (response.dataset.precio_producto - total_descuento).toFixed(2);
+                        //Input Invisible
+                        document.getElementById('precio_total').value = (response.dataset.precio_producto - total_descuento).toFixed(2);
+                        document.getElementById('precio_actual').value = (response.dataset.precio_producto - total_descuento).toFixed(2);
+                        //Se almacenan los valores del precio y existencias
+                        existencias_productos = response.dataset.existencias;
+                        precio_productos = (response.dataset.precio_producto - total_descuento).toFixed(2);
+                    }
+                    else {
+                        document.getElementById('precio').textContent += ('$' + response.dataset.precio_producto);
+                        document.getElementById('total_cantidad').textContent += response.dataset.precio_producto;
+                        //Input Invisible
+                        document.getElementById('precio_total').value = response.dataset.precio_producto;
+                        document.getElementById('precio_actual').value = response.dataset.precio_producto;
+                        //Se almacenan los valores del precio y existencias
+                        existencias_productos = response.dataset.existencias;
+                        precio_productos = response.dataset.precio_producto;
+                    }
                     // Se colocan los datos en la tarjeta de acuerdo al producto seleccionado previamente.
                     document.getElementById('imagen_principal').setAttribute('src', SERVER + 'images/productos/' + response.dataset.imagen_principal);
                     document.getElementById('nombre').textContent = response.dataset.nombre_producto;
@@ -49,14 +76,6 @@ function leerUnProducto(id) {
                     document.getElementById('marca').textContent += response.dataset.nombre_marca;
                     document.getElementById('tamanio').textContent += response.dataset.tamanio;
                     document.getElementById('material').textContent += response.dataset.material;
-                    document.getElementById('precio').textContent += ('$' + response.dataset.precio_producto);
-                    document.getElementById('total_cantidad').textContent += response.dataset.precio_producto;
-                    //Input Invisible
-                    document.getElementById('precio_total').value = response.dataset.precio_producto;
-                    document.getElementById('precio_actual').value = response.dataset.precio_producto;
-                    //Se almacenan los valores del precio y existencias
-                    existencias_productos = response.dataset.existencias;
-                    precio_productos = response.dataset.precio_producto;
                     // Se asigna el valor del id del producto al campo oculto del formulario.
                     document.getElementById('idproducto').value = response.dataset.idproducto;
                     //Validamos si los valores de los array están vacios, serían en promedio y el total de reseñas
@@ -161,31 +180,31 @@ function resenias(id) {
                     //Cada usuario coloco una valoración del 1 - 5 y por cada valor se le representará por una estrella
                     response.dataset.map(function (row) {
                         //Evaluamos cuál caso cumple el usuario cliente, y se le anexa x cantidad de imagenes
-                        if(row.valoraciones == 1){
+                        if (row.valoraciones == 1) {
                             estrellas_user = `
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             `;
                         }
-                        else if (row.valoraciones == 2){
+                        else if (row.valoraciones == 2) {
                             estrellas_user = `
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             `;
                         }
-                        else if (row.valoraciones == 3){
+                        else if (row.valoraciones == 3) {
                             estrellas_user = `
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             `;
-                        } else if (row.valoraciones == 4){
+                        } else if (row.valoraciones == 4) {
                             estrellas_user = `
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             `;
-                        } else if (row.valoraciones == 5){
+                        } else if (row.valoraciones == 5) {
                             estrellas_user = `
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">
                             <img src="../../recursos/iconografia/estrella.png" alt="estrella">

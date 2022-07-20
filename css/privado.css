@@ -423,6 +423,20 @@ footer {
     text-align: left;
 }
 
+#opciones_graficas {
+    width: 100%;
+    margin: 25px 30px 25px 30px;
+    display: flex !important;
+    flex-direction: row;
+    align-content: flex-end;
+    justify-content: end;
+    align-items: center !important;
+}
+
+.datos_grafica{
+    width: 100%;
+}
+
 /*Modificamos*/
 #tarjeta_grafica {
     background-color: #e8d9d9;
@@ -469,26 +483,28 @@ footer {
     margin-left: 8%;
 }
 
-#contenedor_graficos {
-    max-width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: space-around;
-    justify-content: space-around;
+.tabs .tab a {
+    background-color: transparent;
+    color: #36465d !important;
 }
 
-#tarjeta_grafica_venta {
-    width: 40%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    margin: 2%;
+.tabs .tab a.active {
+    background-color: transparent;
+    border: 2px solid #36465d;
+    border-radius: 4px;
+    color: #36465d !important;
+}
+
+.tabs .indicator {
+    background-color: #DA7D27 !important;
+}
+
+.contenedor_graficas {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 5%;
 }
 
 #fechas_grafica {
@@ -543,6 +559,57 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between !important;
+}
+
+/*--------------------------------------------REPORTES--------------------------------------------*/
+
+.tarjeta_reportes {
+    margin-bottom: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    border-radius: 35px;
+    background-color: #36465d;
+    color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.texto_reportes{
+    width: 50%;
+}
+
+.imagen_reportes {
+    width: 20%;
+    text-align: center;
+}
+
+.imagen_reportes img {
+    width: 30%;
+    height: 30%;
+}
+
+.boton_generar_reporte{
+    width: 20%;
+    text-align: end;
+}
+
+.boton_generar_reporte a{
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #1a3760;
+    color: #36465d;
+    background-color: #ffffff;
+    transition: all 0.8s ease;
+}
+
+.boton_generar_reporte a:hover{
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: #1a3760;
+    transition: all 0.4s ease;
 }
 
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
@@ -1165,19 +1232,19 @@ nav .input-field {
 }
 
 .contenedores_entrega {
-    border: 2px solid #777676;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     padding-top: 5%;
     padding-bottom: 5%;
 }
 
 .contenedores_entrega2 {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     width: 44%;
     margin-right: 5%;
     margin-left: 1%;
     padding-left: 1%;
     padding-right: 1%;
     padding-bottom: 2%;
-    border: 2px solid #777676;
     margin-bottom: 5%;
 }
 
@@ -1275,10 +1342,6 @@ table.striped>tbody>tr:nth-child(odd) {
 }
 
 /*------------------------------------------Administrar Marca------------------------------------------*/
-#modal_agregar_marca {
-    height: 280px;
-}
-
 #marca_agregar {
     margin-top: 8%;
 }
@@ -1287,16 +1350,8 @@ table.striped>tbody>tr:nth-child(odd) {
     margin-top: 5%;
 }
 
-#editar_modal_marca {
-    height: 280px;
-}
-
 #marca_modificar {
     margin-top: 8%;
-}
-
-#eliminar_modal_marca {
-    height: 280px;
 }
 
 #marca_eliminar {

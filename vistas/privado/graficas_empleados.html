@@ -36,26 +36,13 @@
         </div>
         <div id="contenedor_graficos">
             <div id="tarjeta_grafica_empleados">
-                <div id="graficas">
-                    <div class="card grey lighten-2">
-                        <div class="card-content white-text">
-                            <h6>Porcentaje de empleados con más entregas</h6>
-                            <img src="../../recursos/img/graficas/grafica_empleados2.png" alt="grafica">
-                        </div>
-                    </div>
+                <div class="col s12 m6">
+                    <!-- Se muestra un gráfico de pastel con el porcentaje de productos por categoría -->
+                    <canvas id="grafica1"></canvas>
                 </div>
-                <div id="fechas_grafica_empleado">
-                    <div class="fecha_empleado">
-                        <p>Fecha Inicio:</p>
-                        <input type="text" class="datepicker">
-                    </div>
-                    <div class="fecha_empleado">
-                        <p>Fecha Fin:</p>
-                        <input type="text" class="datepicker">
-                    </div>
-                </div>
-                <div id="boton_consultar">
-                    <a class="btn waves-effect waves-light" href="">Consultar</a>
+                <div class="col s12 m6">
+                    <!-- Se muestra un gráfico de pastel con el porcentaje de productos por categoría -->
+                    <canvas id="grafica2"></canvas>
                 </div>
             </div>
         </div>
@@ -85,6 +72,7 @@
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/privado/online.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/graficas_empleado.js"></script>
 </body>
 
 </html>

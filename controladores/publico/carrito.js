@@ -38,7 +38,8 @@ function leerDetalleOrden() {
                     var totalP = 0;
                     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
                     response.dataset.map(function (row) {
-                        precio = (row.precio_producto * row.cantidad_producto);
+                        let total_descuento = row.precio_producto * (row.porcentaje_descuento / 100);
+                        precio = ((row.precio_producto-total_descuento) * row.cantidad_producto);
                         subtotal += precio;
                         totalP += row.cantidad_producto;
                         // Se crean y concatenan las filas de la tabla con los datos de cada registro.

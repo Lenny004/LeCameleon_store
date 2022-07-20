@@ -42,7 +42,6 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'crearProducto':
-            
             $_POST = $producto->validateForm($_POST);
             if (!$producto->setNombreP($_POST['nombre'])) {
                 $result['exception'] = 'El nombre del producto posee caracteres no válidos';

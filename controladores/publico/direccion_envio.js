@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
             menu.classList.remove("sticky");
         }
     }
-
     //Instanciar Datepicker
 	M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 		format: 'yyyy-mm-dd', i18n: {
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
 			weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
 	}});
-
     traerDatosEmpleado();
 });
 
@@ -51,9 +49,39 @@ function traerDatosEmpleado() {
     });
 }
 
-function guardarDatosEnvio(){
+function guardarDatosEnvio(event){
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
     // Petición para guardar los datos ingresados
     fetch(API_CARRITO + 'guardarDatos', {
+        method: 'post',
+        body: new FormData(document.getElementById('register-form'))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    //Si no se obtuvieron los datos del empleado
+                    sweetAlert(4, response.message, 'dashboard.html');
+                } else {
+                    //Si no se obtuvieron los datos del empleado
+                    sweetAlert(4, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    });
+}
+
+
+function guardarDatosEnvio2(event){
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Petición para guardar los datos ingresados
+    fetch(API_CARRITO + 'guardarDatosCentroComercial', {
         method: 'post',
         body: new FormData(document.getElementById('register-form'))
     }).then(function (request) {

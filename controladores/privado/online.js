@@ -66,15 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
                                         <ul class="left hide-on-med-and-down">
                                             <li><a href="dashboard.html">Inicio</a></li>
-                                            <!-- Dropdown Trigger Gráficas -->
-                                            <li><a class="dropdown-trigger" href="graficas.html" data-target="dropdown_graficas">Gráficas
+                                            <!-- Dropdown Trigger Estadísticas -->
+                                            <li><a class="dropdown-trigger" href="estadisticas.html" data-target="dropdown_graficas">Estadísticas
                                                     <i class="material-icons right">arrow_drop_down</i></a>
                                             </li>
-                                            <!-- Estructura del Dropdown de Gráficas-->
+                                            <!-- Estructura del Dropdown de Estadísticas-->
                                             <ul id="dropdown_graficas" class="dropdown-content">
                                                 <li><a href="graficas_ventas.html">Gráficas de Ventas</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="graficas_empleados.html">Gráficas de Empleados</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="reportes.html">Reportes</a></li>
                                                 <li class="divider"></li>
                                             </ul>
                                             <!-- Dropdown Trigger Inventario -->
@@ -133,16 +135,18 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div id="opciones_movil">
                                     <li><a class="subheader">Opciones Principales</a></li>
                                     <li><a href="dashboard.html" class="inicio_icon"><img src="../../recursos/iconografia/inicio.png" alt="inicio">Inicio</a></li>
-                                    <!-- Dropdown Trigger Graficas -->
-                                    <li><a class="dropdown-trigger graficas_icon" href="graficas.html" data-target="dropdown_decoracion"><img
-                                                src="../../recursos/iconografia/graficas.png" alt="graficas">Gráficas
+                                    <!-- Dropdown Trigger Estadísticas -->
+                                    <li><a class="dropdown-trigger graficas_icon" href="estadisticas.html" data-target="dropdown_decoracion"><img
+                                                src="../../recursos/iconografia/graficas.png" alt="graficas">Estadísticas
                                             <i class="material-icons right">arrow_drop_down</i></a>
                                     </li>
-                                    <!-- Estructura del Dropdown de Graficas-->
+                                    <!-- Estructura del Dropdown de Estadísticas-->
                                     <ul id="dropdown_decoracion" class="dropdown-content">
                                         <li><a href="graficas_ventas.html">Gráficas de Ventas</a></li>
                                         <li class="divider"></li>
                                         <li><a href="graficas_empleados.html">Gráficas de Empleados</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="reportes.html">Reportes</a></li>
                                         <li class="divider"></li>
                                     </ul>
                                     <!-- Dropdown Trigger Inventario -->

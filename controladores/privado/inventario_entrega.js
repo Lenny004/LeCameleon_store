@@ -1,6 +1,7 @@
 //Se crea la ruta constante para la API
-const API_inventario_entrega = SERVER + "sitio_privado/api_inventario_entrega.php?action=";
-const ENDPOINT = SERVER + "sitio_privado/api_inventario_entrega.php?action=cargar_productos";
+const API_INVENTARIO_ENTREGA = SERVER + "sitio_privado/api_inventario_entrega.php?action=";
+const ENDPOINT_PRODUCTOS = SERVER + "sitio_privado/api_inventario_entrega.php?action=cargarProductos";
+const ENDPOINT_PROVEEDOR = SERVER + "sitio_privado/api_inventario_entrega.php?action=cargarProveedores";
 var accion = null;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -14,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     //Se carga la tabla con los datos de la DB
-    readRows(API_inventario_entrega);
-
+    readRows(API_INVENTARIO_ENTREGA);
     //Se cargan los productos en el select
-    fillSelect(ENDPOINT, 'un producto', "id_producto", null);
+    fillSelect(ENDPOINT_PRODUCTOS, 'un producto', "producto", null);
+    fillSelect(ENDPOINT_PROVEEDOR, 'un proveedor', "proveedores", null);
 });
 
 //Función para cargar los datos en la tabla
@@ -40,6 +41,49 @@ function fillTable(dataset) {
     document.getElementById("tabla_cuerpo").innerHTML = contenido;
 }
 
+// Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar para encontrar unos productos.
+document.getElementById('thesearch').addEventListener('submit', function (event) {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    //Se hace la petición para el caso de llenar el select según un parametro
+    fetch(API_INVENTARIO_ENTREGA + 'leerProductosBuscador', {
+        method: 'post',
+        body: new FormData(document.getElementById('thesearch'))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                let content = '';
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se obtiene el dato del primer campo de la sentencia SQL (valor para cada opción).
+                        value = Object.values(row)[0];
+                        // Se obtiene el dato del segundo campo de la sentencia SQL (texto para cada opción).
+                        text = Object.values(row)[1];
+                        // Se verifica si el valor de la API es diferente al valor seleccionado para enlistar una opción, de lo contrario se establece la opción como seleccionada.
+                        if (value != null) {
+                            content += `<option value="${value}">${text}</option>`;
+                        } else {
+                            content += `<option value="${value}" selected>${text}</option>`;
+                        }
+                    });
+                } else {
+                    content += '<option>No hay opciones disponibles</option>';
+                }
+                // Se agregan las opciones a la etiqueta select mediante su id.
+                document.getElementById("producto").innerHTML = content;
+                // Se inicializa el componente Select del formulario para que muestre las opciones.
+                M.FormSelect.init(document.querySelectorAll('select'));
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    })
+});
+
 document.getElementById("formulario_entrega").addEventListener("submit", function (event) {
     //Se evita que se recargue la página
     event.preventDefault();
@@ -50,8 +94,7 @@ document.getElementById("formulario_entrega").addEventListener("submit", functio
     } else {
         modalidad = "actualizar_entrega";
     }
-
-    fetch(API_inventario_entrega + modalidad, {
+    fetch(API_INVENTARIO_ENTREGA + modalidad, {
         method: "post",
         body: new FormData(document.getElementById("formulario_entrega")),
     }).then(function (request) {
@@ -62,79 +105,10 @@ document.getElementById("formulario_entrega").addEventListener("submit", functio
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     // Se cargan nuevamente las filas en la tabla de la vista después de guardar un registro y se muestra un mensaje de éxito.
-                    readRows(API_inventario_entrega);
+                    readRows(API_INVENTARIO_ENTREGA);
                     sweetAlert(1, response.message, null);
                 } else {
                     sweetAlert(2, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.estado + " " + request.statusText);
-        }
-    });
-});
-
-//Método para buscar registros y colocarlos en la tabla
-document.getElementById("buscador_inventario").addEventListener("keyup", function () {
-    //Se crea el dato de tipo formulario a enviar
-    let datos = new FormData();
-    //Se crea la variable para obtener la información del buscador
-    let buscador = document.getElementById("buscador_inventario").value;
-    //Se llena con el name y el valor del identificador
-    datos.append("buscador", buscador);
-    //Se ejecuta la busqueda
-    fetch(API_inventario_entrega + "buscador", {
-        method: "post",
-        body: datos,
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    data = response.dataset;
-                } else {
-                    data = response.dataset;
-                }
-                // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                fillTable(data);
-            });
-        } else {
-            console.log(request.estado + " " + request.statusText);
-        }
-    });
-});
-
-//Método para cargar los datos en el formulario
-document.getElementById("thesearch").addEventListener("submit", function () {
-    //Se crea el dato de tipo formulario a enviar
-    let datos = new FormData();
-    //Se crea la variable para obtener la información del buscador
-    let buscador = document.getElementById("buscador_registro").value;
-    //Se llena con el name y el valor del identificador
-    datos.append("buscador", buscador);
-    //Se ejecuta la busqueda
-    fetch(API_inventario_entrega + "seleccionar", {
-        method: "post",
-        body: datos,
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado){
-                    //Se cargan los datos en el formulario
-                    document.getElementById("id_inventario").value = response.dataset.idinventario;
-                    document.getElementById("cantidad_formulario").value =
-                        response.dataset.cantidad;
-                    document.getElementById("fecha_entrega").value = response.dataset.fecha_entrega;
-                    document.getElementById("fecha_inicio").value =
-                        response.dataset.fecha_inicio_ventas;
-                    document.getElementById("precio").value = response.dataset.precio_producto;
-                    fillSelect(ENDPOINT, "un producto", "id_producto", response.dataset.idproducto);
-                } else {
                 }
             });
         } else {
@@ -150,34 +124,3 @@ function cambiar_variables1() {
 function cambiar_variables2() {
     accion = false;
 }
-//Método que actualiza los datos
-
-/*
-document.getElementById("formulario_entrega").addEventListener('submit', function (event) { 
-
-    //Se evita que se recargue la página
-    event.preventDefault();
-    // Se ejecutá la función en la API
-    fetch(API_inventario_entrega + "actualizar_entrega", {
-        method: 'post',
-        body: new FormData(document.getElementById("formulario_entrega")),
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    data = response.dataset;
-                } else {
-                    data = response.dataset;
-                }
-                // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                fillTable(data);
-            });
-        } else {
-            console.log(request.estado + " " + request.statusText);
-        }
-    });
-});
-*/

@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
                 $_POST = $pedido->validateForm($_POST);
                 if (!$pedido->ordenIniciada()) {
                     $result['exception'] = 'Ocurrió un problema al obtener el pedido';
-                } elseif (!$pedido->setProducto($_POST['idproducto'])) {
+                } elseif (!$pedido->setIdProducto($_POST['idproducto'])) {
                     $result['exception'] = 'Producto incorrecto';
                 } elseif (!$pedido->setTotalProducto($_POST['precio_total'])) {
                     $result['exception'] = 'El precio total del producto es incorrecto';
@@ -31,8 +31,10 @@ if (isset($_GET['action'])) {
                 } else if ($pedido->crearDetalleFactura()) {
                     $result['estado'] = 1;
                     $result['message'] = 'Producto agregado correctamente';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al agregar el producto al carrito';
+                    $result['exception'] = 'Ocurrió un problema al agregar el producto al carrito.' . PHP_EOL . 'Ya no hay más existencias de este producto';
                 }
                 break;
             case 'leerDetallePedido':
@@ -81,8 +83,8 @@ if (isset($_GET['action'])) {
                 if (!$pedido->setDireccion($_POST['id_detalle'])) {
                     $result['exception'] = 'Detalle incorrecto';
                 } else if ($pedido->actualizarFactura()) {
-                    if($pedido->crearPedidoCliente())
-                    $result['estado'] = 1;
+                    if ($pedido->crearPedidoCliente())
+                        $result['estado'] = 1;
                     $result['message'] = 'Pedido finalizado correctamente';
                 } else {
                     $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
@@ -90,23 +92,57 @@ if (isset($_GET['action'])) {
                 break;
             case 'guardarDatos':
                 $_POST = $pedido->validateForm($_POST);
-                $fecha_actual = date('d');
+                date_default_timezone_set('America/El_Salvador');
+                $fecha_actual = date('Y-m-d', strtotime('+3 days'));
                 $fecha = explode('-', $_POST['fecha']);
-                if (!$pedido->setDireccion($_POST['direccion_entrega'])) {
-                    $result['exception'] = 'Dirección incorrecta';
-                } elseif (!$pedido->setFechaEntrega($_POST['fecha'])) {
+                if (!$pedido->setFechaEntrega($_POST['fecha'])) {
                     $result['exception'] = 'Formato de fecha ingresado es incorrecto';
-                } elseif (intval($fecha[2]) <= intval($fecha_actual + 2)) {
-                    $result['exception'] = 'La fecha de entrega debe tener 2 días minimo desde la fecha en que se realiza el pedido';
+                } elseif ($fecha <= $fecha_actual) {
+                    $result['exception'] = 'La fecha de entrega debe tener 3 días minimo desde la fecha en que se realiza el pedido';
+                } elseif (!isset($_POST['hora_entrega'])) {
+                    $result['exception'] = 'Hora incorrecta, seleccione una hora de entrega';
+                } elseif (!$pedido->setHoraEntrega($_POST['hora_entrega'])) {
+                    $result['exception'] = 'Formato de hora incorrecta';
+                } elseif (!isset($_POST['centros_comerciales'])) {
+                    $result['exception'] = 'Dirección incorrecta. Seleccione un Centro Comercial';
+                } elseif (!$pedido->setDireccion($_POST['direccion_entrega'])) {
+                    $result['exception'] = 'Dirección incorrecta, ha ingresado caracteres no válidos';
                 } else if ($pedido->actualizarFactura()) {
-                    if($pedido->crearPedidoCliente())
-                    $result['estado'] = 1;
+                    if ($pedido->crearPedidoCliente())
+                        $result['estado'] = 1;
                     $result['message'] = 'Pedido finalizado correctamente';
                 } else {
                     $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
                 }
                 break;
-            //Cuenta cuantos productos existen en detalle
+            case 'guardarDatosCentroComercial':
+                $_POST = $pedido->validateForm($_POST);
+                date_default_timezone_set('America/El_Salvador');
+                $fecha_actual = date('Y-m-d', strtotime('+3 days'));
+                $fecha = explode('-', $_POST['fecha']);
+                if (!$pedido->setFechaEntrega($_POST['fecha'])) {
+                    $result['exception'] = 'Formato de fecha ingresado es incorrecto';
+                } elseif ($fecha <= $fecha_actual) {
+                    $result['exception'] = 'La fecha de entrega debe tener 3 días minimo desde la fecha en que se realiza el pedido';
+                } elseif (!isset($_POST['hora_entrega'])) {
+                    $result['exception'] = 'Hora incorrecta, seleccione una hora de entrega';
+                } elseif (!isset($_POST['centros_comerciales'])) {
+                    $result['exception'] = 'Dirección incorrecta. Seleccione un Centro Comercial';
+                } elseif (!isset($_POST['hora_entrega'])) {
+                    $result['exception'] = 'Hora incorrecta, seleccione una hora de entrega';
+                } elseif (!$pedido->setHoraEntrega($_POST['hora_entrega'])) {
+                    $result['exception'] = 'Formato de hora incorrecta';
+                } elseif (!$pedido->setCentroComercial($_POST['centros_comerciales'])) {
+                    $result['exception'] = 'Dirección incorrecta';
+                } else if ($pedido->actualizarFactura()) {
+                    if ($pedido->crearPedidoCliente())
+                        $result['estado'] = 1;
+                    $result['message'] = 'Pedido finalizado correctamente';
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                }
+                break;
+                //Cuenta cuantos productos existen en detalle
             case 'totalpedidos':
                 if ($result['dataset'] = $pedido->totalProductosDetalle()) {
                     $result['estado'] = 1;
