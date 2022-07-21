@@ -142,9 +142,10 @@ class Subcategoria extends Validator
         $params = array($this->idSubCategoriaProducto);
         return Database::ejecutarSentencia($sql, $params);
     }
-    
+
     //Obtenemos los valores de categoria para mostrarse en el select para modificar la subcategoria
-    public function obtener_producto() {
+    public function obtener_producto()
+    {
         $sql = 'SELECT idcategoria_producto, categoria_producto, imagen_categoria
                 FROM tbcategoria
                 ORDER BY idcategoria_producto DESC';
@@ -162,7 +163,15 @@ class Subcategoria extends Validator
         INNER JOIN tbcategoria ON tbcategoria.idcategoria_producto = tbsubcategoria_producto.idcategoria_producto
         WHERE subcategoria_producto ILIKE ? OR categoria_producto ILIKE ?
         ORDER BY categoria_producto ASC';
-        $params = array("%$value%","%$value%");
+        $params = array("%$value%", "%$value%");
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    /*------------------------------------------------------PUBLICO----------------------------------------------- */
+    public function obtenerSubcategorias()
+    {
+        $sql = 'SELECT idsubcategoria_producto, subcategoria_producto FROM tbsubcategoria_producto WHERE idcategoria_producto = ?';
+        $params = array($this->idCategoriaProducto);
         return Database::obtenerSentencias($sql, $params);
     }
 }

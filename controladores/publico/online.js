@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const ENDPOINT_CATEGORIA = SERVER + "sitio_publico/api_categorias.php?action=readAll";
 const ENDPOINT_CATEGORIA2 = SERVER + "sitio_publico/api_categorias.php?action=sumaCategorias";
+const ENDPOINT_CATEGORIA3 = SERVER + "sitio_publico/api_categorias.php?action=obtenerSubcategorias";
 
 function mostrarCategorias() {
     fetch(ENDPOINT_CATEGORIA, {
@@ -197,7 +198,7 @@ function mostrarCategorias() {
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
                     data = response.dataset;
-                    // Se envían los datos a la función del controlador para llenar la tabla en la vista.
+                    // Se envían los datos a la función para llenar el menú de opciones
                     agregarCategoria(data);
                 } else {
                     sweetAlert(4, response.exception, null);
@@ -210,109 +211,95 @@ function mostrarCategorias() {
 }
 
 function agregarCategoria(dataset) {
-    fetch(ENDPOINT_CATEGORIA2, {
-        method: 'get'
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-        if (request.ok) {
-            // Se obtiene la respuesta en formato JSON.
-            request.json().then(function (response) {
-                let total = '';
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
-                if (response.estado) {
-                    total = response.suma_categorias;
-                    dropdown1 = '';
-                    dropdown2 = '';
-                    dropdown3 = '';
-                    suma = 1;
-                    if (total > 0) {
-                        dataset.map(function (row) {
-                            if (suma == 1 && total == 1) {
-                                dropdown1 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_1">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown1').innerHTML = dropdown1;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                            }
-                            else if (suma == 1 && total == 2) {
-                                dropdown1 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_1">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown1').innerHTML = dropdown1;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                                suma = suma + 1;
-                            }
-                            else if (suma == 1 && total == 3) {
-                                dropdown1 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_1">${row.categoria_producto} <i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown1').innerHTML = dropdown1;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                                suma = suma + 1;
-                            }
-                            else if (suma == 2 && total == 2) {
-                                dropdown2 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_2">${row.categoria_producto} <i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown2').innerHTML = dropdown2;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                            }
-                            else if (suma == 2 && total == 3) {
-                                dropdown2 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_2">${row.categoria_producto} <i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown2').innerHTML = dropdown2;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                                suma = suma + 1;
-                            }
-                            else if (suma == 3 && total == 3) {
-                                dropdown3 +=
-                                    `<a class="dropdown-trigger" href="#" data-target="dropdown_3">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
-                                document.getElementById('dropdown3').innerHTML = dropdown3;
-                                //Instanciar Dropdown Menú
-                                var elems = document.querySelectorAll('.dropdown-trigger');
-                                M.Dropdown.init(elems, { coverTrigger: false, hover: false });
-                            }
-                            else {
-                                sweetAlert(4, 'Necesitas crear otro dropdown', null);
-                            }
-                        });
-                    }
-                    else {
-                    }
-                } else {
-                    sweetAlert(4, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.estado + ' ' + request.statusText);
-        }
+    var menu = `<li><a href="dashboard.html">Inicio</a></li>`;
+    document.getElementById("opciones").innerHTML = menu;
+    //Variable que almacenará el boton de categoria
+    let dropdown = '';
+    //Variable para crear drowpdown desde 1
+    let i = 1;
+    //Por cada categoria 
+    dataset.forEach(row => {
+        menu = `<!-- Dropdown Trigger ${i} -->
+        <li id="dropdown${i}"></li>
+        <!-- Estructura del Dropdown ${i}-->
+        <ul id="dropdown_${i}" class="dropdown-content">
+        </ul>`
+        document.getElementById("opciones").innerHTML += menu;
+        // Se define una dirección con los datos de cada categoría para mostrar sus productos en otra página web.
+        url = `productosc.html?id=${row.idcategoria_producto}&nombre=${row.categoria_producto}`;
+        //Se crea el dropdown
+        dropdown = `<a class="dropdown-trigger" href="${url}" data-target="dropdown_${i}">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
+        document.getElementById(`dropdown${i}`).innerHTML = dropdown;
+        //Instanciar Dropdown Menú
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        M.Dropdown.init(elems, { coverTrigger: false, hover: false });
+        //Contador para crear dropdowns
+        i = 1 + i;
+        //Función para cargar las subcategorias en los dropdowns de las categorias
+        subcategoria(row.idcategoria_producto)
     });
+    menu = `<li><a href="marcas.html">Marcas</a></li>
+    <li><a href="ofertas.html">Ofertas</a></li>
+    <!-- Dropdown Trigger Servicio al cliente -->
+    <li><a class="dropdown-trigger" href="#" data-target="dropdown_servicio">Servicio al Cliente
+            <i class="material-icons right">arrow_drop_down</i></a>
+    </li>
+    <!-- Estructura del Dropdown del Servicio al cliente-->
+    <ul id="dropdown_servicio" class="dropdown-content">
+        <li><a href="contactanos.html">Contáctanos</a></li>
+        <li class="divider"></li>
+        <li><a href="condiciones_compra.html">Condiciones de Compra</a></li>
+        <li class="divider"></li>
+        <li><a href="devoluciones.html">Devoluciones y Reembolsos</a></li>
+        <li class="divider"></li>
+        <li><a href="politica_envio.html">Políticas y Zonas de envío</a></li>
+        <li class="divider"></li>
+        <li><a href="reportar_problema.html">Reportar un problema</a></li>
+        <li class="divider"></li>
+    </ul>`;
+    document.getElementById("opciones").innerHTML += menu;
+    //Instanciar Dropdown Menú
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elems, { coverTrigger: false, hover: false });
 }
 
-function subcategoria() {
-    // Petición para consultar si existen pedidos con fecha de entrega actual.
-    fetch(API_PEDIDOS + 'existenciaPedidosHoy', {
-        method: 'get'
+//Variable para crear drowpdown desde 1 para subcategorias
+var dropdownsub = 1;
+
+function subcategoria(id) {
+    // Se define un objeto con los datos del registro seleccionado.
+    let data = new FormData();
+    data.append('idcategoria_menu', id);
+    // Petición para obtener los datos del registro solicitado.
+    fetch(ENDPOINT_CATEGORIA3, {
+        method: 'post',
+        body: data
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
-                let data = [];
-                // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
-                    data = response.dataset;
+                    //Por cada subcategoria
+                    response.dataset2.forEach(row => {
+                        // Se define una dirección con los datos de cada categoría para mostrar sus productos en otra página web.
+                        url = `productoss.html?id=${row.idsubcategoria_producto}&nombre=${row.subcategoria_producto}`;
+                        submenu =
+                            `<li><a href="${url}">${row.subcategoria_producto}</a></li>
+                        <li class="divider"></li>`
+                        //Se agrega al dropdown de la subcategoria
+                        document.getElementById(`dropdown_${dropdownsub}`).innerHTML += submenu;
+                        //Instanciar Dropdown Menú
+                        var elems = document.querySelectorAll('.dropdown-trigger');
+                        M.Dropdown.init(elems, { coverTrigger: false, hover: false });
+                    });
+                    //Contador para crear dropdowns de las subcategorias
+                    dropdownsub = 1 + dropdownsub;
+                    console.log(dropdownsub + "jejeje");
                 } else {
-                    sweetAlert(4, response.exception, null);
+                    sweetAlert(2, response.exception, null);
                 }
-                // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                CrearPedidoHoy(data);
             });
         } else {
             console.log(request.estado + ' ' + request.statusText);
