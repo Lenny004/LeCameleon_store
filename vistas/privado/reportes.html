@@ -53,7 +53,8 @@
                 </div>
                 <div class="texto_reportes">
                     <p><b>Reporte de productos vendidos</b></p>
-                    <P>Es un reporte que muestra los productos vendidos y cuanto se ha adquirido de ganancias de este mismo.</P>
+                    <P>Es un reporte que muestra los productos vendidos y cuanto se ha adquirido de ganancias de este
+                        mismo.</P>
                 </div>
                 <div class="boton_generar_reporte">
                     <a href="">Generar</a>
@@ -80,7 +81,7 @@
                     <P>Es un reporte que ayudará a visualizar los pedidos completados</P>
                 </div>
                 <div class="boton_generar_reporte">
-                    <a href="">Generar</a>
+                    <a>Generar</a>
                 </div>
             </div>
             <div class="tarjeta_reportes">
@@ -88,11 +89,96 @@
                     <img src="../../recursos/iconografia/pedidosw.png" alt="reporte">
                 </div>
                 <div class="texto_reportes">
-                    <p><b>Reporte de productos</b></p>
-                    <P>Es un reporte que ayudará a visualizar los pedidos completados</P>
+                    <p><b>Reporte de ventas personalizado</b></p>
+                    <P>Es un reporte de ventas del dia actual, mes actual o año actual de un producto</P>
                 </div>
                 <div class="boton_generar_reporte">
-                    <a href="">Generar</a>
+                    <a class="btn modal-trigger" onclick="openGenerar()">Generar</a>
+                </div>
+            </div>
+            <!-- Modal Personalizado -->
+            <div id="modal_personalizado1" class="modal modales_reporte">
+                <div class="modal-content">
+                    <form method="post" id="form_personalizado1">
+                        <div id="titulo_modal2">
+                            <div>
+                                <h4>Generar Reporte</h4>
+                            </div>
+                            <div>
+                                <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="divider"></div>
+                            <div class="input-field col s12 datos_grafica">
+                                <select name="filtro" id="filtro" onchange="seleccionTiempo(this.value)">
+                                    <option value="" disabled selected>Seleccione una opción:</option>
+                                    <option value="1">Día Actual</option>
+                                    <option value="2">Mes Actual</option>
+                                    <option value="3">Año Actual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                <button id="boton_agregar" name="boton_agregar" type="submit"
+                                    class="waves-effect waves-light btn boton_azul">Generar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tarjeta_reportes">
+                <div class="imagen_reportes">
+                    <img src="../../recursos/iconografia/pedidosw.png" alt="reporte">
+                </div>
+                <div class="texto_reportes">
+                    <p><b>Reporte de productos vendidos personalizado</b></p>
+                    <P>Es un reporte que ayudará a visualizar los productos vendidos por medio de sus parametros: marca,
+                        proveedores, categorias y empleados</P>
+                </div>
+                <div class="boton_generar_reporte">
+                    <a class="btn modal-trigger" onclick="openGenerar2()">Generar</a>
+                </div>
+            </div>
+            <!-- Modal Personalizado -->
+            <div id="modal_personalizado2" class="modal modales_reporte">
+                <div class="modal-content">
+                    <form method="post" id="form_personalizado2">
+                        <div id="titulo_modal2">
+                            <div>
+                                <h4>Generar Reporte</h4>
+                            </div>
+                            <div>
+                                <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="divider"></div>
+                            <div class="input-field col s12 datos_grafica">
+                                <select name="filtro" id="filtro" onchange="seleccionFiltro(this.value)">
+                                    <option value="" disabled selected>Seleccione un filtro:</option>
+                                    <option value="1">Categoría</option>
+                                    <option value="2">Subcategoría</option>
+                                    <option value="3">Marca</option>
+                                    <option value="4">Proveedores</option>
+                                    <option value="5">Empleados</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s12 datos_grafica">
+                                <select name="opciones" id="opciones">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                <button id="boton_agregar" name="boton_agregar" type="submit"
+                                    class="waves-effect waves-light btn boton_azul">Generar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -123,7 +209,7 @@
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/privado/online.js"></script>
-    <script type="text/javascript" src="../../controladores/privado/graficas_ventas.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/reportes.js"></script>
 </body>
 
 </html>

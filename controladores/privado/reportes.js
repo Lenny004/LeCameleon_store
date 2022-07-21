@@ -2,33 +2,47 @@ const ENDPOINT_CATEGORIA = SERVER + "sitio_privado/api_categorias.php?action=rea
 const ENDPOINT_SUBC = SERVER + 'sitio_privado/api_subcategoria.php?action=readAll';
 const ENDPOINT_MARCA = SERVER + 'sitio_privado/api_marca.php?action=readAll';
 const ENDPOINT_PROVEEDOR = SERVER + 'sitio_privado/api_proveedor.php?action=readAll';
+const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleados.php?action=readAll';
 
-// Método manejador de eventos que se ejecuta cuando el documento ha cargado.
+//Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
     let menu = document.getElementById("menu");
     window.onscroll = function () {
-        if (window.pageYOffset >= 100) {
+        if (window.pageYOffset >= 80) {
             menu.classList.add("sticky");
         }
         else {
             menu.classList.remove("sticky");
         }
     }
-    //Inicializar el componente del Tab
-    M.AutoInit();
-    // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+    //Instanciar Select
+    M.FormSelect.init(document.querySelectorAll('select'));
 
-    //Instanciar Datepicker
-    M.Datepicker.init(document.querySelectorAll('.datepicker'), {
-        format: 'yyyy-mm-dd', i18n: {
-            months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
-            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
-            weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+    let options = {
+        dismissible: false,
+        onOpenStart: function () {
+            // Se restauran los elementos del formulario.
+            document.getElementById('form_personalizado1').reset();
         }
-    });
+    }
+    // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
+    M.Modal.init(document.querySelectorAll('.modal'), options);
 });
+
+// Función para preparar el formulario al momento de generar un reporte
+function openGenerar() {
+    // Se abre la caja de diálogo (modal) que contiene el formulario.
+    M.Modal.getInstance(document.getElementById('modal_personalizado1')).open();
+    // Se asigna el título para la caja de diálogo (modal).
+}
+
+// Función para preparar el formulario al momento de generar un reporte
+function openGenerar2() {
+    // Se abre la caja de diálogo (modal) que contiene el formulario.
+    M.Modal.getInstance(document.getElementById('modal_personalizado2')).open();
+    // Se asigna el título para la caja de diálogo (modal).
+}
+
 
 function seleccionFiltro(opcion) {
     switch (opcion) {
@@ -48,6 +62,9 @@ function seleccionFiltro(opcion) {
             //Traemos todos los proveedores existentes
             fillSelect(ENDPOINT_PROVEEDOR, 'un proveedor', 'opciones', null);
             break;
+        case "5":
+            //Traemos todos los empleados existentes
+            fillSelect(ENDPOINT_EMPLEADOS, 'un empleado', 'opciones', null);
         default:
             console.log("no entre a ningún caso");
             break;
