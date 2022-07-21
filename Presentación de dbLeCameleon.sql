@@ -232,18 +232,18 @@ INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "imagen_su
     ('Decoración Artesanal', '629c96e0f1fd1.jpg', 3);
 
 INSERT INTO public."tbcolor"("color")
-    VALUES ('rojo'),
-    ('azul'),
-    ('verde'),
-    ('amarillo'),
-    ('morado'),
-    ('rosado'),
-    ('celeste'),
-    ('naranja'),
-    ('cafe'),
-    ('gris'),
-    ('negro'),
-    ('blanco');
+    VALUES ('Rojo'),
+    ('Azul'),
+    ('Verde'),
+    ('Amarillo'),
+    ('Morado'),
+    ('Rosado'),
+    ('Celeste'),
+    ('Naranja'),
+    ('Cafe'),
+    ('Gris'),
+    ('Negro'),
+    ('Blanco');
 
 INSERT INTO public."tbmarca"("nombre_marca", "imagen_marca")
     VALUES 
@@ -271,24 +271,36 @@ INSERT INTO public."tbestado_producto"("estado_producto")
 
 INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "imagen_principal", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
     VALUES 
-    ('KitchenCraft Colección Cascanueces', 'Utencilios de cocina', '62d039a5cffca.png', 'Madera', '30 cm', 5, 0, 19.60, 1, 7, 3, 1, 3),
-	('Pete Cromer Echidna Tea Towel', 'Utencilios de cocina', '62d03b5b488c5.png', 'Algodon', '50cm x 70cm', 15, 0, 8.60, 1, 7, 3, 1, 3),
-	('Pete Cromer Echidna Tote Bag', 'Utencilios de cocina', '62d04a9aca8d3.png', 'Algodon', '41cm x 42cm', 20, 0, 9.00, 1, 7, 3, 1, 3),
-	('Pete Cromer Kookaburra Tote Bag', 'Utencilios de cocina', '62d03bbb0efbe.png', 'Algodon', '41cm x 42cm', 16, 0, 7.60, 7, 13, 3, 1, 3),
+    ('KitchenCraft Colección Cascanueces', 'Utencilios de cocina', '62d97e2acf1fa.png', 'Madera', '30 cm', 5, 0, 19.60, 1, 7, 3, 1, 5),
+	('Pete Cromer Echidna Tea Towel', 'Utencilios de cocina', '62d03b5b488c5.png', 'Algodon', '50cm x 70cm', 15, 0, 8.60, 1, 7, 3, 1, 5),
+	('Pete Cromer Echidna Tote Bag', 'Utencilios de cocina', '62d04a9aca8d3.png', 'Algodon', '41cm x 42cm', 20, 0, 9.00, 1, 7, 3, 1, 5),
+	('Pete Cromer Kookaburra Tote Bag', 'Utencilios de cocina', '62d97e714c56e.png', 'Algodon', '41cm x 42cm', 16, 0, 7.60, 7, 13, 3, 1, 5),
 	('Eco-Friendly Bamboo Fibre Compost Bin', 'Accesorios', '62d03e2f493c8.png', 'fibras de bambú', '50 cm', 5, 0, 39.60, 1, 7, 3, 1, 3),
-	('Estante colgante de utensilios de acero inoxidable', 'Utencilios de cocina', '62d04c4dad34c.png', 'Metal', '52cm', 15, 0, 5.60, 1, 7, 3, 1, 3),
-	('Pulsera con piedras de mar', 'Accesorios', '62d04c9746c93.png', 'Malaquita', '6 cm', 5, 0, 49.60, 1, 13, 3, 1, 3),
+	('Estante colgante de utensilios de acero inoxidable', 'Utencilios de cocina', '62d04c4dad34c.png', 'Metal', '52cm', 15, 0, 5.60, 1, 7, 3, 1, 6),
+	('Pulsera con piedras de mar', 'Accesorios', '62d04c9746c93.png', 'Malaquita', '6 cm', 5, 0, 49.60, 1, 13, 3, 1, 16),
 	('Prendedor Estilo Art Decó', 'Accesorios', '62d04cd90358d.png', 'Metal', '2.2cm x 5cm', 15, 0, 48.60, 1, 13, 3, 1, 3),
-	('Collar con cuentas de vidrio', 'Accesorios', '62d04d02de258.png', 'vidrio marroquí', '70cm', 2, 0, 99.00, 1, 13, 3, 1, 3),
-	('Reloj Mach 2000 Dark Empire', 'Accesorios', '62d04d34487bd.png', 'Metal', '23.5cm', 16, 0, 87.60, 1, 13, 3, 1, 3),
-	('Reloj Himalaya Automatic White.', 'Accesorios', '62d042b066c1f.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 13, 3, 1, 3),
-	(' Reloj para dama Milanese Type 18', 'Accesorios', '62d04d7061cd1.png', 'Metal', '23cmM', 15, 0, 5.60, 1, 13, 3, 1, 3),
-	('Yogurella', 'Utencilios de cocina', '62d0443e83c14.png', 'Metal', '15cm', 15, 0, 65.60, 1, 2, 3, 1, 3),
-	('POPCORN POPPER XL', 'Utencilios de cocina', '62d0453bbb40f.png', 'Metal', '34 x 52 x 29 cm.', 5, 0, 89.60, 1, 2, 3, 1, 3),
-	('PIMMY 700W ORANGE', 'Utencilios de cocina', '62d045d0f1bc6.png', 'Metal', '20cm', 15, 0, 38.60, 1, 2, 3, 1, 3),
-	('BLENDY METAL', 'Utencilios de cocina', '62d04e1b2a79a.png', 'Metal', '18 x 36 x 15 cm.', 2, 0, 59.00, 1, 2, 3, 1, 3),
-	('SPREMÌ METAL', 'Utencilios de cocina', '62d04741ad581.png', 'Metal', '29.5cm', 16, 0, 87.60, 1, 2, 3, 1, 3),
-	('CENTRIKA METAL.', 'Utencilios de cocina', '62d047891d3d9.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 2, 3, 1, 3);
+	('Collar con cuentas de vidrio', 'Accesorios', '62d04d02de258.png', 'vidrio marroquí', '70cm', 2, 0, 99.00, 1, 13, 3, 1, 13),
+	('Reloj Mach 2000 Dark Empire', 'Accesorios', '62d04d34487bd.png', 'Metal', '23.5cm', 16, 0, 87.60, 1, 13, 3, 1, 17),
+	('Reloj Himalaya Automatic White.', 'Accesorios', '62d042b066c1f.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 13, 3, 1, 17),
+	('Reloj para dama Milanese Type 18', 'Accesorios', '62d04d7061cd1.png', 'Metal', '23cmM', 15, 0, 5.60, 1, 13, 3, 1, 17),
+	('Yogurella', 'Utencilios de cocina', '62d0443e83c14.png', 'Metal', '15cm', 15, 0, 65.60, 1, 2, 3, 1, 5),
+	('POPCORN POPPER XL', 'Utencilios de cocina', '62d0453bbb40f.png', 'Metal', '34 x 52 x 29 cm.', 5, 0, 89.60, 1, 2, 3, 1, 5),
+	('PIMMY 700W ORANGE', 'Utencilios de cocina', '62d045d0f1bc6.png', 'Metal', '20cm', 15, 0, 38.60, 1, 2, 3, 1, 5),
+	('BLENDY METAL', 'Utencilios de cocina', '62d04e1b2a79a.png', 'Metal', '18 x 36 x 15 cm.', 2, 0, 59.00, 1, 2, 3, 1, 5),
+	('SPREMÌ METAL', 'Utencilios de cocina', '62d04741ad581.png', 'Metal', '29.5cm', 16, 0, 87.60, 1, 2, 3, 1, 5),
+	('CENTRIKA METAL.', 'Utencilios de cocina', '62d047891d3d9.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 2, 3, 1, 5),
+    ('Black & White Lofi Girl Hoodie', 'Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un bordado de logotipo de Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d7f3ffad04f.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 62.90, 11, 1, 1, 1, 18),
+	('Lofi Girl & Friends Hoodie', 'Un peluche, una niña y un gato, no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original sudadera con capucha de Lofi Girl. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d7f468302a8.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 69.90, 11, 1, 1, 1, 18),
+    ('Nighttime Radio Hoodie', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d7f4c29cac3.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 69.90, 11, 1, 1, 1, 18),
+	('Lofi Girl & Friends Sweatshirt', 'Un peluche, una niña y un gato: no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original sudadera de Lofi Girl. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d9569ebfc2f.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 59.90, 11, 1, 1, 1, 18),
+    ('Nighttime Radio Sweatshirt', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d95880e9eb6.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 62.90, 11, 1, 1, 1, 19),
+	('Lofi Girl Signature Sweatshirt', 'Refresca tus básicos diarios con esta sudadera original de Lofi Girl. En un color para una apariencia limpia y firmada con una caligrafía de la firma Lofi Girl simple pero elegante bordada en el frente, puedes mostrar tu apoyo a la marca en un ambiente sutil y relajado.', '62d95bc72dc85.png', '85% algodón, 15% poliéster', 'talla M', 50, 10, 59.90, 11, 1, 1, 1, 19),
+    ('Large LOFI Logo  Hoodie', 'Haz una declaración con esta original sudadera con capucha de Lofi Girl. En un color para una apariencia limpia y terminado con un logotipo "LO-FI" simple pero audaz bordado en el frente, es el atuendo perfecto para que el mundo sepa que escuchas lofi hip hop.', '62d973715222b.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 69.90, 11, 1, 1, 1, 19),
+	('Lofi Girl Logo Hoodie', 'A veces menos es más. Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un logotipo Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d974e8909c6.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 59.90, 11, 1, 1, 1, 19),
+    ('Lofi Girl Signature Sweatshirt Girl', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d9766be672c.png', '85% cotton, 15% polyester', 'talla S', 50, 10, 59.90, 10, 1, 1, 1, 19),
+	('Red Lofi Girl - Sweatshirt', 'Refresca tus básicos diarios con esta sudadera original de Lofi Girl. En un color para una apariencia limpia y firmada con una caligrafía de la firma Lofi Girl simple pero elegante bordada en el frente, puedes mostrar tu apoyo a la marca en un ambiente sutil y relajado.', '62d9798d58f00.png', '85% algodón, 15% poliéster', 'talla M', 50, 5, 59.90, 1, 1, 1, 1, 19),
+    ('Lofi Girl & Friends TShirt', 'Un peluche, una niña y un gato: no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original camiseta de Lofi Girl, confeccionada en 100% algodón para máxima comodidad y suavidad. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d9793aed6d5.png', '85% cotton, 15% polyester', 'talla S', 50, 15, 34.90, 6, 1, 1, 1, 19),
+	('Lofi Girl Logo TShirt', 'A veces menos es más. Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un logotipo Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d97a44f1b36.png', '85% algodón, 15% poliéster', 'talla M', 50, 10, 34.90, 3, 1, 1, 1, 19);
 
 INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
     VALUES 
