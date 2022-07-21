@@ -41,12 +41,13 @@ CREATE TABLE tbusuario_cliente(
     idusuario_c SERIAL primary key,
     usuario_c character varying(75) NOT NULL,
     contrasena_c character varying(200) NOT NULL,
-    intentos_c integer,
+    intentos_c integer NULL,
     nombre_cliente character varying(50) NOT NULL,
     apellido_cliente character varying(50) NOT NULL,
     correo_cliente character varying(60) NOT NULL,
-    telefono_cliente varchar(9) NOT NULL,
+    telefono_cliente varchar(9) UNIQUE NOT NULL,
     direccion_cliente character varying(1000) NULL,
+    fecha_creacion timestamp NOT NULL,
     fecha_bloqueo_c timestamp without time zone,
     fecha_desbloqueo_c timestamp without time zone,
     idestado_usuario_c integer NOT NULL REFERENCES tbestado_usuario_c(idestado_usuario_c)
@@ -74,7 +75,7 @@ CREATE TABLE tbsubcategoria_producto (
     idsubcategoria_producto SERIAL primary key,
     subcategoria_producto character varying(60) UNIQUE NOT NULL,
     imagen_subcategoria VARCHAR(1000),
-    idcategoria_producto integer NOT NULL
+    idcategoria_producto integer NOT NULL REFERENCES tbcategoria(idcategoria_producto)
 );
 
 CREATE TABLE tbdistribuidor(
@@ -90,7 +91,6 @@ CREATE TABLE tbmarca (
     imagen_marca VARCHAR(1000)
 );
 
-
 CREATE TABLE tbcolor (
     idcolor SERIAL primary key,
     color character varying(15) UNIQUE NOT NULL
@@ -103,13 +103,14 @@ CREATE TABLE tbestado_producto (
 
 CREATE TABLE tbproducto (
     idproducto SERIAL primary key,
-    nombre_producto character varying(150) NOT NULL,
+    nombre_producto character varying(75) NOT NULL,
     descripcion character varying(1000) NOT NULL,
     material character varying(50) NOT NULL,
-    tamaño character varying(50),
+    tamanio character varying(50),
     existencias smallint NOT NULL,
     porcentaje_descuento smallint DEFAULT 0 NOT NULL,
     precio_producto numeric(6,2) NOT NULL,
+    imagen_principal VARCHAR(1000),
     idcolor integer NULL REFERENCES tbcolor(idcolor),
     id_marca integer NOT NULL REFERENCES tbmarca(id_marca),
     iddistribuidor integer NOT NULL REFERENCES tbdistribuidor(iddistribuidor),
@@ -123,7 +124,7 @@ CREATE TABLE tbimagen_producto (
     idproducto integer NOT NULL REFERENCES tbproducto(idproducto)
 );
 
-CREATE TABLE tbinventario (
+CREATE TABLE tbinventario(
     idinventario SERIAL primary key,
     cantidad smallint NOT NULL,
     precio_unitario numeric(7,2) NOT NULL,
@@ -144,7 +145,7 @@ CREATE TABLE tbtipo_pago (
 
 CREATE TABLE tbfactura (
     idfactura SERIAL primary key,
-    fecha_factura timestamp without time zone NOT NULL,
+    fecha_factura timestamp NOT NULL,
     monto_total numeric(7,2) NULL,
     idestado_factura integer NOT NULL REFERENCES tbestado_factura(idestado_factura),
     idtipo_pago integer NULL REFERENCES tbtipo_pago(idtipo_pago),
@@ -156,7 +157,7 @@ CREATE TABLE tbdetalle_factura (
     iddetalle_factura SERIAL primary key,
     total_producto numeric(7,2) NOT NULL,
     precio_actual numeric(6,2) NOT NULL,
-    cantidad_descuento numeric(6,2) NOT NULL,
+    cantidad_descuento numeric(6,2) DEFAULT 0 NULL,
     cantidad_producto smallint NOT NULL,
     idfactura integer NOT NULL REFERENCES tbfactura(idfactura),
     idproducto integer NOT NULL REFERENCES tbproducto(idproducto)
@@ -165,7 +166,7 @@ CREATE TABLE tbdetalle_factura (
 CREATE TABLE tbenvio_pedido (
     idenvio_pedido SERIAL primary key,
     direccion_entrega_pedido character varying(500) NOT NULL,
-    fecha_entrega_pedido timestamp without time zone NOT NULL,
+    fecha_entrega_pedido timestamp NOT NULL,
     idfactura integer NOT NULL REFERENCES tbfactura(idfactura)
 );
 
@@ -203,72 +204,105 @@ INSERT INTO public."tbdistribuidor"("nombre_distribuidor", "direccion_distribuid
     ('Nahanche','Metrocentro, Tercera Etapa Local 74 y 75 San Salvador CP, 1101', '+503 2260 1581'),
     ('Coco Canela', '9° Calle Poniente #4036, Local #6, Plaza La Novena, Colonia Escalón entre la 77° y la, 79 Avenida Nte., San Salvador', '+503 2223 8088');
 
-INSERT INTO public."tbcategoria"("categoria_producto")
-    VALUES ('Decoración'), ('Accesorios'),('Artesanales');
+INSERT INTO public."tbcategoria"("categoria_producto", "imagen_categoria")
+    VALUES ('Decoración', '629be07ca8673.jpg'), ('Accesorios', '629e07f09310e.png'),('Artesanales', '629be073b2933.jpg');
 
 
-INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "idcategoria_producto")
-    VALUES ('Patio', 1),
-    ('Terraza', 1),
-    ('Otros', 1), 
-    ('Dormitorio', 1),
-    ('Cocina', 1),
-    ('Salón', 1),
-    ('Baño', 1),
-    ('Accesorios tecnológicos', 1),
-    ('Decoración de escritorios', 1),
-    ('Anillos', 2),
-    ('Aretes', 2),
-    ('Billeteras', 2),
-    ('Collares', 2),
-    ('Llaveros', 2),
-    ('Pines', 2),
-    ('Pulseras', 2),
-    ('Relojes', 2),
-    ('Playeras Masculinas', 2),
-    ('Playeras Femeninas', 2),
-    ('Accesorios Artesanales', 3),
-    ('Decoración Artesanal', 3);
+INSERT INTO public."tbsubcategoria_producto"("subcategoria_producto", "imagen_subcategoria","idcategoria_producto")
+    VALUES ('Patio', '629c97600f700.jpg', 1),
+    ('Terraza', '629c973194afc.jpg', 1),
+    ('Otros', '629c973b1963c.jpg', 1), 
+    ('Dormitorio', '629c9743ad46e.jpg', 1),
+    ('Cocina', '629c974c8919b.jpeg', 1),
+    ('Salón', '629c9755e9fee.jpg', 1),
+    ('Baño', '629c9724c9951.jpg', 1),
+    ('Accesorios tecnológicos', '629c97f978565.png', 1),
+    ('Decoración de escritorios', '629c97d7e17e2.jpg', 1),
+    ('Anillos', '629be63b8951e.jpg', 2),
+    ('Aretes', '629be6230ffda.jpg', 2),
+    ('Billeteras', '629be65082eaa.jpg', 2),
+    ('Collares', '629be897cf087.jpg', 2),
+    ('Llaveros', '629be69a1d41b.jpg', 2),
+    ('Pines', '629be8a13b854.jpg', 2),
+    ('Pulseras', '629be8aaf0092.jpg', 2),
+    ('Relojes', '629c1d108f17e.jpg', 2),
+    ('Playeras Masculinas', '629c1cf1d5fda.png', 2),
+    ('Playeras Femeninas', '629be8bc89ab6.jpg', 2),
+    ('Accesorios Artesanales', '629be68c37a81.jpg', 3),
+    ('Decoración Artesanal', '629c96e0f1fd1.jpg', 3);
 
 INSERT INTO public."tbcolor"("color")
-    VALUES ('rojo'),
-    ('azul'),
-    ('verde'),
-    ('amarillo'),
-    ('morado'),
-    ('rosado'),
-    ('celeste'),
-    ('naranja'),
-    ('cafe'),
-    ('gris'),
-    ('negro'),
-    ('blanco');
+    VALUES ('Rojo'),
+    ('Azul'),
+    ('Verde'),
+    ('Amarillo'),
+    ('Morado'),
+    ('Rosado'),
+    ('Celeste'),
+    ('Naranja'),
+    ('Cafe'),
+    ('Gris'),
+    ('Negro'),
+    ('Blanco');
 
-INSERT INTO public."tbmarca"("nombre_marca")
+INSERT INTO public."tbmarca"("nombre_marca", "imagen_marca")
     VALUES 
-    ('Lofi Girl'),
-    ('Ariete'),
-    ('Laura Ashley'),
-    ('TENDANCE'),
-    ('Maine Furniture Co.'),
-    ('Rebecca Mobili'),
-    ('Living Nostalgia'),
-    ('WedgWood'),
-    ('Missoni Home'),
-    ('MisterWils'),
-    ('Ruzafa Vintage'),
-    ('Francisco Segarra'),
-    ('Trouve'),
-    ('Hilda Herrera'),
-    ('Nahanche'),
-    ('Coco Canela');
-
+    ('Lofi Girl', '62d4ca6e57136.png'),
+    ('Ariete', '62d4cbb4f287e.jpg'),
+    ('Laura Ashley', '62d4cc03c842f.png'),
+    ('TENDANCE', '62d4d0771c9cf.png'),
+    ('Maine Furniture Co', '62d4d0fc9aa10.png'),
+    ('Rebecca Mobili', '62d4d26c987d7.jpg'),
+    ('KitchenCraft', '62d4d2bdab07a.png'),
+    ('WedgWood', '62d4d360569be.png'),
+    ('Missoni Home', '62d4d3c2e8388.jpg'),
+    ('MisterWils', '62d4d47e8bc44.jpg'),
+    ('Ruzafa Vintage', '62d4d4e97b040.jpg'),
+    ('Francisco Segarra', '62d4d5279194f.png'),
+    ('Trouve', '62d4d569cd75c.png'),
+    ('Hilda Herrera', '62d4d6eceed0d.jpg'),
+    ('Nahanche', '62d4df449a6fe.png'),
+    ('Coco Canela', '62d4df73c8572.png');
 
 INSERT INTO public."tbestado_producto"("estado_producto")
     VALUES ('En venta'),
-    ('Agotado');
+    ('Agotado'),
+    ('Eliminado');
 
-INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamaño", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
+INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "imagen_principal", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
+    VALUES 
+    ('KitchenCraft Colección Cascanueces', 'Utencilios de cocina', '62d97e2acf1fa.png', 'Madera', '30 cm', 5, 0, 19.60, 1, 7, 3, 1, 5),
+	('Pete Cromer Echidna Tea Towel', 'Utencilios de cocina', '62d03b5b488c5.png', 'Algodon', '50cm x 70cm', 15, 0, 8.60, 1, 7, 3, 1, 5),
+	('Pete Cromer Echidna Tote Bag', 'Utencilios de cocina', '62d04a9aca8d3.png', 'Algodon', '41cm x 42cm', 20, 0, 9.00, 1, 7, 3, 1, 5),
+	('Pete Cromer Kookaburra Tote Bag', 'Utencilios de cocina', '62d97e714c56e.png', 'Algodon', '41cm x 42cm', 16, 0, 7.60, 7, 13, 3, 1, 5),
+	('Eco-Friendly Bamboo Fibre Compost Bin', 'Accesorios', '62d03e2f493c8.png', 'fibras de bambú', '50 cm', 5, 0, 39.60, 1, 7, 3, 1, 3),
+	('Estante colgante de utensilios de acero inoxidable', 'Utencilios de cocina', '62d04c4dad34c.png', 'Metal', '52cm', 15, 0, 5.60, 1, 7, 3, 1, 6),
+	('Pulsera con piedras de mar', 'Accesorios', '62d04c9746c93.png', 'Malaquita', '6 cm', 5, 0, 49.60, 1, 13, 3, 1, 16),
+	('Prendedor Estilo Art Decó', 'Accesorios', '62d04cd90358d.png', 'Metal', '2.2cm x 5cm', 15, 0, 48.60, 1, 13, 3, 1, 3),
+	('Collar con cuentas de vidrio', 'Accesorios', '62d04d02de258.png', 'vidrio marroquí', '70cm', 2, 0, 99.00, 1, 13, 3, 1, 13),
+	('Reloj Mach 2000 Dark Empire', 'Accesorios', '62d04d34487bd.png', 'Metal', '23.5cm', 16, 0, 87.60, 1, 13, 3, 1, 17),
+	('Reloj Himalaya Automatic White.', 'Accesorios', '62d042b066c1f.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 13, 3, 1, 17),
+	('Reloj para dama Milanese Type 18', 'Accesorios', '62d04d7061cd1.png', 'Metal', '23cmM', 15, 0, 5.60, 1, 13, 3, 1, 17),
+	('Yogurella', 'Utencilios de cocina', '62d0443e83c14.png', 'Metal', '15cm', 15, 0, 65.60, 1, 2, 3, 1, 5),
+	('POPCORN POPPER XL', 'Utencilios de cocina', '62d0453bbb40f.png', 'Metal', '34 x 52 x 29 cm.', 5, 0, 89.60, 1, 2, 3, 1, 5),
+	('PIMMY 700W ORANGE', 'Utencilios de cocina', '62d045d0f1bc6.png', 'Metal', '20cm', 15, 0, 38.60, 1, 2, 3, 1, 5),
+	('BLENDY METAL', 'Utencilios de cocina', '62d04e1b2a79a.png', 'Metal', '18 x 36 x 15 cm.', 2, 0, 59.00, 1, 2, 3, 1, 5),
+	('SPREMÌ METAL', 'Utencilios de cocina', '62d04741ad581.png', 'Metal', '29.5cm', 16, 0, 87.60, 1, 2, 3, 1, 5),
+	('CENTRIKA METAL.', 'Utencilios de cocina', '62d047891d3d9.png', 'Metal', '24.5cm', 5, 0, 99.60, 1, 2, 3, 1, 5),
+    ('Black & White Lofi Girl Hoodie', 'Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un bordado de logotipo de Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d7f3ffad04f.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 62.90, 11, 1, 1, 1, 18),
+	('Lofi Girl & Friends Hoodie', 'Un peluche, una niña y un gato, no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original sudadera con capucha de Lofi Girl. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d7f468302a8.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 69.90, 11, 1, 1, 1, 18),
+    ('Nighttime Radio Hoodie', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d7f4c29cac3.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 69.90, 11, 1, 1, 1, 18),
+	('Lofi Girl & Friends Sweatshirt', 'Un peluche, una niña y un gato: no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original sudadera de Lofi Girl. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d9569ebfc2f.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 59.90, 11, 1, 1, 1, 18),
+    ('Nighttime Radio Sweatshirt', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d95880e9eb6.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 62.90, 11, 1, 1, 1, 19),
+	('Lofi Girl Signature Sweatshirt', 'Refresca tus básicos diarios con esta sudadera original de Lofi Girl. En un color para una apariencia limpia y firmada con una caligrafía de la firma Lofi Girl simple pero elegante bordada en el frente, puedes mostrar tu apoyo a la marca en un ambiente sutil y relajado.', '62d95bc72dc85.png', '85% algodón, 15% poliéster', 'talla M', 50, 10, 59.90, 11, 1, 1, 1, 19),
+    ('Large LOFI Logo  Hoodie', 'Haz una declaración con esta original sudadera con capucha de Lofi Girl. En un color para una apariencia limpia y terminado con un logotipo "LO-FI" simple pero audaz bordado en el frente, es el atuendo perfecto para que el mundo sepa que escuchas lofi hip hop.', '62d973715222b.png', '85% cotton, 15% polyester', 'talla S', 50, 0, 69.90, 11, 1, 1, 1, 19),
+	('Lofi Girl Logo Hoodie', 'A veces menos es más. Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un logotipo Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d974e8909c6.png', '85% algodón, 15% poliéster', 'talla M', 50, 0, 59.90, 11, 1, 1, 1, 19),
+    ('Lofi Girl Signature Sweatshirt Girl', 'Para los noctámbulos que prefieren la paz y la tranquilidad de trabajar hasta altas horas de la noche. Esta sudadera con capucha original de Lofi Girl es una prenda básica para tu guardarropa. En un color para una apariencia limpia e impreso con la ilustración de la radio nocturna en el frente, este es un artículo imprescindible para cualquier fan de Lofi Girl.', '62d9766be672c.png', '85% cotton, 15% polyester', 'talla S', 50, 10, 59.90, 10, 1, 1, 1, 19),
+	('Red Lofi Girl - Sweatshirt', 'Refresca tus básicos diarios con esta sudadera original de Lofi Girl. En un color para una apariencia limpia y firmada con una caligrafía de la firma Lofi Girl simple pero elegante bordada en el frente, puedes mostrar tu apoyo a la marca en un ambiente sutil y relajado.', '62d9798d58f00.png', '85% algodón, 15% poliéster', 'talla M', 50, 5, 59.90, 1, 1, 1, 1, 19),
+    ('Lofi Girl & Friends TShirt', 'Un peluche, una niña y un gato: no podemos nombrar un trío más icónico. Mejora tus sesiones de estudio con esta original camiseta de Lofi Girl, confeccionada en 100% algodón para máxima comodidad y suavidad. En un solo color para una apariencia limpia y detallada con tres bordados individuales en el pecho, tienes garantizada una buena compañía durante tus estudios.', '62d9793aed6d5.png', '85% cotton, 15% polyester', 'talla S', 50, 15, 34.90, 6, 1, 1, 1, 19),
+	('Lofi Girl Logo TShirt', 'A veces menos es más. Mejora tu guardarropa con esta sudadera con capucha original de Lofi Girl. En un color para una apariencia limpia y firmado con un logotipo Lofi Girl simple pero elegante en el frente, puede mostrar su apoyo a la marca mientras se mantiene cómodo y relajado.', '62d97a44f1b36.png', '85% algodón, 15% poliéster', 'talla M', 50, 10, 34.90, 3, 1, 1, 1, 19);
+
+INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "tamanio", "existencias", "porcentaje_descuento", "precio_producto", "idcolor", "id_marca", "iddistribuidor", "idestado_producto", "idsubcategoria_producto")
     VALUES 
     ('Skyler Stripe Outdoor Rug', 'Para las mesas de afuera', 'Tela de algodón', 'Grande 18x12', 4, 0, 9.60, 2, 3, 3, 1, 3),
     ('LeiDrail', 'Luces solares para exteriores, recargan con luz solar', 'Metal', 'pequeño 20x7', 4, 0, 8.60, 4, 2, 2, 1, 1),
@@ -281,6 +315,16 @@ INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "t
     ('Brazalete de cuero', 'Brazalete de cuero color cafe', 'cuero', 'M', 10, 20, 5.00, 9, 1, 1, 1, 16),
     ('Camiseta de hombre Sivar', 'Camiseta de algodon de hombre', 'algodon', 'M', 10, 20, 11.00, 2, 14, 14, 1, 18);
 
+INSERT INTO public."tbimagen_producto"("imagen_producto", "idproducto")
+    VALUES ('image1.png',2),
+    ('image2.png',2),
+    ('image3.png', 2),
+    ('image4.png',2),
+    ('image11.png', 6),
+    ('image2.png',6),
+    ('image21.png', 7),
+    ('image22.png',7);
+
 INSERT INTO public."tbtipo_empleado"("tipo_empleado")
     VALUES ('Administrador'), ('Repartidor');
 
@@ -288,8 +332,8 @@ INSERT INTO public."tbestado_empleado"("nombre_estado")
     VALUES ('Activo'), ('Inactivo'), ('Vacaciones');
 
 INSERT INTO public."tbempleado"("nombre_empleado", "apellido_empleado", "duiempleado", "nitempleado", "telefono_empleado", "correo_empleado", "fecha_nacimiento_empleado", "idtipo_empleado", "idestado_empleado")
-    VALUES ('Lenny', 'Elias', '85961246-9', '1234-123456-123-4', '8888-8888', 'lenny@gmail.com', '2003-08-08', 1, 1),
-    ('Fatima', 'Franco', '44518967-4', '5284-165489-521-2', '4444-4444', 'faty@gmail.com', '2004-06-19', 2, 1),
+    VALUES ('Lenny Adrián', 'Elías Sánchez', '85961246-9', '1234-123456-123-4', '8888-8888', 'lenny@gmail.com', '2003-08-08', 1, 1),
+    ('Aimee Vanessa', 'Osorio Canales', '44518967-4', '5284-165489-521-2', '4444-4444', 'canelita@gmail.com', '2004-05-07', 2, 1),
     ('Erick', 'Chinchilla', '26598743-8', '1568-689546-568-2', '7777-7777', 'erick@gmail.com', '2004-11-10', 2, 1),
     ('Mangandi', 'Cardona', '05864277-1', '6698-154879-354-3', '5555-5555', 'manga@gmail.com', '2003-10-04', 2, 1),
     ('Nelson', 'Peña', '45789954-1', '3214-658412-567-9', '9999-9999', 'nelson@gmail.com', '2003-04-12', 1, 1);
@@ -306,53 +350,65 @@ INSERT INTO public."tbestado_usuario_e"(
 	VALUES ('Activo'), ('Inactivo');
 
 INSERT INTO public."tbusuario_empleado"("usuario_e", "contrasena_e", "idempleado", "idtipo_usuario_e", "idestado_usuario_e")
-	VALUES ('Lenny', '1234', 1, 1, 1),
-('ErickE', '123', 2, 2, 1);
+	VALUES ('lenny', '1234', 1, 1, 1),
+('aimee', '1234', 2, 2, 1),
+('erick', '1234', 3, 1, 1),
+('mangandi', '1234', 4, 1, 1),
+('nelson', '1234', 5, 1, 1);
 
-
-INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "idestado_usuario_c")
-	VALUES ('Lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', 1),
-('Fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', 1),
-('Aimee', '123', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', 1),
-('Sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', 1),
-('Gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', 1),
-('Oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', 1),
-('Erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', 1),
-('Jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', 1),
-('Sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', 1),
-('Geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', 1);
+INSERT INTO public."tbusuario_cliente"("usuario_c", "contrasena_c", "nombre_cliente", "apellido_cliente", "correo_cliente", "telefono_cliente", "direccion_cliente", "fecha_creacion", "idestado_usuario_c")
+	VALUES ('lenny', '1234', 'Lenny Adrián', 'Elías Sánchez', 'lennyx004@gmail.com', '7852-5487', 'Mejicanos, San Salvador', '2022-07-20', 1),
+('aimee', '1234', 'Aimee Vanessa', 'Osorio Canales', 'aimee08@gmail.com', '1258-9467' ,'Mejicanos, San Salvador', '2022-07-17', 1),
+('nelson', '1234', 'Nelson Daniel', 'Peña Pineda', 'nelson@gmail.com', '7895-9467' ,'Mejicanos, San Salvador', '2022-07-16', 1),
+('mangandi', '1234', 'Rodrigo Gabriel', 'Mangandi Cardona', 'mangandi@gmail.com', '6952-5487', 'Mejicanos, San Salvador', '2022-07-15', 1),
+('fatima', '123', 'Fatima Rocio', 'Lopez Franco', 'fatima08@gmail.com', '8795-4587' ,'San Martin, San Salvador', '2022-07-14', 1),
+('sofia', '123', 'Sofia Bautista', 'Hernandez Martinez', 'sofi45@gmail.com', '8145-4587' ,'Colonia Escalon, San Salvador', '2022-07-14', 1),
+('gabriela', '123', 'Gabriela Susana', 'Mendez Barrera', 'Gaby7u7@gmail.com', '1459-8956' ,'Mejicanos, San Salvador', '2022-07-14', 1),
+('oliver', '123', 'Oliver Alejandro', 'Erazo Reyes', 'oliver01@gmail.com', '7789-8454' ,'Olocuilta, La Paz', '2022-07-8', 1),
+('erick', '123', 'Erick Salvador', 'Chinchilla Chiquillo', 'ericku@gmail.com', '7741-5748' ,'San Salvador, San Salvador', '2022-07-8', 1),
+('jesus', '123', 'Jesus Gerardo', 'Esquivel Ramirez', 'jesusDK@gmail.com', '8894-5545' ,'Mejicanos, San Salvador', '2022-07-1', 1),
+('sey', '123', 'Sey Guadalupe', 'Alvarado Najarro', 'xmxxs@gmail.com', '8898-4243' ,'Mejicanos, San Salvador', '2022-07-3', 1),
+('geissel', '123', 'Geissel Mireya', 'Hernandez Ramos', 'geissel24@gmail.com', '6588-4984' ,'San Martin, San Salvador', '2022-07-25', 1);
 
 INSERT INTO public."tbestado_factura"("estado_factura")
-	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando');
+	VALUES ('Cancelada'),('Pendiente'),('Retrasada'),('Entregando'), ('Editando');
 
 INSERT INTO public."tbtipo_pago"("tipo_pago")
 	VALUES ('Debito'),('Chivo Wallet');
 
-INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura", "idusuario_c", "idusuario_e")
-	VALUES 
-    ('2022-03-14', 25.80, 2, 1, 1),
-	('2022-03-15', 17.20, 2, 2, 1),
-	('2022-03-16', 8.60, 2, 3, 2),
-	('2022-03-17', 8.60, 2, 4, 2),
-    ('2022-03-15', 17.20, 2, 5, 1),
-	('2022-03-16', 54.90, 3, 6, 1),
-	('2022-03-08', 250.00, 3, 7, 2),
-    ('2022-03-05', 20.00, 1, 8, 2),
-    ('2022-03-25', 44.90, 2, 9, 1),
-    ('2022-03-20', 11.00, 4, 10, 2),
-    ('2022-03-22', 500.00, 2, 1, 2),
-    ('2022-03-23', 98.58, 2, 2, 1),
-    ('2022-03-24', 20.00, 2, 3, 1),
-    ('2022-03-25', 68.5, 2, 5, 2),
-    ('2022-03-15', 290.99, 3, 4, 2),
-    ('2022-03-11', 48.19, 3, 5, 2),
-    ('2022-03-27', 49.90, 2, 6, 1);
+INSERT INTO public."tbfactura"("fecha_factura", "monto_total", "idestado_factura", "idusuario_c")
+	VALUES
+    ('2022-06-05', 66.39, 2, 1),
+    ('2022-06-05', 45.00, 1, 1),
+    ('2022-06-05', 44.90, 1, 1),
+    ('2022-06-05', 54.90, 1, 1),
+
+	('2022-03-15', 17.20, 2, 2),
+	('2022-03-16', 8.60, 2, 3),
+	('2022-03-17', 8.60, 2, 4),
+    ('2022-03-15', 17.20, 2, 5),
+	('2022-03-16', 54.90, 3, 6),
+	('2022-03-08', 250.00, 3, 7),
+    ('2022-03-05', 20.00, 1, 8),
+    ('2022-03-25', 44.90, 2, 9),
+    ('2022-03-20', 11.00, 4, 10),
+    ('2022-03-22', 500.00, 2, 1),
+    ('2022-03-23', 98.58, 2, 2),
+    ('2022-03-24', 20.00, 2, 3),
+    ('2022-03-25', 68.5, 2, 5),
+    ('2022-03-15', 290.99, 3, 4),
+    ('2022-03-11', 48.19, 3, 5),
+    ('2022-03-27', 49.90, 2, 6);
 
 INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "cantidad_descuento", "cantidad_producto", "idfactura", "idproducto")
 	VALUES 
-    (8.60, 8.60, 0, 3, 1, 2),
-	(8.60, 8.60, 0, 2, 2, 2),
-	(8.60, 8.60, 0, 1, 3, 2),
+    (19.20, 9.60, 0, 2, 1, 1),
+    (17.20, 8.60, 0, 2, 1, 2),
+    (29.99, 29.99, 0, 1, 1, 3),
+	(8.60, 8.60, 0, 1, 2, 2),
+	(44.90, 44.90, 0, 1, 3, 4),
+	(54.90, 54.90, 0, 1, 4, 5),
+
 	(8.60, 8.60, 0, 1, 4, 2),
 	(8.60, 8.60, 0, 1, 5, 2),
     (54.90, 54.90, 0, 1, 6, 5),
@@ -382,14 +438,30 @@ INSERT INTO public."tbdetalle_factura"("total_producto", "precio_actual", "canti
     (5.00, 5.00, 0, 1, 17, 9);
 
 INSERT INTO public."tbenvio_pedido"("direccion_entrega_pedido", "fecha_entrega_pedido", "idfactura")
-	VALUES ('Metrocentro', '2022-03-21', 1),
-	('Colonia Escalon Av23 Casa#14', '2022-03-22', 2),
-	('Plaza Mundo', '2022-03-23', 3),
-	('Mejicanos, Colonia Zacamil residencial universitaria', '2022-03-24', 4),
-    ('San Martin, San Salvador', '2022-03-29', 5),
-	('Santo Tomas AV 14 casa #12', '2022-03-20', 6),
-	('Colonia Monte Carmelo, Ilopango', '2022-03-17', 7),
-	('Residencia España, Av34 Casa #67', '2022-03-25', 8);
+	VALUES ('Metrocentro', '2022-06-06', 1),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-06-06', 2),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 3),
+    ('Colonia Escalon Av23 Casa#14', '2022-03-22', 4),
+	('Plaza Mundo', '2022-03-23', 5),
+	('Mejicanos, Colonia Zacamil residencial universitaria', '2022-03-24', 6),
+    ('San Martin, San Salvador', '2022-03-29', 7),
+	('Santo Tomas AV 14 casa #12', '2022-03-20', 8),
+	('Colonia Monte Carmelo, Ilopango', '2022-03-17', 9),
+	('Residencia España, Av34 Casa #67', '2022-03-25', 10),
+    ('Calle vista al lago en circulo cercano al restaurante, casa #89', '2022-05-25', 11),
+    ('Instituto Técnico Ricaldone', '2022-05-25', 12),
+    ('Monseñor Romero y Final Calle 5 de Noviembre entre 21ª y 23ª', '2022-05-29', 13),
+    ('SAN SALVADOR. Dirección: 87 Ave. Sur, No. 7, Colonia Escalón, San Salvador', '2022-05-29', 14),
+    ('25 Avenida Sur y, Alameda Franklin Delano Roosevelt, San Salvador', '2022-05-29', 15);
+
+INSERT INTO public."tbestado_valoracion"(
+	"estado_valoracion")
+	VALUES ('Visible'),('Invisible');
+
+INSERT INTO tbvaloraciones(
+	valoraciones, "reseña", fecha_publicacion, idproducto, idestado_valoracion, idusuario_c)
+	VALUES (4, 'Me ha gustado el producto','2022-05-06', 2, 1, 1),
+    (4, 'Me ha gustado el producto','2022-05-06', 3, 1, 1);
 
 ---------------------------------------------------INNER JOIN---------------------------------------------------
 
@@ -732,8 +804,8 @@ where "porcentaje_descuento" != 0
 
 --------------------------------------------------CONSULTAS DE REPORTES CON RANGO DE FECHAS--------------------------------------------------
 /*Reporte para mostrar lo que ha vendido un empleado en un rango de fechas*/
-SELECT SUM("monto_total") AS Monto_Total, "tbusuario_empleado"."usuario_e" 
-FROM public."tbfactura", public."tbusuario_empleado" 
+SELECT SUM("monto_total") AS Monto_Total, "tbusuario_empleado"."usuario_e"
+FROM public."tbfactura", public."tbusuario_empleado"
 WHERE "tbfactura"."idusuario_e" = "tbusuario_empleado"."idusuario_e" AND ("tbfactura"."fecha_factura" BETWEEN '2022-03-01' AND '2022-03-30') GROUP BY "usuario_e"
 
 /*Reporte para saber los envios de pedido en una fecha exacta*/

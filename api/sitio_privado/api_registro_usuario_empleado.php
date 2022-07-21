@@ -8,201 +8,63 @@ if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $usuario = new Usuarios;
+    $registroUsuario = new RegistroUsuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['id_usuario'])) {
-        $result['session'] = 1;
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
-        switch ($_GET['action']) {
-            case 'getUser':
-                if (isset($_SESSION['alias_usuario'])) {
-                    $result['estado'] = 1;
-                    $result['username'] = $_SESSION['alias_usuario'];
+    // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+    switch ($_GET['action']) {
+            //Verificamos si existen usuarios
+        case 'verificarPrimerUso':
+            //Si existen usuarios manda un mensaje de que se encontraron
+            if ($registroUsuario->ValidarExistenciaPrimerUsuario()) {
+                $result['estado'] = 1;
+                $result['message'] = 'Existe al menos un usuario registrado';
+            } else {
+                $result['exception'] = 'No existe un usuario administrador registrado';
+            }
+            break;
+        case 'registroUsuario':
+            $_POST = $registroUsuario->validateForm($_POST);
+            $fecha_actual = date('Y');
+            $fecha = explode('-', $_POST['fechaM']);
+            if (!$registroUsuario->setNombres($_POST['nombre'])) {
+                $result['exception'] = 'Nombres incorrectos';
+            } elseif (!$registroUsuario->setApellidos($_POST['apellidos'])) {
+                $result['exception'] = 'Apellidos incorrectos';
+            } elseif (!$registroUsuario->setDUI($_POST['dui'])) {
+                $result['exception'] = 'Formato de DUI incorrecto';
+            } elseif (!$registroUsuario->setNIT($_POST['nit'])) {
+                $result['exception'] = 'Formato de NIT incorrecto';
+            } elseif (!$registroUsuario->setTelefono($_POST['telefono'])) {
+                $result['exception'] = 'El formato de teléfono incorrecto';
+            } elseif (!$registroUsuario->setFechaNEmpleado($_POST['fechaM'])) {
+                $result['exception'] = 'Formato de fecha ingresado es incorrecto';
+            } elseif (intval($fecha[0]) > intval($fecha_actual - 18)) {
+                $result['exception'] = 'El empleado debe ser mayor de edad';
+            } elseif (!$registroUsuario->setCorreoEmpleado($_POST['email'])) {
+                $result['exception'] = 'El formato de correo eléctroncio es inválido';
+            } elseif ($_POST['password'] != $_POST['confirmar_contra']) {
+                $result['exception'] = 'Las contraseñas ingresadas son diferentes';
+            } elseif (!$registroUsuario->setContraEmpleado($_POST['password'])) {
+                $result['exception'] = $registroUsuario->getPasswordError();
+            } elseif ($registroUsuario->RegistrarEmpleado()) {
+                if ($registroUsuario->ObtenerEmpleadoRegistrado()) {
+                    if ($registroUsuario->RegistrarUsuarioEmpleado()) {
+                        $result['estado'] = 1;
+                        $result['message'] = 'Usuario administrador registrado correctamente';
+                    } else {
+                        $result['exception'] = 'Usuario administrador no pudo ser registrado';
+                    }
                 } else {
-                    $result['exception'] = 'Alias de usuario indefinido';
+                    $result['exception'] = 'Error al obtener credenciales';
                 }
-                break;
-            case 'logOut':
-                if (session_destroy()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
-                }
-                break;
-            case 'readProfile':
-                if ($result['dataset'] = $usuario->readProfile()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'Usuario inexistente';
-                }
-                break;
-            case 'editProfile':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setNombres($_POST['nombres'])) {
-                    $result['exception'] = 'Nombres incorrectos';
-                } elseif (!$usuario->setApellidos($_POST['apellidos'])) {
-                    $result['exception'] = 'Apellidos incorrectos';
-                } elseif (!$usuario->setCorreo($_POST['correo'])) {
-                    $result['exception'] = 'Correo incorrecto';
-                } elseif ($usuario->editProfile()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Perfil modificado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'changePassword':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setId($_SESSION['id_usuario'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif (!$usuario->checkPassword($_POST['actual'])) {
-                    $result['exception'] = 'Clave actual incorrecta';
-                } elseif ($_POST['nueva'] != $_POST['confirmar']) {
-                    $result['exception'] = 'Claves nuevas diferentes';
-                } elseif (!$usuario->setClave($_POST['nueva'])) {
-                    $result['exception'] = $usuario->getPasswordError();
-                } elseif ($usuario->changePassword()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Contraseña cambiada correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'readAll':
-                if ($result['dataset'] = $usuario->readAll()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'No hay datos registrados';
-                }
-                break;
-            case 'search':
-                $_POST = $usuario->validateForm($_POST);
-                if ($_POST['search'] == '') {
-                    $result['exception'] = 'Ingrese un valor para buscar';
-                } elseif ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Valor encontrado';
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'No hay coincidencias';
-                }
-                break;
-            case 'create':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setNombres($_POST['nombres'])) {
-                    $result['exception'] = 'Nombres incorrectos';
-                } elseif (!$usuario->setApellidos($_POST['apellidos'])) {
-                    $result['exception'] = 'Apellidos incorrectos';
-                } elseif (!$usuario->setCorreo($_POST['correo'])) {
-                    $result['exception'] = 'Correo incorrecto';
-                } elseif (!$usuario->setAlias($_POST['alias'])) {
-                    $result['exception'] = 'Alias incorrecto';
-                } elseif ($_POST['clave'] != $_POST['confirmar']) {
-                    $result['exception'] = 'Claves diferentes';
-                } elseif (!$usuario->setClave($_POST['clave'])) {
-                    $result['exception'] = $usuario->getPasswordError();
-                } elseif ($usuario->createRow()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Usuario creado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'readOne':
-                if (!$usuario->setId($_POST['id'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif ($result['dataset'] = $usuario->readOne()) {
-                    $result['estado'] = 1;
-                } elseif (Database::getException()) {
-                    $result['exception'] = Database::getException();
-                } else {
-                    $result['exception'] = 'Usuario inexistente';
-                }
-                break;
-            case 'update':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setId($_POST['id'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif (!$usuario->readOne()) {
-                    $result['exception'] = 'Usuario inexistente';
-                } elseif (!$usuario->setNombres($_POST['nombres'])) {
-                    $result['exception'] = 'Nombres incorrectos';
-                } elseif (!$usuario->setApellidos($_POST['apellidos'])) {
-                    $result['exception'] = 'Apellidos incorrectos';
-                } elseif (!$usuario->setCorreo($_POST['correo'])) {
-                    $result['exception'] = 'Correo incorrecto';
-                } elseif ($usuario->updateRow()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Usuario modificado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'delete':
-                if ($_POST['id'] == $_SESSION['id_usuario']) {
-                    $result['exception'] = 'No se puede eliminar a sí mismo';
-                } elseif (!$usuario->setId($_POST['id'])) {
-                    $result['exception'] = 'Usuario incorrecto';
-                } elseif (!$usuario->readOne()) {
-                    $result['exception'] = 'Usuario inexistente';
-                } elseif ($usuario->deleteRow()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Usuario eliminado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            default:
-                $result['exception'] = 'Acción no disponible dentro de la sesión';
-        }
-    } else {
-        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
-        switch ($_GET['action']) {
-            case 'registro_usuario':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->setNombres($_POST['nombres'])) {
-                    $result['exception'] = 'Nombres incorrectos';
-                } elseif (!$usuario->setApellidos($_POST['apellidos'])) {
-                    $result['exception'] = 'Apellidos incorrectos';
-                } elseif (!$usuario->setCorreo($_POST['correo'])) {
-                    $result['exception'] = 'Correo incorrecto';
-                } elseif (!$usuario->setAlias($_POST['alias'])) {
-                    $result['exception'] = 'Alias incorrecto';
-                } elseif ($_POST['clave'] != $_POST['confirmar']) {
-                    $result['exception'] = 'Claves diferentes';
-                } elseif (!$usuario->setClave($_POST['clave'])) {
-                    $result['exception'] = $usuario->getPasswordError();
-                } elseif ($usuario->createRow()) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Usuario registrado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'logIn':
-                $_POST = $usuario->validateForm($_POST);
-                if (!$usuario->checkUser($_POST['alias'])) {
-                    $result['exception'] = 'Alias incorrecto';
-                } elseif ($usuario->checkPassword($_POST['clave'])) {
-                    $result['estado'] = 1;
-                    $result['message'] = 'Autenticación correcta';
-                    $_SESSION['id_usuario'] = $usuario->getId();
-                    $_SESSION['alias_usuario'] = $usuario->getAlias();
-                } else {
-                    $result['exception'] = 'Clave incorrecta';
-                }
-                break;
-            default:
-                $result['exception'] = 'Acción no disponible fuera de la sesión';
-        }
+            } else {
+                $result['exception'] = Database::getException();
+            }
+            break;
+        default:
+            $result['exception'] = 'Acción no disponible fuera de la sesión';
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');

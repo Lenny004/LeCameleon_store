@@ -56,7 +56,37 @@ class Validator
     public function validacionNumeroNaturales($value)
     {
         // Se verifica que el valor sea un número entero mayor o igual a uno.
-        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' => 1))) {
+        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' >= 1))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+    *   Método para validar un número natural con 0
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validacionNumeroNaturalesConCero($value)
+    {
+        // Se verifica que el valor sea un número entero mayor o igual a uno.
+        if (filter_var($value, FILTER_VALIDATE_INT, array('min_range' >= 0))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        /*
+    *   Método para validar un número natural como porcentaje
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validacionPorcentaje($value)
+    {
+        // Se verifica que el valor sea un número entero mayor o igual a uno.
+        if ($value >= 0 && $value <=100){
             return true;
         } else {
             return false;
@@ -82,6 +112,75 @@ class Validator
                     if ($type == 2 || $type == 3) {
                         // Se obtiene la extensión del archivo y se convierte a minúsculas.
                         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                        // Se establece un nombre único para el archivo.
+                        $this->fileName = uniqid() . '.' . $extension;
+                        return true;
+                    } else {
+                        $this->fileError = 'El tipo de imagen debe ser jpg o png';
+                        return false;
+                    }
+                } else {
+                    $this->fileError = 'La dimensión de la imagen es incorrecta';
+                    return false;
+                }
+            } else {
+                $this->fileError = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            }
+        } else {
+            $this->fileError = 'El archivo de la imagen no existe';
+            return false;
+        }
+    }
+
+    public function validateImages($file, $maxWidth, $maxHeigth)
+    {
+        // Se verifica si el archivo existe, de lo contrario se establece el mensaje de error correspondiente.
+        if ($file) {
+            // Se comprueba si el archivo tiene un tamaño menor o igual a 2MB, de lo contrario se establece el mensaje de error correspondiente.
+            if ($file['size'] <= 2097152) {
+                // Se obtienen las dimensiones de la imagen y su tipo.
+                list($width, $height, $type) = getimagesize($file['tmp_name']);
+                // Se verifica si la imagen cumple con las dimensiones máximas, de lo contrario se establece el mensaje de error correspondiente.
+                if ($width <= $maxWidth && $height <= $maxHeigth) {
+                    // Se comprueba si el tipo de imagen es permitido (2 - JPG y 3 - PNG), de lo contrario se establece el mensaje de error correspondiente.
+                    if ($type == 2 || $type == 3) {
+                        // Se obtiene la extensión del archivo y se convierte a minúsculas.
+                        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                        // Se establece un nombre único para el archivo.
+                        $this->fileName = uniqid() . '.' . $extension;
+                        return true;
+                    } else {
+                        $this->fileError = 'El tipo de imagen debe ser jpg o png';
+                        return false;
+                    }
+                } else {
+                    $this->fileError = 'La dimensión de la imagen es incorrecta';
+                    return false;
+                }
+            } else {
+                $this->fileError = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            }
+        } else {
+            $this->fileError = 'El archivo de la imagen no existe';
+            return false;
+        }
+    }
+
+    
+    public function validarImagenes($file, $tamanio, $anchura, $altura, $tipo, $nombre_archivo)
+    {
+        // Se verifica si el archivo existe, de lo contrario se establece el mensaje de error correspondiente.
+        if ($file) {
+            // Se comprueba si el archivo tiene un tamaño menor o igual a 2MB, de lo contrario se establece el mensaje de error correspondiente.
+            if ($tamanio <= 2097152) {
+                // Se verifica si la imagen cumple con las dimensiones máximas, de lo contrario se establece el mensaje de error correspondiente.
+                if ($anchura <= 2000 && $altura <= 2000) {
+                    // Se comprueba si el tipo de imagen es permitido (2 - JPG y 3 - PNG), de lo contrario se establece el mensaje de error correspondiente.
+                    if ($tipo == 2 || $tipo == 3) {
+                        // Se obtiene la extensión del archivo y se convierte a minúsculas.
+                        $extension = strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
                         // Se establece un nombre único para el archivo.
                         $this->fileName = uniqid() . '.' . $extension;
                         return true;
@@ -139,7 +238,22 @@ class Validator
     public function validateString($value, $minimum, $maximum)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.]{' . $minimum . ',' . $maximum . '}$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\:\%\-]{' . $minimum . ',' . $maximum . '}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        /*
+    *   Método para validar una cadena de texto (letras, digitos, espacios en blanco y signos de puntuación).
+    *   Parámetros: $value (dato a validar), $minimum (longitud mínima) y $maximum (longitud máxima).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validateDireccion($value, $minimum, $maximum)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\%\;\.\#]{' . $minimum . ',' . $maximum . '}$/', $value)) {
             return true;
         } else {
             return false;
@@ -199,16 +313,16 @@ class Validator
     public function validatePassword($value)
     {
         // Se verifica la longitud mínima.
-        if (strlen($value) >= 3) {
+        if (strlen($value) >= 4) {
             // Se verifica la longitud máxima.
-            if (strlen($value) <= 72) {
+            if (strlen($value) <= 60) {
                 return true;
             } else {
-                $this->passwordError = 'Clave mayor a 72 caracteres';
+                $this->passwordError = 'Clave mayor a 60 caracteres';
                 return false;
             }
         } else {
-            $this->passwordError = 'Clave menor a 3 caracteres';
+            $this->passwordError = 'Clave menor a 4 caracteres';
             return false;
         }
     }
@@ -229,6 +343,21 @@ class Validator
     }
 
     /*
+    *   Método para validar el formato del DUI (Documento Único de Identidad).
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validarNIT($value)
+    {
+        // Se verifica que el número tenga el formato 0000-000000-000-0.
+        if (preg_match('/^[0-9]{4}[-][0-9]{6}[-][0-9]{3}[-][0-9]{1}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
     *   Método para validar un número telefónico.
     *   Parámetros: $value (dato a validar).
     *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
@@ -237,6 +366,21 @@ class Validator
     {
         // Se verifica que el número tenga el formato 0000-0000 y que inicie con 2, 6 o 7.
         if (preg_match('/^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+    *   Método para validar un número telefónico extranjero.
+    *   Parámetros: $value (dato a validar).
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validarNumeroExtranjero($value)
+    {
+        // Se verifica que el número tenga el formato +000-00000000
+        if (preg_match('/^[+][0-9]{2,3}[-][0-9]{9,10}$/', $value)) {
             return true;
         } else {
             return false;
@@ -260,6 +404,21 @@ class Validator
     }
 
     /*
+    * Método para validar un formato de hora
+    * Parámetros: $value (dato a validar)
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validarHora($value)
+    {
+        // Se verifica que la hora tenga el formato 00-00-00.
+        if (preg_match('/^[0-9]{2}[:][0-9]{2}[:][0-9]{2}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
     *   Método para validar la ubicación de un archivo antes de subirlo al servidor.
     *   Parámetros: $file (archivo), $path (ruta del archivo) y $name (nombre del archivo).
     *   Retorno: booleano (true si el archivo fue subido al servidor o false en caso contrario).
@@ -270,6 +429,21 @@ class Validator
         if (file_exists($path)) {
             // Se verifica que el archivo sea movido al servidor.
             if (move_uploaded_file($file['tmp_name'], $path . $name)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function saveImagen($file, $path, $name)
+    {
+        // Se comprueba que la ruta en el servidor exista.
+        if (file_exists($path)) {
+            // Se verifica que el archivo sea movido al servidor.
+            if (move_uploaded_file($file, $path . $name)) {
                 return true;
             } else {
                 return false;
