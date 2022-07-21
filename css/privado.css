@@ -612,6 +612,10 @@ footer {
     transition: all 0.4s ease;
 }
 
+.modales_reporte{
+    width: 300px !important;
+}
+
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
 #tarjeta_inventario {
     background-color: #e8d9d9;

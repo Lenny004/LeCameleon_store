@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function seleccionFiltro(opcion) {
-    console.log(opcion);
     switch (opcion) {
         case "1":
             //Traemos todas las categorias existentes
