@@ -77,18 +77,6 @@
                     <img src="../../recursos/iconografia/pedidosw.png" alt="reporte">
                 </div>
                 <div class="texto_reportes">
-                    <p><b>Reporte de pedidos completados</b></p>
-                    <P>Es un reporte que ayudará a visualizar los pedidos completados</P>
-                </div>
-                <div class="boton_generar_reporte">
-                    <a>Generar</a>
-                </div>
-            </div>
-            <div class="tarjeta_reportes">
-                <div class="imagen_reportes">
-                    <img src="../../recursos/iconografia/pedidosw.png" alt="reporte">
-                </div>
-                <div class="texto_reportes">
                     <p><b>Reporte de ventas personalizado</b></p>
                     <P>Es un reporte de ventas del dia actual, mes actual o año actual de un producto</P>
                 </div>
@@ -170,6 +158,51 @@
                             <div class="input-field col s12 datos_grafica">
                                 <select name="opciones" id="opciones">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
+                                <button id="boton_agregar" name="boton_agregar" type="submit"
+                                    class="waves-effect waves-light btn boton_azul">Generar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tarjeta_reportes">
+                <div class="imagen_reportes">
+                    <img src="../../recursos/iconografia/pedidosw.png" alt="reporte">
+                </div>
+                <div class="texto_reportes">
+                    <p><b>Reporte de pedidos completados personalizados</b></p>
+                    <P>Es un reporte que ayudará a visualizar los pedidos completados entre un rango de fechas</P>
+                </div>
+                <div class="boton_generar_reporte">
+                    <a class="btn modal-trigger" onclick="openGenerar3()">Generar</a>
+                </div>
+            </div>
+            <!-- Modal Personalizado -->
+            <div id="modal_personalizado3" class="modal modales_reporte2">
+                <div class="modal-content">
+                    <form method="post" id="form_personalizado3">
+                        <div id="titulo_modal2">
+                            <div>
+                                <h4>Generar Reporte</h4>
+                            </div>
+                            <div>
+                                <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                        src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="divider"></div>
+                            <div class="input-field col s12">
+                                <input id="fecha_inicio" name="fecha_inicio" type="text" class="datepicker">
+                                <label class="active" for="fecha_inicio">Fecha de Inicio:</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="fecha_fin" name="fecha_fin" type="text" class="datepicker">
+                                <label class="active" for="fecha_fin">Fecha de Fin:</label>
                             </div>
                         </div>
                         <div class="row">

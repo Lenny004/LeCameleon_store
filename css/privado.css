@@ -613,7 +613,11 @@ footer {
 }
 
 .modales_reporte{
-    width: 300px !important;
+    width: 100% !important;
+}
+
+.modales_reporte2{
+    height: 80% !important;
 }
 
 /*------------------------------------------Main INVENTARIO------------------------------------------*/

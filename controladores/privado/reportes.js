@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // Se inicializa el componente Modal para que funcionen las cajas de diálogo.
     M.Modal.init(document.querySelectorAll('.modal'), options);
+
+    //Instanciar Datepicker
+    M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+        format: 'yyyy-mm-dd', i18n: {
+            months: ['Enero', 'Febrero', 'Marzo', 'April', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthsShort: ['En', 'Febr', 'Mzo', 'Abr', 'My', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb'],
+            weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
+        }
+    });
 });
 
 // Función para preparar el formulario al momento de generar un reporte
@@ -40,6 +50,13 @@ function openGenerar() {
 function openGenerar2() {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modal_personalizado2')).open();
+    // Se asigna el título para la caja de diálogo (modal).
+}
+
+// Función para preparar el formulario al momento de generar un reporte
+function openGenerar3() {
+    // Se abre la caja de diálogo (modal) que contiene el formulario.
+    M.Modal.getInstance(document.getElementById('modal_personalizado3')).open();
     // Se asigna el título para la caja de diálogo (modal).
 }
 
