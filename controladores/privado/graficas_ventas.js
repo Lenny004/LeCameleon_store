@@ -102,7 +102,7 @@ document.getElementById('form_personalizado').addEventListener('submit', functio
                             nombre_producto.push(row.nombre_producto);
                         });
                         // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
-                        barGraph('grafica5', cantidades, nombre_producto, 'Cantidad de productos', ('Nombres de productos por '+ tipo_frase));
+                        barGraph('grafica5', nombre_producto, cantidades,'Cantidad de productos', ('Nombres de productos por '+ tipo_frase));
                     } else {
                         document.getElementById('grafica5').remove();
                         console.log(response.exception);
