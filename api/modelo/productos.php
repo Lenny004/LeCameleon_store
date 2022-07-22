@@ -658,4 +658,17 @@ class Productos extends Validator
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
+
+    //Metodos para reporte de producto mas vendido con descuento
+    public function ProductoDescuento()
+    {
+        $sql = 'SELECT SUM (COALESCE(total_producto)) as total, idproducto, nombre_producto, precio_actual as precio_unitario, cantidad_descuento
+                FROM tbdetalle_factura
+                INNER JOIN tbproducto using(idproducto)
+                WHERE cantidad_descuento !=0.00
+                GROUP BY nombre_producto, idproducto, precio_unitario,cantidad_descuento
+                ORDER BY total DESC';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
 }
