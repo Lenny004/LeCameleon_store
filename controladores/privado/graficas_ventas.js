@@ -53,3 +53,39 @@ function seleccionFiltro(opcion) {
             break;
     }
 }
+
+// Método manejador de eventos que se ejecuta cuando se envía el formulario de generar gráfica
+document.getElementById('thesearch').addEventListener('submit', function (event) {
+	// Se evita recargar la página web después de enviar el formulario.
+	event.preventDefault();
+	// Petición para obtener los datos del gráfico.
+    fetch(API_PRODUCTOS + 'cantidadProductosCategoria', {
+        method: 'post',
+        body: 
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos a graficar.
+                    let categorias = [];
+                    let cantidades = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        categorias.push(row.nombre_categoria);
+                        cantidades.push(row.cantidad);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
+                    barGraph('chart1', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+                } else {
+                    document.getElementById('chart1').remove();
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+});

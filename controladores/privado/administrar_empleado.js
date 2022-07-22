@@ -101,7 +101,7 @@ function fillTable(dataset) {
 }
 
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar.
-document.getElementById('thesearch').addEventListener('submit', function (event) {
+document.getElementById('form_personalizado').addEventListener('submit', function (event) {
 	// Se evita recargar la página web después de enviar el formulario.
 	event.preventDefault();
 	// Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js

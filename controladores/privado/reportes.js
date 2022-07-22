@@ -43,14 +43,16 @@ document.addEventListener('DOMContentLoaded', function () {
 function openGenerar() {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modal_personalizado1')).open();
-    // Se asigna el título para la caja de diálogo (modal).
 }
 
 // Función para preparar el formulario al momento de generar un reporte
 function openGenerar2() {
+    //Se vacian los campos
+    document.getElementById('fecha_inicio').value = " ";
+    document.getElementById('fecha_fin').value = " ";
+    M.updateTextFields();
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modal_personalizado2')).open();
-    // Se asigna el título para la caja de diálogo (modal).
 }
 
 // Función para preparar el formulario al momento de generar un reporte
@@ -59,7 +61,6 @@ function openGenerar3() {
     M.Modal.getInstance(document.getElementById('modal_personalizado3')).open();
     // Se asigna el título para la caja de diálogo (modal).
 }
-
 
 function seleccionFiltro(opcion) {
     switch (opcion) {
