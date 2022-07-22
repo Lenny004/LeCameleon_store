@@ -31,6 +31,9 @@ class Productos extends Validator
     private $total_resenia = null;
     private $min = 0;
     private $max = null;
+    private $filtro = null;
+    private $opcion = null;
+    private $parametro = "";
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
@@ -266,6 +269,26 @@ class Productos extends Validator
         }
     }
 
+    public function setFiltro($value)
+    {
+        if ($this->validacionNumeroNaturales($value)) {
+            $this->filtro = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setOpcion($value)
+    {
+        if ($this->validacionNumeroNaturales($value)) {
+            $this->opcion = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -292,6 +315,11 @@ class Productos extends Validator
     public function getTotalResenia()
     {
         return $this->total_resenia;
+    }
+
+    public function getFiltro()
+    {
+        return $this->filtro;
     }
 
     //Petición para traer los colores
@@ -657,5 +685,38 @@ class Productos extends Validator
                 ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function filtroProductosVendidos()
+    {   
+        if ($this->filtro == 1) {
+            $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
+            FROM tbproducto tp 
+            INNER JOIN tbdetalle_factura tdf USING(idproducto)
+            INNER JOIN tbfactura tf ON tf.idfactura = tdf.idfactura
+            INNER JOIN tbsubcategoria_producto tsc ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+            INNER JOIN tbcategoria tc ON tsc.idsubcategoria_producto = tc.idcategoria_producto
+            WHERE tf.idestado_factura = 1 OR tc.idcategoria_producto = ?
+            GROUP BY tp.idproducto';
+            $params = array($this->opcion);
+            return Database::obtenerSentencias($sql, $params);
+        } else {
+            switch ($this->getFiltro()){
+                case 2:
+                    $this->parametro = "idsubcategoria_producto";
+                case 3:
+                    $this->parametro = "id_marca";
+                case 4:
+                    $this->parametro = "iddistribuidor";
+            }
+            $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
+            FROM tbproducto tp 
+            INNER JOIN tbdetalle_factura tdf USING(idproducto)
+            INNER JOIN tbfactura tf ON tf.idfactura = tdf.idfactura
+            WHERE tf.idestado_factura = 1 AND ? = ?
+            GROUP BY tp.idproducto';
+            $params = array(strval($this->parametro), $this->opcion);
+            return Database::obtenerSentencias($sql, $params);
+        }
     }
 }
