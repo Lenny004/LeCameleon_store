@@ -5,8 +5,8 @@ require('../../modelo/productos.php');
 
 $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
-$pdf->startReport('Productos de la categoría');
-// Se instancia el módelo Productos para procesar los datos.
+$pdf->startReport('Productos más vendidos');
+// Se instancia el módelo de Descuento para procesar los datos.
 $vendida = new Descuento;
     // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
     if ($dataProductos = $vendida->ProductoVendido()) {
@@ -29,7 +29,7 @@ $vendida = new Descuento;
             $pdf->cell(30, 10, $rowProducto['total'], 1, 1);
         }
     } else {
-        $pdf->cell(0, 10, utf8_decode('No hay productos para esta categoría'), 1, 1);
+        $pdf->cell(0, 10, utf8_decode('No hay productos vendidos'), 1, 1);
     }
     // Se envía el documento al navegador y se llama al método footer()
-    $pdf->output('I', 'categoria.pdf');;
+    $pdf->output('I', 'productos_vendidos.pdf');;
