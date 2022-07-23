@@ -3,7 +3,7 @@ const ENDPOINT_SUBC = SERVER + 'sitio_privado/api_subcategoria.php?action=readAl
 const ENDPOINT_MARCA = SERVER + 'sitio_privado/api_marca.php?action=readAll';
 const ENDPOINT_PROVEEDOR = SERVER + 'sitio_privado/api_proveedor.php?action=readAll';
 const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleados.php?action=readAll';
-const ENDPOINT_DETALLE_FACT = SERVER + '';
+
 
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
