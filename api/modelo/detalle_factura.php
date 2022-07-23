@@ -124,9 +124,9 @@ class Descuento extends Validator
     //Metodo Read all
     public function readAll()
     {
-        $sql = 'SELECT *
-                FROM tbdetalle_factura
-                WHERE iddetalle_factura = -1 ';
+        $sql = 'SELECT iddetalle_factura, total_producto, precio_actual, cantidad_descuento, cantidad_producto, idfactura, idproducto
+        FROM tbdetalle_factura
+        WHERE cantidad_descuento !=0.00';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
@@ -138,6 +138,18 @@ class Descuento extends Validator
                 FROM tbdetalle_factura
                 INNER JOIN tbproducto using(idproducto)
                 WHERE cantidad_descuento !=0.00
+                GROUP BY nombre_producto, idproducto, precio_unitario,cantidad_descuento
+                ORDER BY total DESC';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //Metodos para reporte de producto mas vendido con descuento
+    public function ProductoVendido()
+    {
+        $sql = 'SELECT SUM (COALESCE(total_producto)) as total, idproducto, nombre_producto, precio_actual as precio_unitario, cantidad_descuento
+                FROM tbdetalle_factura
+                INNER JOIN tbproducto using(idproducto)
                 GROUP BY nombre_producto, idproducto, precio_unitario,cantidad_descuento
                 ORDER BY total DESC';
         $params = null;
