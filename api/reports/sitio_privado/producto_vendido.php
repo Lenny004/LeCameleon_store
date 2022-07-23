@@ -16,7 +16,7 @@ $vendida = new Descuento;
         $pdf->setFont('Times', 'B', 11);
         // Se imprimen las celdas con los encabezados.
         $pdf->cell(30, 10, utf8_decode('Id Producto'), 1, 0, 'C', 1);
-        $pdf->cell(70, 10, utf8_decode('Nombre Producto'), 1, 0, 'C', 1);
+        $pdf->cell(90, 10, utf8_decode('Nombre Producto'), 1, 0, 'C', 1);
         $pdf->cell(30, 10, utf8_decode('Precio Unitario'), 1, 0, 'C', 1);
         $pdf->cell(30, 10, utf8_decode('Total'), 1, 1, 'C', 1);
         // Se establece la fuente para los datos de los productos.
@@ -24,7 +24,7 @@ $vendida = new Descuento;
         // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
         foreach ($dataProductos as $rowProducto) {
             $pdf->cell(30, 10, $rowProducto['idproducto'], 1, 0);
-            $pdf->cell(70, 10, utf8_decode($rowProducto['nombre_producto']), 1, 0);
+            $pdf->cell(90, 10, utf8_decode($rowProducto['nombre_producto']), 1, 0);
             $pdf->cell(30, 10, $rowProducto['precio_unitario'], 1, 0);
             $pdf->cell(30, 10, $rowProducto['total'], 1, 1);
         }
