@@ -89,7 +89,7 @@ function seleccionFiltro(opcion) {
     }
 }
 
-// Función para abrir el reporte de productos.
+// Función para abrir el reporte de productos con descuentos.
 function openReportDescuento() {
     // Se establece la ruta del reporte en el servidor.
     let url = SERVER + 'reports/sitio_privado/producto_descuento.php';
@@ -97,6 +97,7 @@ function openReportDescuento() {
     window.open(url);
 }
 
+// Función para abrir el reporte de productos mas vendidos.
 function openReportVendidos() {
     // Se establece la ruta del reporte en el servidor.
     let url = SERVER + 'reports/sitio_privado/producto_vendido.php';

@@ -8,7 +8,7 @@ $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
 $pdf->startReport('Productos más vendidos con descuentos');
 
-// Se instancia el módelo Categorías para obtener los datos.
+// Se instancia el módelo Descuento para obtener los datos.
 $descuento = new Descuento;
 if ($dataDescuento = $descuento->ProductoDescuento()) {
     // Se establece un color de relleno para los encabezados.
