@@ -320,25 +320,52 @@ function cerrarSesion() {
 *   Retorno: ninguno.
 */
 function barGraph(canvas, xAxis, yAxis, legend, titulo) {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    // Se declara un arreglo para guardar códigos de colores en formato rgb temporalmente.
+    let rgb_desordenado = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb.
     let colors = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb para los bordes.
+    let colors2 = [];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     for (i = 0; i < xAxis.length; i++) {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        //Generamos un valor hasta 255 que es el máximo en rgb para luego anexarlo
+        let valor1 = Math.floor(Math.random() * 255);
+        let valor2 = Math.floor(Math.random() * 255);
+        //Tendrá un valor establecido para que sea una paleta de colores igual (pastel)
+        let valor3 = 150;
+        // Se declara un arreglo para guardar los códigos RGB para luego desordenarlos
+        let rgb = [valor1, valor2, valor3];
+        //Se desordenan los valores obtenidos
+        rgb.sort(() => Math.random() - 0.5);
+        //Se ingresan en el array que los guardará temporalmente
+        rgb_desordenado.push(rgb[0]);
+        rgb_desordenado.push(rgb[1]);
+        rgb_desordenado.push(rgb[2]);
+        colors.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ",0.4" + ")");
+        colors2.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ")");
+        //Volvemos a vaciar el array para que guarde nuevos valores
+        rgb_desordenado = [];
     }
     // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
-    const context = document.getElementById(canvas).getContext('2d');
+    let context = document.getElementById(canvas).getContext('2d');
+    if (window.barras) {
+        window.barras.clear();
+        window.barras.destroy();
+    }
     // Se crea una instancia para generar el gráfico con los datos recibidos.
-    const chart = new Chart(context, {
+    window.barras = new Chart(context, {
         type: 'bar',
         data: {
             labels: xAxis,
             datasets: [{
                 label: legend,
                 data: yAxis,
-                borderColor: '#000000',
+                borderColor: ['rgb(140, 196, 63, 0.9)',
+                'rgb(47, 105, 80, 0.8)'],
+                color: '#242221',
                 borderWidth: 1,
-                backgroundColor: colors,
+                backgroundColor: ['rgb(140, 196, 63, 0.9)',
+                'rgb(47, 105, 80, 0.8)'],
                 barPercentage: 1
             }]
         },
@@ -372,26 +399,46 @@ function barGraph(canvas, xAxis, yAxis, legend, titulo) {
 *   Retorno: ninguno.
 */
 function lineGraph(canvas, xAxis, yAxis, legend, titulo) {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    // Se declara un arreglo para guardar códigos de colores en formato rgb temporalmente.
+    let rgb_desordenado = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb.
     let colors = [];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     for (i = 0; i < xAxis.length; i++) {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        //Generamos un valor hasta 255 que es el máximo en rgb para luego anexarlo
+        let valor1 = Math.floor(Math.random() * 255);
+        let valor2 = Math.floor(Math.random() * 255);
+        //Tendrá un valor establecido para que sea una paleta de colores igual (pastel)
+        let valor3 = 150;
+        // Se declara un arreglo para guardar los códigos RGB para luego desordenarlos
+        let rgb = [valor1, valor2, valor3];
+        //Se desordenan los valores obtenidos
+        rgb.sort(() => Math.random() - 0.5);
+        //Se ingresan en el array que los guardará temporalmente
+        rgb_desordenado.push(rgb[0]);
+        rgb_desordenado.push(rgb[1]);
+        rgb_desordenado.push(rgb[2]);
+        colors.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ",0.5" + ")");
+        //Volvemos a vaciar el array para que guarde nuevos valores
+        rgb_desordenado = [];
     }
     // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
-    const context = document.getElementById(canvas).getContext('2d');
+    let context = document.getElementById(canvas).getContext('2d');
+    let chart = new Chart(context);
+    chart.destroy();
     // Se crea una instancia para generar el gráfico con los datos recibidos.
-    const chart = new Chart(context, {
-        type: 'bar',
+    chart = new Chart(context, {
+        type: 'line',
         data: {
             labels: xAxis,
             datasets: [{
+                fill: true,
                 label: legend,
                 data: yAxis,
-                borderColor: '#000000',
                 borderWidth: 1,
                 backgroundColor: colors,
-                barPercentage: 1
+                barPercentage: 1,
+                tension: 0.1
             }]
         },
         options: {
@@ -423,12 +470,89 @@ function lineGraph(canvas, xAxis, yAxis, legend, titulo) {
 *   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
 *   Retorno: ninguno.
 */
+function donutGraph(canvas, legends, values, titulo) {
+    // Se declara un arreglo para guardar códigos de colores en formato rgb temporalmente.
+    let rgb_desordenado = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb.
+    let colors = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb para los bordes.
+    let colors2 = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
+    for (i = 0; i < values.length; i++) {
+        //Generamos un valor hasta 255 que es el máximo en rgb para luego anexarlo
+        let valor1 = Math.floor(Math.random() * 255);
+        let valor2 = Math.floor(Math.random() * 255);
+        //Tendrá un valor establecido para que sea una paleta de colores igual (pastel)
+        let valor3 = 0;
+        // Se declara un arreglo para guardar los códigos RGB para luego desordenarlos
+        let rgb = [valor1, valor2, valor3];
+        //Se desordenan los valores obtenidos
+        rgb.sort(() => Math.random() - 0.5);
+        //Se ingresan en el array que los guardará temporalmente
+        rgb_desordenado.push(rgb[0]);
+        rgb_desordenado.push(rgb[1]);
+        rgb_desordenado.push(rgb[2]);
+        colors.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ",0.4" + ")");
+        colors2.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ")");
+        //Volvemos a vaciar el array para que guarde nuevos valores
+        rgb_desordenado = [];
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    let context = document.getElementById(canvas).getContext('2d');
+    if (window.donut) {
+        window.donut.clear();
+        window.donut.destroy();
+    }
+    // Se crea una instancia para generar el gráfico con los datos recibidos.
+    window.donut = new Chart(context, {
+        type: 'doughnut',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
+                borderColor: colors2,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: titulo
+                }
+            }
+        }
+    });
+}
+
+/*
+*   Función para generar un gráfico de pastel. Requiere el archivo chart.js. Para más información https://www.chartjs.org/
+*   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
 function pieGraph(canvas, legends, values, titulo) {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    // Se declara un arreglo para guardar códigos de colores en formato rgb temporalmente.
+    let rgb_desordenado = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb.
     let colors = [];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     for (i = 0; i < values.length; i++) {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        //Generamos un valor hasta 255 que es el máximo en rgb para luego anexarlo
+        let valor1 = Math.floor(Math.random() * 255);
+        let valor2 = Math.floor(Math.random() * 255);
+        //Tendrá un valor establecido para que sea una paleta de colores igual (pastel)
+        let valor3 = 150;
+        // Se declara un arreglo para guardar los códigos RGB para luego desordenarlos
+        let rgb = [valor1, valor2, valor3];
+        //Se desordenan los valores obtenidos
+        rgb.sort(() => Math.random() - 0.5);
+        //Se ingresan en el array que los guardará temporalmente
+        rgb_desordenado.push(rgb[0]);
+        rgb_desordenado.push(rgb[1]);
+        rgb_desordenado.push(rgb[2]);
+        colors.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ",0.8" + ")");
+        //Volvemos a vaciar el array para que guarde nuevos valores
+        rgb_desordenado = [];
     }
     // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
     const context = document.getElementById(canvas).getContext('2d');

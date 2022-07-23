@@ -103,9 +103,10 @@ document.getElementById('form_personalizado').addEventListener('submit', functio
                         });
                         // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
                         barGraph('grafica5', nombre_producto, cantidades,'Cantidad de productos', ('Nombres de productos por '+ tipo_frase));
+                        // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+                        donutGraph('grafica6', nombre_producto, cantidades, ('Nombres de productos por '+ tipo_frase));
                     } else {
-                        document.getElementById('grafica5').remove();
-                        console.log(response.exception);
+                        sweetAlert(2, response.exception, null);
                     }
                 });
             } else {
