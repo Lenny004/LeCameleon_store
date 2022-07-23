@@ -243,7 +243,7 @@ if (isset($_GET['action'])) {
                 } else if (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
-                    $result['exception'] = 'Este producto no posee reseñas';
+                    $result['exception'] = 'Este filtro aún no posee productos';
                 }
                 break;
             default:
