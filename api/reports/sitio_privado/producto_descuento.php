@@ -10,7 +10,6 @@ $pdf->startReport('Productos más vendidos con descuentos');
 
 // Se instancia el módelo Categorías para obtener los datos.
 $descuento = new Descuento;
-// Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
 if ($dataDescuento = $descuento->ProductoDescuento()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(175);
@@ -46,14 +45,14 @@ if ($dataDescuento = $descuento->ProductoDescuento()) {
                     $pdf->cell(30, 10, $rowProducto['total'], 1, 1);
                 }
             } else {
-                $pdf->cell(0, 10, utf8_decode('No hay productos para esta categoría'), 1, 1);
+                $pdf->cell(0, 10, utf8_decode('No hay productos en descuentos vendidos'), 1, 1);
             }
         } else {
-            $pdf->cell(0, 10, utf8_decode('Categoría incorrecta o inexistente'), 1, 1);
+            $pdf->cell(0, 10, utf8_decode('Productos incorrecto o inexistente'), 1, 1);
         }
     }
 } else {
-    $pdf->cell(0, 10, utf8_decode('No hay categorías para mostrar'), 1, 1);
+    $pdf->cell(0, 10, utf8_decode('No hay productos con descuentos para mostrar'), 1, 1);
 }
 
 // Se envía el documento al navegador y se llama al método footer()
