@@ -3,6 +3,7 @@ const ENDPOINT_SUBC = SERVER + 'sitio_privado/api_subcategoria.php?action=readAl
 const ENDPOINT_MARCA = SERVER + 'sitio_privado/api_marca.php?action=readAll';
 const ENDPOINT_PROVEEDOR = SERVER + 'sitio_privado/api_proveedor.php?action=readAll';
 const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleados.php?action=readAll';
+const ENDPOINT_DETALLE_FACT = SERVER + '';
 
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
@@ -86,4 +87,12 @@ function seleccionFiltro(opcion) {
             console.log("no entre a ningún caso");
             break;
     }
+}
+
+// Función para abrir el reporte de productos.
+function openReport() {
+    // Se establece la ruta del reporte en el servidor.
+    let url = SERVER + 'reports/sitio_privado/producto_descuento.php';
+    // Se abre el reporte en una nueva pestaña del navegador web.
+    window.open(url);
 }
