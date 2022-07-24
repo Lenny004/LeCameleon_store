@@ -497,6 +497,23 @@ function donutGraph(canvas, legends, values, titulo) {
         //Volvemos a vaciar el array para que guarde nuevos valores
         rgb_desordenado = [];
     }
+    // Note: changes to the plugin code is not reflected to the chart, because the plugin is loaded at chart construction time and editor changes only trigger an chart.update().
+    const image = new Image();
+    image.src = '../../api/images/logo_icon2.png';
+    const plugin = {
+    id: 'custom_canvas_background_image',
+    beforeDraw: (chart) => {
+        if (image.complete) {
+        const ctx = chart.ctx;
+        const {top, left, width, height} = chart.chartArea;
+        const x = left + width / 2 - image.width / 2;
+        const y = top + height / 2 - image.height / 2;
+        ctx.drawImage(image, x, y);
+        } else {
+        image.onload = () => chart.draw();
+        }
+    }
+    };
     // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
     let context = document.getElementById(canvas).getContext('2d');
     if (window.donut) {
@@ -514,6 +531,7 @@ function donutGraph(canvas, legends, values, titulo) {
                 backgroundColor: colors
             }]
         },
+        plugins: [plugin],
         options: {
             plugins: {
                 title: {
