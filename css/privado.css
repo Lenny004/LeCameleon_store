@@ -1772,6 +1772,17 @@ body.dark #estado_pedido p {
     }
 
     /*------------------------------------------Main Gráficas------------------------------------------*/
+    #opciones_graficas {
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-end;
+        justify-content: end;
+        align-items: center !important;
+    }
+    
     .titulo_graficas {
         font-size: 35px;
     }
