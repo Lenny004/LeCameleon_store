@@ -374,7 +374,10 @@ function barGraph(canvas, xAxis, yAxis, legend, titulo) {
             plugins: {
                 title: {
                     display: true,
-                    text: titulo
+                    text: titulo,
+                    font: {
+                        size: 14
+                    }
                 },
                 legend: {
                     display: false
@@ -447,7 +450,10 @@ function lineGraph(canvas, xAxis, yAxis, legend, titulo) {
             plugins: {
                 title: {
                     display: true,
-                    text: titulo
+                    text: titulo,
+                    font: {
+                        size: 14
+                    }
                 },
                 legend: {
                     display: false
@@ -466,7 +472,7 @@ function lineGraph(canvas, xAxis, yAxis, legend, titulo) {
 }
 
 /*
-*   Función para generar un gráfico de pastel. Requiere el archivo chart.js. Para más información https://www.chartjs.org/
+*   Función para generar un gráfico de donut. Requiere el archivo chart.js. Para más información https://www.chartjs.org/
 *   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
 *   Retorno: ninguno.
 */
@@ -536,7 +542,10 @@ function donutGraph(canvas, legends, values, titulo) {
             plugins: {
                 title: {
                     display: true,
-                    text: titulo
+                    text: titulo,
+                    font: {
+                        size: 14
+                    }
                 }
             }
         }
@@ -588,7 +597,65 @@ function pieGraph(canvas, legends, values, titulo) {
             plugins: {
                 title: {
                     display: true,
-                    text: titulo
+                    text: title,
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+}
+
+/*
+*   Función para generar un gráfico de donut. Requiere el archivo chart.js. Para más información https://www.chartjs.org/
+*   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
+function polarGraph(canvas, legends, values, titulo) {
+    // Se declara un arreglo para guardar códigos de colores en formato rgb temporalmente.
+    let rgb_desordenado = [];
+    // Se declara un arreglo para guardar códigos de colores en formato rgb.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
+    for (i = 0; i < values.length; i++) {
+        //Generamos un valor hasta 255 que es el máximo en rgb para luego anexarlo
+        let valor1 = Math.floor(Math.random() * 255);
+        let valor2 = Math.floor(Math.random() * 255);
+        //Tendrá un valor establecido para que sea una paleta de colores igual (pastel)
+        let valor3 = 150;
+        // Se declara un arreglo para guardar los códigos RGB para luego desordenarlos
+        let rgb = [valor1, valor2, valor3];
+        //Se desordenan los valores obtenidos
+        rgb.sort(() => Math.random() - 0.5);
+        //Se ingresan en el array que los guardará temporalmente
+        rgb_desordenado.push(rgb[0]);
+        rgb_desordenado.push(rgb[1]);
+        rgb_desordenado.push(rgb[2]);
+        colors.push("rgb"+ "(" + rgb_desordenado[0] + "," + rgb_desordenado[1] + "," + rgb_desordenado[2] + ",0.8" + ")");
+        //Volvemos a vaciar el array para que guarde nuevos valores
+        rgb_desordenado = [];
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = document.getElementById(canvas).getContext('2d');
+    // Se crea una instancia para generar el gráfico con los datos recibidos.
+    const chart = new Chart(context, {
+        type: 'polarArea',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: titulo,
+                    font: {
+                        size: 14
+                    }
                 }
             }
         }

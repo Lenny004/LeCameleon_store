@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="divider"></div>
                             <div class="input-field col s12 datos_grafica">
-                                <select name="filtro" id="filtro" onchange="seleccionTiempo(this.value)">
+                                <select name="filtro" id="filtro">
                                     <option value="" disabled selected>Seleccione una opción:</option>
                                     <option value="1">Día Actual</option>
                                     <option value="2">Mes Actual</option>
@@ -111,7 +111,7 @@
                         <div class="row">
                             <div class="col s12 m12 l12 xl12" id="boton_agregar_centrado">
                                 <button id="boton_agregar" name="boton_agregar" type="submit"
-                                    class="waves-effect waves-light btn boton_azul">Generar</button>
+                                    class="waves-effect waves-light btn boton_azul" onclick="seleccionTiempo(event)">Generar</button>
                             </div>
                         </div>
                     </form>

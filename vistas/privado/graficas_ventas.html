@@ -92,17 +92,17 @@
                     </form>
                 </div>
                 <div id="rangos">
-                    <form method="post" class="z-depth-2">
+                    <form method="post" id="MandarFechas" class="z-depth-2">
                         <div id="opciones_graficas" class="col s12">
                             <div class="input-field col s3 offset-l5">
-                                <input id="fecha_1" name="fecha_1" type="text" class="datepicker">
-                                <label class="active" for="fecha_1">Fecha Inicial:</label>
+                                <input id="fecha_inicio" name="fecha_inicio" type="text" class="datepicker">
+                                <label class="active" for="fecha_inicio">Fecha Inicial:</label>
                             </div>
                             <div class="input-field col s3">
-                                <input id="fecha_2" name="fecha_2" type="text" class="datepicker">
-                                <label class="active" for="fecha_2">Fecha Final:</label>
+                                <input id="fecha_final" name="fecha_final" type="text" class="datepicker">
+                                <label class="active" for="fecha_final">Fecha Final:</label>
                             </div>
-                            <button class="btn waves-effect boton_verde waves-light" type="submit" name="action">Generar
+                            <button onclick="openGraficaVenta(event)" class="btn waves-effect boton_verde waves-light" type="submit" name="action">Generar
                             </button>
                         </div>
                         <div class="col s12 m6">

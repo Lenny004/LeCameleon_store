@@ -114,3 +114,41 @@ document.getElementById('form_personalizado').addEventListener('submit', functio
             }
         });
 });
+
+
+// Función para preparar el formulario al momento de modificar un registro.
+function openGraficaVenta(event) {
+    event.preventDefault();
+	// Petición para obtener los datos del registro solicitado.
+	fetch(API_PRODUCTOS + 'graficoInventarioRango', {
+		method: 'post',
+		body: new FormData(document.getElementById('MandarFechas'))
+	}).then(function (request) {
+		// Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+		if (request.ok) {
+			// Se obtiene la respuesta en formato JSON.
+			request.json().then(function (response) {
+				// Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+				if (response.estado) {
+					// Se inicializan los campos del formulario con los datos del registro seleccionado.
+                    let fecha = [];
+                    let cantidades = [];
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        fecha.push(row.fecha_entrega);
+                        cantidades.push(row.cantidad);
+                        console.log(fecha);
+                        console.log(cantidades);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
+                    barGraph('grafica7', fecha, cantidades, 'Cantidad de inventario por fecha', 'Inventario por fecha');
+                    lineGraph('grafica8', fecha, cantidades, 'Cantidad de inventario por fecha', 'Inventario por fecha');
+				} else {
+					sweetAlert(2, response.exception, null);
+				}
+			});
+		} else {
+			console.log(request.estado + ' ' + request.statusText);
+		}
+	});
+}
