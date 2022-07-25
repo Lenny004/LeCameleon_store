@@ -507,6 +507,10 @@ footer {
     margin-bottom: 5%;
 }
 
+#modal_personalizado1{
+    width: 25% !important;
+}
+
 #fechas_grafica {
     color: #2f6950;
     display: flex;
@@ -1667,6 +1671,10 @@ body.dark #estado_pedido p {
     color: #ffffff;
 }
 
+body.dark .select-wrapper input.select-dropdown{
+    color: #ffffff;
+}
+
 /*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
 
 /*para celulares*/
@@ -1955,6 +1963,11 @@ body.dark #estado_pedido p {
         margin-right: 1%;
     }
 
+    #modal_personalizado1{
+        width: 95% !important;
+    }
+    
+
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
     #pedidos {
@@ -2242,6 +2255,11 @@ body.dark #estado_pedido p {
         margin-right: 0%;
     }
 
+    #modal_personalizado1{
+        width: 85% !important;
+    }
+    
+
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
     #tarjeta_inventario {
         text-align: center;
@@ -2436,6 +2454,10 @@ body.dark #estado_pedido p {
     .container .card img {
         max-height: 160px;
         width: 100%;
+    }
+
+    #modal_personalizado1{
+        width: 55% !important;
     }
 
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/

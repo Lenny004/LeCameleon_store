@@ -297,4 +297,15 @@ class Carrito extends Validator
         $params = array($_SESSION['idusuario_c']);
         return Database::obtenerSentencia($sql, $params);
     }
+
+    //Función para crear Reporte (Recibo al finalizar la compra)
+    public function reciboFinalizarCompra(){
+        $sql = 'SELECT idfactura, tuc.direccion_cliente, tf.fecha_factura, SUM(total_producto) as total_producto, SUM(cantidad_descuento) as cantidad_descuento, tuc.nombre_cliente, tuc.apellido_cliente, tuc.telefono_cliente FROM tbdetalle_factura 
+        INNER JOIN tbfactura tf USING (idfactura)
+        INNER JOIN tbusuario_cliente tuc USING (idusuario_c)
+        WHERE idfactura = ?
+        GROUP BY idfactura, tf.fecha_factura, tuc.nombre_cliente, tuc.apellido_cliente, tuc.direccion_cliente, tuc.telefono_cliente';
+        $params = array($_SESSION['idfactura']);
+        return Database::obtenerSentencia($sql, $params);
+    }
 }

@@ -2003,10 +2003,102 @@ body.dark #logo_login img {
 
 body.dark #credenciales_login a {
     color: #DA7D27;
+    transition: all .7s ease-in-out;
 }
 
 body.dark #inicio_sesion_form input {
     color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #titulo_principal{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #subtema_texto{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #texto_inicial{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h5{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .detalle_datos p{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark u {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .contenedor_producto_carrito .precio_unitario p {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .detalle_datos .precio h5 {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark b {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #pedidos b {
+    color: #21190A;
+    transition: all .7s ease-in-out;
+}
+
+body.dark input[type=text]:not(.browser-default):disabled {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .select-wrapper input.select-dropdown{
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark [type="radio"]:not(:checked)+span, [type="radio"]:checked+span {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .contenedor_envio p {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark [type="checkbox"]+span:not(.lever) {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .precio_cantidad a {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .contenido_modal_resenia input[type=text]:not(.browser-default):disabled {
+    color: #21190A;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .ofertas_descuentos a {
+    color: #ffffff !important;
+    transition: all .7s ease-in-out;
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RESPONSIVE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

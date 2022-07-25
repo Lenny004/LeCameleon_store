@@ -277,6 +277,30 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No se tienen registros en inventario en estos rangos de fechas';
                 }
                 break;
+                // Para el gráfico de pastel sobre los vendedores que mas vendieron en un mes.
+            case 'graficaProductoxdesctop':
+                if ($result['dataset'] = $producto->graficaProductoDescuento()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No se pudo obtener el porcentaje de productos más vendidos por empleados';
+                }
+                break;
+            // Para el gráfico de pastel y de barra sobre el top 5 productos con mas cantidad en inventario
+            case 'graficaProductoInventariod':
+                if ($result['dataset'] = $producto->graficaProductoInventario5()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No se pudo obtener el top 5 productos con mas cantidad en inventario';
+                }
+                break;
+            // Para el gráfico de barra l sobre el top 5 productos mas vendidos
+            case 'graficaProductosVendidsos':
+                if ($result['dataset'] = $producto->graficaProductosVendidos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No se pudo obtener el top 5 productos con mas cantidad en inventario';
+                }
+                break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

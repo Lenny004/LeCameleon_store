@@ -149,7 +149,7 @@ class Descuento extends Validator
         FROM tbproducto tp
         INNER JOIN tbdetalle_factura tdf using(idproducto)
         GROUP BY tp.idproducto
-        ORDER BY cantidad_vendida DESC';
+        ORDER BY idproducto ASC';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
