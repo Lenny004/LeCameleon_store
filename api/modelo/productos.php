@@ -849,10 +849,44 @@ class Productos extends Validator
     //Grafico de barras para ver Inventario en un rango de fechas mediante grafico de barras
     public function obtenerInventarioRango()
     {
-        $sql = "SELECT fecha_entrega, count(*) as cantidad from 
+        $sql = "SELECT to_char(fecha_entrega, 'DD-MM-YYYY') fecha_entrega, count(*) as cantidad from 
                 tbinventario where fecha_entrega BETWEEN ? AND ? 
                 group by fecha_entrega";
         $params = array($this->fechainicio, $this->fechafinal);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //Metodos para grafica de  de producto mas vendido con descuento
+    public function graficaProductoDescuento()
+    {
+        $sql = 'SELECT idproducto, nombre_producto, precio_producto, porcentaje_descuento
+            FROM tbproducto
+            WHERE porcentaje_descuento > 0
+            ORDER BY idproducto DESC LIMIT 5';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //top 5 productos con mas cantidad en inventario
+    public function graficaProductoInventario5()
+    {
+        $sql = 'SELECT nombre_producto, cantidad
+        FROM public.tbinventario
+        inner join tbproducto USING (idproducto)
+        ORDER BY cantidad DESC LIMIT 5';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //top 5 productos más vendidos
+    public function graficaProductosVendidos()
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
+                FROM tbproducto tp
+                INNER JOIN tbdetalle_factura tdf using(idproducto)
+                GROUP BY tp.idproducto
+                ORDER BY cantidad_vendida DESC LIMIT 5';
+        $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
 }

@@ -296,7 +296,6 @@ function subcategoria(id) {
                     });
                     //Contador para crear dropdowns de las subcategorias
                     dropdownsub = 1 + dropdownsub;
-                    console.log(dropdownsub + "jejeje");
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

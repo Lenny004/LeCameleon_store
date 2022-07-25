@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
             weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
         }
     });
+
+    //para cargar la gráfica de los productos con más descuento
+    graficoDescuentoProducto();
+    graficoInventarioProducto();
+    graficoVentaProducto();
 });
 
 //Variable para saber que filtro eligio
@@ -70,7 +75,7 @@ function seleccionFiltro(opcion) {
     }
 }
 
-function seleccionOpcion(opcion_elegida){
+function seleccionOpcion(opcion_elegida) {
     opcion = opcion_elegida;
 }
 
@@ -87,50 +92,50 @@ document.getElementById('form_personalizado').addEventListener('submit', functio
         method: 'post',
         body: data
     }).then(function (request) {
-            // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-            if (request.ok) {
-                request.json().then(function (response) {
-                    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
-                    if (response.estado) {
-                        // Se declaran los arreglos para guardar los datos a graficar.
-                        let cantidades = [];
-                        let nombre_producto = [];
-                        // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
-                        response.dataset.map(function (row) {
-                            // Se agregan los datos a los arreglos.
-                            cantidades.push(row.cantidad_vendida);
-                            nombre_producto.push(row.nombre_producto);
-                        });
-                        // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
-                        barGraph('grafica5', nombre_producto, cantidades,'Cantidad de productos', ('Nombres de productos por '+ tipo_frase));
-                        // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
-                        donutGraph('grafica6', nombre_producto, cantidades, ('Nombres de productos por '+ tipo_frase));
-                    } else {
-                        sweetAlert(2, response.exception, null);
-                    }
-                });
-            } else {
-                console.log(request.status + ' ' + request.statusText);
-            }
-        });
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+                if (response.estado) {
+                    // Se declaran los arreglos para guardar los datos a graficar.
+                    let cantidades = [];
+                    let nombre_producto = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        cantidades.push(row.cantidad_vendida);
+                        nombre_producto.push(row.nombre_producto);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
+                    barGraph('grafica5', nombre_producto, cantidades, 'Cantidad de productos', ('Nombres de productos por ' + tipo_frase));
+                    // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+                    donutGraph('grafica6', nombre_producto, cantidades, ('Nombres de productos por ' + tipo_frase));
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
 });
 
 
 // Función para preparar el formulario al momento de modificar un registro.
 function openGraficaVenta(event) {
     event.preventDefault();
-	// Petición para obtener los datos del registro solicitado.
-	fetch(API_PRODUCTOS + 'graficoInventarioRango', {
-		method: 'post',
-		body: new FormData(document.getElementById('MandarFechas'))
-	}).then(function (request) {
-		// Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
-		if (request.ok) {
-			// Se obtiene la respuesta en formato JSON.
-			request.json().then(function (response) {
-				// Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-				if (response.estado) {
-					// Se inicializan los campos del formulario con los datos del registro seleccionado.
+    // Petición para obtener los datos del registro solicitado.
+    fetch(API_PRODUCTOS + 'graficoInventarioRango', {
+        method: 'post',
+        body: new FormData(document.getElementById('MandarFechas'))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.estado) {
+                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     let fecha = [];
                     let cantidades = [];
                     response.dataset.map(function (row) {
@@ -139,14 +144,121 @@ function openGraficaVenta(event) {
                         cantidades.push(row.cantidad);
                     });
                     // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
-                    barGraph('grafica7', fecha, cantidades, 'Cantidad de inventario por fecha', 'Inventario por fecha');
-                    lineGraph('grafica8', fecha, cantidades, 'Cantidad de inventario por fecha', 'Inventario por fecha');
-				} else {
-					sweetAlert(2, response.exception, null);
-				}
-			});
-		} else {
-			console.log(request.estado + ' ' + request.statusText);
-		}
-	});
+                    barGraph('grafica7', fecha, cantidades, 'Cantidad ingresada en la fecha', 'Cantidad de productos ingresados en inventario por rango de fechas');
+                    lineGraph('grafica8', fecha, cantidades, 'Cantidad ingresada en la fecha', 'Cantidad de productos ingresados en inventario por rango de fechas');
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.estado + ' ' + request.statusText);
+        }
+    });
+}
+
+
+// Función para mostrar el porcentaje de productos por categoría en un gráfico de pastel.
+function graficoDescuentoProducto() {
+    // Petición para obtener los datos del gráfico.
+    fetch(API_PRODUCTOS + 'graficaProductoxdesctop', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos a gráficar.
+                    let producto = [];
+                    let descuento = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        producto.push(row.nombre_producto);
+                        descuento.push(row.porcentaje_descuento);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+                    polarGraph('grafica1', producto, descuento, 'Productos con más porcentaje de descuento');
+                    lineGraph('grafica2', producto, descuento, 'Porcentaje de descuento', 'Productos con más porcentaje de descuento');
+                } else {
+                    document.getElementById('grafica1').remove();
+                    document.getElementById('grafica2').remove();
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+
+// Función para mostrar el grafico por la cantidad de productos en inventario
+function graficoInventarioProducto() {
+    // Petición para obtener los datos del gráfico.
+    fetch(API_PRODUCTOS + 'graficaProductoInventariod', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos a gráficar.
+                    let producto = [];
+                    let cantidad = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        producto.push(row.nombre_producto);
+                        cantidad.push(row.cantidad);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+                    donutGraph('grafica3', producto, cantidad, 'Top 5 de productos con más cantidad en inventario');
+                    //barGraph('grafica4', producto, cantidad, 'Porcentaje de producto');
+                } else {
+                    document.getElementById('grafica3').remove();
+                    //document.getElementById('grafica4').remove();
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+// Función para mostrar el grafico de los 5 productos mas vendidos
+function graficoVentaProducto() {
+    // Petición para obtener los datos del gráfico.
+    fetch(API_PRODUCTOS + 'graficaProductosVendidsos', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos a gráficar.
+                    let producto = [];
+                    let cantidadd = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se agregan los datos a los arreglos.
+                        producto.push(row.nombre_producto);
+                        cantidadd.push(row.cantidad_vendida);
+                    });
+                    // Se llama a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+                    barGraph('grafica4', producto, cantidadd,'Cantidad de productos vendidos', 'top 5 productos vendidos');
+
+                } else {
+                    document.getElementById('grafica4').remove();
+
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
 }

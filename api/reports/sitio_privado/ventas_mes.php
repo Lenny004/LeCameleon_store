@@ -6,9 +6,10 @@ $pdf = new Report;
 //Establecemos la zona horaria de El Salvador
 date_default_timezone_set('America/El_Salvador');
 //Se guarda en una variable la fecha del mes actual
-$mes_actual = date('M');
+$meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+$mes_actual = date('m');
 // Se inicia el reporte con el encabezado del documento.
-$pdf->startReport('Reporte de ventas de productos del Mes de ' . $mes_actual);
+$pdf->startReport('Reporte de ventas de productos del Mes de ' . $meses[$mes_actual - 1]);
 // Se instancia el módelo de productos para obtener los datos.
 $producto = new Productos;
 // Se verifica si existen registros (categorías) para mostrar, de lo contrario se imprime un mensaje.

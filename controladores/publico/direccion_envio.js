@@ -63,6 +63,10 @@ function guardarDatosEnvio(event){
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
+                    // Se establece la ruta del reporte en el servidor.
+                    let url = SERVER + 'reports/sitio_publico/recibo_factura.php';
+                    // Se abre el reporte en una nueva pestaña del navegador web.
+                    window.open(url);
                     //Si no se obtuvieron los datos del empleado
                     sweetAlert(4, response.message, 'dashboard.html');
                 } else {
@@ -91,6 +95,10 @@ function guardarDatosEnvio2(event){
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.estado) {
+                    // Se establece la ruta del reporte en el servidor.
+                    let url = SERVER + 'reports/sitio_publico/recibo_factura.php';
+                    // Se abre el reporte en una nueva pestaña del navegador web.
+                    window.open(url);
                     //Si no se obtuvieron los datos del empleado
                     sweetAlert(4, response.message, 'dashboard.html');
                 } else {
