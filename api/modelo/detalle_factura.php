@@ -126,7 +126,7 @@ class Descuento extends Validator
     {
         $sql = 'SELECT iddetalle_factura, total_producto, precio_actual, cantidad_descuento, cantidad_producto, idfactura, idproducto
         FROM tbdetalle_factura
-        WHERE cantidad_descuento !=0.00';
+        WHERE cantidad_descuento != 0.00';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }

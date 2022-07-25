@@ -122,3 +122,19 @@ function seleccionTiempo(event) {
             break;
     }
 }
+
+// Función para abrir el reporte de productos con descuentos.
+function openReportDescuento() {
+    // Se establece la ruta del reporte en el servidor.
+    let url = SERVER + 'reports/sitio_privado/producto_descuento.php';
+    // Se abre el reporte en una nueva pestaña del navegador web.
+    window.open(url);
+}
+
+// Función para abrir el reporte de productos mas vendidos.
+function openReportVendidos() {
+    // Se establece la ruta del reporte en el servidor.
+    let url = SERVER + 'reports/sitio_privado/producto_vendido.php';
+    // Se abre el reporte en una nueva pestaña del navegador web.
+    window.open(url);
+}
