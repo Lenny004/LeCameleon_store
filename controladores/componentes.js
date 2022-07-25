@@ -370,6 +370,7 @@ function barGraph(canvas, xAxis, yAxis, legend, titulo) {
             }]
         },
         options: {
+            responsive: true,
             aspectRatio: 1,
             plugins: {
                 title: {
