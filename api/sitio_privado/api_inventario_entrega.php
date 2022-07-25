@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos';
                 }
                 break;
-            //Función para cargar los proveedores en el select
+                //Función para cargar los proveedores en el select
             case 'cargarProveedores':
                 if ($result['dataset'] = $inventario->cargarProveedores()) {
                     $result['estado'] = 1;
@@ -77,7 +77,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
             case 'seleccionar':
                 $_POST = $inventario->validateForm($_POST);
                 if ($result['dataset'] = $inventario->buscador_seleccionador($_POST['buscador'])) {

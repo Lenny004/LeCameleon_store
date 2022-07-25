@@ -138,3 +138,11 @@ function openReportVendidos() {
     // Se abre el reporte en una nueva pestaña del navegador web.
     window.open(url);
 }
+
+// Función para abrir el reporte de productos mas vendidos.
+function openReportInventario() {
+    // Se establece la ruta del reporte en el servidor.
+    let url = SERVER + 'reports/sitio_privado/inventario.php';
+    // Se abre el reporte en una nueva pestaña del navegador web.
+    window.open(url);
+}
