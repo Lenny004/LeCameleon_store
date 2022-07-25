@@ -137,8 +137,6 @@ function openGraficaVenta(event) {
                         // Se agregan los datos a los arreglos.
                         fecha.push(row.fecha_entrega);
                         cantidades.push(row.cantidad);
-                        console.log(fecha);
-                        console.log(cantidades);
                     });
                     // Se llama a la función que genera y muestra un gráfico de barras. Se encuentra en el archivo components.js
                     barGraph('grafica7', fecha, cantidades, 'Cantidad de inventario por fecha', 'Inventario por fecha');

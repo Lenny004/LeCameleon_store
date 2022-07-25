@@ -131,14 +131,6 @@ function openReportDescuento() {
     window.open(url);
 }
 
-// Función para abrir el reporte de productos con descuentos.
-function openReportDescuentoPrueba() {
-    // Se establece la ruta del reporte en el servidor.
-    let url = SERVER + 'reports/sitio_privado/prueba.php';
-    // Se abre el reporte en una nueva pestaña del navegador web.
-    window.open(url);
-}
-
 // Función para abrir el reporte de productos mas vendidos.
 function openReportVendidos() {
     // Se establece la ruta del reporte en el servidor.
