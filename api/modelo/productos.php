@@ -33,6 +33,8 @@ class Productos extends Validator
     private $max = null;
     private $filtro = null;
     private $opcion = null;
+    private $fechainicio = null;
+    private $fechafinal = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
@@ -288,6 +290,27 @@ class Productos extends Validator
         }
     }
 
+    //Le asignamos un valor a fecha inicial
+    public function setFechaIncio($value)
+    {
+        if ($this->fechainicio = $value) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    //Le asignamos un valor a la fecha final
+    public function setFechaFinal($value)
+    {
+        if ($this->fechafinal = $value) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -319,6 +342,17 @@ class Productos extends Validator
     public function getFiltro()
     {
         return $this->filtro;
+    }
+
+    //grafica fecha incio y fecha final get
+    public function getFechaInicio()
+    {
+        return $this->fechainicio;
+    }
+
+    public function getFechafinal()
+    {
+        return $this->fechafinal;
     }
 
     //Petición para traer los colores
@@ -687,7 +721,7 @@ class Productos extends Validator
     }
 
     public function filtroProductosVendidos()
-    {   
+    {
         if ($this->filtro == 1) {
             $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
             FROM tbproducto tp 
@@ -701,7 +735,7 @@ class Productos extends Validator
             $params = array($this->opcion);
             return Database::obtenerSentencias($sql, $params);
         } else {
-            switch ($this->getFiltro()){
+            switch ($this->getFiltro()) {
                 case 2:
                     $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
                     FROM tbproducto tp 
@@ -711,7 +745,7 @@ class Productos extends Validator
                     GROUP BY tp.idproducto LIMIT 20';
                     $params = array($this->opcion);
                     return Database::obtenerSentencias($sql, $params);
-                break;
+                    break;
                 case 3:
                     $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
                     FROM tbproducto tp 
@@ -721,7 +755,7 @@ class Productos extends Validator
                     GROUP BY tp.idproducto LIMIT 20';
                     $params = array($this->opcion);
                     return Database::obtenerSentencias($sql, $params);
-                break;
+                    break;
                 case 4:
                     $sql = 'SELECT tp.idproducto, tp.nombre_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
                     FROM tbproducto tp 
@@ -731,8 +765,94 @@ class Productos extends Validator
                     GROUP BY tp.idproducto LIMIT 20';
                     $params = array($this->opcion);
                     return Database::obtenerSentencias($sql, $params);
-                break;
+                    break;
             }
         }
+    }
+
+    //función de reportes para ver las ventas por año dia de un producto en especifico
+    public function ventasAnioxProducto()
+    {
+        $sql = "SELECT tp.idproducto, tp.nombre_producto, tf.fecha_factura, tf.monto_total, tuc.usuario_c
+                from tbdetalle_factura tdf
+                INNER JOIN tbfactura tf
+                ON tdf.idfactura = tf.idfactura
+                INNER JOIN tbproducto tp
+                ON tdf.idproducto = tp.idproducto
+                LEFT JOIN tbusuario_cliente tuc
+                ON tf.idusuario_c = tuc.idusuario_c
+                WHERE tf.fecha_factura BETWEEN (SELECT date_trunc('YEAR', now())::DATE) AND now()
+                ORDER BY tf.idfactura ASC";
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //función de reportes para ver las ventas por año dia de un producto en especifico
+    public function ventasMesxProducto()
+    {
+        $sql = "SELECT DISTINCT ON (tf.idfactura) tf.idfactura, tp.nombre_producto, tf.fecha_factura, tf.monto_total, tuc.usuario_c
+                from tbfactura tf
+                LEFT JOIN tbdetalle_factura tdf
+                ON tf.idfactura = tdf.iddetalle_factura
+                LEFT JOIN tbproducto tp
+                ON tdf.idproducto = tp.idproducto
+                LEFT JOIN tbusuario_cliente tuc
+                ON tf.idusuario_c = tuc.idusuario_c
+                WHERE TO_CHAR(fecha_factura, 'MM') = TO_CHAR(CURRENT_DATE, 'MM')
+                ORDER BY idfactura ASC";
+        //AND tp.idproducto = trunc(random() * 10 + 1) FORMA CON RANDOM
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //función de reportes para ver las ventas por dia de un producto en especifico
+    public function ventasDiaxProducto()
+    {
+        $sql = 'SELECT tf.idfactura, tp.nombre_producto, tf.fecha_factura, tf.monto_total, tuc.usuario_c
+                from tbfactura tf
+                LEFT JOIN tbdetalle_factura tdf
+                ON tf.idfactura = tdf.iddetalle_factura
+                LEFT JOIN tbproducto tp
+                ON tdf.idproducto = tp.idproducto
+                LEFT JOIN tbusuario_cliente tuc
+                ON tf.idusuario_c = tuc.idusuario_c
+                WHERE fecha_factura = CURRENT_DATE
+                ORDER BY idfactura ASC';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    // Grafico de PolarArea para ver el top 5 vendedores que mas vendieorn en el mes actual.
+    public function topEmpleadosMasVendieron()
+    {
+        $sql = 'SELECT usuario_e, COUNT(idfactura) as cantidad
+        FROM tbfactura 
+        INNER JOIN tbusuario_empleado USING(idusuario_e)
+        WHERE EXTRACT (MONTH FROM fecha_factura) = EXTRACT(MONTH FROM now())
+        AND idestado_factura = 1
+        GROUP BY usuario_e ORDER BY cantidad DESC LIMIT 5';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //Grafico de barras para ver cuantos clientes fueron creados por el mes actual.
+    public function obtenerUsuariosClientesMesActual()
+    {
+        $sql = 'SELECT  COUNT(idusuario_c) usuarios_creados, fecha_creacion
+                FROM tbusuario_cliente
+                WHERE EXTRACT (MONTH FROM fecha_creacion) = EXTRACT(MONTH FROM now())
+                GROUP BY fecha_creacion';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    //Grafico de barras para ver Inventario en un rango de fechas mediante grafico de barras
+    public function obtenerInventarioRango()
+    {
+        $sql = "SELECT fecha_entrega, count(*) as cantidad from 
+                tbinventario where fecha_entrega BETWEEN ? AND ? 
+                group by fecha_entrega";
+        $params = array($this->fechainicio, $this->fechafinal);
+        return Database::obtenerSentencias($sql, $params);
     }
 }

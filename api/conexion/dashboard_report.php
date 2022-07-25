@@ -25,19 +25,21 @@ class Report extends FPDF
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a main.php
-        if (isset($_SESSION['id_usuario'])) {
+        if (isset($_SESSION['idusuario_e'])) {
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
             $this->setTitle('Dashboard - Reporte', true);
             // Se establecen los margenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
+            // Se establecen los margenes del documento que es el margen inferior:
+            $this->SetAutoPageBreak(true,15);
             // Se añade una nueva página al documento (orientación vertical y formato carta) y se llama al método header()
             $this->addPage('p', 'letter');
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->aliasNbPages();
         } else {
-            header('location: ../../../vistas/privado/index.php');
+            header('location: ../../../vistas/privado/index.html');
         }
     }
 
@@ -46,9 +48,10 @@ class Report extends FPDF
     *   Se llama automáticamente en el método addPage()
     */
     public function header()
-    {
+    {   
         // Se establece el logo.
-        $this->image('../../images/logo_icon.png', 15, 15, 20);
+        $this->image('../../images/fondo_report.png', 0, 0, 220);
+        $this->image('../../images/logo_report.png', 15, 12, 40);
         // Se ubica el título.
         $this->cell(20);
         $this->setFont('Arial', 'B', 15);
@@ -57,6 +60,7 @@ class Report extends FPDF
         $this->cell(20);
         $this->setFont('Arial', '', 10);
         $this->cell(166, 10, 'Fecha/Hora: '.date('d-m-Y H:i:s'), 0, 1, 'C');
+        $this->cell(190, 10, 'Reporte creado por: ' . $_SESSION['usuario_e'], 0, 1, 'C');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->ln(10);
     }
@@ -72,7 +76,7 @@ class Report extends FPDF
         // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
         // Se imprime una celda con el número de página.
-        $this->cell(0, 10, utf8_decode('Página ').$this->pageNo().'/{nb}', 0, 0, 'C');
+        $this->cell(0, 0, utf8_decode('Página ').$this->pageNo().'/{nb}', 0, 0, 'L');
     }
 }
 ?>

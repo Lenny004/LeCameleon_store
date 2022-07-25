@@ -90,26 +90,36 @@ function seleccionFiltro(opcion) {
     }
 }
 
-// Función para abrir el reporte de productos con descuentos.
-function openReportDescuento() {
-    // Se establece la ruta del reporte en el servidor.
-    let url = SERVER + 'reports/sitio_privado/producto_descuento.php';
-    // Se abre el reporte en una nueva pestaña del navegador web.
-    window.open(url);
-}
 
-// Función para abrir el reporte de productos con descuentos.
-function openReportDescuentoPrueba() {
-    // Se establece la ruta del reporte en el servidor.
-    let url = SERVER + 'reports/sitio_privado/prueba.php';
-    // Se abre el reporte en una nueva pestaña del navegador web.
-    window.open(url);
-}
-
-// Función para abrir el reporte de productos mas vendidos.
-function openReportVendidos() {
-    // Se establece la ruta del reporte en el servidor.
-    let url = SERVER + 'reports/sitio_privado/producto_vendido.php';
-    // Se abre el reporte en una nueva pestaña del navegador web.
-    window.open(url);
+//funcion onchange para seleccionar el tiempo o extraer el tiempo de los select
+function seleccionTiempo(event) {
+    event.preventDefault();
+    //Se crea una variable para guardar el el valor del select
+    var filtro = document.getElementById("filtro").value;
+    switch (filtro) {
+        //Caso para dia
+        case "1":
+            console.log('Escogiste dia');
+            // Se establece la ruta del reporte en el servidor.
+            var url = SERVER + 'reports/sitio_privado/ventas_dias.php';
+            // Se abre el reporte en una nueva pestaña del navegador web.
+            window.open(url);
+            break;
+        //Caso para mes
+        case "2":
+            console.log('Escogiste mes');
+            // Se establece la ruta del reporte en el servidor.
+            var url = SERVER + 'reports/sitio_privado/ventas_mes.php';
+            // Se abre el reporte en una nueva pestaña del navegador web.
+            window.open(url);
+            break;
+        //Caso para año
+        case "3":
+            console.log('Escogiste año');
+            // Se establece la ruta del reporte en el servidor.
+            var url = SERVER + 'reports/sitio_privado/ventas_anio.php';
+            // Se abre el reporte en una nueva pestaña del navegador web.
+            window.open(url);
+            break;
+    }
 }

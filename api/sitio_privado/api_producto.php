@@ -233,9 +233,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'productosVendidosFiltro':
-                if (!$producto->setFiltro($_POST['tipo'])){
+                if (!$producto->setFiltro($_POST['tipo'])) {
                     $result['exception'] = 'Error al elegir un filtro';
-                } else if (!$producto->setOpcion($_POST['opcion'])){
+                } else if (!$producto->setOpcion($_POST['opcion'])) {
                     $result['exception'] = 'Error al elegir una opcion';
                 } else if ($result['dataset'] = $producto->filtroProductosVendidos()) {
                     $result['estado'] = 1;
@@ -244,6 +244,37 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 } else {
                     $result['exception'] = 'Este filtro aún no posee productos';
+                }
+                break;
+                // Para el gráfico de pastel sobre los vendedores que mas vendieron en un mes.
+            case 'porcentajeVendedoresxMes':
+                if ($result['dataset'] = $producto->topEmpleadosMasVendieron()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No se pudo obtener el porcentaje de productos más vendidos por empleados';
+                }
+                break;
+                //Para el gráfico de barras sobre los clientes que fueron creados en un mes.
+            case 'graficoCreadoxmes':
+                if ($result['dataset'] = $producto->obtenerUsuariosClientesMesActual()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No se han creado usuarios clientes';
+                }
+                break;
+                //Para el gráfico de barras sobre inventario en un rango de fechas.
+            case 'graficoInventarioRango':
+                if (!$producto->setFechaIncio($_POST['fecha_inicio'])) {
+                    $result['exception'] = 'fecha inicio incorrecto';
+                } elseif (!$producto->setFechaFinal($_POST['fecha_final'])) {
+                    $result['exception'] = 'fecha final incorrecta';
+                } elseif ($result['dataset'] = $producto->obtenerInventarioRango()) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Grafica creada correctamente';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No se tienen registros en inventario en estos rangos de fechas';
                 }
                 break;
             default:

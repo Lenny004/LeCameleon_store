@@ -35,7 +35,7 @@
             <h3>Gráficas de Empleados</h3>
         </div>
         <div id="contenedor_graficos">
-            <div id="tarjeta_grafica_empleados">
+            <div id="tarjeta_grafica_empleados" class="row">
                 <div class="col s12 m6">
                     <!-- Se muestra un gráfico de pastel con el porcentaje de productos por categoría -->
                     <canvas id="grafica1"></canvas>
@@ -67,6 +67,8 @@
             </div>
         </div>
     </footer>
+    <!-- Importación de librería para generar gráficos en tiempo real. Para más información https://www.chartjs.org/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
