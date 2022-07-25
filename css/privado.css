@@ -611,6 +611,65 @@ footer {
     height: 80% !important;
 }
 
+/*--------------------------------------------REPORTES--------------------------------------------*/
+
+.tarjeta_reportes {
+    margin-bottom: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    border-radius: 35px;
+    background-color: #36465d;
+    color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.texto_reportes{
+    width: 50%;
+}
+
+.imagen_reportes {
+    width: 20%;
+    text-align: center;
+}
+
+.imagen_reportes img {
+    width: 30%;
+    height: 30%;
+}
+
+.boton_generar_reporte{
+    width: 20%;
+    text-align: end;
+}
+
+.boton_generar_reporte a{
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #1a3760;
+    color: #36465d;
+    background-color: #ffffff;
+    transition: all 0.8s ease;
+}
+
+.boton_generar_reporte a:hover{
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: #1a3760;
+    transition: all 0.4s ease;
+}
+
+.modales_reporte{
+    width: 100% !important;
+}
+
+.modales_reporte2{
+    height: 80% !important;
+}
+
 /*------------------------------------------Main INVENTARIO------------------------------------------*/
 #tarjeta_inventario {
     background-color: #e8d9d9;
