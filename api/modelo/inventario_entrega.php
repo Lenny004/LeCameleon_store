@@ -145,4 +145,15 @@ class inventario_entrega extends Validator
         //print_r ($params);
         return Database::ejecutarSentencia($sql, $params);
     }
+
+    //Función de obtener datos inventario reporte
+    public function obtenerInventarioReporte()
+    {
+        $sql = 'SELECT nombre_producto, cantidad, precio_unitario, fecha_entrega, fecha_inicio_ventas
+        FROM tbinventario ti
+        INNER JOIN tbproducto tp USING (idproducto)
+        ORDER BY fecha_entrega ASC';
+        $params = null;
+        return Database::obtenerSentencias($sql, $params);
+    }
 }

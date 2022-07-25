@@ -134,12 +134,10 @@ class Descuento extends Validator
     //Metodos para reporte de producto mas vendido con descuento
     public function ProductoDescuento()
     {
-        $sql = 'SELECT SUM (COALESCE(total_producto)) as total, idproducto, nombre_producto, precio_actual as precio_unitario, cantidad_descuento
-                FROM tbdetalle_factura
-                INNER JOIN tbproducto using(idproducto)
-                WHERE cantidad_descuento !=0.00
-                GROUP BY nombre_producto, idproducto, precio_unitario,cantidad_descuento
-                ORDER BY total DESC';
+        $sql = 'SELECT idproducto, nombre_producto, precio_producto, porcentaje_descuento
+        FROM tbproducto
+        WHERE porcentaje_descuento > 0
+        ORDER BY idproducto DESC';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
@@ -147,11 +145,11 @@ class Descuento extends Validator
     //Metodos para reporte de producto mas vendido con descuento
     public function ProductoVendido()
     {
-        $sql = 'SELECT SUM (COALESCE(total_producto)) as total, idproducto, nombre_producto, precio_actual as precio_unitario, cantidad_descuento
-                FROM tbdetalle_factura
-                INNER JOIN tbproducto using(idproducto)
-                GROUP BY nombre_producto, idproducto, precio_unitario,cantidad_descuento
-                ORDER BY total DESC';
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, SUM(tdf.cantidad_producto) as cantidad_vendida
+        FROM tbproducto tp
+        INNER JOIN tbdetalle_factura tdf using(idproducto)
+        GROUP BY tp.idproducto
+        ORDER BY cantidad_vendida DESC';
         $params = null;
         return Database::obtenerSentencias($sql, $params);
     }
