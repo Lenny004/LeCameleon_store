@@ -4,10 +4,6 @@ const ENDPOINT_MARCA = SERVER + 'sitio_privado/api_marca.php?action=readAll';
 const ENDPOINT_PROVEEDOR = SERVER + 'sitio_privado/api_proveedor.php?action=readAll';
 const ENDPOINT_EMPLEADOS = SERVER + 'sitio_privado/api_empleados.php?action=readAll';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1afac7f3360e3f4a55c668d8d0c47dd8bf3184fb
 //Evento que se ejecuta cuando se carga la página web
 document.addEventListener('DOMContentLoaded', function () {
     let menu = document.getElementById("menu");
@@ -47,26 +43,16 @@ document.addEventListener('DOMContentLoaded', function () {
 function openGenerar() {
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modal_personalizado1')).open();
-<<<<<<< HEAD
-=======
-    // Se asigna el título para la caja de diálogo (modal).
->>>>>>> 1afac7f3360e3f4a55c668d8d0c47dd8bf3184fb
 }
 
 // Función para preparar el formulario al momento de generar un reporte
 function openGenerar2() {
-<<<<<<< HEAD
     //Se vacian los campos
     document.getElementById('fecha_inicio').value = " ";
     document.getElementById('fecha_fin').value = " ";
     M.updateTextFields();
     // Se abre la caja de diálogo (modal) que contiene el formulario.
     M.Modal.getInstance(document.getElementById('modal_personalizado2')).open();
-=======
-    // Se abre la caja de diálogo (modal) que contiene el formulario.
-    M.Modal.getInstance(document.getElementById('modal_personalizado2')).open();
-    // Se asigna el título para la caja de diálogo (modal).
->>>>>>> 1afac7f3360e3f4a55c668d8d0c47dd8bf3184fb
 }
 
 // Función para preparar el formulario al momento de generar un reporte
@@ -76,10 +62,6 @@ function openGenerar3() {
     // Se asigna el título para la caja de diálogo (modal).
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1afac7f3360e3f4a55c668d8d0c47dd8bf3184fb
 function seleccionFiltro(opcion) {
     switch (opcion) {
         case "1":
