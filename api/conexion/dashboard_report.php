@@ -4,8 +4,8 @@ require('../../conexion/validaciones.php');
 require('../../libraries/fpdf182/fpdf.php');
 
 /**
-*   Clase para definir las plantillas de los reportes del sitio privado. Para más información http://www.fpdf.org/
-*/
+ *   Clase para definir las plantillas de los reportes del sitio privado. Para más información http://www.fpdf.org/
+ */
 class Report extends FPDF
 {
     // Propiedad para guardar el título del reporte.
@@ -48,7 +48,7 @@ class Report extends FPDF
     *   Se llama automáticamente en el método addPage()
     */
     public function header()
-    {   
+    {
         // Se establece el logo.
         $this->image('../../images/fondo_report.png', 0, 0, 220);
         $this->image('../../images/logo_report.png', 15, 12, 40);
@@ -59,10 +59,10 @@ class Report extends FPDF
         // Se ubica la fecha y hora del servidor.
         $this->cell(20);
         $this->setFont('Arial', '', 10);
-        $this->cell(166, 10, 'Fecha/Hora: '.date('d-m-Y H:i:s'), 0, 1, 'C');
-        if($_SESSION['usuario_e'] ){
+        $this->cell(166, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
+        if ($_SESSION['usuario_e']) {
             $this->cell(190, 10, 'Reporte creado por: ' . $_SESSION['usuario_e'], 0, 1, 'C');
-        }else{
+        } else {
         }
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->ln(10);
@@ -79,6 +79,6 @@ class Report extends FPDF
         // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
         // Se imprime una celda con el número de página.
-        $this->cell(0, 0, utf8_decode('Página ').$this->pageNo().'/{nb}', 0, 0, 'L');
+        $this->cell(0, 0, utf8_decode('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'L');
     }
 }
