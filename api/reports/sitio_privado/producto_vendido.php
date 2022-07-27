@@ -11,7 +11,7 @@ $vendida = new Descuento;
 // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
 if ($dataProductos = $vendida->ProductoVendido()) {
     // Se establece un color de relleno para los encabezados.
-    $pdf->setFillColor(140,196,63);
+    $pdf->setFillColor(140, 196, 63);
     // Se establece la fuente para los encabezados.
     $pdf->setFont('Helvetica', 'B', 10);
     // Se imprimen las celdas con los encabezados.
