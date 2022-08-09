@@ -1698,6 +1698,10 @@ img.imagen_muestra {
 
 /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
 
+#logo_registrar {
+    text-align: center;
+}
+
 #logo_registrar img {
     max-width: 340px;
     max-height: 300px;
@@ -1844,6 +1848,41 @@ img.imagen_muestra {
 #contenido_recuperar .card-content {
     height: 490px;
     width: 390px;
+    padding: 24px !important;
+}
+
+#boton_recuperar {
+    text-align: center;
+    width: 100%;
+}
+
+#boton_recuperar button {
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_recuperar button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+#boton_renovar {
+    text-align: center;
+    width: 100%;
+}
+
+#boton_renovar button {
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_renovar button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
 }
 
 
@@ -1872,55 +1911,27 @@ img.imagen_muestra {
     color: #282012;
 }
 
-#boton_recuperar {
-    position: static;
-    width: 400px;
+#contenido_renovar {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-content: center;
-    justify-content: center;
+    align-items: center;
 }
 
-
-/*Cambiamos las propiedades del boton iniciar sesion*/
-
-#boton_recuperar a {
-    background-color: #DA7D27;
-    box-shadow: none;
-}
-
-#boton_recuperar a:hover {
-    padding: 0px 18px 5px 18px;
-    background-color: #ffff;
-    border: 1.5px solid #DA7D27;
-    color: #DA7D27;
-}
-
-#boton_renovar {
-    position: static;
-    margin-top: 15px;
+#tarjeta_renovar {
+    height: 600px;
     width: 400px;
+    box-shadow: 0px 1px 5px 2px #bfbfbf;
+    margin-bottom: 45px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
 }
 
-
-/*Cambiamos las propiedades del boton iniciar sesion*/
-
-#boton_renovar a {
-    background-color: #DA7D27;
-    box-shadow: none;
-}
-
-#boton_renovar a:hover {
-    padding: 0px 18px 5px 18px;
-    background-color: #ffff;
-    border: 1.5px solid #DA7D27;
-    color: #DA7D27;
+#contenido_renovar .card-content {
+    height: 490px;
+    width: 390px;
 }
 
 
@@ -2319,16 +2330,19 @@ body.dark .ofertas_descuentos a {
 /*para celulares*/
 
 @media screen and (max-width: 374px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     /*Le asignamos un tamaño al texto*/
     #barra_anuncio p {
         font-size: smaller;
     }
+
     /*Le asignamos tamaño a la imagen del logo*/
     #logo_imagen img {
         height: 45px;
         width: 150px;
     }
+
     /*Modificamos del contenedor de logo, categoria, buscador, idioma, login y carrito*/
     #apartado_buscador {
         display: flex;
@@ -2341,6 +2355,7 @@ body.dark .ofertas_descuentos a {
         margin-right: 0px;
         margin-left: 0px;
     }
+
     /*Propiedades del boton de idioma*/
     #boton_idioma a {
         width: 70px;
@@ -2350,16 +2365,19 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         align-items: center;
     }
+
     /*Le asignamos un tamaño a las letras del boton*/
     #boton_idioma p {
         font-size: 9px;
         margin-right: 5px;
     }
+
     /*Le asignamos tamaño al boton de Carrito*/
     #boton_carrito img {
         max-height: 30px;
         max-width: 30px;
     }
+
     /*Le asignamos propiedades al boton de cantidad productos*/
     #boton_carrito span {
         color: #ffff;
@@ -2376,13 +2394,16 @@ body.dark .ofertas_descuentos a {
         align-content: center !important;
         justify-content: center !important;
     }
+
     .container .input-field {
         max-width: 280px;
         max-height: 40px;
     }
+
     #menu_desplegable {
         max-width: 40px;
     }
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
         display: flex;
@@ -2391,37 +2412,45 @@ body.dark .ofertas_descuentos a {
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
+
     #buscador2 nav {
         height: 25px;
         width: 180px;
     }
+
     #buscador2 img {
         margin-bottom: -8px;
         margin-left: 180px;
     }
+
     #buscador2 form {
         margin-top: 2px;
         max-width: 200px;
         color: #777676;
     }
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Editar el titulo del slider*/
     #slider_main h1 {
         font-size: 45px;
     }
+
     .slides h3 {
         background-color: rgba(119, 118, 118, 0.7);
         width: 77%;
     }
+
     .titulo_categoria {
         font-size: 35px;
     }
+
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
         height: 220px;
         margin-top: 2px;
         margin-bottom: 15px;
     }
+
     #tarjetas a {
         color: #2f6950;
         font-size: 10px;
@@ -2436,25 +2465,31 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     #tarjetas span {
         font-size: 15px;
         margin-bottom: 10px;
     }
+
     .container .card {
         padding: 5px;
     }
+
     .container .card img {
         height: 110px;
         width: 100%;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 150px !important;
         width: 100% !important;
     }
+
     .card .card-action:last-child {
         border-radius: 0 0 0px 0px !important;
     }
+
     .card .card-content {
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -2462,18 +2497,21 @@ body.dark .ofertas_descuentos a {
         padding-bottom: 0px !important;
         border-radius: 0 0 0px 0px !important;
     }
+
     #seccion_productos .card a {
         border: 2px solid #2f6950;
         padding: 5px 15px 5px 15px;
         margin-right: 0;
         font-size: x-small;
     }
+
     .card .card-action {
         padding: 16px 0px !important;
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
+
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
     /*Editamos el footer*/
     #redes {
@@ -2485,6 +2523,7 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     #informacion div {
         display: flex;
         flex-direction: column;
@@ -2493,6 +2532,7 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         padding: 25px;
     }
+
     /*-Footer Terminos-*/
     #pie p {
         font-size: smaller;
@@ -2501,6 +2541,7 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         align-items: center;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
     #formulario_registrar {
@@ -2513,23 +2554,28 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         flex-wrap: wrap;
     }
+
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
     #logo_registrar img {
         max-width: 250px;
         max-height: 230px;
     }
+
     #datos .input-field {
         margin-bottom: 45px;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
     #tarjeta_validar {
         max-height: 500px;
         max-width: 300px;
     }
+
     #boton_iniciar {
         width: 300px;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
@@ -2537,13 +2583,16 @@ body.dark .ofertas_descuentos a {
         max-height: 500px;
         max-width: 300px;
     }
+
     #contenido_login .card-content {
         height: 350px;
         width: 300px;
     }
+
     #tarjeta_login {
         font-size: smaller;
     }
+
     /*-Footer Terminos-*/
     #pie_login {
         position: relative;
@@ -2554,6 +2603,7 @@ body.dark .ofertas_descuentos a {
         align-items: center;
         flex-wrap: wrap;
     }
+
     .terminos_login {
         font-size: smaller;
         margin-left: 0px;
@@ -2563,6 +2613,18 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         justify-content: center;
     }
+
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_renovar {
+        max-height: 700px;
+        max-width: 300px;
+    }
+
+    #contenido_renovar .card-content {
+        height: 450px;
+        width: 300px;
+    }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION VALIDAR------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
@@ -2570,33 +2632,60 @@ body.dark .ofertas_descuentos a {
         max-height: 600px;
         max-width: 300px;
     }
+
     #tarjeta_recuperar .card-content {
         height: 490px;
         width: 300px;
     }
+
     #boton_renovar {
         width: 300px;
         margin-top: 25px;
     }
+
     #tarjeta_recuperar {
         font-size: smaller;
+    }
+
+    /*-----------------------------------------------------TUS PEDIDOS-----------------------------------------------------*/
+    #pedidos {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 5%;
+        margin-right: 1%;
+        margin-bottom: 5%;
+        padding-bottom: 5%;
+        margin-left: 1%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .imagen_producto {
+        width: 100%;
+        text-align: center;
     }
 }
 
 @media screen and (min-width:375px) and (max-width:576px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     /*Le asignamos tamaño a la imagen del logo*/
     #logo_imagen img {
         height: 60px;
         width: 200px;
     }
+
     #menu_desplegable {
         max-width: 40px;
     }
+
     .slides h3 {
         background-color: rgba(119, 118, 118, 0.7);
         width: 60%;
     }
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
         display: flex;
@@ -2605,36 +2694,44 @@ body.dark .ofertas_descuentos a {
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
+
     #buscador2 nav {
         max-height: 25px;
         max-width: 280px;
     }
+
     #buscador2 img {
         margin-bottom: -8px;
         margin-left: 285px;
     }
+
     #buscador2 form {
         margin-top: 2px;
         max-width: 280px;
         color: #777676;
     }
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Editar el titulo del slider*/
     #slider_main h1 {
         font-size: 55px;
     }
+
     #slider_main h3 {
         font-size: 35px;
     }
+
     .titulo_categoria {
         font-size: 40px;
     }
+
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
         height: 245px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
+
     #tarjetas a {
         color: #2f6950;
         font-size: 10px;
@@ -2650,26 +2747,32 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     /*Titulos de las tarjetas*/
     #tarjetas span {
         font-size: 18px;
         margin-bottom: 10px;
     }
+
     .container .card {
         padding: 10px;
     }
+
     .container .card img {
         height: 120px;
         width: 100%;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 190px !important;
         width: 100% !important;
     }
+
     .card .card-action:last-child {
         border-radius: 0 0 0px 0px !important;
     }
+
     .card .card-content {
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -2677,12 +2780,14 @@ body.dark .ofertas_descuentos a {
         padding-bottom: 0px !important;
         border-radius: 0 0 0px 0px !important;
     }
+
     #seccion_productos .card a {
         border: 2px solid #2f6950;
         padding: 5px 15px 5px 15px;
         margin-right: 0;
         font-size: smaller;
     }
+
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
     /*Editamos el footer*/
     #redes {
@@ -2694,6 +2799,7 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     #informacion div {
         display: flex;
         flex-direction: column;
@@ -2702,6 +2808,7 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         padding: 25px;
     }
+
     /*-Footer Terminos-*/
     #pie p {
         font-size: smaller;
@@ -2710,6 +2817,7 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         align-items: center;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
@@ -2717,13 +2825,16 @@ body.dark .ofertas_descuentos a {
         max-height: 500px;
         max-width: 360px;
     }
+
     #contenido_login .card-content {
         height: 400px;
         width: 360px;
     }
+
     #tarjeta_login {
         font-size: smaller;
     }
+
     .terminos_login {
         font-size: smaller;
         margin-left: 0px;
@@ -2733,18 +2844,22 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
         justify-content: center;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------MAIN VALIDAR------------------------------------------------------*/
     #tarjeta_validar {
         height: 500px;
         width: 360px;
     }
+
     #boton_iniciar {
         width: 360px;
     }
+
     #boton_renovar {
         width: 360px;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
     #formulario_registrar {
@@ -2756,6 +2871,7 @@ body.dark .ofertas_descuentos a {
         align-items: center;
         justify-content: center;
     }
+
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
     #logo_registrar img {
         max-width: 320px;
@@ -2763,6 +2879,7 @@ body.dark .ofertas_descuentos a {
         margin-left: -15px;
         position: relative;
     }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
     /*Editamos el tamaño de la tarjeta*/
@@ -2770,27 +2887,29 @@ body.dark .ofertas_descuentos a {
         max-height: 550px;
         max-width: 360px;
     }
+
     #contenido_recuperar .card-content {
         height: 480px;
         width: 360px;
     }
-    #boton_recuperar {
-        width: 360px;
-    }
+
     #tarjeta_recuperar p {
         font-size: smaller;
     }
 }
 
 @media screen and (min-width:577px) and (max-width:765px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     #menu_desplegable {
         max-width: 40px;
     }
+
     .slides h3 {
         background-color: rgba(119, 118, 118, 0.7);
         width: 60%;
     }
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
         display: flex;
@@ -2799,30 +2918,36 @@ body.dark .ofertas_descuentos a {
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
+
     #buscador2 nav {
         height: 25px;
         width: 450px;
     }
+
     #buscador2 img {
         margin-bottom: -8px;
         margin-left: 455px;
     }
+
     #buscador2 form {
         margin-top: 2px;
         min-width: 440;
         max-width: 700px;
         color: #777676;
     }
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     .titulo_categoria {
         font-size: 45px;
     }
+
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
         height: 300px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
+
     #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
@@ -2837,26 +2962,32 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     /*Titulos de las tarjetas*/
     #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
+
     .container .card {
         padding: 5px;
     }
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 170px !important;
         width: 100% !important;
     }
+
     .card .card-action:last-child {
         border-radius: 0 0 0px 0px !important;
     }
+
     .card .card-content {
         padding-left: 5px !important;
         padding-right: 5px !important;
@@ -2864,14 +2995,23 @@ body.dark .ofertas_descuentos a {
         padding-bottom: 0px !important;
         border-radius: 0 0 0px 0px !important;
     }
+
     #seccion_productos .card a {
         border: 2px solid #2f6950;
         padding: 5px 15px 5px 15px;
         margin-right: 0;
     }
+
     .card .card-action {
         padding: 16px 16px !important;
     }
+
+    #contenido_renovar .card-content {
+        height: 490px;
+        width: 395px;
+        padding: 24px !important;
+    }
+
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++REGISTRAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     /*-------------------------------------------------------SECTION REGISTRAR------------------------------------------------------*/
     /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
@@ -2884,14 +3024,17 @@ body.dark .ofertas_descuentos a {
 }
 
 @media screen and (min-width:766px) and (max-width:909px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     #menu_desplegable {
         max-width: 40px;
     }
+
     .slides h3 {
         background-color: rgba(119, 118, 118, 0.7);
         width: 60%;
     }
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
         display: flex;
@@ -2900,25 +3043,30 @@ body.dark .ofertas_descuentos a {
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
+
     #buscador2 nav {
         height: 25px;
         width: 600px;
     }
+
     #buscador2 img {
         margin-bottom: -8px;
         margin-left: 605px;
     }
+
     #buscador2 form {
         margin-top: 2px;
         max-width: 600px;
         color: #777676;
     }
+
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
         height: 260px;
         margin-top: 2px;
         margin-bottom: 20px;
     }
+
     #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
@@ -2933,38 +3081,72 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     /*Titulos de las tarjetas*/
     #tarjetas span {
         font-size: 15px;
         margin-bottom: 2px;
     }
+
     .container .card {
         padding: 5px;
     }
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 200px !important;
         width: 100% !important;
     }
+
     .card .card-action:last-child {
         border-radius: 0 0 0px 0px !important;
     }
+
     #seccion_productos .card a {
         border: 2px solid #2f6950;
         padding: 5px 15px 5px 15px;
         margin-right: 0;
     }
+
+    .detalle_imagenes {
+        flex-wrap: wrap;
+    }
+
+    /*Le damos un tamaño a las imagenes en detalle del producto*/
+    .detalle_imagenes .imagenes {
+        width: 100%;
+        height: 65px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .detalle_imagenes .imagen_principal {
+        width: 100%;
+    }
+
+    img.imagen_muestra {
+        width: 65px;
+    }
+
+    /*Ajustamos el tamaño del boton del detalle*/
+    .detalle_datos button {
+        width: 45% !important;
+        font-size: x-small;
+    }
 }
 
 @media screen and (min-width:910px) and (max-width:1133px) {
+
     /*---------------------------------------------------------HEADER---------------------------------------------------------*/
     #menu_desplegable {
         max-width: 60px;
     }
+
     /*Modificamos las propiedades del buscador para moviles*/
     #buscador2 {
         display: flex;
@@ -2973,19 +3155,23 @@ body.dark .ofertas_descuentos a {
         /*Baseline alinea los ítems en el contenedor según la base del contenido de los ítems del contenedor. */
         align-items: center;
     }
+
     #buscador2 nav {
         height: 25px;
         width: 780px;
     }
+
     #buscador2 img {
         margin-bottom: -8px;
         margin-left: 785px;
     }
+
     #buscador2 form {
         margin-top: 2px;
         max-width: 780px;
         color: #777676;
     }
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
@@ -2993,6 +3179,7 @@ body.dark .ofertas_descuentos a {
         margin-top: 2px;
         margin-bottom: 20px;
     }
+
     #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
@@ -3007,34 +3194,66 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     /*Titulos de las tarjetas*/
     #tarjetas span {
         font-size: 19px;
         margin-bottom: 10px;
     }
+
     .container .card {
         padding: 5px;
     }
+
     .container .card img {
         max-height: 160px;
         width: 100%;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 220px !important;
         width: 100% !important;
     }
+
     .card .card-action:last-child {
         border-radius: 0 0 0px 0px !important;
     }
+
     #seccion_productos .card a {
         border: 2px solid #2f6950;
         padding: 5px 15px 5px 15px;
         margin-right: 0;
     }
+
+    .detalle_imagenes {
+        flex-wrap: wrap;
+    }
+
+    /*Le damos un tamaño a las imagenes en detalle del producto*/
+    .detalle_imagenes .imagenes {
+        width: 100%;
+        height: 75px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .detalle_imagenes .imagen_principal {
+        width: 100%;
+    }
+
+    img.imagen_muestra {
+        width: 75px;
+    }
+
+    /*Ajustamos el tamaño del boton del detalle*/
+    .detalle_datos button {
+        width: 45% !important;
+    }
 }
 
 @media screen and (min-width:1134px) and (max-width:1365px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
@@ -3042,6 +3261,7 @@ body.dark .ofertas_descuentos a {
         margin-top: 2px;
         margin-bottom: 20px;
     }
+
     #tarjetas a {
         font-size: 15px;
         padding-right: 0px;
@@ -3055,14 +3275,29 @@ body.dark .ofertas_descuentos a {
         align-content: center;
         align-self: center;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 260px !important;
         width: 100% !important;
     }
+
+    /*Le damos un tamaño a las imagenes en detalle del producto*/
+    .detalle_imagenes .imagenes {
+        width: 25%;
+    }
+
+    .detalle_imagenes .imagen_principal {
+        width: 75%;
+    }
+
+    .detalle_datos button {
+        width: 40% !important;
+    }
 }
 
 @media screen and (min-width:1366px) and (max-width:1600px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
@@ -3070,20 +3305,24 @@ body.dark .ofertas_descuentos a {
         margin-top: 2px !important;
         margin-bottom: 20px !important;
     }
+
     #tarjetas a {
         font-size: 15px;
         max-width: 110px;
     }
+
     .container .card img {
         min-height: 200px !important;
         width: 100%;
     }
+
     .container .card .card-action:last-child {
         text-align: center;
     }
 }
 
 @media screen and (min-width:1600px) and (max-width:1920px) {
+
     /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
     /*Le asignamos nuevos valores a las card*/
     #tarjetas {
@@ -3092,17 +3331,21 @@ body.dark .ofertas_descuentos a {
         margin-top: 2px !important;
         margin-bottom: 20px !important;
     }
+
     #tarjetas a {
         font-size: 15px;
         max-width: 110px;
     }
+
     .container .card img {
         min-height: 210px !important;
         width: 100%;
     }
+
     .container .card .card-action:last-child {
         text-align: center;
     }
+
     /*Le damos tamaño a las img de las card*/
     #seccion_productos .card img {
         height: 400px !important;
