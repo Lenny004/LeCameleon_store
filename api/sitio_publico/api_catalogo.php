@@ -140,6 +140,28 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay coincidencias';
             }
             break;
+        case 'obtenerImagenesSecundarias':
+            if (!$producto->setIdProducto($_POST['id_producto'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->obtenerImagenesSecundarias()) {
+                $result['status'] = 1;
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'Imagenes secundarias inexistentes';
+            }
+            break;
+        case 'obtenerImagenMarca':
+            if (!$producto->setIdProducto($_POST['id_producto'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->obtenerImagenMarca()) {
+                $result['status'] = 1;
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'Imagen de la marca inexistente';
+            }
+            break;
         case 'rangoSubcategoria':
             if (!$producto->setIdSubcategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';

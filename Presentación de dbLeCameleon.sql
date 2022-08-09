@@ -315,6 +315,12 @@ INSERT INTO public."tbproducto"("nombre_producto", "descripcion", "material", "t
     ('Brazalete de cuero', 'Brazalete de cuero color cafe', 'cuero', 'M', 10, 20, 5.00, 9, 1, 1, 1, 16),
     ('Camiseta de hombre Sivar', 'Camiseta de algodon de hombre', 'algodon', 'M', 10, 20, 11.00, 2, 14, 14, 1, 18);
 
+INSERT INTO tbimagen_producto (imagen_producto, idproducto) VALUES
+    ('62f2bbb2676d0.png', 28),
+    ('62f2bc1c64bb9.png', 28),
+    ('62f2bc8766762.png', 28),
+    ('62f2bcba9848e.png', 28);
+
 INSERT INTO public."tbimagen_producto"("imagen_producto", "idproducto")
     VALUES ('image1.png',2),
     ('image2.png',2),

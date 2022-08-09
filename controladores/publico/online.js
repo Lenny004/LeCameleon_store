@@ -212,9 +212,14 @@ function mostrarCategorias() {
 
 function agregarCategoria(dataset) {
     var menu = `<li><a href="dashboard.html">Inicio</a></li>`;
+    var menu_movil = `<li><a class="subheader">Opciones Principales</a></li>
+    <li><a href="dashboard.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/inicio.png"
+                alt="inicio">Inicio</a></li>`;
     document.getElementById("opciones").innerHTML = menu;
+    document.getElementById("opciones_movil").innerHTML = menu_movil;
     //Variable que almacenará el boton de categoria
     let dropdown = '';
+    let dropdown_movil = '';
     //Variable para crear drowpdown desde 1
     let i = 1;
     //Por cada categoria 
@@ -223,13 +228,22 @@ function agregarCategoria(dataset) {
         <li id="dropdown${i}"></li>
         <!-- Estructura del Dropdown ${i}-->
         <ul id="dropdown_${i}" class="dropdown-content">
-        </ul>`
+        </ul>`;
+        menu_movil = `<!-- Dropdown Trigger Mobile ${i}-->
+        <li id="dropdown_mobile${i}">
+        </li>
+        <!-- Estructura del Dropdown mobile desplegable ${i}-->
+        <ul id="dropdown_desplegable_movil${i}" class="dropdown-content">
+        </ul>`;
         document.getElementById("opciones").innerHTML += menu;
+        document.getElementById("opciones_movil").innerHTML += menu_movil;
         // Se define una dirección con los datos de cada categoría para mostrar sus productos en otra página web.
         url = `productosc.html?id=${row.idcategoria_producto}&nombre=${row.categoria_producto}`;
         //Se crea el dropdown
         dropdown = `<a class="dropdown-trigger" href="${url}" data-target="dropdown_${i}">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
+        dropdown_movil = `<a class="dropdown-trigger" href="${url}" data-target="dropdown_desplegable_movil${i}">${row.categoria_producto}<i class="material-icons right">arrow_drop_down</i></a>`;
         document.getElementById(`dropdown${i}`).innerHTML = dropdown;
+        document.getElementById(`dropdown_mobile${i}`).innerHTML = dropdown_movil;
         //Instanciar Dropdown Menú
         var elems = document.querySelectorAll('.dropdown-trigger');
         M.Dropdown.init(elems, { coverTrigger: false, hover: false });
@@ -257,7 +271,37 @@ function agregarCategoria(dataset) {
         <li><a href="reportar_problema.html">Reportar un problema</a></li>
         <li class="divider"></li>
     </ul>`;
+    menu_movil = `<li><a href="marcas.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/marcas.png"
+    alt="marca">Marcas</a></li>
+    <li><a href="otros.html" class="waves-effect waves-red"><img src="../../recursos/iconografia/oferta.png" alt="ofertas">Ofertas</a></li>
+    <!-- Dropdown Trigger Servicio al cliente -->
+    <li><a class="dropdown-trigger" href="#!" data-target="dropdown_servicio_movil"><img
+        src="../../recursos/iconografia/servicio.png" alt="servicio">Servicio al Cliente
+    <i class="material-icons right">arrow_drop_down</i></a>
+    </li>
+    <!-- Estructura del Dropdown del Servicio al cliente-->
+    <ul id="dropdown_servicio_movil" class="dropdown-content">
+    <li><a href="contactanos.html" class="waves-effect waves-red">Contáctanos</a></li>
+    <li class="divider"></li>
+    <li><a href="condiciones_compra.html" class="waves-effect waves-red">Condiciones de Compra</a></li>
+    <li class="divider"></li>
+    <li><a href="devoluciones.html" class="waves-effect waves-red">Devoluciones y Reembolsos</a></li>
+    <li class="divider"></li>
+    <li><a href="politica_envio.html" class="waves-effect waves-red">Políticas y Zonas de envío</a>
+    </li>
+    <li class="divider"></li>
+    <li><a href="reportar_problema.html" class="waves-effect waves-red">Reportar un problema</a></li>
+    <li class="divider"></li>
+    </ul>
+    <li>
+    <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Configuración</a></li>
+    <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+    <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
+    <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>`;
     document.getElementById("opciones").innerHTML += menu;
+    document.getElementById("opciones_movil").innerHTML += menu_movil;
     //Instanciar Dropdown Menú
     var elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, { coverTrigger: false, hover: false });
@@ -290,6 +334,7 @@ function subcategoria(id) {
                         <li class="divider"></li>`
                         //Se agrega al dropdown de la subcategoria
                         document.getElementById(`dropdown_${dropdownsub}`).innerHTML += submenu;
+                        document.getElementById(`dropdown_desplegable_movil${dropdownsub}`).innerHTML += submenu;
                         //Instanciar Dropdown Menú
                         var elems = document.querySelectorAll('.dropdown-trigger');
                         M.Dropdown.init(elems, { coverTrigger: false, hover: false });

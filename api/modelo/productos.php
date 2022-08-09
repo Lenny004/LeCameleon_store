@@ -557,6 +557,21 @@ class Productos extends Validator
         return Database::obtenerSentencia($sql, $params);
     }
 
+    // Función que buscará las imagenes secundarias del producto
+    public function obtenerImagenesSecundarias(){
+        $sql = 'SELECT imagen_producto FROM tbimagen_producto WHERE idproducto =  ?';
+        $params = array($this->idproducto);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    // Función que buscará la imagen de la marca del producto
+    public function obtenerImagenMarca()
+    {
+        $sql = 'SELECT imagen_marca FROM tbproducto tp INNER JOIN tbmarca tm ON tp.id_marca = tm.id_marca WHERE idproducto =  ?';
+        $params = array($this->idproducto);
+        return Database::obtenerSentencia($sql, $params);
+    }
+
     //Se obtiene el promedio de valoraciones para así mostrarlo por medio de una estrella
     public function promedioValoraciones()
     {

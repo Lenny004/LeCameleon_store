@@ -25,42 +25,53 @@
 <body>
     <!--Contenido del sitio web-->
     <main>
-        <div id="contenido_login">
+        <div id="contenido_renovar">
             <div id="logo_login">
                 <img src="../../recursos/img/logo_icon2.png" alt="logo">
             </div>
-            <div class="card" id="tarjeta_login">
-                <div class="card-content white-text">
-                    <h5>Renovar Contraseña </h5>
-                    <li class="divider"></li>
-                    <div id="imagen_correo_validar">
-                        <img src="../../recursos/iconografia/restaurar_contra.png" alt="mensaje">
+            <form action="">
+                <div class="card" id="tarjeta_renovar">
+                    <div class="card-content white-text">
+                        <h5>Renovar Contraseña </h5>
+                        <li class="divider"></li>
+                        <div id="imagen_correo_validar">
+                            <img src="../../recursos/iconografia/restaurar_contra.png" alt="mensaje">
+                        </div>
+                        <div id="anuncio_registrar">
+                            <p>Se ha autentificado el código enviado.</p>
+                        </div>
+                        <div class="input-field">
+                            <div id="codigo">
+                                <p>Código Enviado:</p>
+                            </div>
+                            <div>
+                                <input id="codigo" type="text" class="validate" data-length="60" required>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <div id="codigo">
+                                <p>Nueva contraseña:</p>
+                            </div>
+                            <div>
+                                <input id="contraseña" type="password" class="validate" data-length="60" required>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <div id="codigo">
+                                <p>Confirmar nueva contraseña:</p>
+                            </div>
+                            <div>
+                                <input id="confirmar_contraseña" type="password" class="validate" data-length="60" required>
+                                <span class="helper-text" data-error="contraseñas no coinciden"
+                                    data-success="contraseñas coinciden"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div id="anuncio_registrar">
-                        <p>Se ha autentificado el código enviado.</p>
-                    </div>
-                    <div class="input-field">
-                        <div id="codigo">
-                            <p>Nueva contraseña:</p>
-                        </div>
-                        <div>
-                            <input id="contraseña" type="tel" class="validate" data-length="60">
-                        </div>
-                    </div>
-                    <div class="input-field">
-                        <div id="codigo">
-                            <p>Confirmar nueva contraseña:</p>
-                        </div>
-                        <div>
-                            <input id="confirmar_contraseña" type="password" class="validate" data-length="60">
-                            <span class="helper-text" data-error="contraseñas no coinciden" data-success="contraseñas coinciden"></span>
-                        </div>
+                    <div class="card-action" id="boton_renovar">
+                        <button class="btn-small waves-effect waves-red" type="submit">Renovar Contraseña</button>
                     </div>
                 </div>
-                <div class="card-action" id="boton_renovar">
-                    <a class="btn-small waves-effect waves-red" href="index.html">Renovar Contraseña</a>
-                </div>
-            </div>
+            </form>
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->

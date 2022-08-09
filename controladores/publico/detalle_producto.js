@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const ID = params.get('id');
     // Se llama a la función que muestra el detalle del producto seleccionado previamente.
     leerUnProducto(ID);
+    generarImagenesSecundarias(ID);
+    generarImagenMarca(ID);
     resenias(ID);
     // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
@@ -147,9 +149,70 @@ function leerUnProducto(id) {
                                 break;
                         }
                     }
+                    generarImagenesSecundarias();
                 } else {
                     // Se presenta un mensaje de error cuando no existen datos para mostrar.
                     document.getElementById('nombre').innerHTML = `<i class="material-icons small">cloud_off</i><span class="red-text">${response.exception}</span>`;
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+function generarImagenesSecundarias(id) {
+    // Se define un objeto con los datos del producto seleccionado
+    const DATA = new FormData();
+    DATA.append('id_producto', id);
+    // Petición para consultar si existen imagenes secundarias
+    fetch(API_CATALOGO + 'obtenerImagenesSecundarias', {
+        method: 'post',
+        body: DATA
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) { 
+                    let imagen_secundaria = '';
+                    response.dataset.map(function (row) {
+                        imagen_secundaria += `<img class="imagen_muestra materialboxed" src="${SERVER}images/productos/${row.imagen_producto}">`;
+                    });
+                    document.getElementById("imagenes_secundarias").innerHTML = imagen_secundaria;
+                    M.AutoInit();
+                } else {
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+function generarImagenMarca(id) {
+    // Se define un objeto con los datos del producto seleccionado
+    const DATA = new FormData();
+    DATA.append('id_producto', id);
+    // Petición para consultar si existen imagenes secundarias
+    fetch(API_CATALOGO + 'obtenerImagenMarca', {
+        method: 'post',
+        body: DATA
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
+        if (request.ok) {
+            // Se obtiene la respuesta en formato JSON.
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) { 
+                    let imagen_secundaria = '';
+                    imagen_secundaria += `<img class="imagen_muestra materialboxed" src="${SERVER}images/marca/${response.dataset.imagen_marca}">`;
+                    document.getElementById("imagenes_secundarias").innerHTML += imagen_secundaria;
+                      M.AutoInit();
+                } else {
+                    console.log(imagen_secundaria);
                 }
             });
         } else {

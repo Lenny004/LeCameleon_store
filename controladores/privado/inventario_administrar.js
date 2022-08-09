@@ -141,14 +141,14 @@ function cantidad(e) {
     //Se formatean las imagenes si en caso vuelve a elegir otras imagenes y una cantidad inferior
     imagenesReseteadas();
     //Validamos la lingitud de los archivos seleccionados
-    if (e.target.files.length > 5) {
+    if (e.target.files.length > 4) {
         //Si es mayor a 5 salta una alerta
-        sweetAlert(2, "Solo puedes subir 5 imagenes máximo", null);
+        sweetAlert(2, "Solo puedes subir 4 imagenes máximo", null);
         e.preventDefault();
-        //Le damos un valor vacio si en caso la longitud es mayor a 5, de esta manera no cargaran los nombres de los archivos
+        //Le damos un valor vacio si en caso la longitud es mayor a 4, de esta manera no cargaran los nombres de los archivos
         document.getElementById("archivos").value = "";
     }
-    //Si es menor a 5
+    //Si es menor a 4
     else {
         //Objeto formulario
         lista_img = new FormData();
