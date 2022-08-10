@@ -1,5 +1,5 @@
 <?php
-require('../../conexion/dashboard_report.php');
+require('../../conexion/dashboard_report2.php');
 require('../../modelo/carrito.php');
 
 $pdf = new Report;

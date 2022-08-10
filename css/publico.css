@@ -2666,6 +2666,112 @@ body.dark .ofertas_descuentos a {
         width: 100%;
         text-align: center;
     }
+
+    /*-----------------------------------------------------DETALLE PEDIDO-----------------------------------------------------*/
+    .contenedor_detalle {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #menu a {
+        min-width: 30px;
+    }
+
+    .detalle_datos {
+        width: 100%;
+    }
+
+    .detalle_imagenes {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    .detalle_imagenes .imagenes {
+        width: 40%;
+    }
+
+    /*Ajustamos el tamaño del boton del detalle*/
+    .detalle_datos button {
+        width: 55% !important;
+        font-size: x-small;
+    }
+
+    
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    .contenedor_producto_carrito {
+        width: 100%;
+    }
+
+    .contenedor_subtotal_carrito {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    
+    #subtotal_productos h5{
+        font-size: large;
+    }
+
+    .producto_imagen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .producto_imagen img {
+        height: 100px;
+    }
+
+    .producto_datos h5 {
+        font-size: medium;
+    }
+
+    .producto_imagen {
+        width: 35%;
+    }
+
+    .detalle_producto {
+        width: 65%;
+    }
+
+    .detalle_producto h6 {
+        font-size: small;
+    }
+
+    .detalle_producto h5 {
+        font-size: small;
+    }
+
+    .cantidad{
+        width: 50px;
+        font-size: small;
+    }
+
+    .precio_producto {
+        width: 100%;
+    }
+
+    .contenedor_producto_carrito .precio_unitario p {
+        display: none;
+    }
+
+    .producto_datos .precio_producto h5::before {
+        font-weight: bold;
+        content: "Precio Unitario: ";
+        font-size: medium;
+    }
+
+    .contenedor_envio_cuerpo{
+        height: 475px;
+        text-align: center;
+    }
+
+    .container .input-field {
+        max-width: 280px;
+        max-height: 60px;
+        margin-top: 5px;
+    }
 }
 
 @media screen and (min-width:375px) and (max-width:576px) {
@@ -2896,6 +3002,86 @@ body.dark .ofertas_descuentos a {
     #tarjeta_recuperar p {
         font-size: smaller;
     }
+
+    /*---------------------------------------------------DETALLE PRODUCTO---------------------------------------------------*/
+    .contenedor_detalle {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #menu a {
+        min-width: 30px;
+    }
+
+    .detalle_datos {
+        width: 100%;
+    }
+
+    .detalle_imagenes {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    .detalle_imagenes .imagenes {
+        width: 25%;
+    }
+
+    /*Ajustamos el tamaño del boton del detalle*/
+    .detalle_datos button {
+        width: 45% !important;
+        font-size: x-small;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    .contenedor_producto_carrito {
+        width: 100%;
+    }
+
+    .contenedor_subtotal_carrito {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    
+    #subtotal_productos h5{
+        font-size: large;
+    }
+
+    .producto_imagen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .producto_imagen img {
+        height: 120px;
+    }
+
+    .producto_datos h5 {
+        font-size: medium;
+    }
+
+    .producto_imagen {
+        width: 30%;
+    }
+
+    .detalle_producto {
+        width: 70%;
+    }
+
+    .precio_producto {
+        width: 100%;
+    }
+
+    .contenedor_producto_carrito .precio_unitario p {
+        display: none;
+    }
+
+    .producto_datos .precio_producto h5::before {
+        font-weight: bold;
+        content: "Precio Unitario: ";
+    }
 }
 
 @media screen and (min-width:577px) and (max-width:765px) {
@@ -3021,6 +3207,80 @@ body.dark .ofertas_descuentos a {
         margin-left: 35px;
         position: relative;
     }
+
+    .detalle_imagenes {
+        flex-wrap: wrap;
+    }
+
+    /*Le damos un tamaño a las imagenes en detalle del producto*/
+    .detalle_imagenes .imagenes {
+        width: 100%;
+        height: 65px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .detalle_imagenes .imagen_principal {
+        width: 100%;
+    }
+
+    img.imagen_muestra {
+        width: 65px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /*Ajustamos el tamaño del boton del detalle*/
+    .detalle_datos button {
+        width: 60% !important;
+        font-size: x-small;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    .contenedor_producto_carrito {
+        width: 65%;
+    }
+
+    .contenedor_subtotal_carrito {
+        width: 30%;
+    }
+    
+    .producto_imagen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .producto_imagen img {
+        height: 100px;
+    }
+
+    .producto_datos h5 {
+        font-size: medium;
+    }
+
+    .producto_imagen {
+        width: 25%;
+    }
+
+    .detalle_producto {
+        width: 75%;
+    }
+
+    .precio_producto {
+        width: 100%;
+    }
+
+    .contenedor_producto_carrito .precio_unitario p {
+        display: none;
+    }
+
+    .producto_datos .precio_producto h5::before {
+        font-weight: bold;
+        content: "Precio Unitario: ";
+    }
 }
 
 @media screen and (min-width:766px) and (max-width:909px) {
@@ -3122,6 +3382,7 @@ body.dark .ofertas_descuentos a {
         width: 100%;
         height: 65px;
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-around;
     }
 
@@ -3131,12 +3392,30 @@ body.dark .ofertas_descuentos a {
 
     img.imagen_muestra {
         width: 65px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     /*Ajustamos el tamaño del boton del detalle*/
     .detalle_datos button {
         width: 45% !important;
         font-size: x-small;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    .producto_imagen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .producto_imagen img {
+        height: 125px;
+    }
+
+    .producto_datos h5 {
+        font-size: large;
     }
 }
 
@@ -3249,6 +3528,18 @@ body.dark .ofertas_descuentos a {
     /*Ajustamos el tamaño del boton del detalle*/
     .detalle_datos button {
         width: 45% !important;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CARRITO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    .producto_imagen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .producto_imagen img {
+        height: 150px;
     }
 }
 
