@@ -130,49 +130,53 @@
     <main>
         <div class="contenedor_perfil">
             <h3>Perfil</h3>
-            <form action="" >
+            <form id="perfil_form" name="perfil_form" method="post">
                 <div class="nombre_edit_cliente">
-                    <p>Lenny Adrián Elías Sánchez</p>
-                    <a href=""><u>Editar Perfil</u> <img src="../../recursos/iconografia/editar3.png" alt=""></a>
+                    <p id="nombre_completo_perfil"></p>
+                    <a onclick="habilitarEdicion()"><u>Editar Perfil</u><img id="imagen_edit" src="../../recursos/iconografia/editar3.png" alt=""></a>
                 </div>
                 <div class="datos_cliente">
-                    <div class="input-field col s6">
-                        <input id="nombre" type="text" class="validate">
+                    <div class="input-field col s12 m6">
+                        <input id="nombre" type="text" readonly>
                         <label for="nombre">Nombres:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="apellido" type="text" class="validate">
+                    <div class="input-field col s12 m6">
+                        <input id="apellido" type="text" readonly>
                         <label for="apellido">Apellidos:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="telefono" type="text" class="validate">
-                        <label for="telefono">Teléfono:</label>
+                    <div class="input-field col s12 m6">
+                        <input id="telefono" name="telefono" type="text" class="validate" readonly maxlength="9">
+                        <label id="lbtelefono" for="telefono">Teléfono:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="correo_cliente" type="text" class="validate">
+                    <div class="input-field col s12 m6">
+                        <input id="correo_cliente" name="correo_cliente" class="validate" type="text" readonly>
                         <label for="correo_cliente">Correo:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="usuario" type="text" class="validate">
+                    <div class="input-field col s12 m6">
+                        <input id="usuario" type="text" readonly>
                         <label for="usuario">Usuario:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="contra" type="text" class="validate">
-                        <label for="contra">Contraseña:</label>
+                    <div class="input-field col s12 m6">
+                        <input id="contra" name="contra" type="password" class="validate" readonly maxlength="60">
+                        <label id="lbcontra" for="contra">Contraseña:</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="confirmar_contra" type="text" class="validate">
-                        <label for="confirmar_contra">Confirmar Contraseña:</label>
+                    <div class="input-field col s12 m6">
+                        <input id="confirmar_contra" name="confirmar_contra" type="password" class="validate" readonly maxlength="60">
+                        <label id="lbconfirmar_contra" for="confirmar_contra">Confirmar Contraseña:</label>
                     </div>
                 </div>
                 <div class="datos_cliente">
-                    <div class="input-field col s6">
-                        <textarea id="direccion_cliente" class="materialize-textarea"></textarea>
-                        <label for="direccion_cliente">Dirección:</label>
+                    <div class="input-field col s12 m6">
+                        <input id="dui" type="text" readonly maxlength="10">
+                        <label id="lbdui" for="dui">DUI:</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <textarea id="direccion_cliente" name="direccion_cliente" class="materialize-textarea" class="validate" readonly maxlength="1000"></textarea>
+                        <label id="lbdireccion" for="direccion_cliente">Dirección:</label>
                     </div>
                 </div>
                 <div class="modificar_perfil">
-                    <button class="btn-small waves-effect waves-blue" type="submit">Modificar Perfil</button>
+                    <button id="boton_modificar" class="btn-small waves-effect waves-blue" type="submit" disabled>Modificar Perfil</button>
                 </div>
             </form>
         </div>
@@ -237,8 +241,9 @@
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/dashboard.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/carrito.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>    
+    <script type="text/javascript" src="../../controladores/publico/perfil.js"></script>
 </body>
 
 </html>

@@ -298,6 +298,7 @@ function agregarCategoria(dataset) {
     </li>
     <li><a class="subheader">Configuración</a></li>
     <li><a href="perfil.html"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Perfil</a></li>
+    <li><a href="pedidos_cliente.html"><img src="../../recursos/iconografia/pedidos.png" alt="perfil">Tus Pedidos</a></li>
     <li><a href="#"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo Nocturno</a></li>
     <li><a href="index.html"><img src="../../recursos/iconografia/logout.png" alt="cerrar">Cerrar Sesión</a></li>`;
     document.getElementById("opciones").innerHTML += menu;

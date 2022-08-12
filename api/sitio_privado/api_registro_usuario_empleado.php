@@ -26,6 +26,7 @@ if (isset($_GET['action'])) {
             break;
         case 'registroUsuario':
             $_POST = $registroUsuario->validateForm($_POST);
+            date_default_timezone_set('America/El_Salvador');
             $fecha_actual = date('Y');
             $fecha = explode('-', $_POST['fechaM']);
             if (!$registroUsuario->setNombres($_POST['nombre'])) {
