@@ -3,16 +3,18 @@ require_once('../conexion/database.php');
 require_once('../conexion/validaciones.php');
 require_once('../modelo/login_publico.php');
 require_once('../modelo/carrito.php');
+require_once('../modelo/registro_usuario_cliente.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-// Se instancia la clase correspondiente.
+    // Se instancia la clase correspondiente.
     $pedido = new Carrito;
+    $registro = new RegistroUsuariosClientes;
     $usuario_cliente = new UsuarioCliente;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'cliente' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'cliente' => null, 'nombre' => null, 'apellido' => null, 'telefono' => null, 'direccion' => null, 'dui' => null, 'correo' => null, 'contra' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idusuario_c'])) {
         $result['session'] = 1;
@@ -28,6 +30,13 @@ if (isset($_GET['action'])) {
                     $result['estado'] = 1;
                     $result['session'] = 1;
                     $result['username'] = $_SESSION['usuario_c'];
+                    $result['contra'] = $_SESSION['contrasena_c'];
+                    $result['nombre'] = $_SESSION['nombre_cliente'];
+                    $result['apellido'] = $_SESSION['apellido_cliente'];
+                    $result['telefono'] = $_SESSION['telefono_cliente'];
+                    $result['direccion'] = $_SESSION['direccion_cliente'];
+                    $result['dui'] = $_SESSION['dui_cliente'];
+                    $result['correo'] = $_SESSION['correo_cliente'];
                     $result['cliente'] = $_SESSION['nombre_cliente'] . " " . $_SESSION['apellido_cliente'];
                     if ($result['dataset'] = $pedido->totalProductosDetalle()) {
                         $result['estado'] = 1;
@@ -35,8 +44,29 @@ if (isset($_GET['action'])) {
                     } elseif (Database::getException()) {
                         $result['exception'] = Database::getException();
                     } else {
-                        $result['exception'] = 'Ocurrió un problema al remover los productos';
+                        $result['exception'] = 'Ocurrió un problema al obtener los datos del usuario';
                     }
+                } else {
+                    $result['exception'] = 'Nombre de usuario indefinido';
+                }
+                break;
+            case 'actualizarPerfil':
+                $_POST = $registro->validateForm($_POST);
+                if (!$registro->setTelefono($_POST['telefono'])) {
+                    $result['exception'] = 'El número de teléfono ingresado tiene un formato incorrecto. Recuerde el formato de teléfono "0000-0000"';
+                } else if (!$registro->setDireccion($_POST['direccion_cliente'])) {
+                    $result['exception'] = 'La dirección ingresada contiene carácteres no válidos.';
+                } else if (!$registro->setCorreoCliente($_POST['correo_cliente'])) {
+                    $result['exception'] = 'El correo ingresado no tiene un formato válido. Intentelo de nuevo';
+                } elseif ($_POST['contra'] != $_POST['confirmar_contra']) {
+                    $result['exception'] = 'Las contraseñas ingresadas son diferentes, compruebe que ha ingresado correctamente la contraseña en el apartado de confirmar contraseña';
+                } else if (!$registro->setContraCliente($_POST['contra'])) {
+                    $result['exception'] = $registro->getPasswordError();
+                } else if ($registro->actualizarPerfil($_SESSION['idusuario_c'])) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Usuario modificado correctamente';
+                } else if (Database::getException()) {
+                    $result['exception'] = Database::getException();
                 } else {
                     $result['exception'] = 'Nombre de usuario indefinido';
                 }
@@ -48,7 +78,7 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
-            //Proceso para ingresar en el login
+                //Proceso para ingresar en el login
             case 'logIn':
                 $_POST = $usuario_cliente->validateForm($_POST);
                 //Si el usuario no es correcto manda una alerta
@@ -60,8 +90,13 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Autenticacion correcta';
                     $_SESSION['idusuario_c'] = $usuario_cliente->getIdUsuarioC();
                     $_SESSION['usuario_c'] = $usuario_cliente->getUsuario();
+                    $_SESSION['contrasena_c'] = $usuario_cliente->getContra();
                     $_SESSION['nombre_cliente'] = $usuario_cliente->getNombreCliente();
                     $_SESSION['apellido_cliente'] = $usuario_cliente->getApellidoCliente();
+                    $_SESSION['telefono_cliente'] = $usuario_cliente->getTelefono();
+                    $_SESSION['direccion_cliente'] = $usuario_cliente->getDireccion();
+                    $_SESSION['correo_cliente'] = $usuario_cliente->getCorreo();
+                    $_SESSION['dui_cliente'] = $usuario_cliente->getDUICliente();
                 }
                 //Si el usuario es el correcto pero la contra es incorrecta
                 else {

@@ -1214,10 +1214,11 @@ img.imagen_muestra {
 
 .nombre_edit_cliente a {
     color: #21190A;
-    ;
+    cursor: pointer;
 }
 
 .nombre_edit_cliente img {
+    margin-left: 8px;
     width: 18px;
 }
 
@@ -2512,6 +2513,11 @@ body.dark .ofertas_descuentos a {
         justify-content: center;
     }
 
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
+    }
+
     /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
     /*Editamos el footer*/
     #redes {
@@ -2949,6 +2955,11 @@ body.dark .ofertas_descuentos a {
         align-items: center;
         justify-content: center;
         justify-content: center;
+    }
+
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
     }
 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++VALIDAR USUARIO+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

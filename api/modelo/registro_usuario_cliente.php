@@ -13,6 +13,8 @@ class RegistroUsuariosClientes extends Validator
     private $correo_cliente = null;
     private $idestado_cliente = 1;
     private $contrasena = null;
+    private $fecha_creacion = null;
+    private $direccion = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
@@ -62,8 +64,20 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
+    
+    //Le asignamos el valor de la dirección de empleado
+    public function setDireccion($value)
+    {
+        if ($this->validateString($value, 10, 1000)) {
+            $this->direccion = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //Le asignamos el valor de correo
-    public function setCorreoEmpleado($value)
+    public function setCorreoCliente($value)
     {
         if ($this->validateEmail($value)) {
             $this->correo_cliente = $value;
@@ -74,7 +88,7 @@ class RegistroUsuariosClientes extends Validator
     }
 
     //Le asignamos el valor de empleado
-    public function setContraEmpleado($value)
+    public function setContraCliente($value)
     {
         if ($this->validatePassword($value)) {
             $this->contrasena = $value;
@@ -84,12 +98,29 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
+    
+    //Le asignamos la fecha y hora actual de creación
+    public function setFechaCreacion($value)
+    {
+        $this->fecha_creacion = ($value);
+        return true;
+    }
+
     //Función para registrar un usuario cliente
     public function registrarUsuarioCliente()
     {
-        $sql = 'INSERT INTO tbusuario_cliente(usuario_c, contrasena_c, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, idestado_usuario_c)
-        VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->correo_cliente, $this->contrasena, $this->nombre_cliente, $this->apellido_cliente, $this->correo_cliente, $this->telefono_cliente, $this->idestado_cliente);
+        $sql = 'INSERT INTO tbusuario_cliente(usuario_c, contrasena_c, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, dui_cliente, fecha_creacion, idestado_usuario_c)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->correo_cliente, $this->contrasena, $this->nombre_cliente, $this->apellido_cliente, $this->correo_cliente, $this->telefono_cliente, $this->dui, $this->fecha_creacion, $this->idestado_cliente);
+        return Database::ejecutarSentencia($sql, $params);
+    }
+
+    //Función para registrar un usuario cliente
+    public function actualizarPerfil($id)
+    {
+        $sql = 'UPDATE tbusuario_cliente SET contrasena_c = ?, correo_cliente = ?, telefono_cliente = ?, direccion_cliente = ?
+        WHERE idusuario_c = ?';
+        $params = array($this->contrasena, $this->correo_cliente, $this->telefono_cliente, $this->direccion, $id);
         return Database::ejecutarSentencia($sql, $params);
     }
 }

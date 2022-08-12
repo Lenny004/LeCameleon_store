@@ -15,6 +15,8 @@ if (isset($_GET['action'])) {
     // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
     switch ($_GET['action']) {
         case 'registroUsuario':
+            date_default_timezone_set('America/El_Salvador');
+            $fecha_creacion = date('Y-m-d h:i:s', time());
             $_POST = $registroUsuarioC->validateForm($_POST);
             if (!$registroUsuarioC->setNombres($_POST['nombre'])) {
                 $result['exception'] = 'Nombres incorrectos';
@@ -24,15 +26,19 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Formato de DUI incorrecto';
             } elseif (!$registroUsuarioC->setTelefono($_POST['telefono'])) {
                 $result['exception'] = 'El formato de teléfono incorrecto';
-            } elseif (!$registroUsuarioC->setCorreoEmpleado($_POST['email'])) {
+            } elseif (!$registroUsuarioC->setCorreoCliente($_POST['email'])) {
                 $result['exception'] = 'El formato de correo eléctroncio es inválido';
+            } elseif (!$registroUsuarioC->setFechaCreacion($fecha_creacion)) {
+                $result['exception'] = 'Formato de fecha de creación es incorrecto';
             } elseif ($_POST['password'] != $_POST['confirmar_contra']) {
                 $result['exception'] = 'Las contraseñas ingresadas son diferentes';
-            } elseif (!$registroUsuarioC->setContraEmpleado($_POST['password'])) {
+            } elseif (!$registroUsuarioC->setContraCliente($_POST['password'])) {
                 $result['exception'] = $registroUsuarioC->getPasswordError();
             } elseif ($registroUsuarioC->registrarUsuarioCliente()) {
                 $result['estado'] = 1;
                 $result['message'] = 'Tu usuario ha sido registrado correctamente';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
             } else {
                 $result['exception'] = 'Usuario no pudo ser registrado';
             }
