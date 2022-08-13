@@ -131,50 +131,36 @@
     <!--Contenido del sitio web-->
     <main>
         <div class="row">
-            <div class="col s3 m3 l3 xl3">
-                <h3 id="titulo_izquierdo">Marcas</h3>
-                <div class="input-field col s10">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Nombre marca</label>
-                </div>
-                <div class="botones_busqueda col s10">
-                    <a class="boton_filtrar" href="" class="btn waves-effect waves-teal z-depth-2">Filtrar</a>
-                    <a class="boton_limpiar" href="" class="btn waves-effect waves-teal z-depth-2">Limpiar</a>
-                </div>
-                <div class="input-field col s10">
-                    <select>
-                        <option value="disabled selected">Nombre (A-Z)</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                    <label>Ordenar Por:</label>
-                </div>
+            <div class="col s12 m12 l3 xl3">
+                <form method="post" id="buscador_marca">
+                    <h3 id="titulo_izquierdo">Marcas</h3>
+                    <div class="input-field col s10">
+                        <input id="buscador_input" name="buscador_input" type="text" class="validate">
+                        <label for="buscador_input">Nombre marca: </label>
+                    </div>
+                    <div class="botones_busqueda col s10">
+                        <button class="boton_filtrar" type="submit" class="btn waves-effect waves-teal z-depth-2">Filtrar</button>
+                        <a class="boton_limpiar" class="btn waves-effect waves-teal z-depth-2" onclick="cargarMarcas()">Recargar</a>
+                    </div>
+                    <div class="input-field col s10">
+                        <select onchange="ordenAZ(this.value)">
+                            <option value="disabled selected">Nombre (A-Z)</option>
+                            <option value="1">A-Z</option>
+                            <option value="2">Z-A</option>
+                        </select>
+                        <label>Ordenar Por:</label>
+                    </div>
+                </form>
             </div>
-            <div class="col s9 m9 l9 xl9">
-                <div class="row cuadro_marca">
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
-                    <div class="col s3 imagen_marca"><img src="../../recursos/img/marcas/lofi_girl.png" alt=""></div>
+            <div class="col s12 m12 l9 xl9">
+                <div class="row cuadro_marca" id="cuadro_marca">
+                    
                 </div>
             </div>
             <div id="numeros_pag">
                 <ul class="pagination">
                     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     <li class="active"><a href="#!">1</a></li>
-                    <li class="waves-effect"><a href="#!">2</a></li>
-                    <li class="waves-effect"><a href="#!">3</a></li>
-                    <li class="waves-effect"><a href="#!">4</a></li>
-                    <li class="waves-effect"><a href="#!">5</a></li>
                     <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
@@ -239,7 +225,11 @@
     </footer>
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>  
+    <script type="text/javascript" src="../../controladores/publico/marcas.js"></script>
 </body>
 
 </html>

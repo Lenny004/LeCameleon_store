@@ -39,6 +39,18 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay coincidencias';
                 }
                 break;
+            //Buscador de marcas por orden alfabetico
+            case 'busquedaOrden':
+                $_POST = $admin_marca->validateForm($_POST);
+                if ($result['dataset'] = $admin_marca->buscarMarcasAlfabeticamente($_POST['orden'])) {
+                    $result['estado'] = 1;
+                    $result['message'] = 'Marca encontrada';
+                } elseif (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'No hay coincidencias';
+                }
+                break;
                 //Obtener los valores de marca para actualizar o eliminar
             case 'readOne':
                 if (!$admin_marca->setidMarca($_POST['ide'])) {

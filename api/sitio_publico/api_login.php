@@ -63,6 +63,10 @@ if (isset($_GET['action'])) {
                 } else if (!$registro->setContraCliente($_POST['contra'])) {
                     $result['exception'] = $registro->getPasswordError();
                 } else if ($registro->actualizarPerfil($_SESSION['idusuario_c'])) {
+                    $_SESSION['telefono_cliente'] = $registro->getTelefono();
+                    $_SESSION['direccion_cliente'] = $registro->getDireccion();
+                    $_SESSION['correo_cliente'] = $registro->getCorreo();
+                    $_SESSION['contrasena_c'] = $registro->getContra();
                     $result['estado'] = 1;
                     $result['message'] = 'Usuario modificado correctamente';
                 } else if (Database::getException()) {

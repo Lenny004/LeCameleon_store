@@ -93,6 +93,9 @@ function habilitarEdicion() {
         document.getElementById("telefono").removeAttribute("readonly");
         document.getElementById("lbtelefono").innerHTML = "<b><u>Teléfono:</u> *</b>";
         document.getElementById("lbtelefono").style.color = "#36465d";
+        document.getElementById("correo_cliente").removeAttribute("readonly");
+        document.getElementById("lbcorreo_cliente").innerHTML = "<b><u>Correo:</u> *</b>";
+        document.getElementById("lbcorreo_cliente").style.color = "#36465d";
         document.getElementById("direccion_cliente").removeAttribute("readonly");
         document.getElementById("lbdireccion").innerHTML = "<b><u>Dirección:</u> *</b>";
         document.getElementById("lbdireccion").style.color = "#36465d";
@@ -115,6 +118,9 @@ function deshabilitarEdicion(){
     document.getElementById("telefono").setAttribute("readonly", true);
     document.getElementById("lbtelefono").innerHTML = "Teléfono:";
     document.getElementById("lbtelefono").style.color = "#9E9E9E";
+    document.getElementById("correo_cliente").setAttribute("readonly", true);
+    document.getElementById("lbcorreo_cliente").innerHTML = "Correo:";
+    document.getElementById("lbcorreo_cliente").style.color = "#9E9E9E";
     document.getElementById("direccion_cliente").setAttribute("readonly", true);
     document.getElementById("lbdireccion").innerHTML = "Dirección:";
     document.getElementById("lbdireccion").style.color = "#9E9E9E";

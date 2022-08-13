@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <ul id="dropdown_usuario" class="dropdown-content">
                                                 <li><a class="teal-text text-darken-4">${response.empleado}</a></li>
                                                 <li class="divider"></li>
-                                                <li><a href="#!" class="teal-text text-darken-4 ver_perfil"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
+                                                <li><a href="perfil.html" class="teal-text text-darken-4 ver_perfil"><img src="../../recursos/iconografia/usuario.png" alt="perfil">Ver Perfil</a></li>
                                                 <li><a href="#!" class="teal-text text-darken-4 modo_oscuro" onclick="ModoNocturno()"><img src="../../recursos/iconografia/luna_estrellas.png" alt="luna">Modo</a></li>
                                                 <li class="divider"></li>
                                                 <li><a class="teal-text text-darken-4 cerrar_sesion" onclick="logOut()"><img src="../../recursos/iconografia/logout.png" alt="logout">Cerrar Sesión</a></li>
