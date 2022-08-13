@@ -1,5 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_LOGIN = SERVER + "sitio_publico/api_login.php?action=";
+const API_LOGIN = SERVER + "sitio_privado/api_login.php?action=";
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -28,16 +28,16 @@ function obtenerDatosUsuario(){
                     // Se comprueba si la respuesta es satisfactoria, de lo contrario se direcciona a la página web principal.
                     if (response.estado) {
                         //Cargamos los datos en los input de perfil
-                        document.getElementById('nombre_completo_perfil').innerHTML = response.cliente;
+                        document.getElementById('nombre_completo_perfil').innerHTML = response.empleado;
                         document.getElementById('nombre').value = response.nombre;
                         document.getElementById('apellido').value = response.apellido;
-                        document.getElementById('telefono').value = response.telefono;
-                        document.getElementById('correo_cliente').value = response.correo;
-                        document.getElementById('usuario').value = response.username;
+                        document.getElementById('telefono').value = response.telefono_empleado;
+                        document.getElementById('correo_empleado').value = response.correo_empleado;
+                        document.getElementById('usuario_empleado').value = response.username;
                         document.getElementById('contra').value = response.contra;
                         document.getElementById('confirmar_contra').value = response.contra;
-                        document.getElementById('direccion_cliente').value = response.direccion;
-                        document.getElementById('dui').value = response.dui;
+                        document.getElementById('nit').value = response.nit_empleado;
+                        document.getElementById('dui').value = response.dui_empleado;
                         M.updateTextFields();
                     } else {
                         sweetAlert(3, response.exception, 'index.html');
@@ -93,12 +93,9 @@ function habilitarEdicion() {
         document.getElementById("telefono").removeAttribute("readonly");
         document.getElementById("lbtelefono").innerHTML = "<b><u>Teléfono:</u> *</b>";
         document.getElementById("lbtelefono").style.color = "#36465d";
-        document.getElementById("correo_cliente").removeAttribute("readonly");
-        document.getElementById("lbcorreo_cliente").innerHTML = "<b><u>Correo:</u> *</b>";
-        document.getElementById("lbcorreo_cliente").style.color = "#36465d";
-        document.getElementById("direccion_cliente").removeAttribute("readonly");
-        document.getElementById("lbdireccion").innerHTML = "<b><u>Dirección:</u> *</b>";
-        document.getElementById("lbdireccion").style.color = "#36465d";
+        document.getElementById("correo_empleado").removeAttribute("readonly");
+        document.getElementById("lbcorreo").innerHTML = "<b><u>Correo:</u> *</b>";
+        document.getElementById("lbcorreo").style.color = "#36465d";
         document.getElementById("contra").removeAttribute("readonly");
         document.getElementById("contra").type = "text";
         document.getElementById("lbcontra").innerHTML = "<b><u>Contraseña:</u> *</b>";
@@ -107,7 +104,7 @@ function habilitarEdicion() {
         document.getElementById("confirmar_contra").style.color = "#b51d26";
         document.getElementById("lbconfirmar_contra").innerHTML = "<b><u>Confirmar Contraseña:</u> *</b>";
         document.getElementById("lbconfirmar_contra").style.color = "#36465d";
-        let boton = document.getElementById("boton_modificar");
+        let boton = document.getElementById("boton_perfil");
         boton.removeAttribute('disabled');
         valor = 1;
     }
@@ -118,12 +115,9 @@ function deshabilitarEdicion(){
     document.getElementById("telefono").setAttribute("readonly", true);
     document.getElementById("lbtelefono").innerHTML = "Teléfono:";
     document.getElementById("lbtelefono").style.color = "#9E9E9E";
-    document.getElementById("correo_cliente").setAttribute("readonly", true);
-    document.getElementById("lbcorreo_cliente").innerHTML = "Correo:";
-    document.getElementById("lbcorreo_cliente").style.color = "#9E9E9E";
-    document.getElementById("direccion_cliente").setAttribute("readonly", true);
-    document.getElementById("lbdireccion").innerHTML = "Dirección:";
-    document.getElementById("lbdireccion").style.color = "#9E9E9E";
+    document.getElementById("correo_empleado").setAttribute("readonly", true);
+    document.getElementById("lbcorreo").innerHTML = "Correo:";
+    document.getElementById("lbcorreo").style.color = "#9E9E9E";
     document.getElementById("contra").setAttribute("readonly", true);
     document.getElementById("contra").type = "password";
     document.getElementById("lbcontra").innerHTML = "Contraseña:";
@@ -132,6 +126,6 @@ function deshabilitarEdicion(){
     document.getElementById("confirmar_contra").style.color = "#000000";
     document.getElementById("lbconfirmar_contra").innerHTML = "Confirmar Contraseña:";
     document.getElementById("lbconfirmar_contra").style.color = "#9E9E9E";
-    let boton = document.getElementById("boton_modificar");
+    let boton = document.getElementById("boton_perfil");
     boton.setAttribute('disabled', true);
 }

@@ -108,7 +108,8 @@ class Admin_marca extends Validator
         return Database::ejecutarSentencia($sql, $params);
     }
 
-    public function mostrar_datos_tabla(){
+    public function mostrar_datos_tabla()
+    {
         $sql = 'SELECT id_marca, nombre_marca, imagen_marca
                 FROM tbmarca
                 ORDER BY id_marca ASC';
@@ -127,5 +128,24 @@ class Admin_marca extends Validator
                 ORDER BY id_marca ASC';
         $params = array("%$value%");
         return Database::obtenerSentencias($sql, $params);
+    }
+
+    /*
+    *   Método de busqueda de marcas alfabeticamente
+    */
+    public function buscarMarcasAlfabeticamente($value)
+    {
+        switch ($value) {
+            case 1:
+                $sql = 'SELECT id_marca, nombre_marca, imagen_marca FROM tbmarca ORDER BY nombre_marca ASC';
+                $params = null;
+                return Database::obtenerSentencias($sql, $params);
+                break;
+            case 2:
+                $sql = 'SELECT id_marca, nombre_marca, imagen_marca FROM tbmarca ORDER BY nombre_marca DESC';
+                $params = null;
+                return Database::obtenerSentencias($sql, $params);
+                break;
+        }
     }
 }

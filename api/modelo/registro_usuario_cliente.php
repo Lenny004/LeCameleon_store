@@ -53,6 +53,12 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
+    //Retornamos el valor del telefono de cliente
+    public function getTelefono()
+    {
+        return $this->telefono_cliente;
+    }
+
     //Le asignamos el valor del telefono de empleado
     public function setTelefono($value)
     {
@@ -64,7 +70,12 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
-    
+    //Retornamos el valor del direccion de cliente
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
     //Le asignamos el valor de la dirección de empleado
     public function setDireccion($value)
     {
@@ -74,6 +85,12 @@ class RegistroUsuariosClientes extends Validator
         } else {
             return false;
         }
+    }
+
+    //Retornamos el valor del Correo de cliente
+    public function getCorreo()
+    {
+        return $this->correo_cliente;
     }
 
     //Le asignamos el valor de correo
@@ -87,6 +104,12 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
+    //Retornamos el valor de la contrasena de cliente
+    public function getContra()
+    {
+        return $this->contrasena;
+    }
+
     //Le asignamos el valor de empleado
     public function setContraCliente($value)
     {
@@ -98,7 +121,6 @@ class RegistroUsuariosClientes extends Validator
         }
     }
 
-    
     //Le asignamos la fecha y hora actual de creación
     public function setFechaCreacion($value)
     {

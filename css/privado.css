@@ -433,7 +433,7 @@ footer {
     align-items: center !important;
 }
 
-.datos_grafica{
+.datos_grafica {
     width: 100%;
 }
 
@@ -507,7 +507,7 @@ footer {
     margin-bottom: 5%;
 }
 
-#modal_personalizado1{
+#modal_personalizado1 {
     width: 25% !important;
 }
 
@@ -573,7 +573,7 @@ footer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.texto_reportes{
+.texto_reportes {
     width: 50%;
 }
 
@@ -587,12 +587,12 @@ footer {
     height: 30%;
 }
 
-.boton_generar_reporte{
+.boton_generar_reporte {
     width: 20%;
     text-align: end;
 }
 
-.boton_generar_reporte a{
+.boton_generar_reporte a {
     padding: 2% 8% 2% 8%;
     border: 2px solid #1a3760;
     color: #36465d;
@@ -600,18 +600,18 @@ footer {
     transition: all 0.8s ease;
 }
 
-.boton_generar_reporte a:hover{
+.boton_generar_reporte a:hover {
     border: 2px solid #ffffff;
     color: #ffffff;
     background-color: #1a3760;
     transition: all 0.4s ease;
 }
 
-.modales_reporte{
+.modales_reporte {
     width: 300px !important;
 }
 
-.modales_reporte2{
+.modales_reporte2 {
     height: 80% !important;
 }
 
@@ -632,7 +632,7 @@ footer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.texto_reportes{
+.texto_reportes {
     width: 50%;
 }
 
@@ -646,12 +646,12 @@ footer {
     height: 30%;
 }
 
-.boton_generar_reporte{
+.boton_generar_reporte {
     width: 20%;
     text-align: end;
 }
 
-.boton_generar_reporte a{
+.boton_generar_reporte a {
     padding: 2% 8% 2% 8%;
     border: 2px solid #1a3760;
     color: #36465d;
@@ -659,18 +659,18 @@ footer {
     transition: all 0.8s ease;
 }
 
-.boton_generar_reporte a:hover{
+.boton_generar_reporte a:hover {
     border: 2px solid #ffffff;
     color: #ffffff;
     background-color: #1a3760;
     transition: all 0.4s ease;
 }
 
-.modales_reporte{
+.modales_reporte {
     width: 100% !important;
 }
 
-.modales_reporte2{
+.modales_reporte2 {
     height: 80% !important;
 }
 
@@ -1045,6 +1045,79 @@ nav .input-field {
     height: 15px;
 }
 
+
+/*-------------------------------------------------------Perfil LOGIN------------------------------------------------------*/
+
+.contenedor_perfil {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.input-field.col label {
+    left: 0rem !important;
+}
+
+.nombre_edit_empleado {
+    width: 100%;
+    background-color: #e8d9d9;
+    border-radius: 12px;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nombre_edit_empleado a {
+    color: #21190A;
+    cursor: pointer;
+}
+
+.nombre_edit_empleado img {
+    margin-left: 8px;
+    width: 18px;
+}
+
+.contenedor_perfil form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.datos_empleado {
+    width: 50%;
+    padding: 2%;
+}
+
+.datos_empleado .input-field {
+    margin-bottom: 2%;
+}
+
+.modificar_perfil {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+
+.modificar_perfil button {
+    background-color: #36465d;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+.modificar_perfil button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #36465d;
+    color: #36465d;
+}
 
 /*------------------------------------------Monitorear Pedidos------------------------------------------*/
 /*Colocamos el titulo y la caja con los estados a un extremo del otro*/
@@ -1671,7 +1744,7 @@ body.dark #estado_pedido p {
     color: #ffffff;
 }
 
-body.dark .select-wrapper input.select-dropdown{
+body.dark .select-wrapper input.select-dropdown {
     color: #ffffff;
 }
 
@@ -1828,6 +1901,11 @@ body.dark .select-wrapper input.select-dropdown{
         max-height: 230px;
     }
 
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
+    }
+
     /*------------------------------------------Main Gráficas------------------------------------------*/
     #opciones_graficas {
         width: 100%;
@@ -1839,7 +1917,7 @@ body.dark .select-wrapper input.select-dropdown{
         justify-content: end;
         align-items: center !important;
     }
-    
+
     .titulo_graficas {
         font-size: 35px;
     }
@@ -1963,10 +2041,10 @@ body.dark .select-wrapper input.select-dropdown{
         margin-right: 1%;
     }
 
-    #modal_personalizado1{
+    #modal_personalizado1 {
         width: 95% !important;
     }
-    
+
 
     /*------------------------------------------Monitorear Pedidos------------------------------------------*/
     /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
@@ -2210,6 +2288,11 @@ body.dark .select-wrapper input.select-dropdown{
         position: relative;
     }
 
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
+    }
+
     /*------------------------------------------Main Gráficas------------------------------------------*/
     .titulo_graficas {
         font-size: 40px;
@@ -2255,10 +2338,10 @@ body.dark .select-wrapper input.select-dropdown{
         margin-right: 0%;
     }
 
-    #modal_personalizado1{
+    #modal_personalizado1 {
         width: 85% !important;
     }
-    
+
 
     /*------------------------------------------Main INVENTARIO------------------------------------------*/
     #tarjeta_inventario {
@@ -2456,7 +2539,7 @@ body.dark .select-wrapper input.select-dropdown{
         width: 100%;
     }
 
-    #modal_personalizado1{
+    #modal_personalizado1 {
         width: 55% !important;
     }
 

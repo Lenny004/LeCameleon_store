@@ -10,7 +10,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'empleado' => null, 'nivel_usuario' => null, 'tipo_usuario' => null);
+    $result = array('estado' => 0, 'session' => 0, 'message' => null, 'exception' => null, 'dataset' => null, 'username' => null, 'contra' => null, 'empleado' => null, 'nombre' => null, 'apellido' => null, 'nivel_usuario' => null, 'tipo_usuario' => null, 'dui_empleado' => null, 'nit_empleado' => null, 'telefono_empleado' => null, 'correo_empleado' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idusuario_e'])) {
         $result['session'] = 1;
@@ -25,9 +25,43 @@ if (isset($_GET['action'])) {
                 if (isset($_SESSION['usuario_e'])) {
                     $result['estado'] = 1;
                     $result['username'] = $_SESSION['usuario_e'];
+                    $result['contra'] = $_SESSION['contra'];
                     $result['empleado'] = $_SESSION['nombre_empleado'] . " " . $_SESSION['apellido_empleado'];
+                    $result['nombre'] = $_SESSION['nombre_empleado'];
+                    $result['apellido'] = $_SESSION['apellido_empleado'];
                     $result['nivel_usuario'] = $_SESSION['idtipo_usuario_e'];
                     $result['tipo_usuario'] = $_SESSION['tipo_usuario_e'];
+                    $result['dui_empleado'] = $_SESSION['dui_empleado'];
+                    $result['nit_empleado'] = $_SESSION['nit_empleado'];
+                    $result['telefono_empleado'] = $_SESSION['telefono_empleado'];
+                    $result['correo_empleado'] = $_SESSION['correo_empleado'];
+                } else if (Database::getException()) {
+                    $result['exception'] = Database::getException();
+                } else {
+                    $result['exception'] = 'Nombre de usuario indefinido';
+                }
+                break;
+            case 'actualizarPerfil':
+                $_POST = $usuario->validateForm($_POST);
+                if (!$usuario->setTelefono($_POST['telefono'])) {
+                    $result['exception'] = 'El número de teléfono ingresado tiene un formato incorrecto. Recuerde el formato de teléfono "0000-0000"';
+                } else if (!$usuario->setCorreoEmpleado($_POST['correo_empleado'])) {
+                    $result['exception'] = 'El correo ingresado no tiene un formato válido. Intentelo de nuevo';
+                } elseif ($_POST['contra'] != $_POST['confirmar_contra']) {
+                    $result['exception'] = 'Las contraseñas ingresadas son diferentes, compruebe que ha ingresado correctamente la contraseña en el apartado de confirmar contraseña';
+                } else if (!$usuario->setClaveEmpleado($_POST['contra'])) {
+                    $result['exception'] = $usuario->getPasswordError();
+                } else if ($usuario->actualizarUsuario($_SESSION['idusuario_e'])) {
+                    if ($usuario->actualizarEmpleado()) {
+                        $_SESSION['contra'] = $usuario->getClaveUsuario();
+                        $_SESSION['telefono_empleado'] = $usuario->getTelefono();
+                        $_SESSION['correo_empleado'] = $usuario->getCorreoEmpleado();
+                        $result['estado'] = 1;
+                        $result['message'] = 'Usuario modificado correctamente';
+                    } else {
+                        $result['exception'] = 'No se ha podido actualizar los datos del empleado';
+                    }
+                    
                 } else if (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
@@ -64,13 +98,18 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 } else if ($usuario->ValidarContraUsuarioEmpleado($_POST['password_login']) && $usuario->getIntento() < 5 && $usuario->getEstadoU() == 1) {
                     $result['estado'] = 1;
-                    $result['message'] = 'Autenticacion correcta';
                     $_SESSION['idusuario_e'] = $usuario->getIdUsuarioE();
                     $_SESSION['usuario_e'] = $usuario->getUsuario();
+                    $_SESSION['contra'] = $usuario->getClaveUsuario();
                     $_SESSION['nombre_empleado'] = $usuario->getNombreEmpleado();
                     $_SESSION['apellido_empleado'] = $usuario->getApellidoEmpleado();
                     $_SESSION['idtipo_usuario_e'] = $usuario->getIdTipoU();
                     $_SESSION['tipo_usuario_e'] = $usuario->getTipoUsuario();
+                    $_SESSION['dui_empleado'] = $usuario->getDUIEmpleado();
+                    $_SESSION['nit_empleado'] = $usuario->getNITEmpleado();
+                    $_SESSION['telefono_empleado'] = $usuario->getTelefono();
+                    $_SESSION['correo_empleado'] = $usuario->getCorreoEmpleado();
+                    $result['message'] = 'Autenticacion correcta';
                 }
                 //Si el usuario es el correcto pero la contra es incorrecta
                 else {

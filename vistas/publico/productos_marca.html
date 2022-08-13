@@ -22,73 +22,6 @@
 <body>
     <!--Encabezado del sitio web-->
     <header>
-        <!--Anuncios-->
-        <div id="barra_anuncio" class="z-depth-1">
-            <a href="#" class="mensaje_arriba">
-                <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
-                <p>Esta semana Descuento en la Decoracion de oficina</p>
-            </a>
-        </div>
-        <!--Logo, buscador, idioma, login y carrito de compras-->
-        <div id="apartado_buscador">
-            <!--Logo-->
-            <div id="logo_imagen">
-                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
-            </div>
-            <!--Categoria de busqueda-->
-            <div id="boton_categoria" class="hide-on-med-and-down">
-                <div class="input-field grey lighten-2 z-depth-2">
-                    <select>
-                        <option value="" disabled selected>Todo</option>
-                        <option value="1">Decoración</option>
-                        <option value="2">Accesorios</option>
-                        <option value="3">Artesanales</option>
-                        <option value="4">Marcas</option>
-                        <option value="5">Color</option>
-                    </select>
-                </div>
-            </div>
-            <!-- Buscador -->
-            <div id="buscador" class="hide-on-med-and-down">
-                <nav class="grey lighten-2">
-                    <div class="nav-wrapper">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
-            </div>
-            <!--Idioma-->
-            <div id="boton_idioma">
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-trigger btn grey lighten-2' href='#' data-target='dropdown_idioma'>
-                    <p>Español</p>
-                    <img src="../../recursos/iconografia/el_salvador.png" alt="español" width="20" height="20">
-                </a>
-                <!-- Dropdown Structure -->
-                <ul id='dropdown_idioma' class='dropdown-content'>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">English<img src="../../recursos/iconografia/inglaterra.png" alt="english"
-                                width="20" height="20"></a></li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">Français<img src="../../recursos/iconografia/francia.png" alt="frances" width="20"
-                                height="20"></a></li>
-                </ul>
-            </div>
-            <!--Login-->
-            <div id="boton_login" class="hide-on-med-and-down">
-                <a href="index.html"><img class="tooltipped" data-position="bottom"
-                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
-            </div>
-            <!--Carrito de Compras-->
-            <div id="boton_carrito">
-                <a href=""><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom"
-                        data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
-            </div>
-        </div>
     </header>
     <!--Menú de navegación del sitio web-->
     <div class="navbar-fixed" id="menu">
@@ -130,39 +63,41 @@
     </ul>
     <!--Contenido del sitio web-->
     <main>
-        <div class="row">
-            <div class="col s12 m12 l3 xl3">
-                <form method="post" id="buscador_marca">
-                    <h3 id="titulo_izquierdo">Marcas</h3>
-                    <div class="input-field col s10">
-                        <input id="buscador_input" name="buscador_input" type="text" class="validate">
-                        <label for="buscador_input">Nombre marca: </label>
+        <div id="contenido">
+            <div class="row">
+                <div class="col s3 m3 l3 xl3">
+                    <div>
+                        <h3 id="title">Marca</h3>
                     </div>
-                    <div class="botones_busqueda col s10">
-                        <button class="boton_filtrar" type="submit" class="btn waves-effect waves-teal z-depth-2">Filtrar</button>
-                        <a class="boton_limpiar" class="btn waves-effect waves-teal z-depth-2" onclick="cargarMarcas()">Recargar</a>
+                    <div class="precio_cantidad" id="rango_precios">
+                        <h5>Precio</h5>
+                        <a onclick="Rango(0, 25)" href="#">$0 a $25</a>
+                        <a onclick="Rango(25, 50)" href="#">$25 a $50</a>
+                        <a onclick="Rango(50, 100)" href="#">$50 a $100</a>
+                        <a onclick="RangoMax()" href="#">$100 y más</a>
                     </div>
-                    <div class="input-field col s10">
-                        <select onchange="ordenAZ(this.value)">
-                            <option value="disabled selected">Nombre (A-Z)</option>
-                            <option value="1">A-Z</option>
-                            <option value="2">Z-A</option>
-                        </select>
-                        <label>Ordenar Por:</label>
+                    <h5>Color</h5>
+                    <div class="row">
+                        <a class="coloriz uno col s1 button" href="#"></a>
+                        <a class="coloriz dos col s1 button" href="#"></a>
+                        <a class="coloriz tres col s1 button" href="#"></a>
+                        <a class="coloriz cuatro col s1 button" href="#"></a>
+                        <a class="coloriz cinco col s1 button" href="#"></a>
+                        <a class="coloriz seis col s1 button" href="#"></a>
                     </div>
-                </form>
-            </div>
-            <div class="col s12 m12 l9 xl9">
-                <div class="row cuadro_marca" id="cuadro_marca">
-                    
+                    <div class="row">
+                        <a class="coloriz siete col s1 button" href="#"></a>
+                        <a class="coloriz ocho col s1 button" href="#"></a>
+                        <a class="coloriz nueve col s1 button" href="#"></a>
+                        <a class="coloriz diez col s1 button" href="#"></a>
+                        <a class="coloriz once col s1 button" href="#"></a>
+                        <a class="coloriz doce col s1 button" href="#"></a>
+                    </div>
                 </div>
-            </div>
-            <div id="numeros_pag">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#!">1</a></li>
-                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <div class="col s9 m9 l9 xl9" id="seccion_productos">
+                    <!--Card-->
+                    <div class="row" id="descuentos"></div>
+                </div>
             </div>
         </div>
     </main>
@@ -226,10 +161,8 @@
     <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
     <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
-    <script type="text/javascript" src="../../controladores/publico/online.js"></script>  
-    <script type="text/javascript" src="../../controladores/publico/marcas.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>
 </body>
 
 </html>
