@@ -18,17 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const ID = params.get('id');
     const NAME = params.get('nombre');
     // Se llama a la función que muestra los productos de la categoría seleccionada previamente.
-    readProductosCategoria(ID, NAME);
+    readProductosMarca(ID, NAME);
 });
 
 // Función para obtener y mostrar los productos de acuerdo a la categoría seleccionada.
-function readProductosCategoria(id, categoria) {
+function readProductosMarca(id, marca) {
     // Se define un objeto con los datos del registro seleccionado.
     const DATA = new FormData();
-    DATA.append('idcategoria_producto', id);
+    DATA.append('idmarca', id);
     document.getElementById('id').value = id;
     // Petición para solicitar los productos de la categoría seleccionada.
-    fetch(API_CATALOGO + 'readProductosCategoria', {
+    fetch(API_CATALOGO + 'readProductosMarca', {
         method: 'post',
         body: DATA
     }).then(function (request) {
@@ -63,9 +63,9 @@ function readProductosCategoria(id, categoria) {
                         `;
                     });
                     // Se asigna como título la categoría de los productos.
-                    document.getElementById('title').textContent = 'Categoría: ' + categoria;
+                    document.getElementById('title').textContent = marca;
                     // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
-                    document.getElementById('productosc').innerHTML = content;
+                    document.getElementById('productos_marca').innerHTML = content;
                     // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
                     M.Materialbox.init(document.querySelectorAll('.materialboxed'));
                 } else {
@@ -86,7 +86,7 @@ function buscar(event) {
     let valorInput = document.getElementById("id").value;
     document.getElementById('ide').value = valorInput;
     // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    fetch(API_CATALOGO + 'search', {
+    fetch(API_CATALOGO + 'searchProductoMarca', {
         method: 'post',
         body: new FormData(document.getElementById('thesearch'))
     }).then(function (request) {
@@ -123,7 +123,7 @@ function buscar(event) {
                         `;
                     });
                     // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
-                    document.getElementById('productosc').innerHTML = content;
+                    document.getElementById('productos_marca').innerHTML = content;
                 } else {
                     sweetAlert(2, response.exception, null);
                 }
@@ -173,7 +173,7 @@ function busquedaRangos(action, form) {
                         `;
                     });
                     // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
-                    document.getElementById('productosc').innerHTML = content;
+                    document.getElementById('productos_marca').innerHTML = content;
                     // Se inicializa el componente Material Box para que funcione el efecto Lightbox.
                     M.Materialbox.init(document.querySelectorAll('.materialboxed'));
                     // Se inicializa el componente Tooltip para que funcionen las sugerencias textuales.
@@ -189,7 +189,7 @@ function busquedaRangos(action, form) {
 }
 
 function Rango(min, max) {
-    let action = 'rangoCategoria';
+    let action = 'rangoMarcas';
     let valor = document.getElementById('id').value;
     const data = new FormData();
     data.append('id', valor);
@@ -200,7 +200,7 @@ function Rango(min, max) {
 }
 
 function RangoMax() {
-    let action = 'rangoMaxCategoria';
+    let action = 'rangoMaxMarca';
     let valor = document.getElementById('id').value;
     const data = new FormData();
     data.append('id', valor);
