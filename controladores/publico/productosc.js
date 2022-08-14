@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let params = new URLSearchParams(location.search);
     // Se obtienen los datos localizados por medio de las variables.
     const ID = params.get('id');
-
     const NAME = params.get('nombre');
     // Se llama a la función que muestra los productos de la categoría seleccionada previamente.
     readProductosCategoria(ID, NAME);

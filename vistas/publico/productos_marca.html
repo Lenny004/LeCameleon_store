@@ -62,43 +62,59 @@
         </div>
     </ul>
     <!--Contenido del sitio web-->
-    <main>
-        <div id="contenido">
-            <div class="row">
-                <div class="col s3 m3 l3 xl3">
-                    <div>
-                        <h3 id="title">Marca</h3>
-                    </div>
-                    <div class="precio_cantidad" id="rango_precios">
-                        <h5>Precio</h5>
-                        <a onclick="Rango(0, 25)" href="#">$0 a $25</a>
-                        <a onclick="Rango(25, 50)" href="#">$25 a $50</a>
-                        <a onclick="Rango(50, 100)" href="#">$50 a $100</a>
-                        <a onclick="RangoMax()" href="#">$100 y más</a>
-                    </div>
-                    <h5>Color</h5>
+    <main class="contenido">
+        <input id="id" name="id" class="hide" type="number">
+        <div class="row">
+            <div class="col l3 xl3 hide-on-med-and-down">
+                <div>
+                    <h3 class="titulo_categoria" id="title"></h3>
+                </div>
+                <div class="precio_cantidad" id="rango_precios">
+                    <h5>Precio</h5>
+                    <a onclick="Rango(0, 25)" href="#">$0 a $25</a>
+                    <a onclick="Rango(25, 50)" href="#">$25 a $50</a>
+                    <a onclick="Rango(50, 100)" href="#">$50 a $100</a>
+                    <a onclick="RangoMax()" href="#">$100 y más</a>
                     <div class="row">
-                        <a class="coloriz uno col s1 button" href="#"></a>
-                        <a class="coloriz dos col s1 button" href="#"></a>
-                        <a class="coloriz tres col s1 button" href="#"></a>
-                        <a class="coloriz cuatro col s1 button" href="#"></a>
-                        <a class="coloriz cinco col s1 button" href="#"></a>
-                        <a class="coloriz seis col s1 button" href="#"></a>
-                    </div>
-                    <div class="row">
-                        <a class="coloriz siete col s1 button" href="#"></a>
-                        <a class="coloriz ocho col s1 button" href="#"></a>
-                        <a class="coloriz nueve col s1 button" href="#"></a>
-                        <a class="coloriz diez col s1 button" href="#"></a>
-                        <a class="coloriz once col s1 button" href="#"></a>
-                        <a class="coloriz doce col s1 button" href="#"></a>
                     </div>
                 </div>
-                <div class="col s9 m9 l9 xl9" id="seccion_productos">
-                    <!--Card-->
-                    <div class="row" id="descuentos"></div>
+                <div class="ofertas_descuentos">
+                    <h5>Ofertas y Descuentos</h5>
+                    <a href="ofertas.html">Todos los Descuentos</a>
+                </div>
+                <h5>Color</h5>
+                <div class="row">
+                    <a class="coloriz uno col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz dos col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz tres col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz cuatro col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz cinco col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz seis col s1 button" href="billeteras.html"></a>
+                </div>
+                <div class="row">
+                    <a class="coloriz siete col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz ocho col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz nueve col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz diez col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz once col s1 button" href="billeteras.html"></a>
+                    <a class="coloriz doce col s1 button" href="billeteras.html"></a>
                 </div>
             </div>
+            <div class="col s12 m12 l9 xl9" id="seccion_productos">
+                <!--Card-->
+                <div class="row" id="productos_marca"></div>
+            </div>
+            <!-- Fila para mostrar los productos disponibles -->
+            <div class="row" id="productos"></div>
+            <ul class="pagination">
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#!">1</a></li>
+                <li class="waves-effect"><a href="#!">2</a></li>
+                <li class="waves-effect"><a href="#!">3</a></li>
+                <li class="waves-effect"><a href="#!">4</a></li>
+                <li class="waves-effect"><a href="#!">5</a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
         </div>
     </main>
     <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
@@ -163,6 +179,7 @@
     <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controladores/componentes.js"></script>
     <script type="text/javascript" src="../../controladores/publico/online.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/productos_marca.js"></script>
 </body>
 
 </html>

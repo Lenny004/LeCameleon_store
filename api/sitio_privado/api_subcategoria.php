@@ -83,7 +83,7 @@ if (isset($_GET['action'])) {
             case 'update':
                 $_POST = $subcategorias->validateForm($_POST);
                 if (!$subcategorias->setidSubCategoriaProducto($_POST['ide'])) {
-                    $result['exception'] = 'Subcategoria incorrecta xdddd';
+                    $result['exception'] = 'Subcategoria incorrecta';
                 } elseif (!$data = $subcategorias->readOne()) {
                     $result['exception'] = 'Subcategoria inexistente';
                 } elseif (!$subcategorias->setsubCategoriaProducto($_POST['subcategoria_modificar'])) {

@@ -27,6 +27,7 @@ class Productos extends Validator
     private $idproducto = null;
     private $idcategoria = null;
     private $idsubcategoria = null;
+    private $idmarca = null;
     private $promedio = null;
     private $total_resenia = null;
     private $min = 0;
@@ -63,6 +64,16 @@ class Productos extends Validator
     {
         if ($this->validacionNumeroNaturales($value)) {
             $this->idsubcategoria = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setIdMarca($value)
+    {
+        if ($this->validacionNumeroNaturales($value)) {
+            $this->idmarca = $value;
             return true;
         } else {
             return false;
@@ -543,6 +554,20 @@ class Productos extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    //funcionamiento para cargar las cards de productos por marca
+    public function readProductosMarca($idmarca, $buscador)
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+        FROM tbproducto tp
+        WHERE tp.existencias > 0
+        AND tp.idestado_producto = 1
+        AND tp.id_marca = ?
+        AND tp.nombre_producto ILIKE ?
+        ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
+        $params = array($idmarca, "%$buscador%");
+        return Database::obtenerSentencias($sql, $params);
+    }
+
     //Ver en detalle del producto
     public function leerUnProducto()
     {
@@ -558,7 +583,8 @@ class Productos extends Validator
     }
 
     // Función que buscará las imagenes secundarias del producto
-    public function obtenerImagenesSecundarias(){
+    public function obtenerImagenesSecundarias()
+    {
         $sql = 'SELECT imagen_producto FROM tbimagen_producto WHERE idproducto =  ?';
         $params = array($this->idproducto);
         return Database::obtenerSentencias($sql, $params);
@@ -675,6 +701,23 @@ class Productos extends Validator
         return Database::obtenerSentencias($sql, $params);
     }
 
+    public function RangoMaxProductoMarca($idmarca)
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+                FROM tbproducto tp
+                LEFT JOIN tbsubcategoria_producto tsc
+                ON tp.idsubcategoria_producto = tsc.idsubcategoria_producto
+                LEFT JOIN tbcategoria tc
+                ON tc.idcategoria_producto = tsc.idcategoria_producto
+                WHERE tp.existencias > 0
+				AND tp.idestado_producto = 1
+                AND tp.id_marca = ?
+                AND precio_producto >= 100
+                ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
+        $params = array($idmarca);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
     public function RangoProductoSubcategoria()
     {
         $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
@@ -719,6 +762,20 @@ class Productos extends Validator
                 AND tp.porcentaje_descuento > 0
                 ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
         $params = array($this->min, $this->max);
+        return Database::obtenerSentencias($sql, $params);
+    }
+
+    public function rangoMarca($idmarca)
+    {
+        $sql = 'SELECT tp.idproducto, tp.nombre_producto, tp.precio_producto, tp.imagen_principal
+        FROM tbproducto tp
+        WHERE tp.existencias > 0
+        AND tp.id_marca = ?
+        AND tp.idestado_producto = 1
+        AND precio_producto BETWEEN ? AND ?
+        AND tp.porcentaje_descuento > 0
+        ORDER BY idproducto ASC LIMIT 6 OFFSET 0';
+        $params = array($idmarca, $this->min, $this->max);
         return Database::obtenerSentencias($sql, $params);
     }
 

@@ -7,6 +7,8 @@ require_once('../modelo/productos.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
+    // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
+    session_start();
     // Se instancian las clases correspondientes.
     $categoria = new Categorias;
     $producto = new Productos;
@@ -56,6 +58,18 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No existen productos para mostrar';
             }
             break;
+        case 'readProductosMarca':
+            if (!$producto->setIdMarca($_POST['idmarca'])) {
+                $result['exception'] = 'Marca incorrecta';
+            } elseif ($result['dataset'] = $producto->readProductosMarca($_POST['idmarca'], '')) {
+                $result['status'] = 1;
+                $_SESSION['idmarca'] = $_POST['idmarca'];
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos para mostrar';
+            }
+            break;
             //Buscador pero por categoria
         case 'search':
             $_POST = $producto->validateForm($_POST);
@@ -76,6 +90,20 @@ if (isset($_GET['action'])) {
             if ($_POST['search'] == '') {
                 $result['exception'] = 'Ingrese un valor para buscar';
             } elseif ($result['dataset'] = $producto->readProductossubCategoria($_POST['ide'], $_POST['search'])) {
+                $result['status'] = 1;
+                $result['message'] = 'Valor encontrado';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No hay coincidencias';
+            }
+            break;
+            //Buscador de productos por marca
+        case 'searchProductoMarca':
+            $_POST = $producto->validateForm($_POST);
+            if ($_POST['search'] == '') {
+                $result['exception'] = 'Ingrese un valor para buscar';
+            } elseif ($result['dataset'] = $producto->readProductosMarca($_POST['ide'], $_POST['search'])) {
                 $result['status'] = 1;
                 $result['message'] = 'Valor encontrado';
             } elseif (Database::getException()) {
@@ -208,6 +236,32 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No existen productos con esos precios';
             }
             break;
+        case 'rangoMarcas':
+            if (!$producto->setMin($_POST['min'])) {
+                $result['exception'] = 'Ingrese un valor minimo valido para buscar';
+            } elseif (!$producto->setMax($_POST['max'])) {
+                $result['exception'] = 'Ingrese un valor máximo valido para buscar';
+            } elseif ($result['dataset'] = $producto->rangoMarca($_SESSION['idmarca'])) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
+        case 'rangoMaxMarca':
+            if (!$producto->setIdMarca($_POST['id'])) {
+                $result['exception'] = 'Producto incorrecto';
+            } elseif ($result['dataset'] = $producto->RangoMaxProductoMarca($_SESSION['idmarca'])) {
+                $result['status'] = 1;
+                $result['message'] = 'Se han encontrado productos';
+            } elseif (Database::getException()) {
+                $result['exception'] = Database::getException();
+            } else {
+                $result['exception'] = 'No existen productos con esos precios';
+            }
+            break;
         case 'rangoMaxCategoria':
             if (!$producto->setIdCategoria($_POST['id'])) {
                 $result['exception'] = 'Producto incorrecto';
@@ -248,7 +302,6 @@ if (isset($_GET['action'])) {
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
-    $result['exception'] = "Acceso denegado";
     print(json_encode($result));
 } else {
     $result['exception'] = "Recurso no disponible";
