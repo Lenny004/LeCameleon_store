@@ -210,7 +210,7 @@ function generarImagenMarca(id) {
                     let imagen_secundaria = '';
                     imagen_secundaria += `<img class="imagen_muestra materialboxed" src="${SERVER}images/marca/${response.dataset.imagen_marca}">`;
                     document.getElementById("imagenes_secundarias").innerHTML += imagen_secundaria;
-                      M.AutoInit();
+                    M.AutoInit();
                 } else {
                     console.log(imagen_secundaria);
                 }

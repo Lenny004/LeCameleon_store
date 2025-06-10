@@ -19,7 +19,7 @@ class Productos extends Validator
     private $estado = null;
     private $subcategoria = null;
     private $imagen = null;
-    //private $imagenes = null;
+    private $imagenes = null;
     private $link = '../images/productos/';
     private $idvaloracion = null;
     private $estado_valoracion = null;
@@ -36,6 +36,7 @@ class Productos extends Validator
     private $opcion = null;
     private $fechainicio = null;
     private $fechafinal = null;
+    private $buscador = null;
 
     /*
     *   Métodos para validar y asignar valores de los atributos.
