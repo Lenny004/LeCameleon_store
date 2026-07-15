@@ -20,6 +20,14 @@
                 </ul>
             </div>
             <div>
+                <p class="footer__heading">Ayuda</p>
+                <ul class="footer__links">
+                    @if (Route::has('returns'))
+                        <li><a href="{{ route('returns') }}" class="footer__link">Devoluciones</a></li>
+                    @endif
+                </ul>
+            </div>
+            <div>
                 <p class="footer__heading">Cuenta</p>
                 <ul class="footer__links">
                     @auth

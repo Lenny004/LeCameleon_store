@@ -14,11 +14,19 @@ use Illuminate\Validation\ValidationException;
  */
 class InventoryService
 {
+    public function __construct(
+        private readonly StockAlertService $stockAlertService,
+    ) {}
+
     public function stockIn(Product $product, int $quantity, ?User $user = null, ?string $notes = null): InventoryMovement
     {
-        return $this->mutate($product, $quantity, InventoryMovementType::StockIn, function (Product $locked) use ($quantity) {
+        $movement = $this->mutate($product, $quantity, InventoryMovementType::StockIn, function (Product $locked) use ($quantity) {
             $locked->quantity_available += $quantity;
         }, $user, $notes);
+
+        $this->stockAlertService->notifyPendingAlerts($product->fresh());
+
+        return $movement;
     }
 
     public function stockOut(
@@ -126,12 +134,13 @@ class InventoryService
     ): InventoryMovement {
         return DB::transaction(function () use ($product, $newQuantityAvailable, $user, $notes) {
             $locked = Product::query()->lockForUpdate()->findOrFail($product->id);
-            $delta = $newQuantityAvailable - $locked->quantity_available;
+            $previousQuantity = $locked->quantity_available;
+            $delta = $newQuantityAvailable - $previousQuantity;
 
             $locked->quantity_available = $newQuantityAvailable;
             $locked->save();
 
-            return InventoryMovement::query()->create([
+            $movement = InventoryMovement::query()->create([
                 'product_id' => $locked->id,
                 'user_id' => $user?->id,
                 'type' => InventoryMovementType::Adjust,
@@ -139,6 +148,12 @@ class InventoryService
                 'notes' => $notes,
                 'created_at' => now(),
             ]);
+
+            if ($newQuantityAvailable > $previousQuantity) {
+                $this->stockAlertService->notifyPendingAlerts($locked);
+            }
+
+            return $movement;
         });
     }
 

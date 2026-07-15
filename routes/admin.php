@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReturnRequestController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
@@ -25,6 +26,11 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
         Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
         Route::post('orders/{order}/capture-payment', [OrderController::class, 'capturePayment'])->name('orders.capture-payment');
+        Route::patch('orders/{order}/shipment', [OrderController::class, 'updateShipment'])->name('orders.shipment');
+
+        Route::get('return-requests', [ReturnRequestController::class, 'index'])->name('return-requests.index');
+        Route::patch('return-requests/{returnRequest}/approve', [ReturnRequestController::class, 'approve'])->name('return-requests.approve');
+        Route::patch('return-requests/{returnRequest}/deny', [ReturnRequestController::class, 'deny'])->name('return-requests.deny');
 
         Route::resource('users', UserController::class);
         Route::resource('categories', CategoryController::class);

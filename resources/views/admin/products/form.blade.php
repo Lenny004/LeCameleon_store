@@ -175,6 +175,36 @@
             <label class="form-label" for="material">Material</label>
             <input type="text" id="material" name="material" class="form-input" value="{{ old('material', $product->material ?? '') }}">
         </div>
+
+        <h3 class="text-small" style="font-weight:700;margin-top:var(--space-md);">Measurements (cm)</h3>
+        <p class="text-muted" style="font-size:0.85rem;margin-bottom:var(--space-md);">Optional flat-lay garment measurements for the product detail page.</p>
+        @php
+            $measurementLabels = [
+                'chest_cm' => 'Chest',
+                'waist_cm' => 'Waist',
+                'hips_cm' => 'Hips',
+                'length_cm' => 'Length',
+                'shoulder_cm' => 'Shoulder',
+                'sleeve_cm' => 'Sleeve',
+            ];
+            $existingMeasurements = old('measurements', $product->measurements ?? []);
+        @endphp
+        <div class="form-row form-row--2">
+            @foreach ($measurementLabels as $measurementKey => $measurementLabel)
+                <div class="form-group">
+                    <label class="form-label" for="measurement_{{ $measurementKey }}">{{ $measurementLabel }} (cm)</label>
+                    <input
+                        type="number"
+                        id="measurement_{{ $measurementKey }}"
+                        name="measurement_{{ $measurementKey }}"
+                        class="form-input"
+                        step="0.1"
+                        min="0"
+                        value="{{ old("measurement_{$measurementKey}", $existingMeasurements[$measurementKey] ?? '') }}"
+                    >
+                </div>
+            @endforeach
+        </div>
     </div>
 
     <div class="card">

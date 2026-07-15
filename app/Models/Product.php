@@ -39,6 +39,7 @@ class Product extends Model
         'size_label',
         'color',
         'material',
+        'measurements',
         'is_unique_piece',
         'quantity_available',
         'quantity_reserved',
@@ -62,6 +63,7 @@ class Product extends Model
             'quantity_reserved' => 'integer',
             'low_stock_threshold' => 'integer',
             'published_at' => 'datetime',
+            'measurements' => 'array',
         ];
     }
 
@@ -103,6 +105,11 @@ class Product extends Model
     public function views(): HasMany
     {
         return $this->hasMany(ProductView::class);
+    }
+
+    public function stockAlerts(): HasMany
+    {
+        return $this->hasMany(StockAlert::class);
     }
 
     public function isInStock(): bool

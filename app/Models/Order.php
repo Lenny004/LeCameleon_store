@@ -71,6 +71,11 @@ class Order extends Model
         return $this->hasMany(Shipment::class);
     }
 
+    public function returnRequests(): HasMany
+    {
+        return $this->hasMany(ReturnRequest::class);
+    }
+
     /**
      * Fulfillment steps with completed flags for the current status.
      *
