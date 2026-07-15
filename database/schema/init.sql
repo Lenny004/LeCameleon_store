@@ -451,3 +451,208 @@ CREATE TABLE settings (
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- -----------------------------------------------------------------------------
+-- sv_departments — El Salvador departments (14, post-2024 reform)
+-- -----------------------------------------------------------------------------
+CREATE TABLE sv_departments (
+    id              BIGSERIAL PRIMARY KEY,
+    code            VARCHAR(10) NOT NULL UNIQUE,
+    name            VARCHAR(120) NOT NULL,
+    slug            VARCHAR(140) NOT NULL UNIQUE,
+    is_active       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- -----------------------------------------------------------------------------
+-- sv_municipalities — 44 consolidated municipalities with flat shipping rates
+-- -----------------------------------------------------------------------------
+CREATE TABLE sv_municipalities (
+    id                  BIGSERIAL PRIMARY KEY,
+    sv_department_id    BIGINT NOT NULL REFERENCES sv_departments (id) ON DELETE CASCADE,
+    code                VARCHAR(20) NOT NULL UNIQUE,
+    name                VARCHAR(150) NOT NULL,
+    slug                VARCHAR(180) NOT NULL UNIQUE,
+    region_label        VARCHAR(20) NOT NULL, -- Norte|Sur|Este|Oeste|Centro|Costa
+    base_shipping_cost  NUMERIC(10, 2) NOT NULL DEFAULT 0,
+    latitude            NUMERIC(10, 7),
+    longitude           NUMERIC(10, 7),
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_sv_municipalities_department ON sv_municipalities (sv_department_id);
+CREATE INDEX idx_sv_municipalities_region ON sv_municipalities (region_label);
+
+-- -----------------------------------------------------------------------------
+-- sv_districts — Former municipalities (262 total; seed samples only)
+-- -----------------------------------------------------------------------------
+CREATE TABLE sv_districts (
+    id                  BIGSERIAL PRIMARY KEY,
+    sv_municipality_id  BIGINT NOT NULL REFERENCES sv_municipalities (id) ON DELETE CASCADE,
+    name                VARCHAR(150) NOT NULL,
+    slug                VARCHAR(180) NOT NULL,
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (sv_municipality_id, slug)
+);
+
+-- -----------------------------------------------------------------------------
+-- logistics_companies — Carrier / partner brands
+-- -----------------------------------------------------------------------------
+CREATE TABLE logistics_companies (
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name                VARCHAR(150) NOT NULL,
+    legal_name          VARCHAR(200),
+    trade_name          VARCHAR(150),
+    tax_id              VARCHAR(30),
+    email               VARCHAR(150),
+    phone               VARCHAR(30),
+    address_line        VARCHAR(255),
+    sv_municipality_id  BIGINT REFERENCES sv_municipalities (id) ON DELETE SET NULL,
+    website             VARCHAR(255),
+    logo_path           VARCHAR(500),
+    contact_person      VARCHAR(150),
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    notes               TEXT,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    deleted_at          TIMESTAMPTZ
+);
+
+-- -----------------------------------------------------------------------------
+-- logistics_workers — Collectors, drivers, dispatchers
+-- -----------------------------------------------------------------------------
+CREATE TABLE logistics_workers (
+    id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    logistics_company_id    UUID REFERENCES logistics_companies (id) ON DELETE SET NULL,
+    user_id                 UUID REFERENCES users (id) ON DELETE SET NULL,
+    employee_code           VARCHAR(30),
+    first_name              VARCHAR(100) NOT NULL,
+    last_name               VARCHAR(100) NOT NULL,
+    document_id             VARCHAR(20),
+    phone                   VARCHAR(30),
+    email                   VARCHAR(150),
+    role                    VARCHAR(20) NOT NULL, -- collector|driver|dispatcher|supervisor
+    hire_date               DATE,
+    is_active               BOOLEAN NOT NULL DEFAULT TRUE,
+    notes                   TEXT,
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    deleted_at              TIMESTAMPTZ
+);
+
+CREATE INDEX idx_logistics_workers_role ON logistics_workers (role);
+
+-- -----------------------------------------------------------------------------
+-- logistics_vehicles — Fleet units assigned to companies
+-- -----------------------------------------------------------------------------
+CREATE TABLE logistics_vehicles (
+    id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    logistics_company_id    UUID NOT NULL REFERENCES logistics_companies (id) ON DELETE CASCADE,
+    logistics_worker_id     UUID REFERENCES logistics_workers (id) ON DELETE SET NULL,
+    plate_number            VARCHAR(20) NOT NULL UNIQUE,
+    brand                   VARCHAR(80),
+    model                   VARCHAR(80),
+    year                    SMALLINT,
+    color                   VARCHAR(40),
+    vehicle_type            VARCHAR(20) NOT NULL, -- motorcycle|van|truck|bicycle|car
+    capacity_kg             NUMERIC(8, 2),
+    is_active               BOOLEAN NOT NULL DEFAULT TRUE,
+    notes                   TEXT,
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_logistics_vehicles_type ON logistics_vehicles (vehicle_type);
+
+-- -----------------------------------------------------------------------------
+-- shipping_zones — Delivery zones (may map 1:1 to a municipality)
+-- -----------------------------------------------------------------------------
+CREATE TABLE shipping_zones (
+    id                  BIGSERIAL PRIMARY KEY,
+    code                VARCHAR(30) NOT NULL UNIQUE,
+    name                VARCHAR(150) NOT NULL,
+    description         TEXT,
+    sv_municipality_id  BIGINT REFERENCES sv_municipalities (id) ON DELETE SET NULL,
+    sort_order          SMALLINT NOT NULL DEFAULT 0,
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- -----------------------------------------------------------------------------
+-- shipping_zone_rates — Origin-to-destination zone pricing
+-- -----------------------------------------------------------------------------
+CREATE TABLE shipping_zone_rates (
+    id                      BIGSERIAL PRIMARY KEY,
+    origin_zone_id          BIGINT NOT NULL REFERENCES shipping_zones (id) ON DELETE CASCADE,
+    destination_zone_id   BIGINT NOT NULL REFERENCES shipping_zones (id) ON DELETE CASCADE,
+    base_fee                NUMERIC(10, 2) NOT NULL,
+    per_km_fee              NUMERIC(10, 2) NOT NULL DEFAULT 0,
+    min_fee                 NUMERIC(10, 2) NOT NULL DEFAULT 0,
+    max_fee                 NUMERIC(10, 2),
+    estimated_hours         NUMERIC(6, 2),
+    is_active               BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (origin_zone_id, destination_zone_id)
+);
+
+-- -----------------------------------------------------------------------------
+-- dispatch_schedules — Next pickup / dispatch windows
+-- -----------------------------------------------------------------------------
+CREATE TABLE dispatch_schedules (
+    id                  BIGSERIAL PRIMARY KEY,
+    name                VARCHAR(150) NOT NULL,
+    next_dispatch_at    TIMESTAMPTZ NOT NULL,
+    cutoff_at           TIMESTAMPTZ NOT NULL,
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    notes               TEXT,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- -----------------------------------------------------------------------------
+-- delivery_warnings — Checkout / tracking / admin notices
+-- -----------------------------------------------------------------------------
+CREATE TABLE delivery_warnings (
+    id              BIGSERIAL PRIMARY KEY,
+    code            VARCHAR(50) NOT NULL UNIQUE,
+    title           VARCHAR(200) NOT NULL,
+    body            TEXT NOT NULL,
+    severity        VARCHAR(20) NOT NULL, -- info|warning|danger
+    applies_to      VARCHAR(20) NOT NULL, -- checkout|tracking|admin
+    is_active       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- -----------------------------------------------------------------------------
+-- shipment_events — Shipment lifecycle and recipient outcome log
+-- -----------------------------------------------------------------------------
+CREATE TABLE shipment_events (
+    id                  BIGSERIAL PRIMARY KEY,
+    shipment_id         BIGINT NOT NULL REFERENCES shipments (id) ON DELETE CASCADE,
+    status              VARCHAR(30) NOT NULL,
+    recipient_outcome   VARCHAR(30), -- accepted|refused|no_answer|wrong_address|rescheduled|left_with_neighbor
+    note                TEXT,
+    happened_at         TIMESTAMPTZ NOT NULL,
+    created_by          UUID REFERENCES users (id) ON DELETE SET NULL,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_shipment_events_shipment ON shipment_events (shipment_id, happened_at);
+
+-- -----------------------------------------------------------------------------
+-- shipments (logistics extensions) — columns added via migration 2026_07_15_000016
+-- logistics_company_id, logistics_worker_id, logistics_vehicle_id,
+-- origin_municipality_id, destination_municipality_id, shipping_zone_rate_id,
+-- quoted_fee, distance_km, recipient_name, recipient_phone, recipient_notes,
+-- next_attempt_at; status widened to VARCHAR(30)
+-- -----------------------------------------------------------------------------
+-- coupons.shipping_only — BOOLEAN DEFAULT FALSE (migration 2026_07_15_000017)
