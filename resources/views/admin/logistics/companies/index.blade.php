@@ -28,40 +28,16 @@
         <tbody>
             @forelse ($companies as $company)
                 <tr>
-                    <td>
-                        <a href="{{ route('admin.logistics.companies.show', $company) }}" class="logistics-link">
-                            {{ $company->name }}
-                        </a>
-                    </td>
-                    <td><code>{{ $company->nit }}</code></td>
-                    <td>
-                        {{ $company->contact_name }}
-                        @if ($company->contact_phone)
-                            <span class="text-muted logistics-meta">{{ $company->contact_phone }}</span>
-                        @endif
-                    </td>
-                    <td>
-                        @if ($company->municipality)
-                            {{ $company->municipality->displayName() }}
-                            <span class="text-muted logistics-meta">{{ $company->municipality->department?->name }}</span>
-                        @else
-                            —
-                        @endif
-                    </td>
+                    <td><a href="{{ route('admin.logistics.companies.show', $company) }}" class="logistics-link">{{ $company->name }}</a></td>
+                    <td><code>{{ $company->tax_id ?: '—' }}</code></td>
+                    <td>{{ $company->contact_person ?: '—' }}</td>
+                    <td>{{ $company->municipality?->name ?? '—' }}</td>
                     <td>{{ $company->workers_count }}</td>
-                    <td>
-                        <span class="badge badge--{{ $company->is_active ? 'success' : 'warning' }}">
-                            {{ $company->is_active ? 'Active' : 'Inactive' }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.logistics.companies.edit', $company) }}" class="btn btn--ghost btn--sm">Edit</a>
-                    </td>
+                    <td><span class="badge badge--{{ $company->is_active ? 'success' : 'warning' }}">{{ $company->is_active ? 'Active' : 'Inactive' }}</span></td>
+                    <td><a href="{{ route('admin.logistics.companies.edit', $company) }}" class="btn btn--ghost btn--sm">Edit</a></td>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="7" class="text-muted">No logistics companies yet.</td>
-                </tr>
+                <tr><td colspan="7" class="text-muted">No logistics companies yet.</td></tr>
             @endforelse
         </tbody>
     </table>
