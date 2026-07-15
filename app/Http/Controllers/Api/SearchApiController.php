@@ -25,6 +25,18 @@ class SearchApiController extends Controller
             (int) $request->input('per_page', 12),
         );
 
-        return response()->json($products);
+        $suggestions = $this->catalogService
+            ->searchSuggestions((string) $request->input('q', ''))
+            ->map(fn ($product) => [
+                'slug' => $product->slug,
+                'name' => $product->name,
+                'price' => $product->price,
+            ])
+            ->values();
+
+        return response()->json([
+            ...$products->toArray(),
+            'suggestions' => $suggestions,
+        ]);
     }
 }

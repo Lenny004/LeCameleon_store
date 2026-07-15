@@ -37,14 +37,9 @@ class CatalogService
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
 
-        if (! empty($filters['q'])) {
-            $term = '%'.strtolower((string) $filters['q']).'%';
-            $query->where(function (Builder $builder) use ($term) {
-                $builder
-                    ->whereRaw('LOWER(name) LIKE ?', [$term])
-                    ->orWhereRaw('LOWER(description) LIKE ?', [$term])
-                    ->orWhereRaw('LOWER(sku) LIKE ?', [$term]);
-            });
+        $searchTerms = $this->parseSearchTerms((string) ($filters['q'] ?? ''));
+        if ($searchTerms !== []) {
+            $this->applySearchTerms($query, $searchTerms);
         }
 
         if (! empty($filters['category'])) {
@@ -144,6 +139,31 @@ class CatalogService
             ->get(['slug', 'updated_at']);
     }
 
+    /**
+     * Lightweight matches for autocomplete / highlight UIs.
+     */
+    public function searchSuggestions(string $q, int $limit = 8): Collection
+    {
+        $searchTerms = $this->parseSearchTerms($q);
+
+        if ($searchTerms === []) {
+            return collect();
+        }
+
+        $query = Product::query()
+            ->select(['slug', 'name', 'price'])
+            ->where('status', ProductStatus::Published)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
+
+        $this->applySearchTerms($query, $searchTerms);
+
+        return $query
+            ->orderBy('name')
+            ->limit($limit)
+            ->get();
+    }
+
     public function filterOptions(): array
     {
         $base = Product::query()
@@ -158,6 +178,45 @@ class CatalogService
             'size_labels' => (clone $base)->whereNotNull('size_label')->distinct()->orderBy('size_label')->pluck('size_label'),
             'colors' => (clone $base)->whereNotNull('color')->distinct()->orderBy('color')->pluck('color'),
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function parseSearchTerms(string $q): array
+    {
+        $terms = preg_split('/\s+/u', trim($q), -1, PREG_SPLIT_NO_EMPTY);
+
+        if ($terms === false) {
+            return [];
+        }
+
+        return array_values($terms);
+    }
+
+    /**
+     * Each term must match at least one searchable field (AND across terms).
+     *
+     * @param  list<string>  $terms
+     */
+    private function applySearchTerms(Builder $query, array $terms): void
+    {
+        foreach ($terms as $term) {
+            $like = '%'.strtolower($term).'%';
+
+            $query->where(function (Builder $builder) use ($like) {
+                $builder
+                    ->whereRaw('LOWER(products.name) LIKE ?', [$like])
+                    ->orWhereRaw('LOWER(products.description) LIKE ?', [$like])
+                    ->orWhereRaw('LOWER(products.sku) LIKE ?', [$like])
+                    ->orWhereRaw('LOWER(products.color) LIKE ?', [$like])
+                    ->orWhereRaw('LOWER(products.material) LIKE ?', [$like])
+                    ->orWhereRaw('LOWER(products.era_decade) LIKE ?', [$like])
+                    ->orWhereHas('brand', function (Builder $brandQuery) use ($like) {
+                        $brandQuery->whereRaw('LOWER(name) LIKE ?', [$like]);
+                    });
+            });
+        }
     }
 
     private function applySort(Builder $query, string $sort): Builder

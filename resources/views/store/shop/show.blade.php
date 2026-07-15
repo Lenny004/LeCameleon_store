@@ -178,6 +178,57 @@
                 </form>
             @endif
         </div>
+
+        @php
+            $isPublished = ($product->status?->value ?? $product->status) === 'published'
+                && $product->published_at
+                && $product->published_at <= now();
+            $canMakeOffer = $isPublished && $stock > 0;
+        @endphp
+
+        @if ($canMakeOffer && Route::has('shop.offers.store'))
+            <section class="checkout-section" style="margin-top:var(--space-lg);padding:var(--space-md);">
+                <h2 class="checkout-section__title" style="font-size:1.1rem;">Hacer oferta</h2>
+                <p class="text-muted text-small" style="margin-bottom:var(--space-md);">
+                    Propón un precio por debajo de ${{ number_format((float) $product->price, 2) }}.
+                    @if ($product->is_unique_piece)
+                        Pieza única — negociación disponible.
+                    @endif
+                </p>
+
+                @auth
+                    <form method="POST" action="{{ route('shop.offers.store', $product) }}">
+                        @csrf
+                        <div class="form-group">
+                            <label class="form-label" for="offer_amount">Tu oferta (USD)</label>
+                            <input
+                                type="number"
+                                id="offer_amount"
+                                name="amount"
+                                class="form-input"
+                                step="0.01"
+                                min="1"
+                                max="{{ max(1, (float) $product->price - 0.01) }}"
+                                value="{{ old('amount') }}"
+                                required
+                            >
+                            @error('amount')
+                                <p class="form-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="offer_message">Mensaje (opcional)</label>
+                            <textarea id="offer_message" name="message" class="form-textarea" rows="3" maxlength="1000">{{ old('message') }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn--ghost">Enviar oferta</button>
+                    </form>
+                @else
+                    <p class="text-muted">
+                        <a href="{{ route('login') }}">Inicia sesión</a> para hacer una oferta.
+                    </p>
+                @endauth
+            </section>
+        @endif
     </div>
 </div>
 
