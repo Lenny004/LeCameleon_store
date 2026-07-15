@@ -59,6 +59,9 @@
     $imageUrl = $resolveImageUrl($product);
     $productId = $get($product, 'id', '');
     $url = Route::has('shop.show') && $slug !== '#' ? route('shop.show', $slug) : '#';
+    $avgRating = $get($product, 'approved_reviews_avg');
+    $reviewsCount = (int) ($get($product, 'approved_reviews_count') ?? 0);
+    $avgRating = $avgRating !== null && $reviewsCount > 0 ? round((float) $avgRating, 1) : null;
 @endphp
 
 <article class="product-card">
@@ -78,6 +81,16 @@
                 <span class="product-card__era">{{ $era }}</span>
             @endif
             <h3 class="product-card__title">{{ $name }}</h3>
+            @if ($avgRating)
+                <p class="product-card__rating" aria-label="{{ $avgRating }} de 5, {{ $reviewsCount }} reseñas">
+                    <span class="product-rating product-rating--sm" aria-hidden="true">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="product-rating__star {{ $i <= round($avgRating) ? 'product-rating__star--on' : '' }}">★</span>
+                        @endfor
+                    </span>
+                    <span class="product-card__rating-text">{{ number_format($avgRating, 1) }} ({{ $reviewsCount }})</span>
+                </p>
+            @endif
             <div class="product-card__footer">
                 <span class="product-card__price">${{ number_format((float) $price, 2) }}</span>
             </div>

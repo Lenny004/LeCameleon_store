@@ -68,6 +68,21 @@
             <span class="product-info__era">{{ $era }}</span>
         @endif
         <h1 class="product-info__title">{{ $product->name }}</h1>
+        @php
+            $avgRating = $reviewSummary['average'] ?? ($product->approved_reviews_avg ? round((float) $product->approved_reviews_avg, 1) : null);
+            $reviewsCount = $reviewSummary['count'] ?? (int) ($product->approved_reviews_count ?? 0);
+        @endphp
+        @if ($avgRating)
+            <p class="product-info__rating">
+                <span class="product-rating" aria-label="{{ $avgRating }} de 5">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <span class="product-rating__star {{ $i <= round($avgRating) ? 'product-rating__star--on' : '' }}" aria-hidden="true">★</span>
+                    @endfor
+                </span>
+                <strong>{{ number_format($avgRating, 1) }}</strong>
+                <a href="#product-reviews" class="product-info__rating-link">{{ $reviewsCount }} {{ $reviewsCount === 1 ? 'reseña' : 'reseñas' }}</a>
+            </p>
+        @endif
         <p class="product-info__price">${{ number_format((float) $product->price, 2) }}</p>
 
         <div class="product-info__meta">
@@ -257,26 +272,106 @@
     </section>
 @endif
 
-<section class="container section product-reviews">
+<section class="container section product-reviews" id="product-reviews">
     <div class="section__header">
-        <h2 class="section__title">Reseñas</h2>
+        <h2 class="section__title">Valoraciones y comentarios</h2>
     </div>
 
-    @if ($product->reviews->isNotEmpty())
-        <div class="product-reviews__list">
-            @foreach ($product->reviews as $review)
-                <article class="product-review">
-                    <div class="product-review__header">
-                        <strong>{{ $review->user?->name ?? 'Cliente' }}</strong>
-                        <span class="product-review__rating" aria-label="{{ $review->rating }} de 5">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
-                    </div>
-                    @if ($review->title)
-                        <h3 class="product-review__title">{{ $review->title }}</h3>
-                    @endif
-                    <p class="product-review__body">{{ $review->body }}</p>
-                </article>
-            @endforeach
+    @php
+        $summary = $reviewSummary ?? ['count' => 0, 'average' => null, 'distribution' => [5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0]];
+        $reviewList = $reviews ?? collect();
+        $activeRating = $reviewFilters['rating'] ?? null;
+        $activeSort = $reviewFilters['sort'] ?? 'newest';
+        $reviewBaseUrl = route('shop.show', $product->slug);
+    @endphp
+
+    @if ($summary['count'] > 0)
+        <div class="product-reviews__summary">
+            <div class="product-reviews__score">
+                <p class="product-reviews__average">{{ number_format((float) $summary['average'], 1) }}</p>
+                <p class="product-rating" aria-label="{{ $summary['average'] }} de 5">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <span class="product-rating__star {{ $i <= round((float) $summary['average']) ? 'product-rating__star--on' : '' }}" aria-hidden="true">★</span>
+                    @endfor
+                </p>
+                <p class="text-muted text-small">Basado en {{ $summary['count'] }} {{ $summary['count'] === 1 ? 'reseña' : 'reseñas' }}</p>
+            </div>
+            <ul class="product-reviews__bars" aria-label="Distribución de valoraciones">
+                @foreach ($summary['distribution'] as $stars => $total)
+                    @php $pct = $summary['count'] > 0 ? round(($total / $summary['count']) * 100) : 0; @endphp
+                    <li class="product-reviews__bar-row">
+                        <a
+                            href="{{ $reviewBaseUrl }}?review_rating={{ $stars }}&review_sort={{ urlencode($activeSort) }}#product-reviews"
+                            class="product-reviews__bar-label {{ (string) $activeRating === (string) $stars ? 'is-active' : '' }}"
+                        >
+                            {{ $stars }} ★
+                        </a>
+                        <div class="product-reviews__bar-track" aria-hidden="true">
+                            <span class="product-reviews__bar-fill" style="width: {{ $pct }}%;"></span>
+                        </div>
+                        <span class="product-reviews__bar-count">{{ $total }}</span>
+                    </li>
+                @endforeach
+            </ul>
         </div>
+
+        <form method="GET" action="{{ $reviewBaseUrl }}" class="product-reviews__filters">
+            <input type="hidden" name="review_rating" value="{{ $activeRating }}">
+            <div class="product-reviews__chips" role="group" aria-label="Filtrar por estrellas">
+                <a
+                    href="{{ $reviewBaseUrl }}?review_sort={{ urlencode($activeSort) }}#product-reviews"
+                    class="product-reviews__chip {{ $activeRating === null || $activeRating === '' ? 'is-active' : '' }}"
+                >
+                    Todas
+                </a>
+                @for ($stars = 5; $stars >= 1; $stars--)
+                    <a
+                        href="{{ $reviewBaseUrl }}?review_rating={{ $stars }}&review_sort={{ urlencode($activeSort) }}#product-reviews"
+                        class="product-reviews__chip {{ (string) $activeRating === (string) $stars ? 'is-active' : '' }}"
+                    >
+                        {{ $stars }} ★
+                    </a>
+                @endfor
+            </div>
+            <div class="product-reviews__sort">
+                <label for="review_sort" class="text-small">Ordenar</label>
+                <select id="review_sort" name="review_sort" class="form-select" onchange="this.form.submit()">
+                    <option value="newest" @selected($activeSort === 'newest')>Más recientes</option>
+                    <option value="oldest" @selected($activeSort === 'oldest')>Más antiguas</option>
+                    <option value="highest" @selected($activeSort === 'highest')>Mejor valoración</option>
+                    <option value="lowest" @selected($activeSort === 'lowest')>Menor valoración</option>
+                </select>
+            </div>
+        </form>
+
+        @if ($reviewList->isNotEmpty())
+            <div class="product-reviews__list">
+                @foreach ($reviewList as $review)
+                    <article class="product-review">
+                        <div class="product-review__header">
+                            <div>
+                                <strong>{{ $review->user?->name ?? 'Cliente' }}</strong>
+                                @if ($review->created_at)
+                                    <time class="product-review__date text-muted text-small" datetime="{{ $review->created_at->toDateString() }}">
+                                        {{ $review->created_at->translatedFormat('d M Y') }}
+                                    </time>
+                                @endif
+                            </div>
+                            <span class="product-review__rating" aria-label="{{ $review->rating }} de 5">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
+                        </div>
+                        @if ($review->title)
+                            <h3 class="product-review__title">{{ $review->title }}</h3>
+                        @endif
+                        <p class="product-review__body">{{ $review->body }}</p>
+                    </article>
+                @endforeach
+            </div>
+        @else
+            <p class="text-muted">No hay comentarios con ese filtro.</p>
+            <p>
+                <a href="{{ $reviewBaseUrl }}#product-reviews" class="btn btn--ghost btn--sm">Ver todas las reseñas</a>
+            </p>
+        @endif
     @else
         <p class="text-muted">Aún no hay reseñas aprobadas para este producto.</p>
     @endif

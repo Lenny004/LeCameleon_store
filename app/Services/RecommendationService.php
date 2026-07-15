@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\DB;
  */
 class RecommendationService
 {
+    public function __construct(
+        private readonly ReviewService $reviewService,
+    ) {}
+
     /**
      * Explicit relations first, then same category/brand fallback.
      */
@@ -77,11 +81,14 @@ class RecommendationService
 
     public function featuredForHome(int $limit = 8): Collection
     {
-        return $this->publishedQuery()
+        $query = $this->publishedQuery()
             ->with(['brand', 'category', 'images'])
             ->orderByDesc('published_at')
-            ->limit($limit)
-            ->get();
+            ->limit($limit);
+
+        $this->reviewService->applyApprovedAggregates($query);
+
+        return $query->get();
     }
 
     private function categoryBrandFallback(Product $product, int $limit, Collection $exclude): Collection
@@ -90,7 +97,7 @@ class RecommendationService
             return collect();
         }
 
-        return $this->publishedQuery()
+        $query = $this->publishedQuery()
             ->with(['brand', 'category', 'images'])
             ->whereNotIn('id', $exclude)
             ->where(function ($query) use ($product) {
@@ -101,8 +108,11 @@ class RecommendationService
                 }
             })
             ->orderByDesc('published_at')
-            ->limit($limit)
-            ->get();
+            ->limit($limit);
+
+        $this->reviewService->applyApprovedAggregates($query);
+
+        return $query->get();
     }
 
     private function hydrateOrdered(Collection $ids, int $limit): Collection
@@ -111,10 +121,14 @@ class RecommendationService
             return collect();
         }
 
-        return $this->publishedQuery()
+        $query = $this->publishedQuery()
             ->whereIn('id', $ids)
             ->with(['brand', 'category', 'images'])
-            ->limit($limit)
+            ->limit($limit);
+
+        $this->reviewService->applyApprovedAggregates($query);
+
+        return $query
             ->get()
             ->sortBy(fn (Product $p) => $ids->search($p->id))
             ->values()
