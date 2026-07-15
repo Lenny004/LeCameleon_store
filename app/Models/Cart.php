@@ -18,7 +18,15 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'session_id',
+        'reminded_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'reminded_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {

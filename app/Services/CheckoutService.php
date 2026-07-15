@@ -4,12 +4,10 @@ namespace App\Services;
 
 use App\Enums\CouponType;
 use App\Enums\OrderStatus;
-use App\Enums\PaymentStatus;
 use App\Mail\OrderPlaced;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Order;
-use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +21,7 @@ class CheckoutService
     public function __construct(
         private readonly CartService $cartService,
         private readonly InventoryService $inventoryService,
+        private readonly PaymentService $paymentService,
     ) {}
 
     /**
@@ -37,6 +36,7 @@ class CheckoutService
         array $shippingAddress,
         ?string $couponCode = null,
         ?string $notes = null,
+        string $paymentMethod = 'manual',
     ): Order {
         $cart->load(['items.product']);
 
@@ -49,7 +49,7 @@ class CheckoutService
         $billingAddress['email'] = $email;
         $shippingAddress['email'] = $email;
 
-        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes) {
+        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
                 $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
@@ -117,13 +117,8 @@ class CheckoutService
                 $appliedCoupon->increment('used_count');
             }
 
-            // Manual-first payment record; Stripe integration is optional via env keys.
-            Payment::query()->create([
-                'order_id' => $order->id,
-                'provider' => 'manual',
-                'status' => PaymentStatus::Pending,
-                'amount' => $grandTotal,
-            ]);
+            $paymentProvider = $this->resolvePaymentProvider($paymentMethod);
+            $this->paymentService->createPendingPayment($order, $paymentProvider);
 
             $this->cartService->clear($cart);
 
@@ -198,5 +193,14 @@ class CheckoutService
         $prefix = config('store.order_number_prefix', 'LC');
 
         return sprintf('%s-%s-%s', $prefix, now()->format('Ymd'), strtoupper(substr(uniqid(), -6)));
+    }
+
+    private function resolvePaymentProvider(string $paymentMethod): string
+    {
+        if ($paymentMethod === 'stripe' && empty(config('services.stripe.secret'))) {
+            return 'manual';
+        }
+
+        return $paymentMethod === 'stripe' ? 'stripe' : 'manual';
     }
 }

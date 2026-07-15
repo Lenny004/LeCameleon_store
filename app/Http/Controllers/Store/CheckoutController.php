@@ -52,6 +52,8 @@ class CheckoutController extends Controller
 
         $email = $request->validated('email') ?? $request->user()?->email ?? '';
 
+        $paymentMethod = $request->validated('payment_method') ?? 'manual';
+
         $order = $this->checkoutService->placeOrder(
             $cart,
             $request->user(),
@@ -60,6 +62,7 @@ class CheckoutController extends Controller
             $request->validated('shipping_address'),
             $request->validated('coupon_code'),
             $request->validated('notes'),
+            $paymentMethod,
         );
 
         $request->session()->put('last_order_id', $order->id);
@@ -67,6 +70,13 @@ class CheckoutController extends Controller
         $redirect = redirect()
             ->route('checkout.success', $order)
             ->with('success', 'Order placed successfully.');
+
+        if ($paymentMethod === 'stripe' && $order->payments()->latest()->first()?->provider === 'manual') {
+            $redirect->with(
+                'info',
+                'Stripe is not configured yet; your order will be completed with manual payment.',
+            );
+        }
 
         if ($order->coupon_code) {
             $redirect->with(
