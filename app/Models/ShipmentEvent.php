@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Timeline event for a shipment status change or delivery attempt.
+ * Timeline entry for a shipment status change or delivery outcome.
  */
 class ShipmentEvent extends Model
 {

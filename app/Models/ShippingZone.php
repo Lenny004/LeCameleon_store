@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Shipping zone — may map 1:1 to a municipality or group several.
+ * Shipping zone anchored to a municipality for A→B rate matrix lookups.
  */
 class ShippingZone extends Model
 {

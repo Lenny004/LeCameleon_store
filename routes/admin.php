@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\LogisticsCompanyController;
+use App\Http\Controllers\Admin\LogisticsVehicleController;
+use App\Http\Controllers\Admin\LogisticsWorkerController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -60,4 +63,10 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 
         Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+
+        Route::prefix('logistics')->name('logistics.')->group(function () {
+            Route::resource('companies', LogisticsCompanyController::class);
+            Route::resource('workers', LogisticsWorkerController::class);
+            Route::resource('vehicles', LogisticsVehicleController::class);
+        });
     });

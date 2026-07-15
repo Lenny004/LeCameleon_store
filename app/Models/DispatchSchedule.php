@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Scheduled dispatch window for warehouse pickups.
+ * Next outbound dispatch window configured by operations.
  */
 class DispatchSchedule extends Model
 {
@@ -24,5 +25,11 @@ class DispatchSchedule extends Model
             'cutoff_at' => 'datetime',
             'is_active' => 'boolean',
         ];
+    }
+
+    /** @param  Builder<self>  $query */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
     }
 }
