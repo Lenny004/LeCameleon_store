@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+        <nav class="nav-extended white">
+            <div class="nav-wrapper">
+                <a href="#" data-target="mobile" class="sidenav-trigger" id="menu_desplegable"><i
+                        class="material-icons">menu</i></a>
+                <!--Colocamos un buscador para tamaños moviles y de tablets-->
+                <div id="buscador2" class="hide-on-large-only">
+                    <nav class="grey lighten-2">
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                    <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+                </div>
+                <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
+                <ul class="left hide-on-med-and-down" id="opciones">
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="../../recursos/img/main_publico/nav3.jpg">
+                </div>
+                <a href="index.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
+            </div>
+        </li>
+        <div id="opciones_movil">
+        </div>
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <!--Creamos el id que sera nuestro contenedor-->
+        <div class="container">
+            <div class="row">
+                <!--Creamos el id de titulo principal para poder editar o hacerle estilos a nuestro titulo-->
+                <h3 id="titulo_principal">Politicas y zona de envio</h3>
+            </div>
+            <div class="row">
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="subtema_texto">1. Los plazos aproximados para que el producto sea entregado inician desde
+                    la compra hasta una fecha establecida por el USUARIO/CLIENTE, dicha fecha no debé sobrepasar 2
+                    semanas máximo desde que se efectuo el pago.</p>
+                <!--Creamos el id subtema para poder editar o hacerle estilos a nuestros subtemas-->
+                <p id="texto_inicial">El USUARIO/CLIENTE cuenta con 2 diferentes opciones de envio. El tipo de
+                    entrega de productos a
+                    centros comerciales tiene un costo de $0.00, siempre que sea en el área central de El
+                    Salvador,
+                    fuera de ella puede tener recargo dependiendo
+                    la zona. La segunda opción de tipo de entrega es a domicilio con un costo extra a la compra
+                    de
+                    $5.00 dólares americanos. El envio a domicio tendrá un costo de $0.00 si el USUARIO/CLIENTE
+                    realiza compras mayores a los $50.00 dólares americanos.
+                    Aplica para el territorio de El Salvador.<br><br>
+                    El administrador de la página web no será responsable de los errores causados en la entrega
+                    cuando la fecha y dirección de entrega introducida por el USUARIO/CLIENTE en el formulario
+                    de
+                    pedido no se ajuste a la realidad o hayan sido omitidos.
+                    Los plazos pueden variar por razones logísticas o de fuerza mayor. En casos de retrasos en
+                    las
+                    entregas, el admin id="texto_inicial"istrador de la página web informará a sus
+                    USUARIOS/CLIENTE,
+                    en cuanto tenga
+                    conocimiento de ellos. <br><br>
+                    Cada entrega se considera efectuada a partir del momento en el área de Gestión de la Entrega
+                    pone el producto a disposición del USUARIO/CLIENTE, que se materializa a través del sistema
+                    de
+                    control utilizado por el área de transporte propia de la empresa.<br><br>
+                    No se considerarán retrasos en la entrega aquellos casos en que el pedido haya sido puesto a
+                    disposición del USUARIO/CLIENTE, por parte del transportista dentro del plazo y no haya
+                    podido
+                    ser entregado por causa imputable al USUARIO/CLIENTE.
+                </p>
+                <p id="subtema_texto">
+                    2. A – Datos de entrega, entregas no realizadas y pérdidas del producto
+                </p>
+                <p id="texto_inicial">
+                    El administrador de la página web contrata como parte del servicio de entrega de mensajería o
+                    Correos de España, la realización de una serie de acciones de seguimiento, encaminadas a
+                    garantizar
+                    que la entrega se produce.<br><br>
+                    Si pasados 7 días después de la salida a reparto del pedido, no se ha concertado la entrega, el
+                    USUARIO/CLIENTE deberá ponerse en contacto con el administrador de la página web.<br><br>
+                    En caso de que el USUARIO/CLIENTE no proceda así, pasados 10 días hábiles desde la salida a
+                    reparto del pedido, éste será devuelto y el USUARIO/CLIENTE deberá de hacerse cargo de los
+                    gastos de envío y retorno del pedido, así como de los posibles
+                    gastos de gestión asociados.
+                </p>
+                <p id="subtema_texto">
+                    2. B – Diligencia en la entrega
+                </p>
+                <div id="texto_espacio">
+                    <p id="texto_inicial">
+                        El USUARIO/CLIENTE, deberá comprobar el buen estado del pedido ante el transporte o correos
+                        que,
+                        por cuenta del administrador de la página web, realice la entrega del producto solicitado,
+                        indicando en el albarán de entrega cualquier anomalía que
+                        pudiera detectar en el pedido.<br><br>
+                        **IMPORTANTE: Lugares adonde Le Caméléon NO presta servicio a domicilio: Las Margaritas, La
+                        Campanera,
+                        El Pepeto, El Limón, Apopa, Soyapango, San Martin, San Luis Talpa, Cuscatancingo, Ayutuxtepeque,
+                        San José (Soyapango se entregan en el Parqueo de Unicentro o Plaza Mundo), Ninguna Comunidad.
+                        El cliente debe dar la dirección EXACTA para confirmarle la entrega, si la zona es de riesgo el
+                        producto se entregará en Centros Comerciales.**
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--El aparte del sitio web (Información del sitio y otros apartados de términos y contactos)-->
+        <aside id="informacion">
+            <div>
+                <p>POLÍTICA DE SERVICIO</p>
+                <a href="Politica_envio.html">Política y Zona de envíos</a><br>
+                <a href="Condiciones_compra.html">Condiciones de Compra</a><br>
+                <a href="Terminos_servicio.html">Términos de Servicio</a><br>
+                <a href="Politica_privacidad.html">Política de Privacidad</a><br>
+                <a href="Legal.html">Legal</a>
+            </div>
+            <div>
+                <p>CONÓCENOS</p>
+                <a href="Acercade.html">Acerca de Le Caméléon</a><br>
+                <a href="contactanos.html">Contáctanos</a>
+            </div>
+            <div>
+                <p>SOPORTE</p>
+                <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
+                <a href="pedidos_cliente.html">Tus Pedidos</a>
+            </div>
+            <div id="redes">
+                <p>SÍGUENOS EN TU RED FAVORITA</p>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
+            </div>
+            <div id="correo">
+                <p>E-MAIL DE SUSCRIPCIÓN</p>
+                <a>Obtenga las últimas actualizaciones</a><br>
+                <a>en productos y ofertas directamente</a>
+                <div class="ingresar_correo">
+                    <input type="email" class="validate white brown-text text-brown-darken-4"
+                        placeholder="email@gmail.com"><br>
+                    <a href="" class="btn tooltipped brown darken-4" data-position="top"
+                        data-tooltip="Suscribete para recibir notificaciones de ofertas y nuevos productos"><img
+                            src="../../recursos/iconografia/flecha_enviar.png" alt="enviar" height="35" width="35"></a>
+                </div>
+            </div>
+        </aside>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div class="terminos">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+            </div>
+            <div>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/servicio_cliente_general.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/privado.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <!--Tarjetas de Categorias-->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12 xl12">
+                    <!--Titulo de Categorias-->
+                    <h3 class="titulo_grafica">Empleado y usuario</h3>
+                </div>
+                <!--Card-->
+                <div class="col s12 m6 l6 xl6">
+                    <div class="card horizontal" id="tarjeta_grafica">
+                        <div class="card-image">
+                            <img src="../../recursos/img/empleados_usuarios/empleados.jpg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title">Administrar Empleados</span>
+                            </div>
+                            <div class="card-action">
+                                <a href="administrar_empleados.html">Administrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l6 xl6">
+                    <div class="card horizontal" id="tarjeta_grafica">
+                        <div class="card-image">
+                            <img src="../../recursos/img/empleados_usuarios/usuarios.jpg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title">Administrar Usuarios</span>
+                            </div>
+                            <div class="card-action">
+                                <a href="administrar_usuarios.html">Administrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div>
+            </div>
+            <div id="texto_terminos">
+                <div class="terminos">
+                    <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                </div>
+                <div>
+                    <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+                </div>
+            </div>
+            <div id="sitio_privado">
+                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                        alt="web" height="45"></a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/online.js"></script>
+</body>
+
+</html>

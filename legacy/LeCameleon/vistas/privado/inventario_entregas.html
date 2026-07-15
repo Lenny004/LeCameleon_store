@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/privado.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <div class="col s12 m12 l12 xl12" id="titulo_buscador">
+            <h3>Registrar Entrega</h3>
+        </div>
+        <div class="contenedor_entregas">
+            <div class="contenedores_izquierda">
+                <div class="row contenedores_entrega">
+                    <div class="col s12 m12 l12 xl12 texto_verde">
+                        <p>Encuentre y obtenga los datos del producto ya existente colocando su nombre en el
+                            buscador</p>
+                    </div>
+                    <div class="col s12 m12 l12 xl12" id="titulo_buscador">
+                        <h6>Buscar Producto:</h6>
+                        <div id="buscador">
+                            <nav class="grey lighten-2">
+                                <div class="nav-wrapper">
+                                    <form method="post" id="thesearch">
+                                        <div class="input-field">
+                                            <input id="buscador_registro" type="search" name="buscador_registro" required>
+                                        </div>
+                                        <button type="submit"><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></button>
+                                    </form>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="row contenedores_entrega">
+                    <form id="formulario_entrega" method="post">
+                        <div class="col s12 m12 l12 xl12">
+                            <div class="col s6 m6 l6 xl6">
+                                <input type="text" id="id_inventario" name="id_inventario" class="hide">
+                                <div class="input-field col s12">
+                                    <select name="producto" id="producto">
+                                    </select>
+                                    <label>Nombre Producto:</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="cantidad_formulario" name="cantidad_formulario" type="number"
+                                        class="validate">
+                                    <label for="cantidad_formulario">Cantidad:</label>
+                                </div>
+                                <div>
+                                    <p>Fecha entrega del producto:</p>
+                                    <input type="text" id="fecha_entrega" name="fecha_entrega" class="datepicker">
+                                </div>
+                                <div>
+                                    <p>Fecha inicial para vender:</p>
+                                    <input type="text" id="fecha_inicio" name="fecha_inicio" class="datepicker">
+                                </div>
+                            </div>
+                            <div class="col s6 m6 l6 xl6">
+                                <div class="input-field col s12">
+                                    <select name="proveedores" id="proveedores">
+                                    </select>
+                                    <label>Proveedor:</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="precio" type="text" name="precio" class="validate">
+                                    <label for="precio">Precio Unitario:</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="empleado" type="text" name="empleado" class="validate">
+                                    <label for="empleado">Empleado que registra:</label>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row contenedores_entrega">
+                    <div class="col s12 m12 l12 xl12">
+                        <h5>Acciones</h5>
+                    </div>
+                    <div class="col s12 m12 l12 xl12" id="titulo_buscador">
+                        <div class="col s12 m12 l12 xl12" id="boton_agregar">
+                            <button id="crear" onclick="cambiar_variables1()" type="submit"
+                                class="modal-close waves-effect waves-green btn-flat">Agregar
+                                Registro</button>
+                        </div>
+                        <div class="col s12 m12 l12 xl12" id="boton_modificar">
+                            <button id="actualizar" onclick="cambiar_variables2()" type="submit"
+                                class="modal-close waves-effect waves-blue btn-flat">Modificar
+                                Producto</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="contenedores_entrega2">
+                <div class="col s12 m12 l12 xl12">
+                    <h5>Registros Anteriores</h5>
+                </div>
+                <div class="col s12 m12 l12 xl12" id="titulo_buscador">
+                    <h6>Buscar Producto:</h6>
+                    <div id="buscador">
+                        <nav class="grey lighten-2">
+                            <div class="nav-wrapper">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="buscador_inventario" type="search" required>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                        <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+                    </div>
+                </div>
+                <div class="col s12 m12 l12 xl12" id="tabla_entregas">
+                    <table class="centered striped brown darken-3 highlight responsive-table">
+                        <!--Columnas de la tabla-->
+                        <thead>
+                            <tr>
+                                <th>ID Entrega</th>
+                                <th>Nombre Producto</th>
+                                <th>Fecha Entrega</th>
+                                <th>Fecha Venta</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <!--Filas de la tabla con sus elementos-->
+                        <tbody id="tabla_cuerpo">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div>
+            </div>
+            <div id="texto_terminos">
+                <div class="terminos">
+                    <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                </div>
+                <div>
+                    <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+                </div>
+            </div>
+            <div id="sitio_privado">
+                <a href="../../vistas/publico/dashboard.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/dashboard.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                        alt="web" height="45"></a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../..//recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/online.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/inventario_entrega.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,3251 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    transition: all .7s ease-in-out;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/*Barra de color que anuncia ofertas*/
+#barra_anuncio {
+    height: 42px;
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+/*Modificamos del contenedor de logo, nombre, tipo usuario y imagen usuario*/
+#apartado_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+/*Le asignamos tamaño a la imagen del logo*/
+#logo_imagen img {
+    max-height: 75px;
+    max-width: 284px;
+}
+
+#usuario p {
+    font-weight: 600;
+    color: #36465d;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-content: center;
+    margin-right: 25px;
+    transition: all .7s ease-in-out;
+}
+
+#usuario {
+    padding: 10px 20px 5px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+/*Le asignamos tamaño a la imagen de usuario*/
+#usuario img {
+    max-height: 45px;
+    max-width: 45px;
+    cursor: pointer;
+}
+
+#usuario i {
+    cursor: pointer;
+}
+
+#dropdown_usuario {
+    width: 200px !important;
+}
+
+#dropdown_usuario img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    top: 4px;
+    position: relative;
+}
+
+#opciones_movil img {
+    width: 20px;
+    height: 20px;
+    top: 4px;
+    margin-right: 10px;
+    position: relative;
+}
+
+#opciones_movil a {
+    width: 100%;
+}
+
+.material-tooltip {
+    background-color: #2f6950 !important;
+}
+
+/*Botones del menú*/
+#menu a {
+    color: #4a4a4a;
+    min-width: 155px;
+    max-width: 250px;
+    font-weight: 500;
+    transition: all .7s ease-in-out;
+}
+
+/*Cuando se coloque el mouse encima de una opción del mouse, las letras cambian de color*/
+#menu a:hover {
+    color: #2f6950;
+    transition: all .7s ease-in-out;
+}
+
+#menu.sticky {
+    position: fixed;
+    top: 0;
+}
+
+nav.nav-extended {
+    transition: all .7s ease-in-out;
+}
+
+.card-title {
+    transition: all .7s ease-in-out;
+}
+
+.slides h1 {
+    color: #ffffff;
+    font-weight: bold;
+    background-color: rgba(119, 118, 118, 0.5);
+}
+
+/*Menú para moviles le cambiamos el color de las letras*/
+.user-view a {
+    color: #ffffff;
+}
+
+/*Alinea el titulo al centro*/
+.titulo_administrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Modificamos*/
+#tarjetas {
+    background-color: #e8d9d9;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: all .7s ease-in-out;
+}
+
+/*Sombreado a las tarjetas*/
+#tarjetas:hover {
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+#tarjetas a {
+    color: #2f6950;
+}
+
+#tarjetas a:hover {
+    color: #ffff;
+}
+
+.container .card {
+    padding: 7px;
+}
+
+.container .card img {
+    height: 200px;
+    width: 100%;
+}
+
+.card a {
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+.card a:hover {
+    background-color: #2f6950;
+}
+
+/*---------------------------------Footer--------------------------------*/
+
+/*-Colocamos un color al footer-*/
+footer {
+    background-color: #f8cc93;
+}
+
+/*-Footer Terminos-*/
+#pie {
+    position: relative;
+    font-size: smaller;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#texto_terminos {
+    margin-left: 10%;
+}
+
+.terminos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*-Le damos la propiedad negrita a terminos y condiciones del sitio-*/
+.terminos p {
+    font-weight: bold;
+}
+
+#sitio_privado {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#sitio_privado a {
+    font-weight: bolder;
+    color: #21190a;
+    padding: 5px;
+}
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+#contenido_login {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+/*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+#logo_login img {
+    max-width: 180px;
+    max-height: 135px;
+}
+
+#tarjeta_login {
+    height: 500px;
+    width: 400px;
+    box-shadow: 0px 1px 5px 2px #bfbfbf;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+/*Modificamos el titulo de la tarjeta de Iniciar Sesión*/
+#tarjeta_login h5 {
+    color: #282012;
+    font-weight: 500;
+    transition: all .7s ease-in-out;
+}
+
+/*Le damos un nuevo tamaño a la imagen del usuario*/
+#tarjeta_login img {
+    height: 60px;
+    width: 60px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#anuncio_registrar {
+    font-size: small;
+    text-align: center;
+    color: #282012;
+}
+
+#anuncio_registrar p {
+    text-align: center;
+}
+
+#imagen_usuario_login {
+    display: flex;
+    flex-direction: row;
+    /* Alinear items en el centro */
+    justify-content: center;
+}
+
+#contenido_login .card-content {
+    height: 390px;
+    width: 390px;
+}
+
+/*Le asignamos un tamaño y color a las palabras de usuario y contraseña*/
+#tarjeta_login p {
+    color: #2f6950;
+}
+
+#credenciales_login {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#credenciales_login a {
+    color: #36465d;
+    border: none;
+    padding: 0;
+}
+
+#credenciales_login a:hover {
+    background: none;
+}
+
+#contra_login {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#contra_login img {
+    margin-top: 20px !important;
+    position: relative !important;
+    height: 25px !important;
+    width: 25px !important;
+    cursor: pointer;
+}
+
+#boton_iniciar_login {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_iniciar_login button {
+    background-color: #DA7D27;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+#boton_iniciar_login button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27;
+    color: #DA7D27;
+}
+
+#registro_login {
+    align-self: center;
+}
+
+#registro_login a {
+    color: #36465d !important;
+}
+
+#datos img {
+    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+#datos span {
+    color: #36465d;
+}
+
+#formulario_registro {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: space-between;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo_registro img {
+    max-width: 340px;
+    max-height: 300px;
+}
+
+#boton_registrar {
+    display: flex;
+    flex-direction: row;
+    /* Alinear items en el centro */
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+#boton_registrar button {
+    background-color: #DA7D27;
+    box-shadow: none;
+}
+
+#boton_registrar button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #DA7D27 !important;
+    color: #DA7D27;
+}
+
+.datepicker-date-display {
+    background-color: #2f6950 !important;
+}
+
+.datepicker-date-display .year-text {
+    color: #ffffff !important;
+}
+
+.datepicker-date-display .date-text {
+    color: #ffffff !important;
+}
+
+/*------------------------------------------Main Gráficas------------------------------------------*/
+
+
+/*Alinea el titulo al lado izquierdo*/
+.titulo_graficas {
+    text-align: left;
+}
+
+#opciones_graficas {
+    width: 100%;
+    margin: 25px 30px 25px 30px;
+    display: flex !important;
+    flex-direction: row;
+    align-content: flex-end;
+    justify-content: end;
+    align-items: center !important;
+}
+
+.datos_grafica {
+    width: 100%;
+}
+
+/*Modificamos*/
+#tarjeta_grafica {
+    background-color: #e8d9d9;
+    margin-top: 20px;
+    margin-bottom: 40%;
+}
+
+#tarjeta_grafica span {
+    font-weight: 400;
+}
+
+#tarjeta_grafica:hover {
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+#tarjeta_grafica a {
+    color: #2f6950;
+}
+
+#tarjeta_grafica a:hover {
+    color: #ffff;
+}
+
+#tarjeta_grafica .card img {
+    height: 200px;
+    width: 250px;
+}
+
+#tarjeta_grafica a {
+    color: #2f6950;
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+#tarjeta_grafica a:hover {
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+/*------------------------------------------Main Gráficas VENTAS------------------------------------------*/
+
+#titulo_graficos {
+    margin-left: 8%;
+}
+
+.tabs .tab a {
+    background-color: transparent;
+    color: #36465d !important;
+}
+
+.tabs .tab a.active {
+    background-color: transparent;
+    border: 2px solid #36465d;
+    border-radius: 4px;
+    color: #36465d !important;
+}
+
+.tabs .indicator {
+    background-color: #DA7D27 !important;
+}
+
+.contenedor_graficas {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 5%;
+}
+
+#modal_personalizado1 {
+    width: 25% !important;
+}
+
+#fechas_grafica {
+    color: #2f6950;
+    display: flex;
+    flex-direction: row;
+}
+
+#fechas_grafica .input-field {
+    margin-top: 10%;
+}
+
+.clasificar_grafica {
+    width: 25%;
+    margin-right: 10%;
+}
+
+#graficas h6 {
+    color: #21190a;
+}
+
+#graficas img {
+    max-width: 500px;
+    height: 100%;
+}
+
+#boton_consultar {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#boton_consultar a {
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*------------------------------------------Main Gráficas EMPLEADOS------------------------------------------*/
+#tarjeta_grafica_empleados {
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10% !important;
+}
+
+
+/*--------------------------------------------REPORTES--------------------------------------------*/
+
+.tarjeta_reportes {
+    margin-bottom: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    border-radius: 35px;
+    background-color: #36465d;
+    color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.texto_reportes {
+    width: 50%;
+}
+
+.imagen_reportes {
+    width: 20%;
+    text-align: center;
+}
+
+.imagen_reportes img {
+    width: 30%;
+    height: 30%;
+}
+
+.boton_generar_reporte {
+    width: 20%;
+    text-align: end;
+}
+
+.boton_generar_reporte a {
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #1a3760;
+    color: #36465d;
+    background-color: #ffffff;
+    transition: all 0.8s ease;
+}
+
+.boton_generar_reporte a:hover {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: #1a3760;
+    transition: all 0.4s ease;
+}
+
+.modales_reporte {
+    width: 300px !important;
+}
+
+.modales_reporte2 {
+    height: 80% !important;
+}
+
+/*--------------------------------------------REPORTES--------------------------------------------*/
+
+.tarjeta_reportes {
+    margin-bottom: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    border-radius: 35px;
+    background-color: #36465d;
+    color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.texto_reportes {
+    width: 50%;
+}
+
+.imagen_reportes {
+    width: 20%;
+    text-align: center;
+}
+
+.imagen_reportes img {
+    width: 30%;
+    height: 30%;
+}
+
+.boton_generar_reporte {
+    width: 20%;
+    text-align: end;
+}
+
+.boton_generar_reporte a {
+    padding: 2% 8% 2% 8%;
+    border: 2px solid #1a3760;
+    color: #36465d;
+    background-color: #ffffff;
+    transition: all 0.8s ease;
+}
+
+.boton_generar_reporte a:hover {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: #1a3760;
+    transition: all 0.4s ease;
+}
+
+.modales_reporte {
+    width: 100% !important;
+}
+
+.modales_reporte2 {
+    height: 80% !important;
+}
+
+/*------------------------------------------Main INVENTARIO------------------------------------------*/
+#tarjeta_inventario {
+    background-color: #e8d9d9;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Sombreado a las tarjetas*/
+#tarjeta_inventario:hover {
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+#tarjeta_inventario a {
+    color: #2f6950;
+    border: 2px solid #2f6950;
+    padding: 5px 35px 5px 35px;
+}
+
+#tarjeta_inventario a:hover {
+    background-color: #2f6950;
+    color: #ffff;
+}
+
+#tarjeta_inventario p {
+    font-size: small;
+}
+
+#tarjeta_inventario span {
+    font-size: 18px;
+}
+
+#tarjeta_inventario img {
+    height: 200px;
+    width: 250px;
+}
+
+/*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+#titulo_buscador {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#buscador {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#buscador nav {
+    height: 40px;
+}
+
+#buscador button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#thesearch img {
+    margin-top: 2%;
+}
+
+#buscador form {
+    max-width: 450px;
+    max-height: 40px;
+    color: #777676;
+}
+
+#buscador .input-field input[type=search] {
+    padding-left: 2% !important;
+    width: 100%;
+}
+
+nav .input-field {
+    width: 100%;
+}
+
+#thesearch {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#tabla {
+    margin-bottom: 10%;
+}
+
+#tabla img {
+    width: 80px;
+}
+
+
+/*------------------------------------------Main INVENTARIO------------------------------------------*/
+#titulo_modal {
+    color: #282012;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#titulo_modal img {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+#imagenes_modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#imagenes_modal p {
+    color: #36465d;
+    font-size: 12px;
+    text-align: center;
+}
+
+#imagenes_modal a {
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+#imagenes_modal a:hover {
+    background-color: #ffffff;
+    color: #36465d;
+    border: 2px solid #36465d;
+}
+
+#imagen_principal_modal img {
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#imagenes_secundarias img {
+    width: 40px;
+    height: 40px;
+}
+
+#contenido_credenciales {
+    margin-top: 15px;
+    height: 700px;
+    width: 570px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-content: space-between;
+}
+
+#agregar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#modificar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#eliminar_modal_producto {
+    height: 90%;
+    width: 80%;
+}
+
+#reseniasModal {
+    height: 90%;
+    width: 90%;
+}
+
+#reseniasModal table.centered thead tr th {
+    color: #21190a;
+    background-color: #ffffff;
+}
+
+/*Tablas hijas o pares de color blanco*/
+#reseniasModal table.striped>tbody>tr:nth-child(even) {
+    color: #21190a;
+    background-color: #ffffff;
+}
+
+/*Tablas hijas o impar de color blanco*/
+#reseniasModal table.striped>tbody>tr:nth-child(odd) {
+    color: #21190a;
+    background-color: #ffffff !important;
+}
+
+
+#editarModal {
+    height: 90%;
+    width: 90%;
+}
+
+#campos {
+    height: 99%;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#boton_agregar {
+    text-align: center;
+}
+
+#boton_agregar button {
+    background-color: #2f6950;
+    color: #ffffff;
+}
+
+.boton_verde {
+    background-color: #2f6950 !important;
+    color: #ffffff;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+#acciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#acciones img {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+}
+
+/*Modal 2*/
+#titulo_modal2 {
+    color: #282012;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#titulo_modal2 img {
+    width: 30px !important;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: -5px;
+}
+
+#imagen_principal_modal2 img {
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#contenido_credenciales2 {
+    margin-top: 15px;
+    height: 700px;
+    width: 570px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-content: space-between;
+}
+
+#editarModal {
+    height: 90%;
+    width: 90%;
+}
+
+#campos2 {
+    height: 99%;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+#boton_modificar {
+    text-align: center;
+    padding: 15px;
+}
+
+#boton_modificar button {
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+#boton_eliminar {
+    text-align: center;
+    padding: 15px;
+}
+
+#boton_eliminar p {
+    color: #d32f2f;
+}
+
+#boton_eliminar button {
+    background-color: #d32f2f;
+    color: #ffffff;
+    margin-bottom: 2%;
+}
+
+/*Modal 3*/
+#eliminarModal {
+    height: 90%;
+    width: 90%;
+}
+
+/*Modal 4*/
+#reseñaModal {
+    height: 90%;
+    width: 90%;
+}
+
+#estrellas {
+    display: flex;
+    flex-direction: row;
+}
+
+#estrellas img {
+    width: 25px;
+    height: 25px;
+}
+
+#estado_reseña {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+/*Propiedades del boton de idioma*/
+#estado_reseña a {
+    background-color: #36465d;
+    color: #ffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#estado_reseña img {
+    width: 15px;
+    height: 15px;
+}
+
+
+/*-------------------------------------------------------Perfil LOGIN------------------------------------------------------*/
+
+.contenedor_perfil {
+    color: #21190A;
+    margin-top: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.input-field.col label {
+    left: 0rem !important;
+}
+
+.nombre_edit_empleado {
+    width: 100%;
+    background-color: #e8d9d9;
+    border-radius: 12px;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nombre_edit_empleado a {
+    color: #21190A;
+    cursor: pointer;
+}
+
+.nombre_edit_empleado img {
+    margin-left: 8px;
+    width: 18px;
+}
+
+.contenedor_perfil form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.datos_empleado {
+    width: 50%;
+    padding: 2%;
+}
+
+.datos_empleado .input-field {
+    margin-bottom: 2%;
+}
+
+.modificar_perfil {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+
+/*Cambiamos las propiedades del boton iniciar sesion*/
+
+.modificar_perfil button {
+    background-color: #36465d;
+    box-shadow: none;
+    border: none;
+    padding: 0px 18px 5px 18px;
+}
+
+.modificar_perfil button:hover {
+    padding: 0px 18px 5px 18px;
+    background-color: #ffff;
+    border: 1.5px solid #36465d;
+    color: #36465d;
+}
+
+/*------------------------------------------Monitorear Pedidos------------------------------------------*/
+/*Colocamos el titulo y la caja con los estados a un extremo del otro*/
+#informacion {
+    padding: 25px 30px 25px 30px;
+    /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#informacion h4 {
+    font-weight: bold;
+}
+
+/*La caja de estado del pedido su contenido lo colocamos en fila*/
+#estado_pedido {
+    width: 720px;
+    border: solid 2px #bfbfbf;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#estado_pedido p {
+    font-size: small;
+    margin-right: 15px;
+}
+
+#rojo {
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#rojo a {
+    background-color: #b51d26;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#amarillo {
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#amarillo a {
+    background-color: #da7d27;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#azul {
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#azul a {
+    background-color: #36465d;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#verde {
+    position: relative;
+}
+
+/*Le asignamos un color a los 'a' para que sean cuadrados*/
+#verde a {
+    background-color: #8cc43f;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 30%;
+    margin-right: -10px;
+    /*Establecer las propiedades top, right, bottom y left de un 
+    elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+/*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+#pedidos {
+    width: 1280px;
+    height: 210px;
+    border: 1px solid #282012;
+    margin: 25px 30px 25px 30px;
+    /*Arriba, drecha, abajo, izquierda*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/*Le damos una posición y tamaño a la imagen del camión*/
+#pedidos img {
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: 45px;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar {
+    right: 5%;
+    position: relative;
+}
+
+/*Separamos el boton de tomar pedido de la derecha*/
+#tomar2 {
+    right: 5%;
+    position: relative;
+}
+
+/*Se pueden tomar el pedido*/
+#tomar a {
+    background-color: #da7d27;
+}
+
+/*El pedido esta en camino*/
+#tomar2 a {
+    background-color: #8cc43f;
+}
+
+/*Movemos la información a la izquierda*/
+#direccion {
+    font-size: small;
+    left: 22%;
+    position: absolute;
+}
+
+/*Agregamos negrita a los titulos internos de la tarjeta*/
+#direccion h6 {
+    font-weight: bold;
+    transition: all .7s ease-in-out;
+}
+
+/*Colores de las tarjetas dependiendo de su estado*/
+#pendiente a {
+    background-color: #d32f2f;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+}
+
+#disponible a {
+    background-color: #da7d27;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+}
+
+#entregando a {
+    background-color: #8cc43f;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+}
+
+#no_disponible a {
+    background-color: #36465d;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+}
+
+/**/
+
+#imagenes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+.imagen_principal img {
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#imagenes p {
+    color: #36465d;
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#imagenes a {
+    background-color: #36465d;
+    color: #ffffff;
+}
+
+
+.imagenes_secundarias img {
+    width: 40px;
+    height: 40px;
+}
+
+/*------------------------------------------Registro de entregas------------------------------------------*/
+.contenedor_entregas {
+    display: flex;
+    flex-direction: row;
+}
+
+#titulo_buscador h3 {
+    margin-left: 5%;
+}
+
+.contenedores_izquierda {
+    width: 44%;
+    margin-left: 5%;
+    margin-right: 1%;
+}
+
+.contenedores_entrega {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.contenedores_entrega2 {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    width: 44%;
+    margin-right: 5%;
+    margin-left: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
+    margin-bottom: 5%;
+}
+
+.texto_verde {
+    color: #2f6950;
+}
+
+#tabla_entregas {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+/*Tablas hijas o pares de color blanco*/
+table.centered thead tr th {
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*Tablas hijas o pares de color blanco*/
+table.striped>tbody>tr:nth-child(even) {
+    color: #ffffff;
+    background-color: #2f6950;
+}
+
+/*Tablas hijas o impar de color blanco*/
+table.striped>tbody>tr:nth-child(odd) {
+    color: #ffffff;
+    background-color: #1f8753 !important;
+}
+
+
+/*Tablas hijas o impares de color blanco*/
+#tabla_entregas table.striped>tbody>tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/*------------------------------------------CATEGORIAS PRINCIPALES------------------------------------------*/
+
+#acciones_categorias {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#acciones_categorias img {
+    width: 45px;
+    height: 45px;
+}
+
+.boton_agregar_categoria {
+    position: absolute;
+    bottom: 5%;
+    margin-left: -25%;
+}
+
+.boton_azul {
+    background-color: #36465d !important;
+    color: #ffffff;
+}
+
+.boton_modificar_categoria {
+    position: absolute;
+    bottom: 5%;
+    margin-left: -25%;
+}
+
+#modal_agregar_subcategoria {
+    height: 300px;
+}
+
+#modal_modificar_subcategoria {
+    height: 300px;
+}
+
+#modal_eliminar_subcategoria {
+    height: 300px;
+}
+
+/*------------------------------------------Administrar Empleados------------------------------------------*/
+
+#boton_agregar_centrado {
+    text-align: center;
+}
+
+#boton_agregar_centrado {
+    text-align: center;
+}
+
+#estado_usuario_cliente .btn {
+    background-color: #36465d;
+}
+
+#modificar_modal_usuarioC {
+    width: 30%;
+}
+
+/*------------------------------------------Administrar Marca------------------------------------------*/
+#marca_agregar {
+    margin-top: 8%;
+}
+
+.subir_imagen {
+    margin-top: 5%;
+}
+
+#marca_modificar {
+    margin-top: 8%;
+}
+
+#marca_eliminar {
+    margin-top: 8%;
+}
+
+
+/*----------------------------------------------Modo Nocturno------------------------------------------------------------------*/
+
+body.dark {
+    background: #242221;
+    transition: all .7s ease-in-out;
+}
+
+body.dark nav.nav-extended {
+    background-color: #2b2c2d !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_imagen img {
+    content: url("../recursos/img/logo3.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #menu a:hover {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #dropdown_usuario a {
+    color: #8cc43f !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .icono_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .ver_perfil img {
+    content: url("../recursos/iconografia/usuariow.png");
+    transition: all .7s ease-in-out;
+}
+
+.modo_oscuro::after {
+    content: ' Oscuro';
+}
+
+body.dark .modo_oscuro::after {
+    content: ' Claro';
+}
+
+body.dark .modo_oscuro img {
+    content: url("../recursos/iconografia/sol.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .cerrar_sesion img {
+    content: url("../recursos/iconografia/logoutw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .inicio_icon img {
+    content: url("../recursos/iconografia/iniciow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .graficas_icon img {
+    content: url("../recursos/iconografia/graficasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .inventario_icon img {
+    content: url("../recursos/iconografia/inventariow.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .categoria_icon img {
+    content: url("../recursos/iconografia/categoriasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .empleado_icon img {
+    content: url("../recursos/iconografia/empleados_usuariosw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .marca_icon img {
+    content: url("../recursos/iconografia/marcasw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .distribuidor_icon img {
+    content: url("../recursos/iconografia/distribuidorw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark .pedidos_icon img {
+    content: url("../recursos/iconografia/auto_pedidosw.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjetas:hover {
+    box-shadow: 0 1px 2rem rgba(47, 105, 80, 1);
+    transition: all 0.4s ease;
+}
+
+body.dark #usuario p {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h1 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h3 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark h4 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #direccion h6 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #direccion p {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .card-title {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .dropdown-content {
+    background-color: #2b2c2d;
+}
+
+body.dark .dropdown-content li:hover {
+    background-color: #242221 !important;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .sidenav {
+    background-color: #2b2c2d;
+}
+
+body.dark .sidenav a {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark .sidenav a:hover {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #contenido_login .card {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login h5 {
+    color: #ffffff;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_login p {
+    color: #8cc43f;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #logo_login img {
+    content: url("../recursos/img/logo_icon.png");
+    transition: all .7s ease-in-out;
+}
+
+body.dark #credenciales_login a {
+    color: #DA7D27;
+}
+
+body.dark #inicio_sesion_form input {
+    color: #ffffff;
+}
+
+body.dark #tarjeta_grafica {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_inventario {
+    background-color: #2b2c2d;
+    transition: all .7s ease-in-out;
+}
+
+body.dark #tarjeta_inventario p {
+    color: #ffffff;
+}
+
+body.dark .texto_verde p {
+    color: #8cc43f;
+}
+
+body.dark #titulo_buscador h6 {
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega label {
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega p {
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega input {
+    color: #ffffff;
+}
+
+body.dark #formulario_entrega .dropdown-content li>span {
+    color: #8cc43f;
+}
+
+body.dark .contenedores_entrega2 h5 {
+    color: #ffffff;
+}
+
+body.dark .contenedores_entrega h5 {
+    color: #ffffff;
+}
+
+body.dark #pedidos {
+    border: 1px solid #ffffff;
+}
+
+body.dark #estado_pedido p {
+    color: #ffffff;
+}
+
+body.dark .select-wrapper input.select-dropdown {
+    color: #ffffff;
+}
+
+/*----------------------------------------------RESPONSIVE---------------------------------------------------------------------*/
+
+/*para celulares*/
+@media screen and (max-width: 374px) {
+
+    /*---------------------------------------------------------HEADER---------------------------------------------------------*/
+    #menu_desplegable {
+        max-width: 40px;
+    }
+
+    /*Editar el titulo del slider*/
+    #slider_main h1 {
+        font-size: 45px;
+    }
+
+    .titulo_administrar {
+        font-size: 35px;
+    }
+
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 225px;
+        margin-top: 2px;
+        margin-bottom: 15px;
+    }
+
+    #tarjetas a {
+        color: #2f6950;
+        font-size: 10px;
+        width: 60px;
+        padding-right: 0px;
+        padding-left: 0px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjetas span {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .container .card {
+        padding: 5px;
+    }
+
+    .container .card img {
+        height: 110px;
+        width: 100%;
+    }
+
+    .card {
+        padding: 5px;
+    }
+
+    .card img {
+        height: 110px;
+        width: 100%;
+    }
+
+    /*-Footer Terminos-*/
+    #pie {
+        text-align: center;
+        position: relative;
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #texto_terminos {
+        margin-left: 0%;
+    }
+
+    .terminos {
+        font-size: smaller;
+        margin-left: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_login {
+        max-height: 450px;
+        max-width: 300px;
+    }
+
+    #contenido_login .card-content {
+        height: 350px;
+        width: 300px;
+    }
+
+    #tarjeta_login {
+        font-size: smaller;
+    }
+
+    /*-Footer Terminos-*/
+    #pie_login {
+        position: relative;
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .terminos_login {
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #formulario_registro {
+        width: 95%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registro img {
+        max-width: 250px;
+        max-height: 230px;
+    }
+
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    #opciones_graficas {
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-end;
+        justify-content: end;
+        align-items: center !important;
+    }
+
+    .titulo_graficas {
+        font-size: 35px;
+    }
+
+    #tarjeta_grafica {
+        margin-bottom: 10%;
+    }
+
+    #tarjeta_grafica a {
+        font-size: 10px;
+        margin-right: -8px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        height: 20px !important;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span {
+        font-size: 15px;
+    }
+
+    #tarjeta_grafica .card {
+        padding: 5px;
+    }
+
+    #tarjeta_grafica.card img {
+        margin-top: 10%;
+        height: 80%;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tarjeta_inventario a {
+        font-size: 10px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tarjeta_inventario p {
+        font-size: small;
+    }
+
+    #tarjeta_inventario span {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    #tarjeta_inventario img {
+        height: 100px;
+        width: 100px;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador {
+        padding-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tabla th {
+        font-size: 12px;
+    }
+
+    #tabla td {
+        font-size: 12px;
+    }
+
+    #titulo_buscador h3 {
+        margin-left: 5%;
+    }
+
+    .contenedor_entregas {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2 {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    #modal_personalizado1 {
+        width: 95% !important;
+    }
+
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos {
+        width: 100%;
+        height: 600px;
+        border: 1px solid #282012;
+        margin-top: 2%;
+        margin-right: 1%;
+        margin-bottom: 2%;
+        margin-left: 1%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img {
+        max-width: 200px;
+        max-height: 200px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2 {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion {
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6 {
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #retrasado a {
+        background-color: #d32f2f;
+        width: 100%;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a {
+        background-color: #da7d27;
+        width: 100%;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #entregando a {
+        background-color: #8cc43f;
+        width: 100%;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #no_disponible a {
+        background-color: #36465d;
+        width: 100%;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+}
+
+
+@media screen and (min-width:375px) and (max-width:576px) {
+
+    /*---------------------------------------------------------HEADER---------------------------------------------------------*/
+    #menu_desplegable {
+        max-width: 40px;
+    }
+
+    /*Editar el titulo del slider*/
+    #slider_main h1 {
+        font-size: 50px;
+    }
+
+    /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
+
+    .titulo_administrar {
+        font-size: 40px;
+    }
+
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 245px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    #tarjetas a {
+        color: #2f6950;
+        font-size: 10px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*Titulos de las tarjetas*/
+    #tarjetas span {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .container .card {
+        padding: 10px;
+    }
+
+    .container .card img {
+        height: 120px;
+        width: 200px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .card img {
+        height: 120px;
+        width: 200px;
+    }
+
+    /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
+
+    /*Editamos el footer*/
+    #pie {
+        text-align: center;
+        position: relative;
+        font-size: small;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #texto_terminos {
+        margin-left: 0%;
+    }
+
+    .terminos {
+        font-size: small;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++LOGIN+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    /*-------------------------------------------------------SECTION LOGIN------------------------------------------------------*/
+    /*Editamos el tamaño de la tarjeta*/
+    #tarjeta_login {
+        max-height: 450px;
+        max-width: 360px;
+    }
+
+    #contenido_login .card-content {
+        height: 360px;
+        width: 360px;
+    }
+
+    #boton_iniciar_login {
+        margin: 0px;
+        padding-bottom: 10px;
+    }
+
+    #tarjeta_login {
+        font-size: smaller;
+    }
+
+    .terminos_login {
+        font-size: smaller;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #formulario_registro {
+        width: 90%;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*Le damos un nuevo tamaño a la imagen de Le Cameleon*/
+    #logo_registro img {
+        max-width: 320px;
+        max-height: 245px;
+        margin-left: -15px;
+        position: relative;
+    }
+
+    /*---------------------------------------------------------------PERFIL-----------------------------------------------------------*/
+    .datos_cliente {
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    .titulo_graficas {
+        font-size: 40px;
+    }
+
+    #tarjeta_grafica {
+        margin-bottom: 10%;
+    }
+
+    #tarjeta_grafica a {
+        color: #2f6950;
+        font-size: 11px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span {
+        font-size: 20px;
+    }
+
+    #tarjeta_grafica.card img {
+        height: 95%;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    #modal_personalizado1 {
+        width: 85% !important;
+    }
+
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tarjeta_inventario a {
+        font-size: 11px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tarjeta_inventario p {
+        font-size: small;
+    }
+
+    #tarjeta_inventario span {
+        font-size: 20px;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador {
+        padding-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #titulo_buscador h3 {
+        margin-left: 5%;
+    }
+
+    .contenedor_entregas {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2 {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos {
+        width: 330px;
+        height: 700px;
+        margin: 20px 25px 20px 25px;
+        /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img {
+        max-width: 250px;
+        max-height: 250px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2 {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion {
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6 {
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #retrasado a {
+        background-color: #d32f2f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a {
+        background-color: #da7d27;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #entregando a {
+        background-color: #8cc43f;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #no_disponible a {
+        background-color: #36465d;
+        width: 329px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width:577px) and (max-width:765px) {
+
+    /*---------------------------------------------------------HEADER---------------------------------------------------------*/
+    #menu_desplegable {
+        max-width: 40px;
+    }
+
+    /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
+
+    .titulo_administrar {
+        font-size: 45px;
+    }
+
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 300px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    #tarjetas a {
+        font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*Titulos de las tarjetas*/
+    #tarjetas span {
+        font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .container .card {
+        padding: 5px;
+    }
+
+    .container .card img {
+        max-height: 160px;
+        width: 100%;
+    }
+
+    #modal_personalizado1 {
+        width: 55% !important;
+    }
+
+    /*---------------------------------------------------------FOOTER MAIN---------------------------------------------------------*/
+
+    /*Editamos el footer*/
+    #pie {
+        text-align: center;
+        position: relative;
+        font-size: small;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #texto_terminos {
+        margin-left: 0%;
+    }
+
+    .terminos {
+        font-size: small;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-content: center;
+    }
+
+    #sitio_privado {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    .titulo_graficas {
+        font-size: 35px;
+    }
+
+    #tarjeta_grafica {
+        margin-bottom: 10%;
+    }
+
+    #tarjeta_grafica a {
+        font-size: 15px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span {
+        font-size: 22px;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clasificar_grafica {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario a {
+        font-size: 11px;
+        margin-right: -8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tarjeta_inventario p {
+        font-size: medium;
+    }
+
+    #tarjeta_inventario span {
+        font-size: 22px;
+    }
+
+    #titulo_buscador h3 {
+        margin-left: 1%;
+    }
+
+    .contenedor_entregas {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenedores_izquierda {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .contenedores_entrega2 {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos {
+        width: 500px;
+        height: 700px;
+        border: 1px solid #282012;
+        margin: 20px 25px 20px 25px;
+        /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+    }
+
+    /*Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img {
+        max-width: 400px;
+        max-height: 400px;
+        margin-left: 0px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Separamos el boton de tomar pedido de la derecha*/
+    #tomar2 {
+        right: 0;
+        position: static;
+        margin-bottom: 25px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion {
+        text-align: center;
+        font-size: small;
+        left: 0;
+        position: relative;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6 {
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #retrasado a {
+        background-color: #d32f2f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a {
+        background-color: #da7d27;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #entregando a {
+        background-color: #8cc43f;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #no_disponible a {
+        background-color: #36465d;
+        width: 499px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width:766px) and (max-width:909px) {
+
+    /*---------------------------------------------------------HEADER---------------------------------------------------------*/
+    #menu_desplegable {
+        max-width: 40px;
+    }
+
+    /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
+
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 260px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    #tarjetas a {
+        font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*Titulos de las tarjetas*/
+    #tarjetas span {
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .container .card {
+        padding: 5px;
+    }
+
+    .container .card img {
+        max-height: 160px;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    #tarjeta_grafica {
+        margin-bottom: 10%;
+    }
+
+    #tarjeta_grafica a {
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_grafica span {
+        font-size: 25px;
+    }
+
+    /*------------------------------------------Main Gráficas Ventas------------------------------------------*/
+    #fechas_grafica .input-field {
+        margin-top: 12%;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario a {
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #tarjeta_inventario span {
+        font-size: 25px;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos {
+        width: 740px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a {
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 12px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a {
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a {
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 0px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a {
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: 5px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion {
+        font-size: small;
+        left: 22%;
+        position: absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6 {
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #retrasado a {
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a {
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #entregando a {
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #no_disponible a {
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width:910px) and (max-width:1133px) {
+
+    /*---------------------------------------------------------HEADER---------------------------------------------------------*/
+    #menu_desplegable {
+        max-width: 60px;
+    }
+
+    /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
+
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 270px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    #tarjetas a {
+        font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*Titulos de las tarjetas*/
+    #tarjetas span {
+        font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .container .card {
+        padding: 5px;
+    }
+
+    .container .card img {
+        max-height: 160px;
+        width: 100%;
+    }
+
+    /*------------------------------------------Main Gráficas------------------------------------------*/
+    #tarjeta_grafica {
+        margin-bottom: 15%;
+    }
+
+    #tarjeta_grafica a {
+        font-size: 15px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO------------------------------------------*/
+    #tarjeta_inventario {
+        min-height: 316px;
+    }
+
+    #tarjeta_inventario a {
+        font-size: 16px;
+        padding: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador {
+        margin-top: 10%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    /*La caja contenedor de los pedidos tiene un tamaño, border y un margin para separarlo de la paginas*/
+    #pedidos {
+        width: 865px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #rojo a {
+        background-color: #b51d26;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #amarillo a {
+        background-color: #da7d27;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #azul a {
+        background-color: #36465d;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -10px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*Le asignamos un color a los 'a' para que sean cuadrados*/
+    #verde a {
+        background-color: #8cc43f;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 30%;
+        margin-right: -7px;
+        /*Establecer las propiedades top, right, bottom y left de un 
+        elemento relativamente posicionado hará que se ajuste fuera de su posición normal.*/
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+
+    /*  Le damos una posición y tamaño a la imagen del camión*/
+    #pedidos img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /*Movemos la información a la izquierda*/
+    #direccion {
+        font-size: small;
+        left: 22%;
+        position: absolute;
+    }
+
+    /*Agregamos negrita a los titulos internos de la tarjeta*/
+    #direccion h6 {
+        font-weight: bold;
+    }
+
+    /*Colores de las tarjetas dependiendo de su estado*/
+    #retrasado a {
+        background-color: #d32f2f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #disponible a {
+        background-color: #da7d27;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #entregando a {
+        background-color: #8cc43f;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    #no_disponible a {
+        background-color: #36465d;
+        width: 20px;
+        height: 208px;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width:1134px) and (max-width:1333px) {
+
+    /*---------------------------------------------------------SECTION MAIN---------------------------------------------------------*/
+    /*Le asignamos nuevos valores a las card*/
+    #tarjetas {
+        height: 340px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    #tarjetas a {
+        font-size: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding: 0px;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    /*------------------------------------------Main INVENTARIO VISUALIZAR EXISTENCIAS------------------------------------------*/
+    #titulo_buscador {
+        margin-top: 10%;
+    }
+
+    /*------------------------------------------Monitorear Pedidos------------------------------------------*/
+    #pedidos {
+        width: 1080px;
+        height: 210px;
+        border: 1px solid #282012;
+        margin: 25px 30px 25px 30px;
+        /*Arriba, drecha, abajo, izquierda*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+}
