@@ -1,0 +1,328 @@
+/* Shipping quote calculator, tracking timeline, and delivery warnings */
+
+.shipping-quote {
+    padding-block: var(--space-2xl);
+    max-width: 40rem;
+}
+
+.shipping-quote__eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+}
+
+.shipping-quote__title {
+    margin-bottom: var(--space-md);
+}
+
+.shipping-quote__intro {
+    margin-bottom: var(--space-xl);
+}
+
+.shipping-quote__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface);
+}
+
+.shipping-quote__result {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.shipping-quote__status {
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+.shipping-quote__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.shipping-quote__fee {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, var(--primary) 10%, var(--background));
+}
+
+.shipping-quote__fee-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.shipping-quote__fee-value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.shipping-quote__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: 0;
+}
+
+.shipping-quote__meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    font-size: 0.9375rem;
+}
+
+.shipping-quote__meta-row dt {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.shipping-quote__meta-row dd {
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+.shipping-quote__footnote {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* Delivery warnings (quote + checkout) */
+.shipping-warnings {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.shipping-warning {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.shipping-warning--info {
+    border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+    background-color: color-mix(in srgb, var(--primary) 8%, var(--background));
+}
+
+.shipping-warning--warning {
+    border-color: color-mix(in srgb, #d97706 45%, var(--border));
+    background-color: color-mix(in srgb, #d97706 10%, var(--background));
+}
+
+.shipping-warning--critical {
+    border-color: color-mix(in srgb, var(--danger, #dc2626) 50%, var(--border));
+    background-color: color-mix(in srgb, var(--danger, #dc2626) 10%, var(--background));
+}
+
+.shipping-warning__title {
+    font-weight: 700;
+}
+
+.shipping-warning__message {
+    color: var(--text-muted);
+}
+
+/* Tracking lookup + timeline */
+.tracking {
+    padding-block: var(--space-2xl);
+    max-width: 44rem;
+}
+
+.tracking__eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+}
+
+.tracking__title {
+    margin-bottom: var(--space-md);
+}
+
+.tracking__intro {
+    margin-bottom: var(--space-xl);
+}
+
+.tracking-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface);
+    margin-bottom: var(--space-xl);
+}
+
+.tracking-form__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.tracking-form__row .form-input {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.tracking-status {
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface);
+    margin-bottom: var(--space-lg);
+}
+
+.tracking-status__code {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.tracking-status__badge {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background-color: color-mix(in srgb, var(--primary) 15%, var(--background));
+    color: var(--text);
+}
+
+.tracking-timeline {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-lg) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 2px solid var(--border);
+    margin-left: 0.65rem;
+}
+
+.tracking-timeline__item {
+    position: relative;
+    padding: 0 0 var(--space-lg) var(--space-lg);
+}
+
+.tracking-timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -0.45rem;
+    top: 0.35rem;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: var(--radius-full);
+    background-color: var(--border);
+    border: 2px solid var(--background);
+}
+
+.tracking-timeline__item--current::before {
+    background-color: var(--primary);
+}
+
+.tracking-timeline__item--done::before {
+    background-color: var(--accent);
+}
+
+.tracking-timeline__status {
+    font-weight: 700;
+    font-size: 0.9375rem;
+}
+
+.tracking-timeline__time {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.tracking-timeline__note {
+    margin: var(--space-xs) 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.tracking-outcome {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--accent) 10%, var(--background));
+}
+
+.tracking-outcome__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+}
+
+.tracking-map {
+    margin-top: var(--space-lg);
+}
+
+.tracking-map__placeholder {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--border);
+    background:
+        radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 55%),
+        linear-gradient(135deg, var(--secondary) 0%, color-mix(in srgb, var(--primary) 6%, var(--background)) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+    padding: var(--space-md);
+}
+
+.tracking-map__coords {
+    margin: var(--space-sm) 0 0;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono, monospace);
+}
+
+/* Checkout live shipping quote block */
+.checkout-shipping-quote {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+}
+
+.checkout-shipping-quote__eta {
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+}
+
+[x-cloak] {
+    display: none !important;
+}

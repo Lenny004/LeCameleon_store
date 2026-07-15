@@ -14,6 +14,26 @@ return [
 
     'shipping_flat_rate' => (float) env('STORE_SHIPPING_FLAT_RATE', 9.99),
 
+    // Origin municipality for A→B shipping quotes (sv_municipalities.id).
+    'warehouse_municipality_id' => env('STORE_WAREHOUSE_MUNICIPALITY_ID') !== null
+        ? (int) env('STORE_WAREHOUSE_MUNICIPALITY_ID')
+        : null,
+
+    'default_shipping_eta_hours' => (int) env('STORE_DEFAULT_SHIPPING_ETA_HOURS', 48),
+
+    'default_shipping_distance_km' => (float) env('STORE_DEFAULT_SHIPPING_DISTANCE_KM', 10),
+
+    // Origin municipality for zone-matrix quotes (set after seeding SV geo).
+    'warehouse_municipality_id' => env('STORE_WAREHOUSE_MUNICIPALITY_ID') !== null
+        ? (int) env('STORE_WAREHOUSE_MUNICIPALITY_ID')
+        : null,
+
+    // Fallback distance when municipality coordinates are missing.
+    'default_shipping_distance_km' => (float) env('STORE_DEFAULT_SHIPPING_DISTANCE_KM', 10),
+
+    // Default ETA when zone rate does not define estimated_hours.
+    'default_shipping_eta_hours' => (int) env('STORE_DEFAULT_SHIPPING_ETA_HOURS', 48),
+
     'tax_rate' => (float) env('STORE_TAX_RATE', 0),
 
     'session_cart_key' => 'cart_session_id',
