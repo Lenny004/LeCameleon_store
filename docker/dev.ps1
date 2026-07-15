@@ -5,12 +5,13 @@
 .EXAMPLE
   .\docker\dev.ps1 up
   .\docker\dev.ps1 setup
+  .\docker\dev.ps1 smoke
   .\docker\dev.ps1 artisan migrate
   .\docker\dev.ps1 down
 #>
 param(
     [Parameter(Position = 0)]
-    [ValidateSet('up', 'down', 'build', 'setup', 'artisan', 'composer', 'npm', 'logs', 'shell', 'ps')]
+    [ValidateSet('up', 'down', 'build', 'setup', 'artisan', 'composer', 'npm', 'logs', 'shell', 'ps', 'smoke')]
     [string]$Command = 'up',
 
     [Parameter(ValueFromRemainingArguments = $true)]
@@ -71,5 +72,8 @@ switch ($Command) {
     }
     'ps' {
         docker compose ps
+    }
+    'smoke' {
+        & "$PSScriptRoot\smoke.ps1" @Args
     }
 }

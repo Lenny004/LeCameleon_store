@@ -5,38 +5,50 @@
 @section('page-subtitle', 'Sales and traffic reports')
 
 @section('content')
+<form method="GET" action="{{ route('admin.analytics.index') }}" class="admin-filters" style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-xl);align-items:end;">
+    <label>
+        <span class="form-label">From</span>
+        <input type="date" name="from" class="form-input" value="{{ $from->toDateString() }}">
+    </label>
+    <label>
+        <span class="form-label">To</span>
+        <input type="date" name="to" class="form-input" value="{{ $to->toDateString() }}">
+    </label>
+    <button type="submit" class="btn btn--primary btn--sm">Apply</button>
+</form>
+
 <div class="kpi-grid">
     <div class="kpi-card">
-        <p class="kpi-card__label">Page views (7d)</p>
-        <p class="kpi-card__value">{{ number_format($pageViews ?? 8420) }}</p>
+        <p class="kpi-card__label">Product views</p>
+        <p class="kpi-card__value">{{ number_format($pageViews ?? $kpis['product_views'] ?? 0) }}</p>
     </div>
     <div class="kpi-card">
-        <p class="kpi-card__label">Add to cart rate</p>
-        <p class="kpi-card__value">{{ $cartRate ?? '8.2' }}%</p>
+        <p class="kpi-card__label">Conversion rate</p>
+        <p class="kpi-card__value">{{ number_format((float) ($cartRate ?? $kpis['conversion_rate'] ?? 0), 1) }}%</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">Avg. order value</p>
-        <p class="kpi-card__value">${{ number_format($aov ?? 112, 0) }}</p>
+        <p class="kpi-card__value">${{ number_format((float) ($aov ?? $kpis['average_order_value'] ?? 0), 0) }}</p>
     </div>
     <div class="kpi-card">
-        <p class="kpi-card__label">Return rate</p>
-        <p class="kpi-card__value">{{ $returnRate ?? '1.8' }}%</p>
+        <p class="kpi-card__label">Low / out of stock</p>
+        <p class="kpi-card__value">{{ ($lowStockCount ?? 0) }}/{{ ($outOfStockCount ?? 0) }}</p>
     </div>
 </div>
 
 <div class="admin-charts">
     <div class="admin-chart-card">
-        <h2 class="admin-chart-card__title">Monthly revenue</h2>
+        <h2 class="admin-chart-card__title">Daily revenue</h2>
         <canvas id="chart-sales"
-            data-labels='@json($salesLabels ?? ["Jan","Feb","Mar","Apr","May","Jun"])'
-            data-values='@json($salesValues ?? [8200,9100,7800,10200,11500,12450])'>
+            data-labels='@json($salesLabels ?? [])'
+            data-values='@json($salesValues ?? [])'>
         </canvas>
     </div>
     <div class="admin-chart-card">
-        <h2 class="admin-chart-card__title">Weekly orders</h2>
+        <h2 class="admin-chart-card__title">Daily orders</h2>
         <canvas id="chart-orders"
-            data-labels='@json($ordersLabels ?? ["W1","W2","W3","W4"])'
-            data-values='@json($ordersValues ?? [18,22,25,21])'>
+            data-labels='@json($ordersLabels ?? [])'
+            data-values='@json($ordersValues ?? [])'>
         </canvas>
     </div>
 </div>
@@ -54,17 +66,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($topProducts ?? [
-                    ['name' => 'Denim Jacket 80s', 'views' => 420, 'sales' => 8, 'revenue' => 712],
-                    ['name' => 'Floral Dress 70s', 'views' => 380, 'sales' => 6, 'revenue' => 720],
-                ] as $p)
+                @forelse ($topProducts ?? [] as $p)
                     <tr>
-                        <td>{{ $p['name'] }}</td>
-                        <td>{{ $p['views'] }}</td>
-                        <td>{{ $p['sales'] }}</td>
-                        <td>${{ number_format($p['revenue'], 0) }}</td>
+                        <td>{{ is_array($p) ? $p['name'] : ($p->name ?? '—') }}</td>
+                        <td>{{ is_array($p) ? $p['views'] : ($p->views ?? 0) }}</td>
+                        <td>{{ is_array($p) ? $p['sales'] : ($p->sales ?? 0) }}</td>
+                        <td>${{ number_format((float) (is_array($p) ? $p['revenue'] : ($p->revenue ?? 0)), 0) }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4">No product activity in this period.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
