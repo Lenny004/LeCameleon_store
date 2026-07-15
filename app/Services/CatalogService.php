@@ -181,6 +181,27 @@ class CatalogService
     }
 
     /**
+     * Active categories ranked by published product count (homepage collections).
+     */
+    public function topCategoriesWithPublishedCount(int $limit = 4): Collection
+    {
+        $publishedProductConstraints = function (Builder $query) {
+            $query->where('status', ProductStatus::Published)
+                ->whereNotNull('published_at')
+                ->where('published_at', '<=', now());
+        };
+
+        return Category::query()
+            ->where('is_active', true)
+            ->whereHas('products', $publishedProductConstraints)
+            ->withCount(['products as published_products_count' => $publishedProductConstraints])
+            ->orderByDesc('published_products_count')
+            ->orderBy('sort_order')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
      * @return list<string>
      */
     private function parseSearchTerms(string $q): array

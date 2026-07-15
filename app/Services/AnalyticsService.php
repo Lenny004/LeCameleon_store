@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\OfferStatus;
 use App\Enums\OrderStatus;
 use App\Enums\ProductStatus;
+use App\Enums\ReturnRequestStatus;
+use App\Models\Offer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductView;
+use App\Models\ReturnRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -73,6 +77,36 @@ class AnalyticsService
             'conversion_rate' => $views > 0 ? round(($orderCount / $views) * 100, 2) : 0,
             'low_stock_count' => $lowStock,
             'out_of_stock_count' => $outOfStock,
+            ...$this->operationalKpis(),
+        ];
+    }
+
+    /**
+     * Actionable counts for the admin dashboard (not period-scoped).
+     *
+     * @return array{
+     *     pending_offers_count: int,
+     *     pending_returns_count: int,
+     *     pending_orders_count: int,
+     *     authenticated_products_count: int
+     * }
+     */
+    public function operationalKpis(): array
+    {
+        return [
+            'pending_offers_count' => Offer::query()
+                ->where('status', OfferStatus::Pending)
+                ->count(),
+            'pending_returns_count' => ReturnRequest::query()
+                ->where('status', ReturnRequestStatus::Pending)
+                ->count(),
+            'pending_orders_count' => Order::query()
+                ->where('status', OrderStatus::Pending)
+                ->count(),
+            'authenticated_products_count' => Product::query()
+                ->where('status', ProductStatus::Published)
+                ->where('is_authenticated', true)
+                ->count(),
         ];
     }
 

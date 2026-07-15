@@ -25,6 +25,37 @@
     </div>
 </div>
 
+<div class="kpi-grid" style="margin-top:var(--space-md);">
+    <div class="kpi-card">
+        <p class="kpi-card__label">Pending orders</p>
+        <p class="kpi-card__value">{{ $kpis['pending_orders_count'] ?? 0 }}</p>
+        @if (Route::has('admin.orders.index'))
+            <a href="{{ route('admin.orders.index') }}" class="kpi-card__delta">View orders</a>
+        @endif
+    </div>
+    <div class="kpi-card">
+        <p class="kpi-card__label">Pending offers</p>
+        <p class="kpi-card__value">{{ $kpis['pending_offers_count'] ?? 0 }}</p>
+        @if (Route::has('admin.offers.index'))
+            <a href="{{ route('admin.offers.index') }}" class="kpi-card__delta">Review offers</a>
+        @endif
+    </div>
+    <div class="kpi-card">
+        <p class="kpi-card__label">Pending returns</p>
+        <p class="kpi-card__value">{{ $kpis['pending_returns_count'] ?? 0 }}</p>
+        @if (Route::has('admin.return-requests.index'))
+            <a href="{{ route('admin.return-requests.index') }}" class="kpi-card__delta">Review returns</a>
+        @endif
+    </div>
+    <div class="kpi-card">
+        <p class="kpi-card__label">Authenticated pieces</p>
+        <p class="kpi-card__value">{{ $kpis['authenticated_products_count'] ?? 0 }}</p>
+        @if (Route::has('admin.products.index'))
+            <a href="{{ route('admin.products.index') }}" class="kpi-card__delta">View catalog</a>
+        @endif
+    </div>
+</div>
+
 <div class="admin-charts">
     <div class="admin-chart-card">
         <h2 class="admin-chart-card__title">Revenue trend</h2>

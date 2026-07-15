@@ -22,6 +22,12 @@
             <div>
                 <p class="footer__heading">Ayuda</p>
                 <ul class="footer__links">
+                    @if (Route::has('about'))
+                        <li><a href="{{ route('about') }}" class="footer__link">Nuestra historia</a></li>
+                    @endif
+                    @if (Route::has('contact.show'))
+                        <li><a href="{{ route('contact.show') }}" class="footer__link">Contacto</a></li>
+                    @endif
                     @if (Route::has('returns'))
                         <li><a href="{{ route('returns') }}" class="footer__link">Devoluciones</a></li>
                     @endif
