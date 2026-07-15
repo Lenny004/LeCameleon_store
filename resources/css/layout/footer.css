@@ -40,6 +40,42 @@
     max-width: 24rem;
 }
 
+.footer__newsletter {
+    margin-top: var(--space-lg);
+    max-width: 22rem;
+}
+
+.footer__newsletter-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+    color: var(--text-muted);
+}
+
+.footer__newsletter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.footer__newsletter-input {
+    flex: 1 1 10rem;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.footer__newsletter-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
 .footer__heading {
     font-family: var(--font-display);
     font-size: 0.875rem;

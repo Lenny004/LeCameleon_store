@@ -34,6 +34,8 @@ Then open:
 
 Recent storefront and admin additions on `develop`:
 
+- **FAQ** — `/faq` with Spanish Q&A (condition, measurements, shipping, returns, authenticity, offers) in a BEM accordion.
+- **Newsletter** — footer email capture stored in `newsletter_subscribers` (`POST /newsletter`, throttle 5/min).
 - **Make an offer** — buyers propose a price on published in-stock products; staff accept, decline, or counter in admin.
 - **Authenticity** — admin can mark products as verified (`is_authenticated`) with notes; PDP shows a verified badge.
 - **Stripe webhook** — `POST /api/webhooks/stripe` captures pending payments when `STRIPE_WEBHOOK_SECRET` is set (or in local dev without secret).

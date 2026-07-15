@@ -4,6 +4,25 @@
             <div>
                 <p class="footer__brand">Le Cameleon</p>
                 <p class="footer__tagline">Piezas vintage seleccionadas con criterio. Moda y objetos con historia, listos para una nueva vida.</p>
+                @if (Route::has('newsletter.store'))
+                    <form method="POST" action="{{ route('newsletter.store') }}" class="footer__newsletter">
+                        @csrf
+                        <p class="footer__newsletter-label">Boletín</p>
+                        <div class="footer__newsletter-row">
+                            <input
+                                type="email"
+                                name="email"
+                                class="footer__newsletter-input @error('email') form-input--error @enderror"
+                                placeholder="Tu correo"
+                                value="{{ old('email') }}"
+                                required
+                                autocomplete="email"
+                                aria-label="Correo para el boletín"
+                            >
+                            <button type="submit" class="btn btn--primary btn--sm">Suscribirme</button>
+                        </div>
+                    </form>
+                @endif
             </div>
             <div>
                 <p class="footer__heading">Tienda</p>
@@ -27,6 +46,9 @@
                     @endif
                     @if (Route::has('contact.show'))
                         <li><a href="{{ route('contact.show') }}" class="footer__link">Contacto</a></li>
+                    @endif
+                    @if (Route::has('faq'))
+                        <li><a href="{{ route('faq') }}" class="footer__link">Preguntas frecuentes</a></li>
                     @endif
                     @if (Route::has('returns'))
                         <li><a href="{{ route('returns') }}" class="footer__link">Devoluciones</a></li>
