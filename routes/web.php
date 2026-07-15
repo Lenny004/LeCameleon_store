@@ -16,8 +16,6 @@ use App\Http\Controllers\Store\ReviewController;
 use App\Http\Controllers\Store\ShippingInfoController;
 use App\Http\Controllers\Store\ShippingQuoteController;
 use App\Http\Controllers\Store\TrackingController;
-use App\Http\Controllers\Store\ShippingQuoteController;
-use App\Http\Controllers\Store\TrackingController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
 use App\Http\Controllers\Store\OfferController;
@@ -80,13 +78,7 @@ Route::post('/tracking', [TrackingController::class, 'lookup'])
 Route::get('/tracking/{code}', [TrackingController::class, 'show'])
     ->where('code', '[A-Za-z0-9\-]+')
     ->name('tracking.show');
-Route::post('/shipping/quote', ShippingQuoteController::class)
-    ->middleware('throttle:30,1')
-    ->name('shipping.quote');
-Route::get('/tracking', [TrackingController::class, 'show'])->name('tracking.show');
-Route::post('/tracking', [TrackingController::class, 'lookup'])
-    ->middleware('throttle:20,1')
-    ->name('tracking.lookup');
+
 Route::post('/newsletter', [NewsletterController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('newsletter.store');
