@@ -1,0 +1,95 @@
+.checkout {
+    padding-block: var(--space-xl);
+}
+
+.checkout-steps {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    overflow-x: auto;
+}
+
+.checkout-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text-muted);
+}
+
+.checkout-step--active {
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 12%, var(--background));
+    color: var(--text);
+}
+
+.checkout-step--done {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.checkout-step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--secondary);
+    font-size: 0.75rem;
+}
+
+.checkout-step--active .checkout-step__num {
+    background-color: var(--primary);
+    color: var(--primary-contrast);
+}
+
+.checkout-layout {
+    display: grid;
+    gap: var(--space-xl);
+}
+
+@media (min-width: 64rem) {
+    .checkout-layout {
+        grid-template-columns: 1fr 20rem;
+        align-items: start;
+    }
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.checkout-section {
+    padding: var(--space-lg);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.checkout-section__title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+}
+
+.checkout-review-item {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: var(--space-sm);
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.checkout-review-item:last-child {
+    border-bottom: none;
+}

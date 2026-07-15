@@ -1,0 +1,156 @@
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--space-xl) var(--space-md);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 26rem;
+    padding: var(--space-2xl);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-card__brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: var(--space-xs);
+}
+
+.auth-card__brand span {
+    color: var(--accent);
+}
+
+.auth-card__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-xs);
+}
+
+.auth-card__subtitle {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xl);
+}
+
+.auth-card__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.auth-card__footer {
+    margin-top: var(--space-lg);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.auth-card__footer a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.auth-card__footer a:hover {
+    text-decoration: underline;
+}
+
+.account-layout {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block: var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+    .account-layout {
+        grid-template-columns: 14rem 1fr;
+        align-items: start;
+    }
+}
+
+.account-nav {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+}
+
+.account-nav__link {
+    display: block;
+    padding: 0.625rem var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background-color var(--transition);
+}
+
+.account-nav__link:hover {
+    background-color: color-mix(in srgb, var(--primary) 8%, var(--surface));
+}
+
+.account-nav__link--active {
+    background-color: color-mix(in srgb, var(--primary) 15%, var(--surface));
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.account-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.order-card {
+    padding: var(--space-lg);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.order-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.order-card__id {
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.order-card__date {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.order-card__items {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.order-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+}
+
+.order-card__total {
+    font-family: var(--font-display);
+    font-weight: 700;
+}

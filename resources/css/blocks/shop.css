@@ -1,0 +1,130 @@
+.shop-layout {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block: var(--space-xl);
+}
+
+@media (min-width: 64rem) {
+    .shop-layout {
+        grid-template-columns: 16rem 1fr;
+        align-items: start;
+    }
+}
+
+.filter-panel {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+.filter-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.filter-panel__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.filter-panel__group {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-panel__group:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.filter-panel__label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-sm);
+}
+
+.filter-panel__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.filter-panel__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.filter-panel__option input {
+    accent-color: var(--primary);
+}
+
+.filter-panel__toggle {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (min-width: 64rem) {
+    .filter-panel__toggle {
+        display: none;
+    }
+}
+
+.shop-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.shop-toolbar__count {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.shop-toolbar__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.shop-toolbar__sort select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: 0.875rem;
+}
+
+.filter-panel--mobile-hidden {
+    display: none;
+}
+
+.filter-panel--mobile-hidden.filter-panel--open {
+    display: block;
+}
+
+@media (min-width: 64rem) {
+    .filter-panel--mobile-hidden {
+        display: block;
+    }
+}

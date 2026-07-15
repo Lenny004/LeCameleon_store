@@ -1,0 +1,33 @@
+.flash {
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    font-size: 0.9375rem;
+    margin-bottom: var(--space-md);
+}
+
+.flash--success {
+    background-color: color-mix(in srgb, var(--success) 12%, var(--background));
+    border-color: color-mix(in srgb, var(--success) 40%, var(--border));
+}
+
+.flash--error {
+    background-color: color-mix(in srgb, var(--danger) 12%, var(--background));
+    border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
+}
+
+.flash--warning {
+    background-color: color-mix(in srgb, var(--warning) 12%, var(--background));
+    border-color: color-mix(in srgb, var(--warning) 40%, var(--border));
+}
+
+.flash--info {
+    background-color: color-mix(in srgb, var(--accent) 10%, var(--background));
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.flash-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
