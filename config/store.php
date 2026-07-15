@@ -19,15 +19,6 @@ return [
         ? (int) env('STORE_WAREHOUSE_MUNICIPALITY_ID')
         : null,
 
-    'default_shipping_eta_hours' => (int) env('STORE_DEFAULT_SHIPPING_ETA_HOURS', 48),
-
-    'default_shipping_distance_km' => (float) env('STORE_DEFAULT_SHIPPING_DISTANCE_KM', 10),
-
-    // Origin municipality for zone-matrix quotes (set after seeding SV geo).
-    'warehouse_municipality_id' => env('STORE_WAREHOUSE_MUNICIPALITY_ID') !== null
-        ? (int) env('STORE_WAREHOUSE_MUNICIPALITY_ID')
-        : null,
-
     // Fallback distance when municipality coordinates are missing.
     'default_shipping_distance_km' => (float) env('STORE_DEFAULT_SHIPPING_DISTANCE_KM', 10),
 
