@@ -30,7 +30,7 @@
             </div>
 
             @php
-                $featured = $featuredProducts ?? collect([
+                $featured = $featured ?? $featuredProducts ?? collect([
                     (object) ['slug' => 'chaqueta-denim-80s', 'name' => 'Chaqueta Denim 80s', 'price' => 89.00, 'era' => '1980s', 'condition' => 'Excelente', 'image' => null],
                     (object) ['slug' => 'vestido-floral-70s', 'name' => 'Vestido Floral 70s', 'price' => 120.00, 'era' => '1970s', 'condition' => 'Muy bueno', 'image' => null],
                     (object) ['slug' => 'bolso-cuero-vintage', 'name' => 'Bolso Cuero Vintage', 'price' => 65.00, 'era' => '1990s', 'condition' => 'Bueno', 'image' => null],
