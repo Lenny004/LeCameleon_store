@@ -27,25 +27,15 @@
         <tbody>
             @forelse ($workers as $worker)
                 <tr>
-                    <td>
-                        <a href="{{ route('admin.logistics.workers.show', $worker) }}" class="logistics-link">{{ $worker->full_name }}</a>
-                    </td>
-                    <td><code>{{ $worker->dui }}</code></td>
+                    <td><a href="{{ route('admin.logistics.workers.show', $worker) }}" class="logistics-link">{{ $worker->fullName() }}</a></td>
+                    <td><code>{{ $worker->document_id ?: '—' }}</code></td>
                     <td>{{ ucfirst($worker->role->value) }}</td>
                     <td>{{ $worker->company?->name ?? '—' }}</td>
-                    <td>
-                        <span class="badge badge--{{ $worker->is_active ? 'success' : 'warning' }}">
-                            {{ $worker->is_active ? 'Active' : 'Inactive' }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.logistics.workers.edit', $worker) }}" class="btn btn--ghost btn--sm">Edit</a>
-                    </td>
+                    <td><span class="badge badge--{{ $worker->is_active ? 'success' : 'warning' }}">{{ $worker->is_active ? 'Active' : 'Inactive' }}</span></td>
+                    <td><a href="{{ route('admin.logistics.workers.edit', $worker) }}" class="btn btn--ghost btn--sm">Edit</a></td>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="6" class="text-muted">No workers yet.</td>
-                </tr>
+                <tr><td colspan="6" class="text-muted">No workers yet.</td></tr>
             @endforelse
         </tbody>
     </table>
