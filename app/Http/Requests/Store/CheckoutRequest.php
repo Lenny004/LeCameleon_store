@@ -8,7 +8,7 @@ class CheckoutRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user() !== null;
+        return true;
     }
 
     /**
@@ -17,6 +17,12 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'email' => [
+                \Illuminate\Validation\Rule::requiredIf(fn () => $this->user() === null),
+                'nullable',
+                'email',
+                'max:255',
+            ],
             'billing_address' => ['required', 'array'],
             'billing_address.first_name' => ['required', 'string', 'max:100'],
             'billing_address.last_name' => ['required', 'string', 'max:100'],

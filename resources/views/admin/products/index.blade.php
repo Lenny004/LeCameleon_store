@@ -8,7 +8,7 @@
 <div class="admin-page-header">
     <div>
         <h2 class="admin-page-header__title">All products</h2>
-        <p class="admin-page-header__subtitle">{{ count($products ?? []) ?: 24 }} items in catalog</p>
+        <p class="admin-page-header__subtitle">{{ $products->total() }} items in catalog</p>
     </div>
     @if (Route::has('admin.products.create'))
         <a href="{{ route('admin.products.create') }}" class="btn btn--primary">Add product</a>
@@ -29,30 +29,43 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($products ?? [
-                ['sku' => 'LC-001', 'name' => 'Denim Jacket 80s', 'category' => 'Clothing', 'price' => 89, 'stock' => 1, 'status' => 'Active'],
-                ['sku' => 'LC-002', 'name' => 'Floral Dress 70s', 'category' => 'Clothing', 'price' => 120, 'stock' => 1, 'status' => 'Active'],
-                ['sku' => 'LC-003', 'name' => 'Leather Bag Vintage', 'category' => 'Accessories', 'price' => 65, 'stock' => 0, 'status' => 'Sold out'],
-            ] as $product)
+            @forelse ($products as $product)
                 <tr>
-                    <td>{{ $product['sku'] }}</td>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['category'] }}</td>
-                    <td>${{ number_format($product['price'], 2) }}</td>
-                    <td>{{ $product['stock'] }}</td>
+                    <td>{{ $product->sku }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->category?->name ?? '—' }}</td>
+                    <td>${{ number_format((float) $product->price, 2) }}</td>
                     <td>
-                        <span class="badge badge--{{ $product['status'] === 'Active' ? 'success' : 'warning' }}">{{ $product['status'] }}</span>
+                        {{ $product->quantity_available }}
+                        @if ($product->quantity_available <= $product->low_stock_threshold)
+                            <span class="badge badge--warning">Low stock</span>
+                        @endif
+                    </td>
+                    <td>
+                        <span class="badge badge--{{ $product->status->value === 'published' ? 'success' : 'warning' }}">
+                            {{ ucfirst(str_replace('_', ' ', $product->status->value)) }}
+                        </span>
                     </td>
                     <td>
                         <div class="table__actions">
                             @if (Route::has('admin.products.edit'))
-                                <a href="{{ route('admin.products.edit', $product['sku']) }}" class="btn btn--ghost btn--sm">Edit</a>
+                                <a href="{{ route('admin.products.edit', $product) }}" class="btn btn--ghost btn--sm">Edit</a>
                             @endif
                         </div>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="7">No products yet.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+@if ($products->hasPages())
+    <div style="margin-top:var(--space-lg);">
+        {{ $products->links() }}
+    </div>
+@endif
 @endsection

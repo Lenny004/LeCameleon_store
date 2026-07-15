@@ -24,6 +24,7 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
         Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
+        Route::post('orders/{order}/capture-payment', [OrderController::class, 'capturePayment'])->name('orders.capture-payment');
 
         Route::resource('users', UserController::class);
         Route::resource('categories', CategoryController::class);

@@ -1,31 +1,34 @@
 @extends('layouts.admin')
 
-@section('title', 'Order ' . ($order->id ?? ''))
-@section('page-title', 'Order #' . ($order->id ?? 'LC-1042'))
+@section('title', 'Order ' . $order->number)
+@section('page-title', 'Order #' . $order->number)
 
 @section('content')
 @php
-    $order = $order ?? (object) [
-        'id' => 'LC-1042',
-        'customer' => 'maria@email.com',
-        'status' => 'processing',
-        'total' => 189.00,
-        'shipping_address' => 'Calle Ejemplo 123',
-        'items' => [
-            (object) ['name' => 'Denim Jacket 80s', 'sku' => 'LC-001', 'qty' => 1, 'price' => 89],
-            (object) ['name' => 'Floral Dress 70s', 'sku' => 'LC-002', 'qty' => 1, 'price' => 100],
-        ],
-    ];
+    $shipping = $order->shipping_address ?? [];
+    $shippingLine = collect([
+        $shipping['line1'] ?? null,
+        $shipping['city'] ?? null,
+        $shipping['postal_code'] ?? null,
+    ])->filter()->implode(', ');
 @endphp
 
 <div style="display:grid;gap:var(--space-xl);max-width:48rem;">
     <div class="card">
         <div class="card__header">
             <h2 class="card__title">Order details</h2>
-            <span class="badge badge--primary">{{ ucfirst($order->status) }}</span>
+            <span class="badge badge--primary">{{ ucfirst($order->status->value) }}</span>
         </div>
-        <p class="text-muted">Customer: {{ $order->customer }}</p>
-        <p class="text-muted" style="margin-top:var(--space-xs);">Ship to: {{ $order->shipping_address }}</p>
+        <p class="text-muted">Customer: {{ $order->customerEmail() ?? $order->user?->email ?? 'Guest' }}</p>
+        @if ($shippingLine)
+            <p class="text-muted" style="margin-top:var(--space-xs);">Ship to: {{ $shippingLine }}</p>
+        @endif
+        <p class="text-muted" style="margin-top:var(--space-xs);">Placed: {{ $order->placed_at?->format('Y-m-d H:i') }}</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card__title" style="margin-bottom:var(--space-md);">Status timeline</h2>
+        @include('components.order-timeline', ['timeline' => $order->statusTimeline()])
     </div>
 
     <div class="card">
@@ -45,26 +48,64 @@
                         <tr>
                             <td>{{ $item->sku }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->qty }}</td>
-                            <td>${{ number_format($item->price, 2) }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>${{ number_format((float) $item->line_total, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <p style="text-align:right;margin-top:var(--space-md);font-weight:700;">Total: ${{ number_format($order->total, 2) }}</p>
+        @if ($order->coupon_code)
+            <p class="text-muted" style="margin-top:var(--space-md);">
+                Coupon {{ $order->coupon_code }}: −${{ number_format((float) $order->discount_total, 2) }}
+            </p>
+        @endif
+        <p style="text-align:right;margin-top:var(--space-md);font-weight:700;">Total: ${{ number_format((float) $order->grand_total, 2) }}</p>
     </div>
 
-    @if (Route::has('admin.orders.update'))
-        <form method="POST" action="{{ route('admin.orders.update', $order->id) }}" class="card">
+    @if ($order->payments->isNotEmpty())
+        <div class="card">
+            <h2 class="card__title" style="margin-bottom:var(--space-md);">Payments</h2>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->payments as $payment)
+                            <tr>
+                                <td>{{ $payment->provider }}</td>
+                                <td>{{ ucfirst($payment->status->value) }}</td>
+                                <td>${{ number_format((float) $payment->amount, 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            @if ($order->status->value === 'pending' && $order->payments->contains(fn ($payment) => $payment->status->value === 'pending'))
+                <form method="POST" action="{{ route('admin.orders.capture-payment', $order) }}" style="margin-top:var(--space-md);">
+                    @csrf
+                    <button type="submit" class="btn btn--primary">Mark payment captured</button>
+                </form>
+            @endif
+        </div>
+    @endif
+
+    @if (Route::has('admin.orders.status'))
+        <form method="POST" action="{{ route('admin.orders.status', $order) }}" class="card">
             @csrf
             @method('PATCH')
             <h2 class="card__title" style="margin-bottom:var(--space-md);">Update status</h2>
             <div class="form-group">
                 <label class="form-label" for="status">Status</label>
                 <select id="status" name="status" class="form-select">
-                    @foreach (['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as $s)
-                        <option value="{{ $s }}" {{ ($order->status ?? '') === $s ? 'selected' : '' }}>{{ ucfirst($s) }}</option>
+                    @foreach ($statuses as $status)
+                        <option value="{{ $status->value }}" @selected($order->status === $status)>{{ ucfirst($status->value) }}</option>
                     @endforeach
                 </select>
             </div>
