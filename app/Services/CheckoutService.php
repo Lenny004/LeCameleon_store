@@ -22,6 +22,8 @@ class CheckoutService
         private readonly CartService $cartService,
         private readonly InventoryService $inventoryService,
         private readonly PaymentService $paymentService,
+        private readonly ShippingRateService $shippingRateService,
+        private readonly ShipmentTrackingService $shipmentTrackingService,
     ) {}
 
     /**
@@ -37,6 +39,7 @@ class CheckoutService
         ?string $couponCode = null,
         ?string $notes = null,
         string $paymentMethod = 'manual',
+        ?int $destinationMunicipalityId = null,
     ): Order {
         $cart->load(['items.product']);
 
@@ -49,7 +52,7 @@ class CheckoutService
         $billingAddress['email'] = $email;
         $shippingAddress['email'] = $email;
 
-        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod) {
+        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
                 $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
@@ -64,7 +67,12 @@ class CheckoutService
             $orderSubtotal = $this->cartService->subtotal($cart);
             $appliedCoupon = $this->resolveCoupon($couponCode, $orderSubtotal);
             $discountTotal = $this->calculateDiscount($appliedCoupon, $orderSubtotal);
-            $shippingTotal = (float) config('store.shipping_flat_rate', 0);
+
+            $shippingTotal = $this->resolveShippingTotal($destinationMunicipalityId);
+
+            if ($destinationMunicipalityId) {
+                $shippingAddress['sv_municipality_id'] = $destinationMunicipalityId;
+            }
             $taxRate = (float) config('store.tax_rate', 0);
             $taxableAmount = max($orderSubtotal - $discountTotal, 0);
             $taxTotal = round($taxableAmount * $taxRate, 2);
@@ -121,6 +129,15 @@ class CheckoutService
             $this->paymentService->createPendingPayment($order, $paymentProvider);
 
             $this->cartService->clear($cart);
+
+            $warehouseId = config('store.warehouse_municipality_id');
+            $warehouseId = is_numeric($warehouseId) ? (int) $warehouseId : null;
+
+            $this->shipmentTrackingService->createForOrder(
+                $order,
+                $destinationMunicipalityId,
+                $warehouseId,
+            );
 
             $order = $order->load('items');
 
@@ -193,6 +210,20 @@ class CheckoutService
         $prefix = config('store.order_number_prefix', 'LC');
 
         return sprintf('%s-%s-%s', $prefix, now()->format('Ymd'), strtoupper(substr(uniqid(), -6)));
+    }
+
+    private function resolveShippingTotal(?int $destinationMunicipalityId): float
+    {
+        if (! $destinationMunicipalityId) {
+            return (float) config('store.shipping_flat_rate', 0);
+        }
+
+        $originId = config('store.warehouse_municipality_id');
+        $originId = is_numeric($originId) ? (int) $originId : null;
+
+        $quote = $this->shippingRateService->quote($originId, $destinationMunicipalityId);
+
+        return (float) $quote['fee'];
     }
 
     private function resolvePaymentProvider(string $paymentMethod): string

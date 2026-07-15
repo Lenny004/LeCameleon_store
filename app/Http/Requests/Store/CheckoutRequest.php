@@ -43,6 +43,7 @@ class CheckoutRequest extends FormRequest
             'shipping_address.postal_code' => ['required', 'string', 'max:20'],
             'shipping_address.country' => ['required', 'string', 'size:2'],
             'shipping_address.phone' => ['nullable', 'string', 'max:30'],
+            'destination_municipality_id' => ['nullable', 'integer', 'exists:sv_municipalities,id'],
             'coupon_code' => ['nullable', 'string', 'max:50'],
             'notes' => ['nullable', 'string', 'max:1000'],
             'payment_method' => ['nullable', 'string', 'in:manual,stripe'],

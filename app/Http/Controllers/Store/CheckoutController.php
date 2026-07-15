@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Store;
 
+use App\Http\Controllers\Concerns\LoadsServiceableMunicipalities;
 use App\Http\Controllers\Concerns\ResolvesStoreSession;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\CheckoutRequest;
@@ -15,6 +16,7 @@ use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
+    use LoadsServiceableMunicipalities;
     use ResolvesStoreSession;
 
     public function __construct(
@@ -42,6 +44,8 @@ class CheckoutController extends Controller
             'subtotal' => $this->cartService->subtotal($cart),
             'shipping' => (float) config('store.shipping_flat_rate', 0),
             'currency' => config('store.currency', 'USD'),
+            'departments' => $this->serviceableDepartmentsWithMunicipalities(),
+            'quoteCalculateUrl' => route('shipping.quote.calculate'),
         ]);
     }
 
@@ -54,6 +58,10 @@ class CheckoutController extends Controller
 
         $paymentMethod = $request->validated('payment_method') ?? 'manual';
 
+        $destinationMunicipalityId = $request->filled('destination_municipality_id')
+            ? (int) $request->validated('destination_municipality_id')
+            : null;
+
         $order = $this->checkoutService->placeOrder(
             $cart,
             $request->user(),
@@ -63,6 +71,7 @@ class CheckoutController extends Controller
             $request->validated('coupon_code'),
             $request->validated('notes'),
             $paymentMethod,
+            $destinationMunicipalityId,
         );
 
         $request->session()->put('last_order_id', $order->id);
