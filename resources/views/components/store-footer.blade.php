@@ -84,6 +84,14 @@
         </div>
         <div class="footer__bottom">
             <span>&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</span>
+            <span class="footer__legal">
+                @if (Route::has('privacy'))
+                    <a href="{{ route('privacy') }}" class="footer__link">Privacidad</a>
+                @endif
+                @if (Route::has('terms'))
+                    <a href="{{ route('terms') }}" class="footer__link">Términos</a>
+                @endif
+            </span>
             @include('components.theme-toggle')
         </div>
     </div>
