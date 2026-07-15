@@ -25,6 +25,7 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Status</th>
+                <th>Verified</th>
                 <th></th>
             </tr>
         </thead>
@@ -47,6 +48,13 @@
                         </span>
                     </td>
                     <td>
+                        @if ($product->is_authenticated)
+                            <span class="badge badge--success">Verified</span>
+                        @else
+                            <span class="text-muted">—</span>
+                        @endif
+                    </td>
+                    <td>
                         <div class="table__actions">
                             @if (Route::has('admin.products.edit'))
                                 <a href="{{ route('admin.products.edit', $product) }}" class="btn btn--ghost btn--sm">Edit</a>
@@ -56,7 +64,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7">No products yet.</td>
+                    <td colspan="8">No products yet.</td>
                 </tr>
             @endforelse
         </tbody>
