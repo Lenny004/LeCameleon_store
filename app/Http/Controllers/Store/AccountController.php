@@ -60,4 +60,15 @@ class AccountController extends Controller
 
         return back()->with('success', 'Solicitud de devolución enviada. Te contactaremos pronto.');
     }
+
+    public function offers(Request $request): View
+    {
+        $offers = $request->user()
+            ->offers()
+            ->with('product')
+            ->orderByDesc('created_at')
+            ->paginate(15);
+
+        return view('store.account.offers.index', compact('offers'));
+    }
 }

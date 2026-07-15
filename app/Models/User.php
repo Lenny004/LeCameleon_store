@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(InventoryMovement::class);
     }
 
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::Admin;

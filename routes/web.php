@@ -9,6 +9,7 @@ use App\Http\Controllers\Store\ReturnsController;
 use App\Http\Controllers\Store\ReviewController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
+use App\Http\Controllers\Store\OfferController;
 use App\Http\Controllers\Store\StockAlertController;
 use App\Http\Controllers\Store\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -57,10 +58,15 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:10,1')
         ->name('shop.reviews.store');
 
+    Route::post('/shop/{product}/offers', [OfferController::class, 'store'])
+        ->middleware('throttle:10,1')
+        ->name('shop.offers.store');
+
     Route::get('/account', [AccountController::class, 'profile'])->name('account.index');
     Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');
     Route::put('/account/profile', [AccountController::class, 'updateProfile'])->name('account.profile.update');
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders.index');
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
     Route::post('/account/orders/{order}/returns', [AccountController::class, 'storeReturn'])->name('account.orders.returns.store');
+    Route::get('/account/offers', [AccountController::class, 'offers'])->name('account.offers.index');
 });
