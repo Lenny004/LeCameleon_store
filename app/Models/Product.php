@@ -123,6 +123,11 @@ class Product extends Model
         return $this->hasMany(StockAlert::class);
     }
 
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function isInStock(): bool
     {
         return $this->quantity_available > $this->quantity_reserved;
