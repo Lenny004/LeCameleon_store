@@ -1,6 +1,6 @@
 # Phase 3 — Domain Backend (Services, Controllers, Policies)
 
-**Status:** Planned  
+**Status:** Completed  
 **Owner:** Backend Dev  
 **Depends on:** Phase 1–2
 
