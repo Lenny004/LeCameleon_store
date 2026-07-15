@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+        <!--Anuncios-->
+        <div id="barra_anuncio" class="z-depth-1">
+            <a href="#" class="mensaje_arriba">
+                <img src="../../recursos/iconografia/regalo100px.png" alt="regalo" height="22">
+                <p>Esta semana Descuento en la Decoracion de oficina</p>
+            </a>
+        </div>
+        <!--Logo, buscador, idioma, login y carrito de compras-->
+        <div id="apartado_buscador">
+            <!--Logo-->
+            <div id="logo_imagen">
+                <a href="dashboard.html"><img src="../../recursos/img/logo2.png" alt="logo"></a>
+            </div>
+            <!--Categoria de busqueda-->
+            <div id="boton_categoria" class="hide-on-med-and-down">
+                <div class="input-field grey lighten-2 z-depth-2">
+                    <select>
+                        <option value="" disabled selected>Todo</option>
+                        <option value="1">Decoración</option>
+                        <option value="2">Accesorios</option>
+                        <option value="3">Artesanales</option>
+                        <option value="4">Marcas</option>
+                        <option value="5">Color</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Buscador -->
+            <div id="buscador" class="hide-on-med-and-down">
+                <nav class="grey lighten-2">
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+                <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+            </div>
+            <!--Idioma-->
+            <div id="boton_idioma">
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-trigger btn grey lighten-2' href='#' data-target='dropdown_idioma'>
+                    <p>Español</p>
+                    <img src="../../recursos/iconografia/el_salvador.png" alt="español" width="20" height="20">
+                </a>
+                <!-- Dropdown Structure -->
+                <ul id='dropdown_idioma' class='dropdown-content'>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!">English<img src="../../recursos/iconografia/inglaterra.png" alt="english"
+                                width="20" height="20"></a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!">Français<img src="../../recursos/iconografia/francia.png" alt="frances" width="20"
+                                height="20"></a></li>
+                </ul>
+            </div>
+            <!--Login-->
+            <div id="boton_login" class="hide-on-med-and-down">
+                <a href="index.html"><img class="tooltipped" data-position="bottom"
+                        data-tooltip="Iniciar Sesión" src="../../recursos/iconografia/usuario.png" alt="login"></a>
+            </div>
+            <!--Carrito de Compras-->
+            <div id="boton_carrito">
+                <a href=""><img src="../../recursos/iconografia/carrito.png" class="tooltipped" data-position="bottom"
+                        data-tooltip="Carrito de Compras" alt="login" height="35"><span>1</span></a>
+            </div>
+        </div>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+        <nav class="nav-extended white">
+            <div class="nav-wrapper">
+                <a href="#" data-target="mobile" class="sidenav-trigger" id="menu_desplegable"><i
+                        class="material-icons">menu</i></a>
+                <!--Colocamos un buscador para tamaños moviles y de tablets-->
+                <div id="buscador2" class="hide-on-large-only">
+                    <nav class="grey lighten-2">
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                    <a href=""><img src="../../recursos/iconografia/lupa.png" alt="lupa" height="22"></a>
+                </div>
+                <!--Menú con opciones que será invisible cuando este en tamaños de móviles y tablets-->
+                <ul class="left hide-on-med-and-down" id="opciones">
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="../../recursos/img/main_publico/nav3.jpg">
+                </div>
+                <a href="index.html"><img class="circle" src="../../recursos/iconografia/usuario.png">Iniciar Sesión</a>
+            </div>
+        </li>
+        <div id="opciones_movil">
+        </div>
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <div class="row">
+            <div class="col s12 m12 l3 xl3">
+                <form method="post" id="buscador_marca">
+                    <h3 id="titulo_izquierdo">Marcas</h3>
+                    <div class="input-field col s10">
+                        <input id="buscador_input" name="buscador_input" type="text" class="validate">
+                        <label for="buscador_input">Nombre marca: </label>
+                    </div>
+                    <div class="botones_busqueda col s10">
+                        <button class="boton_filtrar" type="submit" class="btn waves-effect waves-teal z-depth-2">Filtrar</button>
+                        <a class="boton_limpiar" class="btn waves-effect waves-teal z-depth-2" onclick="cargarMarcas()">Recargar</a>
+                    </div>
+                    <div class="input-field col s10">
+                        <select onchange="ordenAZ(this.value)">
+                            <option value="disabled selected">Nombre (A-Z)</option>
+                            <option value="1">A-Z</option>
+                            <option value="2">Z-A</option>
+                        </select>
+                        <label>Ordenar Por:</label>
+                    </div>
+                </form>
+            </div>
+            <div class="col s12 m12 l9 xl9">
+                <div class="row cuadro_marca" id="cuadro_marca">
+                    
+                </div>
+            </div>
+            <div id="numeros_pag">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--El aparte del sitio web (Información del sitio y otros apartados de términos y contactos)-->
+        <aside id="informacion">
+            <div>
+                <p>POLÍTICA DE SERVICIO</p>
+                <a href="Politica_envio.html">Política y Zona de envíos</a><br>
+                <a href="Condiciones_compra.html">Condiciones de Compra</a><br>
+                <a href="Terminos_servicio.html">Términos de Servicio</a><br>
+                <a href="Politica_privacidad.html">Política de Privacidad</a><br>
+                <a href="Legal.html">Legal</a>
+            </div>
+            <div>
+                <p>CONÓCENOS</p>
+                <a href="Acercade.html">Acerca de Le Caméléon</a><br>
+                <a href="contactanos.html">Contáctanos</a>
+            </div>
+            <div>
+                <p>SOPORTE</p>
+                <a href="Devoluciones.html">Devoluciones y Reembolsos</a><br>
+                <a href="reportar_problema.html">Reportar un Problema</a><br>
+                <a href="pedidos_cliente.html">Tus Pedidos</a>
+            </div>
+            <div id="redes">
+                <p>SÍGUENOS EN TU RED FAVORITA</p>
+                <a href=""><img src="../../recursos/iconografia/instagram.png" id="instagram" alt="instagram"
+                        height="30" class="instagram"></a>
+                <a href=""><img src="../../recursos/iconografia/facebook.png" id="facebook" alt="facebook" height="30"
+                        class="facebook"></a>
+                <a href=""><img src="../../recursos/iconografia/youtube.png" id="youtube" alt="youtube" height="30"
+                        class="youtube"></a>
+                <a href=""><img src="../../recursos/iconografia/tiktok.png" id="tiktok" alt="tiktok" height="30"
+                        class="tiktok"></a>
+            </div>
+            <div id="correo">
+                <p>E-MAIL DE SUSCRIPCIÓN</p>
+                <a>Obtenga las últimas actualizaciones</a><br>
+                <a>en productos y ofertas directamente</a>
+                <div class="ingresar_correo">
+                    <input type="email" class="validate white brown-text text-brown-darken-4"
+                        placeholder="email@gmail.com"><br>
+                    <a href="" class="btn tooltipped brown darken-4" data-position="top"
+                        data-tooltip="Suscribete para recibir notificaciones de ofertas y nuevos productos"><img
+                            src="../../recursos/iconografia/flecha_enviar.png" alt="enviar" height="35" width="35"></a>
+                </div>
+            </div>
+        </aside>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div class="terminos">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+            </div>
+            <div>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/index.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/online.js"></script>  
+    <script type="text/javascript" src="../../controladores/publico/marcas.js"></script>
+</body>
+
+</html>
