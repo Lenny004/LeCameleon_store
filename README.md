@@ -44,12 +44,30 @@ Then open:
 .\docker\dev.ps1 up          # start stack
 .\docker\dev.ps1 down        # stop stack
 .\docker\dev.ps1 artisan migrate
+.\docker\dev.ps1 artisan db:seed
+.\docker\dev.ps1 artisan test
 .\docker\dev.ps1 artisan tinker
 .\docker\dev.ps1 composer require vendor/package
 .\docker\dev.ps1 smoke       # HTTP smoke (200 / redirect / 403 / 404)
 .\docker\dev.ps1 logs
 .\docker\dev.ps1 shell
 ```
+
+Equivalent inside Compose:
+
+```bash
+docker compose exec app php artisan migrate
+docker compose exec app php artisan test
+docker compose exec app php artisan schedule:work   # reservation TTL + queued jobs
+docker compose exec app php artisan payment:capture LC-20260715-ABC123
+```
+
+## Storefront notes
+
+- **Guest checkout** — `/checkout` works without an account; guests must provide an email, and order confirmation is sent via Mailpit locally ([http://localhost:18025](http://localhost:18025)).
+- **Returns** — public policy at `/returns`; logged-in customers can open return requests from account order detail.
+- **Payments (demo)** — orders start as manual pending payments; staff can capture in admin or run `payment:capture {order-number}` in the app container.
+- **Scheduler** — run `schedule:work` in Docker to release expired stock reservations and process queued mail.
 
 ## Architecture docs
 

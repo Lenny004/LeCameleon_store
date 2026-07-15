@@ -10,6 +10,16 @@ use Illuminate\Validation\Rule;
 
 class ProductRequest extends FormRequest
 {
+    /** @var list<string> */
+    public const MEASUREMENT_KEYS = [
+        'chest_cm',
+        'waist_cm',
+        'hips_cm',
+        'length_cm',
+        'shoulder_cm',
+        'sleeve_cm',
+    ];
+
     public function authorize(): bool
     {
         return $this->user()?->isStaff() ?? false;
@@ -22,6 +32,20 @@ class ProductRequest extends FormRequest
     {
         $this->merge([
             'is_unique_piece' => $this->boolean('is_unique_piece'),
+        ]);
+
+        $measurements = [];
+
+        foreach (self::MEASUREMENT_KEYS as $key) {
+            $value = $this->input("measurement_{$key}");
+
+            if ($value !== null && $value !== '') {
+                $measurements[$key] = (float) $value;
+            }
+        }
+
+        $this->merge([
+            'measurements' => $measurements !== [] ? $measurements : null,
         ]);
     }
 
@@ -50,6 +74,8 @@ class ProductRequest extends FormRequest
             'size_label' => ['nullable', 'string', 'max:50'],
             'color' => ['nullable', 'string', 'max:80'],
             'material' => ['nullable', 'string', 'max:150'],
+            'measurements' => ['nullable', 'array'],
+            'measurements.*' => ['numeric', 'min:0'],
             'is_unique_piece' => ['sometimes', 'boolean'],
             'quantity_available' => ['required', 'integer', 'min:0'],
             'low_stock_threshold' => ['sometimes', 'integer', 'min:0'],

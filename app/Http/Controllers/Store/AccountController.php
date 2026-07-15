@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\ProfileUpdateRequest;
+use App\Http\Requests\Store\ReturnRequestFormRequest;
+use App\Enums\ReturnRequestStatus;
 use App\Models\Order;
+use App\Models\ReturnRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -41,7 +44,20 @@ class AccountController extends Controller
         abort_unless($order->user_id === $request->user()->id, 403);
 
         return view('store.account.orders.show', [
-            'order' => $order->load('items.product'),
+            'order' => $order->load(['items.product', 'shipments', 'returnRequests']),
         ]);
+    }
+
+    public function storeReturn(ReturnRequestFormRequest $request, Order $order): RedirectResponse
+    {
+        ReturnRequest::query()->create([
+            'order_id' => $order->id,
+            'order_item_id' => $request->validated('order_item_id'),
+            'user_id' => $request->user()->id,
+            'reason' => $request->validated('reason'),
+            'status' => ReturnRequestStatus::Pending,
+        ]);
+
+        return back()->with('success', 'Solicitud de devolución enviada. Te contactaremos pronto.');
     }
 }

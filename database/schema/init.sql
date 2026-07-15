@@ -131,6 +131,7 @@ CREATE TABLE products (
     size_label              VARCHAR(50),
     color                   VARCHAR(80),
     material                VARCHAR(150),
+    measurements            JSONB,
     is_unique_piece         BOOLEAN NOT NULL DEFAULT FALSE,
     quantity_available      INTEGER NOT NULL DEFAULT 0,
     quantity_reserved       INTEGER NOT NULL DEFAULT 0,
@@ -310,6 +311,40 @@ CREATE TABLE shipments (
 );
 
 CREATE INDEX idx_shipments_order_id ON shipments (order_id);
+
+-- -----------------------------------------------------------------------------
+-- stock_alerts — Waitlist for out-of-stock products
+-- -----------------------------------------------------------------------------
+CREATE TABLE stock_alerts (
+    id              BIGSERIAL PRIMARY KEY,
+    product_id      UUID NOT NULL REFERENCES products (id) ON DELETE CASCADE,
+    email           VARCHAR(255) NOT NULL,
+    user_id         UUID REFERENCES users (id) ON DELETE SET NULL,
+    notified_at     TIMESTAMPTZ,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (product_id, email)
+);
+
+CREATE INDEX idx_stock_alerts_product_id ON stock_alerts (product_id);
+
+-- -----------------------------------------------------------------------------
+-- return_requests — Customer return submissions (status only)
+-- -----------------------------------------------------------------------------
+CREATE TABLE return_requests (
+    id              BIGSERIAL PRIMARY KEY,
+    order_id        UUID NOT NULL REFERENCES orders (id) ON DELETE CASCADE,
+    order_item_id   BIGINT REFERENCES order_items (id) ON DELETE SET NULL,
+    user_id         UUID REFERENCES users (id) ON DELETE SET NULL,
+    reason          TEXT NOT NULL,
+    status          VARCHAR(20) NOT NULL DEFAULT 'pending', -- pending|approved|denied|refunded
+    admin_notes     TEXT,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_return_requests_order_id ON return_requests (order_id);
+CREATE INDEX idx_return_requests_status ON return_requests (status);
 
 -- -----------------------------------------------------------------------------
 -- coupons — Promotional discounts
