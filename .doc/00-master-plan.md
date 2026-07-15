@@ -54,6 +54,9 @@ LeCameleon_Store/
 | 5 | `05-admin-panel.md` | Frontend Dev | Admin Blade + dashboard UX |
 | 6 | `06-enterprise-features.md` | Full-stack | Wishlist, recommendations, analytics, reviews |
 | 7 | `07-qa-hardening.md` | Reviewer | Docs, seeders, polish, production checklist |
+| 8 | `08-docker.md` | DevOps | Docker Compose local stack |
+| 10 | `10-commerce-payments-mail-media.md` | Full-stack | Guest checkout, Mailpit, payment capture |
+| 11 | `11-returns.md` | Full-stack | Returns page + admin RMA flow |
 
 ## 4. Working rules
 
@@ -65,18 +68,18 @@ LeCameleon_Store/
 
 ## 5. Success criteria
 
-- [ ] Laravel boots with PostgreSQL/Supabase config
-- [ ] Full schema documented in `database/schema/init.sql`
-- [ ] Public: catalog, filters, product detail, cart, checkout
-- [ ] Admin: dashboard KPIs, CRUD inventory/orders/users
-- [ ] Light/dark CSS variables applied via BEM
-- [ ] Seed data for demo vintage catalog
-- [ ] `.doc/` plans reflect what was actually built
+- [x] Laravel boots with PostgreSQL/Supabase config
+- [x] Full schema documented in `database/schema/init.sql`
+- [x] Public: catalog, filters, product detail, cart, checkout
+- [x] Admin: dashboard KPIs, CRUD inventory/orders/users
+- [x] Light/dark CSS variables applied via BEM
+- [x] Seed data for demo vintage catalog
+- [x] `.doc/` plans reflect what was actually built
 
 ## 6. Status
 
 - **Started:** 2026-07-14
 - **Updated:** 2026-07-15
 - **Branch:** `develop`
-- **Completed:** Docker stack (phase 8), database (1), backend (3), storefront + admin UI (4–5), enterprise polish start (6: recommendations, analytics, 403/404, Docker smoke)
-- **Next:** Finish remaining Phase 6 items (coupons UX, reviews, reservations) + Phase 7 QA hardening
+- **Completed:** Phases 1–6, 8 (Docker), 10–11 (commerce/payments, returns), Phase 7 QA hardening (feature tests + checklist)
+- **Next:** P2 backlog (`.doc/12-backlog.md`) — Scout search, Stripe live, authenticity workflow
