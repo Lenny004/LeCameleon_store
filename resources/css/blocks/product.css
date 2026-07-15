@@ -159,3 +159,8 @@
     text-align: center;
     background: var(--surface);
 }
+
+.product-recs {
+    padding-block: var(--space-2xl);
+    border-top: 1px solid var(--border);
+}

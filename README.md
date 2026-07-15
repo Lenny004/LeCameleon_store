@@ -46,6 +46,7 @@ Then open:
 .\docker\dev.ps1 artisan migrate
 .\docker\dev.ps1 artisan tinker
 .\docker\dev.ps1 composer require vendor/package
+.\docker\dev.ps1 smoke       # HTTP smoke (200 / redirect / 403 / 404)
 .\docker\dev.ps1 logs
 .\docker\dev.ps1 shell
 ```

@@ -4,20 +4,19 @@
 
 @section('content')
 @php
-    $p = $product ?? (object) [
-        'id' => 1,
-        'slug' => 'chaqueta-denim-80s',
-        'name' => 'Chaqueta Denim 80s',
-        'price' => 89.00,
-        'era' => '1980s',
-        'condition' => 'Excelente',
-        'brand' => 'Levi\'s',
-        'size' => 'M',
-        'description' => 'Chaqueta de mezclilla auténtica de los 80. Lavado natural, sin desgaste estructural. Pieza única con historia.',
-        'stock' => 1,
-        'images' => [],
-    ];
-    $images = $p->images ?? ($p->image ? [$p->image] : []);
+    $images = collect($product->images ?? [])
+        ->map(fn ($img) => is_string($img) ? $img : ($img->path ?? null))
+        ->filter()
+        ->map(fn ($path) => str_starts_with($path, 'http') || str_starts_with($path, '/')
+            ? $path
+            : asset('storage/'.$path))
+        ->values()
+        ->all();
+
+    $stock = max(0, (int) $product->quantity_available - (int) $product->quantity_reserved);
+    $condition = $product->condition_grade?->value ?? $product->condition_grade;
+    $brandName = $product->brand?->name;
+    $era = $product->era_decade;
 @endphp
 
 <div class="container product-detail">
@@ -30,14 +29,14 @@
             <a href="{{ route('shop.index') }}">Tienda</a>
             <span class="breadcrumb__sep">/</span>
         @endif
-        <span>{{ $p->name }}</span>
+        <span>{{ $product->name }}</span>
     </nav>
 
     <div x-data="productGallery({{ json_encode($images) }})">
         <div class="product-gallery">
             <div class="product-gallery__main">
                 <template x-if="images.length">
-                    <img :src="images[active]" alt="{{ $p->name }}">
+                    <img :src="images[active]" alt="{{ $product->name }}">
                 </template>
                 <template x-if="!images.length">
                     <div style="width:100%;height:100%;background:var(--secondary);"></div>
@@ -54,64 +53,90 @@
     </div>
 
     <div class="product-info">
-        @if ($p->era ?? null)
-            <span class="product-info__era">{{ $p->era }}</span>
+        @if ($era)
+            <span class="product-info__era">{{ $era }}</span>
         @endif
-        <h1 class="product-info__title">{{ $p->name }}</h1>
-        <p class="product-info__price">${{ number_format((float) $p->price, 2) }}</p>
+        <h1 class="product-info__title">{{ $product->name }}</h1>
+        <p class="product-info__price">${{ number_format((float) $product->price, 2) }}</p>
 
         <div class="product-info__meta">
-            @if ($p->condition ?? null)
-                <span class="badge badge--accent">{{ $p->condition }}</span>
+            @if ($condition)
+                <span class="badge badge--accent">{{ $condition }}</span>
             @endif
-            @if (($p->stock ?? 1) <= 1)
+            @if ($product->is_unique_piece || $stock <= 1)
                 <span class="badge badge--warning">Pieza única</span>
             @endif
         </div>
 
-        <p class="product-info__description">{{ $p->description ?? '' }}</p>
+        <p class="product-info__description">{{ $product->description ?? $product->short_description }}</p>
 
         <dl class="product-info__specs">
-            @if ($p->brand ?? null)
-                <div class="product-info__spec"><dt>Marca</dt><dd>{{ $p->brand }}</dd></div>
+            @if ($brandName)
+                <div class="product-info__spec"><dt>Marca</dt><dd>{{ $brandName }}</dd></div>
             @endif
-            @if ($p->size ?? null)
-                <div class="product-info__spec"><dt>Talla</dt><dd>{{ $p->size }}</dd></div>
+            @if ($product->size_label)
+                <div class="product-info__spec"><dt>Talla</dt><dd>{{ $product->size_label }}</dd></div>
             @endif
-            @if ($p->era ?? null)
-                <div class="product-info__spec"><dt>Época</dt><dd>{{ $p->era }}</dd></div>
+            @if ($era)
+                <div class="product-info__spec"><dt>Época</dt><dd>{{ $era }}</dd></div>
             @endif
-            @if ($p->condition ?? null)
-                <div class="product-info__spec"><dt>Condición</dt><dd>{{ $p->condition }}</dd></div>
+            @if ($condition)
+                <div class="product-info__spec"><dt>Condición</dt><dd>{{ $condition }}</dd></div>
             @endif
         </dl>
 
-        <div class="product-info__actions" x-data="quantityInput(1, {{ $p->stock ?? 1 }})">
+        <div class="product-info__actions" x-data="quantityInput(1, {{ max($stock, 1) }})">
             <div class="product-info__qty">
                 <button type="button" @click="decrement()" aria-label="Disminuir">−</button>
                 <input type="number" name="quantity" x-model="qty" min="1" :max="max" readonly>
                 <button type="button" @click="increment()" aria-label="Aumentar">+</button>
             </div>
 
-            @if (Route::has('cart.store'))
+            @if (Route::has('cart.store') && $stock > 0)
                 <form action="{{ route('cart.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{ $p->id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="quantity" :value="qty">
                     <button type="submit" class="btn btn--primary">Agregar al carrito</button>
                 </form>
             @else
-                <button type="button" class="btn btn--primary" disabled>Agregar al carrito</button>
+                <button type="button" class="btn btn--primary" disabled>Agotado</button>
             @endif
 
             @if (Route::has('wishlist.store'))
                 <form action="{{ route('wishlist.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{ $p->id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <button type="submit" class="btn btn--ghost">Favoritos</button>
                 </form>
             @endif
         </div>
     </div>
 </div>
+
+@if (($related ?? collect())->isNotEmpty())
+    <section class="container section product-recs">
+        <div class="section__header">
+            <h2 class="section__title">También te puede gustar</h2>
+        </div>
+        <div class="grid-products">
+            @foreach ($related as $item)
+                @include('components.product-card', ['product' => $item])
+            @endforeach
+        </div>
+    </section>
+@endif
+
+@if (($alsoViewed ?? collect())->isNotEmpty())
+    <section class="container section product-recs">
+        <div class="section__header">
+            <h2 class="section__title">Clientes también vieron</h2>
+        </div>
+        <div class="grid-products">
+            @foreach ($alsoViewed as $item)
+                @include('components.product-card', ['product' => $item])
+            @endforeach
+        </div>
+    </section>
+@endif
 @endsection

@@ -78,5 +78,5 @@ LeCameleon_Store/
 - **Started:** 2026-07-14
 - **Updated:** 2026-07-15
 - **Branch:** `develop`
-- **Completed:** Docker stack (phase 8), database (1), backend (3), storefront + admin UI (4–5)
-- **Next:** Phase 6 enterprise polish + Phase 7 QA against Docker/Postgres
+- **Completed:** Docker stack (phase 8), database (1), backend (3), storefront + admin UI (4–5), enterprise polish start (6: recommendations, analytics, 403/404, Docker smoke)
+- **Next:** Finish remaining Phase 6 items (coupons UX, reviews, reservations) + Phase 7 QA hardening

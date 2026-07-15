@@ -2,29 +2,26 @@
 
 @section('title', 'Dashboard')
 @section('page-title', 'Dashboard')
-@section('page-subtitle', 'Overview of store performance')
+@section('page-subtitle', 'Overview of store performance (last 30 days)')
 
 @section('content')
 <div class="kpi-grid">
     <div class="kpi-card">
         <p class="kpi-card__label">Revenue (30d)</p>
-        <p class="kpi-card__value">${{ number_format($revenue ?? 12450, 0) }}</p>
-        <p class="kpi-card__delta">+12% vs last month</p>
+        <p class="kpi-card__value">${{ number_format($revenue ?? $kpis['revenue'] ?? 0, 0) }}</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">Orders</p>
-        <p class="kpi-card__value">{{ $ordersCount ?? 86 }}</p>
-        <p class="kpi-card__delta">+8% vs last month</p>
+        <p class="kpi-card__value">{{ $ordersCount ?? $kpis['orders_count'] ?? 0 }}</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">Low stock</p>
-        <p class="kpi-card__value">{{ $lowStockCount ?? 5 }}</p>
+        <p class="kpi-card__value">{{ $lowStockCount ?? $kpis['low_stock_count'] ?? 0 }}</p>
         <p class="kpi-card__delta" style="color:var(--warning);">Needs attention</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">Conversion</p>
-        <p class="kpi-card__value">{{ $conversion ?? '2.4' }}%</p>
-        <p class="kpi-card__delta">+0.3% vs last month</p>
+        <p class="kpi-card__value">{{ number_format((float) ($conversion ?? $kpis['conversion_rate'] ?? 0), 1) }}%</p>
     </div>
 </div>
 
@@ -32,15 +29,15 @@
     <div class="admin-chart-card">
         <h2 class="admin-chart-card__title">Revenue trend</h2>
         <canvas id="chart-sales"
-            data-labels='@json($salesLabels ?? ["Jan","Feb","Mar","Apr","May","Jun","Jul"])'
-            data-values='@json($salesValues ?? [3200,4100,3800,5200,4800,6100,5400])'>
+            data-labels='@json($salesLabels ?? [])'
+            data-values='@json($salesValues ?? [])'>
         </canvas>
     </div>
     <div class="admin-chart-card">
-        <h2 class="admin-chart-card__title">Orders by week</h2>
+        <h2 class="admin-chart-card__title">Orders by day</h2>
         <canvas id="chart-orders"
-            data-labels='@json($ordersLabels ?? ["W1","W2","W3","W4"])'
-            data-values='@json($ordersValues ?? [18,22,25,21])'>
+            data-labels='@json($ordersLabels ?? [])'
+            data-values='@json($ordersValues ?? [])'>
         </canvas>
     </div>
 </div>
@@ -64,19 +61,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($recentOrders ?? [
-                    ['id' => 'LC-1042', 'customer' => 'María G.', 'status' => 'Processing', 'total' => 189.00, 'date' => '2026-07-14'],
-                    ['id' => 'LC-1041', 'customer' => 'Carlos R.', 'status' => 'Shipped', 'total' => 65.00, 'date' => '2026-07-13'],
-                    ['id' => 'LC-1040', 'customer' => 'Ana L.', 'status' => 'Delivered', 'total' => 245.00, 'date' => '2026-07-12'],
-                ] as $order)
+                @forelse ($recentOrders ?? [] as $order)
                     <tr>
-                        <td>{{ $order['id'] }}</td>
-                        <td>{{ $order['customer'] }}</td>
-                        <td><span class="badge badge--primary">{{ $order['status'] }}</span></td>
-                        <td>${{ number_format($order['total'], 2) }}</td>
-                        <td>{{ $order['date'] }}</td>
+                        <td>
+                            @if (Route::has('admin.orders.show'))
+                                <a href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
+                            @else
+                                {{ $order->number }}
+                            @endif
+                        </td>
+                        <td>{{ $order->user?->name ?? '—' }}</td>
+                        <td><span class="badge badge--primary">{{ $order->status?->value ?? $order->status }}</span></td>
+                        <td>${{ number_format((float) $order->grand_total, 2) }}</td>
+                        <td>{{ optional($order->placed_at)->toDateString() ?? '—' }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5">No orders yet.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
