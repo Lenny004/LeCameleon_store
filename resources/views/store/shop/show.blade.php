@@ -97,6 +97,38 @@
             @endif
         </dl>
 
+        @php
+            $measurementLabels = [
+                'chest_cm' => 'Pecho',
+                'waist_cm' => 'Cintura',
+                'hips_cm' => 'Cadera',
+                'length_cm' => 'Largo',
+                'shoulder_cm' => 'Hombros',
+                'sleeve_cm' => 'Manga',
+            ];
+            $measurements = collect($product->measurements ?? [])->filter(fn ($value) => $value !== null && $value !== '');
+        @endphp
+
+        @if ($measurements->isNotEmpty())
+            <section style="margin:var(--space-lg) 0;">
+                <h2 class="text-small" style="font-weight:700;margin-bottom:var(--space-sm);">Medidas (cm)</h2>
+                <div class="table-wrap">
+                    <table class="table">
+                        <tbody>
+                            @foreach ($measurementLabels as $key => $label)
+                                @if ($measurements->has($key))
+                                    <tr>
+                                        <th scope="row">{{ $label }}</th>
+                                        <td>{{ number_format((float) $measurements[$key], 1) }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        @endif
+
         <div class="product-info__actions" x-data="quantityInput(1, {{ max($stock, 1) }})">
             <div class="product-info__qty">
                 <button type="button" @click="decrement()" aria-label="Disminuir">−</button>
@@ -113,6 +145,20 @@
                 </form>
             @else
                 <button type="button" class="btn btn--primary" disabled>Agotado</button>
+            @endif
+
+            @if ($stock <= 0 && Route::has('shop.stock-alert'))
+                <form action="{{ route('shop.stock-alert', $product) }}" method="POST" class="checkout-section" style="margin-top:var(--space-md);padding:var(--space-md);">
+                    @csrf
+                    <h3 class="checkout-section__title" style="font-size:1rem;">Avisarme cuando haya stock</h3>
+                    @guest
+                        <div class="form-group">
+                            <label class="form-label" for="stock_alert_email">Correo electrónico</label>
+                            <input type="email" id="stock_alert_email" name="email" class="form-input" value="{{ old('email') }}" required>
+                        </div>
+                    @endguest
+                    <button type="submit" class="btn btn--ghost">Avisarme</button>
+                </form>
             @endif
 
             @if (Route::has('wishlist.store'))

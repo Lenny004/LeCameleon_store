@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductImage;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -36,6 +38,11 @@ class ProductSeeder extends Seeder
                 'material' => 'Polyester Chiffon',
                 'is_unique_piece' => true,
                 'quantity_available' => 1,
+                'measurements' => [
+                    'bust_cm' => 92,
+                    'waist_cm' => 72,
+                    'length_cm' => 145,
+                ],
                 'attributes' => ['provenance' => 'Estate sale, San Francisco', 'care' => 'Dry clean only'],
             ],
             [
@@ -253,11 +260,16 @@ class ProductSeeder extends Seeder
                 'quantity_reserved' => 0,
                 'low_stock_threshold' => 1,
                 'published_at' => now()->subDays(rand(1, 30)),
+                'measurements' => $data['measurements'] ?? null,
             ]);
+
+            $primaryImagePath = $index === 10
+                ? 'placeholders/vintage-product.jpg'
+                : 'products/'.$product->slug.'/main.jpg';
 
             ProductImage::query()->create([
                 'product_id' => $product->id,
-                'path' => 'products/'.$product->slug.'/main.jpg',
+                'path' => $primaryImagePath,
                 'alt' => $product->name,
                 'sort_order' => 0,
                 'is_primary' => true,
@@ -278,6 +290,20 @@ class ProductSeeder extends Seeder
                     'value' => $value,
                 ]);
             }
+        }
+
+        $featuredProduct = Product::query()->where('slug', '1970s-floral-maxi-dress')->first();
+        $demoCustomer = User::query()->where('email', 'customer@lecameleon.store')->first();
+
+        if ($featuredProduct && $demoCustomer) {
+            Review::query()->create([
+                'product_id' => $featuredProduct->id,
+                'user_id' => $demoCustomer->id,
+                'rating' => 5,
+                'title' => 'Beautiful drape and true vintage fit',
+                'body' => 'The measurements matched the listing and the condition was exactly as described.',
+                'is_approved' => true,
+            ]);
         }
     }
 }

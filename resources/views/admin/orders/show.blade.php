@@ -96,6 +96,38 @@
         </div>
     @endif
 
+    @if (Route::has('admin.orders.shipment'))
+        @php
+            $shipment = $shipment ?? $order->shipments->first();
+        @endphp
+        <form method="POST" action="{{ route('admin.orders.shipment', $order) }}" class="card">
+            @csrf
+            @method('PATCH')
+            <h2 class="card__title" style="margin-bottom:var(--space-md);">Shipment tracking</h2>
+            <div class="form-row form-row--2">
+                <div class="form-group">
+                    <label class="form-label" for="carrier">Carrier</label>
+                    <input type="text" id="carrier" name="carrier" class="form-input" value="{{ old('carrier', $shipment?->carrier) }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="tracking_number">Tracking number</label>
+                    <input type="text" id="tracking_number" name="tracking_number" class="form-input" value="{{ old('tracking_number', $shipment?->tracking_number) }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="shipment_status">Status</label>
+                <select id="shipment_status" name="status" class="form-select" required>
+                    @foreach ($shipmentStatuses ?? [] as $shipmentStatus)
+                        <option value="{{ $shipmentStatus->value }}" @selected(old('status', $shipment?->status?->value ?? 'pending') === $shipmentStatus->value)>
+                            {{ ucfirst(str_replace('_', ' ', $shipmentStatus->value)) }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" class="btn btn--primary">Save shipment</button>
+        </form>
+    @endif
+
     @if (Route::has('admin.orders.status'))
         <form method="POST" action="{{ route('admin.orders.status', $order) }}" class="card">
             @csrf
