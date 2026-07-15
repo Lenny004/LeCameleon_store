@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Concerns\LoadsServiceableMunicipalities;
 use App\Http\Controllers\Controller;
 use App\Models\LogisticsCompany;
-use App\Models\Municipality;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class LogisticsCompanyController extends Controller
 {
+    use LoadsServiceableMunicipalities;
+
     public function index(): View
     {
         $companies = LogisticsCompany::query()
@@ -25,18 +27,17 @@ class LogisticsCompanyController extends Controller
     public function create(): View
     {
         return view('admin.logistics.companies.create', [
-            'municipalities' => $this->municipalityOptions(),
+            'departments' => $this->serviceableDepartmentsWithMunicipalities(),
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $this->validated($request);
-        $company = LogisticsCompany::query()->create($data);
+        $company = LogisticsCompany::query()->create($this->validated($request));
 
         return redirect()
             ->route('admin.logistics.companies.show', $company)
-            ->with('success', 'Logistics company created.');
+            ->with('success', "Company {$company->name} created.");
     }
 
     public function show(LogisticsCompany $company): View
@@ -50,7 +51,7 @@ class LogisticsCompanyController extends Controller
     {
         return view('admin.logistics.companies.edit', [
             'company' => $company,
-            'municipalities' => $this->municipalityOptions(),
+            'departments' => $this->serviceableDepartmentsWithMunicipalities(),
         ]);
     }
 
@@ -60,7 +61,7 @@ class LogisticsCompanyController extends Controller
 
         return redirect()
             ->route('admin.logistics.companies.show', $company)
-            ->with('success', 'Logistics company updated.');
+            ->with('success', 'Company updated.');
     }
 
     public function destroy(LogisticsCompany $company): RedirectResponse
@@ -69,7 +70,7 @@ class LogisticsCompanyController extends Controller
 
         return redirect()
             ->route('admin.logistics.companies.index')
-            ->with('success', 'Logistics company deleted.');
+            ->with('success', 'Company removed.');
     }
 
     /**
@@ -78,25 +79,18 @@ class LogisticsCompanyController extends Controller
     private function validated(Request $request): array
     {
         return $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'nit' => ['required', 'string', 'max:20'],
-            'contact_name' => ['required', 'string', 'max:255'],
-            'contact_email' => ['nullable', 'email', 'max:255'],
-            'contact_phone' => ['nullable', 'string', 'max:30'],
-            'municipality_id' => ['nullable', 'exists:municipalities,id'],
-            'notes' => ['nullable', 'string'],
+            'name' => ['required', 'string', 'max:150'],
+            'legal_name' => ['nullable', 'string', 'max:200'],
+            'trade_name' => ['nullable', 'string', 'max:150'],
+            'tax_id' => ['nullable', 'string', 'max:30'],
+            'email' => ['nullable', 'email', 'max:150'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'address_line' => ['nullable', 'string', 'max:255'],
+            'sv_municipality_id' => ['nullable', 'integer', 'exists:sv_municipalities,id'],
+            'website' => ['nullable', 'url', 'max:255'],
+            'contact_person' => ['nullable', 'string', 'max:150'],
             'is_active' => ['sometimes', 'boolean'],
+            'notes' => ['nullable', 'string'],
         ]) + ['is_active' => $request->boolean('is_active')];
-    }
-
-    /**
-     * @return \Illuminate\Support\Collection<int, Municipality>
-     */
-    private function municipalityOptions()
-    {
-        return Municipality::query()
-            ->with('department')
-            ->orderBy('name')
-            ->get();
     }
 }

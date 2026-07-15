@@ -19,7 +19,7 @@
                 <th>Plate</th>
                 <th>Type</th>
                 <th>Company</th>
-                <th>Assigned worker</th>
+                <th>Worker</th>
                 <th>Status</th>
                 <th></th>
             </tr>
@@ -27,25 +27,15 @@
         <tbody>
             @forelse ($vehicles as $vehicle)
                 <tr>
-                    <td>
-                        <a href="{{ route('admin.logistics.vehicles.show', $vehicle) }}" class="logistics-link">{{ $vehicle->plate }}</a>
-                    </td>
-                    <td>{{ ucfirst($vehicle->type->value) }}</td>
+                    <td><a href="{{ route('admin.logistics.vehicles.show', $vehicle) }}" class="logistics-link">{{ $vehicle->plate_number }}</a></td>
+                    <td>{{ ucfirst($vehicle->vehicle_type->value) }}</td>
                     <td>{{ $vehicle->company?->name ?? '—' }}</td>
-                    <td>{{ $vehicle->worker?->full_name ?? '—' }}</td>
-                    <td>
-                        <span class="badge badge--{{ $vehicle->is_active ? 'success' : 'warning' }}">
-                            {{ $vehicle->is_active ? 'Active' : 'Inactive' }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.logistics.vehicles.edit', $vehicle) }}" class="btn btn--ghost btn--sm">Edit</a>
-                    </td>
+                    <td>{{ $vehicle->driver?->fullName() ?? '—' }}</td>
+                    <td><span class="badge badge--{{ $vehicle->is_active ? 'success' : 'warning' }}">{{ $vehicle->is_active ? 'Active' : 'Inactive' }}</span></td>
+                    <td><a href="{{ route('admin.logistics.vehicles.edit', $vehicle) }}" class="btn btn--ghost btn--sm">Edit</a></td>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="6" class="text-muted">No vehicles yet.</td>
-                </tr>
+                <tr><td colspan="6" class="text-muted">No vehicles yet.</td></tr>
             @endforelse
         </tbody>
     </table>
