@@ -1,6 +1,6 @@
 # Phase 4 — Public Storefront (Blade + BEM)
 
-**Status:** Planned  
+**Status:** Completed  
 **Owner:** Frontend Dev  
 **Depends on:** Phase 2–3 stubs
 

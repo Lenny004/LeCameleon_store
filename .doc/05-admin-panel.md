@@ -1,6 +1,6 @@
 # Phase 5 — Admin Panel
 
-**Status:** Planned  
+**Status:** Completed  
 **Owner:** Frontend Dev  
 **Depends on:** Phase 3–4
 
