@@ -19,8 +19,8 @@
 
 <div class="container" style="padding-block:var(--space-xl);">
     <nav class="breadcrumb">
-        @if (Route::has('account.orders'))
-            <a href="{{ route('account.orders') }}">Mis pedidos</a>
+        @if (Route::has('account.orders.index'))
+            <a href="{{ route('account.orders.index') }}">Mis pedidos</a>
             <span class="breadcrumb__sep">/</span>
         @endif
         <span>#{{ $order->id }}</span>

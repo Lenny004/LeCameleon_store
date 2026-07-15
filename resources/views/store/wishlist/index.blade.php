@@ -9,10 +9,10 @@
     </div>
 
     @php
-        $products = $wishlistProducts ?? collect([
-            (object) ['id' => 1, 'slug' => 'chaqueta-denim-80s', 'name' => 'Chaqueta Denim 80s', 'price' => 89.00, 'era' => '1980s', 'condition' => 'Excelente'],
-            (object) ['id' => 3, 'slug' => 'bolso-cuero-vintage', 'name' => 'Bolso Cuero Vintage', 'price' => 65.00, 'era' => '1990s', 'condition' => 'Bueno'],
-        ]);
+        $products = collect($wishlist?->items ?? [])
+            ->map(fn ($item) => $item->product)
+            ->filter()
+            ->values();
     @endphp
 
     @if ($products->count())

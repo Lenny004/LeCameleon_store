@@ -8,8 +8,8 @@
         @if (Route::has('account.index'))
             <a href="{{ route('account.index') }}" class="account-nav__link account-nav__link--active">Perfil</a>
         @endif
-        @if (Route::has('account.orders'))
-            <a href="{{ route('account.orders') }}" class="account-nav__link">Mis pedidos</a>
+        @if (Route::has('account.orders.index'))
+            <a href="{{ route('account.orders.index') }}" class="account-nav__link">Mis pedidos</a>
         @endif
         @if (Route::has('wishlist.index'))
             <a href="{{ route('wishlist.index') }}" class="account-nav__link">Favoritos</a>

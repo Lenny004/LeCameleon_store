@@ -51,7 +51,7 @@ switch ($Command) {
         docker compose exec app php artisan storage:link
         Write-Host ''
         Write-Host 'Store:   http://localhost:8080'
-        Write-Host 'Mailpit: http://localhost:8025'
+        Write-Host 'Mailpit: http://localhost:18025'
         Write-Host 'Vite:    http://localhost:5173'
     }
     'artisan' {
