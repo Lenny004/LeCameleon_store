@@ -47,9 +47,17 @@ class ShopController extends Controller
             $request->ip(),
         );
 
+        $related = $this->recommendationService->forProduct($product);
+        $alsoViewed = $this->recommendationService->customersAlsoViewed(
+            $product,
+            8,
+            $related->pluck('id'),
+        );
+
         return view('store.shop.show', [
             'product' => $product,
-            'related' => $this->recommendationService->forProduct($product),
+            'related' => $related,
+            'alsoViewed' => $alsoViewed,
         ]);
     }
 

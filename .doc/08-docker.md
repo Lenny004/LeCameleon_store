@@ -59,6 +59,9 @@ docker compose exec node npm install
 docker compose logs -f app nginx
 docker compose down
 docker compose down -v   # wipe Postgres volume
+
+# HTTP smoke (PowerShell host)
+.\docker\dev.ps1 smoke
 ```
 
 ## Supabase

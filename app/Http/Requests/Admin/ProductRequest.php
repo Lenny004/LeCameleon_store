@@ -16,6 +16,16 @@ class ProductRequest extends FormRequest
     }
 
     /**
+     * Unchecked checkboxes are omitted from the request; normalize them here.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'is_unique_piece' => $this->boolean('is_unique_piece'),
+        ]);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public function rules(): array
