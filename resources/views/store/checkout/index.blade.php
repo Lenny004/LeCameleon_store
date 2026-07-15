@@ -7,7 +7,10 @@
   Single-step checkout. Field names must match CheckoutRequest:
   billing_address.*, shipping_address.*, coupon_code, notes.
 --}}
-<div class="container checkout">
+<div class="container checkout" x-data="shippingQuote({
+    calculateUrl: @js($quoteCalculateUrl ?? route('shipping.quote.calculate')),
+    flatRate: {{ (float) ($shipping ?? 0) }},
+})">
     <h1 class="heading-1" style="margin-bottom: var(--space-lg);">Checkout</h1>
 
     @if ($errors->any())
@@ -82,7 +85,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="shipping_line2">Departamento / referencia (opcional)</label>
+                    <label class="form-label" for="destination_municipality_id">Municipio de entrega</label>
+                    <input type="hidden" name="destination_municipality_id" :value="municipalityId || ''">
+                    <select
+                        id="destination_municipality_id"
+                        class="form-input"
+                        x-model="municipalityId"
+                        @change="fetchQuote()"
+                    >
+                        <option value="">Selecciona un municipio para cotizar envío…</option>
+                        @isset($departments)
+                            @foreach ($departments as $department)
+                                <optgroup label="{{ $department->name }}">
+                                    @foreach ($department->municipalities as $municipality)
+                                        <option
+                                            value="{{ $municipality->id }}"
+                                            @selected((string) old('destination_municipality_id') === (string) $municipality->id)
+                                        >
+                                            {{ $municipality->name }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        @endisset
+                    </select>
+                    <p class="text-muted" style="font-size:0.875rem;margin-top:var(--space-xs);">
+                        Sin municipio seleccionado se aplica la tarifa plana de envío.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="shipping_line2">Referencia adicional (opcional)</label>
                     <input
                         type="text"
                         id="shipping_line2"
@@ -264,11 +297,43 @@
             </div>
             <div class="cart-summary__row">
                 <span>Envío</span>
-                <span>${{ number_format($orderShipping, 2) }}</span>
+                <span x-text="formatMoney(displayFee)"></span>
             </div>
             <div class="cart-summary__row cart-summary__row--total">
                 <span>Total</span>
-                <span>${{ number_format($orderTotal, 2) }}</span>
+                <span x-text="formatMoney({{ $orderSubtotal }} + displayFee)"></span>
+            </div>
+
+            <div class="checkout-shipping-quote" x-show="municipalityId" x-cloak>
+                <template x-if="loading">
+                    <p class="text-muted" style="margin:0;">Calculando envío…</p>
+                </template>
+                <template x-if="quote && !loading">
+                    <div>
+                        <p style="margin:0;">
+                            Entrega estimada: <strong x-text="formatEta(quote.eta_hours)"></strong>
+                        </p>
+                        <p class="checkout-shipping-quote__eta">
+                            Próximo despacho: <span x-text="formatDispatch(quote.next_dispatch_at)"></span>
+                        </p>
+                        <template x-if="quote.warnings && quote.warnings.length">
+                            <ul class="shipping-warnings" style="margin-top:var(--space-sm);">
+                                <template x-for="warning in quote.warnings" :key="warning.id">
+                                    <li
+                                        class="shipping-warning"
+                                        :class="'shipping-warning--' + (warning.severity || 'info')"
+                                    >
+                                        <strong class="shipping-warning__title" x-text="warning.title"></strong>
+                                        <span class="shipping-warning__message" x-text="warning.message"></span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </div>
+                </template>
+                <template x-if="error && !loading">
+                    <p class="form-error" style="margin:0;" x-text="error"></p>
+                </template>
             </div>
 
             @isset($cart)
@@ -288,6 +353,22 @@
 
 @push('scripts')
 <script>
+    // Re-fetch shipping quote when returning with validation errors and a prior municipality selection.
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkoutRoot = document.querySelector('.checkout[x-data]');
+        if (!checkoutRoot || !window.Alpine) {
+            return;
+        }
+
+        const component = Alpine.$data(checkoutRoot);
+        const selectedMunicipality = @json(old('destination_municipality_id'));
+
+        if (selectedMunicipality) {
+            component.municipalityId = String(selectedMunicipality);
+            component.fetchQuote();
+        }
+    });
+
     // Copy shipping address into billing when "same as shipping" is checked.
     document.querySelector('.checkout-form')?.addEventListener('submit', function (event) {
         const form = event.currentTarget;

@@ -56,6 +56,12 @@
                     @if (Route::has('shipping'))
                         <li><a href="{{ route('shipping') }}" class="footer__link">Envíos</a></li>
                     @endif
+                    @if (Route::has('shipping.quote'))
+                        <li><a href="{{ route('shipping.quote') }}" class="footer__link">Calculadora de envío</a></li>
+                    @endif
+                    @if (Route::has('tracking.index'))
+                        <li><a href="{{ route('tracking.index') }}" class="footer__link">Rastrear envío</a></li>
+                    @endif
                     @if (Route::has('returns'))
                         <li><a href="{{ route('returns') }}" class="footer__link">Devoluciones</a></li>
                     @endif
