@@ -3,6 +3,7 @@
 use App\Http\Controllers\Store\AboutController;
 use App\Http\Controllers\Store\AccountController;
 use App\Http\Controllers\Store\AuthController;
+use App\Http\Controllers\Store\CareGuideController;
 use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\Store\ContactController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\NewsletterController;
 use App\Http\Controllers\Store\ReturnsController;
 use App\Http\Controllers\Store\ReviewController;
+use App\Http\Controllers\Store\ShippingInfoController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
 use App\Http\Controllers\Store\OfferController;
@@ -58,6 +60,8 @@ Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])-
 
 Route::get('/about', AboutController::class)->name('about');
 Route::get('/faq', FaqController::class)->name('faq');
+Route::get('/care', CareGuideController::class)->name('care');
+Route::get('/shipping', ShippingInfoController::class)->name('shipping');
 Route::post('/newsletter', [NewsletterController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('newsletter.store');

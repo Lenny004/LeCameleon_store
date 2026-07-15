@@ -50,6 +50,12 @@
                     @if (Route::has('faq'))
                         <li><a href="{{ route('faq') }}" class="footer__link">Preguntas frecuentes</a></li>
                     @endif
+                    @if (Route::has('care'))
+                        <li><a href="{{ route('care') }}" class="footer__link">Cuidado vintage</a></li>
+                    @endif
+                    @if (Route::has('shipping'))
+                        <li><a href="{{ route('shipping') }}" class="footer__link">Envíos</a></li>
+                    @endif
                     @if (Route::has('returns'))
                         <li><a href="{{ route('returns') }}" class="footer__link">Devoluciones</a></li>
                     @endif
