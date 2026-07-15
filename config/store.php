@@ -24,4 +24,7 @@ return [
 
     'recommendations_limit' => 8,
 
+    // Minutes before unpaid pending order reservations are released.
+    'reservation_ttl_minutes' => (int) env('STORE_RESERVATION_TTL_MINUTES', 30),
+
 ];

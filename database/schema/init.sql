@@ -229,11 +229,11 @@ CREATE TABLE cart_items (
 );
 
 -- -----------------------------------------------------------------------------
--- orders — Checkout records with address snapshots
+-- orders — Checkout records with address snapshots (user_id nullable for guest checkout)
 -- -----------------------------------------------------------------------------
 CREATE TABLE orders (
     id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id             UUID NOT NULL REFERENCES users (id) ON DELETE RESTRICT,
+    user_id             UUID REFERENCES users (id) ON DELETE RESTRICT,
     number              VARCHAR(30) NOT NULL UNIQUE,
     status              VARCHAR(20) NOT NULL DEFAULT 'pending', -- pending|paid|processing|shipped|delivered|cancelled|refunded
     currency            VARCHAR(3) NOT NULL DEFAULT 'USD',
