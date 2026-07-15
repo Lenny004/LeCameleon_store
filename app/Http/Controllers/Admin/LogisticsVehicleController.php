@@ -17,8 +17,8 @@ class LogisticsVehicleController extends Controller
     public function index(): View
     {
         $vehicles = LogisticsVehicle::query()
-            ->with(['company', 'worker'])
-            ->orderBy('plate')
+            ->with(['company', 'driver'])
+            ->orderBy('plate_number')
             ->paginate(20);
 
         return view('admin.logistics.vehicles.index', compact('vehicles'));
@@ -45,7 +45,7 @@ class LogisticsVehicleController extends Controller
     public function show(LogisticsVehicle $vehicle): View
     {
         return view('admin.logistics.vehicles.show', [
-            'vehicle' => $vehicle->load(['company', 'worker']),
+            'vehicle' => $vehicle->load(['company', 'driver']),
         ]);
     }
 
@@ -74,7 +74,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.index')
-            ->with('success', 'Vehicle deleted.');
+            ->with('success', 'Vehicle removed.');
     }
 
     /**
@@ -83,28 +83,31 @@ class LogisticsVehicleController extends Controller
     private function validated(Request $request): array
     {
         return $request->validate([
-            'logistics_company_id' => ['required', 'exists:logistics_companies,id'],
-            'logistics_worker_id' => ['nullable', 'exists:logistics_workers,id'],
-            'plate' => ['required', 'string', 'max:20'],
-            'type' => ['required', Rule::enum(VehicleType::class)],
-            'description' => ['nullable', 'string', 'max:255'],
+            'logistics_company_id' => ['required', 'uuid', 'exists:logistics_companies,id'],
+            'logistics_worker_id' => ['nullable', 'uuid', 'exists:logistics_workers,id'],
+            'plate_number' => ['required', 'string', 'max:20'],
+            'brand' => ['nullable', 'string', 'max:80'],
+            'model' => ['nullable', 'string', 'max:80'],
+            'year' => ['nullable', 'integer', 'min:1980', 'max:2100'],
+            'color' => ['nullable', 'string', 'max:40'],
+            'vehicle_type' => ['required', Rule::enum(VehicleType::class)],
+            'capacity_kg' => ['nullable', 'numeric', 'min:0'],
             'is_active' => ['sometimes', 'boolean'],
+            'notes' => ['nullable', 'string'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 
-    /**
-     * @return \Illuminate\Support\Collection<int, LogisticsCompany>
-     */
     private function companyOptions()
     {
-        return LogisticsCompany::query()->orderBy('name')->get();
+        return LogisticsCompany::query()->where('is_active', true)->orderBy('name')->get();
     }
 
-    /**
-     * @return \Illuminate\Support\Collection<int, LogisticsWorker>
-     */
     private function workerOptions()
     {
-        return LogisticsWorker::query()->with('company')->orderBy('full_name')->get();
+        return LogisticsWorker::query()
+            ->with('company')
+            ->where('is_active', true)
+            ->orderBy('last_name')
+            ->get();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\WorkerRole;
+use App\Enums\LogisticsWorkerRole;
 use App\Http\Controllers\Controller;
 use App\Models\LogisticsCompany;
 use App\Models\LogisticsWorker;
@@ -17,7 +17,8 @@ class LogisticsWorkerController extends Controller
     {
         $workers = LogisticsWorker::query()
             ->with('company')
-            ->orderBy('full_name')
+            ->orderBy('last_name')
+            ->orderBy('first_name')
             ->paginate(20);
 
         return view('admin.logistics.workers.index', compact('workers'));
@@ -27,7 +28,7 @@ class LogisticsWorkerController extends Controller
     {
         return view('admin.logistics.workers.create', [
             'companies' => $this->companyOptions(),
-            'roles' => WorkerRole::cases(),
+            'roles' => LogisticsWorkerRole::cases(),
         ]);
     }
 
@@ -43,7 +44,7 @@ class LogisticsWorkerController extends Controller
     public function show(LogisticsWorker $worker): View
     {
         return view('admin.logistics.workers.show', [
-            'worker' => $worker->load(['company', 'vehicles']),
+            'worker' => $worker->load(['company', 'assignedVehicles']),
         ]);
     }
 
@@ -52,7 +53,7 @@ class LogisticsWorkerController extends Controller
         return view('admin.logistics.workers.edit', [
             'worker' => $worker,
             'companies' => $this->companyOptions(),
-            'roles' => WorkerRole::cases(),
+            'roles' => LogisticsWorkerRole::cases(),
         ]);
     }
 
@@ -71,7 +72,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.index')
-            ->with('success', 'Worker deleted.');
+            ->with('success', 'Worker removed.');
     }
 
     /**
@@ -80,21 +81,22 @@ class LogisticsWorkerController extends Controller
     private function validated(Request $request): array
     {
         return $request->validate([
-            'logistics_company_id' => ['required', 'exists:logistics_companies,id'],
-            'full_name' => ['required', 'string', 'max:255'],
-            'dui' => ['required', 'string', 'max:15'],
-            'role' => ['required', Rule::enum(WorkerRole::class)],
+            'logistics_company_id' => ['nullable', 'uuid', 'exists:logistics_companies,id'],
+            'employee_code' => ['nullable', 'string', 'max:30'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
+            'document_id' => ['nullable', 'string', 'max:20'],
             'phone' => ['nullable', 'string', 'max:30'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'email' => ['nullable', 'email', 'max:150'],
+            'role' => ['required', Rule::enum(LogisticsWorkerRole::class)],
+            'hire_date' => ['nullable', 'date'],
             'is_active' => ['sometimes', 'boolean'],
+            'notes' => ['nullable', 'string'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 
-    /**
-     * @return \Illuminate\Support\Collection<int, LogisticsCompany>
-     */
     private function companyOptions()
     {
-        return LogisticsCompany::query()->orderBy('name')->get();
+        return LogisticsCompany::query()->where('is_active', true)->orderBy('name')->get();
     }
 }

@@ -54,4 +54,9 @@ class LogisticsWorker extends Model
     {
         return $this->hasMany(LogisticsVehicle::class);
     }
+
+    public function fullName(): string
+    {
+        return trim("{$this->first_name} {$this->last_name}");
+    }
 }
