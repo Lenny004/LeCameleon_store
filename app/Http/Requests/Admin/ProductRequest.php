@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use App\Enums\ConditionGrade;
+use App\Enums\ProductStatus;
+use App\Enums\ProductType;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class ProductRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return $this->user()?->isStaff() ?? false;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        $productId = $this->route('product')?->id;
+
+        return [
+            'brand_id' => ['nullable', 'exists:brands,id'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:280', Rule::unique('products', 'slug')->ignore($productId)],
+            'sku' => ['required', 'string', 'max:80', Rule::unique('products', 'sku')->ignore($productId)],
+            'type' => ['required', Rule::enum(ProductType::class)],
+            'status' => ['required', Rule::enum(ProductStatus::class)],
+            'description' => ['nullable', 'string'],
+            'short_description' => ['nullable', 'string', 'max:500'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'compare_at_price' => ['nullable', 'numeric', 'min:0'],
+            'cost_price' => ['nullable', 'numeric', 'min:0'],
+            'condition_grade' => ['required', Rule::enum(ConditionGrade::class)],
+            'era_decade' => ['nullable', 'string', 'max:20'],
+            'size_label' => ['nullable', 'string', 'max:50'],
+            'color' => ['nullable', 'string', 'max:80'],
+            'material' => ['nullable', 'string', 'max:150'],
+            'is_unique_piece' => ['sometimes', 'boolean'],
+            'quantity_available' => ['required', 'integer', 'min:0'],
+            'low_stock_threshold' => ['sometimes', 'integer', 'min:0'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:500'],
+            'published_at' => ['nullable', 'date'],
+        ];
+    }
+}

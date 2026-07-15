@@ -1,0 +1,57 @@
+:root {
+    --text: rgb(4, 3, 22);
+    --background: rgb(237, 237, 237);
+    --primary: rgb(17, 255, 0);
+    --secondary: rgb(214, 214, 214);
+    --accent: rgb(1, 233, 98);
+
+    --text-muted: color-mix(in srgb, var(--text) 65%, transparent);
+    --surface: color-mix(in srgb, var(--background) 92%, var(--text));
+    --border: color-mix(in srgb, var(--secondary) 80%, var(--text) 20%);
+    --primary-contrast: rgb(4, 3, 22);
+    --danger: rgb(220, 38, 38);
+    --success: rgb(22, 163, 74);
+    --warning: rgb(234, 179, 8);
+
+    --font-display: 'Syne', system-ui, sans-serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    --shadow-sm: 0 1px 2px rgb(4 3 22 / 0.06);
+    --shadow-md: 0 4px 12px rgb(4 3 22 / 0.08);
+    --shadow-lg: 0 12px 32px rgb(4 3 22 / 0.12);
+
+    --header-height: 4rem;
+    --sidebar-width: 16rem;
+    --container-max: 72rem;
+    --transition: 180ms ease;
+}
+
+[data-theme="dark"] {
+    --text: rgb(234, 233, 252);
+    --background: rgb(18, 18, 18);
+    --primary: rgb(17, 255, 0);
+    --secondary: rgb(41, 41, 41);
+    --accent: rgb(22, 254, 118);
+
+    --text-muted: color-mix(in srgb, var(--text) 70%, transparent);
+    --surface: rgb(28, 28, 28);
+    --border: rgb(55, 55, 55);
+    --primary-contrast: rgb(4, 3, 22);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.35);
+    --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.45);
+}
