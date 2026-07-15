@@ -37,6 +37,7 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
         Route::post('orders/{order}/capture-payment', [OrderController::class, 'capturePayment'])->name('orders.capture-payment');
         Route::patch('orders/{order}/shipment', [OrderController::class, 'updateShipment'])->name('orders.shipment');
+        Route::post('orders/{order}/shipment-events', [OrderController::class, 'storeShipmentEvent'])->name('orders.shipment-events');
 
         Route::get('offers', [OfferController::class, 'index'])->name('offers.index');
         Route::patch('offers/{offer}/accept', [OfferController::class, 'accept'])->name('offers.accept');

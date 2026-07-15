@@ -100,32 +100,122 @@
         @php
             $shipment = $shipment ?? $order->shipments->first();
         @endphp
-        <form method="POST" action="{{ route('admin.orders.shipment', $order) }}" class="card">
-            @csrf
-            @method('PATCH')
+        <div class="card logistics-shipment-panel">
             <h2 class="card__title" style="margin-bottom:var(--space-md);">Shipment tracking</h2>
-            <div class="form-row form-row--2">
-                <div class="form-group">
-                    <label class="form-label" for="carrier">Carrier</label>
-                    <input type="text" id="carrier" name="carrier" class="form-input" value="{{ old('carrier', $shipment?->carrier) }}">
+
+            <form method="POST" action="{{ route('admin.orders.shipment', $order) }}">
+                @csrf
+                @method('PATCH')
+                <div class="logistics-form__grid">
+                    <div class="form-group">
+                        <label class="form-label" for="logistics_company_id">Carrier company</label>
+                        <select id="logistics_company_id" name="logistics_company_id" class="form-select">
+                            <option value="">— Unassigned —</option>
+                            @foreach ($companies ?? [] as $company)
+                                <option value="{{ $company->id }}" @selected((string) old('logistics_company_id', $shipment?->logistics_company_id) === (string) $company->id)>{{ $company->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="logistics_worker_id">Worker</label>
+                        <select id="logistics_worker_id" name="logistics_worker_id" class="form-select">
+                            <option value="">— Unassigned —</option>
+                            @foreach ($workers ?? [] as $worker)
+                                <option value="{{ $worker->id }}" @selected((string) old('logistics_worker_id', $shipment?->logistics_worker_id) === (string) $worker->id)>{{ $worker->fullName() }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="logistics_vehicle_id">Vehicle</label>
+                        <select id="logistics_vehicle_id" name="logistics_vehicle_id" class="form-select">
+                            <option value="">— Unassigned —</option>
+                            @foreach ($vehicles ?? [] as $vehicle)
+                                <option value="{{ $vehicle->id }}" @selected((string) old('logistics_vehicle_id', $shipment?->logistics_vehicle_id) === (string) $vehicle->id)>{{ $vehicle->plate_number }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group logistics-form__full">
+                        <label class="form-label" for="destination_municipality_id">Destination municipality</label>
+                        @include('components.municipality-select', [
+                            'departments' => $departments ?? collect(),
+                            'name' => 'destination_municipality_id',
+                            'id' => 'destination_municipality_id',
+                            'selected' => old('destination_municipality_id', $shipment?->destination_municipality_id),
+                        ])
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="carrier">Carrier label</label>
+                        <input type="text" id="carrier" name="carrier" class="form-input" value="{{ old('carrier', $shipment?->carrier) }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="tracking_number">Tracking number</label>
+                        <input type="text" id="tracking_number" name="tracking_number" class="form-input" value="{{ old('tracking_number', $shipment?->tracking_number) }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="shipment_status">Status</label>
+                        <select id="shipment_status" name="status" class="form-select" required>
+                            @foreach ($shipmentStatuses ?? [] as $shipmentStatus)
+                                <option value="{{ $shipmentStatus->value }}" @selected(old('status', $shipment?->status?->value ?? 'pending') === $shipmentStatus->value)>
+                                    {{ ucfirst(str_replace('_', ' ', $shipmentStatus->value)) }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="tracking_number">Tracking number</label>
-                    <input type="text" id="tracking_number" name="tracking_number" class="form-input" value="{{ old('tracking_number', $shipment?->tracking_number) }}">
+                <button type="submit" class="btn btn--primary" style="margin-top:var(--space-md);">Save assignment</button>
+            </form>
+
+            @if ($shipment?->events?->isNotEmpty())
+                <div class="logistics-shipment-panel__events">
+                    <h3 class="card__title" style="font-size:0.9375rem;margin-bottom:var(--space-sm);">Event timeline</h3>
+                    <div class="logistics-timeline">
+                        @foreach ($shipment->events->sortByDesc('happened_at') as $event)
+                            <div class="logistics-timeline__item">
+                                <strong>{{ ucfirst(str_replace('_', ' ', $event->status->value)) }}</strong>
+                                @if ($event->recipient_outcome)
+                                    <span class="text-muted"> · {{ ucfirst(str_replace('_', ' ', $event->recipient_outcome->value)) }}</span>
+                                @endif
+                                <p class="logistics-timeline__meta">{{ $event->happened_at?->format('Y-m-d H:i') }}</p>
+                                @if ($event->note)
+                                    <p>{{ $event->note }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="shipment_status">Status</label>
-                <select id="shipment_status" name="status" class="form-select" required>
-                    @foreach ($shipmentStatuses ?? [] as $shipmentStatus)
-                        <option value="{{ $shipmentStatus->value }}" @selected(old('status', $shipment?->status?->value ?? 'pending') === $shipmentStatus->value)>
-                            {{ ucfirst(str_replace('_', ' ', $shipmentStatus->value)) }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <button type="submit" class="btn btn--primary">Save shipment</button>
-        </form>
+            @endif
+
+            @if (Route::has('admin.orders.shipment-events'))
+                <form method="POST" action="{{ route('admin.orders.shipment-events', $order) }}" style="margin-top:var(--space-lg);padding-top:var(--space-lg);border-top:1px solid var(--border);">
+                    @csrf
+                    <h3 class="card__title" style="font-size:0.9375rem;margin-bottom:var(--space-md);">Append event</h3>
+                    <div class="logistics-form__grid">
+                        <div class="form-group">
+                            <label class="form-label" for="event_status">Status</label>
+                            <select id="event_status" name="status" class="form-select" required>
+                                @foreach ($shipmentStatuses ?? [] as $shipmentStatus)
+                                    <option value="{{ $shipmentStatus->value }}">{{ ucfirst(str_replace('_', ' ', $shipmentStatus->value)) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="recipient_outcome">Recipient outcome</label>
+                            <select id="recipient_outcome" name="recipient_outcome" class="form-select">
+                                <option value="">— N/A —</option>
+                                @foreach ($recipientOutcomes ?? [] as $outcome)
+                                    <option value="{{ $outcome->value }}">{{ ucfirst(str_replace('_', ' ', $outcome->value)) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group logistics-form__full">
+                            <label class="form-label" for="note">Note</label>
+                            <input type="text" id="note" name="note" class="form-input" maxlength="500">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn--ghost" style="margin-top:var(--space-md);">Record event</button>
+                </form>
+            @endif
+        </div>
     @endif
 
     @if (Route::has('admin.orders.status'))
