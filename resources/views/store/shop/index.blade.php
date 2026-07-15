@@ -50,6 +50,23 @@
                 </div>
             </div>
 
+            <div class="filter-panel__group">
+                <p class="filter-panel__label">Valoración mínima</p>
+                <div class="filter-panel__options">
+                    @foreach ([5, 4, 3, 2, 1] as $stars)
+                        <label class="filter-panel__option">
+                            <input
+                                type="radio"
+                                name="min_rating"
+                                value="{{ $stars }}"
+                                {{ (string) request('min_rating', $filters['min_rating'] ?? '') === (string) $stars ? 'checked' : '' }}
+                            >
+                            {{ $stars }} ★ o más
+                        </label>
+                    @endforeach
+                </div>
+            </div>
+
             <button type="submit" class="btn btn--primary btn--block">Aplicar filtros</button>
         </form>
     </aside>
@@ -78,10 +95,18 @@
             <div class="shop-toolbar__sort">
                 <label for="sort" class="text-small">Ordenar:</label>
                 <select id="sort" name="sort" onchange="if(this.value) window.location.href=this.value">
-                    @php $base = Route::has('shop.index') ? route('shop.index') : '#'; @endphp
-                    <option value="{{ $base }}?sort=new" {{ request('sort') === 'new' ? 'selected' : '' }}>Más recientes</option>
-                    <option value="{{ $base }}?sort=price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Precio: menor</option>
-                    <option value="{{ $base }}?sort=price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Precio: mayor</option>
+                    @php
+                        $base = Route::has('shop.index') ? route('shop.index') : '#';
+                        $sortQuery = collect($filters ?? request()->only(['q', 'category', 'brand', 'era_decade', 'condition_grade', 'size_label', 'color', 'price_min', 'price_max', 'in_stock', 'min_rating']))
+                            ->filter(fn ($v) => $v !== null && $v !== '')
+                            ->all();
+                        $sortUrl = fn (string $sort) => $base.'?'.http_build_query(array_merge($sortQuery, ['sort' => $sort]));
+                        $currentSort = request('sort', $filters['sort'] ?? 'newest');
+                    @endphp
+                    <option value="{{ $sortUrl('newest') }}" {{ in_array($currentSort, ['newest', 'new', ''], true) ? 'selected' : '' }}>Más recientes</option>
+                    <option value="{{ $sortUrl('price_asc') }}" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Precio: menor</option>
+                    <option value="{{ $sortUrl('price_desc') }}" {{ $currentSort === 'price_desc' ? 'selected' : '' }}>Precio: mayor</option>
+                    <option value="{{ $sortUrl('rating') }}" {{ $currentSort === 'rating' ? 'selected' : '' }}>Mejor valorados</option>
                 </select>
             </div>
         </div>

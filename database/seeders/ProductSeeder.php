@@ -308,14 +308,56 @@ class ProductSeeder extends Seeder
         $demoCustomer = User::query()->where('email', 'customer@lecameleon.store')->first();
 
         if ($featuredProduct && $demoCustomer) {
-            Review::query()->create([
-                'product_id' => $featuredProduct->id,
-                'user_id' => $demoCustomer->id,
-                'rating' => 5,
-                'title' => 'Beautiful drape and true vintage fit',
-                'body' => 'The measurements matched the listing and the condition was exactly as described.',
-                'is_approved' => true,
-            ]);
+            Review::query()->updateOrCreate(
+                [
+                    'product_id' => $featuredProduct->id,
+                    'user_id' => $demoCustomer->id,
+                ],
+                [
+                    'rating' => 5,
+                    'title' => 'Beautiful drape and true vintage fit',
+                    'body' => 'The measurements matched the listing and the condition was exactly as described.',
+                    'is_approved' => true,
+                ],
+            );
+
+            $extraReviewers = User::factory()->count(4)->create();
+            $demoReviews = [
+                ['rating' => 5, 'title' => 'Pieza única', 'body' => 'Llegó impecable y olía a vintage auténtico. La talla coincide con las medidas.'],
+                ['rating' => 4, 'title' => 'Muy bonito', 'body' => 'Colores vivos y forro en buen estado. El envío fue rápido.'],
+                ['rating' => 4, 'title' => 'Tal como en fotos', 'body' => 'La descripción es honesta. Pequeño desgaste en el dobladillo, nada grave.'],
+                ['rating' => 3, 'title' => 'Aceptable', 'body' => 'Bonito diseño pero esperaba un poco menos de desgaste en las costuras.'],
+            ];
+
+            foreach ($extraReviewers as $index => $reviewer) {
+                $payload = $demoReviews[$index];
+                Review::query()->create([
+                    'product_id' => $featuredProduct->id,
+                    'user_id' => $reviewer->id,
+                    'rating' => $payload['rating'],
+                    'title' => $payload['title'],
+                    'body' => $payload['body'],
+                    'is_approved' => true,
+                    'created_at' => now()->subDays(10 - $index),
+                    'updated_at' => now()->subDays(10 - $index),
+                ]);
+            }
+
+            $secondProduct = Product::query()
+                ->where('slug', '!=', $featuredProduct->slug)
+                ->where('status', ProductStatus::Published)
+                ->first();
+
+            if ($secondProduct) {
+                Review::query()->create([
+                    'product_id' => $secondProduct->id,
+                    'user_id' => $demoCustomer->id,
+                    'rating' => 5,
+                    'title' => 'Compra feliz',
+                    'body' => 'Excelente pieza, embalaron con mucho cuidado.',
+                    'is_approved' => true,
+                ]);
+            }
         }
     }
 }

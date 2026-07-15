@@ -28,3 +28,29 @@ Boutique vintage store with local delivery network in El Salvador:
 ## El Salvador geo baseline (2026)
 
 Use the post-reform structure: **14 departments**, **44 municipalities** (districts nested where needed). Seed official names in English keys / Spanish labels.
+
+See also: [20-sv-municipalities-2026.md](./20-sv-municipalities-2026.md)
+
+## QA checklist
+
+### Completed
+
+- [x] `git pull --rebase origin develop` (2026-07-15)
+- [x] `php artisan migrate --force` — no pending migrations
+- [x] `ElSalvadorGeoSeeder` — 14 departments + 44 municipalities
+- [x] `LogisticsDemoSeeder` — zones, rates, company, workers, vehicles, dispatch, warnings
+- [x] Backend services: `ShippingRateService`, `ShipmentTrackingService`, `DispatchService`
+- [x] Storefront routes: `/shipping/quote`, `/tracking`
+- [x] Feature tests: `ShippingRateTest`, `TrackingPageTest`
+
+### In progress / blockers
+
+- [ ] Admin CRUD UIs for zones, rates, warnings, dispatch (views partially in flight from parallel agents)
+- [ ] Checkout municipality selector wired to live quotes in all environments (`STORE_WAREHOUSE_MUNICIPALITY_ID` or settings bootstrap)
+- [ ] Full E2E smoke on Docker after admin agent merges
+
+### Notes (2026-07-15 QA)
+
+- Duplicate `web.php` logistics routes were fixed upstream (`8033620`).
+- Missing service classes blocked `artisan` until QA added minimal implementations.
+- Parallel agent WIP stashed locally as `qa-other-agents-wip` / `qa-wip-local` — re-apply after admin merge.

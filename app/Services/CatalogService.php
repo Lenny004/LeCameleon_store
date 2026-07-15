@@ -16,6 +16,10 @@ use Illuminate\Support\Collection;
  */
 class CatalogService
 {
+    public function __construct(
+        private readonly ReviewService $reviewService,
+    ) {}
+
     /**
      * @param  array<string, mixed>  $filters
      */
@@ -36,6 +40,8 @@ class CatalogService
             ->where('status', ProductStatus::Published)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
+
+        $this->reviewService->applyApprovedAggregates($query);
 
         $searchTerms = $this->parseSearchTerms((string) ($filters['q'] ?? ''));
         if ($searchTerms !== []) {
@@ -95,30 +101,51 @@ class CatalogService
             $query->whereColumn('quantity_available', '>', 'quantity_reserved');
         }
 
+        // Keep products whose approved-review average meets the shopper's minimum.
+        if (isset($filters['min_rating']) && $filters['min_rating'] !== '') {
+            $minRating = (int) $filters['min_rating'];
+            if ($minRating >= 1 && $minRating <= 5) {
+                $query->whereIn('id', function ($sub) use ($minRating) {
+                    $sub->select('product_id')
+                        ->from('reviews')
+                        ->where('is_approved', true)
+                        ->whereNull('deleted_at')
+                        ->groupBy('product_id')
+                        ->havingRaw('AVG(rating) >= ?', [$minRating]);
+                });
+            }
+        }
+
         return $this->applySort($query, (string) ($filters['sort'] ?? 'newest'));
     }
 
     public function findPublishedBySlug(string $slug): ?Product
     {
-        return Product::query()
-            ->with(['brand', 'category', 'images', 'attributes', 'reviews' => fn ($q) => $q->where('is_approved', true)->with('user')->orderByDesc('created_at')])
+        $query = Product::query()
+            ->with(['brand', 'category', 'images', 'attributes'])
             ->where('slug', $slug)
             ->where('status', ProductStatus::Published)
             ->whereNotNull('published_at')
-            ->where('published_at', '<=', now())
-            ->first();
+            ->where('published_at', '<=', now());
+
+        $this->reviewService->applyApprovedAggregates($query);
+
+        return $query->first();
     }
 
     public function featured(int $limit = 8): Collection
     {
-        return Product::query()
+        $query = Product::query()
             ->with(['brand', 'category', 'images'])
             ->where('status', ProductStatus::Published)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->orderByDesc('published_at')
-            ->limit($limit)
-            ->get();
+            ->limit($limit);
+
+        $this->reviewService->applyApprovedAggregates($query);
+
+        return $query->get();
     }
 
     public function newArrivals(int $limit = 8): Collection
@@ -246,6 +273,7 @@ class CatalogService
             'price_asc' => $query->orderBy('price'),
             'price_desc' => $query->orderByDesc('price'),
             'name' => $query->orderBy('name'),
+            'rating' => $query->orderByDesc('approved_reviews_avg')->orderByDesc('approved_reviews_count'),
             default => $query->orderByDesc('published_at'),
         };
     }
