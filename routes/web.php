@@ -10,6 +10,7 @@ use App\Http\Controllers\Store\ReviewController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
 use App\Http\Controllers\Store\OfferController;
+use App\Http\Controllers\Store\SavedSearchController;
 use App\Http\Controllers\Store\StockAlertController;
 use App\Http\Controllers\Store\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -69,4 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
     Route::post('/account/orders/{order}/returns', [AccountController::class, 'storeReturn'])->name('account.orders.returns.store');
     Route::get('/account/offers', [AccountController::class, 'offers'])->name('account.offers.index');
+    Route::get('/account/saved-searches', [SavedSearchController::class, 'index'])->name('account.saved-searches.index');
+    Route::post('/account/saved-searches', [SavedSearchController::class, 'store'])->name('account.saved-searches.store');
+    Route::delete('/account/saved-searches/{savedSearch}', [SavedSearchController::class, 'destroy'])->name('account.saved-searches.destroy');
 });

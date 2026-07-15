@@ -38,6 +38,7 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::get('return-requests', [ReturnRequestController::class, 'index'])->name('return-requests.index');
         Route::patch('return-requests/{returnRequest}/approve', [ReturnRequestController::class, 'approve'])->name('return-requests.approve');
         Route::patch('return-requests/{returnRequest}/deny', [ReturnRequestController::class, 'deny'])->name('return-requests.deny');
+        Route::patch('return-requests/{returnRequest}/refund', [ReturnRequestController::class, 'refund'])->name('return-requests.refund');
 
         Route::resource('users', UserController::class);
         Route::resource('categories', CategoryController::class);

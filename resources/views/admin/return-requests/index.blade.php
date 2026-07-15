@@ -26,7 +26,12 @@
                     <td>{{ $returnRequest->orderItem?->name ?? 'Full order' }}</td>
                     <td>{{ Str::limit($returnRequest->reason, 50) }}</td>
                     <td>
-                        <span class="badge badge--{{ $returnRequest->status->value === 'approved' ? 'success' : ($returnRequest->status->value === 'denied' ? 'error' : 'warning') }}">
+                        <span class="badge badge--{{ match ($returnRequest->status->value) {
+                            'approved' => 'success',
+                            'denied' => 'error',
+                            'refunded' => 'success',
+                            default => 'warning',
+                        } }}">
                             {{ ucfirst($returnRequest->status->value) }}
                         </span>
                     </td>
@@ -49,6 +54,12 @@
                                     </form>
                                 @endif
                             </div>
+                        @elseif ($returnRequest->status->value === 'approved' && Route::has('admin.return-requests.refund'))
+                            <form method="POST" action="{{ route('admin.return-requests.refund', $returnRequest) }}" style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn--ghost btn--sm">Mark refunded</button>
+                            </form>
                         @endif
                     </td>
                 </tr>

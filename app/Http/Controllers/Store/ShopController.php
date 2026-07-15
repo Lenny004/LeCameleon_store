@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Models\SavedSearch;
 use App\Services\AnalyticsService;
 use App\Services\CatalogService;
 use App\Services\RecommendationService;
@@ -31,6 +32,7 @@ class ShopController extends Controller
             ),
             'filters' => $filters,
             'filterOptions' => $this->catalogService->filterOptions(),
+            'hasActiveFilters' => SavedSearch::filtersAreActive($filters),
         ]);
     }
 

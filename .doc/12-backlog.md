@@ -9,13 +9,13 @@ Features intentionally deferred after Phases 6–11. Revisit when the store is s
 
 | Item | Why later |
 |------|-----------|
-| Make an offer / counter-offer | Needs messaging + negotiation UI; high UX cost |
+| Make an offer / counter-offer | ~~Needs messaging + negotiation UI~~ ✅ Phase 14 |
 | Authenticity / provenance workflow | Admin evidence upload + badge; valuable for designer pieces |
 | Full-text search (Scout / Meilisearch / `to_tsvector`) | Current `LIKE` filters are enough for small catalogs |
-| Saved searches + email digests | Depends on search + alerts infra |
+| Saved searches + email digests | ~~Depends on search + alerts infra~~ ✅ saved searches (Phase 15); email digests later |
 | Sold comps / price history | Analytics data model expansion |
 | Multi-warehouse inventory | Single-location is enough for one boutique |
-| Full i18n (lang files ES/EN) | Copy is mixed ES storefront / EN admin by design for now |
+| Full i18n (lang files ES/EN) | ~~Copy is mixed ES storefront / EN admin~~ partial stubs `lang/*/store.php` (Phase 15) |
 | Automatic Stripe refunds on RMA approve | Returns scaffold is status-only; add when Stripe live |
 | GraphQL / headless storefront | Monolith Blade is the chosen architecture |
 | Multi-currency | Config is single `STORE_CURRENCY` |
