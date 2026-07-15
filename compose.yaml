@@ -1,0 +1,109 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WWWUSER: "1000"
+        WWWGROUP: "1000"
+    container_name: lecameleon-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE:-lecameleon}
+      DB_USERNAME: ${DB_USERNAME:-lecameleon}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - lecameleon
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: lecameleon-nginx
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - .:/var/www/html:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - lecameleon
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: lecameleon-postgres
+    restart: unless-stopped
+    ports:
+      - "${FORWARD_DB_PORT:-5433}:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-lecameleon}
+      POSTGRES_USER: ${DB_USERNAME:-lecameleon}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    volumes:
+      - lecameleon_pgdata:/var/lib/postgresql/data
+      # Schema is applied via Laravel migrations (init.sql is documentation only).
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-lecameleon} -d ${DB_DATABASE:-lecameleon}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - lecameleon
+
+  redis:
+    image: redis:7-alpine
+    container_name: lecameleon-redis
+    restart: unless-stopped
+    ports:
+      - "${FORWARD_REDIS_PORT:-6379}:6379"
+    volumes:
+      - lecameleon_redis:/data
+    networks:
+      - lecameleon
+
+  node:
+    image: node:22-alpine
+    container_name: lecameleon-node
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "${VITE_PORT:-5173}:5173"
+    environment:
+      VITE_HOST: 0.0.0.0
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    networks:
+      - lecameleon
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lecameleon-mailpit
+    restart: unless-stopped
+    ports:
+      - "${FORWARD_MAILPIT_DASHBOARD_PORT:-18025}:8025"
+      - "${FORWARD_MAILPIT_PORT:-11025}:1025"
+    networks:
+      - lecameleon
+
+networks:
+  lecameleon:
+    driver: bridge
+
+volumes:
+  lecameleon_pgdata:
+  lecameleon_redis:
