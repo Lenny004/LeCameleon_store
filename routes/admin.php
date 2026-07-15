@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
@@ -34,6 +35,9 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::patch('offers/{offer}/accept', [OfferController::class, 'accept'])->name('offers.accept');
         Route::patch('offers/{offer}/decline', [OfferController::class, 'decline'])->name('offers.decline');
         Route::patch('offers/{offer}/counter', [OfferController::class, 'counter'])->name('offers.counter');
+
+        Route::get('messages', [ContactMessageController::class, 'index'])->name('messages.index');
+        Route::patch('messages/{message}/read', [ContactMessageController::class, 'markRead'])->name('messages.read');
 
         Route::get('return-requests', [ReturnRequestController::class, 'index'])->name('return-requests.index');
         Route::patch('return-requests/{returnRequest}/approve', [ReturnRequestController::class, 'approve'])->name('return-requests.approve');
