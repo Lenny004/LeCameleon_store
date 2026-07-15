@@ -3,9 +3,13 @@
 namespace App\Services;
 
 use App\Enums\OrderStatus;
+use App\Mail\OrderCancelled;
+use App\Mail\OrderPaid;
+use App\Mail\OrderShipped;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -54,6 +58,8 @@ class OrderService
             }
 
             $order->update(['status' => $newStatus]);
+
+            $this->dispatchStatusMail($order->fresh(['items', 'user']), $newStatus);
 
             return $order->fresh(['items', 'user']);
         });
@@ -114,6 +120,26 @@ class OrderService
                 $actor,
                 "Order {$order->number} refunded",
             );
+        }
+    }
+
+    private function dispatchStatusMail(Order $order, OrderStatus $status): void
+    {
+        $email = $order->customerEmail();
+
+        if (! $email) {
+            return;
+        }
+
+        $mailable = match ($status) {
+            OrderStatus::Paid => new OrderPaid($order),
+            OrderStatus::Shipped => new OrderShipped($order),
+            OrderStatus::Cancelled => new OrderCancelled($order),
+            default => null,
+        };
+
+        if ($mailable) {
+            Mail::to($email)->send($mailable);
         }
     }
 }

@@ -50,14 +50,19 @@ class CheckoutController extends Controller
         $sessionId = $this->ensureSessionId($request, 'session_cart_key');
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
 
+        $email = $request->validated('email') ?? $request->user()?->email ?? '';
+
         $order = $this->checkoutService->placeOrder(
             $cart,
             $request->user(),
+            $email,
             $request->validated('billing_address'),
             $request->validated('shipping_address'),
             $request->validated('coupon_code'),
             $request->validated('notes'),
         );
+
+        $request->session()->put('last_order_id', $order->id);
 
         $redirect = redirect()
             ->route('checkout.success', $order)
@@ -79,7 +84,10 @@ class CheckoutController extends Controller
 
     public function success(Request $request, Order $order): View
     {
-        abort_unless($order->user_id === $request->user()?->id, 403);
+        $ownsOrder = $request->user() && $order->user_id === $request->user()->id;
+        $sessionOrder = $request->session()->get('last_order_id') === $order->id;
+
+        abort_unless($ownsOrder || $sessionOrder, 403);
 
         return view('store.checkout.success', ['order' => $order->load('items')]);
     }

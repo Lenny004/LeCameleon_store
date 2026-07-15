@@ -24,6 +24,23 @@
         <form method="POST" action="{{ route('checkout.store') }}" class="checkout-form">
             @csrf
 
+            @guest
+            <section class="checkout-section">
+                <h2 class="checkout-section__title">Contacto</h2>
+                <div class="form-group">
+                    <label class="form-label" for="email">Correo electrónico</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        value="{{ old('email') }}"
+                        required
+                    >
+                </div>
+            </section>
+            @endguest
+
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Dirección de envío</h2>
 

@@ -19,7 +19,7 @@
             <h2 class="card__title">Order details</h2>
             <span class="badge badge--primary">{{ ucfirst($order->status->value) }}</span>
         </div>
-        <p class="text-muted">Customer: {{ $order->user?->email }}</p>
+        <p class="text-muted">Customer: {{ $order->customerEmail() ?? $order->user?->email ?? 'Guest' }}</p>
         @if ($shippingLine)
             <p class="text-muted" style="margin-top:var(--space-xs);">Ship to: {{ $shippingLine }}</p>
         @endif
@@ -62,6 +62,39 @@
         @endif
         <p style="text-align:right;margin-top:var(--space-md);font-weight:700;">Total: ${{ number_format((float) $order->grand_total, 2) }}</p>
     </div>
+
+    @if ($order->payments->isNotEmpty())
+        <div class="card">
+            <h2 class="card__title" style="margin-bottom:var(--space-md);">Payments</h2>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->payments as $payment)
+                            <tr>
+                                <td>{{ $payment->provider }}</td>
+                                <td>{{ ucfirst($payment->status->value) }}</td>
+                                <td>${{ number_format((float) $payment->amount, 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            @if ($order->status->value === 'pending' && $order->payments->contains(fn ($payment) => $payment->status->value === 'pending'))
+                <form method="POST" action="{{ route('admin.orders.capture-payment', $order) }}" style="margin-top:var(--space-md);">
+                    @csrf
+                    <button type="submit" class="btn btn--primary">Mark payment captured</button>
+                </form>
+            @endif
+        </div>
+    @endif
 
     @if (Route::has('admin.orders.status'))
         <form method="POST" action="{{ route('admin.orders.status', $order) }}" class="card">

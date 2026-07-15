@@ -111,4 +111,18 @@ class Order extends Model
 
         return $timeline;
     }
+
+    /**
+     * Customer email from shipping snapshot or linked user account.
+     */
+    public function customerEmail(): ?string
+    {
+        $shippingEmail = $this->shipping_address['email'] ?? null;
+
+        if (is_string($shippingEmail) && $shippingEmail !== '') {
+            return $shippingEmail;
+        }
+
+        return $this->user?->email;
+    }
 }

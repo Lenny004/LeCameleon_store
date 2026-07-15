@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderStatusRequest;
 use App\Models\Order;
 use App\Services\OrderService;
+use App\Services\PaymentService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -14,6 +15,7 @@ class OrderController extends Controller
 {
     public function __construct(
         private readonly OrderService $orderService,
+        private readonly PaymentService $paymentService,
     ) {}
 
     public function index(): View
@@ -46,5 +48,14 @@ class OrderController extends Controller
         );
 
         return back()->with('success', 'Order status updated.');
+    }
+
+    public function capturePayment(Order $order): RedirectResponse
+    {
+        $this->authorize('update', $order);
+
+        $this->paymentService->capturePayment($order, request()->user());
+
+        return back()->with('success', 'Payment captured and order marked as paid.');
     }
 }

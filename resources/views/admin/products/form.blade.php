@@ -15,6 +15,7 @@
 <form
     method="POST"
     action="{{ $formAction }}"
+    enctype="multipart/form-data"
     style="max-width:48rem;display:flex;flex-direction:column;gap:var(--space-xl);"
 >
     @csrf
@@ -173,6 +174,37 @@
         <div class="form-group">
             <label class="form-label" for="material">Material</label>
             <input type="text" id="material" name="material" class="form-input" value="{{ old('material', $product->material ?? '') }}">
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Images</h2>
+
+        @if ($isEditing && $product->images->isNotEmpty())
+            <input type="hidden" name="manage_images" value="1">
+            <p class="text-muted" style="margin-bottom:var(--space-md);">Uncheck images to remove them on save.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-md);margin-bottom:var(--space-lg);">
+                @foreach ($product->images as $image)
+                    <label style="display:flex;flex-direction:column;gap:var(--space-xs);max-width:8rem;font-size:0.85rem;">
+                        <img src="{{ asset('storage/'.$image->path) }}" alt="{{ $image->alt }}" style="width:8rem;height:8rem;object-fit:cover;border-radius:4px;">
+                        <span>
+                            <input
+                                type="checkbox"
+                                name="keep_image_ids[]"
+                                value="{{ $image->id }}"
+                                @checked(in_array($image->id, old('keep_image_ids', $product->images->pluck('id')->all())))
+                            >
+                            Keep@if ($image->is_primary) (primary)@endif
+                        </span>
+                    </label>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="form-group">
+            <label class="form-label" for="images">Upload images</label>
+            <input type="file" id="images" name="images[]" class="form-input" accept="image/*" multiple>
+            <p class="text-muted" style="margin-top:var(--space-xs);font-size:0.85rem;">First uploaded image becomes primary when none exists.</p>
         </div>
     </div>
 

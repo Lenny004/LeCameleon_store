@@ -7,7 +7,10 @@ use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -34,6 +37,8 @@ class ProductController extends Controller
     {
         $product = Product::query()->create($request->validated());
 
+        $this->storeUploadedImages($product, $request->file('images', []));
+
         return redirect()
             ->route('admin.products.show', $product)
             ->with('success', 'Product created.');
@@ -49,7 +54,7 @@ class ProductController extends Controller
     public function edit(Product $product): View
     {
         return view('admin.products.edit', [
-            'product' => $product,
+            'product' => $product->load('images'),
             'brands' => Brand::query()->orderBy('name')->get(),
             'categories' => Category::query()->orderBy('sort_order')->get(),
         ]);
@@ -58,6 +63,12 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->validated());
+
+        if ($request->boolean('manage_images')) {
+            $this->syncExistingImages($product, $request->input('keep_image_ids', []));
+        }
+
+        $this->storeUploadedImages($product, $request->file('images', []));
 
         return redirect()
             ->route('admin.products.show', $product)
@@ -72,5 +83,63 @@ class ProductController extends Controller
         return redirect()
             ->route('admin.products.index')
             ->with('success', 'Product deleted.');
+    }
+
+    /**
+     * @param  list<UploadedFile>  $images
+     */
+    private function storeUploadedImages(Product $product, array $images): void
+    {
+        if ($images === []) {
+            return;
+        }
+
+        $existingCount = $product->images()->count();
+        $hasPrimary = $product->images()->where('is_primary', true)->exists();
+
+        foreach ($images as $index => $image) {
+            if (! $image instanceof UploadedFile) {
+                continue;
+            }
+
+            $path = $image->store("products/{$product->id}", 'public');
+
+            $product->images()->create([
+                'path' => $path,
+                'alt' => $product->name,
+                'sort_order' => $existingCount + $index,
+                'is_primary' => ! $hasPrimary && $index === 0,
+            ]);
+        }
+    }
+
+    /**
+     * @param  list<int|string>  $keepImageIds
+     */
+    private function syncExistingImages(Product $product, array $keepImageIds): void
+    {
+        $keepIds = collect($keepImageIds)
+            ->map(fn ($id) => (int) $id)
+            ->filter()
+            ->values();
+
+        $imagesToRemove = $product->images()
+            ->when($keepIds->isNotEmpty(), fn ($query) => $query->whereNotIn('id', $keepIds))
+            ->when($keepIds->isEmpty(), fn ($query) => $query)
+            ->get();
+
+        foreach ($imagesToRemove as $image) {
+            Storage::disk('public')->delete($image->path);
+            $image->delete();
+        }
+
+        if ($keepIds->isNotEmpty() && ! $product->images()->where('is_primary', true)->exists()) {
+            ProductImage::query()
+                ->where('product_id', $product->id)
+                ->whereIn('id', $keepIds)
+                ->orderBy('sort_order')
+                ->first()
+                ?->update(['is_primary' => true]);
+        }
     }
 }

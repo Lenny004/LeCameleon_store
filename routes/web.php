@@ -39,12 +39,12 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
+
 Route::middleware('auth')->group(function () {
     Route::post('/shop/{product}/reviews', [ReviewController::class, 'store'])->name('shop.reviews.store');
-
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
     Route::get('/account', [AccountController::class, 'profile'])->name('account.index');
     Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');

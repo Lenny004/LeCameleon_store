@@ -4,11 +4,15 @@ namespace App\Services;
 
 use App\Enums\CouponType;
 use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
+use App\Mail\OrderPlaced;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -27,7 +31,8 @@ class CheckoutService
      */
     public function placeOrder(
         Cart $cart,
-        User $user,
+        ?User $user,
+        string $email,
         array $billingAddress,
         array $shippingAddress,
         ?string $couponCode = null,
@@ -41,7 +46,10 @@ class CheckoutService
             ]);
         }
 
-        return DB::transaction(function () use ($cart, $user, $billingAddress, $shippingAddress, $couponCode, $notes) {
+        $billingAddress['email'] = $email;
+        $shippingAddress['email'] = $email;
+
+        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
                 $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
@@ -64,7 +72,7 @@ class CheckoutService
 
             // Create the order first so reservations can reference it.
             $order = Order::query()->create([
-                'user_id' => $user->id,
+                'user_id' => $user?->id,
                 'number' => $this->generateOrderNumber(),
                 'status' => OrderStatus::Pending,
                 'currency' => config('store.currency', 'USD'),
@@ -109,9 +117,23 @@ class CheckoutService
                 $appliedCoupon->increment('used_count');
             }
 
+            // Manual-first payment record; Stripe integration is optional via env keys.
+            Payment::query()->create([
+                'order_id' => $order->id,
+                'provider' => 'manual',
+                'status' => PaymentStatus::Pending,
+                'amount' => $grandTotal,
+            ]);
+
             $this->cartService->clear($cart);
 
-            return $order->load('items');
+            $order = $order->load('items');
+
+            if ($email) {
+                Mail::to($email)->send(new OrderPlaced($order));
+            }
+
+            return $order;
         });
     }
 
