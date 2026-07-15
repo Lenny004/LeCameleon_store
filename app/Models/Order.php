@@ -70,4 +70,45 @@ class Order extends Model
     {
         return $this->hasMany(Shipment::class);
     }
+
+    /**
+     * Fulfillment steps with completed flags for the current status.
+     *
+     * @return array<int, array{status: string, label: string, completed: bool, current: bool}>
+     */
+    public function statusTimeline(): array
+    {
+        $flow = [
+            OrderStatus::Pending,
+            OrderStatus::Paid,
+            OrderStatus::Processing,
+            OrderStatus::Shipped,
+            OrderStatus::Delivered,
+        ];
+
+        $isTerminal = in_array($this->status, [OrderStatus::Cancelled, OrderStatus::Refunded], true);
+        $currentIndex = $isTerminal ? false : array_search($this->status, $flow, true);
+
+        $timeline = [];
+
+        foreach ($flow as $index => $status) {
+            $timeline[] = [
+                'status' => $status->value,
+                'label' => ucfirst($status->value),
+                'completed' => $currentIndex !== false && $index <= $currentIndex,
+                'current' => $this->status === $status,
+            ];
+        }
+
+        if ($isTerminal) {
+            $timeline[] = [
+                'status' => $this->status->value,
+                'label' => ucfirst($this->status->value),
+                'completed' => true,
+                'current' => true,
+            ];
+        }
+
+        return $timeline;
+    }
 }

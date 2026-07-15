@@ -1,6 +1,18 @@
 @extends('layouts.store')
 
-@section('title', ($product->name ?? 'Producto') . ' — Le Cameleon')
+@php
+    $metaTitle = $product->meta_title ?: $product->name;
+    $metaDescription = $product->meta_description
+        ?: \Illuminate\Support\Str::limit(strip_tags($product->short_description ?: $product->description ?: ''), 160);
+@endphp
+
+@section('title', $metaTitle . ' — Le Cameleon')
+@section('meta_description', $metaDescription)
+
+@push('meta')
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+@endpush
 
 @section('content')
 @php
@@ -139,4 +151,60 @@
         </div>
     </section>
 @endif
+
+<section class="container section product-reviews">
+    <div class="section__header">
+        <h2 class="section__title">Reseñas</h2>
+    </div>
+
+    @if ($product->reviews->isNotEmpty())
+        <div class="product-reviews__list">
+            @foreach ($product->reviews as $review)
+                <article class="product-review">
+                    <div class="product-review__header">
+                        <strong>{{ $review->user?->name ?? 'Cliente' }}</strong>
+                        <span class="product-review__rating" aria-label="{{ $review->rating }} de 5">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
+                    </div>
+                    @if ($review->title)
+                        <h3 class="product-review__title">{{ $review->title }}</h3>
+                    @endif
+                    <p class="product-review__body">{{ $review->body }}</p>
+                </article>
+            @endforeach
+        </div>
+    @else
+        <p class="text-muted">Aún no hay reseñas aprobadas para este producto.</p>
+    @endif
+
+    @auth
+        @if (Route::has('shop.reviews.store'))
+            <form method="POST" action="{{ route('shop.reviews.store', $product) }}" class="product-review-form checkout-section" style="margin-top:var(--space-xl);">
+                @csrf
+                <h3 class="checkout-section__title">Escribe una reseña</h3>
+                <div class="form-group">
+                    <label class="form-label" for="rating">Calificación</label>
+                    <select id="rating" name="rating" class="form-select" required>
+                        <option value="">Selecciona</option>
+                        @for ($i = 5; $i >= 1; $i--)
+                            <option value="{{ $i }}" @selected(old('rating') == $i)>{{ $i }} estrella{{ $i > 1 ? 's' : '' }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="title">Título</label>
+                    <input type="text" id="title" name="title" class="form-input" value="{{ old('title') }}" maxlength="150" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="body">Comentario</label>
+                    <textarea id="body" name="body" class="form-textarea" rows="4" required>{{ old('body') }}</textarea>
+                </div>
+                <button type="submit" class="btn btn--primary">Enviar reseña</button>
+            </form>
+        @endif
+    @else
+        <p class="text-muted" style="margin-top:var(--space-md);">
+            <a href="{{ route('login') }}">Inicia sesión</a> para dejar una reseña.
+        </p>
+    @endauth
+</section>
 @endsection

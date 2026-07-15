@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', config('app.name', 'Le Cameleon'))</title>
+    <meta name="description" content="@yield('meta_description', 'Le Cameleon — curated vintage fashion and unique pieces.')">
+    @stack('meta')
   <script>
     (function () {
       var k = 'lecameleon-theme';

@@ -59,9 +59,22 @@ class CheckoutController extends Controller
             $request->validated('notes'),
         );
 
-        return redirect()
+        $redirect = redirect()
             ->route('checkout.success', $order)
             ->with('success', 'Order placed successfully.');
+
+        if ($order->coupon_code) {
+            $redirect->with(
+                'info',
+                sprintf(
+                    'Coupon %s applied. You saved $%s.',
+                    $order->coupon_code,
+                    number_format((float) $order->discount_total, 2),
+                ),
+            );
+        }
+
+        return $redirect;
     }
 
     public function success(Request $request, Order $order): View

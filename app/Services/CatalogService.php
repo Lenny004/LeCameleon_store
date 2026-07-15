@@ -106,7 +106,7 @@ class CatalogService
     public function findPublishedBySlug(string $slug): ?Product
     {
         return Product::query()
-            ->with(['brand', 'category', 'images', 'attributes', 'reviews' => fn ($q) => $q->where('is_approved', true)])
+            ->with(['brand', 'category', 'images', 'attributes', 'reviews' => fn ($q) => $q->where('is_approved', true)->with('user')->orderByDesc('created_at')])
             ->where('slug', $slug)
             ->where('status', ProductStatus::Published)
             ->whereNotNull('published_at')
@@ -129,6 +129,19 @@ class CatalogService
     public function newArrivals(int $limit = 8): Collection
     {
         return $this->featured($limit);
+    }
+
+    /**
+     * Published products for the XML sitemap.
+     */
+    public function publishedForSitemap(): Collection
+    {
+        return Product::query()
+            ->where('status', ProductStatus::Published)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('updated_at')
+            ->get(['slug', 'updated_at']);
     }
 
     public function filterOptions(): array
