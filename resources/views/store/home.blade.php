@@ -53,6 +53,31 @@
         </div>
     </section>
 
+    @php
+        $categories = $categories ?? collect();
+    @endphp
+
+    @if ($categories->isNotEmpty() && Route::has('shop.index'))
+        <section class="container section">
+            <div class="section__header">
+                <h2 class="section__title">Colecciones</h2>
+                <a href="{{ route('shop.index') }}" class="btn btn--ghost btn--sm">Ver catálogo</a>
+            </div>
+
+            <div class="collection-grid">
+                @foreach ($categories as $category)
+                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}" class="collection-card">
+                        <h3 class="collection-card__title">{{ $category->name }}</h3>
+                        <p class="collection-card__count">{{ $category->published_products_count }} {{ $category->published_products_count === 1 ? 'pieza' : 'piezas' }}</p>
+                        @if ($category->description)
+                            <p class="collection-card__text">{{ Str::limit($category->description, 90) }}</p>
+                        @endif
+                    </a>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
     <section class="container section">
         <div class="collection-banner">
             <div class="collection-banner__text">

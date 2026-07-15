@@ -20,6 +20,7 @@ class HomeController extends Controller
             'featured' => $this->catalogService->featured(),
             'newArrivals' => $this->catalogService->newArrivals(),
             'collections' => $this->recommendationService->featuredForHome(),
+            'categories' => $this->catalogService->topCategoriesWithPublishedCount(4),
         ]);
     }
 }

@@ -5,6 +5,7 @@
         ['route' => 'admin.inventory.index', 'label' => 'Inventory', 'icon' => 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4'],
         ['route' => 'admin.orders.index', 'label' => 'Orders', 'icon' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'],
         ['route' => 'admin.offers.index', 'label' => 'Offers', 'icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+        ['route' => 'admin.messages.index', 'label' => 'Messages', 'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
         ['route' => 'admin.return-requests.index', 'label' => 'Returns', 'icon' => 'M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6'],
         ['route' => 'admin.users.index', 'label' => 'Users', 'icon' => 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197'],
         ['route' => 'admin.categories.index', 'label' => 'Categories', 'icon' => 'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z'],
@@ -25,7 +26,7 @@
     <nav class="admin-sidebar__nav" aria-label="Admin navigation">
         <div class="admin-sidebar__section">
             <p class="admin-sidebar__label">Main</p>
-            @foreach (array_slice($navItems, 0, 6) as $item)
+            @foreach (array_slice($navItems, 0, 7) as $item)
                 @if (Route::has($item['route']))
                     <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) || request()->routeIs($item['route']) ? 'admin-sidebar__link--active' : '' }}">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
@@ -36,7 +37,7 @@
         </div>
         <div class="admin-sidebar__section">
             <p class="admin-sidebar__label">Catalog</p>
-            @foreach (array_slice($navItems, 6, 4) as $item)
+            @foreach (array_slice($navItems, 7, 4) as $item)
                 @if (Route::has($item['route']))
                     <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
@@ -47,7 +48,7 @@
         </div>
         <div class="admin-sidebar__section">
             <p class="admin-sidebar__label">System</p>
-            @foreach (array_slice($navItems, 10) as $item)
+            @foreach (array_slice($navItems, 11) as $item)
                 @if (Route::has($item['route']))
                     <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
