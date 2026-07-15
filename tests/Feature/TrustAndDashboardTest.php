@@ -8,6 +8,7 @@ use App\Enums\ProductStatus;
 use App\Enums\ReturnRequestStatus;
 use App\Models\Category;
 use App\Models\ContactMessage;
+use App\Models\NewsletterSubscriber;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Product;
@@ -30,6 +31,39 @@ class TrustAndDashboardTest extends TestCase
         $this->get(route('contact.show'))
             ->assertOk()
             ->assertSee('Contacto');
+
+        $this->get(route('faq'))
+            ->assertOk()
+            ->assertSee('Preguntas frecuentes')
+            ->assertSee('grados de condición');
+    }
+
+    public function test_newsletter_subscribes_email(): void
+    {
+        $this->post(route('newsletter.store'), [
+            'email' => 'vintage@example.com',
+        ])
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('newsletter_subscribers', [
+            'email' => 'vintage@example.com',
+        ]);
+    }
+
+    public function test_newsletter_rejects_duplicate_email(): void
+    {
+        NewsletterSubscriber::query()->create([
+            'email' => 'vintage@example.com',
+            'subscribed_at' => now(),
+        ]);
+
+        $this->from(route('home'))
+            ->post(route('newsletter.store'), [
+                'email' => 'vintage@example.com',
+            ])
+            ->assertRedirect(route('home'))
+            ->assertSessionHasErrors('email');
     }
 
     public function test_contact_form_stores_message(): void

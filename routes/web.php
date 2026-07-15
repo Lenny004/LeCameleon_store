@@ -6,7 +6,9 @@ use App\Http\Controllers\Store\AuthController;
 use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\Store\ContactController;
+use App\Http\Controllers\Store\FaqController;
 use App\Http\Controllers\Store\HomeController;
+use App\Http\Controllers\Store\NewsletterController;
 use App\Http\Controllers\Store\ReturnsController;
 use App\Http\Controllers\Store\ReviewController;
 use App\Http\Controllers\Store\ShopController;
@@ -55,6 +57,10 @@ Route::post('/checkout', [CheckoutController::class, 'store'])
 Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/about', AboutController::class)->name('about');
+Route::get('/faq', FaqController::class)->name('faq');
+Route::post('/newsletter', [NewsletterController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.store');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:10,1')

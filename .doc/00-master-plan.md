@@ -80,6 +80,7 @@ LeCameleon_Store/
 
 - **Started:** 2026-07-14
 - **Updated:** 2026-07-15
-- **Branch:** `develop`
-- **Completed:** Phases 1–6, 8 (Docker), 10–11 (commerce/payments, returns), Phase 7 QA hardening (feature tests + checklist)
-- **Next:** P2 backlog (`.doc/12-backlog.md`) — Scout search, Stripe live, authenticity workflow
+- **Branch:** `develop` → `origin/develop`
+- **Completed:** Phases 1–11, Docker (8), P2 continue (13), offers/search (14), discovery/i18n (15), media/returns (16), trust/dashboard (17), FAQ/newsletter (18)
+- **Next:** Remaining backlog items in `.doc/12-backlog.md` (Scout, Stripe live keys in production, multi-currency, admin 2FA)
+- **Tests:** Full suite green in Docker (36+)
