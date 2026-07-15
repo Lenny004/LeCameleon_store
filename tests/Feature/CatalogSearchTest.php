@@ -20,12 +20,12 @@ class CatalogSearchTest extends TestCase
 
         Product::factory()->create([
             'name' => 'Denim Overalls',
-            'description' => 'Wide-leg denim piece without a jacket cut.',
+            'description' => 'Wide-leg denim piece with adjustable straps.',
         ]);
 
         Product::factory()->create([
-            'name' => 'Leather Jacket',
-            'description' => 'Black biker jacket, no denim.',
+            'name' => 'Leather Biker Coat',
+            'description' => 'Black leather outerwear, no denim.',
         ]);
 
         $response = $this->get(route('search', ['q' => 'denim jacket']));
@@ -33,7 +33,7 @@ class CatalogSearchTest extends TestCase
         $response->assertOk();
         $response->assertSee($match->name, false);
         $response->assertDontSee('Denim Overalls', false);
-        $response->assertDontSee('Leather Jacket', false);
+        $response->assertDontSee('Leather Biker Coat', false);
     }
 
     public function test_empty_search_query_lists_all_published_products(): void
