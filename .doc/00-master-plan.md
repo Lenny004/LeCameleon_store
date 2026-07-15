@@ -76,5 +76,7 @@ LeCameleon_Store/
 ## 6. Status
 
 - **Started:** 2026-07-14
-- **Current phase:** 0 → 1
-- **Branch:** `develop` (to be created)
+- **Updated:** 2026-07-15
+- **Branch:** `develop`
+- **Completed:** Docker stack (phase 8), database (1), backend (3), storefront + admin UI (4–5)
+- **Next:** Phase 6 enterprise polish + Phase 7 QA against Docker/Postgres
