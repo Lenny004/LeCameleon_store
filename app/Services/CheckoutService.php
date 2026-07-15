@@ -42,68 +42,71 @@ class CheckoutService
         }
 
         return DB::transaction(function () use ($cart, $user, $billingAddress, $shippingAddress, $couponCode, $notes) {
-            foreach ($cart->items as $item) {
-                $sellable = $item->product->quantity_available - $item->product->quantity_reserved;
+            // Validate sellable stock before creating the order.
+            foreach ($cart->items as $cartItem) {
+                $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
 
-                if ($item->quantity > $sellable) {
+                if ($cartItem->quantity > $sellableQuantity) {
                     throw ValidationException::withMessages([
-                        'cart' => "Insufficient stock for {$item->product->name}.",
+                        'cart' => "Insufficient stock for {$cartItem->product->name}.",
                     ]);
                 }
-
-                $this->inventoryService->reserve(
-                    $item->product,
-                    $item->quantity,
-                    $user,
-                    'Checkout reservation',
-                    Order::class,
-                    null,
-                );
             }
 
-            $subtotal = $this->cartService->subtotal($cart);
-            $coupon = $this->resolveCoupon($couponCode, $subtotal);
-            $discount = $this->calculateDiscount($coupon, $subtotal);
-            $shipping = (float) config('store.shipping_flat_rate', 0);
+            $orderSubtotal = $this->cartService->subtotal($cart);
+            $appliedCoupon = $this->resolveCoupon($couponCode, $orderSubtotal);
+            $discountTotal = $this->calculateDiscount($appliedCoupon, $orderSubtotal);
+            $shippingTotal = (float) config('store.shipping_flat_rate', 0);
             $taxRate = (float) config('store.tax_rate', 0);
-            $taxable = max($subtotal - $discount, 0);
-            $tax = round($taxable * $taxRate, 2);
-            $grandTotal = max($subtotal - $discount, 0) + $shipping + $tax;
+            $taxableAmount = max($orderSubtotal - $discountTotal, 0);
+            $taxTotal = round($taxableAmount * $taxRate, 2);
+            $grandTotal = $taxableAmount + $shippingTotal + $taxTotal;
 
+            // Create the order first so reservations can reference it.
             $order = Order::query()->create([
                 'user_id' => $user->id,
                 'number' => $this->generateOrderNumber(),
                 'status' => OrderStatus::Pending,
                 'currency' => config('store.currency', 'USD'),
-                'subtotal' => $subtotal,
-                'discount_total' => $discount,
-                'shipping_total' => $shipping,
-                'tax_total' => $tax,
+                'subtotal' => $orderSubtotal,
+                'discount_total' => $discountTotal,
+                'shipping_total' => $shippingTotal,
+                'tax_total' => $taxTotal,
                 'grand_total' => $grandTotal,
-                'coupon_code' => $coupon?->code,
+                'coupon_code' => $appliedCoupon?->code,
                 'billing_address' => $billingAddress,
                 'shipping_address' => $shippingAddress,
                 'notes' => $notes,
                 'placed_at' => now(),
             ]);
 
-            foreach ($cart->items as $item) {
+            foreach ($cart->items as $cartItem) {
                 $order->items()->create([
-                    'product_id' => $item->product_id,
-                    'name' => $item->product->name,
-                    'sku' => $item->product->sku,
-                    'quantity' => $item->quantity,
-                    'unit_price' => $item->unit_price,
-                    'line_total' => $item->quantity * $item->unit_price,
+                    'product_id' => $cartItem->product_id,
+                    'name' => $cartItem->product->name,
+                    'sku' => $cartItem->product->sku,
+                    'quantity' => $cartItem->quantity,
+                    'unit_price' => $cartItem->unit_price,
+                    'line_total' => $cartItem->quantity * $cartItem->unit_price,
                     'meta' => [
-                        'slug' => $item->product->slug,
-                        'condition_grade' => $item->product->condition_grade?->value,
+                        'slug' => $cartItem->product->slug,
+                        'condition_grade' => $cartItem->product->condition_grade?->value,
                     ],
                 ]);
+
+                // Hold stock against this order to prevent overselling unique pieces.
+                $this->inventoryService->reserve(
+                    $cartItem->product,
+                    $cartItem->quantity,
+                    $user,
+                    'Checkout reservation for '.$order->number,
+                    Order::class,
+                    (string) $order->id,
+                );
             }
 
-            if ($coupon) {
-                $coupon->increment('used_count');
+            if ($appliedCoupon) {
+                $appliedCoupon->increment('used_count');
             }
 
             $this->cartService->clear($cart);
