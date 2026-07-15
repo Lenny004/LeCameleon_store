@@ -26,8 +26,8 @@
                         @if (Route::has('account.index'))
                             <li><a href="{{ route('account.index') }}" class="footer__link">Mi perfil</a></li>
                         @endif
-                        @if (Route::has('account.orders'))
-                            <li><a href="{{ route('account.orders') }}" class="footer__link">Mis pedidos</a></li>
+                        @if (Route::has('account.orders.index'))
+                            <li><a href="{{ route('account.orders.index') }}" class="footer__link">Mis pedidos</a></li>
                         @endif
                     @else
                         @if (Route::has('login'))

@@ -28,13 +28,13 @@ class CheckoutController extends Controller
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
 
         if ($cart->items->isEmpty()) {
-            return redirect()->route('store.cart.index')->with('error', 'Your cart is empty.');
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
         try {
             $this->checkoutService->validateCartForCheckout($cart);
         } catch (ValidationException $e) {
-            return redirect()->route('store.cart.index')->withErrors($e->errors());
+            return redirect()->route('cart.index')->withErrors($e->errors());
         }
 
         return view('store.checkout.index', [
@@ -60,7 +60,7 @@ class CheckoutController extends Controller
         );
 
         return redirect()
-            ->route('store.checkout.success', $order)
+            ->route('checkout.success', $order)
             ->with('success', 'Order placed successfully.');
     }
 

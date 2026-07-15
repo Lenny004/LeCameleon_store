@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         $this->mergeGuestData($request);
 
-        return redirect()->intended(route('store.home'));
+        return redirect()->intended(route('home'));
     }
 
     public function showRegister(): View
@@ -60,7 +60,7 @@ class AuthController extends Controller
 
         $this->mergeGuestData($request);
 
-        return redirect()->route('store.home')->with('success', 'Welcome to Le Cameleon.');
+        return redirect()->route('home')->with('success', 'Welcome to Le Cameleon.');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -69,7 +69,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('store.home');
+        return redirect()->route('home');
     }
 
     private function mergeGuestData(Request $request): void
