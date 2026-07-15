@@ -221,6 +221,22 @@
             </section>
 
             <section class="checkout-section">
+                <h2 class="checkout-section__title">Método de pago</h2>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="radio" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }}>
+                        Pago manual (transferencia / efectivo)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="radio" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }}>
+                        Tarjeta (Stripe)
+                    </label>
+                </div>
+            </section>
+
+            <section class="checkout-section">
                 <h2 class="checkout-section__title">Cupón y notas</h2>
                 <div class="form-group">
                     <label class="form-label" for="coupon_code">Código de cupón</label>

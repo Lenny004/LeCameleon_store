@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ReturnRequestStatus;
 use App\Http\Controllers\Controller;
 use App\Models\ReturnRequest;
+use App\Support\RecordsActivity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -28,6 +29,8 @@ class ReturnRequestController extends Controller
             'admin_notes' => $request->input('admin_notes'),
         ]);
 
+        RecordsActivity::log('return.approved', $returnRequest);
+
         return back()->with('success', 'Return request approved.');
     }
 
@@ -37,6 +40,8 @@ class ReturnRequestController extends Controller
             'status' => ReturnRequestStatus::Denied,
             'admin_notes' => $request->input('admin_notes'),
         ]);
+
+        RecordsActivity::log('return.denied', $returnRequest);
 
         return back()->with('success', 'Return request denied.');
     }

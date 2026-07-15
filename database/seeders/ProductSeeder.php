@@ -79,6 +79,8 @@ class ProductSeeder extends Seeder
                 'material' => 'Lambskin Leather',
                 'is_unique_piece' => true,
                 'quantity_available' => 1,
+                'is_authenticated' => true,
+                'authenticity_notes' => 'Serial-matched CC turn-lock and hologram sticker reviewed in-house; lambskin quilting consistent with 1990s production.',
                 'attributes' => ['authenticity' => 'Verified', 'hardware' => 'Gold-tone CC turn-lock'],
             ],
             [
@@ -97,6 +99,8 @@ class ProductSeeder extends Seeder
                 'material' => 'Silk Twill',
                 'is_unique_piece' => true,
                 'quantity_available' => 1,
+                'is_authenticated' => true,
+                'authenticity_notes' => 'Hand-rolled hem, artist signature, and care label match Hermès 1980s silk carré references.',
                 'attributes' => ['artist' => 'Philippe Ledoux', 'hem' => 'Hand-rolled'],
             ],
             [
@@ -249,7 +253,11 @@ class ProductSeeder extends Seeder
             $attributes = $data['attributes'];
             $brandSlug = $data['brand_slug'];
             $categorySlug = $data['category_slug'];
-            unset($data['attributes'], $data['brand_slug'], $data['category_slug']);
+            $isAuthenticated = $data['is_authenticated'] ?? false;
+            $authenticityNotes = $data['authenticity_notes'] ?? null;
+            unset($data['attributes'], $data['brand_slug'], $data['category_slug'], $data['is_authenticated'], $data['authenticity_notes']);
+
+            $adminUser = User::query()->where('email', 'admin@lecameleon.store')->first();
 
             $product = Product::query()->create([
                 ...$data,
@@ -261,6 +269,10 @@ class ProductSeeder extends Seeder
                 'low_stock_threshold' => 1,
                 'published_at' => now()->subDays(rand(1, 30)),
                 'measurements' => $data['measurements'] ?? null,
+                'is_authenticated' => $isAuthenticated,
+                'authenticity_notes' => $isAuthenticated ? $authenticityNotes : null,
+                'authenticated_at' => $isAuthenticated ? now()->subDays(rand(1, 14)) : null,
+                'authenticated_by' => $isAuthenticated ? $adminUser?->id : null,
             ]);
 
             $primaryImagePath = $index === 10

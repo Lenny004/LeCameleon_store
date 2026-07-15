@@ -27,4 +27,7 @@ return [
     // Minutes before unpaid pending order reservations are released.
     'reservation_ttl_minutes' => (int) env('STORE_RESERVATION_TTL_MINUTES', 30),
 
+    // Hours of cart inactivity before sending an abandoned-cart reminder email.
+    'abandoned_cart_hours' => (int) env('STORE_ABANDONED_CART_HOURS', 24),
+
 ];

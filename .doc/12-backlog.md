@@ -23,10 +23,10 @@ Features intentionally deferred after Phases 6–11. Revisit when the store is s
 ## Nice-to-have polish
 
 - Product image CDN / image variants (thumb, webp)
-- Abandoned cart emails
-- Admin activity audit log
+- ~~Abandoned cart emails~~ ✅ (daily job, `abandoned_cart_hours` config)
+- ~~Admin activity audit log~~ ✅ (`/admin/activity`, `RecordsActivity`)
 - Two-factor auth for admin
-- Rate limiting on stock-alert and review endpoints (beyond defaults)
+- ~~Rate limiting on stock-alert and review endpoints (beyond defaults)~~ ✅ (`throttle` on stock-alert, reviews, checkout)
 
 ## Suggested next epic after go-live
 

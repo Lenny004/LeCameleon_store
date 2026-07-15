@@ -75,10 +75,19 @@
             @if ($condition)
                 <span class="badge badge--accent">{{ $condition }}</span>
             @endif
+            @if ($product->is_authenticated)
+                <span class="badge badge--success">Pieza verificada</span>
+            @endif
             @if ($product->is_unique_piece || $stock <= 1)
                 <span class="badge badge--warning">Pieza única</span>
             @endif
         </div>
+
+        @if ($product->is_authenticated && $product->authenticity_notes)
+            <p class="product-info__authenticity text-muted" style="font-size:0.9rem;margin-bottom:var(--space-md);">
+                {{ \Illuminate\Support\Str::limit($product->authenticity_notes, 200) }}
+            </p>
+        @endif
 
         <p class="product-info__description">{{ $product->description ?? $product->short_description }}</p>
 

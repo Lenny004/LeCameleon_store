@@ -32,6 +32,7 @@ class ProductRequest extends FormRequest
     {
         $this->merge([
             'is_unique_piece' => $this->boolean('is_unique_piece'),
+            'is_authenticated' => $this->boolean('is_authenticated'),
         ]);
 
         $measurements = [];
@@ -77,6 +78,8 @@ class ProductRequest extends FormRequest
             'measurements' => ['nullable', 'array'],
             'measurements.*' => ['numeric', 'min:0'],
             'is_unique_piece' => ['sometimes', 'boolean'],
+            'is_authenticated' => ['sometimes', 'boolean'],
+            'authenticity_notes' => ['nullable', 'string', 'max:2000'],
             'quantity_available' => ['required', 'integer', 'min:0'],
             'low_stock_threshold' => ['sometimes', 'integer', 'min:0'],
             'meta_title' => ['nullable', 'string', 'max:255'],

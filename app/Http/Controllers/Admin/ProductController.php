@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Support\RecordsActivity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -35,9 +36,11 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-        $product = Product::query()->create($request->validated());
+        $product = Product::query()->create($this->productPayload($request));
 
         $this->storeUploadedImages($product, $request->file('images', []));
+
+        RecordsActivity::log('product.created', $product);
 
         return redirect()
             ->route('admin.products.show', $product)
@@ -62,13 +65,15 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
-        $product->update($request->validated());
+        $product->update($this->productPayload($request, $product));
 
         if ($request->boolean('manage_images')) {
             $this->syncExistingImages($product, $request->input('keep_image_ids', []));
         }
 
         $this->storeUploadedImages($product, $request->file('images', []));
+
+        RecordsActivity::log('product.updated', $product);
 
         return redirect()
             ->route('admin.products.show', $product)
@@ -78,11 +83,38 @@ class ProductController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         $this->authorize('delete', $product);
+
+        RecordsActivity::log('product.deleted', $product, [
+            'name' => $product->name,
+            'slug' => $product->slug,
+        ]);
+
         $product->delete();
 
         return redirect()
             ->route('admin.products.index')
             ->with('success', 'Product deleted.');
+    }
+
+    /**
+     * Build validated product attributes, including provenance audit fields.
+     *
+     * @return array<string, mixed>
+     */
+    private function productPayload(ProductRequest $request, ?Product $product = null): array
+    {
+        $data = $request->validated();
+
+        if ($request->boolean('is_authenticated')) {
+            $data['authenticated_at'] = $product?->authenticated_at ?? now();
+            $data['authenticated_by'] = $product?->authenticated_by ?? $request->user()?->id;
+        } else {
+            $data['authenticated_at'] = null;
+            $data['authenticated_by'] = null;
+            $data['authenticity_notes'] = null;
+        }
+
+        return $data;
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Enums\ShipmentStatus;
 use App\Services\OrderService;
 use App\Services\PaymentService;
+use App\Support\RecordsActivity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -59,6 +60,8 @@ class OrderController extends Controller
         $this->authorize('update', $order);
 
         $this->paymentService->capturePayment($order, request()->user());
+
+        RecordsActivity::log('payment.captured', $order);
 
         return back()->with('success', 'Payment captured and order marked as paid.');
     }

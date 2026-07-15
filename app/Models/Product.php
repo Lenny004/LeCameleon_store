@@ -40,6 +40,10 @@ class Product extends Model
         'color',
         'material',
         'measurements',
+        'is_authenticated',
+        'authenticity_notes',
+        'authenticated_at',
+        'authenticated_by',
         'is_unique_piece',
         'quantity_available',
         'quantity_reserved',
@@ -64,7 +68,14 @@ class Product extends Model
             'low_stock_threshold' => 'integer',
             'published_at' => 'datetime',
             'measurements' => 'array',
+            'is_authenticated' => 'boolean',
+            'authenticated_at' => 'datetime',
         ];
+    }
+
+    public function authenticator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'authenticated_by');
     }
 
     public function brand(): BelongsTo

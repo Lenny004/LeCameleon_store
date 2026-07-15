@@ -45,6 +45,7 @@ class CheckoutRequest extends FormRequest
             'shipping_address.phone' => ['nullable', 'string', 'max:30'],
             'coupon_code' => ['nullable', 'string', 'max:50'],
             'notes' => ['nullable', 'string', 'max:1000'],
+            'payment_method' => ['nullable', 'string', 'in:manual,stripe'],
         ];
     }
 }

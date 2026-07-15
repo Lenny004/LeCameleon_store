@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -46,4 +47,6 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
 
         Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
+        Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
     });

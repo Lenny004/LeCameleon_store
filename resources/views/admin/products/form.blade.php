@@ -208,6 +208,30 @@
     </div>
 
     <div class="card">
+        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Authenticity</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+            <div class="form-group">
+                <label class="form-label" for="is_authenticated">
+                    <input type="checkbox" id="is_authenticated" name="is_authenticated" value="1" @checked(old('is_authenticated', $product->is_authenticated ?? false))>
+                    Verified piece (provenance checked)
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="authenticity_notes">Authenticity notes</label>
+                <textarea
+                    id="authenticity_notes"
+                    name="authenticity_notes"
+                    class="form-textarea"
+                    rows="3"
+                    maxlength="2000"
+                    placeholder="Serial numbers, expert review, documentation summary…"
+                >{{ old('authenticity_notes', $product->authenticity_notes ?? '') }}</textarea>
+                <p class="text-muted" style="margin-top:var(--space-xs);font-size:0.85rem;">Shown on the product page when verified.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
         <h2 class="card__title" style="margin-bottom:var(--space-lg);">Images</h2>
 
         @if ($isEditing && $product->images->isNotEmpty())

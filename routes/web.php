@@ -17,7 +17,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-Route::post('/shop/{product}/stock-alert', [StockAlertController::class, 'store'])->name('shop.stock-alert');
+Route::post('/shop/{product}/stock-alert', [StockAlertController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('shop.stock-alert');
 Route::get('/shop/{slug}', [ShopController::class, 'show'])->name('shop.show');
 Route::get('/search', [ShopController::class, 'search'])->name('search');
 
@@ -43,13 +45,17 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::post('/checkout', [CheckoutController::class, 'store'])
+    ->middleware('throttle:20,1')
+    ->name('checkout.store');
 Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/returns', ReturnsController::class)->name('returns');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/shop/{product}/reviews', [ReviewController::class, 'store'])->name('shop.reviews.store');
+    Route::post('/shop/{product}/reviews', [ReviewController::class, 'store'])
+        ->middleware('throttle:10,1')
+        ->name('shop.reviews.store');
 
     Route::get('/account', [AccountController::class, 'profile'])->name('account.index');
     Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');
