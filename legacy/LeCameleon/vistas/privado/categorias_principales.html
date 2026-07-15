@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/privado.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!--Encabezado del sitio web-->
+    <header>
+    </header>
+    <!--Menú de navegación del sitio web-->
+    <div class="navbar-fixed" id="menu">
+    </div>
+    <!--Menú para móviles-->
+    <ul class="sidenav" id="mobile">
+    </ul>
+    <!--Contenido del sitio web-->
+    <main>
+        <!--Tarjetas de Categorias-->
+        <div class="container">
+            <div class="row" id="titulo_buscador">
+                <div class="col s8 m8 l8 xl8">
+                    <!--Titulo de Categorias-->
+                    <h3 class="titulo_administrar">Administrar Categorias Principales</h3>
+                </div>
+                <div class="col s4 m4 l4 xl4">
+                    <!-- Boton Modal Agregar -->
+                    <a onclick="openCreate()" class="waves-effect waves-light btn modal-trigger boton_verde">Agregar
+                        Categoría +</a>
+                </div>
+                <!-- Modal Agregar-->
+                <div id="modal_agregar_categoria" class="modal">
+                    <div class="modal-content">
+                        <form enctype="multipart/form-data" method="post" id="agregar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Agregar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivo" name="archivo" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input id="categoria_agregar" name="categoria_agregar" type="text" class="validate" required>
+                                    <label class="active" for="categoria_agregar">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_agregar_categoria">
+                                    <button type="submit" class="btn boton_verde">Agregar
+                                        Categoría</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Modificar -->
+                <div id="editar_modal_categoria" class="modal">
+                    <div class="modal-content">
+                        <form enctype="multipart/form-data" method="post" id="modificar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Modificar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivop" name="archivop" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="nombrearchivo" name="nombrearchivo" class="file-path validate"
+                                                type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="categoria_modificar" name="categoria_modificar" type="text"
+                                        class="validate" required>
+                                    <label class="active" for="categoria_modificar">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer boton_modificar_categoria">
+                                    <button type="submit" class="waves-effect waves-light btn blue">Modificar
+                                        Categoría</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Eliminar -->
+                <div id="eliminar_modal_categoria" class="modal">
+                    <div class="modal-content">
+                        <form enctype="multipart/form-data" method="post" id="eliminar_forms">
+                            <div id="titulo_modal2">
+                                <div>
+                                    <h4>Eliminar Categoria</h4>
+                                </div>
+                                <div>
+                                    <a class="modal-close waves-effect waves-red btn-flat red darken-2"><img
+                                            src="../../recursos/iconografia/cerrar.png" alt="cerrar"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>imagen</span>
+                                            <input id="archivoe" name="archivoe" type="file" required disabled>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="namefile" name="namefile" class="file-path validate" type="text"
+                                                required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col col s8 m8 l8 xl8">
+                                    <input class="hide" type="number" id="ide" name="ide">
+                                    <input id="categoria_eliminar" name="categoria_eliminar" type="text"
+                                        class="validate" required disabled>
+                                    <label class="active" for="categoria_eliminar">Nombre Categoria</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="red btn">Eliminar
+                                        Categoría</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Table-->
+            <div class="col s12 m12 l12 xl12" id="tabla">
+                <table class="centered striped teal darken-3 highlight responsive-table">
+                    <!--Columnas de la tabla-->
+                    <thead>
+                        <tr>
+                            <th>imagen Categoria</th>
+                            <th>Nombre Categoria</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <!--Filas de la tabla con sus elementos-->
+                    <!--Se crea el ID existencias para que este muestre los datos de la tabla que estan en la bd-->
+                    <tbody id="tbcategorias"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie">
+            <div>
+            </div>
+            <div id="texto_terminos">
+                <div class="terminos">
+                    <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                </div>
+                <div>
+                    <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+                </div>
+            </div>
+            <div id="sitio_privado">
+                <a href="../../vistas/publico/index.html">Ir a Sitio Web</a>
+                <a href="../../vistas/publico/index.html"><img src="../../recursos/iconografia/sitio_publico.png"
+                        alt="web" height="45"></a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/online.js"></script>
+    <script type="text/javascript" src="../../controladores/privado/administrar_categoria_principales.js"></script>
+</body>
+
+</html>

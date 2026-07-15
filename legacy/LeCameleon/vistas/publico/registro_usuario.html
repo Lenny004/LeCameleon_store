@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+    <!--Nombre de la página-->
+    <title>Le Caméléon</title>
+    <meta charset="UTF-8">
+    <!--Importamos el css de "estilo" para modificar los contenidos de la página principal-->
+    <link type="text/css" rel="stylesheet" href="../../css/publico.css" />
+    <!--Importamos el css para manejar la fuente del sitio web-->
+    <link type="text/css" rel="stylesheet" href="../../css/fuente.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <!--Importar un icono para el sitio web-->
+    <link rel="icon" type="icon/png" href="../../recursos/img/logo_icon.png">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Nombre de la página-->
+<title>Le Caméléon Crear Usuario</title>
+
+<body>
+    <!--Contenido del sitio web-->
+    <main>
+        <div class="container">
+            <div class="row" id="formulario_registrar">
+                <div class="col s12 m6 l6 xl6" id="logo_registrar">
+                    <a href="dashboard.html" class="tooltipped" data-tooltip="Volver a inicio"><img src="../../recursos/img/logo_registro.png" alt="logo"></a>
+                </div>
+                <div class="col s12 m6 l6 xl6">
+                    <div class="row">
+                        <h5>Crear Usuario</h5>
+                        <li class="divider"></li>
+                        <form id="registro-form" method="post">
+                            <div class="row" id="datos">
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="nombre" name="nombre" type="text" class="validate" data-length="50" maxlength="50" required>
+                                    <label for="nombre">Nombres:</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="apellidos" name="apellidos" type="text" class="validate" data-length="50" maxlength="50" required>
+                                    <label for="apellidos">Apellidos:</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="dui" name="dui" type="text" placeholder="00000000-0" data-length="10" maxlength="10" required>
+                                    <label for="dui">DUI:</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6 xl6 offset+s6">
+                                    <input id="telefono" name="telefono" type="text" class="validate" data-length="9" size="9" placeholder="0000-0000" maxlength="9" required>
+                                    <label for="telefono">Teléfono:</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12 xl12">
+                                    <input id="email" name="email" type="email" class="validate" data-length="75" size="75" maxlength="75" required>
+                                    <label for="email">Correo:</label>
+                                    <span class="helper-text" data-error="" data-success=""><u>Necesario para Ingresar y para enviar Código de acceso</u></span>
+                                </div>
+                                <div class="input-field col s10 m10 l10 xl10" id="contra">
+                                    <input id="password" name="password" type="password" class="validate" data-length="60" size="60" maxlength="60" required>
+                                    <label for="password">Contraseña:</label>
+                                </div>
+                                <div class="input-field col s2 m2 l2 xl2">
+                                    <a onclick="mostrarContrasena()"><img src="../../recursos/iconografia/ocultar.png" id="ocultar" alt="mostrar"></a>
+                                </div>
+                                <div class="input-field col s10 m10 l10 xl10" id="contra">
+                                    <input id="confirmar_contra" name="confirmar_contra" type="password" class="validate" data-length="60" size="60" maxlength="60" required>
+                                    <label for="confirmar_contra">Confirmar Contraseña:</label>
+                                </div>
+                                <div class="input-field col s2 m2 l2 xl2">
+                                    <a onclick="mostrarContrasena2()"><img src="../../recursos/iconografia/ocultar.png" id="ocultar2" alt="mostrar"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" id="boton_registrar">
+                                    <button class="btn-small waves-effect waves-orange">Registrarse</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--El pie de la página donde colocamos los derechos reservados, algún banner, etc.-->
+    <footer>
+        <!--Terminos y condiciones-->
+        <div id="pie_login">
+            <div>
+            </div>
+            <div class="terminos_login">
+                <p>TÉRMINOS Y CONDICIONES DEL SITIO</p>
+                <p>Copyright &copy; 2022 Le Caméléon. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript al final del cuerpo para optimizar la carga del sitio-->
+    <script type="text/javascript" src="../../recursos/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controladores/componentes.js"></script>
+    <script type="text/javascript" src="../../controladores/publico/registro_usuario.js"></script>
+</body>
+
+</html>
