@@ -30,6 +30,15 @@ Then open:
 | Vite HMR | http://localhost:5173 |
 | Postgres (host) | `localhost:5433` |
 
+## What's new (develop)
+
+Recent storefront and admin additions on `develop`:
+
+- **Make an offer** — buyers propose a price on published in-stock products; staff accept, decline, or counter in admin.
+- **Authenticity** — admin can mark products as verified (`is_authenticated`) with notes; PDP shows a verified badge.
+- **Stripe webhook** — `POST /api/webhooks/stripe` captures pending payments when `STRIPE_WEBHOOK_SECRET` is set (or in local dev without secret).
+- **Saved searches** — signed-in customers save catalog filter sets from `/shop` and rerun them from account.
+
 ### Demo accounts (after seed)
 
 | Role | Email | Password |

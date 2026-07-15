@@ -30,4 +30,7 @@ return [
     // Hours of cart inactivity before sending an abandoned-cart reminder email.
     'abandoned_cart_hours' => (int) env('STORE_ABANDONED_CART_HOURS', 24),
 
+    // Public-disk path used when a product image is missing or not found.
+    'product_image_placeholder' => 'placeholders/vintage-product.jpg',
+
 ];

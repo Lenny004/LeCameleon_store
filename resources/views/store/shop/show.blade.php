@@ -16,12 +16,11 @@
 
 @section('content')
 @php
+    use App\Models\ProductImage;
+
     $images = collect($product->images ?? [])
-        ->map(fn ($img) => is_string($img) ? $img : ($img->path ?? null))
+        ->map(fn ($img) => $img instanceof ProductImage ? $img->url() : ProductImage::urlFor(is_string($img) ? $img : ($img->path ?? null)))
         ->filter()
-        ->map(fn ($path) => str_starts_with($path, 'http') || str_starts_with($path, '/')
-            ? $path
-            : asset('storage/'.$path))
         ->values()
         ->all();
 

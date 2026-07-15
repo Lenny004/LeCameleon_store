@@ -4,6 +4,8 @@
 ])
 
 @php
+    use App\Models\ProductImage;
+
     $get = static function ($product, string $key, mixed $default = null): mixed {
         if (is_array($product)) {
             return $product[$key] ?? $default;
@@ -16,6 +18,36 @@
         return $default;
     };
 
+    $resolveImageUrl = static function ($product) use ($get): ?string {
+        if (is_object($product) && method_exists($product, 'images') && $product->relationLoaded('images')) {
+            $first = $product->images->first();
+
+            if ($first instanceof ProductImage) {
+                return $first->url();
+            }
+        }
+
+        $firstImage = data_get($product, 'images.0');
+
+        if ($firstImage instanceof ProductImage) {
+            return $firstImage->url();
+        }
+
+        $path = data_get($product, 'images.0.path') ?? data_get($product, 'primaryImage.path');
+
+        if (is_string($path) && $path !== '') {
+            return ProductImage::urlFor($path);
+        }
+
+        $direct = $get($product, 'image') ?? $get($product, 'thumbnail');
+
+        if (is_string($direct) && $direct !== '') {
+            return $direct;
+        }
+
+        return null;
+    };
+
     $slug = $get($product, 'slug', '#');
     $name = $get($product, 'name', 'Producto');
     $price = $get($product, 'price', 0);
@@ -24,10 +56,7 @@
     if (is_object($condition) && property_exists($condition, 'value')) {
         $condition = $condition->value;
     }
-    $image = $get($product, 'image')
-        ?? $get($product, 'thumbnail')
-        ?? data_get($product, 'images.0.path')
-        ?? data_get($product, 'primaryImage.path');
+    $imageUrl = $resolveImageUrl($product);
     $productId = $get($product, 'id', '');
     $url = Route::has('shop.show') && $slug !== '#' ? route('shop.show', $slug) : '#';
 @endphp
@@ -35,8 +64,8 @@
 <article class="product-card">
     <a href="{{ $url }}" class="product-card__link">
         <div class="product-card__media">
-            @if ($image)
-                <img src="{{ $image }}" alt="{{ $name }}" class="product-card__image" loading="lazy">
+            @if ($imageUrl)
+                <img src="{{ $imageUrl }}" alt="{{ $name }}" class="product-card__image" loading="lazy">
             @else
                 <div class="product-card__image" style="background: var(--secondary);" aria-hidden="true"></div>
             @endif
