@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DeliveryWarningController;
+use App\Http\Controllers\Admin\DispatchScheduleController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\LogisticsCompanyController;
 use App\Http\Controllers\Admin\LogisticsVehicleController;
@@ -17,6 +19,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReturnRequestController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ShippingZoneController;
+use App\Http\Controllers\Admin\SvMunicipalityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,5 +72,26 @@ Route::middleware(['auth', 'role:admin|staff'])
             Route::resource('companies', LogisticsCompanyController::class);
             Route::resource('workers', LogisticsWorkerController::class);
             Route::resource('vehicles', LogisticsVehicleController::class);
+
+            Route::get('municipalities', [SvMunicipalityController::class, 'index'])->name('municipalities.index');
+            Route::get('municipalities/{svMunicipality}/edit', [SvMunicipalityController::class, 'edit'])->name('municipalities.edit');
+            Route::put('municipalities/{svMunicipality}', [SvMunicipalityController::class, 'update'])->name('municipalities.update');
+
+            Route::get('zones', [ShippingZoneController::class, 'index'])->name('zones.index');
+            Route::post('zones', [ShippingZoneController::class, 'store'])->name('zones.store');
+            Route::put('zones/{zone}', [ShippingZoneController::class, 'update'])->name('zones.update');
+            Route::delete('zones/{zone}', [ShippingZoneController::class, 'destroy'])->name('zones.destroy');
+            Route::get('zones/rates-matrix', [ShippingZoneController::class, 'ratesMatrix'])->name('zones.rates-matrix');
+            Route::put('zones/rates-matrix', [ShippingZoneController::class, 'updateRatesMatrix'])->name('zones.rates-matrix.update');
+
+            Route::get('dispatch', [DispatchScheduleController::class, 'index'])->name('dispatch.index');
+            Route::post('dispatch', [DispatchScheduleController::class, 'store'])->name('dispatch.store');
+            Route::put('dispatch/{schedule}', [DispatchScheduleController::class, 'update'])->name('dispatch.update');
+            Route::delete('dispatch/{schedule}', [DispatchScheduleController::class, 'destroy'])->name('dispatch.destroy');
+
+            Route::get('warnings', [DeliveryWarningController::class, 'index'])->name('warnings.index');
+            Route::post('warnings', [DeliveryWarningController::class, 'store'])->name('warnings.store');
+            Route::put('warnings/{warning}', [DeliveryWarningController::class, 'update'])->name('warnings.update');
+            Route::delete('warnings/{warning}', [DeliveryWarningController::class, 'destroy'])->name('warnings.destroy');
         });
     });
