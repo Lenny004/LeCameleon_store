@@ -1,6 +1,6 @@
 # Phase 1 — Database Architecture (PostgreSQL / Supabase)
 
-**Status:** Planned → Executing  
+**Status:** Completed  
 **Owner:** Database Architect  
 **Depends on:** Master plan
 
@@ -32,7 +32,6 @@ Unlike mass fashion, vintage inventory is often:
 | `products` | Sellable items (base) |
 | `product_images` | Gallery |
 | `product_attributes` | Flexible attrs (era, material, size, color) |
-| `inventory_items` | Stock units / SKUs with condition & qty |
 | `inventory_movements` | Audit trail (in/out/reserve/adjust) |
 | `carts` / `cart_items` | Guest + user carts |
 | `orders` / `order_items` | Checkout snapshots |
@@ -55,6 +54,9 @@ Unlike mass fashion, vintage inventory is often:
 - `PaymentStatus`: pending, authorized, captured, failed, refunded
 - `InventoryMovementType`: stock_in, stock_out, reserve, release, adjust, return
 - `RelationType`: related, upsell, cross_sell, similar
+- `CouponType`: percent, fixed
+- `AddressType`: shipping, billing
+- `ShipmentStatus`: pending, shipped, in_transit, delivered, returned, failed
 
 ## Supabase considerations
 
@@ -65,13 +67,22 @@ Unlike mass fashion, vintage inventory is often:
 - RLS policies deferred (app-layer auth first); document hooks in init.sql comments
 - Connection via `DATABASE_URL` / discrete env vars
 
-## Deliverables
+## Deliverables (completed)
 
-1. `database/schema/init.sql` — full DDL + comments
-2. Laravel migrations matching the schema
-3. Eloquent models with relationships & casts
-4. PHP enums under `app/Enums`
-5. Factories + seeders for demo vintage catalog
+1. **`database/schema/init.sql`** — Full PostgreSQL DDL with comments (source of truth)
+2. **Laravel migrations** — 20 migration files (`000000` users rewrite + `000003`–`000022` domain tables)
+3. **Eloquent models** — 22 models under `app/Models/` with relationships, casts, and PHPDoc
+4. **PHP enums** — 11 backed string enums under `app/Enums/`
+5. **Factories** — `UserFactory`, `BrandFactory`, `CategoryFactory`, `ProductFactory`, `OrderFactory`
+6. **Seeders** — `UserSeeder`, `BrandSeeder`, `CategorySeeder`, `ProductSeeder`, `CouponSeeder`, `SettingSeeder`, `DatabaseSeeder`
+
+### Demo seed data
+
+- Admin: `admin@lecameleon.store` / `password`
+- Staff: `staff@lecameleon.store` / `password`
+- Customer: `customer@lecameleon.store` / `password`
+- 6 brands, 7 categories (nested), 12 vintage products with images and attributes
+- 3 coupons, 4 store settings
 
 ## Out of scope (phase 1)
 
