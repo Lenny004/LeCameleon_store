@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class);
     }
 
+    public function savedSearches(): HasMany
+    {
+        return $this->hasMany(SavedSearch::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::Admin;

@@ -61,6 +61,29 @@ class PaymentService
         });
     }
 
+    /**
+     * Record a manual refund when an order had a captured payment.
+     */
+    public function recordRefund(Order $order, float $amount, string $note): ?Payment
+    {
+        $hasCaptured = $order->payments()
+            ->where('status', PaymentStatus::Captured)
+            ->exists();
+
+        if (! $hasCaptured) {
+            return null;
+        }
+
+        return Payment::query()->create([
+            'order_id' => $order->id,
+            'provider' => 'manual',
+            'status' => PaymentStatus::Refunded,
+            'amount' => $amount,
+            'transaction_reference' => 'refund-'.now()->timestamp,
+            'payload' => ['note' => $note],
+        ]);
+    }
+
     public function markFailed(Order $order, ?string $reason = null): Payment
     {
         $payment = $order->payments()

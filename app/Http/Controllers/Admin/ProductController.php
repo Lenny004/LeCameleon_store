@@ -136,6 +136,8 @@ class ProductController extends Controller
 
             $path = $image->store("products/{$product->id}", 'public');
 
+            $this->maybeCreateGdThumbnail($path);
+
             $product->images()->create([
                 'path' => $path,
                 'alt' => $product->name,
@@ -172,6 +174,75 @@ class ProductController extends Controller
                 ->orderBy('sort_order')
                 ->first()
                 ?->update(['is_primary' => true]);
+        }
+    }
+
+    /**
+     * Optional native GD thumbnail alongside the original (not stored in DB).
+     */
+    private function maybeCreateGdThumbnail(string $storedPath): void
+    {
+        if (! extension_loaded('gd')) {
+            return;
+        }
+
+        $disk = Storage::disk('public');
+
+        if (! $disk->exists($storedPath)) {
+            return;
+        }
+
+        $fullPath = $disk->path($storedPath);
+        $info = @getimagesize($fullPath);
+
+        if ($info === false) {
+            return;
+        }
+
+        [$width, $height, $type] = $info;
+
+        $source = match ($type) {
+            IMAGETYPE_JPEG => @imagecreatefromjpeg($fullPath),
+            IMAGETYPE_PNG => @imagecreatefrompng($fullPath),
+            IMAGETYPE_WEBP => function_exists('imagecreatefromwebp') ? @imagecreatefromwebp($fullPath) : false,
+            default => false,
+        };
+
+        if ($source === false) {
+            return;
+        }
+
+        $max = 400;
+        $ratio = min($max / max($width, 1), $max / max($height, 1), 1);
+        $newWidth = max(1, (int) round($width * $ratio));
+        $newHeight = max(1, (int) round($height * $ratio));
+
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+
+        if ($thumb === false) {
+            imagedestroy($source);
+
+            return;
+        }
+
+        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        $pathInfo = pathinfo($storedPath);
+        $thumbRelative = ($pathInfo['dirname'] ?? '.').'/'.($pathInfo['filename'] ?? 'image').'_thumb.'.($pathInfo['extension'] ?? 'jpg');
+        $thumbFull = $disk->path($thumbRelative);
+
+        $saved = match ($type) {
+            IMAGETYPE_JPEG => imagejpeg($thumb, $thumbFull, 85),
+            IMAGETYPE_PNG => imagepng($thumb, $thumbFull),
+            IMAGETYPE_WEBP => function_exists('imagewebp') ? imagewebp($thumb, $thumbFull, 85) : false,
+            default => false,
+        };
+
+        imagedestroy($source);
+        imagedestroy($thumb);
+
+        if ($saved === false) {
+            @unlink($thumbFull);
         }
     }
 }

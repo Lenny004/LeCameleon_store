@@ -65,6 +65,16 @@
 
         <div class="shop-toolbar">
             <p class="shop-toolbar__count">{{ $products->total() ?? count($products ?? []) }} productos</p>
+            @auth
+                @if (($hasActiveFilters ?? false) && Route::has('account.saved-searches.store'))
+                    <form method="POST" action="{{ route('account.saved-searches.store') }}" class="shop-toolbar__save" style="display:flex;gap:var(--space-sm);align-items:center;">
+                        @csrf
+                        <input type="hidden" name="query_params" value="{{ json_encode($filters ?? []) }}">
+                        <input type="text" name="name" class="form-input" placeholder="Nombre de la búsqueda" maxlength="120" required style="max-width:14rem;">
+                        <button type="submit" class="btn btn--ghost btn--sm">Guardar búsqueda</button>
+                    </form>
+                @endif
+            @endauth
             <div class="shop-toolbar__sort">
                 <label for="sort" class="text-small">Ordenar:</label>
                 <select id="sort" name="sort" onchange="if(this.value) window.location.href=this.value">
