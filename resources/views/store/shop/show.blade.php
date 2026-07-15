@@ -76,7 +76,7 @@
                 <span class="badge badge--accent">{{ $condition }}</span>
             @endif
             @if ($product->is_authenticated)
-                <span class="badge badge--success">Pieza verificada</span>
+                <span class="badge badge--success">{{ __('store.verified_piece') }}</span>
             @endif
             @if ($product->is_unique_piece || $stock <= 1)
                 <span class="badge badge--warning">Pieza única</span>
@@ -150,7 +150,7 @@
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="quantity" :value="qty">
-                    <button type="submit" class="btn btn--primary">Agregar al carrito</button>
+                    <button type="submit" class="btn btn--primary">{{ __('store.add_to_cart') }}</button>
                 </form>
             @else
                 <button type="button" class="btn btn--primary" disabled>Agotado</button>
@@ -188,7 +188,7 @@
 
         @if ($canMakeOffer && Route::has('shop.offers.store'))
             <section class="checkout-section" style="margin-top:var(--space-lg);padding:var(--space-md);">
-                <h2 class="checkout-section__title" style="font-size:1.1rem;">Hacer oferta</h2>
+                <h2 class="checkout-section__title" style="font-size:1.1rem;">{{ __('store.make_offer') }}</h2>
                 <p class="text-muted text-small" style="margin-bottom:var(--space-md);">
                     Propón un precio por debajo de ${{ number_format((float) $product->price, 2) }}.
                     @if ($product->is_unique_piece)

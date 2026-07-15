@@ -14,6 +14,9 @@
         @if (Route::has('account.offers.index'))
             <a href="{{ route('account.offers.index') }}" class="account-nav__link account-nav__link--active">Mis ofertas</a>
         @endif
+        @if (Route::has('account.saved-searches.index'))
+            <a href="{{ route('account.saved-searches.index') }}" class="account-nav__link">Búsquedas guardadas</a>
+        @endif
         @if (Route::has('wishlist.index'))
             <a href="{{ route('wishlist.index') }}" class="account-nav__link">Favoritos</a>
         @endif
