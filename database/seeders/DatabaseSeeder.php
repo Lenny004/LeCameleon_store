@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CouponSeeder::class,
             SettingSeeder::class,
+            ElSalvadorGeoSeeder::class,
+            LogisticsDemoSeeder::class,
         ]);
     }
 }
