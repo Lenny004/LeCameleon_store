@@ -2,7 +2,7 @@
 .shop-layout {
     --shop-warm-surface: var(--surface);
     --shop-accent-olive: var(--accent-hover);
-    --shop-accent-rust: var(--accent);
+    --shop-accent-rust: var(--accent-hover);
 
     display: grid;
     gap: var(--space-lg);
@@ -149,11 +149,11 @@
 }
 
 .filter-panel {
-    background-color: var(--shop-warm-surface);
+    background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    box-shadow: var(--shadow-xs);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .filter-panel__header {
@@ -197,7 +197,7 @@
 }
 
 .filter-panel__group[open] .filter-panel__label {
-    color: var(--shop-accent-olive);
+    color: var(--text);
 }
 
 .filter-panel__label {

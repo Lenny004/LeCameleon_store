@@ -12,13 +12,13 @@
 }
 
 .badge--primary {
-    background-color: color-mix(in srgb, var(--primary) 25%, var(--background));
-    color: var(--accent);
+    background-color: color-mix(in srgb, var(--primary) 18%, var(--background));
+    color: var(--text);
 }
 
 .badge--accent {
-    background-color: color-mix(in srgb, var(--accent) 20%, var(--background));
-    color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 16%, var(--background));
+    color: var(--accent-hover);
 }
 
 .badge--success {
