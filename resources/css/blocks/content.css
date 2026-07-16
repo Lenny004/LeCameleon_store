@@ -1,4 +1,7 @@
-/* Static / informational store pages */
+/* ==========================================================================
+   Páginas estáticas — about, envíos, legal, contacto, devoluciones
+   Superficies claras con acentos neón sutiles
+   ========================================================================== */
 
 .content-page {
     padding-block: var(--space-2xl);
@@ -13,6 +16,7 @@
     max-width: 32rem;
 }
 
+/* Cabecera de página con separador y barra de acento */
 .content-page__header {
     margin-bottom: var(--space-xl);
     padding-bottom: var(--space-lg);
@@ -29,13 +33,14 @@
     border-radius: var(--radius-full);
 }
 
+/* Etiqueta superior (eyebrow) */
 .content-page__eyebrow {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: var(--space-sm);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--accent-hover);
 }
 
 .content-page__brand .brand-logo {
@@ -69,6 +74,7 @@
     color: var(--text-muted);
 }
 
+/* Panel de prosa — tarjeta con halo neón ambiental */
 .content-page__prose {
     position: relative;
     display: flex;
@@ -76,9 +82,10 @@
     gap: var(--space-lg);
     padding: var(--space-xl);
     background-color: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--border));
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .content-page__prose::before {
@@ -88,9 +95,9 @@
     border-radius: inherit;
     pointer-events: none;
     background:
-        radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 50%),
-        radial-gradient(ellipse 80% 60% at 0% 100%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 45%);
-    opacity: 0.9;
+        radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 50%),
+        radial-gradient(ellipse 80% 60% at 0% 100%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 45%);
+    opacity: 0.85;
 }
 
 .content-page__prose > * {
@@ -138,6 +145,7 @@
     font-weight: 600;
     text-decoration: none;
     text-underline-offset: 0.15em;
+    transition: color var(--transition);
 }
 
 .content-page__prose a:hover {
@@ -150,13 +158,14 @@
     font-weight: 600;
 }
 
+/* Panel genérico (formularios, bloques auxiliares) */
 .content-page__panel {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
     padding: var(--space-xl);
     background-color: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--border));
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
 }
@@ -167,6 +176,7 @@
     gap: var(--space-lg);
 }
 
+/* Acciones al pie del contenido */
 .content-page__actions {
     display: flex;
     flex-wrap: wrap;
@@ -189,6 +199,7 @@
     color: var(--accent);
     font-weight: 600;
     text-decoration: none;
+    transition: color var(--transition);
 }
 
 .content-page__footer a:hover {
@@ -198,6 +209,11 @@
 
 .content-page__alert {
     margin-bottom: var(--space-lg);
+}
+
+/* Espacio entre cabecera y acordeón FAQ en la misma página */
+.content-page .faq {
+    margin-bottom: var(--space-md);
 }
 
 @media (min-width: 48rem) {

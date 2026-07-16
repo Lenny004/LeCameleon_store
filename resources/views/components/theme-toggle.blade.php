@@ -5,9 +5,10 @@
     x-init="sync()"
     @click="toggle()"
     @themechange.window="sync()"
+    aria-label="Cambiar tema"
     :aria-label="isDark ? 'Activar modo claro' : 'Activar modo oscuro'"
-    :aria-pressed="isDark"
-    :title="isDark ? 'Modo claro' : 'Modo oscuro'"
+    :aria-pressed="isDark ? 'true' : 'false'"
+    :title="isDark ? 'Activar modo claro' : 'Activar modo oscuro'"
 >
     <svg class="theme-toggle__icon theme-toggle__icon--moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>

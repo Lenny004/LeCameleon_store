@@ -8,6 +8,7 @@
 <div class="admin-page-header">
     <div>
         <h2 class="admin-page-header__title">All orders</h2>
+        <p class="admin-page-header__subtitle">{{ $orders->total() }} orders</p>
     </div>
 </div>
 
@@ -25,26 +26,38 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($orders ?? [
-                ['id' => 'LC-1042', 'customer' => 'maria@email.com', 'items' => 2, 'total' => 189, 'status' => 'processing', 'date' => '2026-07-14'],
-                ['id' => 'LC-1041', 'customer' => 'carlos@email.com', 'items' => 1, 'total' => 65, 'status' => 'shipped', 'date' => '2026-07-13'],
-                ['id' => 'LC-1040', 'customer' => 'ana@email.com', 'items' => 3, 'total' => 245, 'status' => 'delivered', 'date' => '2026-07-12'],
-            ] as $order)
+            @forelse ($orders as $order)
                 <tr>
-                    <td>{{ $order['id'] }}</td>
-                    <td>{{ $order['customer'] }}</td>
-                    <td>{{ $order['items'] }}</td>
-                    <td>${{ number_format($order['total'], 2) }}</td>
-                    <td><span class="badge badge--primary">{{ ucfirst($order['status']) }}</span></td>
-                    <td>{{ $order['date'] }}</td>
                     <td>
                         @if (Route::has('admin.orders.show'))
-                            <a href="{{ route('admin.orders.show', $order['id']) }}" class="btn btn--ghost btn--sm">View</a>
+                            <a href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
+                        @else
+                            {{ $order->number }}
+                        @endif
+                    </td>
+                    <td>{{ $order->customerEmail() ?? $order->user?->email ?? '—' }}</td>
+                    <td>{{ $order->items_count }}</td>
+                    <td>${{ number_format((float) $order->grand_total, 2) }}</td>
+                    <td><span class="badge badge--primary">{{ ucfirst($order->status->value) }}</span></td>
+                    <td>{{ $order->placed_at?->format('Y-m-d') ?? '—' }}</td>
+                    <td>
+                        @if (Route::has('admin.orders.show'))
+                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn--ghost btn--sm">View</a>
                         @endif
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="7">No orders yet.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+@if ($orders->hasPages())
+    <div style="margin-top:var(--space-lg);">
+        {{ $orders->links() }}
+    </div>
+@endif
 @endsection

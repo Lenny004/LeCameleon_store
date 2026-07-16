@@ -25,12 +25,7 @@ class ShopController extends Controller
 
     public function index(Request $request): View
     {
-        // Includes min_rating so shoppers can filter by average star score.
-        $filters = $request->only([
-            'q', 'category', 'brand', 'era_decade', 'condition_grade',
-            'size_label', 'color', 'price_min', 'price_max', 'in_stock',
-            'min_rating', 'sort',
-        ]);
+        $filters = $this->catalogFilters($request);
 
         return view('store.shop.index', [
             'products' => $this->catalogService->paginatePublished(
@@ -84,5 +79,23 @@ class ShopController extends Controller
         $request->merge(['q' => $request->get('q', $request->get('query'))]);
 
         return $this->index($request);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function catalogFilters(Request $request): array
+    {
+        $filters = $request->only([
+            'q', 'category', 'brand', 'era_decade', 'condition_grade',
+            'size_label', 'color', 'price_min', 'price_max', 'in_stock',
+            'min_rating', 'sort',
+        ]);
+
+        if (($filters['sort'] ?? null) === 'new') {
+            $filters['sort'] = 'newest';
+        }
+
+        return $filters;
     }
 }

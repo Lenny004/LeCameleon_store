@@ -43,12 +43,9 @@
                 @endforeach
             </section>
 
-            @if (Route::has('checkout.place'))
+            @if (Route::has('checkout.index'))
                 <div class="checkout-submit">
-                    <form method="POST" action="{{ route('checkout.place') }}">
-                        @csrf
-                        <button type="submit" class="btn btn--primary btn--lg">Confirmar pedido</button>
-                    </form>
+                    <a href="{{ route('checkout.index') }}" class="btn btn--primary btn--lg">Confirmar pedido</a>
                     <p class="checkout-submit__note">Revisa los datos antes de confirmar. Podrás seguir el estado del pedido desde tu cuenta.</p>
                 </div>
             @endif

@@ -32,7 +32,15 @@ class AuthController extends Controller
     public function login(LoginRequest $request): RedirectResponse
     {
         if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');
+            return back()->withErrors(['email' => 'Credenciales incorrectas.'])->onlyInput('email');
+        }
+
+        if (! $request->user()->is_active) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors(['email' => 'Tu cuenta está desactivada.'])->onlyInput('email');
         }
 
         $request->session()->regenerate();

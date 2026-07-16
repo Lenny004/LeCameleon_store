@@ -1,46 +1,87 @@
+/* ==========================================================================
+   Accesibilidad — utilidades reutilizables
+   ========================================================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Anillo de foco con brillo suave (complementa :focus-visible global) */
+.focus-ring:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* ==========================================================================
+   Badges — etiquetas compactas
+   Fondos atenuados; color semántico en texto, no rellenos neon grandes.
+   ========================================================================== */
+
 .badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.2rem 0.6rem;
+    gap: var(--space-2xs);
+    padding: 0.1875rem 0.625rem;
     font-size: 0.6875rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
     border-radius: var(--radius-full);
+    border: 1px solid transparent;
     background-color: var(--secondary);
-    color: var(--text);
+    color: var(--text-muted);
 }
 
 .badge--primary {
-    background-color: color-mix(in srgb, var(--primary) 18%, var(--background));
+    background-color: var(--primary-muted);
+    border-color: color-mix(in srgb, var(--primary) 22%, transparent);
     color: var(--text);
 }
 
 .badge--accent {
-    background-color: color-mix(in srgb, var(--accent) 16%, var(--background));
+    background-color: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 20%, transparent);
     color: var(--accent-hover);
 }
 
 .badge--success {
-    background-color: color-mix(in srgb, var(--success) 20%, var(--background));
+    background-color: color-mix(in srgb, var(--success) 14%, var(--background));
+    border-color: color-mix(in srgb, var(--success) 24%, transparent);
     color: var(--success);
 }
 
 .badge--warning {
-    background-color: color-mix(in srgb, var(--warning) 20%, var(--background));
+    background-color: color-mix(in srgb, var(--warning) 14%, var(--background));
+    border-color: color-mix(in srgb, var(--warning) 24%, transparent);
     color: var(--warning);
 }
 
 .badge--danger {
-    background-color: color-mix(in srgb, var(--danger) 20%, var(--background));
+    background-color: color-mix(in srgb, var(--danger) 12%, var(--background));
+    border-color: color-mix(in srgb, var(--danger) 22%, transparent);
     color: var(--danger);
 }
+
+/* ==========================================================================
+   Tarjetas
+   ========================================================================== */
 
 .card {
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
 }
 
 .card__header {
@@ -48,19 +89,28 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .card__title {
     font-family: var(--font-display);
     font-size: 1.125rem;
     font-weight: 600;
+    color: var(--text);
+    line-height: var(--line-height-snug);
 }
+
+/* ==========================================================================
+   Tablas
+   ========================================================================== */
 
 .table-wrap {
     overflow-x: auto;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
 }
 
 .table {
@@ -71,14 +121,15 @@
 
 .table th,
 .table td {
-    padding: 0.75rem 1rem;
+    padding: 0.8125rem 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .table th {
     font-weight: 600;
-    background-color: color-mix(in srgb, var(--secondary) 30%, var(--surface));
+    color: var(--text);
+    background-color: color-mix(in srgb, var(--secondary) 35%, var(--surface));
     white-space: nowrap;
 }
 
@@ -87,13 +138,18 @@
 }
 
 .table tr:hover td {
-    background-color: color-mix(in srgb, var(--primary) 4%, var(--surface));
+    background-color: color-mix(in srgb, var(--primary) 3%, var(--surface));
 }
 
 .table__actions {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-sm);
 }
+
+/* ==========================================================================
+   KPI — tarjetas de métricas
+   ========================================================================== */
 
 .kpi-grid {
     display: grid;
@@ -106,31 +162,40 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
 }
 
 .kpi-card__label {
     font-size: 0.8125rem;
     color: var(--text-muted);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    line-height: var(--line-height-snug);
 }
 
 .kpi-card__value {
     font-family: var(--font-display);
     font-size: 1.75rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: var(--line-height-tight);
+    color: var(--text);
 }
 
 .kpi-card__delta {
     font-size: 0.8125rem;
-    margin-top: var(--space-xs);
-    color: var(--accent);
+    margin-top: var(--space-sm);
+    color: var(--accent-hover);
+    font-weight: 600;
 }
+
+/* ==========================================================================
+   Paginación
+   ========================================================================== */
 
 .pagination {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: var(--space-xs);
     margin-top: var(--space-xl);
 }
@@ -139,24 +204,41 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.25rem;
-    height: 2.25rem;
+    min-width: 2.375rem;
+    height: 2.375rem;
     padding: 0 var(--space-sm);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     font-size: 0.875rem;
-    transition: border-color var(--transition), background-color var(--transition);
+    color: var(--text);
+    background-color: var(--surface);
+    transition:
+        border-color var(--transition),
+        background-color var(--transition),
+        box-shadow var(--transition);
 }
 
 .pagination__link:hover {
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+    background-color: var(--primary-muted);
+}
+
+.pagination__link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .pagination__link--active {
     background-color: var(--primary);
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary) 80%, var(--text) 20%);
     color: var(--primary-contrast);
     font-weight: 600;
+}
+
+.pagination__link--active:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
 }
 
 .pagination__link--disabled {

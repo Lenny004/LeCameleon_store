@@ -1,9 +1,11 @@
-/* - Cart page — sticky summary - */
+/* Página del carrito — superficies claras y resumen sticky */
 
 .cart-page {
-    --commerce-warm-surface: var(--surface);
-    --commerce-accent-olive: var(--accent-hover);
-    --commerce-accent-rust: var(--accent-hover);
+    --commerce-surface: var(--surface);
+    --commerce-surface-muted: color-mix(in srgb, var(--surface) 92%, var(--background) 8%);
+    --commerce-accent: var(--accent);
+    --commerce-accent-soft: var(--accent-soft);
+    --commerce-neon-glow: color-mix(in srgb, var(--primary) 28%, transparent);
 
     padding-block: var(--space-xl) var(--space-2xl);
 }
@@ -26,16 +28,16 @@
 
 @media (min-width: 64rem) {
     .cart-layout {
-        grid-template-columns: minmax(0, 1fr) 22rem;
+        grid-template-columns: minmax(0, 1fr) 23rem;
         gap: var(--space-2xl);
     }
 }
 
-/* - Cart items list - */
+/* Lista de artículos */
 .cart-items {
     display: flex;
     flex-direction: column;
-    background-color: var(--commerce-warm-surface);
+    background-color: var(--commerce-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xs);
@@ -48,8 +50,12 @@
     justify-content: space-between;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, var(--commerce-accent-olive) 30%);
-    background-color: color-mix(in srgb, var(--commerce-warm-surface) 85%, var(--surface-raised) 15%);
+    border-bottom: 1px solid var(--border-subtle);
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--commerce-surface) 88%, var(--commerce-accent-soft) 12%),
+        var(--commerce-surface)
+    );
 }
 
 .cart-items__title {
@@ -79,7 +85,7 @@
 }
 
 .cart-item:hover {
-    background-color: color-mix(in srgb, var(--commerce-warm-surface) 70%, var(--surface-raised) 30%);
+    background-color: var(--commerce-surface-muted);
 }
 
 @media (min-width: 48rem) {
@@ -103,7 +109,7 @@
     background: linear-gradient(
         145deg,
         var(--secondary),
-        color-mix(in srgb, var(--secondary) 65%, var(--commerce-accent-olive) 35%)
+        color-mix(in srgb, var(--secondary) 70%, var(--commerce-accent-soft) 30%)
     );
 }
 
@@ -128,7 +134,7 @@
 }
 
 .cart-item__title a:hover {
-    color: var(--commerce-accent-rust);
+    color: var(--commerce-accent);
 }
 
 .cart-item__meta {
@@ -179,14 +185,39 @@
     text-align: center;
 }
 
-/* - Order summary (Amazon-style sticky) - */
+/* Resumen sticky — tarjeta clara con acento neón */
 .cart-summary,
 .order-summary {
+    position: relative;
     padding: var(--space-lg);
-    background-color: var(--surface-raised);
-    border: 1px solid var(--border);
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--surface-raised) 94%, var(--commerce-accent-soft) 6%) 0%,
+        var(--surface-raised) 2.5rem
+    );
+    border: 1px solid color-mix(in srgb, var(--border) 82%, var(--commerce-accent) 18%);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow:
+        var(--shadow-md),
+        0 0 0 1px color-mix(in srgb, var(--surface) 80%, transparent);
+    overflow: hidden;
+}
+
+.cart-summary::before,
+.order-summary::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary) 18%,
+        var(--accent) 50%,
+        var(--primary) 82%,
+        transparent
+    );
+    opacity: 0.92;
 }
 
 @media (min-width: 64rem) {
@@ -195,6 +226,11 @@
         position: sticky;
         top: calc(var(--header-height) + var(--space-md));
         z-index: var(--z-sticky);
+        max-height: calc(100dvh - var(--header-height) - var(--space-xl));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--commerce-accent) 35%, var(--border)) transparent;
     }
 }
 
@@ -206,12 +242,13 @@
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-md);
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, var(--commerce-accent-olive) 30%);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .cart-summary__rows {
     display: flex;
     flex-direction: column;
+    gap: var(--space-2xs);
 }
 
 .cart-summary__row {
@@ -235,12 +272,19 @@
 
 .cart-summary__row--total {
     margin-top: var(--space-sm);
-    padding-top: var(--space-md);
-    border-top: 2px solid color-mix(in srgb, var(--border) 50%, var(--commerce-accent-olive) 50%);
+    padding: var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--primary-muted) 70%, var(--surface-raised) 30%),
+        var(--surface-raised)
+    );
     font-family: var(--font-display);
     font-size: 1.375rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 60%, transparent);
 }
 
 .cart-summary__row--total .cart-summary__row-label {
@@ -252,8 +296,34 @@
     color: var(--text);
 }
 
+/* CTA neón — mismo lenguaje que product-buybox */
 .cart-summary__cta {
     margin-top: var(--space-lg);
+}
+
+.cart-summary__cta .btn--primary {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow:
+        var(--shadow-sm),
+        0 0 18px var(--commerce-neon-glow);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+}
+
+.cart-summary__cta .btn--primary:hover {
+    box-shadow:
+        var(--shadow-md),
+        0 0 24px color-mix(in srgb, var(--primary) 38%, transparent);
+    transform: translateY(-1px);
+}
+
+.cart-summary__cta .btn--primary:active {
+    transform: translateY(0);
 }
 
 .cart-summary__note {
@@ -285,21 +355,32 @@
 .cart-summary__trust-item::before {
     content: '✓';
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
     font-weight: 700;
-    color: var(--success);
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     margin-top: 0.05em;
 }
 
-/* Line items in checkout summary */
+/* Líneas del resumen en checkout */
 .order-summary__items {
     list-style: none;
-    padding: 0;
+    padding: var(--space-sm);
     margin: 0 0 var(--space-md);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     max-height: 14rem;
     overflow-y: auto;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, var(--surface) 88%, var(--background) 12%);
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 }
@@ -310,13 +391,18 @@
     gap: var(--space-sm);
     font-size: 0.875rem;
     line-height: var(--line-height-snug);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px dashed var(--border-subtle);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition);
 }
 
-.order-summary__item:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
+.order-summary__item:hover {
+    background-color: color-mix(in srgb, var(--commerce-accent-soft) 45%, transparent);
+}
+
+.order-summary__item:not(:last-child) {
+    border-bottom: 1px dashed var(--border-subtle);
+    border-radius: 0;
 }
 
 .order-summary__item-name {
@@ -338,7 +424,7 @@
 
 .cart-continue a {
     font-size: 0.875rem;
-    color: var(--commerce-accent-rust);
+    color: var(--commerce-accent);
     font-weight: 600;
     text-decoration: none;
     transition: color var(--transition);

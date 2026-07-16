@@ -63,6 +63,12 @@
                     <template x-if="!images.length">
                         <div class="product-gallery__placeholder" aria-hidden="true"></div>
                     </template>
+                    <span
+                        class="product-gallery__counter"
+                        x-show="images.length > 1"
+                        x-text="(active + 1) + ' / ' + images.length"
+                        aria-live="polite"
+                    ></span>
                 </div>
                 <div class="product-gallery__thumbs" x-show="images.length > 1" x-cloak>
                     <template x-for="(img, i) in images" :key="i">
@@ -135,7 +141,9 @@
             <aside class="product-buybox" aria-label="Comprar producto">
                 <div class="product-buybox__price-block">
                     <div class="product-buybox__price-row">
-                        <p class="product-buybox__price">${{ number_format((float) $product->price, 2) }}</p>
+                        <p class="product-buybox__price">
+                            <span class="product-buybox__currency" aria-hidden="true">$</span>{{ number_format((float) $product->price, 2) }}
+                        </p>
                         @if ($product->compare_at_price && (float) $product->compare_at_price > (float) $product->price)
                             <p class="product-buybox__compare">${{ number_format((float) $product->compare_at_price, 2) }}</p>
                             @php
@@ -442,15 +450,22 @@
                         @foreach ($reviewList as $review)
                             <article class="product-review">
                                 <div class="product-review__header">
-                                    <div>
-                                        <strong class="product-review__author">{{ $review->user?->name ?? 'Cliente' }}</strong>
-                                        @if ($review->created_at)
-                                            <time class="product-review__date" datetime="{{ $review->created_at->toDateString() }}">
-                                                {{ $review->created_at->translatedFormat('d M Y') }}
-                                            </time>
-                                        @endif
+                                    <div class="product-review__identity">
+                                        <span class="product-review__avatar" aria-hidden="true">{{ strtoupper(mb_substr($review->user?->name ?? 'C', 0, 1)) }}</span>
+                                        <div>
+                                            <strong class="product-review__author">{{ $review->user?->name ?? 'Cliente' }}</strong>
+                                            @if ($review->created_at)
+                                                <time class="product-review__date" datetime="{{ $review->created_at->toDateString() }}">
+                                                    {{ $review->created_at->translatedFormat('d M Y') }}
+                                                </time>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <span class="product-review__rating" aria-label="{{ $review->rating }} de 5">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
+                                    <span class="product-rating product-rating--sm product-review__rating" aria-label="{{ $review->rating }} de 5">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <span class="product-rating__star {{ $i <= $review->rating ? 'product-rating__star--on' : '' }}" aria-hidden="true">★</span>
+                                        @endfor
+                                    </span>
                                 </div>
                                 @if ($review->title)
                                     <h3 class="product-review__title">{{ $review->title }}</h3>

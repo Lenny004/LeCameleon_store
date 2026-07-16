@@ -23,7 +23,8 @@
                 @if (Route::has('newsletter.store'))
                     <form method="POST" action="{{ route('newsletter.store') }}" class="footer__newsletter">
                         @csrf
-                        <p class="footer__newsletter-label">Boletín</p>
+                        <p class="footer__newsletter-label" id="footer-newsletter-label">Boletín</p>
+                        <p class="footer__newsletter-hint">Novedades vintage y envíos locales. Sin spam.</p>
                         <div class="footer__newsletter-row">
                             <input
                                 type="email"
@@ -33,9 +34,9 @@
                                 value="{{ old('email') }}"
                                 required
                                 autocomplete="email"
-                                aria-label="Correo para el boletín"
+                                aria-labelledby="footer-newsletter-label"
                             >
-                            <button type="submit" class="btn btn--primary btn--sm">Suscribirme</button>
+                            <button type="submit" class="footer__newsletter-submit">Suscribirme</button>
                         </div>
                     </form>
                 @endif
@@ -112,17 +113,20 @@
         </div>
 
         <div class="footer__bottom">
-            <span class="footer__copyright">&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</span>
-            <span class="footer__legal">
-                @if (Route::has('privacy'))
-                    <a href="{{ route('privacy') }}" class="footer__link">Privacidad</a>
-                @endif
-                @if (Route::has('terms'))
-                    <a href="{{ route('terms') }}" class="footer__link">Términos</a>
-                @endif
-            </span>
-            <div class="footer__theme">
-                @include('components.theme-toggle')
+            <div class="footer__bottom-inner">
+                <p class="footer__copyright">&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</p>
+                <nav class="footer__legal" aria-label="Enlaces legales">
+                    @if (Route::has('privacy'))
+                        <a href="{{ route('privacy') }}" class="footer__link">Privacidad</a>
+                    @endif
+                    @if (Route::has('terms'))
+                        <a href="{{ route('terms') }}" class="footer__link">Términos</a>
+                    @endif
+                </nav>
+                <div class="footer__theme">
+                    <span class="footer__theme-label" id="footer-theme-label">Apariencia</span>
+                    @include('components.theme-toggle')
+                </div>
             </div>
         </div>
     </div>

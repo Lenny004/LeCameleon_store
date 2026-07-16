@@ -2,6 +2,7 @@
     'variant' => 'auto', // auto | compact | horizontal | wide (+ aliases: icon, lockup, full)
     'href' => null,
     'size' => 'md', // sm | md | lg | xl
+    'context' => null, // null | header | guest | hero — ajusta tamaño y almohadilla por zona
     'inverted' => false,
 ])
 
@@ -28,10 +29,15 @@
     $hasWide = $has($wide);
 
     $tag = $href ? 'a' : 'span';
+    $contextClass = in_array($context, ['header', 'guest', 'hero'], true)
+        ? 'brand-logo--ctx-'.$context
+        : null;
+
     $classes = trim(implode(' ', array_filter([
         'brand-logo',
         'brand-logo--'.$variant,
         'brand-logo--'.$size,
+        $contextClass,
         $inverted ? 'brand-logo--inverted' : null,
         $attributes->get('class'),
     ])));

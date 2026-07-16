@@ -1,4 +1,11 @@
-/* Logistics admin blocks — BEM */
+/* ==========================================================================
+   Logística — bloques de administración (BEM)
+   Tema claro: tarjetas sobre --surface, tablas legibles y timelines discretos.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Formularios de configuración logística
+   -------------------------------------------------------------------------- */
 
 .logistics-form {
     display: flex;
@@ -30,6 +37,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+    padding-top: var(--space-sm);
 }
 
 .logistics-checkbox {
@@ -37,21 +45,44 @@
     align-items: center;
     gap: var(--space-sm);
     cursor: pointer;
+    font-size: 0.9375rem;
+    line-height: var(--line-height-snug);
+}
+
+.logistics-checkbox:focus-within {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-sm);
 }
 
 .logistics-link {
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-hover);
+    text-decoration: none;
+    transition: color var(--transition-fast);
 }
 
 .logistics-link:hover {
+    color: var(--accent);
     text-decoration: underline;
+}
+
+.logistics-link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-xs);
 }
 
 .logistics-meta {
     display: block;
     font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: var(--line-height-snug);
 }
+
+/* --------------------------------------------------------------------------
+   Ficha de detalle (empresa, vehículo, trabajador…)
+   -------------------------------------------------------------------------- */
 
 .logistics-detail {
     display: grid;
@@ -61,7 +92,8 @@
 
 .logistics-detail__list {
     display: grid;
-    gap: var(--space-sm);
+    gap: var(--space-md);
+    margin: 0;
 }
 
 .logistics-detail__list dt {
@@ -70,10 +102,14 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
+    margin-bottom: var(--space-2xs);
 }
 
 .logistics-detail__list dd {
     margin: 0;
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: var(--line-height-snug);
 }
 
 .logistics-detail__notes {
@@ -87,7 +123,14 @@
     padding-left: 1.25rem;
     display: grid;
     gap: var(--space-xs);
+    font-size: 0.9375rem;
+    line-height: var(--line-height-base);
+    color: var(--text);
 }
+
+/* --------------------------------------------------------------------------
+   Municipios agrupados por departamento
+   -------------------------------------------------------------------------- */
 
 .logistics-department {
     margin-bottom: var(--space-xl);
@@ -100,10 +143,24 @@
     margin-bottom: var(--space-md);
     padding-bottom: var(--space-sm);
     border-bottom: 1px solid var(--border);
+    color: var(--text);
 }
+
+.logistics-department__title .text-muted {
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+/* --------------------------------------------------------------------------
+   Matriz de tarifas por zona
+   -------------------------------------------------------------------------- */
 
 .logistics-rates-matrix {
     overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-xs);
 }
 
 .logistics-rates-matrix__table {
@@ -115,15 +172,20 @@
 
 .logistics-rates-matrix__table th,
 .logistics-rates-matrix__table td {
-    padding: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--border);
     text-align: center;
 }
 
+.logistics-rates-matrix__table tbody tr:nth-child(even) td:not(:first-child) {
+    background-color: color-mix(in srgb, var(--secondary) 45%, var(--surface));
+}
+
 .logistics-rates-matrix__table th {
-    background-color: color-mix(in srgb, var(--primary) 6%, var(--surface));
+    background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
     font-weight: 600;
     white-space: nowrap;
+    color: var(--text);
 }
 
 .logistics-rates-matrix__table td:first-child,
@@ -133,32 +195,82 @@
     left: 0;
     background-color: var(--surface);
     z-index: 1;
+    font-weight: 600;
+    box-shadow: 1px 0 0 var(--border);
+}
+
+.logistics-rates-matrix__table tbody tr:nth-child(even) td:first-child {
+    background-color: var(--surface);
 }
 
 .logistics-rates-matrix__input {
-    width: 5rem;
+    width: 5.5rem;
+    max-width: 100%;
     text-align: center;
+    font-variant-numeric: tabular-nums;
 }
+
+.logistics-rates-matrix__input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Línea de tiempo de eventos (admin)
+   -------------------------------------------------------------------------- */
 
 .logistics-timeline {
     display: grid;
-    gap: var(--space-md);
+    gap: 0;
     margin-top: var(--space-md);
+    border-left: 2px solid var(--border);
+    margin-left: var(--space-xs);
 }
 
 .logistics-timeline__item {
-    padding-left: var(--space-md);
-    border-left: 2px solid var(--border);
+    position: relative;
+    padding: 0 0 var(--space-md) var(--space-md);
+    font-size: 0.9375rem;
+    line-height: var(--line-height-snug);
+}
+
+.logistics-timeline__item:last-child {
+    padding-bottom: 0;
+}
+
+.logistics-timeline__item::before {
+    content: '';
+    position: absolute;
+    left: calc(-0.4rem - 1px);
+    top: 0.4rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: var(--radius-full);
+    background-color: var(--border);
+    border: 2px solid var(--surface);
 }
 
 .logistics-timeline__item--current {
     border-left-color: var(--accent);
 }
 
+.logistics-timeline__item--current::before {
+    background-color: var(--accent);
+    box-shadow:
+        0 0 0 2px var(--surface),
+        0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
 .logistics-timeline__meta {
     font-size: 0.8125rem;
     color: var(--text-muted);
+    margin: var(--space-2xs) 0 0;
+    font-variant-numeric: tabular-nums;
 }
+
+/* --------------------------------------------------------------------------
+   Panel de envío en detalle de pedido
+   -------------------------------------------------------------------------- */
 
 .logistics-shipment-panel {
     display: grid;

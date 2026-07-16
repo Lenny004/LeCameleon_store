@@ -30,26 +30,35 @@
         </header>
 
         @php
-            $orders = $orders ?? collect([
-                (object) ['id' => 'LC-1001', 'date' => '2026-07-01', 'status' => 'Entregado', 'total' => 209.00, 'items_count' => 2],
-                (object) ['id' => 'LC-1002', 'date' => '2026-07-10', 'status' => 'En tránsito', 'total' => 89.00, 'items_count' => 1],
-            ]);
+            $statusLabels = [
+                'pending' => 'Pendiente',
+                'paid' => 'Pagado',
+                'processing' => 'En preparación',
+                'shipped' => 'Enviado',
+                'delivered' => 'Entregado',
+                'cancelled' => 'Cancelado',
+                'refunded' => 'Reembolsado',
+            ];
         @endphp
 
         @forelse ($orders as $order)
+            @php
+                $statusValue = $order->status->value;
+                $statusLabel = $statusLabels[$statusValue] ?? ucfirst($statusValue);
+            @endphp
             <article class="order-card">
                 <div class="order-card__header">
                     <div>
-                        <p class="order-card__id">Pedido #{{ $order->id }}</p>
-                        <p class="order-card__date">{{ $order->date }}</p>
+                        <p class="order-card__id">Pedido #{{ $order->number }}</p>
+                        <p class="order-card__date">{{ $order->placed_at?->format('d/m/Y H:i') }}</p>
                     </div>
-                    <span class="badge badge--{{ ($order->status ?? '') === 'Entregado' ? 'success' : 'primary' }}">{{ $order->status }}</span>
+                    <span class="badge badge--{{ $statusValue === 'delivered' ? 'success' : 'primary' }}">{{ $statusLabel }}</span>
                 </div>
                 <p class="order-card__items">{{ $order->items_count }} artículo(s)</p>
                 <div class="order-card__footer">
-                    <span class="order-card__total">${{ number_format($order->total, 2) }}</span>
+                    <span class="order-card__total">${{ number_format((float) $order->grand_total, 2) }}</span>
                     @if (Route::has('account.orders.show'))
-                        <a href="{{ route('account.orders.show', $order->id) }}" class="btn btn--ghost btn--sm">Ver detalle</a>
+                        <a href="{{ route('account.orders.show', $order) }}" class="btn btn--ghost btn--sm">Ver detalle</a>
                     @endif
                 </div>
             </article>
@@ -61,6 +70,10 @@
                 'actionUrl' => Route::has('shop.index') ? route('shop.index') : '#',
             ])
         @endforelse
+
+        @if ($orders instanceof \Illuminate\Contracts\Pagination\Paginator && $orders->hasPages())
+            <div class="pagination">{{ $orders->links() }}</div>
+        @endif
     </div>
 </div>
 @endsection

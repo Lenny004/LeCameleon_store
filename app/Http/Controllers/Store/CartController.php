@@ -29,6 +29,7 @@ class CartController extends Controller
             'cart' => $cart,
             'subtotal' => $this->cartService->subtotal($cart),
             'itemCount' => $this->cartService->itemCount($cart),
+            'shipping' => (float) config('store.shipping_flat_rate', 0),
         ]);
     }
 
@@ -40,22 +41,34 @@ class CartController extends Controller
 
         $this->cartService->addItem($cart, $product, (int) $request->input('quantity', 1));
 
-        return back()->with('success', 'Item added to cart.');
+        return back()->with('success', 'Artículo agregado al carrito.');
     }
 
     public function update(Request $request, CartItem $cartItem): RedirectResponse
     {
+        $this->authorizeCartItem($request, $cartItem);
+
         $request->validate(['quantity' => ['required', 'integer', 'min:0', 'max:99']]);
 
         $this->cartService->updateItem($cartItem, (int) $request->input('quantity'));
 
-        return back()->with('success', 'Cart updated.');
+        return back()->with('success', 'Carrito actualizado.');
     }
 
-    public function destroy(CartItem $cartItem): RedirectResponse
+    public function destroy(Request $request, CartItem $cartItem): RedirectResponse
     {
+        $this->authorizeCartItem($request, $cartItem);
+
         $this->cartService->removeItem($cartItem);
 
-        return back()->with('success', 'Item removed from cart.');
+        return back()->with('success', 'Artículo eliminado del carrito.');
+    }
+
+    private function authorizeCartItem(Request $request, CartItem $cartItem): void
+    {
+        $sessionId = $this->ensureSessionId($request, 'session_cart_key');
+        $cart = $this->cartService->resolveCart($request->user(), $sessionId);
+
+        abort_unless($cartItem->cart_id === $cart->id, 403);
     }
 }

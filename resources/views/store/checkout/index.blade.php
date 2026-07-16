@@ -54,11 +54,14 @@
                             type="email"
                             id="email"
                             name="email"
-                            class="form-input"
+                            class="form-input @error('email') form-input--error @enderror"
                             value="{{ old('email') }}"
                             required
                             autocomplete="email"
                         >
+                        @error('email')
+                            <p class="form-error">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </section>
@@ -74,11 +77,14 @@
                                 type="text"
                                 id="shipping_first_name"
                                 name="shipping_address[first_name]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.first_name') form-input--error @enderror"
                                 value="{{ old('shipping_address.first_name', auth()->user()->name ?? '') }}"
                                 required
                                 autocomplete="given-name"
                             >
+                            @error('shipping_address.first_name')
+                                <p class="form-error">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="shipping_last_name">Apellido</label>
@@ -307,7 +313,10 @@
                 <div class="checkout-section__body">
                     <div class="form-group">
                         <label class="form-label" for="coupon_code">Código de cupón</label>
-                        <input type="text" id="coupon_code" name="coupon_code" class="form-input" value="{{ old('coupon_code') }}" placeholder="Opcional">
+                        <input type="text" id="coupon_code" name="coupon_code" class="form-input @error('coupon_code') form-input--error @enderror" value="{{ old('coupon_code') }}" placeholder="Opcional">
+                        @error('coupon_code')
+                            <p class="form-error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="notes">Notas del pedido</label>

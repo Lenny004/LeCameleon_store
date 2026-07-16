@@ -1,3 +1,8 @@
+/* ==========================================================================
+   Estado vacío — placeholder de contenido
+   Tipografía oscura legible; neon solo como halo sutil detrás del icono.
+   ========================================================================== */
+
 .empty-state {
     display: flex;
     flex-direction: column;
@@ -8,12 +13,12 @@
     gap: var(--space-md);
     background:
         radial-gradient(
-            ellipse 70% 50% at 50% 0%,
-            color-mix(in srgb, var(--primary) 6%, transparent) 0%,
-            transparent 65%
+            ellipse 65% 45% at 50% 0%,
+            color-mix(in srgb, var(--primary) 5%, transparent) 0%,
+            transparent 70%
         ),
         var(--surface);
-    border: 1px dashed color-mix(in srgb, var(--border) 80%, var(--accent));
+    border: 1px dashed color-mix(in srgb, var(--border) 85%, var(--text-muted));
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
 }
@@ -22,23 +27,32 @@
     margin-top: var(--space-xl);
 }
 
+/* ==========================================================================
+   Icono decorativo
+   ========================================================================== */
+
 .empty-state__icon-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5rem;
-    height: 5rem;
+    width: 4.75rem;
+    height: 4.75rem;
     border-radius: var(--radius-full);
-    background-color: var(--primary-muted);
-    border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
-    margin-bottom: var(--space-xs);
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-sm);
+    box-shadow: var(--shadow-xs);
 }
 
 .empty-state__icon {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
     color: var(--accent-hover);
 }
+
+/* ==========================================================================
+   Texto y acciones
+   ========================================================================== */
 
 .empty-state__title {
     font-family: var(--font-display);
@@ -46,6 +60,7 @@
     font-weight: 700;
     line-height: var(--line-height-tight);
     color: var(--text);
+    max-width: 28rem;
 }
 
 .empty-state__text {
@@ -60,5 +75,6 @@
     flex-wrap: wrap;
     gap: var(--space-sm);
     justify-content: center;
-    margin-top: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
 }

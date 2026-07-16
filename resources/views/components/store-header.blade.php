@@ -1,4 +1,8 @@
-<header class="header" x-data="mobileNav()">
+<header
+    class="header"
+    x-data="mobileNav()"
+    x-effect="document.body.classList.toggle('has-mobile-nav-open', open)"
+>
     <div class="header__utility">
         <div class="header__utility-inner">
             <p class="header__utility-text">
@@ -30,7 +34,7 @@
                     class="header__search"
                     role="search"
                 >
-                    <label for="header-search" class="header__search-label">Buscar en la tienda</label>
+                    <label for="header-search" class="sr-only">Buscar en la tienda</label>
                     <div class="header__search-field">
                         <input
                             type="search"
@@ -69,7 +73,7 @@
                 @endauth
 
                 @if (Route::has('cart.index'))
-                    <a href="{{ route('cart.index') }}" class="header__cart" aria-label="Carrito">
+                    <a href="{{ route('cart.index') }}" class="header__cart">
                         <span class="header__cart-icon-wrap">
                             <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -77,10 +81,15 @@
                                 <path d="M16 10a4 4 0 0 1-8 0"/>
                             </svg>
                             @if (($cartCount ?? 0) > 0)
-                                <span class="header__cart-count">{{ $cartCount }}</span>
+                                <span class="header__cart-count" aria-hidden="true">{{ $cartCount }}</span>
                             @endif
                         </span>
-                        <span class="header__cart-label">Carrito</span>
+                        <span class="header__cart-label">
+                            Carrito
+                            @if (($cartCount ?? 0) > 0)
+                                <span class="sr-only">, {{ $cartCount }} {{ $cartCount === 1 ? 'artículo' : 'artículos' }}</span>
+                            @endif
+                        </span>
                     </a>
                 @endif
 
@@ -88,7 +97,7 @@
                     @include('components.theme-toggle')
                 </div>
 
-                <button type="button" class="header__menu-toggle" @click="toggle()" aria-label="Abrir menú" :aria-expanded="open">
+                <button type="button" class="header__menu-toggle" @click="toggle()" :aria-label="open ? 'Cerrar menú' : 'Abrir menú'" :aria-expanded="open ? 'true' : 'false'" aria-controls="mobile-nav">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <line x1="3" y1="12" x2="21" y2="12"/>
                         <line x1="3" y1="6" x2="21" y2="6"/>
@@ -119,7 +128,14 @@
         </div>
     </nav>
 
-    <nav class="mobile-nav" :class="{ 'mobile-nav--open': open }" x-show="open" x-transition @click.outside="close()" x-cloak aria-label="Menú móvil">
+    <nav
+        id="mobile-nav"
+        class="mobile-nav"
+        :class="{ 'mobile-nav--open': open }"
+        @click.outside="close()"
+        aria-label="Menú móvil"
+        :aria-hidden="!open"
+    >
         <div class="mobile-nav__header">
             <div class="mobile-nav__brand">
                 @include('components.brand-logo', [
@@ -146,12 +162,15 @@
                 class="mobile-nav__search"
                 role="search"
             >
+                <label for="mobile-nav-search" class="sr-only">Buscar en la tienda</label>
                 <input
                     type="search"
+                    id="mobile-nav-search"
                     name="q"
                     class="mobile-nav__search-input"
                     placeholder="Buscar piezas vintage…"
                     value="{{ request('q') }}"
+                    autocomplete="off"
                 >
                 <button type="submit" class="mobile-nav__search-btn" aria-label="Buscar">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true">
@@ -192,7 +211,10 @@
         </ul>
     </nav>
 
-    <div class="header__overlay" :class="{ 'header__overlay--visible': open }" x-show="open" x-transition.opacity @click="close()" x-cloak aria-hidden="true"></div>
-
-    <style>[x-cloak] { display: none !important; }</style>
+    <div
+        class="header__overlay"
+        :class="{ 'header__overlay--visible': open }"
+        @click="close()"
+        :aria-hidden="!open"
+    ></div>
 </header>

@@ -1,7 +1,11 @@
+/* ==========================================================================
+   Grupos y etiquetas
+   ========================================================================== */
+
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: var(--space-sm);
 }
 
 .form-label {
@@ -11,11 +15,16 @@
     line-height: var(--line-height-snug);
 }
 
+/* ==========================================================================
+   Campos de texto, select y textarea
+   Fondos claros; acento neon solo en foco e interacción.
+   ========================================================================== */
+
 .form-input,
 .form-select,
 .form-textarea {
     width: 100%;
-    padding: 0.75rem 0.9rem;
+    padding: 0.75rem 0.9375rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background-color: var(--surface);
@@ -33,46 +42,65 @@
 .form-input::placeholder,
 .form-textarea::placeholder {
     color: var(--text-muted);
-    opacity: 0.7;
+    opacity: 0.75;
 }
 
 .form-input:hover,
 .form-select:hover,
 .form-textarea:hover {
-    border-color: color-mix(in srgb, var(--border) 60%, var(--text));
+    border-color: color-mix(in srgb, var(--border) 55%, var(--text));
+    background-color: var(--surface-raised);
 }
 
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
     border-color: var(--accent);
     background-color: var(--surface);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+    box-shadow:
+        var(--shadow-inset),
+        0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+    outline: none;
+}
+
+.form-input:focus:not(:focus-visible),
+.form-select:focus:not(:focus-visible),
+.form-textarea:focus:not(:focus-visible) {
+    border-color: var(--accent);
     outline: none;
 }
 
 .form-input:disabled,
 .form-select:disabled,
 .form-textarea:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
     background-color: var(--secondary);
+    border-color: var(--border-subtle);
 }
+
+/* ==========================================================================
+   Validación y ayuda contextual
+   ========================================================================== */
 
 .form-input--error,
 .form-select--error,
 .form-textarea--error {
     border-color: var(--danger);
+    background-color: color-mix(in srgb, var(--danger) 4%, var(--surface));
 }
 
 .form-input--error:focus,
 .form-select--error:focus,
 .form-textarea--error:focus {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 15%, transparent);
+    border-color: var(--danger);
+    box-shadow:
+        var(--shadow-inset),
+        0 0 0 3px color-mix(in srgb, var(--danger) 14%, transparent);
 }
 
 .form-textarea {
-    min-height: 6rem;
+    min-height: 6.5rem;
     resize: vertical;
 }
 
@@ -80,6 +108,7 @@
     font-size: 0.8125rem;
     color: var(--danger);
     line-height: var(--line-height-snug);
+    margin-top: var(--space-2xs);
 }
 
 .form-hint {
@@ -87,6 +116,10 @@
     color: var(--text-muted);
     line-height: var(--line-height-snug);
 }
+
+/* ==========================================================================
+   Filas responsivas
+   ========================================================================== */
 
 .form-row {
     display: grid;
@@ -99,23 +132,37 @@
     }
 }
 
+/* ==========================================================================
+   Checkbox
+   ========================================================================== */
+
 .form-checkbox {
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
     font-size: 0.875rem;
     line-height: var(--line-height-snug);
+    color: var(--text);
     cursor: pointer;
 }
 
 .form-checkbox input {
     flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.15rem;
+    width: 1.0625rem;
+    height: 1.0625rem;
+    margin-top: 0.125rem;
     accent-color: var(--primary);
     cursor: pointer;
 }
+
+.form-checkbox input:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
+/* ==========================================================================
+   Grupo de radio — tarjetas seleccionables
+   ========================================================================== */
 
 .form-radio-group {
     display: flex;
@@ -127,7 +174,7 @@
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
-    padding: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background-color: var(--surface);
@@ -139,21 +186,26 @@
 }
 
 .form-radio:hover {
-    border-color: color-mix(in srgb, var(--border) 50%, var(--primary));
+    border-color: color-mix(in srgb, var(--border) 40%, var(--accent));
     background-color: var(--surface-raised);
 }
 
+.form-radio:has(input:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
 .form-radio:has(input:checked) {
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
     background-color: var(--primary-muted);
     box-shadow: var(--shadow-xs);
 }
 
 .form-radio input {
     flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.2rem;
+    width: 1.0625rem;
+    height: 1.0625rem;
+    margin-top: 0.1875rem;
     accent-color: var(--primary);
     cursor: pointer;
 }
@@ -164,6 +216,7 @@
     gap: var(--space-2xs);
     font-weight: 600;
     font-size: 0.9375rem;
+    color: var(--text);
 }
 
 .form-radio__hint {

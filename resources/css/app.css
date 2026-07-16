@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Punto de entrada CSS — orden de capas del diseño
+   ========================================================================== */
+
 @import './base/tokens.css';
 @import './base/reset.css';
 @import './base/typography.css';
