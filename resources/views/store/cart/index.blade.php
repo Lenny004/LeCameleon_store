@@ -5,19 +5,21 @@
 @section('content')
 <div class="container cart-page">
     @php
-        $items = $cartItems ?? collect([
-            (object) ['id' => 1, 'name' => 'Chaqueta Denim 80s', 'price' => 89.00, 'quantity' => 1, 'size' => 'M', 'image' => null],
-            (object) ['id' => 2, 'name' => 'Vestido Floral 70s', 'price' => 120.00, 'quantity' => 1, 'size' => 'S', 'image' => null],
-        ]);
-        $subtotal = $items->sum(fn ($i) => $i->price * $i->quantity);
-        $shipping = $shipping ?? 9.99;
+        use App\Models\ProductImage;
+
+        $items = $cart->items ?? collect();
+        $subtotal = (float) ($subtotal ?? 0);
+        $shipping = (float) ($shipping ?? config('store.shipping_flat_rate', 0));
         $total = $subtotal + $shipping;
     @endphp
 
     <header class="cart-page__header">
         <h1 class="heading-2">Tu carrito</h1>
         @if ($items->count())
-            <p class="cart-page__count">{{ $items->count() }} {{ $items->count() === 1 ? 'artículo' : 'artículos' }}</p>
+            <p class="cart-page__count">
+                {{ $itemCount ?? $items->sum('quantity') }}
+                {{ ($itemCount ?? $items->sum('quantity')) === 1 ? 'artículo' : 'artículos' }}
+            </p>
         @endif
     </header>
 
@@ -26,51 +28,53 @@
             <div class="cart-items">
                 <header class="cart-items__header">
                     <h2 class="cart-items__title">Artículos en tu carrito</h2>
-                    <span class="cart-items__meta">{{ $items->count() }} {{ $items->count() === 1 ? 'pieza' : 'piezas' }}</span>
+                    <span class="cart-items__meta">
+                        {{ $items->count() }} {{ $items->count() === 1 ? 'pieza' : 'piezas' }}
+                    </span>
                 </header>
                 @foreach ($items as $item)
+                    @php
+                        $product = $item->product;
+                        $imageUrl = ProductImage::urlFor($product?->images->first());
+                    @endphp
                     <article class="cart-item">
-                        @if ($item->image ?? null)
-                            <img src="{{ $item->image }}" alt="" class="cart-item__image">
-                        @else
-                            <div class="cart-item__image cart-item__image--placeholder" aria-hidden="true"></div>
-                        @endif
+                        <img src="{{ $imageUrl }}" alt="" class="cart-item__image">
                         <div class="cart-item__details">
-                            <h2 class="cart-item__title">{{ $item->name }}</h2>
-                            @if ($item->size ?? null)
-                                <p class="cart-item__meta">Talla: {{ $item->size }}</p>
+                            <h2 class="cart-item__title">{{ $product?->name ?? 'Producto' }}</h2>
+                            @if ($product?->size_label)
+                                <p class="cart-item__meta">Talla: {{ $product->size_label }}</p>
                             @endif
                             <p class="cart-item__price">
-                                ${{ number_format($item->price * $item->quantity, 2) }}
+                                ${{ number_format((float) $item->unit_price * $item->quantity, 2) }}
                                 @if ($item->quantity > 1)
-                                    <span class="cart-item__unit">(${{ number_format($item->price, 2) }} c/u)</span>
+                                    <span class="cart-item__unit">(${{ number_format((float) $item->unit_price, 2) }} c/u)</span>
                                 @endif
                             </p>
                         </div>
                         <div class="cart-item__actions">
-                            @if (Route::has('cart.update'))
-                                <form action="{{ route('cart.update', $item->id) }}" method="POST" class="cart-item__qty-form">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input
-                                        type="number"
-                                        id="qty-{{ $item->id }}"
-                                        name="quantity"
-                                        value="{{ $item->quantity }}"
-                                        min="1"
-                                        class="form-input cart-item__qty-input"
-                                        aria-label="Cantidad de {{ $item->name }}"
-                                    >
-                                    <button type="submit" class="btn btn--secondary btn--sm">Actualizar</button>
-                                </form>
-                            @endif
-                            @if (Route::has('cart.destroy'))
-                                <form action="{{ route('cart.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>
-                                </form>
-                            @endif
+                            <form action="{{ route('cart.update', $item) }}" method="POST" class="cart-item__qty-form">
+                                @csrf
+                                @method('PATCH')
+                                <input
+                                    type="number"
+                                    id="qty-{{ $item->id }}"
+                                    name="quantity"
+                                    value="{{ $item->quantity }}"
+                                    min="0"
+                                    max="99"
+                                    class="form-input cart-item__qty-input @error('quantity') form-input--error @enderror"
+                                    aria-label="Cantidad de {{ $product?->name ?? 'producto' }}"
+                                >
+                                @error('quantity')
+                                    <p class="form-error">{{ $message }}</p>
+                                @enderror
+                                <button type="submit" class="btn btn--secondary btn--sm">Actualizar</button>
+                            </form>
+                            <form action="{{ route('cart.destroy', $item) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>
+                            </form>
                         </div>
                     </article>
                 @endforeach
@@ -93,9 +97,7 @@
                     </div>
                 </div>
                 <div class="cart-summary__cta">
-                    @if (Route::has('checkout.index'))
-                        <a href="{{ route('checkout.index') }}" class="btn btn--primary btn--block btn--lg">Proceder al checkout</a>
-                    @endif
+                    <a href="{{ route('checkout.index') }}" class="btn btn--primary btn--block btn--lg">Proceder al checkout</a>
                 </div>
                 <p class="cart-summary__note">El envío final se confirma en el siguiente paso según tu municipio.</p>
                 <div class="cart-summary__trust">

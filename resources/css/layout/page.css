@@ -1,3 +1,8 @@
+/* ==========================================================================
+   Layout de página — contenedor, secciones y fondo neón claro
+   ========================================================================== */
+
+/* Contenedor centrado con ancho máximo del diseño */
 .container {
     width: 100%;
     max-width: var(--container-max);
@@ -11,19 +16,26 @@
     }
 }
 
+/* Shell de página: columna flex a altura completa con degradado ambiental */
 .page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background:
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 120% 70% at 50% -15%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 52%),
+        radial-gradient(ellipse 55% 45% at 100% 0%, color-mix(in srgb, var(--primary) 4%, transparent), transparent 48%),
+        radial-gradient(ellipse 40% 35% at 0% 100%, color-mix(in srgb, var(--accent) 3%, transparent), transparent 50%),
         linear-gradient(
             180deg,
             var(--background-top) 0%,
-            var(--background) 40%,
+            var(--background) 42%,
             var(--background-bottom) 100%
         );
+    background-attachment: fixed;
 }
 
+/* Alturas de cabecera de tienda (utility, principal, subnav) */
 .page--store {
     --header-utility-height: 0px;
     --header-main-height: 3.75rem;
@@ -55,6 +67,7 @@
     flex: 1;
 }
 
+/* Bloque de sección con espaciado vertical consistente */
 .section {
     padding-block: var(--space-2xl);
 }
@@ -65,15 +78,31 @@
     justify-content: space-between;
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
+/* Título de sección con subrayado neón decorativo */
 .section__title {
+    position: relative;
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text);
 }
 
+.section__title::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    margin-top: var(--space-sm);
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 25%, transparent));
+    border-radius: var(--radius-full);
+}
+
+/* Rejilla de productos responsiva */
 .grid-products {
     display: grid;
     gap: var(--space-lg);
@@ -92,6 +121,7 @@
     }
 }
 
+/* Migas de pan — navegación contextual */
 .breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -102,101 +132,17 @@
     margin-bottom: var(--space-lg);
 }
 
-.breadcrumb__sep {
-    opacity: 0.5;
+.breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
 }
 
 .breadcrumb a:hover {
-    color: var(--accent);
-}
-
-/* - Content pages (about, shipping, FAQ) - */
-
-.content-page {
-    padding-block: var(--space-2xl);
-    max-width: 46rem;
-}
-
-.content-page--narrow {
-    max-width: 42rem;
-}
-
-.content-page__eyebrow {
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-sm);
-    font-size: 0.875rem;
-    color: var(--text-muted);
-}
-
-.content-page__header {
-    margin-bottom: var(--space-lg);
-}
-
-.content-page__intro {
-    margin-bottom: var(--space-xl);
-}
-
-.content-page__prose {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    padding: var(--space-lg);
-    background-color: var(--surface);
-    border: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-xs);
-}
-
-.content-page__prose h2 {
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text);
-}
-
-.content-page__prose ul {
-    padding-left: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    color: var(--text-muted);
-}
-
-.content-page__prose p {
-    line-height: var(--line-height-relaxed);
-}
-
-.content-page__prose a {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.content-page__prose a:hover {
-    text-decoration: underline;
     color: var(--accent-hover);
 }
 
-.content-page__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-top: var(--space-xl);
-}
-
-.content-page__footer {
-    margin-top: var(--space-xl);
-    color: var(--text-muted);
-}
-
-.content-page__footer a {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.content-page__footer a:hover {
-    text-decoration: underline;
+.breadcrumb__sep {
+    opacity: 0.45;
+    user-select: none;
 }

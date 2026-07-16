@@ -29,7 +29,7 @@
                 </div>
             @endif
         </div>
-        <span class="hero__scroll-hint" aria-hidden="true">Scroll</span>
+        <span class="hero__scroll-hint" aria-hidden="true"></span>
     </section>
 
     <section class="featured-strip">
@@ -106,25 +106,27 @@
         </section>
     @endif
 
-    <section class="container section">
-        <div class="collection-banner">
-            <div class="collection-banner__text">
-                <h2 class="heading-2">Nueva colección</h2>
-                <p class="text-lead">Prendas y accesorios de décadas pasadas, restaurados y listos para volver a brillar en tu guardarropa.</p>
-                @if (Route::has('shop.index'))
-                    <a href="{{ route('shop.index', ['sort' => 'new']) }}" class="btn btn--primary">Ver novedades</a>
-                @endif
-            </div>
-            <div class="collection-banner__image" role="img" aria-label="Colección vintage">
-                @if ($hasBannerImage)
-                    <img
-                        src="{{ asset($bannerImage) }}"
-                        alt="Colección vintage Le Cameleon"
-                        class="collection-banner__photo"
-                        loading="lazy"
-                        decoding="async"
-                    >
-                @endif
+    <section class="collection-banner-section" aria-labelledby="collection-banner-title">
+        <div class="container">
+            <div class="collection-banner">
+                <div class="collection-banner__text">
+                    <h2 id="collection-banner-title" class="heading-2">Nueva colección</h2>
+                    <p class="text-lead">Prendas y accesorios de décadas pasadas, restaurados y listos para volver a brillar en tu guardarropa.</p>
+                    @if (Route::has('shop.index'))
+                        <a href="{{ route('shop.index', ['sort' => 'new']) }}" class="btn btn--primary">Ver novedades</a>
+                    @endif
+                </div>
+                <div class="collection-banner__image" role="img" aria-label="Colección vintage">
+                    @if ($hasBannerImage)
+                        <img
+                            src="{{ asset($bannerImage) }}"
+                            alt="Colección vintage Le Cameleon"
+                            class="collection-banner__photo"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    @endif
+                </div>
             </div>
         </div>
     </section>

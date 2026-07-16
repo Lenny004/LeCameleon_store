@@ -1,16 +1,24 @@
-/* - Admin shell: surfaces aligned with tokens.css - */
+/* ==========================================================================
+   Admin — shell con acentos neon suaves (sin saturar texto)
+   Superficies alineadas con tokens.css; el verde neon vive en bordes,
+   fondos tenues e indicadores, no en tipografía masiva.
+   ========================================================================== */
 
 .admin {
+    --admin-neon-glow: color-mix(in srgb, var(--accent) 18%, transparent);
+    --admin-neon-line: color-mix(in srgb, var(--accent) 42%, var(--border));
+    --admin-surface-glass: color-mix(in srgb, var(--surface) 94%, transparent);
+
     font-family: var(--font-body);
     color: var(--text);
     background-color: var(--background);
     background-image:
-        radial-gradient(ellipse 120% 80% at 50% -20%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 50%),
-        radial-gradient(ellipse 50% 40% at 100% 0%, color-mix(in srgb, var(--primary) 4%, transparent), transparent 45%),
+        radial-gradient(ellipse 110% 70% at 50% -18%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 52%),
+        radial-gradient(ellipse 45% 35% at 100% 0%, color-mix(in srgb, var(--primary) 3%, transparent), transparent 42%),
         linear-gradient(
             180deg,
             var(--background-top) 0%,
-            var(--background) 45%,
+            var(--background) 48%,
             var(--background-bottom) 100%
         );
     background-attachment: fixed;
@@ -21,7 +29,9 @@
     min-height: 100vh;
 }
 
-/* - Sidebar - */
+/* --------------------------------------------------------------------------
+   Sidebar — navegación lateral con indicador neon discreto
+   -------------------------------------------------------------------------- */
 
 .admin-sidebar {
     position: fixed;
@@ -31,7 +41,9 @@
     width: var(--sidebar-width);
     background-color: var(--surface-raised);
     border-right: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    box-shadow:
+        var(--shadow-sm),
+        inset -1px 0 0 color-mix(in srgb, var(--accent) 6%, transparent);
     display: flex;
     flex-direction: column;
     transform: translateX(-100%);
@@ -54,7 +66,12 @@
     min-height: var(--header-height);
     padding: var(--space-md) var(--space-lg);
     border-bottom: 1px solid var(--border);
-    background: var(--surface-raised);
+    background:
+        linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--accent-soft) 35%, var(--surface-raised)) 0%,
+            var(--surface-raised) 100%
+        );
 }
 
 .admin-sidebar__brand .brand-logo {
@@ -94,6 +111,7 @@
 }
 
 .admin-sidebar__link {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-sm);
@@ -105,32 +123,56 @@
     border: 1px solid transparent;
     transition:
         background-color var(--transition),
-        color var(--transition),
-        border-color var(--transition);
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+/* Barra lateral neon solo en estado activo */
+.admin-sidebar__link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    box-shadow: 0 0 8px var(--admin-neon-glow);
+    transform: translateY(-50%);
+    opacity: 0;
+    transition:
+        height var(--transition),
+        opacity var(--transition);
 }
 
 .admin-sidebar__link svg {
     flex-shrink: 0;
-    opacity: 0.72;
+    opacity: 0.68;
     color: var(--text-muted);
     transition: color var(--transition), opacity var(--transition);
 }
 
 .admin-sidebar__link:hover {
-    background-color: var(--accent-soft);
-    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+    background-color: color-mix(in srgb, var(--accent-soft) 70%, var(--surface));
+    border-color: color-mix(in srgb, var(--border) 70%, transparent);
 }
 
 .admin-sidebar__link:hover svg {
-    opacity: 1;
-    color: var(--accent-hover);
+    opacity: 0.92;
+    color: var(--text);
 }
 
 .admin-sidebar__link--active {
-    background-color: var(--accent-soft);
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    background-color: color-mix(in srgb, var(--accent-soft) 85%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
     color: var(--text);
     font-weight: 600;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-sidebar__link--active::before {
+    height: 60%;
+    opacity: 1;
 }
 
 .admin-sidebar__link--active svg {
@@ -141,10 +183,12 @@
 .admin-sidebar__footer {
     padding: var(--space-md);
     border-top: 1px solid var(--border-subtle);
-    background-color: color-mix(in srgb, var(--surface) 85%, var(--background));
+    background-color: color-mix(in srgb, var(--surface) 88%, var(--background));
 }
 
-/* - Main column - */
+/* --------------------------------------------------------------------------
+   Columna principal
+   -------------------------------------------------------------------------- */
 
 .admin-main {
     flex: 1;
@@ -160,7 +204,9 @@
     }
 }
 
-/* - Topbar - */
+/* --------------------------------------------------------------------------
+   Topbar — barra superior tipo cristal con borde neon sutil
+   -------------------------------------------------------------------------- */
 
 .admin-topbar {
     position: sticky;
@@ -172,10 +218,12 @@
     gap: var(--space-md);
     min-height: var(--header-height);
     padding-inline: var(--space-lg);
-    background-color: color-mix(in srgb, var(--surface) 92%, transparent);
-    backdrop-filter: blur(12px);
+    background-color: var(--admin-surface-glass);
+    backdrop-filter: blur(14px) saturate(1.15);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-xs);
+    box-shadow:
+        var(--shadow-xs),
+        0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .admin-topbar__start {
@@ -201,13 +249,13 @@
     transition:
         background-color var(--transition),
         border-color var(--transition),
-        color var(--transition);
+        box-shadow var(--transition);
 }
 
 .admin-topbar__menu-toggle:hover {
     background-color: var(--accent-soft);
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-    color: var(--text);
+    border-color: var(--admin-neon-line);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 @media (min-width: 64rem) {
@@ -249,6 +297,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--text-muted);
 }
 
 @media (min-width: 40rem) {
@@ -257,7 +306,9 @@
     }
 }
 
-/* - Content area - */
+/* --------------------------------------------------------------------------
+   Área de contenido y overlay móvil
+   -------------------------------------------------------------------------- */
 
 .admin-content {
     flex: 1;
@@ -274,7 +325,7 @@
     position: fixed;
     inset: 0;
     z-index: calc(var(--z-overlay) - 5);
-    background-color: color-mix(in srgb, var(--text) 45%, transparent);
+    background-color: color-mix(in srgb, var(--text) 42%, transparent);
     backdrop-filter: blur(2px);
 }
 
@@ -284,7 +335,9 @@
     }
 }
 
-/* - Page headers (CRUD views) - */
+/* --------------------------------------------------------------------------
+   Encabezados de página (vistas CRUD)
+   -------------------------------------------------------------------------- */
 
 .admin-page-header {
     display: flex;
@@ -313,7 +366,9 @@
     line-height: var(--line-height-snug);
 }
 
-/* - Dashboard - */
+/* --------------------------------------------------------------------------
+   Dashboard y gráficos
+   -------------------------------------------------------------------------- */
 
 .admin-dashboard {
     display: flex;
@@ -328,8 +383,6 @@
 .kpi-grid--spaced {
     margin-top: 0;
 }
-
-/* - Charts - */
 
 .admin-charts {
     display: grid;
@@ -349,6 +402,14 @@
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin-chart-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 18%, var(--border));
+    box-shadow: var(--shadow-sm);
 }
 
 .admin-chart-card__title {
@@ -364,63 +425,12 @@
     max-height: 16rem;
 }
 
-/* - Admin-scoped CRUD polish (cards, tables, KPIs) - */
+/* --------------------------------------------------------------------------
+   Pulido admin: tarjetas, tablas, KPIs y badges
+   El neon se reserva para acentos estructurales, no para el cuerpo del texto.
+   -------------------------------------------------------------------------- */
 
 .admin .card {
-    background-color: var(--surface-raised);
-    border-color: var(--border);
-    box-shadow: var(--shadow-xs);
-}
-
-.admin .card__title {
-    color: var(--text);
-    letter-spacing: -0.01em;
-}
-
-.admin .table-wrap {
-    border-color: var(--border);
-    background-color: var(--surface);
-}
-
-.admin .table th {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    background-color: color-mix(in srgb, var(--secondary) 22%, var(--surface));
-    border-bottom-color: var(--border);
-}
-
-.admin .table td {
-    color: var(--text);
-    border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent);
-}
-
-.admin .table td a {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
-    text-underline-offset: 0.15em;
-    transition: color var(--transition), text-decoration-color var(--transition);
-}
-
-.admin .table td a:hover {
-    color: var(--accent-hover);
-    text-decoration-color: var(--accent);
-}
-
-.admin .table tr:hover td {
-    background-color: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
-}
-
-.admin .kpi-grid {
-    gap: var(--space-md);
-}
-
-.admin .kpi-card {
     background-color: var(--surface-raised);
     border-color: var(--border);
     box-shadow: var(--shadow-xs);
@@ -429,23 +439,130 @@
         box-shadow var(--transition);
 }
 
+.admin .card:hover {
+    border-color: color-mix(in srgb, var(--accent) 14%, var(--border));
+}
+
+.admin .card__title {
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+/* Tablas — cabeceras apagadas, filas con hover tenue */
+.admin .table-wrap {
+    border-color: var(--border);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+.admin .table th {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-color: color-mix(in srgb, var(--secondary) 28%, var(--surface));
+    border-bottom: 1px solid var(--border);
+}
+
+.admin .table td {
+    color: var(--text);
+    border-bottom-color: color-mix(in srgb, var(--border) 65%, transparent);
+    transition: background-color var(--transition-fast);
+}
+
+.admin .table td a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 28%, transparent);
+    text-underline-offset: 0.18em;
+    transition:
+        color var(--transition),
+        text-decoration-color var(--transition);
+}
+
+.admin .table td a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.admin .table tbody tr:hover td {
+    background-color: color-mix(in srgb, var(--accent-soft) 45%, var(--surface));
+}
+
+.admin .table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* KPIs — franja superior neon, valores en texto oscuro */
+.admin .kpi-grid {
+    gap: var(--space-md);
+}
+
+.admin .kpi-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-raised);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition-fast);
+}
+
+.admin .kpi-card::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--primary) 70%, var(--accent)),
+        var(--accent)
+    );
+    opacity: 0.55;
+    transition: opacity var(--transition);
+}
+
 .admin .kpi-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
-    box-shadow: var(--shadow-sm);
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    box-shadow:
+        var(--shadow-sm),
+        0 0 0 1px color-mix(in srgb, var(--accent) 6%, transparent);
+    transform: translateY(-1px);
+}
+
+.admin .kpi-card:hover::before {
+    opacity: 0.85;
 }
 
 .admin .kpi-card--alert {
-    border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+    border-color: color-mix(in srgb, var(--warning) 32%, var(--border));
     background: linear-gradient(
-        160deg,
-        color-mix(in srgb, var(--warning) 6%, var(--surface-raised)) 0%,
-        var(--surface-raised) 55%
+        165deg,
+        color-mix(in srgb, var(--warning) 5%, var(--surface-raised)) 0%,
+        var(--surface-raised) 58%
     );
+}
+
+.admin .kpi-card--alert::before {
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--warning) 80%, var(--danger)),
+        var(--warning)
+    );
+    opacity: 0.7;
 }
 
 .admin .kpi-card__label {
     font-weight: 600;
     letter-spacing: 0.02em;
+    color: var(--text-muted);
 }
 
 .admin .kpi-card__value {
@@ -455,42 +572,109 @@
 
 .admin .kpi-card__delta {
     font-weight: 600;
-}
-
-.admin .kpi-card__delta--warning {
-    color: var(--warning);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
 }
 
 .admin .kpi-card__delta:hover {
     color: var(--accent-hover);
 }
 
+.admin .kpi-card__delta--warning {
+    color: var(--warning);
+}
+
+.admin .kpi-card__delta--warning:hover {
+    color: color-mix(in srgb, var(--warning) 75%, var(--text));
+}
+
+/* Badges — fondos semánticos suaves, texto legible (no neon puro) */
+.admin .badge {
+    font-weight: 700;
+    border-width: 1px;
+}
+
 .admin .badge--primary {
-    background-color: color-mix(in srgb, var(--primary) 16%, var(--surface));
+    background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
+    border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
     color: var(--text);
+}
+
+.admin .badge--accent {
+    background-color: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    color: var(--text);
+}
+
+.admin .badge--success {
+    background-color: color-mix(in srgb, var(--success) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--success) 22%, var(--border));
+    color: color-mix(in srgb, var(--success) 72%, var(--text));
+}
+
+.admin .badge--warning {
+    background-color: color-mix(in srgb, var(--warning) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--warning) 22%, var(--border));
+    color: color-mix(in srgb, var(--warning) 78%, var(--text));
+}
+
+.admin .badge--danger {
+    background-color: color-mix(in srgb, var(--danger) 9%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 20%, var(--border));
+    color: color-mix(in srgb, var(--danger) 75%, var(--text));
 }
 
 .admin .pagination__link--active {
     background-color: var(--primary);
     border-color: var(--primary);
+    color: var(--primary-contrast);
+    box-shadow: 0 0 10px var(--admin-neon-glow);
 }
 
-/* - Dark theme refinements - */
+/* --------------------------------------------------------------------------
+   Tema oscuro — refuerzo de contraste sin exceso de brillo
+   -------------------------------------------------------------------------- */
 
 [data-theme="dark"] .admin {
+    --admin-neon-glow: color-mix(in srgb, var(--accent) 22%, transparent);
+    --admin-surface-glass: color-mix(in srgb, var(--surface) 88%, transparent);
+
     background-image:
-        radial-gradient(ellipse 100% 70% at 50% -15%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 50%),
+        radial-gradient(ellipse 95% 65% at 50% -12%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 50%),
         linear-gradient(180deg, var(--background-top) 0%, var(--background) 50%, var(--background-bottom) 100%);
+}
+
+[data-theme="dark"] .admin-sidebar {
+    box-shadow:
+        var(--shadow-md),
+        inset -1px 0 0 color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 [data-theme="dark"] .admin-sidebar__brand {
     background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--surface-raised) 85%, var(--primary-muted)) 0%,
+        color-mix(in srgb, var(--surface-raised) 80%, var(--primary-muted)) 0%,
         var(--surface-raised) 100%
     );
 }
 
 [data-theme="dark"] .admin-topbar {
-    background-color: color-mix(in srgb, var(--surface) 90%, transparent);
+    background-color: var(--admin-surface-glass);
+    box-shadow:
+        var(--shadow-xs),
+        0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+[data-theme="dark"] .admin .table td a {
+    color: var(--text);
+}
+
+[data-theme="dark"] .admin .table td a:hover {
+    color: var(--accent-hover);
+}
+
+[data-theme="dark"] .admin .badge--primary {
+    background-color: color-mix(in srgb, var(--primary) 14%, var(--surface));
+    color: var(--text);
 }

@@ -3,14 +3,31 @@
 @section('title', 'Tienda — Le Cameleon')
 
 @section('content')
+@php
+    $categories = $filterOptions['categories'] ?? collect();
+    $eraDecades = $filterOptions['era_decades'] ?? collect();
+    $conditionGrades = $filterOptions['condition_grades'] ?? [];
+    $conditionLabels = [
+        'mint' => 'Como nuevo',
+        'excellent' => 'Excelente',
+        'good' => 'Bueno',
+        'fair' => 'Aceptable',
+        'poor' => 'Usado',
+    ];
+
+    $activeCategories = array_values(array_filter((array) ($filters['category'] ?? request('category', []))));
+    $activeEras = array_values(array_filter((array) ($filters['era_decade'] ?? request('era_decade', []))));
+    $activeConditions = array_values(array_filter((array) ($filters['condition_grade'] ?? request('condition_grade', []))));
+    $activeMinRating = $filters['min_rating'] ?? request('min_rating');
+
+    $activeFilterCount = count($activeCategories)
+        + count($activeEras)
+        + count($activeConditions)
+        + ($activeMinRating !== null && $activeMinRating !== '' ? 1 : 0)
+        + (filled($filters['q'] ?? request('q')) ? 1 : 0);
+@endphp
 <div class="container shop-layout" x-data="filterPanel()">
     <aside class="shop-layout__sidebar">
-        @php
-            $activeFilterCount = count((array) request('category', []))
-                + count((array) request('era', []))
-                + count((array) request('condition', []))
-                + (request()->filled('min_rating') ? 1 : 0);
-        @endphp
         <button type="button" class="filter-panel__toggle" @click="toggle()" :aria-expanded="open">
             <svg class="filter-panel__toggle-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h10"/>
@@ -26,37 +43,48 @@
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel__clear">Limpiar</a>
             </div>
 
+            @if (filled($filters['q'] ?? request('q')))
+                <input type="hidden" name="q" value="{{ $filters['q'] ?? request('q') }}">
+            @endif
+            @if (filled($filters['sort'] ?? request('sort')))
+                <input type="hidden" name="sort" value="{{ $filters['sort'] ?? request('sort') }}">
+            @endif
+
             <details class="filter-panel__group" open>
                 <summary class="filter-panel__label">Categoría</summary>
                 <div class="filter-panel__options">
-                    @foreach ($categories ?? ['Ropa', 'Accesorios', 'Calzado', 'Hogar'] as $cat)
+                    @forelse ($categories as $cat)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="category[]" value="{{ is_object($cat) ? $cat->slug : strtolower($cat) }}" {{ in_array(is_object($cat) ? $cat->slug : strtolower($cat), (array) request('category', [])) ? 'checked' : '' }}>
-                            {{ is_object($cat) ? $cat->name : $cat }}
+                            <input type="checkbox" name="category[]" value="{{ $cat->slug }}" {{ in_array($cat->slug, $activeCategories, true) ? 'checked' : '' }}>
+                            {{ $cat->name }}
                         </label>
-                    @endforeach
+                    @empty
+                        <p class="text-muted">Sin categorías disponibles.</p>
+                    @endforelse
                 </div>
             </details>
 
             <details class="filter-panel__group" open>
                 <summary class="filter-panel__label">Época</summary>
                 <div class="filter-panel__options filter-panel__options--grid">
-                    @foreach (['1960s', '1970s', '1980s', '1990s', '2000s'] as $era)
+                    @forelse ($eraDecades as $era)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="era[]" value="{{ $era }}" {{ in_array($era, (array) request('era', [])) ? 'checked' : '' }}>
+                            <input type="checkbox" name="era_decade[]" value="{{ $era }}" {{ in_array($era, $activeEras, true) ? 'checked' : '' }}>
                             {{ $era }}
                         </label>
-                    @endforeach
+                    @empty
+                        <p class="text-muted">Sin épocas disponibles.</p>
+                    @endforelse
                 </div>
             </details>
 
             <details class="filter-panel__group" open>
                 <summary class="filter-panel__label">Condición</summary>
                 <div class="filter-panel__options filter-panel__options--grid">
-                    @foreach (['Excelente', 'Muy bueno', 'Bueno', 'Aceptable'] as $cond)
+                    @foreach ($conditionGrades as $grade)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="condition[]" value="{{ strtolower(str_replace(' ', '-', $cond)) }}" {{ in_array(strtolower(str_replace(' ', '-', $cond)), (array) request('condition', [])) ? 'checked' : '' }}>
-                            {{ $cond }}
+                            <input type="checkbox" name="condition_grade[]" value="{{ $grade->value }}" {{ in_array($grade->value, $activeConditions, true) ? 'checked' : '' }}>
+                            {{ $conditionLabels[$grade->value] ?? ucfirst($grade->value) }}
                         </label>
                     @endforeach
                 </div>
@@ -71,7 +99,7 @@
                                 type="radio"
                                 name="min_rating"
                                 value="{{ $stars }}"
-                                {{ (string) request('min_rating', $filters['min_rating'] ?? '') === (string) $stars ? 'checked' : '' }}
+                                {{ (string) $activeMinRating === (string) $stars ? 'checked' : '' }}
                             >
                             {{ $stars }} ★ o más
                         </label>
@@ -100,17 +128,21 @@
         @if ($activeFilterCount > 0)
             <div class="shop-active-filters" aria-label="Filtros activos">
                 <span class="shop-active-filters__label">Filtros:</span>
-                @foreach ((array) request('category', []) as $catSlug)
-                    <span class="shop-active-filters__chip">{{ $catSlug }}</span>
+                @if (filled($filters['q'] ?? request('q')))
+                    <span class="shop-active-filters__chip">«{{ $filters['q'] ?? request('q') }}»</span>
+                @endif
+                @foreach ($activeCategories as $catSlug)
+                    @php $catLabel = $categories->firstWhere('slug', $catSlug)?->name ?? $catSlug; @endphp
+                    <span class="shop-active-filters__chip">{{ $catLabel }}</span>
                 @endforeach
-                @foreach ((array) request('era', []) as $eraVal)
+                @foreach ($activeEras as $eraVal)
                     <span class="shop-active-filters__chip">{{ $eraVal }}</span>
                 @endforeach
-                @foreach ((array) request('condition', []) as $condVal)
-                    <span class="shop-active-filters__chip">{{ str_replace('-', ' ', $condVal) }}</span>
+                @foreach ($activeConditions as $condVal)
+                    <span class="shop-active-filters__chip">{{ $conditionLabels[$condVal] ?? $condVal }}</span>
                 @endforeach
-                @if (request()->filled('min_rating'))
-                    <span class="shop-active-filters__chip">{{ request('min_rating') }} ★+</span>
+                @if ($activeMinRating !== null && $activeMinRating !== '')
+                    <span class="shop-active-filters__chip">{{ $activeMinRating }} ★+</span>
                 @endif
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="shop-active-filters__clear">Limpiar todo</a>
             </div>
@@ -119,7 +151,7 @@
         <div class="shop-toolbar">
             <div class="shop-toolbar__meta">
                 @php
-                    $total = $products->total() ?? count($products ?? []);
+                    $total = $products->total() ?? 0;
                 @endphp
                 <p class="shop-toolbar__count">
                     <span class="shop-toolbar__count-value">{{ $total }}</span>
@@ -131,7 +163,15 @@
                 @if (($hasActiveFilters ?? false) && Route::has('account.saved-searches.store'))
                     <form method="POST" action="{{ route('account.saved-searches.store') }}" class="shop-toolbar__save">
                         @csrf
-                        <input type="hidden" name="query_params" value="{{ json_encode($filters ?? []) }}">
+                        @foreach ($filters ?? [] as $key => $value)
+                            @if (is_array($value))
+                                @foreach ($value as $entry)
+                                    <input type="hidden" name="query_params[{{ $key }}][]" value="{{ $entry }}">
+                                @endforeach
+                            @elseif ($value !== null && $value !== '')
+                                <input type="hidden" name="query_params[{{ $key }}]" value="{{ $value }}">
+                            @endif
+                        @endforeach
                         <input type="text" name="name" class="form-input shop-toolbar__save-input" placeholder="Nombre de la búsqueda" maxlength="120" required>
                         <button type="submit" class="btn btn--ghost btn--sm">Guardar búsqueda</button>
                     </form>
@@ -144,10 +184,10 @@
                     @php
                         $base = Route::has('shop.index') ? route('shop.index') : '#';
                         $sortQuery = collect($filters ?? request()->only(['q', 'category', 'brand', 'era_decade', 'condition_grade', 'size_label', 'color', 'price_min', 'price_max', 'in_stock', 'min_rating']))
-                            ->filter(fn ($v) => $v !== null && $v !== '')
+                            ->filter(fn ($v) => $v !== null && $v !== '' && $v !== [])
                             ->all();
                         $sortUrl = fn (string $sort) => $base.'?'.http_build_query(array_merge($sortQuery, ['sort' => $sort]));
-                        $currentSort = request('sort', $filters['sort'] ?? 'newest');
+                        $currentSort = $filters['sort'] ?? request('sort', 'newest');
                     @endphp
                     <option value="{{ $sortUrl('newest') }}" {{ in_array($currentSort, ['newest', 'new', ''], true) ? 'selected' : '' }}>Más recientes</option>
                     <option value="{{ $sortUrl('price_asc') }}" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Precio: menor a mayor</option>
@@ -157,32 +197,14 @@
             </div>
         </div>
 
-        @php
-            $items = $products ?? collect([
-                (object) ['id' => 1, 'slug' => 'chaqueta-denim-80s', 'name' => 'Chaqueta Denim 80s', 'price' => 89.00, 'era' => '1980s', 'condition' => 'Excelente'],
-                (object) ['id' => 2, 'slug' => 'vestido-floral-70s', 'name' => 'Vestido Floral 70s', 'price' => 120.00, 'era' => '1970s', 'condition' => 'Muy bueno'],
-                (object) ['id' => 3, 'slug' => 'bolso-cuero-vintage', 'name' => 'Bolso Cuero Vintage', 'price' => 65.00, 'era' => '1990s', 'condition' => 'Bueno'],
-                (object) ['id' => 4, 'slug' => 'camisa-rayas-60s', 'name' => 'Camisa Rayas 60s', 'price' => 45.00, 'era' => '1960s', 'condition' => 'Excelente'],
-                (object) ['id' => 5, 'slug' => 'falda-plisada-90s', 'name' => 'Falda Plisada 90s', 'price' => 38.00, 'era' => '1990s', 'condition' => 'Muy bueno'],
-                (object) ['id' => 6, 'slug' => 'abrigo-lana-70s', 'name' => 'Abrigo Lana 70s', 'price' => 155.00, 'era' => '1970s', 'condition' => 'Excelente'],
-            ]);
-            if (is_object($items) && method_exists($items, 'items')) {
-                $items = collect($items->items());
-            } elseif (!($items instanceof \Illuminate\Support\Collection)) {
-                $items = collect($items);
-            }
-        @endphp
-
-        @if ($items->count())
+        @if ($products->count())
             <div class="shop-results">
                 <div class="grid-products shop-results__grid">
-                    @foreach ($items as $product)
+                    @foreach ($products as $product)
                         @include('components.product-card', ['product' => $product])
                     @endforeach
                 </div>
-                @if (isset($products) && method_exists($products, 'links'))
-                    <div class="shop-results__pagination pagination">{{ $products->links() }}</div>
-                @endif
+                <div class="shop-results__pagination pagination">{{ $products->links() }}</div>
             </div>
         @else
             <div class="shop-results shop-results--empty">

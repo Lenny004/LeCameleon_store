@@ -36,20 +36,23 @@
         </header>
 
         <div class="account-panel">
-            <form method="POST" action="{{ Route::has('account.update') ? route('account.update') : '#' }}" class="auth-card__form">
+            <form method="POST" action="{{ route('account.profile.update') }}" class="auth-card__form">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label class="form-label" for="name">Nombre</label>
-                    <input type="text" id="name" name="name" class="form-input" value="{{ old('name', auth()->user()->name ?? '') }}">
+                    <input type="text" id="name" name="name" class="form-input @error('name') form-input--error @enderror" value="{{ old('name', auth()->user()->name ?? '') }}" required>
+                    @error('name')<span class="form-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" class="form-input" value="{{ old('email', auth()->user()->email ?? '') }}">
+                    <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email', auth()->user()->email ?? '') }}" required>
+                    @error('email')<span class="form-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" value="{{ old('phone', auth()->user()->phone ?? '') }}">
+                    <input type="tel" id="phone" name="phone" class="form-input @error('phone') form-input--error @enderror" value="{{ old('phone', auth()->user()->phone ?? '') }}">
+                    @error('phone')<span class="form-error">{{ $message }}</span>@enderror
                 </div>
                 <button type="submit" class="btn btn--primary">Guardar cambios</button>
             </form>

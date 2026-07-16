@@ -1,10 +1,15 @@
 @extends('layouts.guest')
 
+@section('title', 'Crear cuenta — Le Cameleon')
+
 @section('content')
 <div class="auth-page">
-    <div class="auth-card">
-        <h1 class="auth-card__title">Crear cuenta</h1>
-        <p class="auth-card__subtitle">Únete y guarda tus favoritos</p>
+    <div class="auth-card auth-card--register">
+        <header class="auth-card__head">
+            <span class="auth-card__badge" aria-hidden="true">&#10024;</span>
+            <h1 class="auth-card__title">Crear cuenta</h1>
+            <p class="auth-card__subtitle">Únete y guarda tus favoritos</p>
+        </header>
 
         <form method="POST" action="{{ Route::has('register') ? route('register') : '#' }}" class="auth-card__form">
             @csrf

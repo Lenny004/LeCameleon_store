@@ -49,35 +49,45 @@ class CatalogService
         }
 
         if (! empty($filters['category'])) {
-            $category = Category::query()
-                ->where('slug', $filters['category'])
-                ->orWhere('id', $filters['category'])
-                ->first();
+            $values = is_array($filters['category']) ? $filters['category'] : [$filters['category']];
+            $categoryIds = Category::query()
+                ->where(function (Builder $builder) use ($values) {
+                    $builder->whereIn('slug', $values)->orWhereIn('id', $values);
+                })
+                ->pluck('id');
 
-            if ($category) {
-                $query->where('category_id', $category->id);
+            if ($categoryIds->isNotEmpty()) {
+                $query->whereIn('category_id', $categoryIds);
             }
         }
 
         if (! empty($filters['brand'])) {
-            $brand = Brand::query()
-                ->where('slug', $filters['brand'])
-                ->orWhere('id', $filters['brand'])
-                ->first();
+            $values = is_array($filters['brand']) ? $filters['brand'] : [$filters['brand']];
+            $brandIds = Brand::query()
+                ->where(function (Builder $builder) use ($values) {
+                    $builder->whereIn('slug', $values)->orWhereIn('id', $values);
+                })
+                ->pluck('id');
 
-            if ($brand) {
-                $query->where('brand_id', $brand->id);
+            if ($brandIds->isNotEmpty()) {
+                $query->whereIn('brand_id', $brandIds);
             }
         }
 
         if (! empty($filters['era_decade'])) {
-            $query->where('era_decade', $filters['era_decade']);
+            $values = is_array($filters['era_decade']) ? $filters['era_decade'] : [$filters['era_decade']];
+            $query->whereIn('era_decade', $values);
         }
 
         if (! empty($filters['condition_grade'])) {
-            $grade = ConditionGrade::tryFrom((string) $filters['condition_grade']);
-            if ($grade) {
-                $query->where('condition_grade', $grade);
+            $values = is_array($filters['condition_grade']) ? $filters['condition_grade'] : [$filters['condition_grade']];
+            $grades = collect($values)
+                ->map(fn ($value) => ConditionGrade::tryFrom((string) $value))
+                ->filter()
+                ->all();
+
+            if ($grades !== []) {
+                $query->whereIn('condition_grade', $grades);
             }
         }
 
@@ -274,6 +284,7 @@ class CatalogService
             'price_desc' => $query->orderByDesc('price'),
             'name' => $query->orderBy('name'),
             'rating' => $query->orderByDesc('approved_reviews_avg')->orderByDesc('approved_reviews_count'),
+            'new', 'newest' => $query->orderByDesc('published_at'),
             default => $query->orderByDesc('published_at'),
         };
     }

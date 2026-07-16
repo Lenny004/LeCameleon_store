@@ -1,16 +1,36 @@
+/* ==========================================================================
+   Acordeón FAQ — preguntas frecuentes con acento neón claro
+   ========================================================================== */
+
 .faq {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 }
 
+/* Ítem del acordeón: borde reactivo y barra lateral al abrir */
 .faq__item {
+    position: relative;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background-color: var(--surface);
     overflow: hidden;
     box-shadow: var(--shadow-xs);
-    transition: border-color var(--transition), box-shadow var(--transition);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background-color var(--transition);
+}
+
+.faq__item::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--primary));
+    opacity: 0;
+    transition: opacity var(--transition);
 }
 
 .faq__item:hover {
@@ -18,10 +38,18 @@
 }
 
 .faq__item--open {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
-    box-shadow: var(--shadow-sm);
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+    box-shadow:
+        var(--shadow-sm),
+        0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent);
+    background-color: color-mix(in srgb, var(--accent-soft) 35%, var(--surface));
 }
 
+.faq__item--open::before {
+    opacity: 1;
+}
+
+/* Botón de pregunta — cabecera clickeable del ítem */
 .faq__question {
     display: flex;
     align-items: center;
@@ -42,33 +70,49 @@
     );
     border: none;
     cursor: pointer;
-    transition: color var(--transition), background var(--transition);
-}
-
-.faq__item--open .faq__question {
-    color: var(--text);
-    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    transition:
+        color var(--transition),
+        background var(--transition);
 }
 
 .faq__question:hover {
     color: var(--accent-hover);
 }
 
+.faq__question:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: calc(var(--focus-ring-offset) * -1);
+}
+
+.faq__item--open .faq__question {
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+/* Icono chevron con fondo suave al abrir */
 .faq__icon {
     flex-shrink: 0;
     width: 1.25rem;
     height: 1.25rem;
+    padding: 0.125rem;
     color: var(--accent);
-    transition: transform var(--transition), color var(--transition);
+    border-radius: var(--radius-full);
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    transition:
+        transform var(--transition),
+        color var(--transition),
+        background-color var(--transition);
 }
 
 .faq__item--open .faq__icon {
     transform: rotate(180deg);
-    color: var(--accent-hover);
+    color: var(--accent-contrast);
+    background-color: var(--accent);
 }
 
+/* Cuerpo de respuesta */
 .faq__answer {
-    padding: 0 var(--space-lg) var(--space-lg);
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
     color: var(--text-muted);
     font-size: 0.9375rem;
     line-height: var(--line-height-relaxed);
@@ -100,6 +144,7 @@
     color: var(--accent);
     font-weight: 600;
     text-decoration: none;
+    transition: color var(--transition);
 }
 
 .faq__answer a:hover {

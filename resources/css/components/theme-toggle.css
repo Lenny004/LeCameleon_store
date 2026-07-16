@@ -1,15 +1,21 @@
+/* ==========================================================================
+   Alternador de tema claro/oscuro
+   Acento neon sutil; icono y borde, no relleno grande.
+   ========================================================================== */
+
 .theme-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.375rem;
+    height: 2.375rem;
     padding: 0;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    background-color: var(--background);
+    background-color: var(--surface);
     color: var(--text-muted);
     cursor: pointer;
+    box-shadow: var(--shadow-xs);
     transition:
         border-color var(--transition),
         background-color var(--transition),
@@ -18,26 +24,37 @@
 }
 
 .theme-toggle:hover {
-    border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
-    background-color: color-mix(in srgb, var(--secondary) 45%, var(--background));
-    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    background-color: var(--accent-soft);
+    color: var(--accent-hover);
 }
 
 .theme-toggle:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.theme-toggle:active {
+    box-shadow: var(--shadow-inset);
 }
 
 .theme-toggle[aria-pressed='true'] {
-    border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
-    color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+    background-color: var(--primary-muted);
+    color: var(--accent-hover);
 }
 
+/* Variante en cabecera */
 .header__theme .theme-toggle {
     width: 2.375rem;
     height: 2.375rem;
     border-radius: var(--radius-sm);
 }
+
+/* ==========================================================================
+   Iconos sol / luna
+   ========================================================================== */
 
 .theme-toggle__icon {
     width: 1.0625rem;

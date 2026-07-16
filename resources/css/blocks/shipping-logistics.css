@@ -1,4 +1,12 @@
-/* Shipping quote calculator, tracking timeline, and delivery warnings */
+/* ==========================================================================
+   Cotización, avisos y rastreo — tienda
+   Tema claro: superficies --surface, tintes suaves con color-mix y tokens
+   semánticos (--warning, --danger, --success, --accent).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Cotización de envío
+   -------------------------------------------------------------------------- */
 
 .shipping-quote {
     padding-block: 0;
@@ -25,6 +33,8 @@
 .shipping-quote__status {
     margin: 0;
     font-size: 0.9375rem;
+    line-height: var(--line-height-snug);
+    color: var(--text-muted);
 }
 
 .shipping-quote__details {
@@ -40,12 +50,13 @@
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-md);
-    border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--border));
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
     background: linear-gradient(
         135deg,
-        color-mix(in srgb, var(--primary) 10%, var(--surface)),
-        color-mix(in srgb, var(--accent) 6%, var(--surface))
+        color-mix(in srgb, var(--accent) 8%, var(--surface)) 0%,
+        var(--surface) 55%
     );
+    box-shadow: var(--shadow-xs);
 }
 
 .shipping-quote__fee-label {
@@ -58,7 +69,9 @@
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-hover);
+    line-height: var(--line-height-tight);
 }
 
 .shipping-quote__meta {
@@ -73,6 +86,7 @@
     justify-content: space-between;
     gap: var(--space-md);
     font-size: 0.9375rem;
+    line-height: var(--line-height-snug);
 }
 
 .shipping-quote__meta-row dt {
@@ -84,14 +98,20 @@
     margin: 0;
     font-weight: 600;
     text-align: right;
+    color: var(--text);
 }
 
 .shipping-quote__footnote {
     margin: 0;
     font-size: 0.875rem;
+    line-height: var(--line-height-base);
 }
 
-/* Delivery warnings (quote + checkout) */
+/* --------------------------------------------------------------------------
+   Avisos de entrega (cotización + checkout)
+   Mismo lenguaje visual que .flash: borde izquierdo semántico y fondo suave.
+   -------------------------------------------------------------------------- */
+
 .shipping-warnings {
     list-style: none;
     padding: 0;
@@ -105,25 +125,32 @@
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
+    border-inline-start-width: 3px;
     font-size: 0.875rem;
+    line-height: var(--line-height-snug);
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: var(--space-2xs);
+    color: var(--text);
+    box-shadow: var(--shadow-xs);
 }
 
 .shipping-warning--info {
-    border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
-    background-color: color-mix(in srgb, var(--primary) 8%, var(--background));
+    border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+    border-inline-start-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 7%, var(--surface));
 }
 
 .shipping-warning--warning {
-    border-color: color-mix(in srgb, #d97706 45%, var(--border));
-    background-color: color-mix(in srgb, #d97706 10%, var(--background));
+    border-color: color-mix(in srgb, var(--warning) 28%, var(--border));
+    border-inline-start-color: var(--warning);
+    background-color: color-mix(in srgb, var(--warning) 9%, var(--surface));
 }
 
 .shipping-warning--critical {
-    border-color: color-mix(in srgb, var(--danger, #dc2626) 50%, var(--border));
-    background-color: color-mix(in srgb, var(--danger, #dc2626) 10%, var(--background));
+    border-color: color-mix(in srgb, var(--danger) 26%, var(--border));
+    border-inline-start-color: var(--danger);
+    background-color: color-mix(in srgb, var(--danger) 7%, var(--surface));
 }
 
 .shipping-warning__title {
@@ -134,7 +161,10 @@
     color: var(--text-muted);
 }
 
-/* Tracking lookup + timeline */
+/* --------------------------------------------------------------------------
+   Búsqueda y detalle de rastreo
+   -------------------------------------------------------------------------- */
+
 .tracking {
     padding-block: var(--space-2xl);
     max-width: 44rem;
@@ -162,6 +192,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background-color: var(--surface);
+    box-shadow: var(--shadow-xs);
     margin-bottom: var(--space-xl);
 }
 
@@ -169,6 +200,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+    align-items: stretch;
 }
 
 .tracking-form__row .form-input {
@@ -176,11 +208,16 @@
     min-width: 0;
 }
 
+.tracking-form__row .btn {
+    flex-shrink: 0;
+}
+
 .tracking-status {
     padding: var(--space-lg);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background-color: var(--surface);
+    box-shadow: var(--shadow-xs);
     margin-bottom: var(--space-lg);
 }
 
@@ -189,20 +226,30 @@
     font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+    color: var(--text);
+    margin: 0;
+    word-break: break-all;
 }
 
 .tracking-status__badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-top: var(--space-sm);
     padding: 0.2rem 0.65rem;
     border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
     font-size: 0.8125rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    background-color: color-mix(in srgb, var(--primary) 15%, var(--background));
-    color: var(--text);
+    line-height: 1.3;
+    background-color: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    color: var(--accent-hover);
 }
+
+/* --------------------------------------------------------------------------
+   Línea de tiempo del envío
+   -------------------------------------------------------------------------- */
 
 .tracking-timeline {
     list-style: none;
@@ -220,50 +267,74 @@
     padding: 0 0 var(--space-lg) var(--space-lg);
 }
 
+.tracking-timeline__item:last-child {
+    padding-bottom: 0;
+}
+
 .tracking-timeline__item::before {
     content: '';
     position: absolute;
-    left: -0.45rem;
+    left: calc(-0.45rem - 1px);
     top: 0.35rem;
     width: 0.65rem;
     height: 0.65rem;
     border-radius: var(--radius-full);
     background-color: var(--border);
-    border: 2px solid var(--background);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 1px var(--border);
+    transition: background-color var(--transition), box-shadow var(--transition);
 }
 
 .tracking-timeline__item--current::before {
-    background-color: var(--primary);
+    background-color: var(--accent);
+    box-shadow:
+        0 0 0 2px var(--surface),
+        0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .tracking-timeline__item--done::before {
-    background-color: var(--accent);
+    background-color: var(--success);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--success) 35%, var(--border));
 }
 
 .tracking-timeline__status {
     font-weight: 700;
     font-size: 0.9375rem;
+    color: var(--text);
+}
+
+.tracking-timeline__item--current .tracking-timeline__status {
+    color: var(--accent-hover);
 }
 
 .tracking-timeline__time {
     display: block;
     font-size: 0.8125rem;
     color: var(--text-muted);
-    margin-top: 0.15rem;
+    margin-top: var(--space-2xs);
+    font-variant-numeric: tabular-nums;
 }
 
 .tracking-timeline__note {
     margin: var(--space-xs) 0 0;
     font-size: 0.875rem;
     color: var(--text-muted);
+    line-height: var(--line-height-snug);
 }
+
+/* --------------------------------------------------------------------------
+   Resultado de entrega y mapa aproximado
+   -------------------------------------------------------------------------- */
 
 .tracking-outcome {
     margin-top: var(--space-lg);
-    padding: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    background-color: color-mix(in srgb, var(--accent) 10%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--success) 28%, var(--border));
+    border-inline-start-width: 3px;
+    border-inline-start-color: var(--success);
+    background-color: color-mix(in srgb, var(--success) 8%, var(--surface));
+    box-shadow: var(--shadow-xs);
 }
 
 .tracking-outcome__label {
@@ -272,7 +343,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
-    margin-bottom: var(--space-xs);
+    margin: 0 0 var(--space-xs);
 }
 
 .tracking-map {
@@ -282,10 +353,18 @@
 .tracking-map__placeholder {
     aspect-ratio: 16 / 9;
     border-radius: var(--radius-md);
-    border: 1px dashed var(--border);
+    border: 1px dashed color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
     background:
-        radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 55%),
-        linear-gradient(135deg, var(--secondary) 0%, color-mix(in srgb, var(--primary) 6%, var(--background)) 100%);
+        radial-gradient(
+            circle at 50% 45%,
+            color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            var(--surface) 0%,
+            color-mix(in srgb, var(--secondary) 65%, var(--surface)) 100%
+        );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,21 +379,31 @@
     font-size: 0.8125rem;
     color: var(--text-muted);
     font-family: var(--font-mono, monospace);
+    font-variant-numeric: tabular-nums;
 }
 
-/* Checkout live shipping quote block */
+/* --------------------------------------------------------------------------
+   Cotización en vivo durante el checkout
+   -------------------------------------------------------------------------- */
+
 .checkout-shipping-quote {
     margin-top: var(--space-md);
+    padding: var(--space-md);
     padding-top: var(--space-md);
     border-top: 1px solid var(--border);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     font-size: 0.875rem;
+    line-height: var(--line-height-snug);
+    background-color: color-mix(in srgb, var(--accent) 4%, var(--surface));
 }
 
 .checkout-shipping-quote__eta {
     color: var(--text-muted);
     margin-top: var(--space-xs);
+    font-size: 0.8125rem;
 }
 
+/* Alpine.js: ocultar hasta hidratar */
 [x-cloak] {
     display: none !important;
 }
