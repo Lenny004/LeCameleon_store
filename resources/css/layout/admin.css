@@ -117,25 +117,25 @@
 }
 
 .admin-sidebar__link:hover {
-    background-color: color-mix(in srgb, var(--primary) 7%, var(--surface));
+    background-color: var(--accent-soft);
     border-color: color-mix(in srgb, var(--border) 60%, transparent);
 }
 
 .admin-sidebar__link:hover svg {
     opacity: 1;
-    color: var(--primary);
+    color: var(--accent-hover);
 }
 
 .admin-sidebar__link--active {
-    background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
-    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
-    color: var(--primary);
+    background-color: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    color: var(--text);
     font-weight: 600;
 }
 
 .admin-sidebar__link--active svg {
     opacity: 1;
-    color: var(--accent);
+    color: var(--accent-hover);
 }
 
 .admin-sidebar__footer {
@@ -172,9 +172,9 @@
     gap: var(--space-md);
     min-height: var(--header-height);
     padding-inline: var(--space-lg);
-    background-color: color-mix(in srgb, var(--surface-raised) 88%, transparent);
+    background-color: color-mix(in srgb, var(--surface) 92%, transparent);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow-xs);
 }
 
@@ -205,9 +205,9 @@
 }
 
 .admin-topbar__menu-toggle:hover {
-    background-color: color-mix(in srgb, var(--primary) 6%, var(--surface));
-    border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
-    color: var(--primary);
+    background-color: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    color: var(--text);
 }
 
 @media (min-width: 64rem) {
@@ -449,7 +449,7 @@
 }
 
 .admin .kpi-card__value {
-    color: var(--primary);
+    color: var(--text);
     font-variation-settings: 'SOFT' 40, 'WONK' 0;
 }
 
@@ -466,8 +466,8 @@
 }
 
 .admin .badge--primary {
-    background-color: color-mix(in srgb, var(--primary) 18%, var(--surface));
-    color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 16%, var(--surface));
+    color: var(--text);
 }
 
 .admin .pagination__link--active {

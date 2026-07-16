@@ -37,7 +37,7 @@
 .empty-state__icon {
     width: 2.5rem;
     height: 2.5rem;
-    color: var(--primary);
+    color: var(--accent-hover);
 }
 
 .empty-state__title {

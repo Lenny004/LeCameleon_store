@@ -1,8 +1,8 @@
 /* - Product page shell - */
 
 .product-page {
-    --product-warm-surface: color-mix(in srgb, var(--surface) 90%, var(--secondary) 10%);
-    --product-accent-olive: color-mix(in srgb, var(--primary) 70%, var(--accent) 30%);
+    --product-warm-surface: var(--surface);
+    --product-accent-olive: var(--accent-hover);
 
     padding-block: var(--space-lg) var(--space-2xl);
 }
