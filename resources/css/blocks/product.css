@@ -1,4 +1,4 @@
-/* ── Product page shell ─────────────────────────────────────────── */
+/* - Product page shell - */
 
 .product-page {
     --product-warm-surface: color-mix(in srgb, var(--surface) 90%, var(--secondary) 10%);
@@ -11,7 +11,7 @@
     margin-bottom: var(--space-lg);
 }
 
-/* ── Main two-column layout (gallery left / content right) ─────── */
+/* - Main two-column layout (gallery left / content right) - */
 
 .product-detail {
     display: grid;
@@ -54,7 +54,7 @@
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
-/* ── Gallery ────────────────────────────────────────────────────── */
+/* - Gallery - */
 
 .product-gallery {
     display: flex;
@@ -167,7 +167,7 @@
     object-fit: cover;
 }
 
-/* ── Header (title hierarchy + meta) ────────────────────────────── */
+/* - Header (title hierarchy + meta) - */
 
 .product-header {
     display: flex;
@@ -236,7 +236,7 @@
     margin-top: var(--space-xs);
 }
 
-/* ── Buy box (Amazon-style sticky CTA) ─────────────────────────── */
+/* - Buy box (Amazon-style sticky CTA) - */
 
 .product-buybox {
     background-color: var(--surface-raised);
@@ -404,7 +404,7 @@
     transform: translateY(0);
 }
 
-/* ── Content panels (description, specs, offers) ───────────────── */
+/* - Content panels (description, specs, offers) - */
 
 .product-panel {
     background-color: var(--surface);
@@ -472,7 +472,7 @@
     color: var(--text-muted);
 }
 
-/* ── Star ratings ───────────────────────────────────────────────── */
+/* - Star ratings - */
 
 .product-rating {
     display: inline-flex;
@@ -493,7 +493,7 @@
     color: var(--accent);
 }
 
-/* ── Related products row ───────────────────────────────────────── */
+/* - Related products row - */
 
 .product-recs {
     padding-block: var(--space-2xl);
@@ -548,7 +548,7 @@
     }
 }
 
-/* ── Reviews section ────────────────────────────────────────────── */
+/* - Reviews section - */
 
 .product-reviews {
     padding-block: var(--space-2xl);
@@ -789,7 +789,7 @@
     margin-top: var(--space-md);
 }
 
-/* ── Legacy aliases (account orders) ─────────────────────────────── */
+/* - Legacy aliases (account orders) - */
 
 .product-info__specs {
     display: grid;

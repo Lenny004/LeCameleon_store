@@ -24,16 +24,17 @@
     outline-offset: var(--focus-ring-offset);
 }
 
-/* Primary — neon brand */
+/* Primary — neon brand accent */
 .btn--primary {
     background-color: var(--primary);
     color: var(--primary-contrast);
-    box-shadow: var(--shadow-xs);
+    border-color: color-mix(in srgb, var(--primary) 80%, var(--text) 20%);
+    box-shadow: 0 1px 2px rgb(4 3 22 / 0.08);
 }
 
 .btn--primary:hover {
     background-color: var(--primary-hover);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent);
 }
 
 .btn--primary:active {

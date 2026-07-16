@@ -128,12 +128,15 @@
                     'size' => 'sm',
                 ])
             </div>
-            <button type="button" class="mobile-nav__close" @click="close()" aria-label="Cerrar menú">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-            </button>
+            <div class="mobile-nav__actions">
+                @include('components.theme-toggle')
+                <button type="button" class="mobile-nav__close" @click="close()" aria-label="Cerrar menú">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         @if (Route::has('search') || Route::has('shop.index'))

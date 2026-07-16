@@ -1,4 +1,4 @@
-/* ── Checkout flow — calm steps, sticky summary ── */
+/* - Checkout flow — calm steps, sticky summary - */
 
 .checkout {
     --commerce-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);

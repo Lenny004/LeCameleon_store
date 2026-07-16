@@ -28,13 +28,12 @@ body {
     isolation: isolate;
     background-color: var(--background);
     background-image:
-        radial-gradient(ellipse 140% 90% at 50% -30%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 100% 0%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 45%),
-        radial-gradient(ellipse 60% 45% at 0% 100%, color-mix(in srgb, var(--secondary) 18%, transparent), transparent 50%),
+        radial-gradient(ellipse 120% 70% at 50% -25%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 55%),
+        radial-gradient(ellipse 55% 40% at 100% 0%, color-mix(in srgb, var(--primary) 3%, transparent), transparent 48%),
         linear-gradient(
-            175deg,
+            180deg,
             var(--background-top) 0%,
-            var(--background) 38%,
+            var(--background) 45%,
             var(--background-bottom) 100%
         );
     background-attachment: fixed;

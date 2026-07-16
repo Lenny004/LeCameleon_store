@@ -1,4 +1,4 @@
-/* ── Admin shell: surfaces aligned with tokens.css ── */
+/* - Admin shell: surfaces aligned with tokens.css - */
 
 .admin {
     font-family: var(--font-body);
@@ -21,7 +21,7 @@
     min-height: 100vh;
 }
 
-/* ── Sidebar ── */
+/* - Sidebar - */
 
 .admin-sidebar {
     position: fixed;
@@ -30,7 +30,7 @@
     z-index: var(--z-overlay);
     width: var(--sidebar-width);
     background-color: var(--surface-raised);
-    border-right: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+    border-right: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
@@ -53,12 +53,8 @@
     align-items: center;
     min-height: var(--header-height);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border-subtle));
-    background: linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--surface-raised) 88%, var(--accent-soft)) 0%,
-        var(--surface-raised) 100%
-    );
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-raised);
 }
 
 .admin-sidebar__brand .brand-logo {
@@ -148,7 +144,7 @@
     background-color: color-mix(in srgb, var(--surface) 85%, var(--background));
 }
 
-/* ── Main column ── */
+/* - Main column - */
 
 .admin-main {
     flex: 1;
@@ -164,7 +160,7 @@
     }
 }
 
-/* ── Topbar ── */
+/* - Topbar - */
 
 .admin-topbar {
     position: sticky;
@@ -261,7 +257,7 @@
     }
 }
 
-/* ── Content area ── */
+/* - Content area - */
 
 .admin-content {
     flex: 1;
@@ -288,7 +284,7 @@
     }
 }
 
-/* ── Page headers (CRUD views) ── */
+/* - Page headers (CRUD views) - */
 
 .admin-page-header {
     display: flex;
@@ -317,7 +313,7 @@
     line-height: var(--line-height-snug);
 }
 
-/* ── Dashboard ── */
+/* - Dashboard - */
 
 .admin-dashboard {
     display: flex;
@@ -333,7 +329,7 @@
     margin-top: 0;
 }
 
-/* ── Charts ── */
+/* - Charts - */
 
 .admin-charts {
     display: grid;
@@ -368,7 +364,7 @@
     max-height: 16rem;
 }
 
-/* ── Admin-scoped CRUD polish (cards, tables, KPIs) ── */
+/* - Admin-scoped CRUD polish (cards, tables, KPIs) - */
 
 .admin .card {
     background-color: var(--surface-raised);
@@ -479,7 +475,7 @@
     border-color: var(--primary);
 }
 
-/* ── Dark theme refinements ── */
+/* - Dark theme refinements - */
 
 [data-theme="dark"] .admin {
     background-image:

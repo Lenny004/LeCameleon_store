@@ -1,16 +1,16 @@
-/* ── Footer shell ─────────────────────────────────────────────── */
+/* - Footer shell - */
 
 .footer {
     margin-top: auto;
-    background-color: var(--primary);
-    color: color-mix(in srgb, var(--primary-contrast) 82%, transparent);
+    background-color: var(--inverse);
+    color: var(--inverse-muted);
 }
 
-/* ── Top strip ────────────────────────────────────────────────── */
+/* - Top strip - */
 
 .footer__top {
-    border-bottom: 1px solid color-mix(in srgb, var(--primary-contrast) 12%, transparent);
-    background-color: color-mix(in srgb, var(--primary) 88%, var(--accent) 12%);
+    border-bottom: 1px solid color-mix(in srgb, var(--inverse-contrast) 12%, transparent);
+    background-color: color-mix(in srgb, var(--inverse) 92%, var(--accent) 8%);
 }
 
 .footer__top-inner {
@@ -34,7 +34,7 @@
 
 .footer__top-text {
     margin: 0;
-    color: color-mix(in srgb, var(--primary-contrast) 75%, transparent);
+    color: var(--inverse-muted);
 }
 
 .footer__top-link {
@@ -48,7 +48,7 @@
     color: var(--primary);
 }
 
-/* ── Main content ─────────────────────────────────────────────── */
+/* - Main content - */
 
 .footer__inner {
     max-width: var(--container-max);
@@ -97,7 +97,7 @@
     }
 }
 
-/* ── Brand column ─────────────────────────────────────────────── */
+/* - Brand column - */
 
 .footer__brand-mark {
     margin-bottom: var(--space-md);
@@ -112,10 +112,10 @@
     max-width: 26rem;
     font-size: 0.9375rem;
     line-height: 1.55;
-    color: color-mix(in srgb, var(--primary-contrast) 68%, transparent);
+    color: var(--inverse-muted);
 }
 
-/* ── Newsletter ───────────────────────────────────────────────── */
+/* - Newsletter - */
 
 .footer__newsletter {
     margin-top: var(--space-lg);
@@ -128,7 +128,7 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--primary-contrast) 55%, transparent);
+    color: color-mix(in srgb, var(--inverse-contrast) 55%, transparent);
 }
 
 .footer__newsletter-row {
@@ -159,7 +159,7 @@
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
-/* ── Link columns ───────────────────────────────────────────── */
+/* - Link columns - */
 
 .footer__heading {
     margin: 0 0 var(--space-md);
@@ -168,7 +168,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--primary-contrast);
+    color: var(--inverse-contrast);
 }
 
 .footer__links {
@@ -183,7 +183,7 @@
 .footer__link {
     font-size: 0.875rem;
     line-height: 1.4;
-    color: color-mix(in srgb, var(--primary-contrast) 68%, transparent);
+    color: var(--inverse-muted);
     text-decoration: none;
     transition: color var(--transition);
 }
@@ -192,7 +192,7 @@
     color: var(--accent);
 }
 
-/* ── Bottom bar ───────────────────────────────────────────────── */
+/* - Bottom bar - */
 
 .footer__bottom {
     display: flex;
@@ -202,9 +202,9 @@
     gap: var(--space-md);
     margin-top: var(--space-2xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid color-mix(in srgb, var(--primary-contrast) 14%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--inverse-contrast) 14%, transparent);
     font-size: 0.8125rem;
-    color: color-mix(in srgb, var(--primary-contrast) 55%, transparent);
+    color: color-mix(in srgb, var(--inverse-contrast) 55%, transparent);
 }
 
 .footer__copyright {
@@ -218,9 +218,9 @@
 }
 
 .footer__theme .theme-toggle {
-    border-color: color-mix(in srgb, var(--primary-contrast) 22%, transparent);
-    background-color: color-mix(in srgb, var(--primary-contrast) 8%, transparent);
-    color: color-mix(in srgb, var(--primary-contrast) 85%, transparent);
+    border-color: color-mix(in srgb, var(--inverse-contrast) 22%, transparent);
+    background-color: color-mix(in srgb, var(--inverse-contrast) 8%, transparent);
+    color: color-mix(in srgb, var(--inverse-contrast) 85%, transparent);
 }
 
 .footer__theme .theme-toggle:hover {

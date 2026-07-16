@@ -15,8 +15,8 @@
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 60% at 50% 100%, color-mix(in srgb, var(--primary) 12%, transparent), transparent),
-        linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--secondary) 40%, var(--background)) 100%);
+        radial-gradient(ellipse 70% 50% at 50% 100%, color-mix(in srgb, var(--accent) 8%, transparent), transparent),
+        linear-gradient(180deg, var(--background-top) 0%, var(--background) 55%, var(--background-bottom) 100%);
     z-index: 0;
 }
 
@@ -56,7 +56,7 @@
     margin: 0 0 var(--space-xs);
     line-height: 0;
     max-width: min(36rem, 92vw);
-    filter: drop-shadow(0 4px 24px rgb(28 25 20 / 0.12));
+    filter: drop-shadow(0 4px 24px rgb(4 3 22 / 0.1));
 }
 
 .hero__logo .brand-logo {
@@ -91,7 +91,7 @@
 
 .hero--has-image .hero__headline,
 .hero--has-image .hero__tagline {
-    text-shadow: 0 1px 12px rgb(28 25 20 / 0.25);
+    text-shadow: 0 1px 12px rgb(4 3 22 / 0.18);
 }
 
 .hero__cta {
@@ -116,10 +116,8 @@
 }
 
 .featured-strip {
-    --shop-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);
-
     padding-block: var(--space-3xl);
-    background-color: var(--shop-warm-surface);
+    background-color: var(--surface);
     border-block: 1px solid var(--border);
 }
 
@@ -196,7 +194,7 @@
 }
 
 .collection-card:hover {
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -233,7 +231,7 @@
 
 .collection-card__count {
     font-size: 0.875rem;
-    color: var(--primary);
+    color: var(--accent-hover);
     font-weight: 600;
 }
 

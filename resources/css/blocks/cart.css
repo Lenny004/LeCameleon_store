@@ -1,4 +1,4 @@
-/* ── Cart page — sticky summary ── */
+/* - Cart page — sticky summary - */
 
 .cart-page {
     --commerce-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);
@@ -31,7 +31,7 @@
     }
 }
 
-/* ── Cart items list ── */
+/* - Cart items list - */
 .cart-items {
     display: flex;
     flex-direction: column;
@@ -179,7 +179,7 @@
     text-align: center;
 }
 
-/* ── Order summary (Amazon-style sticky) ── */
+/* - Order summary (Amazon-style sticky) - */
 .cart-summary,
 .order-summary {
     padding: var(--space-lg);

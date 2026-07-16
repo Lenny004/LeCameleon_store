@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         (function () {
-            var k = 'lecameleon-theme';
+            var k = 'lecameleon-theme-v2';
             var t = localStorage.getItem(k);
-            document.documentElement.setAttribute('data-theme', t === 'dark' || t === 'light' ? t : 'light');
+            document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
         })();
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])

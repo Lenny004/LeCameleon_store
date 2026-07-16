@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     gap: var(--space-md);
-    background-color: var(--surface-raised);
+    background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);

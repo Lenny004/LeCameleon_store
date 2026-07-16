@@ -6,8 +6,13 @@ import { initAdminCharts } from './modules/admin-charts.js';
 window.Alpine = Alpine;
 
 Alpine.data('themeToggle', () => ({
+    isDark: document.documentElement.getAttribute('data-theme') === 'dark',
+    sync() {
+        this.isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    },
     toggle() {
         toggleTheme();
+        this.sync();
     },
 }));
 

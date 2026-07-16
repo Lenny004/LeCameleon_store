@@ -1,4 +1,4 @@
-/* ── Header shell ─────────────────────────────────────────────── */
+/* - Header shell - */
 
 .header {
     --header-utility-height: 2rem;
@@ -9,17 +9,17 @@
     top: 0;
     z-index: 100;
     background-color: var(--surface);
-    border-bottom: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
-    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-xs);
 }
 
-/* ── Utility bar ──────────────────────────────────────────────── */
+/* - Utility bar - */
 
 .header__utility {
     display: none;
     height: var(--header-utility-height);
-    background-color: var(--primary);
-    color: color-mix(in srgb, var(--primary-contrast) 88%, transparent);
+    background-color: var(--inverse);
+    color: color-mix(in srgb, var(--inverse-contrast) 88%, transparent);
 }
 
 @media (min-width: 48rem) {
@@ -56,7 +56,7 @@
 }
 
 .header__utility-text--muted {
-    color: color-mix(in srgb, var(--primary-contrast) 65%, transparent);
+    color: color-mix(in srgb, var(--inverse-contrast) 65%, transparent);
 }
 
 .header__utility-icon {
@@ -64,7 +64,7 @@
     color: var(--accent);
 }
 
-/* ── Main bar ─────────────────────────────────────────────────── */
+/* - Main bar - */
 
 .header__main {
     height: var(--header-main-height);
@@ -95,7 +95,7 @@
     }
 }
 
-/* ── Logo slot ────────────────────────────────────────────────── */
+/* - Logo slot - */
 
 .header__logo {
     display: inline-flex;
@@ -119,7 +119,7 @@
     }
 }
 
-/* ── Search ───────────────────────────────────────────────────── */
+/* - Search - */
 
 .header__search {
     display: none;
@@ -133,15 +133,15 @@
 }
 
 .header__search-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 .header__search-field {
@@ -198,7 +198,7 @@
     filter: brightness(1.06);
 }
 
-/* ── Actions ──────────────────────────────────────────────────── */
+/* - Actions - */
 
 .header__actions {
     display: flex;
@@ -288,13 +288,7 @@
 }
 
 .header__theme {
-    display: none;
-}
-
-@media (min-width: 64rem) {
-    .header__theme {
-        display: block;
-    }
+    display: block;
 }
 
 .header__menu-toggle {
@@ -323,13 +317,13 @@
     }
 }
 
-/* ── Subnav ───────────────────────────────────────────────────── */
+/* - Subnav - */
 
 .header__subnav {
     display: none;
     height: var(--header-subnav-height);
-    background-color: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
-    border-top: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
+    background-color: var(--background);
+    border-top: 1px solid var(--border);
 }
 
 @media (min-width: 64rem) {
@@ -372,7 +366,7 @@
     border-bottom-color: var(--accent);
 }
 
-/* ── Mobile nav ───────────────────────────────────────────────── */
+/* - Mobile nav - */
 
 .header__overlay {
     position: fixed;
@@ -415,6 +409,13 @@
 .mobile-nav__brand {
     margin: 0;
     min-width: 0;
+}
+
+.mobile-nav__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
 }
 
 .mobile-nav__brand .brand-logo {

@@ -1,8 +1,4 @@
-/* Logos legacy (recursos/img):
-   - compact    → logo_icon.png (más cuadrado / estrecho)
-   - horizontal → logo.png (header estándar)
-   - wide       → logo3.png (hero / momentos grandes)
-*/
+/* Brand logos (legacy assets via public/images/brand) */
 
 .brand-logo {
     display: inline-flex;
@@ -15,7 +11,7 @@
     line-height: 0;
     border-radius: var(--radius-md);
     background-color: #000;
-    padding: 0.2rem 0.35rem;
+    padding: 0.25rem 0.4rem;
     transition: opacity var(--transition), transform var(--transition);
 }
 
@@ -32,8 +28,7 @@ a.brand-logo:hover {
     flex-shrink: 1;
 }
 
-/* ── Auto: elige asset según ancho de viewport ── */
-
+/* Auto: pick asset by viewport */
 .brand-logo--auto .brand-logo__img--horizontal,
 .brand-logo--auto .brand-logo__img--wide {
     display: none;
@@ -73,8 +68,6 @@ a.brand-logo:hover {
     }
 }
 
-/* ── Variantes explícitas ── */
-
 .brand-logo--compact .brand-logo__img {
     height: 3rem;
 }
@@ -86,8 +79,6 @@ a.brand-logo:hover {
 .brand-logo--wide .brand-logo__img {
     height: 3.5rem;
 }
-
-/* ── Tamaños ── */
 
 .brand-logo--sm {
     padding: 0.15rem 0.3rem;
@@ -158,10 +149,10 @@ a.brand-logo:hover {
 }
 
 .brand-logo__fallback span {
-    color: #e8a35c;
+    color: var(--accent);
 }
 
-/* Sobre chrome oscuro (footer / sidebar) */
+/* On dark chrome (footer / inverse surfaces) */
 .brand-logo--inverted,
 .brand-logo--bare {
     background-color: transparent;
