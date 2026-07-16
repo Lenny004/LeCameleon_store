@@ -1,10 +1,9 @@
-/* ── Guest shell (auth, errors, minimal pages) ── */
+/* Guest shell (auth, errors, minimal pages) */
 .page--guest {
     background:
-        radial-gradient(ellipse 90% 50% at 50% 0%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 58%),
-        radial-gradient(ellipse 55% 45% at 100% 100%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 52%),
-        radial-gradient(ellipse 40% 35% at 0% 80%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 50%),
-        linear-gradient(180deg, var(--background-top) 0%, var(--background-bottom) 100%);
+        radial-gradient(ellipse 90% 55% at 50% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 50%),
+        linear-gradient(180deg, var(--background-top) 0%, var(--background) 48%, var(--background-bottom) 100%);
 }
 
 .guest-shell {
@@ -15,8 +14,22 @@
 
 .guest-shell__header {
     display: flex;
-    justify-content: center;
-    padding: var(--space-xl) var(--space-md) var(--space-sm);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-lg) var(--space-md) var(--space-sm);
+}
+
+.guest-shell__header .brand-logo {
+    flex-shrink: 0;
+}
+
+.guest-shell__theme {
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .guest-shell__main {
@@ -25,7 +38,7 @@
     flex-direction: column;
 }
 
-/* ── Auth pages (login / register) ── */
+/* Auth pages (login / register) */
 .auth-page {
     flex: 1;
     display: flex;
@@ -37,11 +50,11 @@
 .auth-card {
     width: 100%;
     max-width: 26rem;
-    padding: var(--space-2xl);
-    background-color: var(--surface-raised);
+    padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+    background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
 }
@@ -61,17 +74,19 @@
 
 .auth-card__title {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: clamp(1.35rem, 3vw, 1.6rem);
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--space-xs);
+    color: var(--text);
+    margin: 0 0 var(--space-xs);
+    letter-spacing: -0.02em;
 }
 
 .auth-card__subtitle {
     text-align: center;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: var(--text-muted);
-    margin-bottom: var(--space-xl);
+    margin: 0 0 var(--space-xl);
     line-height: var(--line-height-relaxed);
 }
 
@@ -81,27 +96,31 @@
     gap: var(--space-md);
 }
 
+.auth-card__form .btn--primary {
+    margin-top: var(--space-sm);
+}
+
 .auth-card__footer {
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--border);
     text-align: center;
     font-size: 0.875rem;
     color: var(--text-muted);
 }
 
 .auth-card__footer a {
-    color: var(--accent);
+    color: var(--accent-hover);
     font-weight: 600;
     text-decoration: none;
 }
 
 .auth-card__footer a:hover {
     text-decoration: underline;
-    color: var(--accent-hover);
+    color: var(--accent);
 }
 
-/* ── Account area ── */
+/* Account area */
 .account-layout {
     display: grid;
     gap: var(--space-xl);
@@ -137,13 +156,13 @@
 }
 
 .account-nav__link:hover {
-    background-color: var(--primary-muted);
+    background-color: var(--accent-soft);
     color: var(--text);
 }
 
 .account-nav__link--active {
-    background-color: var(--primary-muted);
-    color: var(--primary);
+    background-color: var(--accent-soft);
+    color: var(--accent-hover);
     font-weight: 600;
 }
 
@@ -193,6 +212,7 @@
 
 .account-content__title {
     margin-bottom: var(--space-xs);
+    color: var(--text);
 }
 
 .account-content__lead {
@@ -230,18 +250,19 @@
     color: var(--accent);
 }
 
-/* ── Order cards ── */
+/* Order cards */
 .order-card {
     padding: var(--space-lg);
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xs);
-    transition: box-shadow var(--transition);
+    transition: box-shadow var(--transition), border-color var(--transition);
 }
 
 .order-card:hover {
     box-shadow: var(--shadow-sm);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
 }
 
 .order-card__header {
@@ -257,6 +278,7 @@
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1rem;
+    color: var(--text);
 }
 
 .order-card__date {
@@ -276,16 +298,17 @@
     justify-content: space-between;
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--border);
 }
 
 .order-card__total {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.125rem;
+    color: var(--text);
 }
 
-/* ── Wishlist page ── */
+/* Wishlist page */
 .wishlist-page {
     padding-block: var(--space-xl) var(--space-2xl);
 }
@@ -309,7 +332,7 @@
     color: var(--text-muted);
 }
 
-/* ── Tracking helpers (base blocks in shipping-logistics.css) ── */
+/* Tracking helpers */
 .tracking-form__hint {
     font-size: 0.875rem;
     margin-top: var(--space-xs);
@@ -317,7 +340,7 @@
 }
 
 .tracking-form__hint a {
-    color: var(--accent);
+    color: var(--accent-hover);
     font-weight: 600;
     text-decoration: none;
 }
@@ -340,6 +363,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin: var(--space-xl) 0 var(--space-sm);
+    color: var(--text-muted);
 }
 
 .tracking__meta-label {
@@ -360,6 +384,7 @@
 .tracking-outcome__text {
     margin: 0;
     font-weight: 600;
+    color: var(--text);
 }
 
 .tracking__actions {

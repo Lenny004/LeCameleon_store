@@ -1,22 +1,21 @@
 /* Editorial catalog card — image-first, boutique hover */
 .product-card {
-    --card-accent-olive: color-mix(in srgb, var(--primary) 70%, var(--accent) 30%);
-    --card-accent-rust: var(--accent);
+    --card-accent: var(--accent);
 
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: var(--surface);
+    background-color: var(--surface-raised);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-xs);
     transition: border-color var(--transition), transform var(--transition-slow), box-shadow var(--transition);
 }
 
 .product-card:hover {
-    border-color: color-mix(in srgb, var(--card-accent-olive) 45%, var(--border));
+    border-color: color-mix(in srgb, var(--card-accent) 40%, var(--border));
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
@@ -104,7 +103,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--card-accent-rust);
+    color: var(--card-accent);
 }
 
 .product-card__brand {
@@ -128,7 +127,7 @@
 }
 
 .product-card:hover .product-card__title {
-    color: color-mix(in srgb, var(--card-accent-olive) 75%, var(--text));
+    color: color-mix(in srgb, var(--card-accent) 70%, var(--text));
 }
 
 .product-card__rating {
@@ -212,8 +211,8 @@
 
 .product-card__wishlist:hover,
 .product-card__wishlist--active {
-    color: var(--card-accent-rust);
-    border-color: color-mix(in srgb, var(--card-accent-rust) 50%, var(--border));
+    color: var(--card-accent);
+    border-color: color-mix(in srgb, var(--card-accent) 50%, var(--border));
     background-color: var(--surface);
 }
 

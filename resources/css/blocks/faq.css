@@ -14,11 +14,11 @@
 }
 
 .faq__item:hover {
-    border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
 }
 
 .faq__item--open {
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
     box-shadow: var(--shadow-sm);
 }
 
@@ -46,12 +46,12 @@
 }
 
 .faq__item--open .faq__question {
-    color: var(--primary);
-    background: color-mix(in srgb, var(--primary) 6%, var(--surface));
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
 }
 
 .faq__question:hover {
-    color: var(--primary);
+    color: var(--accent-hover);
 }
 
 .faq__icon {
@@ -64,7 +64,7 @@
 
 .faq__item--open .faq__icon {
     transform: rotate(180deg);
-    color: var(--primary);
+    color: var(--accent-hover);
 }
 
 .faq__answer {
