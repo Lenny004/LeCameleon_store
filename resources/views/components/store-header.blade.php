@@ -17,7 +17,7 @@
         <div class="header__inner">
             <div class="header__logo">
                 @include('components.brand-logo', [
-                    'variant' => 'auto',
+                    'variant' => 'horizontal',
                     'href' => Route::has('home') ? route('home') : '/',
                     'size' => 'md',
                 ])

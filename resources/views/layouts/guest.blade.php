@@ -21,7 +21,7 @@
     <div class="guest-shell">
         <header class="guest-shell__header">
             @include('components.brand-logo', [
-                'variant' => 'auto',
+                'variant' => 'horizontal',
                 'size' => 'md',
                 'href' => Route::has('home') ? route('home') : '/',
             ])

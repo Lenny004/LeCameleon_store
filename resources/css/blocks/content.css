@@ -35,7 +35,11 @@
     margin-bottom: var(--space-sm);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--accent-hover);
+    color: var(--text-muted);
+}
+
+.content-page__brand .brand-logo {
+    max-width: min(18rem, 100%);
 }
 
 .content-page__brand {

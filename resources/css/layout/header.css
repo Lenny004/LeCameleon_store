@@ -100,7 +100,7 @@
 .header__logo {
     display: inline-flex;
     min-width: 0;
-    max-width: min(14rem, 42vw);
+    max-width: min(11.5rem, 46vw);
 }
 
 .header__logo .brand-logo {
