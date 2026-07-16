@@ -1,9 +1,9 @@
-/* ── Checkout flow — calm steps, vintage-warm forms, sticky summary ── */
+/* ── Checkout flow — calm steps, sticky summary ── */
 
 .checkout {
-    --commerce-warm-surface: color-mix(in srgb, var(--surface) 88%, rgb(210 195 165) 12%);
-    --commerce-accent-olive: color-mix(in srgb, var(--accent) 30%, rgb(85 107 47));
-    --commerce-accent-rust: color-mix(in srgb, var(--accent) 20%, rgb(166 93 63));
+    --commerce-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);
+    --commerce-accent-olive: color-mix(in srgb, var(--primary) 70%, var(--accent) 30%);
+    --commerce-accent-rust: color-mix(in srgb, var(--accent) 85%, var(--text) 15%);
 
     padding-block: var(--space-xl) var(--space-2xl);
 }

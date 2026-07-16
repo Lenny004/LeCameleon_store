@@ -24,7 +24,7 @@
     outline-offset: var(--focus-ring-offset);
 }
 
-/* Primary — deep olive brand */
+/* Primary — neon brand */
 .btn--primary {
     background-color: var(--primary);
     color: var(--primary-contrast);

@@ -54,23 +54,20 @@
 
 .hero__logo {
     margin: 0 0 var(--space-xs);
-    line-height: 1;
+    line-height: 0;
+    max-width: min(36rem, 92vw);
     filter: drop-shadow(0 4px 24px rgb(28 25 20 / 0.12));
 }
 
-.hero__logo .brand-logo--lg .brand-logo__img--icon,
-.hero__logo .brand-logo--lg .brand-logo__mark {
-    height: clamp(3rem, 8vw, 4.5rem);
-    width: clamp(3rem, 8vw, 4.5rem);
+.hero__logo .brand-logo {
+    width: 100%;
+    justify-content: center;
 }
 
-.hero__logo .brand-logo--lg .brand-logo__img--full {
-    height: clamp(3.25rem, 9vw, 5rem);
-    max-width: min(18rem, 70vw);
-}
-
-.hero__logo .brand-logo--lg .brand-logo__text {
-    font-size: clamp(2rem, 7vw, 3.5rem);
+.hero__logo .brand-logo__img {
+    width: 100%;
+    height: auto;
+    max-height: clamp(4.5rem, 18vw, 7.5rem);
 }
 
 .hero--has-image .hero__logo {
@@ -119,7 +116,7 @@
 }
 
 .featured-strip {
-    --shop-warm-surface: color-mix(in srgb, var(--surface) 88%, rgb(210 195 165) 12%);
+    --shop-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);
 
     padding-block: var(--space-3xl);
     background-color: var(--shop-warm-surface);

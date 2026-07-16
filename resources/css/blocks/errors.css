@@ -36,6 +36,16 @@
     );
 }
 
+.error-page__brand {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-xs);
+}
+
+.error-page__brand .brand-logo {
+    max-width: 9rem;
+}
+
 .error-page__card::after {
     content: '';
     position: absolute;

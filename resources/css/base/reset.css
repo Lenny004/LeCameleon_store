@@ -22,7 +22,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Atmospheric page canvas: warm vignette + paper grain (no image assets) */
+/* Atmospheric page canvas: soft vignette + grain (no image assets) */
 .page {
     position: relative;
     isolation: isolate;

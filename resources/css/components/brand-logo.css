@@ -1,118 +1,169 @@
+/* Logos legacy (recursos/img):
+   - compact    → logo_icon.png (más cuadrado / estrecho)
+   - horizontal → logo.png (header estándar)
+   - wide       → logo3.png (hero / momentos grandes)
+*/
+
 .brand-logo {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-sm);
+    justify-content: center;
     min-width: 0;
+    max-width: 100%;
     text-decoration: none;
     color: inherit;
-    line-height: 1;
+    line-height: 0;
+    border-radius: var(--radius-md);
+    background-color: #000;
+    padding: 0.2rem 0.35rem;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+a.brand-logo:hover {
+    opacity: 0.92;
 }
 
 .brand-logo__img {
     display: block;
     width: auto;
+    max-width: 100%;
+    height: auto;
     object-fit: contain;
-    flex-shrink: 0;
+    flex-shrink: 1;
 }
 
-.brand-logo__img--icon {
-    height: 2.25rem;
-    border-radius: var(--radius-sm);
+/* ── Auto: elige asset según ancho de viewport ── */
+
+.brand-logo--auto .brand-logo__img--horizontal,
+.brand-logo--auto .brand-logo__img--wide {
+    display: none;
 }
 
-.brand-logo__img--full {
+.brand-logo--auto .brand-logo__img--compact {
+    display: block;
+    height: 2.75rem;
+    width: auto;
+}
+
+@media (min-width: 40rem) {
+    .brand-logo--auto .brand-logo__img--compact {
+        display: none;
+    }
+
+    .brand-logo--auto .brand-logo__img--horizontal {
+        display: block;
+        height: 2.5rem;
+    }
+
+    .brand-logo--auto .brand-logo__img--wide {
+        display: none;
+    }
+}
+
+@media (min-width: 80rem) {
+    .brand-logo--auto.brand-logo--lg .brand-logo__img--horizontal,
+    .brand-logo--auto.brand-logo--xl .brand-logo__img--horizontal {
+        display: none;
+    }
+
+    .brand-logo--auto.brand-logo--lg .brand-logo__img--wide,
+    .brand-logo--auto.brand-logo--xl .brand-logo__img--wide {
+        display: block;
+        height: 3.25rem;
+    }
+}
+
+/* ── Variantes explícitas ── */
+
+.brand-logo--compact .brand-logo__img {
+    height: 3rem;
+}
+
+.brand-logo--horizontal .brand-logo__img {
     height: 2.5rem;
-    max-width: 10rem;
 }
 
-.brand-logo__mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    flex-shrink: 0;
-    font-family: var(--font-display);
-    font-size: 0.6875rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    color: var(--primary-contrast);
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: var(--radius-sm);
+.brand-logo--wide .brand-logo__img {
+    height: 3.5rem;
 }
 
-.brand-logo__text {
+/* ── Tamaños ── */
+
+.brand-logo--sm {
+    padding: 0.15rem 0.3rem;
+}
+
+.brand-logo--sm.brand-logo--auto .brand-logo__img--compact,
+.brand-logo--sm.brand-logo--compact .brand-logo__img {
+    height: 2.125rem;
+}
+
+.brand-logo--sm.brand-logo--auto .brand-logo__img--horizontal,
+.brand-logo--sm.brand-logo--horizontal .brand-logo__img {
+    height: 1.875rem;
+}
+
+.brand-logo--md.brand-logo--auto .brand-logo__img--compact,
+.brand-logo--md.brand-logo--compact .brand-logo__img {
+    height: 2.75rem;
+}
+
+.brand-logo--md.brand-logo--auto .brand-logo__img--horizontal,
+.brand-logo--md.brand-logo--horizontal .brand-logo__img {
+    height: 2.5rem;
+}
+
+.brand-logo--lg {
+    padding: 0.35rem 0.55rem;
+}
+
+.brand-logo--lg.brand-logo--auto .brand-logo__img--compact,
+.brand-logo--lg.brand-logo--compact .brand-logo__img {
+    height: 4.5rem;
+}
+
+.brand-logo--lg.brand-logo--auto .brand-logo__img--horizontal,
+.brand-logo--lg.brand-logo--horizontal .brand-logo__img {
+    height: 3.25rem;
+}
+
+.brand-logo--lg.brand-logo--wide .brand-logo__img,
+.brand-logo--lg.brand-logo--auto .brand-logo__img--wide {
+    height: 3.75rem;
+}
+
+.brand-logo--xl {
+    padding: 0.5rem 0.75rem;
+}
+
+.brand-logo--xl.brand-logo--auto .brand-logo__img--compact,
+.brand-logo--xl.brand-logo--compact .brand-logo__img {
+    height: 6rem;
+}
+
+.brand-logo--xl.brand-logo--wide .brand-logo__img,
+.brand-logo--xl.brand-logo--auto .brand-logo__img--wide,
+.brand-logo--xl.brand-logo--horizontal .brand-logo__img {
+    height: clamp(3.5rem, 12vw, 6.5rem);
+}
+
+.brand-logo__fallback {
     font-family: var(--font-display);
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.03em;
-    white-space: nowrap;
+    color: #fff;
+    line-height: 1.2;
+    padding: 0.35rem 0.5rem;
 }
 
-.brand-logo__accent {
-    color: var(--accent);
+.brand-logo__fallback span {
+    color: #e8a35c;
 }
 
-.brand-logo--sm .brand-logo__img--icon,
-.brand-logo--sm .brand-logo__mark {
-    height: 1.75rem;
-    width: 1.75rem;
-}
-
-.brand-logo--sm .brand-logo__img--full {
-    height: 1.75rem;
-}
-
-.brand-logo--sm .brand-logo__text {
-    font-size: 1.0625rem;
-}
-
-.brand-logo--lg .brand-logo__img--icon,
-.brand-logo--lg .brand-logo__mark {
-    height: 3rem;
-    width: 3rem;
-}
-
-.brand-logo--lg .brand-logo__img--full {
-    height: 3.25rem;
-    max-width: 12rem;
-}
-
-.brand-logo--lg .brand-logo__text {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.brand-logo--xl .brand-logo__img--icon,
-.brand-logo--xl .brand-logo__mark {
-    height: 4rem;
-    width: 4rem;
-}
-
-.brand-logo--xl .brand-logo__img--full {
-    height: 4.5rem;
-    max-width: 16rem;
-}
-
-.brand-logo--xl .brand-logo__text {
-    font-size: clamp(2.25rem, 8vw, 4.5rem);
-}
-
-.brand-logo--full .brand-logo__text {
-    display: none;
-}
-
-.brand-logo--icon .brand-logo__text {
-    display: none;
-}
-
-.brand-logo--inverted {
-    color: color-mix(in srgb, var(--primary-contrast) 92%, white);
-}
-
-.brand-logo--inverted .brand-logo__accent {
-    color: color-mix(in srgb, var(--accent) 85%, var(--primary-contrast));
-}
-
-.brand-logo--inverted .brand-logo__img--icon {
-    background: color-mix(in srgb, var(--primary-contrast) 12%, transparent);
+/* Sobre chrome oscuro (footer / sidebar) */
+.brand-logo--inverted,
+.brand-logo--bare {
+    background-color: transparent;
+    padding: 0;
 }

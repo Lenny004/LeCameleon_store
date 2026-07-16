@@ -1,4 +1,4 @@
-/* Shop catalog — Amazon-like layout, vintage-warm surfaces */
+/* Shop catalog — Amazon-like layout */
 .shop-layout {
     --shop-warm-surface: color-mix(in srgb, var(--surface) 88%, var(--secondary) 12%);
     --shop-accent-olive: color-mix(in srgb, var(--primary) 70%, var(--accent) 30%);

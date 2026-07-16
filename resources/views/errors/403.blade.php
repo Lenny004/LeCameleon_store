@@ -5,6 +5,9 @@
 @section('content')
 <section class="error-page" aria-labelledby="error-title-403">
     <div class="error-page__card">
+        <div class="error-page__brand">
+            @include('components.brand-logo', ['variant' => 'compact', 'size' => 'md'])
+        </div>
         <p class="error-page__code" aria-hidden="true">403</p>
         <h1 id="error-title-403" class="error-page__title">No tienes permiso para entrar aquí</h1>
         <p class="error-page__text">

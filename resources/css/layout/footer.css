@@ -103,8 +103,8 @@
     margin-bottom: var(--space-md);
 }
 
-.footer__brand-mark .brand-logo__img--icon {
-    filter: brightness(1.08);
+.footer__brand-mark .brand-logo {
+    max-width: 14rem;
 }
 
 .footer__tagline {
