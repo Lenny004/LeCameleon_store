@@ -9,8 +9,7 @@
         (function () {
             var k = 'lecameleon-theme';
             var t = localStorage.getItem(k);
-            if (!t && window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
-            document.documentElement.setAttribute('data-theme', t || 'light');
+            document.documentElement.setAttribute('data-theme', t === 'dark' || t === 'light' ? t : 'light');
         })();
     </script>
     @fonts

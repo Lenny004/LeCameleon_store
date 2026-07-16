@@ -14,9 +14,60 @@ body {
     min-height: 100vh;
     font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.6;
+    font-weight: 400;
+    line-height: var(--line-height-base);
     color: var(--text);
     background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Atmospheric page canvas: warm vignette + paper grain (no image assets) */
+.page {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 140% 90% at 50% -30%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 0%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 45%),
+        radial-gradient(ellipse 60% 45% at 0% 100%, color-mix(in srgb, var(--secondary) 18%, transparent), transparent 50%),
+        linear-gradient(
+            175deg,
+            var(--background-top) 0%,
+            var(--background) 38%,
+            var(--background-bottom) 100%
+        );
+    background-attachment: fixed;
+}
+
+.page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            color-mix(in srgb, var(--text) 1.5%, transparent) 2px,
+            color-mix(in srgb, var(--text) 1.5%, transparent) 3px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 3px,
+            color-mix(in srgb, var(--text) 1%, transparent) 3px,
+            color-mix(in srgb, var(--text) 1%, transparent) 4px
+        );
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .page::before {
+    opacity: 0.12;
+    mix-blend-mode: soft-light;
 }
 
 img,
@@ -58,8 +109,17 @@ p {
 }
 
 :focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+::selection {
+    background-color: color-mix(in srgb, var(--accent) 25%, transparent);
+    color: var(--text);
 }
 
 .sr-only {

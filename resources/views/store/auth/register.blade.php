@@ -11,17 +11,17 @@
             @csrf
             <div class="form-group">
                 <label class="form-label" for="name">Nombre</label>
-                <input type="text" id="name" name="name" class="form-input" value="{{ old('name') }}" required autofocus autocomplete="name">
+                <input type="text" id="name" name="name" class="form-input @error('name') form-input--error @enderror" value="{{ old('name') }}" required autofocus autocomplete="name">
                 @error('name')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}" required autocomplete="email">
+                <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email') }}" required autocomplete="email">
                 @error('email')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="password">Contraseña</label>
-                <input type="password" id="password" name="password" class="form-input" required autocomplete="new-password">
+                <input type="password" id="password" name="password" class="form-input @error('password') form-input--error @enderror" required autocomplete="new-password">
                 @error('password')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">

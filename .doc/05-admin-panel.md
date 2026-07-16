@@ -10,7 +10,7 @@
 
 - Sidebar nav + top bar
 - Dense but readable tables
-- Same design tokens as storefront (admin may force dark by default)
+- Same design tokens as storefront (light default; dark via theme toggle)
 
 ## Screens
 

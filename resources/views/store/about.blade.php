@@ -3,11 +3,13 @@
 @section('title', 'Nuestra historia — Le Cameleon')
 
 @section('content')
-<div class="container" style="padding-block:var(--space-2xl);max-width:46rem;">
-    <p class="text-small text-muted" style="letter-spacing:0.12em;text-transform:uppercase;margin-bottom:var(--space-sm);">Desde 2020</p>
-    <h1 class="heading-2" style="margin-bottom:var(--space-lg);">Le Cameleon</h1>
+<div class="container content-page">
+    <header class="content-page__header">
+        <p class="content-page__eyebrow">Desde 2020</p>
+        <h1 class="heading-2">Le Cameleon</h1>
+    </header>
 
-    <div class="checkout-section" style="display:flex;flex-direction:column;gap:var(--space-lg);">
+    <div class="content-page__prose">
         <p class="text-lead">
             Somos un refugio para piezas con alma: moda vintage, objetos de colección y accesorios que atravesaron décadas
             y llegaron hasta ti con historias que merecen seguir contándose.
@@ -19,8 +21,8 @@
             con carácter.
         </p>
 
-        <h2 class="text-small" style="font-weight:700;">Nuestra promesa</h2>
-        <ul class="text-muted" style="padding-left:1.25rem;display:flex;flex-direction:column;gap:var(--space-xs);">
+        <h2>Nuestra promesa</h2>
+        <ul>
             <li>Descripciones honestas del estado y la procedencia de cada pieza.</li>
             <li>Verificación de autenticidad en artículos de alto valor.</li>
             <li>Embalaje cuidadoso para que tu compra llegue como se merece.</li>
@@ -39,12 +41,12 @@
     </div>
 
     @if (Route::has('contact.show'))
-        <p style="margin-top:var(--space-xl);">
+        <div class="content-page__actions">
             <a href="{{ route('contact.show') }}" class="btn btn--primary">Escríbenos</a>
             @if (Route::has('shop.index'))
-                <a href="{{ route('shop.index') }}" class="btn btn--ghost" style="margin-left:var(--space-sm);">Explorar tienda</a>
+                <a href="{{ route('shop.index') }}" class="btn btn--secondary">Explorar tienda</a>
             @endif
-        </p>
+        </div>
     @endif
 </div>
 @endsection

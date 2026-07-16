@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,8 +9,7 @@
         (function () {
             var k = 'lecameleon-theme';
             var t = localStorage.getItem(k);
-            if (!t) t = 'dark';
-            document.documentElement.setAttribute('data-theme', t);
+            document.documentElement.setAttribute('data-theme', t === 'dark' || t === 'light' ? t : 'light');
         })();
     </script>
     @fonts

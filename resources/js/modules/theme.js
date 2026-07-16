@@ -17,9 +17,9 @@ export function toggleTheme() {
 }
 
 export function initTheme() {
+    // Light is the product default. Only honor an explicit user choice.
     const stored = getStoredTheme();
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = stored || (prefersDark ? 'dark' : 'light');
+    const theme = stored === 'dark' || stored === 'light' ? stored : 'light';
     document.documentElement.setAttribute('data-theme', theme);
 }
 

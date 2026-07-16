@@ -12,7 +12,7 @@
 }
 
 .faq__item--open {
-    border-color: var(--accent);
+    border-color: var(--primary);
 }
 
 .faq__question {
@@ -34,7 +34,7 @@
 }
 
 .faq__question:hover {
-    color: var(--accent);
+    color: var(--primary);
 }
 
 .faq__icon {
@@ -47,7 +47,7 @@
 
 .faq__item--open .faq__icon {
     transform: rotate(180deg);
-    color: var(--accent);
+    color: var(--primary);
 }
 
 .faq__answer {

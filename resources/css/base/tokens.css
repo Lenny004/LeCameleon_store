@@ -1,27 +1,42 @@
 :root {
-    --text: rgb(4, 3, 22);
-    --background: rgb(237, 237, 237);
-    --primary: rgb(17, 255, 0);
-    --secondary: rgb(214, 214, 214);
-    --accent: rgb(1, 233, 98);
+    /* ── Core palette: warm paper + forest + copper ── */
+    --text: rgb(28, 25, 20);
+    --text-muted: rgb(107, 99, 88);
+    --background: rgb(244, 239, 230);
+    --background-top: rgb(250, 247, 242);
+    --background-bottom: rgb(235, 228, 216);
+    --surface: rgb(252, 249, 244);
+    --surface-raised: rgb(255, 253, 250);
+    --border: rgb(214, 204, 190);
+    --border-subtle: color-mix(in srgb, var(--border) 55%, transparent);
 
-    --text-muted: color-mix(in srgb, var(--text) 65%, transparent);
-    --surface: color-mix(in srgb, var(--background) 92%, var(--text));
-    --border: color-mix(in srgb, var(--secondary) 80%, var(--text) 20%);
-    --primary-contrast: rgb(4, 3, 22);
-    --danger: rgb(220, 38, 38);
-    --success: rgb(22, 163, 74);
-    --warning: rgb(234, 179, 8);
+    --primary: rgb(59, 79, 56);
+    --primary-hover: rgb(47, 63, 45);
+    --primary-muted: color-mix(in srgb, var(--primary) 12%, var(--background));
+    --primary-contrast: rgb(252, 249, 244);
 
-    --font-display: 'Syne', system-ui, sans-serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
+    --secondary: rgb(201, 190, 174);
+    --accent: rgb(168, 98, 58);
+    --accent-hover: rgb(145, 82, 46);
+    --accent-soft: color-mix(in srgb, var(--accent) 14%, var(--background));
+    --accent-contrast: rgb(252, 249, 244);
 
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
+    --danger: rgb(181, 62, 52);
+    --success: rgb(58, 107, 68);
+    --warning: rgb(184, 134, 42);
 
+    /* ── Typography ── */
+    --font-display: 'Fraunces', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+
+    --line-height-tight: 1.15;
+    --line-height-snug: 1.35;
+    --line-height-base: 1.6;
+    --line-height-relaxed: 1.75;
+
+    /* ── Spacing scale ── */
+    --space-2xs: 0.125rem;
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
@@ -29,29 +44,83 @@
     --space-xl: 2rem;
     --space-2xl: 3rem;
     --space-3xl: 4rem;
+    --space-4xl: 6rem;
 
-    --shadow-sm: 0 1px 2px rgb(4 3 22 / 0.06);
-    --shadow-md: 0 4px 12px rgb(4 3 22 / 0.08);
-    --shadow-lg: 0 12px 32px rgb(4 3 22 / 0.12);
+    /* ── Radii ── */
+    --radius-xs: 0.125rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.25rem;
+    --radius-full: 9999px;
 
+    /* ── Shadows (warm ink, not cold gray) ── */
+    --shadow-xs: 0 1px 2px rgb(28 25 20 / 0.04);
+    --shadow-sm: 0 1px 3px rgb(28 25 20 / 0.06), 0 1px 2px rgb(28 25 20 / 0.04);
+    --shadow-md: 0 4px 12px rgb(28 25 20 / 0.07), 0 2px 4px rgb(28 25 20 / 0.04);
+    --shadow-lg: 0 12px 32px rgb(28 25 20 / 0.09), 0 4px 8px rgb(28 25 20 / 0.04);
+    --shadow-inset: inset 0 1px 2px rgb(28 25 20 / 0.05);
+
+    /* ── Motion ── */
+    --transition-fast: 120ms ease;
+    --transition: 180ms ease;
+    --transition-slow: 280ms ease;
+
+    /* ── Focus ── */
+    --focus-ring: 2px solid var(--accent);
+    --focus-ring-offset: 2px;
+
+    /* ── Layout ── */
     --header-height: 4rem;
     --sidebar-width: 16rem;
     --container-max: 72rem;
-    --transition: 180ms ease;
+    --container-wide: 90rem;
+
+    /* ── Z-index scale ── */
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-header: 300;
+    --z-overlay: 400;
+    --z-modal: 500;
+}
+
+/* Storefront scope: Fraunces + Source Sans 3 (loaded in store layout) */
+.page {
+    --font-display: 'Fraunces', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
 }
 
 [data-theme="dark"] {
-    --text: rgb(234, 233, 252);
-    --background: rgb(18, 18, 18);
-    --primary: rgb(17, 255, 0);
-    --secondary: rgb(41, 41, 41);
-    --accent: rgb(22, 254, 118);
+    --text: rgb(237, 232, 223);
+    --text-muted: rgb(168, 160, 148);
+    --background: rgb(22, 20, 17);
+    --background-top: rgb(28, 26, 22);
+    --background-bottom: rgb(16, 14, 12);
+    --surface: rgb(32, 29, 25);
+    --surface-raised: rgb(38, 35, 30);
+    --border: rgb(58, 53, 46);
+    --border-subtle: color-mix(in srgb, var(--border) 45%, transparent);
 
-    --text-muted: color-mix(in srgb, var(--text) 70%, transparent);
-    --surface: rgb(28, 28, 28);
-    --border: rgb(55, 55, 55);
-    --primary-contrast: rgb(4, 3, 22);
-    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
-    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.35);
-    --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.45);
+    --primary: rgb(130, 158, 124);
+    --primary-hover: rgb(148, 176, 142);
+    --primary-muted: color-mix(in srgb, var(--primary) 15%, var(--background));
+    --primary-contrast: rgb(22, 20, 17);
+
+    --secondary: rgb(68, 62, 54);
+    --accent: rgb(196, 136, 90);
+    --accent-hover: rgb(212, 152, 106);
+    --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--background));
+    --accent-contrast: rgb(22, 20, 17);
+
+    --danger: rgb(224, 108, 98);
+    --success: rgb(108, 168, 118);
+    --warning: rgb(212, 168, 72);
+
+    --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.25);
+    --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.3), 0 1px 2px rgb(0 0 0 / 0.2);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.35), 0 2px 4px rgb(0 0 0 / 0.2);
+    --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.45), 0 4px 8px rgb(0 0 0 / 0.25);
+    --shadow-inset: inset 0 1px 2px rgb(0 0 0 / 0.2);
 }

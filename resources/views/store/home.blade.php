@@ -3,7 +3,17 @@
 @section('title', 'Le Cameleon — Vintage con alma')
 
 @section('content')
-    <section class="hero">
+    @php
+        $heroImage = config('store.hero_image');
+        $hasHeroImage = is_string($heroImage) && $heroImage !== '' && file_exists(public_path($heroImage));
+        $bannerImage = config('store.collection_banner_image');
+        $hasBannerImage = is_string($bannerImage) && $bannerImage !== '' && file_exists(public_path($bannerImage));
+    @endphp
+
+    <section
+        class="hero{{ $hasHeroImage ? ' hero--has-image' : '' }}"
+        @if ($hasHeroImage) style="--hero-bg-image: url('{{ asset($heroImage) }}');" @endif
+    >
         <div class="hero__content">
             <h1 class="hero__brand">
                 Le
@@ -66,12 +76,28 @@
 
             <div class="collection-grid">
                 @foreach ($categories as $category)
-                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}" class="collection-card">
-                        <h3 class="collection-card__title">{{ $category->name }}</h3>
-                        <p class="collection-card__count">{{ $category->published_products_count }} {{ $category->published_products_count === 1 ? 'pieza' : 'piezas' }}</p>
-                        @if ($category->description)
-                            <p class="collection-card__text">{{ Str::limit($category->description, 90) }}</p>
+                    @php
+                        $categoryImage = method_exists($category, 'imageUrl') ? $category->imageUrl() : null;
+                    @endphp
+                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}" class="collection-card{{ $categoryImage ? ' collection-card--has-media' : '' }}">
+                        @if ($categoryImage)
+                            <div class="collection-card__media">
+                                <img
+                                    src="{{ $categoryImage }}"
+                                    alt=""
+                                    class="collection-card__image"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+                            </div>
                         @endif
+                        <div class="collection-card__body">
+                            <h3 class="collection-card__title">{{ $category->name }}</h3>
+                            <p class="collection-card__count">{{ $category->published_products_count }} {{ $category->published_products_count === 1 ? 'pieza' : 'piezas' }}</p>
+                            @if ($category->description)
+                                <p class="collection-card__text">{{ Str::limit($category->description, 90) }}</p>
+                            @endif
+                        </div>
                     </a>
                 @endforeach
             </div>
@@ -87,7 +113,17 @@
                     <a href="{{ route('shop.index', ['sort' => 'new']) }}" class="btn btn--primary">Ver novedades</a>
                 @endif
             </div>
-            <div class="collection-banner__image" role="img" aria-label="Colección vintage"></div>
+            <div class="collection-banner__image" role="img" aria-label="Colección vintage">
+                @if ($hasBannerImage)
+                    <img
+                        src="{{ asset($bannerImage) }}"
+                        alt="Colección vintage Le Cameleon"
+                        class="collection-banner__photo"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                @endif
+            </div>
         </div>
     </section>
 @endsection

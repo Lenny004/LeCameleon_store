@@ -4,14 +4,17 @@
 
 @section('content')
 <div class="container shop-layout" x-data="filterPanel()">
-    <aside>
-        <button type="button" class="filter-panel__toggle" @click="toggle()">
+    <aside class="shop-layout__sidebar">
+        <button type="button" class="filter-panel__toggle" @click="toggle()" :aria-expanded="open">
+            <svg class="filter-panel__toggle-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h10"/>
+            </svg>
             <span x-text="open ? 'Ocultar filtros' : 'Mostrar filtros'"></span>
         </button>
         <form method="GET" action="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel filter-panel--mobile-hidden" :class="{ 'filter-panel--open': open }">
             <div class="filter-panel__header">
                 <h2 class="filter-panel__title">Filtros</h2>
-                <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="text-small text-muted">Limpiar</a>
+                <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel__clear">Limpiar</a>
             </div>
 
             <div class="filter-panel__group">
@@ -67,34 +70,49 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--block">Aplicar filtros</button>
+            <button type="submit" class="btn btn--primary btn--block filter-panel__submit">Aplicar filtros</button>
         </form>
     </aside>
 
-    <div>
+    <main class="shop-layout__main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             @if (Route::has('home'))
                 <a href="{{ route('home') }}">Inicio</a>
                 <span class="breadcrumb__sep">/</span>
             @endif
-            <span>Tienda</span>
+            <span aria-current="page">Tienda</span>
         </nav>
 
+        <header class="shop-header">
+            <h1 class="shop-header__title">Catálogo</h1>
+            <p class="shop-header__lead">Piezas vintage seleccionadas, listas para encontrar su nueva historia.</p>
+        </header>
+
         <div class="shop-toolbar">
-            <p class="shop-toolbar__count">{{ $products->total() ?? count($products ?? []) }} productos</p>
+            <div class="shop-toolbar__meta">
+                @php
+                    $total = $products->total() ?? count($products ?? []);
+                @endphp
+                <p class="shop-toolbar__count">
+                    <span class="shop-toolbar__count-value">{{ $total }}</span>
+                    {{ $total === 1 ? 'resultado' : 'resultados' }}
+                </p>
+            </div>
+
             @auth
                 @if (($hasActiveFilters ?? false) && Route::has('account.saved-searches.store'))
-                    <form method="POST" action="{{ route('account.saved-searches.store') }}" class="shop-toolbar__save" style="display:flex;gap:var(--space-sm);align-items:center;">
+                    <form method="POST" action="{{ route('account.saved-searches.store') }}" class="shop-toolbar__save">
                         @csrf
                         <input type="hidden" name="query_params" value="{{ json_encode($filters ?? []) }}">
-                        <input type="text" name="name" class="form-input" placeholder="Nombre de la búsqueda" maxlength="120" required style="max-width:14rem;">
+                        <input type="text" name="name" class="form-input shop-toolbar__save-input" placeholder="Nombre de la búsqueda" maxlength="120" required>
                         <button type="submit" class="btn btn--ghost btn--sm">Guardar búsqueda</button>
                     </form>
                 @endif
             @endauth
+
             <div class="shop-toolbar__sort">
-                <label for="sort" class="text-small">Ordenar:</label>
-                <select id="sort" name="sort" onchange="if(this.value) window.location.href=this.value">
+                <label for="sort" class="shop-toolbar__sort-label">Ordenar por</label>
+                <select id="sort" name="sort" class="shop-toolbar__sort-select" onchange="if(this.value) window.location.href=this.value">
                     @php
                         $base = Route::has('shop.index') ? route('shop.index') : '#';
                         $sortQuery = collect($filters ?? request()->only(['q', 'category', 'brand', 'era_decade', 'condition_grade', 'size_label', 'color', 'price_min', 'price_max', 'in_stock', 'min_rating']))
@@ -104,8 +122,8 @@
                         $currentSort = request('sort', $filters['sort'] ?? 'newest');
                     @endphp
                     <option value="{{ $sortUrl('newest') }}" {{ in_array($currentSort, ['newest', 'new', ''], true) ? 'selected' : '' }}>Más recientes</option>
-                    <option value="{{ $sortUrl('price_asc') }}" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Precio: menor</option>
-                    <option value="{{ $sortUrl('price_desc') }}" {{ $currentSort === 'price_desc' ? 'selected' : '' }}>Precio: mayor</option>
+                    <option value="{{ $sortUrl('price_asc') }}" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Precio: menor a mayor</option>
+                    <option value="{{ $sortUrl('price_desc') }}" {{ $currentSort === 'price_desc' ? 'selected' : '' }}>Precio: mayor a menor</option>
                     <option value="{{ $sortUrl('rating') }}" {{ $currentSort === 'rating' ? 'selected' : '' }}>Mejor valorados</option>
                 </select>
             </div>
@@ -128,22 +146,26 @@
         @endphp
 
         @if ($items->count())
-            <div class="grid-products">
-                @foreach ($items as $product)
-                    @include('components.product-card', ['product' => $product])
-                @endforeach
+            <div class="shop-results">
+                <div class="grid-products shop-results__grid">
+                    @foreach ($items as $product)
+                        @include('components.product-card', ['product' => $product])
+                    @endforeach
+                </div>
+                @if (isset($products) && method_exists($products, 'links'))
+                    <div class="shop-results__pagination pagination">{{ $products->links() }}</div>
+                @endif
             </div>
-            @if (isset($products) && method_exists($products, 'links'))
-                <div class="pagination">{{ $products->links() }}</div>
-            @endif
         @else
-            @include('components.empty-state', [
-                'title' => 'Sin resultados',
-                'text' => 'Prueba ajustando los filtros o explora otras categorías.',
-                'actionLabel' => 'Ver todo',
-                'actionUrl' => Route::has('shop.index') ? route('shop.index') : '#',
-            ])
+            <div class="shop-results shop-results--empty">
+                @include('components.empty-state', [
+                    'title' => 'Sin resultados',
+                    'text' => 'Prueba ajustando los filtros o explora otras categorías.',
+                    'actionLabel' => 'Ver todo',
+                    'actionUrl' => Route::has('shop.index') ? route('shop.index') : '#',
+                ])
+            </div>
         @endif
-    </div>
+    </main>
 </div>
 @endsection

@@ -15,6 +15,34 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--background);
+}
+
+.page--store {
+    --header-utility-height: 0px;
+    --header-main-height: 3.75rem;
+    --header-subnav-height: 0px;
+}
+
+@media (min-width: 48rem) {
+    .page--store {
+        --header-utility-height: 2rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .page--store {
+        --header-subnav-height: 2.375rem;
+    }
+}
+
+.page--store {
+    --header-offset: calc(
+        var(--header-utility-height) +
+        var(--header-main-height) +
+        var(--header-subnav-height)
+    );
+    --header-height: var(--header-offset);
 }
 
 .page__main {
@@ -73,4 +101,94 @@
 
 .breadcrumb a:hover {
     color: var(--accent);
+}
+
+/* ── Content pages (about, shipping, FAQ intro) ── */
+.content-page {
+    padding-block: var(--space-2xl);
+    max-width: 46rem;
+}
+
+.content-page--narrow {
+    max-width: 42rem;
+}
+
+.content-page__eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.content-page__header {
+    margin-bottom: var(--space-lg);
+}
+
+.content-page__intro {
+    margin-bottom: var(--space-xl);
+}
+
+.content-page__prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
+}
+
+.content-page__prose h2 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text);
+}
+
+.content-page__prose ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    color: var(--text-muted);
+}
+
+.content-page__prose p {
+    line-height: var(--line-height-relaxed);
+}
+
+.content-page__prose a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.content-page__prose a:hover {
+    text-decoration: underline;
+    color: var(--accent-hover);
+}
+
+.content-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+}
+
+.content-page__footer {
+    margin-top: var(--space-xl);
+    color: var(--text-muted);
+}
+
+.content-page__footer a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.content-page__footer a:hover {
+    text-decoration: underline;
 }

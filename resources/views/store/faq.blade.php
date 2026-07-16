@@ -70,11 +70,13 @@ HTML,
     }, $items);
 @endphp
 
-<div class="container" style="padding-block:var(--space-2xl);max-width:42rem;">
-    <h1 class="heading-2" style="margin-bottom:var(--space-sm);">Preguntas frecuentes</h1>
-    <p class="text-muted" style="margin-bottom:var(--space-xl);">
-        Todo lo que necesitas saber antes de comprar vintage: condición, medidas, envíos y más.
-    </p>
+<div class="container content-page content-page--narrow">
+    <header class="content-page__header">
+        <h1 class="heading-2">Preguntas frecuentes</h1>
+        <p class="content-page__intro text-muted">
+            Todo lo que necesitas saber antes de comprar vintage: condición, medidas, envíos y más.
+        </p>
+    </header>
 
     <div class="faq" x-data="{ open: 0 }">
         @foreach ($items as $index => $item)
@@ -102,7 +104,7 @@ HTML,
     </div>
 
     @if (Route::has('contact.show'))
-        <p class="text-muted" style="margin-top:var(--space-xl);">
+        <p class="content-page__footer">
             ¿No encuentras lo que buscas?
             <a href="{{ route('contact.show') }}">Contáctanos</a> y te ayudamos con gusto.
         </p>
