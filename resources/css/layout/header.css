@@ -9,7 +9,7 @@
     top: 0;
     z-index: 100;
     background-color: var(--surface);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
     box-shadow: var(--shadow-sm);
 }
 
@@ -18,8 +18,8 @@
 .header__utility {
     display: none;
     height: var(--header-utility-height);
-    background-color: var(--text);
-    color: color-mix(in srgb, var(--background) 88%, transparent);
+    background-color: var(--primary);
+    color: color-mix(in srgb, var(--primary-contrast) 88%, transparent);
 }
 
 @media (min-width: 48rem) {
@@ -56,7 +56,7 @@
 }
 
 .header__utility-text--muted {
-    color: color-mix(in srgb, var(--background) 65%, transparent);
+    color: color-mix(in srgb, var(--primary-contrast) 65%, transparent);
 }
 
 .header__utility-icon {
@@ -95,15 +95,11 @@
     }
 }
 
-/* ── Logo ─────────────────────────────────────────────────────── */
+/* ── Logo slot ────────────────────────────────────────────────── */
 
 .header__logo {
     display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
     min-width: 0;
-    text-decoration: none;
-    color: var(--text);
     transition: opacity var(--transition);
 }
 
@@ -111,83 +107,16 @@
     opacity: 0.88;
 }
 
-.header__logo-mark {
-    display: none;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    font-family: var(--font-display);
-    font-size: 0.6875rem;
+.header__logo .brand-logo__text {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     font-weight: 800;
-    letter-spacing: 0.04em;
-    color: var(--primary-contrast);
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: var(--radius-sm);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 12%, transparent);
-}
-
-.header__logo-img {
-    flex-shrink: 0;
-    display: block;
-    width: auto;
-    object-fit: contain;
-}
-
-.header__logo-img--icon {
-    height: 2.25rem;
-}
-
-.header__logo-img--full {
-    display: none;
-    height: 2.5rem;
-    max-width: 9.25rem;
-}
-
-/* Prefer icon + wordmark (Amazon-like). Full logo replaces text when present. */
-.header__logo-img--icon {
-    display: block;
-}
-
-.header__logo-img--full {
-    display: none;
-}
-
-.header__logo:has(.header__logo-img--full) .header__logo-text {
-    display: none;
-}
-
-.header__logo:has(.header__logo-img--full) .header__logo-img--icon,
-.header__logo:has(.header__logo-img--full) .header__logo-mark {
-    display: none;
-}
-
-.header__logo:has(.header__logo-img--full) .header__logo-img--full {
-    display: block;
+    letter-spacing: -0.035em;
 }
 
 @media (max-width: 47.99rem) {
-    .header__logo-mark {
-        display: inline-flex;
-    }
-
-    .header__logo:not(:has(.header__logo-img--icon)):not(:has(.header__logo-img--full)) .header__logo-text {
+    .header__logo .brand-logo--lockup .brand-logo__text {
         display: none;
     }
-}
-
-.header__logo-text {
-    font-family: var(--font-display);
-    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.035em;
-    white-space: nowrap;
-}
-
-.header__logo-accent {
-    color: var(--accent);
 }
 
 /* ── Search ───────────────────────────────────────────────────── */
@@ -399,8 +328,8 @@
 .header__subnav {
     display: none;
     height: var(--header-subnav-height);
-    background-color: color-mix(in srgb, var(--secondary) 35%, var(--surface));
-    border-top: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+    background-color: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+    border-top: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
 }
 
 @media (min-width: 64rem) {
@@ -465,7 +394,7 @@
     gap: var(--space-lg);
     padding: var(--space-lg);
     background-color: var(--surface);
-    border-left: 1px solid var(--border);
+    border-left: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
     box-shadow: var(--shadow-lg);
     transform: translateX(100%);
     transition: transform 0.28s ease;
@@ -484,26 +413,13 @@
 }
 
 .mobile-nav__brand {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
     margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
+    min-width: 0;
+}
+
+.mobile-nav__brand .brand-logo__text {
+    font-size: 1.125rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
-}
-
-.mobile-nav__brand span {
-    color: var(--accent);
-}
-
-.mobile-nav__logo {
-    display: block;
-    width: auto;
-    height: 2rem;
-    object-fit: contain;
-    border-radius: var(--radius-sm);
 }
 
 .mobile-nav__close {

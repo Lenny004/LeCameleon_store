@@ -13,7 +13,7 @@
 
     <form method="POST" action="{{ route('tracking.lookup') }}" class="tracking-form">
         @csrf
-        <div class="form-group" style="margin:0;">
+        <div class="form-group tracking-form__field">
             <label class="form-label" for="tracking_code">Código de rastreo</label>
             <div class="tracking-form__row">
                 <input
@@ -34,7 +34,7 @@
             @error('code')
                 <p class="form-error" role="alert">{{ $message }}</p>
             @enderror
-            <p id="tracking_code_hint" class="text-muted" style="font-size:0.875rem;margin-top:var(--space-xs);">
+            <p id="tracking_code_hint" class="tracking-form__hint">
                 También puedes consultar el estado en
                 <a href="{{ route('account.orders.index') }}">Mis pedidos</a> si iniciaste sesión.
             </p>

@@ -56,6 +56,16 @@
 
         <aside class="order-summary">
             <h2 class="order-summary__title">Resumen del pedido</h2>
+
+            <ul class="order-summary__items">
+                @foreach ($cartItems ?? [['name' => 'Chaqueta Denim 80s', 'qty' => 1, 'price' => 89.00], ['name' => 'Vestido Floral 70s', 'qty' => 1, 'price' => 120.00]] as $item)
+                    <li class="order-summary__item">
+                        <span class="order-summary__item-name">{{ is_array($item) ? $item['name'] : $item->name }} × {{ is_array($item) ? $item['qty'] : $item->quantity }}</span>
+                        <span class="order-summary__item-price">${{ number_format(is_array($item) ? $item['price'] * $item['qty'] : $item->price * $item->quantity, 2) }}</span>
+                    </li>
+                @endforeach
+            </ul>
+
             @php $subtotal = $subtotal ?? 209.00; $shipping = $shipping ?? 9.99; @endphp
             <div class="cart-summary__rows">
                 <div class="cart-summary__row">
@@ -70,6 +80,11 @@
                     <span class="cart-summary__row-label">Total</span>
                     <span class="cart-summary__row-value">${{ number_format($subtotal + $shipping, 2) }}</span>
                 </div>
+            </div>
+
+            <div class="cart-summary__trust">
+                <span class="cart-summary__trust-item">Revisa los totales antes de confirmar</span>
+                <span class="cart-summary__trust-item">Embalaje cuidadoso para piezas vintage</span>
             </div>
         </aside>
     </div>

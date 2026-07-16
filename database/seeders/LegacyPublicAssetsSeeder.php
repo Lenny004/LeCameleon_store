@@ -10,10 +10,10 @@ class LegacyPublicAssetsSeeder extends Seeder
     public function run(): void
     {
         $brandAssets = [
-            'recursos/img/logo.png' => 'brand/logo.png',
-            'recursos/img/logo3.png' => 'brand/logo-alt.png',
-            'api/images/logo_icon.png' => 'brand/logo-icon.png',
-            'api/images/logo_icon2.png' => 'brand/logo-icon-alt.png',
+            // Width-aware logo set (recursos/img)
+            'recursos/img/logo_icon.png' => 'brand/logo-icon.png',   // compact / stacked
+            'recursos/img/logo.png' => 'brand/logo.png',             // horizontal
+            'recursos/img/logo3.png' => 'brand/logo-wide.png',       // widest
         ];
 
         foreach ($brandAssets as $legacy => $dest) {
@@ -42,7 +42,6 @@ class LegacyPublicAssetsSeeder extends Seeder
                 'placeholders/vintage-product.'.$extension,
             );
 
-            // Keep the configured placeholder path stable for ProductImage::placeholderUrl().
             if ($extension !== 'jpg') {
                 LegacyAssetCopier::copyAbsoluteToPublicDisk(
                     $placeholderSource,

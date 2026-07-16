@@ -51,6 +51,11 @@
     $slug = $get($product, 'slug', '#');
     $name = $get($product, 'name', 'Producto');
     $price = $get($product, 'price', 0);
+    $comparePrice = $get($product, 'compare_at_price');
+    $brandName = $get($product, 'brand.name') ?? $get($product, 'brand');
+    if (is_object($brandName)) {
+        $brandName = $brandName->name ?? null;
+    }
     $era = $get($product, 'era_decade') ?? $get($product, 'era');
     $condition = $get($product, 'condition_grade') ?? $get($product, 'condition');
     if (is_object($condition) && property_exists($condition, 'value')) {
@@ -72,6 +77,7 @@
             @else
                 <div class="product-card__placeholder" aria-hidden="true"></div>
             @endif
+            <span class="product-card__view-hint" aria-hidden="true">Ver pieza</span>
             @if ($condition)
                 <span class="product-card__badge badge badge--accent">{{ $condition }}</span>
             @endif
@@ -79,6 +85,9 @@
         <div class="product-card__body">
             @if ($era)
                 <span class="product-card__era">{{ $era }}</span>
+            @endif
+            @if ($brandName)
+                <span class="product-card__brand">{{ $brandName }}</span>
             @endif
             <h3 class="product-card__title">{{ $name }}</h3>
             @if ($avgRating)
@@ -91,8 +100,13 @@
                     <span class="product-card__rating-text">{{ number_format($avgRating, 1) }} <span class="product-card__rating-count">({{ $reviewsCount }})</span></span>
                 </p>
             @endif
-            <p class="product-card__price">
-                <span class="product-card__price-currency">$</span>{{ number_format((float) $price, 2) }}
+            <p class="product-card__price-row">
+                <span class="product-card__price">
+                    <span class="product-card__price-currency">$</span>{{ number_format((float) $price, 2) }}
+                </span>
+                @if ($comparePrice && (float) $comparePrice > (float) $price)
+                    <span class="product-card__compare">${{ number_format((float) $comparePrice, 2) }}</span>
+                @endif
             </p>
         </div>
     </a>

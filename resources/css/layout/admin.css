@@ -1,20 +1,41 @@
+/* ── Admin shell: warm paper surfaces aligned with tokens.css ── */
+
+.admin {
+    font-family: var(--font-body);
+    color: var(--text);
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 120% 80% at 50% -20%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 100% 0%, color-mix(in srgb, var(--primary) 4%, transparent), transparent 45%),
+        linear-gradient(
+            180deg,
+            var(--background-top) 0%,
+            var(--background) 45%,
+            var(--background-bottom) 100%
+        );
+    background-attachment: fixed;
+}
+
 .admin-layout {
     display: flex;
     min-height: 100vh;
 }
 
+/* ── Sidebar ── */
+
 .admin-sidebar {
     position: fixed;
     inset-block: 0;
     left: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     width: var(--sidebar-width);
-    background-color: var(--surface);
-    border-right: 1px solid var(--border);
+    background-color: var(--surface-raised);
+    border-right: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-slow);
 }
 
 .admin-sidebar--open {
@@ -30,29 +51,44 @@
 .admin-sidebar__brand {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-lg);
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.125rem;
-    border-bottom: 1px solid var(--border);
+    min-height: var(--header-height);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border-subtle));
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--surface-raised) 88%, var(--accent-soft)) 0%,
+        var(--surface-raised) 100%
+    );
 }
 
-.admin-sidebar__brand span {
-    color: var(--accent);
+.admin-sidebar__brand .brand-logo {
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-sidebar__brand .brand-logo__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-sidebar__nav {
     flex: 1;
     overflow-y: auto;
     padding: var(--space-md);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--border) 80%, transparent) transparent;
 }
 
 .admin-sidebar__section {
     margin-bottom: var(--space-lg);
 }
 
+.admin-sidebar__section:last-child {
+    margin-bottom: 0;
+}
+
 .admin-sidebar__label {
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -69,29 +105,57 @@
     border-radius: var(--radius-md);
     font-size: 0.875rem;
     font-weight: 500;
-    transition: background-color var(--transition), color var(--transition);
+    color: var(--text);
+    border: 1px solid transparent;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.admin-sidebar__link svg {
+    flex-shrink: 0;
+    opacity: 0.72;
+    color: var(--text-muted);
+    transition: color var(--transition), opacity var(--transition);
 }
 
 .admin-sidebar__link:hover {
-    background-color: color-mix(in srgb, var(--primary) 8%, var(--surface));
+    background-color: color-mix(in srgb, var(--primary) 7%, var(--surface));
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.admin-sidebar__link:hover svg {
+    opacity: 1;
+    color: var(--primary);
 }
 
 .admin-sidebar__link--active {
-    background-color: color-mix(in srgb, var(--primary) 15%, var(--surface));
-    color: var(--accent);
+    background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    color: var(--primary);
     font-weight: 600;
+}
+
+.admin-sidebar__link--active svg {
+    opacity: 1;
+    color: var(--accent);
 }
 
 .admin-sidebar__footer {
     padding: var(--space-md);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-subtle);
+    background-color: color-mix(in srgb, var(--surface) 85%, var(--background));
 }
+
+/* ── Main column ── */
 
 .admin-main {
     flex: 1;
     display: flex;
     flex-direction: column;
     min-width: 0;
+    min-height: 100vh;
 }
 
 @media (min-width: 64rem) {
@@ -100,32 +164,104 @@
     }
 }
 
+/* ── Topbar ── */
+
 .admin-topbar {
     position: sticky;
     top: 0;
-    z-index: 40;
+    z-index: var(--z-sticky);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
-    height: var(--header-height);
+    min-height: var(--header-height);
     padding-inline: var(--space-lg);
-    background-color: color-mix(in srgb, var(--background) 90%, transparent);
+    background-color: color-mix(in srgb, var(--surface-raised) 88%, transparent);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-xs);
+}
+
+.admin-topbar__start {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+}
+
+.admin-topbar__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        color var(--transition);
+}
+
+.admin-topbar__menu-toggle:hover {
+    background-color: color-mix(in srgb, var(--primary) 6%, var(--surface));
+    border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
+    color: var(--primary);
+}
+
+@media (min-width: 64rem) {
+    .admin-topbar__menu-toggle {
+        display: none;
+    }
+}
+
+.admin-topbar__heading {
+    min-width: 0;
 }
 
 .admin-topbar__title {
     font-family: var(--font-display);
     font-size: 1.125rem;
     font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.admin-topbar__subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: var(--space-2xs);
+    line-height: var(--line-height-snug);
 }
 
 .admin-topbar__actions {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    flex-shrink: 0;
 }
+
+.admin-topbar__user {
+    display: none;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (min-width: 40rem) {
+    .admin-topbar__user {
+        display: inline;
+    }
+}
+
+/* ── Content area ── */
 
 .admin-content {
     flex: 1;
@@ -141,8 +277,9 @@
 .admin-overlay {
     position: fixed;
     inset: 0;
-    z-index: 45;
-    background-color: rgb(0 0 0 / 0.5);
+    z-index: calc(var(--z-overlay) - 5);
+    background-color: color-mix(in srgb, var(--text) 45%, transparent);
+    backdrop-filter: blur(2px);
 }
 
 @media (min-width: 64rem) {
@@ -151,31 +288,57 @@
     }
 }
 
+/* ── Page headers (CRUD views) ── */
+
 .admin-page-header {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .admin-page-header__title {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.015em;
+    color: var(--text);
 }
 
 .admin-page-header__subtitle {
     font-size: 0.875rem;
     color: var(--text-muted);
     margin-top: var(--space-xs);
+    line-height: var(--line-height-snug);
 }
+
+/* ── Dashboard ── */
+
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.admin-dashboard__recent {
+    margin-top: 0;
+}
+
+.kpi-grid--spaced {
+    margin-top: 0;
+}
+
+/* ── Charts ── */
 
 .admin-charts {
     display: grid;
     gap: var(--space-lg);
-    margin-top: var(--space-xl);
+    margin-top: 0;
 }
 
 @media (min-width: 48rem) {
@@ -185,18 +348,153 @@
 }
 
 .admin-chart-card {
-    background-color: var(--surface);
+    background-color: var(--surface-raised);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
 }
 
 .admin-chart-card__title {
-    font-size: 0.875rem;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
     font-weight: 600;
+    letter-spacing: -0.01em;
     margin-bottom: var(--space-md);
+    color: var(--text);
 }
 
 .admin-chart-card canvas {
     max-height: 16rem;
+}
+
+/* ── Admin-scoped CRUD polish (cards, tables, KPIs) ── */
+
+.admin .card {
+    background-color: var(--surface-raised);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+}
+
+.admin .card__title {
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+.admin .table-wrap {
+    border-color: var(--border);
+    background-color: var(--surface);
+}
+
+.admin .table th {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-color: color-mix(in srgb, var(--secondary) 22%, var(--surface));
+    border-bottom-color: var(--border);
+}
+
+.admin .table td {
+    color: var(--text);
+    border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.admin .table td a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    text-underline-offset: 0.15em;
+    transition: color var(--transition), text-decoration-color var(--transition);
+}
+
+.admin .table td a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent);
+}
+
+.admin .table tr:hover td {
+    background-color: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+}
+
+.admin .kpi-grid {
+    gap: var(--space-md);
+}
+
+.admin .kpi-card {
+    background-color: var(--surface-raised);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin .kpi-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+    box-shadow: var(--shadow-sm);
+}
+
+.admin .kpi-card--alert {
+    border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+    background: linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--warning) 6%, var(--surface-raised)) 0%,
+        var(--surface-raised) 55%
+    );
+}
+
+.admin .kpi-card__label {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.admin .kpi-card__value {
+    color: var(--primary);
+    font-variation-settings: 'SOFT' 40, 'WONK' 0;
+}
+
+.admin .kpi-card__delta {
+    font-weight: 600;
+}
+
+.admin .kpi-card__delta--warning {
+    color: var(--warning);
+}
+
+.admin .kpi-card__delta:hover {
+    color: var(--accent-hover);
+}
+
+.admin .badge--primary {
+    background-color: color-mix(in srgb, var(--primary) 18%, var(--surface));
+    color: var(--primary);
+}
+
+.admin .pagination__link--active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ── Dark theme refinements ── */
+
+[data-theme="dark"] .admin {
+    background-image:
+        radial-gradient(ellipse 100% 70% at 50% -15%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 50%),
+        linear-gradient(180deg, var(--background-top) 0%, var(--background) 50%, var(--background-bottom) 100%);
+}
+
+[data-theme="dark"] .admin-sidebar__brand {
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--surface-raised) 85%, var(--primary-muted)) 0%,
+        var(--surface-raised) 100%
+    );
+}
+
+[data-theme="dark"] .admin-topbar {
+    background-color: color-mix(in srgb, var(--surface) 90%, transparent);
 }

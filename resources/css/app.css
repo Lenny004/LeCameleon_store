@@ -7,12 +7,14 @@
 @import './layout/admin.css';
 @import './components/button.css';
 @import './components/form.css';
+@import './components/brand-logo.css';
 @import './components/product-card.css';
 @import './components/flash.css';
 @import './components/theme-toggle.css';
 @import './components/empty-state.css';
 @import './components/utilities.css';
 @import './blocks/hero.css';
+@import './blocks/content.css';
 @import './blocks/shop.css';
 @import './blocks/product.css';
 @import './blocks/cart.css';

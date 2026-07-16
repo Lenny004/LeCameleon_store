@@ -27,6 +27,7 @@
         <div class="checkout-form">
             <section class="checkout-section">
                 <div class="checkout-success">
+                    <x-brand-logo variant="compact" size="lg" class="checkout-success__logo" />
                     <span class="checkout-success__badge">Pedido recibido</span>
                     <p class="checkout-success__order">Pedido #{{ $order->number }}</p>
                     <p class="checkout-success__message">Gracias por tu compra. Te enviaremos actualizaciones por correo electrónico a medida que preparemos tu pedido.</p>
@@ -80,6 +81,11 @@
                     <span class="cart-summary__row-label">Total</span>
                     <span class="cart-summary__row-value">${{ number_format((float) $order->grand_total, 2) }}</span>
                 </div>
+            </div>
+
+            <div class="cart-summary__trust">
+                <span class="cart-summary__trust-item">Recibirás confirmación por correo</span>
+                <span class="cart-summary__trust-item">Embalaje cuidadoso para piezas vintage</span>
             </div>
         </aside>
     </div>

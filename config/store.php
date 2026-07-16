@@ -44,9 +44,11 @@ return [
     // Public-disk path used when a product image is missing or not found.
     'product_image_placeholder' => 'placeholders/vintage-product.jpg',
 
-    // Static brand/marketing assets (copied from legacy/ by LegacyPublicAssetsSeeder).
+    // Static brand logos from legacy/LeCameleon/recursos/img (via LegacyPublicAssetsSeeder).
+    // compact (logo_icon) → narrow; horizontal (logo) → header; wide (logo3) → hero/large.
     'brand_logo' => 'images/brand/logo.png',
     'brand_logo_icon' => 'images/brand/logo-icon.png',
+    'brand_logo_wide' => 'images/brand/logo-wide.png',
     'hero_image' => 'images/marketing/decoracion-vintage.jpg',
     'collection_banner_image' => 'images/marketing/banner-collection.jpg',
 

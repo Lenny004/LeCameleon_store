@@ -43,29 +43,25 @@
     </nav>
 
     @unless ($shipment)
-        <div class="empty-state" style="margin-top:var(--space-xl);">
-            <h1 class="heading-2">No encontramos ese código</h1>
-            <p class="text-muted">
-                Verifica que el código <strong class="tracking-status__code">{{ $code }}</strong> sea correcto
-                e inténtalo de nuevo.
-            </p>
-            <a href="{{ route('tracking.index') }}" class="btn btn--primary" style="margin-top:var(--space-md);">
-                Volver a buscar
-            </a>
-        </div>
+        @include('components.empty-state', [
+            'title' => 'No encontramos ese código',
+            'text' => 'Verifica que el código ' . $code . ' sea correcto e inténtalo de nuevo.',
+            'actionLabel' => 'Volver a buscar',
+            'actionUrl' => route('tracking.index'),
+        ])
     @else
         <div class="tracking-status">
-            <p class="text-small text-muted" style="margin:0 0 var(--space-xs);">Código de rastreo</p>
+            <p class="tracking-status__label">Código de rastreo</p>
             <p class="tracking-status__code">{{ $shipment->tracking_number }}</p>
 
             @if ($shipment->carrier)
-                <p class="text-muted" style="margin:var(--space-sm) 0 0;">
+                <p class="tracking__meta-line">
                     Transportista: <strong>{{ $shipment->carrier }}</strong>
                 </p>
             @endif
 
             @if ($municipality)
-                <p class="text-muted" style="margin:var(--space-xs) 0 0;">
+                <p class="tracking__meta-line tracking__meta-line--tight">
                     Destino:
                     <strong>{{ $municipality->name }}</strong>
                     @if ($municipality->department)
@@ -82,18 +78,18 @@
         @if ($latestOutcome)
             <div class="tracking-outcome">
                 <p class="tracking-outcome__label">Resultado de entrega</p>
-                <p style="margin:0;font-weight:600;">
+                <p class="tracking-outcome__text">
                     {{ $outcomeLabels[$latestOutcome->recipient_outcome->value] ?? $latestOutcome->recipient_outcome->value }}
                 </p>
                 @if ($latestOutcome->note)
-                    <p class="text-muted" style="margin:var(--space-xs) 0 0;font-size:0.875rem;">{{ $latestOutcome->note }}</p>
+                    <p class="order-card__note">{{ $latestOutcome->note }}</p>
                 @endif
             </div>
         @endif
 
         @if ($shipment->events->isNotEmpty())
             <section aria-label="Historial del envío">
-                <h2 class="text-small" style="font-weight:700;margin:var(--space-xl) 0 var(--space-sm);">Historial</h2>
+                <h2 class="tracking__section-heading">Historial</h2>
                 <ol class="tracking-timeline">
                     @foreach ($shipment->events as $event)
                         @php
@@ -125,7 +121,7 @@
 
         @if ($municipality?->latitude && $municipality?->longitude)
             <section class="tracking-map" aria-label="Ubicación aproximada del destino">
-                <h2 class="text-small" style="font-weight:700;margin-bottom:var(--space-sm);">Ubicación del destino</h2>
+                <h2 class="tracking__section-heading">Ubicación del destino</h2>
                 <div class="tracking-map__placeholder" role="img" aria-label="Mapa aproximado del municipio de destino">
                     Vista previa del mapa — {{ $municipality->name }}
                 </div>
@@ -136,9 +132,9 @@
             </section>
         @endif
 
-        <p style="margin-top:var(--space-xl);">
+        <div class="tracking__actions">
             <a href="{{ route('tracking.index') }}" class="btn btn--secondary">Buscar otro código</a>
-        </p>
+        </div>
     @endunless
 </div>
 @endsection

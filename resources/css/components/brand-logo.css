@@ -1,0 +1,118 @@
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+    line-height: 1;
+}
+
+.brand-logo__img {
+    display: block;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-logo__img--icon {
+    height: 2.25rem;
+    border-radius: var(--radius-sm);
+}
+
+.brand-logo__img--full {
+    height: 2.5rem;
+    max-width: 10rem;
+}
+
+.brand-logo__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--primary-contrast);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: var(--radius-sm);
+}
+
+.brand-logo__text {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+}
+
+.brand-logo__accent {
+    color: var(--accent);
+}
+
+.brand-logo--sm .brand-logo__img--icon,
+.brand-logo--sm .brand-logo__mark {
+    height: 1.75rem;
+    width: 1.75rem;
+}
+
+.brand-logo--sm .brand-logo__img--full {
+    height: 1.75rem;
+}
+
+.brand-logo--sm .brand-logo__text {
+    font-size: 1.0625rem;
+}
+
+.brand-logo--lg .brand-logo__img--icon,
+.brand-logo--lg .brand-logo__mark {
+    height: 3rem;
+    width: 3rem;
+}
+
+.brand-logo--lg .brand-logo__img--full {
+    height: 3.25rem;
+    max-width: 12rem;
+}
+
+.brand-logo--lg .brand-logo__text {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.brand-logo--xl .brand-logo__img--icon,
+.brand-logo--xl .brand-logo__mark {
+    height: 4rem;
+    width: 4rem;
+}
+
+.brand-logo--xl .brand-logo__img--full {
+    height: 4.5rem;
+    max-width: 16rem;
+}
+
+.brand-logo--xl .brand-logo__text {
+    font-size: clamp(2.25rem, 8vw, 4.5rem);
+}
+
+.brand-logo--full .brand-logo__text {
+    display: none;
+}
+
+.brand-logo--icon .brand-logo__text {
+    display: none;
+}
+
+.brand-logo--inverted {
+    color: color-mix(in srgb, var(--primary-contrast) 92%, white);
+}
+
+.brand-logo--inverted .brand-logo__accent {
+    color: color-mix(in srgb, var(--accent) 85%, var(--primary-contrast));
+}
+
+.brand-logo--inverted .brand-logo__img--icon {
+    background: color-mix(in srgb, var(--primary-contrast) 12%, transparent);
+}

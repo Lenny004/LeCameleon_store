@@ -24,6 +24,10 @@
     @if ($items->count())
         <div class="cart-layout">
             <div class="cart-items">
+                <header class="cart-items__header">
+                    <h2 class="cart-items__title">Artículos en tu carrito</h2>
+                    <span class="cart-items__meta">{{ $items->count() }} {{ $items->count() === 1 ? 'pieza' : 'piezas' }}</span>
+                </header>
                 @foreach ($items as $item)
                     <article class="cart-item">
                         @if ($item->image ?? null)

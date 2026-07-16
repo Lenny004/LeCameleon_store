@@ -1,8 +1,4 @@
 <footer class="footer">
-    @php
-        $storeLogo = config('store.brand_logo');
-        $hasStoreLogo = is_string($storeLogo) && $storeLogo !== '' && file_exists(public_path($storeLogo));
-    @endphp
     <div class="footer__top">
         <div class="footer__top-inner">
             <p class="footer__top-text">Curaduría vintage con envío local en El Salvador</p>
@@ -15,17 +11,14 @@
     <div class="footer__inner">
         <div class="footer__grid">
             <div class="footer__col footer__col--brand">
-                @if ($hasStoreLogo)
-                    <img
-                        src="{{ asset($storeLogo) }}"
-                        alt="Le Cameleon"
-                        class="footer__logo"
-                        width="160"
-                        height="44"
-                        decoding="async"
-                    >
-                @endif
-                <p class="footer__brand">Le <span>Cameleon</span></p>
+                <div class="footer__brand-mark">
+                    @include('components.brand-logo', [
+                        'variant' => 'horizontal',
+                        'href' => Route::has('home') ? route('home') : '/',
+                        'size' => 'md',
+                        'inverted' => true,
+                    ])
+                </div>
                 <p class="footer__tagline">Piezas vintage seleccionadas con criterio. Moda y objetos con historia, listos para una nueva vida.</p>
                 @if (Route::has('newsletter.store'))
                     <form method="POST" action="{{ route('newsletter.store') }}" class="footer__newsletter">

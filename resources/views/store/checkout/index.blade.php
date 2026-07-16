@@ -15,6 +15,21 @@
         <h1 class="heading-2">Checkout</h1>
     </header>
 
+    <nav class="checkout-steps" aria-label="Pasos del checkout">
+        <span class="checkout-step checkout-step--active">
+            <span class="checkout-step__num">1</span>
+            Envío y pago
+        </span>
+        <span class="checkout-step">
+            <span class="checkout-step__num">2</span>
+            Revisión
+        </span>
+        <span class="checkout-step">
+            <span class="checkout-step__num">3</span>
+            Confirmación
+        </span>
+    </nav>
+
     @if ($errors->any())
         <div class="flash flash--error" role="alert">
             <ul>
@@ -269,7 +284,7 @@
 
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Método de pago</h2>
-                <div class="checkout-payment">
+                <div class="checkout-section__body checkout-payment">
                     <label class="form-radio">
                         <input type="radio" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }}>
                         <span class="form-radio__label">
@@ -309,10 +324,21 @@
 
         <aside class="order-summary">
             <h2 class="order-summary__title">Resumen del pedido</h2>
+
+            @isset($cart)
+                <ul class="order-summary__items">
+                    @foreach ($cart->items as $cartItem)
+                        <li class="order-summary__item">
+                            <span class="order-summary__item-name">{{ $cartItem->product?->name }} × {{ $cartItem->quantity }}</span>
+                            <span class="order-summary__item-price">${{ number_format((float) $cartItem->unit_price * $cartItem->quantity, 2) }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            @endisset
+
             @php
                 $orderSubtotal = (float) ($subtotal ?? 0);
                 $orderShipping = (float) ($shipping ?? 0);
-                $orderTotal = $orderSubtotal + $orderShipping;
             @endphp
             <div class="cart-summary__rows">
                 <div class="cart-summary__row">
@@ -331,11 +357,11 @@
 
             <div class="checkout-shipping-quote" x-show="municipalityId" x-cloak>
                 <template x-if="loading">
-                    <p class="form-hint" style="margin:0;">Calculando envío…</p>
+                    <p class="form-hint checkout-shipping-quote__loading">Calculando envío…</p>
                 </template>
                 <template x-if="quote && !loading">
                     <div>
-                        <p style="margin:0;">
+                        <p class="checkout-shipping-quote__lead">
                             Entrega estimada: <strong x-text="formatEta(quote.eta_hours)"></strong>
                         </p>
                         <p class="checkout-shipping-quote__eta">
@@ -357,24 +383,14 @@
                     </div>
                 </template>
                 <template x-if="error && !loading">
-                    <p class="form-error" style="margin:0;" x-text="error"></p>
+                    <p class="form-error checkout-shipping-quote__error" x-text="error"></p>
                 </template>
             </div>
 
-            @isset($cart)
-                <ul class="order-summary__items">
-                    @foreach ($cart->items as $cartItem)
-                        <li class="order-summary__item">
-                            <span class="order-summary__item-name">{{ $cartItem->product?->name }} × {{ $cartItem->quantity }}</span>
-                            <span class="order-summary__item-price">${{ number_format((float) $cartItem->unit_price * $cartItem->quantity, 2) }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            @endisset
-
             <div class="cart-summary__trust">
-                <span class="cart-summary__trust-item">Compra segura</span>
+                <span class="cart-summary__trust-item">Compra segura — datos protegidos</span>
                 <span class="cart-summary__trust-item">Embalaje para piezas delicadas</span>
+                <span class="cart-summary__trust-item">Descripciones honestas del estado</span>
             </div>
         </aside>
     </div>

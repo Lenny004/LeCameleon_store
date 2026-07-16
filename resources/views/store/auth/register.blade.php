@@ -3,7 +3,6 @@
 @section('content')
 <div class="auth-page">
     <div class="auth-card">
-        <p class="auth-card__brand">Le <span>Cameleon</span></p>
         <h1 class="auth-card__title">Crear cuenta</h1>
         <p class="auth-card__subtitle">Únete y guarda tus favoritos</p>
 

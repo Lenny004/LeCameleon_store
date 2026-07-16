@@ -21,18 +21,22 @@
             <a href="{{ route('wishlist.index') }}" class="account-nav__link">Favoritos</a>
         @endif
         @if (Route::has('logout'))
-            <form method="POST" action="{{ route('logout') }}" style="margin-top:var(--space-md);">
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="account-nav__link" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;">Cerrar sesión</button>
+                <button type="submit" class="account-nav__logout">Cerrar sesión</button>
             </form>
         @endif
     </nav>
 
     <div class="account-content">
-        <h1 class="heading-2">Mi perfil</h1>
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Mi cuenta</p>
+            <h1 class="heading-2 account-content__title">Mi perfil</h1>
+            <p class="account-content__lead">Actualiza tus datos de contacto para pedidos y envíos.</p>
+        </header>
 
-        <div class="card">
-            <form method="POST" action="{{ Route::has('account.update') ? route('account.update') : '#' }}" style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <div class="account-panel">
+            <form method="POST" action="{{ Route::has('account.update') ? route('account.update') : '#' }}" class="auth-card__form">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

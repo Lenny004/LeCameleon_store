@@ -72,8 +72,9 @@ HTML,
 
 <div class="container content-page content-page--narrow">
     <header class="content-page__header">
-        <h1 class="heading-2">Preguntas frecuentes</h1>
-        <p class="content-page__intro text-muted">
+        <p class="content-page__eyebrow">Ayuda</p>
+        <h1 class="content-page__title">Preguntas frecuentes</h1>
+        <p class="content-page__intro">
             Todo lo que necesitas saber antes de comprar vintage: condición, medidas, envíos y más.
         </p>
     </header>

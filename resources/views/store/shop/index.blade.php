@@ -5,11 +5,20 @@
 @section('content')
 <div class="container shop-layout" x-data="filterPanel()">
     <aside class="shop-layout__sidebar">
+        @php
+            $activeFilterCount = count((array) request('category', []))
+                + count((array) request('era', []))
+                + count((array) request('condition', []))
+                + (request()->filled('min_rating') ? 1 : 0);
+        @endphp
         <button type="button" class="filter-panel__toggle" @click="toggle()" :aria-expanded="open">
             <svg class="filter-panel__toggle-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h10"/>
             </svg>
             <span x-text="open ? 'Ocultar filtros' : 'Mostrar filtros'"></span>
+            @if ($activeFilterCount > 0)
+                <span class="filter-panel__toggle-badge" aria-label="{{ $activeFilterCount }} filtros activos">{{ $activeFilterCount }}</span>
+            @endif
         </button>
         <form method="GET" action="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel filter-panel--mobile-hidden" :class="{ 'filter-panel--open': open }">
             <div class="filter-panel__header">
@@ -17,8 +26,8 @@
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel__clear">Limpiar</a>
             </div>
 
-            <div class="filter-panel__group">
-                <p class="filter-panel__label">Categoría</p>
+            <details class="filter-panel__group" open>
+                <summary class="filter-panel__label">Categoría</summary>
                 <div class="filter-panel__options">
                     @foreach ($categories ?? ['Ropa', 'Accesorios', 'Calzado', 'Hogar'] as $cat)
                         <label class="filter-panel__option">
@@ -27,11 +36,11 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </details>
 
-            <div class="filter-panel__group">
-                <p class="filter-panel__label">Época</p>
-                <div class="filter-panel__options">
+            <details class="filter-panel__group" open>
+                <summary class="filter-panel__label">Época</summary>
+                <div class="filter-panel__options filter-panel__options--grid">
                     @foreach (['1960s', '1970s', '1980s', '1990s', '2000s'] as $era)
                         <label class="filter-panel__option">
                             <input type="checkbox" name="era[]" value="{{ $era }}" {{ in_array($era, (array) request('era', [])) ? 'checked' : '' }}>
@@ -39,11 +48,11 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </details>
 
-            <div class="filter-panel__group">
-                <p class="filter-panel__label">Condición</p>
-                <div class="filter-panel__options">
+            <details class="filter-panel__group" open>
+                <summary class="filter-panel__label">Condición</summary>
+                <div class="filter-panel__options filter-panel__options--grid">
                     @foreach (['Excelente', 'Muy bueno', 'Bueno', 'Aceptable'] as $cond)
                         <label class="filter-panel__option">
                             <input type="checkbox" name="condition[]" value="{{ strtolower(str_replace(' ', '-', $cond)) }}" {{ in_array(strtolower(str_replace(' ', '-', $cond)), (array) request('condition', [])) ? 'checked' : '' }}>
@@ -51,11 +60,11 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </details>
 
-            <div class="filter-panel__group">
-                <p class="filter-panel__label">Valoración mínima</p>
-                <div class="filter-panel__options">
+            <details class="filter-panel__group" open>
+                <summary class="filter-panel__label">Valoración mínima</summary>
+                <div class="filter-panel__options filter-panel__options--rating">
                     @foreach ([5, 4, 3, 2, 1] as $stars)
                         <label class="filter-panel__option">
                             <input
@@ -68,7 +77,7 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </details>
 
             <button type="submit" class="btn btn--primary btn--block filter-panel__submit">Aplicar filtros</button>
         </form>
@@ -87,6 +96,25 @@
             <h1 class="shop-header__title">Catálogo</h1>
             <p class="shop-header__lead">Piezas vintage seleccionadas, listas para encontrar su nueva historia.</p>
         </header>
+
+        @if ($activeFilterCount > 0)
+            <div class="shop-active-filters" aria-label="Filtros activos">
+                <span class="shop-active-filters__label">Filtros:</span>
+                @foreach ((array) request('category', []) as $catSlug)
+                    <span class="shop-active-filters__chip">{{ $catSlug }}</span>
+                @endforeach
+                @foreach ((array) request('era', []) as $eraVal)
+                    <span class="shop-active-filters__chip">{{ $eraVal }}</span>
+                @endforeach
+                @foreach ((array) request('condition', []) as $condVal)
+                    <span class="shop-active-filters__chip">{{ str_replace('-', ' ', $condVal) }}</span>
+                @endforeach
+                @if (request()->filled('min_rating'))
+                    <span class="shop-active-filters__chip">{{ request('min_rating') }} ★+</span>
+                @endif
+                <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="shop-active-filters__clear">Limpiar todo</a>
+            </div>
+        @endif
 
         <div class="shop-toolbar">
             <div class="shop-toolbar__meta">

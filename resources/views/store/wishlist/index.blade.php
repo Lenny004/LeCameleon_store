@@ -3,17 +3,23 @@
 @section('title', 'Favoritos — Le Cameleon')
 
 @section('content')
-<div class="container section">
-    <div class="section__header">
-        <h1 class="section__title">Mis favoritos</h1>
-    </div>
-
+<div class="container wishlist-page">
     @php
         $products = collect($wishlist?->items ?? [])
             ->map(fn ($item) => $item->product)
             ->filter()
             ->values();
     @endphp
+
+    <header class="wishlist-page__header">
+        <p class="wishlist-page__eyebrow">Tu selección</p>
+        <h1 class="heading-2">Mis favoritos</h1>
+        @if ($products->count())
+            <p class="wishlist-page__count">
+                {{ $products->count() }} {{ $products->count() === 1 ? 'pieza guardada' : 'piezas guardadas' }}
+            </p>
+        @endif
+    </header>
 
     @if ($products->count())
         <div class="grid-products">

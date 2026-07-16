@@ -15,9 +15,11 @@
         @if ($hasHeroImage) style="--hero-bg-image: url('{{ asset($heroImage) }}');" @endif
     >
         <div class="hero__content">
-            <h1 class="hero__brand">
-                Le
-                <span class="hero__brand-accent">Cameleon</span>
+            <h1 class="hero__logo">
+                @include('components.brand-logo', [
+                    'variant' => 'wide',
+                    'size' => 'xl',
+                ])
             </h1>
             <p class="hero__headline">Piezas únicas que cuentan historias</p>
             <p class="hero__tagline">Descubre moda y objetos vintage seleccionados pieza a pieza, con autenticidad y estilo atemporal.</p>

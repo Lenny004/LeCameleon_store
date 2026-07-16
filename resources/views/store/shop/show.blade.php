@@ -133,11 +133,18 @@
             </header>
 
             <aside class="product-buybox" aria-label="Comprar producto">
-                <div class="product-buybox__price-row">
-                    <p class="product-buybox__price">${{ number_format((float) $product->price, 2) }}</p>
-                    @if ($product->compare_at_price && (float) $product->compare_at_price > (float) $product->price)
-                        <p class="product-buybox__compare">${{ number_format((float) $product->compare_at_price, 2) }}</p>
-                    @endif
+                <div class="product-buybox__price-block">
+                    <div class="product-buybox__price-row">
+                        <p class="product-buybox__price">${{ number_format((float) $product->price, 2) }}</p>
+                        @if ($product->compare_at_price && (float) $product->compare_at_price > (float) $product->price)
+                            <p class="product-buybox__compare">${{ number_format((float) $product->compare_at_price, 2) }}</p>
+                            @php
+                                $savingsPct = round((1 - (float) $product->price / (float) $product->compare_at_price) * 100);
+                            @endphp
+                            <span class="product-buybox__savings">−{{ $savingsPct }}%</span>
+                        @endif
+                    </div>
+                    <p class="product-buybox__price-note">Precio final · impuestos incluidos</p>
                 </div>
 
                 <p class="product-buybox__stock product-buybox__stock--{{ $stock <= 0 ? 'out' : ($isLowStock ? 'low' : 'in') }}">
@@ -150,6 +157,8 @@
                     @endif
                 </p>
 
+                <div class="product-buybox__divider" aria-hidden="true"></div>
+
                 <div class="product-buybox__actions" x-data="quantityInput(1, {{ max($stock, 1) }})">
                     @if ($stock > 0)
                         <label class="product-buybox__qty-label" for="product-qty">Cantidad</label>
@@ -161,7 +170,7 @@
                     @endif
 
                     @if (Route::has('cart.store') && $stock > 0)
-                        <form action="{{ route('cart.store') }}" method="POST" class="product-buybox__form">
+                        <form action="{{ route('cart.store') }}" method="POST" class="product-buybox__form product-buybox__cta">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <input type="hidden" name="quantity" :value="qty">
@@ -324,9 +333,10 @@
 </div>
 
 @if (($related ?? collect())->isNotEmpty())
-    <section class="container section product-recs" aria-labelledby="product-recs-related">
-        <div class="section__header">
+    <section class="container section product-recs product-recs--related" aria-labelledby="product-recs-related">
+        <div class="section__header product-recs__header">
             <h2 class="section__title" id="product-recs-related">También te puede gustar</h2>
+            <p class="product-recs__lead">Piezas seleccionadas de la misma época y estilo.</p>
         </div>
         <div class="product-recs__row">
             @foreach ($related as $item)
@@ -337,9 +347,10 @@
 @endif
 
 @if (($alsoViewed ?? collect())->isNotEmpty())
-    <section class="container section product-recs" aria-labelledby="product-recs-viewed">
-        <div class="section__header">
+    <section class="container section product-recs product-recs--viewed" aria-labelledby="product-recs-viewed">
+        <div class="section__header product-recs__header">
             <h2 class="section__title" id="product-recs-viewed">Clientes también vieron</h2>
+            <p class="product-recs__lead">Exploraciones recientes de otros compradores.</p>
         </div>
         <div class="product-recs__row">
             @foreach ($alsoViewed as $item)
@@ -350,8 +361,11 @@
 @endif
 
 <section class="container section product-reviews" id="product-reviews">
-    <div class="section__header">
+    <div class="section__header product-reviews__intro">
         <h2 class="section__title">Valoraciones y comentarios</h2>
+        @if (($reviewSummary['count'] ?? 0) > 0)
+            <p class="product-reviews__intro-text">Opiniones verificadas de compradores de Le Cameleon.</p>
+        @endif
     </div>
 
     @php

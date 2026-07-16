@@ -23,9 +23,13 @@
     </nav>
 
     <div class="account-content">
-        <h1 class="heading-2">Mi perfil</h1>
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Mi cuenta</p>
+            <h1 class="heading-2 account-content__title">Mi perfil</h1>
+            <p class="account-content__lead">Actualiza tus datos de contacto para pedidos y envíos.</p>
+        </header>
 
-        <div class="card">
+        <div class="account-panel">
             <form method="POST" action="{{ Route::has('account.update') ? route('account.update') : '#' }}" class="auth-card__form">
                 @csrf
                 @method('PUT')

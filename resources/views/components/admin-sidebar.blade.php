@@ -29,9 +29,14 @@
 @endphp
 
 <aside class="admin-sidebar" :class="{ 'admin-sidebar--open': open }">
-    <a href="{{ Route::has('admin.dashboard') ? route('admin.dashboard') : '#' }}" class="admin-sidebar__brand">
-        Le <span>Cameleon</span>
-    </a>
+    <div class="admin-sidebar__brand">
+        @include('components.brand-logo', [
+            'variant' => 'compact',
+            'size' => 'sm',
+            'href' => Route::has('admin.dashboard') ? route('admin.dashboard') : null,
+            'inverted' => true,
+        ])
+    </div>
 
     <nav class="admin-sidebar__nav" aria-label="Admin navigation">
         <div class="admin-sidebar__section">

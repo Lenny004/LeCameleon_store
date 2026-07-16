@@ -1,10 +1,4 @@
 <header class="header" x-data="mobileNav()">
-    @php
-        $storeLogo = config('store.brand_logo');
-        $storeLogoIcon = config('store.brand_logo_icon');
-        $hasStoreLogo = is_string($storeLogo) && $storeLogo !== '' && file_exists(public_path($storeLogo));
-        $hasStoreLogoIcon = is_string($storeLogoIcon) && $storeLogoIcon !== '' && file_exists(public_path($storeLogoIcon));
-    @endphp
     <div class="header__utility">
         <div class="header__utility-inner">
             <p class="header__utility-text">
@@ -21,34 +15,13 @@
 
     <div class="header__main">
         <div class="header__inner">
-            <a href="{{ Route::has('home') ? route('home') : '/' }}" class="header__logo" aria-label="Le Cameleon — Inicio">
-                @if ($hasStoreLogoIcon)
-                    <img
-                        src="{{ asset($storeLogoIcon) }}"
-                        alt=""
-                        class="header__logo-img header__logo-img--icon"
-                        width="40"
-                        height="40"
-                        decoding="async"
-                        aria-hidden="true"
-                    >
-                @elseif ($hasStoreLogo)
-                    <img
-                        src="{{ asset($storeLogo) }}"
-                        alt=""
-                        class="header__logo-img header__logo-img--full"
-                        width="148"
-                        height="40"
-                        decoding="async"
-                        aria-hidden="true"
-                    >
-                @else
-                    <span class="header__logo-mark" aria-hidden="true">LC</span>
-                @endif
-                <span class="header__logo-text">
-                    Le <span class="header__logo-accent">Cameleon</span>
-                </span>
-            </a>
+            <div class="header__logo">
+                @include('components.brand-logo', [
+                    'variant' => 'auto',
+                    'href' => Route::has('home') ? route('home') : '/',
+                    'size' => 'md',
+                ])
+            </div>
 
             @if (Route::has('search') || Route::has('shop.index'))
                 <form
@@ -148,12 +121,13 @@
 
     <nav class="mobile-nav" :class="{ 'mobile-nav--open': open }" x-show="open" x-transition @click.outside="close()" x-cloak aria-label="Menú móvil">
         <div class="mobile-nav__header">
-            <p class="mobile-nav__brand">
-                @if ($hasStoreLogoIcon)
-                    <img src="{{ asset($storeLogoIcon) }}" alt="" class="mobile-nav__logo" width="32" height="32" decoding="async" aria-hidden="true">
-                @endif
-                Le <span>Cameleon</span>
-            </p>
+            <div class="mobile-nav__brand">
+                @include('components.brand-logo', [
+                    'variant' => 'compact',
+                    'href' => Route::has('home') ? route('home') : '/',
+                    'size' => 'sm',
+                ])
+            </div>
             <button type="button" class="mobile-nav__close" @click="close()" aria-label="Cerrar menú">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <line x1="18" y1="6" x2="6" y2="18"/>

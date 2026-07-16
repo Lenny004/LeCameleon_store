@@ -6,10 +6,20 @@
     text-align: center;
     padding: var(--space-3xl) var(--space-xl);
     gap: var(--space-md);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background:
+        radial-gradient(
+            ellipse 70% 50% at 50% 0%,
+            color-mix(in srgb, var(--primary) 6%, transparent) 0%,
+            transparent 65%
+        ),
+        var(--surface);
+    border: 1px dashed color-mix(in srgb, var(--border) 80%, var(--accent));
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
+}
+
+.empty-state--spaced {
+    margin-top: var(--space-xl);
 }
 
 .empty-state__icon-wrap {
@@ -20,6 +30,7 @@
     height: 5rem;
     border-radius: var(--radius-full);
     background-color: var(--primary-muted);
+    border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
     margin-bottom: var(--space-xs);
 }
 

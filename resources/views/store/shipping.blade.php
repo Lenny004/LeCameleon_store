@@ -7,14 +7,13 @@
 <div class="container content-page">
     <header class="content-page__header">
         <p class="content-page__eyebrow">Logística</p>
-        <h1 class="heading-2">Envíos</h1>
+        <h1 class="content-page__title">Envíos</h1>
+        <p class="content-page__intro">
+            Empacamos cada pieza como si fuera irreemplazable — porque muchas lo son.
+        </p>
     </header>
 
     <div class="content-page__prose">
-        <p class="text-lead">
-            Empacamos cada pieza como si fuera irreemplazable — porque muchas lo son.
-        </p>
-
         <h2>Costos y tiempos</h2>
         <ul>
             <li>Tarifa plana de envío mostrada en el checkout (configurable por la tienda).</li>
