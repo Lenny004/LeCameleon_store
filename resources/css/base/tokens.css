@@ -1,31 +1,39 @@
 :root {
-    /* ── Core palette: warm paper + forest + copper ── */
-    --text: rgb(28, 25, 20);
-    --text-muted: rgb(107, 99, 88);
-    --background: rgb(244, 239, 230);
-    --background-top: rgb(250, 247, 242);
-    --background-bottom: rgb(235, 228, 216);
-    --surface: rgb(252, 249, 244);
-    --surface-raised: rgb(255, 253, 250);
-    --border: rgb(214, 204, 190);
+    color-scheme: light;
+
+    /* Core palette: cool gray + neon green (light base) */
+    --text: rgb(4, 3, 22);
+    --text-muted: rgb(100, 98, 118);
+    --background: rgb(245, 245, 245);
+    --background-top: rgb(255, 255, 255);
+    --background-bottom: rgb(237, 237, 237);
+    --surface: rgb(255, 255, 255);
+    --surface-raised: rgb(255, 255, 255);
+    --border: rgb(224, 224, 224);
     --border-subtle: color-mix(in srgb, var(--border) 55%, transparent);
 
-    --primary: rgb(59, 79, 56);
-    --primary-hover: rgb(47, 63, 45);
-    --primary-muted: color-mix(in srgb, var(--primary) 12%, var(--background));
-    --primary-contrast: rgb(252, 249, 244);
+    --primary: rgb(17, 255, 0);
+    --primary-hover: rgb(12, 214, 0);
+    --primary-muted: color-mix(in srgb, var(--primary) 10%, var(--background));
+    --primary-contrast: rgb(4, 3, 22);
 
-    --secondary: rgb(201, 190, 174);
-    --accent: rgb(168, 98, 58);
-    --accent-hover: rgb(145, 82, 46);
-    --accent-soft: color-mix(in srgb, var(--accent) 14%, var(--background));
-    --accent-contrast: rgb(252, 249, 244);
+    --secondary: rgb(232, 232, 232);
+    --accent: rgb(1, 233, 98);
+    --accent-hover: rgb(0, 196, 82);
+    --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--background));
+    --accent-contrast: rgb(4, 3, 22);
 
-    --danger: rgb(181, 62, 52);
-    --success: rgb(58, 107, 68);
-    --warning: rgb(184, 134, 42);
+    /* Dark chrome for utility bar / footer (not neon fills) */
+    --inverse: rgb(4, 3, 22);
+    --inverse-hover: rgb(22, 20, 42);
+    --inverse-contrast: rgb(247, 247, 247);
+    --inverse-muted: color-mix(in srgb, var(--inverse-contrast) 68%, transparent);
 
-    /* ── Typography ── */
+    --danger: rgb(220, 56, 70);
+    --success: rgb(1, 180, 80);
+    --warning: rgb(214, 160, 24);
+
+    /* Typography */
     --font-display: 'Fraunces', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
     --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
     --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
@@ -35,7 +43,7 @@
     --line-height-base: 1.6;
     --line-height-relaxed: 1.75;
 
-    /* ── Spacing scale ── */
+    /* Spacing scale */
     --space-2xs: 0.125rem;
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -46,7 +54,7 @@
     --space-3xl: 4rem;
     --space-4xl: 6rem;
 
-    /* ── Radii ── */
+    /* Radii */
     --radius-xs: 0.125rem;
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
@@ -55,29 +63,29 @@
     --radius-2xl: 1.25rem;
     --radius-full: 9999px;
 
-    /* ── Shadows (warm ink, not cold gray) ── */
-    --shadow-xs: 0 1px 2px rgb(28 25 20 / 0.04);
-    --shadow-sm: 0 1px 3px rgb(28 25 20 / 0.06), 0 1px 2px rgb(28 25 20 / 0.04);
-    --shadow-md: 0 4px 12px rgb(28 25 20 / 0.07), 0 2px 4px rgb(28 25 20 / 0.04);
-    --shadow-lg: 0 12px 32px rgb(28 25 20 / 0.09), 0 4px 8px rgb(28 25 20 / 0.04);
-    --shadow-inset: inset 0 1px 2px rgb(28 25 20 / 0.05);
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgb(4 3 22 / 0.04);
+    --shadow-sm: 0 1px 3px rgb(4 3 22 / 0.06), 0 1px 2px rgb(4 3 22 / 0.04);
+    --shadow-md: 0 4px 12px rgb(4 3 22 / 0.07), 0 2px 4px rgb(4 3 22 / 0.04);
+    --shadow-lg: 0 12px 32px rgb(4 3 22 / 0.09), 0 4px 8px rgb(4 3 22 / 0.04);
+    --shadow-inset: inset 0 1px 2px rgb(4 3 22 / 0.05);
 
-    /* ── Motion ── */
+    /* Motion */
     --transition-fast: 120ms ease;
     --transition: 180ms ease;
     --transition-slow: 280ms ease;
 
-    /* ── Focus ── */
+    /* Focus */
     --focus-ring: 2px solid var(--accent);
     --focus-ring-offset: 2px;
 
-    /* ── Layout ── */
+    /* Layout */
     --header-height: 4rem;
     --sidebar-width: 16rem;
     --container-max: 72rem;
     --container-wide: 90rem;
 
-    /* ── Z-index scale ── */
+    /* Z-index scale */
     --z-base: 0;
     --z-dropdown: 100;
     --z-sticky: 200;
@@ -93,30 +101,37 @@
 }
 
 [data-theme="dark"] {
-    --text: rgb(237, 232, 223);
-    --text-muted: rgb(168, 160, 148);
-    --background: rgb(22, 20, 17);
-    --background-top: rgb(28, 26, 22);
-    --background-bottom: rgb(16, 14, 12);
-    --surface: rgb(32, 29, 25);
-    --surface-raised: rgb(38, 35, 30);
-    --border: rgb(58, 53, 46);
+    color-scheme: dark;
+
+    --text: rgb(234, 233, 252);
+    --text-muted: rgb(158, 156, 180);
+    --background: rgb(18, 18, 18);
+    --background-top: rgb(26, 26, 26);
+    --background-bottom: rgb(12, 12, 12);
+    --surface: rgb(28, 28, 28);
+    --surface-raised: rgb(36, 36, 36);
+    --border: rgb(56, 56, 56);
     --border-subtle: color-mix(in srgb, var(--border) 45%, transparent);
 
-    --primary: rgb(130, 158, 124);
-    --primary-hover: rgb(148, 176, 142);
+    --primary: rgb(17, 255, 0);
+    --primary-hover: rgb(72, 255, 58);
     --primary-muted: color-mix(in srgb, var(--primary) 15%, var(--background));
-    --primary-contrast: rgb(22, 20, 17);
+    --primary-contrast: rgb(4, 3, 22);
 
-    --secondary: rgb(68, 62, 54);
-    --accent: rgb(196, 136, 90);
-    --accent-hover: rgb(212, 152, 106);
+    --secondary: rgb(41, 41, 41);
+    --accent: rgb(22, 254, 118);
+    --accent-hover: rgb(86, 255, 158);
     --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--background));
-    --accent-contrast: rgb(22, 20, 17);
+    --accent-contrast: rgb(4, 3, 22);
 
-    --danger: rgb(224, 108, 98);
-    --success: rgb(108, 168, 118);
-    --warning: rgb(212, 168, 72);
+    --inverse: rgb(10, 10, 10);
+    --inverse-hover: rgb(22, 22, 22);
+    --inverse-contrast: rgb(234, 233, 252);
+    --inverse-muted: color-mix(in srgb, var(--inverse-contrast) 62%, transparent);
+
+    --danger: rgb(255, 96, 108);
+    --success: rgb(22, 220, 110);
+    --warning: rgb(232, 188, 72);
 
     --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.25);
     --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.3), 0 1px 2px rgb(0 0 0 / 0.2);

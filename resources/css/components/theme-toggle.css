@@ -28,6 +28,11 @@
     outline-offset: 2px;
 }
 
+.theme-toggle[aria-pressed='true'] {
+    border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+    color: var(--primary);
+}
+
 .header__theme .theme-toggle {
     width: 2.375rem;
     height: 2.375rem;
