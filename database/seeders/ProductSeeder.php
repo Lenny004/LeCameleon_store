@@ -12,6 +12,7 @@ use App\Models\ProductAttribute;
 use App\Models\ProductImage;
 use App\Models\Review;
 use App\Models\User;
+use App\Support\LegacyAssetCopier;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -20,6 +21,7 @@ class ProductSeeder extends Seeder
     {
         $brands = Brand::query()->pluck('id', 'slug');
         $categories = Category::query()->pluck('id', 'slug');
+        $legacyProductImages = LegacyAssetCopier::listFiles('api/images/productos');
 
         $products = [
             [
@@ -275,13 +277,11 @@ class ProductSeeder extends Seeder
                 'authenticated_by' => $isAuthenticated ? $adminUser?->id : null,
             ]);
 
-            $primaryImagePath = $index === 10
-                ? 'placeholders/vintage-product.jpg'
-                : 'products/'.$product->slug.'/main.jpg';
+            $imagePaths = $this->seedProductImages($product, $index, $legacyProductImages);
 
             ProductImage::query()->create([
                 'product_id' => $product->id,
-                'path' => $primaryImagePath,
+                'path' => $imagePaths['primary'],
                 'alt' => $product->name,
                 'sort_order' => 0,
                 'is_primary' => true,
@@ -289,8 +289,8 @@ class ProductSeeder extends Seeder
 
             ProductImage::query()->create([
                 'product_id' => $product->id,
-                'path' => 'products/'.$product->slug.'/detail-'.($index + 1).'.jpg',
-                'alt' => $product->name.' detail view',
+                'path' => $imagePaths['detail'],
+                'alt' => $product->name.' — vista detalle',
                 'sort_order' => 1,
                 'is_primary' => false,
             ]);
@@ -359,5 +359,36 @@ class ProductSeeder extends Seeder
                 ]);
             }
         }
+    }
+
+    /**
+     * @param  list<string>  $legacyProductImages
+     * @return array{primary: string, detail: string}
+     */
+    private function seedProductImages(Product $product, int $index, array $legacyProductImages): array
+    {
+        if ($legacyProductImages === []) {
+            return [
+                'primary' => 'placeholders/vintage-product.jpg',
+                'detail' => 'placeholders/vintage-product.jpg',
+            ];
+        }
+
+        $primarySource = $legacyProductImages[$index % count($legacyProductImages)];
+        $detailSource = $legacyProductImages[($index + 1) % count($legacyProductImages)];
+
+        $primaryExt = strtolower(pathinfo($primarySource, PATHINFO_EXTENSION) ?: 'jpg');
+        $detailExt = strtolower(pathinfo($detailSource, PATHINFO_EXTENSION) ?: 'jpg');
+
+        $primaryPath = 'products/'.$product->slug.'/main.'.$primaryExt;
+        $detailPath = 'products/'.$product->slug.'/detail.'.$detailExt;
+
+        LegacyAssetCopier::copyAbsoluteToPublicDisk($primarySource, $primaryPath);
+        LegacyAssetCopier::copyAbsoluteToPublicDisk($detailSource, $detailPath);
+
+        return [
+            'primary' => $primaryPath,
+            'detail' => $detailPath,
+        ];
     }
 }

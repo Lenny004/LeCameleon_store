@@ -23,7 +23,11 @@
     </nav>
 
     <div class="account-content">
-        <h1 class="heading-2">Búsquedas guardadas</h1>
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Curaduría</p>
+            <h1 class="heading-2 account-content__title">Búsquedas guardadas</h1>
+            <p class="account-content__lead">Vuelve rápido a los filtros que usas para encontrar piezas vintage.</p>
+        </header>
 
         @forelse ($savedSearches as $savedSearch)
             <article class="order-card">
@@ -42,7 +46,7 @@
                         </form>
                     @endif
                 </div>
-                <p class="order-card__items text-muted text-small">
+                <p class="order-card__items order-card__note">
                     {{ collect($savedSearch->query_params)->map(fn ($value, $key) => $key.'='.$value)->implode(' · ') }}
                 </p>
             </article>
@@ -56,7 +60,7 @@
         @endforelse
 
         @if ($savedSearches->hasPages())
-            <div style="margin-top:var(--space-lg);">
+            <div class="account-pagination">
                 {{ $savedSearches->links() }}
             </div>
         @endif

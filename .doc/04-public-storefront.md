@@ -11,24 +11,30 @@
 CSS custom properties (light / dark):
 
 ```css
+/* Vintage modern: warm paper + forest olive + copper */
 :root {
-  --text: rgb(4, 3, 22);
-  --background: rgb(237, 237, 237);
-  --primary: rgb(17, 255, 0);
-  --secondary: rgb(214, 214, 214);
-  --accent: rgb(1, 233, 98);
+  --text: rgb(28, 25, 20);
+  --background: rgb(244, 239, 230);
+  --primary: rgb(59, 79, 56);
+  --secondary: rgb(201, 190, 174);
+  --accent: rgb(168, 98, 58);
+  --surface: rgb(252, 249, 244);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
 }
 
 [data-theme="dark"] {
-  --text: rgb(234, 233, 252);
-  --background: rgb(18, 18, 18);
-  --primary: rgb(17, 255, 0);
-  --secondary: rgb(41, 41, 41);
-  --accent: rgb(22, 254, 118);
+  --text: rgb(237, 232, 223);
+  --background: rgb(22, 20, 17);
+  --primary: rgb(130, 158, 124);
+  --secondary: rgb(68, 62, 54);
+  --accent: rgb(196, 136, 90);
+  --surface: rgb(32, 29, 25);
 }
 ```
 
-Methodology: **BEM** blocks (`header`, `product-card`, `filter-panel`, `cart-drawer`, `checkout`).
+Methodology: **BEM** blocks (`header`, `product-card`, `filter-panel`, `shop-layout`, `order-summary`, `checkout`).
+Demo assets: logos/marketing from `legacy/LeCameleon` via `LegacyPublicAssetsSeeder` → `public/images/`; product photos seeded into `storage/app/public`.
 
 ## Pages
 

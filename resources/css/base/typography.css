@@ -1,41 +1,54 @@
 .heading-display {
     font-family: var(--font-display);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    font-weight: 600;
+    font-style: normal;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.01em;
+    font-variation-settings: 'SOFT' 50, 'WONK' 1;
 }
 
 .heading-1 {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.015em;
+    font-variation-settings: 'SOFT' 40, 'WONK' 1;
 }
 
 .heading-2 {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 700;
-    line-height: 1.15;
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.01em;
 }
 
 .heading-3 {
     font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: var(--line-height-snug);
+    letter-spacing: 0;
 }
 
 .text-lead {
+    font-family: var(--font-body);
     font-size: 1.125rem;
-    line-height: 1.7;
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
     color: var(--text-muted);
 }
 
 .text-small {
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: var(--line-height-base);
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    line-height: var(--line-height-base);
+    letter-spacing: 0.01em;
 }
 
 .text-muted {
@@ -44,6 +57,23 @@
 
 .text-brand {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variation-settings: 'SOFT' 50, 'WONK' 1;
+}
+
+.text-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+
+.text-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
