@@ -3,7 +3,6 @@
 @section('content')
 <div class="auth-page">
     <div class="auth-card">
-        <p class="auth-card__brand">Le <span>Cameleon</span></p>
         <h1 class="auth-card__title">Iniciar sesión</h1>
         <p class="auth-card__subtitle">Bienvenido de vuelta a tu cuenta</p>
 
@@ -11,12 +10,12 @@
             @csrf
             <div class="form-group">
                 <label class="form-label" for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}" required autofocus autocomplete="email">
+                <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email') }}" required autofocus autocomplete="email">
                 @error('email')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="password">Contraseña</label>
-                <input type="password" id="password" name="password" class="form-input" required autocomplete="current-password">
+                <input type="password" id="password" name="password" class="form-input @error('password') form-input--error @enderror" required autocomplete="current-password">
                 @error('password')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <label class="form-checkbox">

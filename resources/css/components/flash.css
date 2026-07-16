@@ -3,27 +3,38 @@
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
     font-size: 0.9375rem;
+    line-height: var(--line-height-snug);
     margin-bottom: var(--space-md);
+    box-shadow: var(--shadow-xs);
 }
 
 .flash--success {
-    background-color: color-mix(in srgb, var(--success) 12%, var(--background));
-    border-color: color-mix(in srgb, var(--success) 40%, var(--border));
+    background-color: color-mix(in srgb, var(--success) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--success) 30%, var(--border));
+    color: var(--text);
 }
 
 .flash--error {
-    background-color: color-mix(in srgb, var(--danger) 12%, var(--background));
-    border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
+    background-color: color-mix(in srgb, var(--danger) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 28%, var(--border));
+    color: var(--text);
 }
 
 .flash--warning {
-    background-color: color-mix(in srgb, var(--warning) 12%, var(--background));
-    border-color: color-mix(in srgb, var(--warning) 40%, var(--border));
+    background-color: color-mix(in srgb, var(--warning) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
+    color: var(--text);
 }
 
 .flash--info {
-    background-color: color-mix(in srgb, var(--accent) 10%, var(--background));
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    background-color: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+    color: var(--text);
+}
+
+.flash ul {
+    margin: 0;
+    padding-left: 1.25rem;
 }
 
 .flash-stack {

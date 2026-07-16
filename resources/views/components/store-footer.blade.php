@@ -1,8 +1,24 @@
 <footer class="footer">
+    <div class="footer__top">
+        <div class="footer__top-inner">
+            <p class="footer__top-text">Curaduría vintage con envío local en El Salvador</p>
+            @if (Route::has('shop.index'))
+                <a href="{{ route('shop.index') }}" class="footer__top-link">Explorar catálogo</a>
+            @endif
+        </div>
+    </div>
+
     <div class="footer__inner">
         <div class="footer__grid">
-            <div>
-                <p class="footer__brand">Le Cameleon</p>
+            <div class="footer__col footer__col--brand">
+                <div class="footer__brand-mark">
+                    @include('components.brand-logo', [
+                        'variant' => 'horizontal',
+                        'href' => Route::has('home') ? route('home') : '/',
+                        'size' => 'md',
+                        'inverted' => true,
+                    ])
+                </div>
                 <p class="footer__tagline">Piezas vintage seleccionadas con criterio. Moda y objetos con historia, listos para una nueva vida.</p>
                 @if (Route::has('newsletter.store'))
                     <form method="POST" action="{{ route('newsletter.store') }}" class="footer__newsletter">
@@ -24,7 +40,8 @@
                     </form>
                 @endif
             </div>
-            <div>
+
+            <div class="footer__col">
                 <p class="footer__heading">Tienda</p>
                 <ul class="footer__links">
                     @if (Route::has('shop.index'))
@@ -36,9 +53,13 @@
                     @if (Route::has('wishlist.index'))
                         <li><a href="{{ route('wishlist.index') }}" class="footer__link">Favoritos</a></li>
                     @endif
+                    @if (Route::has('search'))
+                        <li><a href="{{ route('search') }}" class="footer__link">Buscar</a></li>
+                    @endif
                 </ul>
             </div>
-            <div>
+
+            <div class="footer__col">
                 <p class="footer__heading">Ayuda</p>
                 <ul class="footer__links">
                     @if (Route::has('about'))
@@ -67,7 +88,8 @@
                     @endif
                 </ul>
             </div>
-            <div>
+
+            <div class="footer__col">
                 <p class="footer__heading">Cuenta</p>
                 <ul class="footer__links">
                     @auth
@@ -88,8 +110,9 @@
                 </ul>
             </div>
         </div>
+
         <div class="footer__bottom">
-            <span>&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</span>
+            <span class="footer__copyright">&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</span>
             <span class="footer__legal">
                 @if (Route::has('privacy'))
                     <a href="{{ route('privacy') }}" class="footer__link">Privacidad</a>
@@ -98,7 +121,9 @@
                     <a href="{{ route('terms') }}" class="footer__link">Términos</a>
                 @endif
             </span>
-            @include('components.theme-toggle')
+            <div class="footer__theme">
+                @include('components.theme-toggle')
+            </div>
         </div>
     </div>
 </footer>

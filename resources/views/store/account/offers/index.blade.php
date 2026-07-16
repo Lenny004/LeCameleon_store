@@ -23,7 +23,11 @@
     </nav>
 
     <div class="account-content">
-        <h1 class="heading-2">Mis ofertas</h1>
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Negociación</p>
+            <h1 class="heading-2 account-content__title">Mis ofertas</h1>
+            <p class="account-content__lead">Sigue el estado de tus propuestas de precio en piezas seleccionadas.</p>
+        </header>
 
         @forelse ($offers as $offer)
             <article class="order-card">
@@ -58,10 +62,10 @@
                     <p class="order-card__items">Contraoferta: ${{ number_format((float) $offer->counter_amount, 2) }}</p>
                 @endif
                 @if ($offer->message)
-                    <p class="text-muted" style="font-size:0.9rem;">{{ $offer->message }}</p>
+                    <p class="order-card__note">{{ $offer->message }}</p>
                 @endif
                 @if ($offer->admin_notes)
-                    <p class="text-muted" style="font-size:0.9rem;">Notas: {{ $offer->admin_notes }}</p>
+                    <p class="order-card__note">Notas: {{ $offer->admin_notes }}</p>
                 @endif
             </article>
         @empty
@@ -74,7 +78,7 @@
         @endforelse
 
         @if ($offers->hasPages())
-            <div style="margin-top:var(--space-lg);">
+            <div class="account-pagination">
                 {{ $offers->links() }}
             </div>
         @endif

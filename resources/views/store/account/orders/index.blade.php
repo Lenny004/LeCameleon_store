@@ -23,7 +23,11 @@
     </nav>
 
     <div class="account-content">
-        <h1 class="heading-2">Mis pedidos</h1>
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Historial</p>
+            <h1 class="heading-2 account-content__title">Mis pedidos</h1>
+            <p class="account-content__lead">Consulta el estado y el detalle de tus compras vintage.</p>
+        </header>
 
         @php
             $orders = $orders ?? collect([

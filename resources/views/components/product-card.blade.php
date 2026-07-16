@@ -51,6 +51,11 @@
     $slug = $get($product, 'slug', '#');
     $name = $get($product, 'name', 'Producto');
     $price = $get($product, 'price', 0);
+    $comparePrice = $get($product, 'compare_at_price');
+    $brandName = $get($product, 'brand.name') ?? $get($product, 'brand');
+    if (is_object($brandName)) {
+        $brandName = $brandName->name ?? null;
+    }
     $era = $get($product, 'era_decade') ?? $get($product, 'era');
     $condition = $get($product, 'condition_grade') ?? $get($product, 'condition');
     if (is_object($condition) && property_exists($condition, 'value')) {
@@ -68,10 +73,11 @@
     <a href="{{ $url }}" class="product-card__link">
         <div class="product-card__media">
             @if ($imageUrl)
-                <img src="{{ $imageUrl }}" alt="{{ $name }}" class="product-card__image" loading="lazy">
+                <img src="{{ $imageUrl }}" alt="{{ $name }}" class="product-card__image" loading="lazy" decoding="async">
             @else
-                <div class="product-card__image" style="background: var(--secondary);" aria-hidden="true"></div>
+                <div class="product-card__placeholder" aria-hidden="true"></div>
             @endif
+            <span class="product-card__view-hint" aria-hidden="true">Ver pieza</span>
             @if ($condition)
                 <span class="product-card__badge badge badge--accent">{{ $condition }}</span>
             @endif
@@ -79,6 +85,9 @@
         <div class="product-card__body">
             @if ($era)
                 <span class="product-card__era">{{ $era }}</span>
+            @endif
+            @if ($brandName)
+                <span class="product-card__brand">{{ $brandName }}</span>
             @endif
             <h3 class="product-card__title">{{ $name }}</h3>
             @if ($avgRating)
@@ -88,12 +97,17 @@
                             <span class="product-rating__star {{ $i <= round($avgRating) ? 'product-rating__star--on' : '' }}">★</span>
                         @endfor
                     </span>
-                    <span class="product-card__rating-text">{{ number_format($avgRating, 1) }} ({{ $reviewsCount }})</span>
+                    <span class="product-card__rating-text">{{ number_format($avgRating, 1) }} <span class="product-card__rating-count">({{ $reviewsCount }})</span></span>
                 </p>
             @endif
-            <div class="product-card__footer">
-                <span class="product-card__price">${{ number_format((float) $price, 2) }}</span>
-            </div>
+            <p class="product-card__price-row">
+                <span class="product-card__price">
+                    <span class="product-card__price-currency">$</span>{{ number_format((float) $price, 2) }}
+                </span>
+                @if ($comparePrice && (float) $comparePrice > (float) $price)
+                    <span class="product-card__compare">${{ number_format((float) $comparePrice, 2) }}</span>
+                @endif
+            </p>
         </div>
     </a>
     @if ($showWishlist && Route::has('wishlist.store') && $productId)
@@ -101,7 +115,7 @@
             @csrf
             <input type="hidden" name="product_id" value="{{ $productId }}">
             <button type="submit" class="product-card__wishlist" aria-label="Agregar a favoritos">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
         </form>
     @endif

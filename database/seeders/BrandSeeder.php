@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
+use App\Support\LegacyAssetCopier;
 use Illuminate\Database\Seeder;
 
 class BrandSeeder extends Seeder
@@ -18,10 +19,21 @@ class BrandSeeder extends Seeder
             ['name' => 'Unknown Vintage', 'slug' => 'unknown-vintage', 'description' => 'Unlabeled or artisan vintage pieces.'],
         ];
 
-        foreach ($brands as $brand) {
+        $legacyLogos = LegacyAssetCopier::listFiles('api/images/marca');
+
+        foreach ($brands as $index => $brand) {
+            $logoPath = 'brands/'.$brand['slug'].'.png';
+            $legacyLogo = $legacyLogos[$index % max(count($legacyLogos), 1)] ?? null;
+
+            if ($legacyLogo !== null) {
+                $extension = strtolower(pathinfo($legacyLogo, PATHINFO_EXTENSION) ?: 'png');
+                $logoPath = 'brands/'.$brand['slug'].'.'.$extension;
+                LegacyAssetCopier::copyAbsoluteToPublicDisk($legacyLogo, $logoPath);
+            }
+
             Brand::query()->create([
                 ...$brand,
-                'logo_path' => 'brands/'. $brand['slug'] .'.png',
+                'logo_path' => $logoPath,
             ]);
         }
     }
