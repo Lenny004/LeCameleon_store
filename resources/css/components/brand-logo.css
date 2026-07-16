@@ -1,4 +1,8 @@
-/* Brand logos (legacy assets via public/images/brand) */
+/* ==========================================================================
+   Logos de marca — assets legacy en public/images/brand
+   ========================================================================== */
+
+/* --- Base: almohadilla negra para logos con texto claro sobre superficies claras --- */
 
 .brand-logo {
     display: inline-flex;
@@ -28,7 +32,8 @@ a.brand-logo:hover {
     flex-shrink: 1;
 }
 
-/* Auto: pick asset by viewport */
+/* --- Variante auto: elige el asset según el viewport --- */
+
 .brand-logo--auto .brand-logo__img--horizontal,
 .brand-logo--auto .brand-logo__img--wide {
     display: none;
@@ -68,6 +73,8 @@ a.brand-logo:hover {
     }
 }
 
+/* --- Variantes fijas (compact | horizontal | wide) --- */
+
 .brand-logo--compact .brand-logo__img {
     height: 3rem;
 }
@@ -79,6 +86,8 @@ a.brand-logo:hover {
 .brand-logo--wide .brand-logo__img {
     height: 3.5rem;
 }
+
+/* --- Tamaños genéricos (sm | md | lg | xl) --- */
 
 .brand-logo--sm {
     padding: 0.15rem 0.3rem;
@@ -138,6 +147,8 @@ a.brand-logo:hover {
     height: clamp(3.5rem, 12vw, 6.5rem);
 }
 
+/* --- Texto de respaldo (sin assets de imagen) --- */
+
 .brand-logo__fallback {
     font-family: var(--font-display);
     font-size: 1.25rem;
@@ -152,9 +163,81 @@ a.brand-logo:hover {
     color: var(--accent);
 }
 
-/* On dark chrome (footer / inverse surfaces) */
+/* --- Superficies oscuras: sin almohadilla (footer, chrome invertido) --- */
+
 .brand-logo--inverted,
 .brand-logo--bare {
     background-color: transparent;
     padding: 0;
+}
+
+/* --- Contexto: cabecera de tienda (header + menú móvil) --- */
+
+.header__logo .brand-logo:not(.brand-logo--inverted),
+.brand-logo--ctx-header:not(.brand-logo--inverted) {
+    padding: 0.2rem 0.35rem;
+}
+
+.header__logo .brand-logo:not(.brand-logo--inverted) .brand-logo__img--horizontal,
+.brand-logo--ctx-header:not(.brand-logo--inverted) .brand-logo__img--horizontal {
+    height: 2rem;
+}
+
+@media (min-width: 48rem) {
+    .header__logo .brand-logo:not(.brand-logo--inverted) .brand-logo__img--horizontal,
+    .brand-logo--ctx-header:not(.brand-logo--inverted) .brand-logo__img--horizontal {
+        height: 2.375rem;
+    }
+}
+
+@media (min-width: 80rem) {
+    .header__logo .brand-logo:not(.brand-logo--inverted) .brand-logo__img--horizontal,
+    .brand-logo--ctx-header:not(.brand-logo--inverted) .brand-logo__img--horizontal {
+        height: 2.5rem;
+    }
+}
+
+.mobile-nav__brand .brand-logo:not(.brand-logo--inverted),
+.brand-logo--ctx-header.brand-logo--sm:not(.brand-logo--inverted) {
+    padding: 0.15rem 0.3rem;
+}
+
+.mobile-nav__brand .brand-logo:not(.brand-logo--inverted) .brand-logo__img--compact,
+.brand-logo--ctx-header.brand-logo--sm:not(.brand-logo--inverted) .brand-logo__img--compact {
+    height: 2rem;
+}
+
+/* --- Contexto: shell de invitado (login, registro, errores) --- */
+
+.guest-shell__header .brand-logo:not(.brand-logo--inverted),
+.brand-logo--ctx-guest:not(.brand-logo--inverted) {
+    padding: 0.25rem 0.45rem;
+}
+
+.guest-shell__header .brand-logo:not(.brand-logo--inverted) .brand-logo__img--horizontal,
+.brand-logo--ctx-guest:not(.brand-logo--inverted) .brand-logo__img--horizontal {
+    height: 2.25rem;
+}
+
+@media (min-width: 40rem) {
+    .guest-shell__header .brand-logo:not(.brand-logo--inverted) .brand-logo__img--horizontal,
+    .brand-logo--ctx-guest:not(.brand-logo--inverted) .brand-logo__img--horizontal {
+        height: 2.375rem;
+    }
+}
+
+/* --- Contexto: hero de inicio (lockup amplio sobre fondo claro) --- */
+
+.hero__logo .brand-logo:not(.brand-logo--inverted),
+.brand-logo--ctx-hero:not(.brand-logo--inverted) {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.hero__logo .brand-logo:not(.brand-logo--inverted) .brand-logo__img,
+.brand-logo--ctx-hero:not(.brand-logo--inverted) .brand-logo__img {
+    width: 100%;
+    height: auto;
+    max-height: clamp(4.75rem, 18vw, 7.75rem);
 }

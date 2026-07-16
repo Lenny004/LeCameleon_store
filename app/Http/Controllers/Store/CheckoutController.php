@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
 
         if ($cart->items->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+            return redirect()->route('cart.index')->with('error', 'Tu carrito está vacío.');
         }
 
         try {
@@ -78,7 +78,7 @@ class CheckoutController extends Controller
 
         $redirect = redirect()
             ->route('checkout.success', $order)
-            ->with('success', 'Order placed successfully.');
+            ->with('success', 'Pedido realizado con éxito.');
 
         if ($paymentMethod === 'stripe' && $order->payments()->latest()->first()?->provider === 'manual') {
             $redirect->with(

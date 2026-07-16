@@ -1,3 +1,10 @@
+/* ==========================================================================
+   Reset base y lienzo atmosférico
+   Normalización mínima + fondo con viñeta y grano (sin assets).
+   ========================================================================== */
+
+/* Box model y scroll suave */
+
 *,
 *::before,
 *::after {
@@ -22,7 +29,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Atmospheric page canvas: soft vignette + grain (no image assets) */
+/* Lienzo atmosférico: viñeta suave + grano (sin imágenes) */
+
 .page {
     position: relative;
     isolation: isolate;
@@ -68,6 +76,8 @@ body {
     opacity: 0.12;
     mix-blend-mode: soft-light;
 }
+
+/* Elementos multimedia */
 
 img,
 svg,
@@ -120,6 +130,8 @@ p {
     background-color: color-mix(in srgb, var(--accent) 25%, transparent);
     color: var(--text);
 }
+
+/* Solo lectores de pantalla */
 
 .sr-only {
     position: absolute;

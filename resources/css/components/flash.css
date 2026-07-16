@@ -1,44 +1,64 @@
+/* ==========================================================================
+   Mensajes flash — feedback de sistema
+   Fondos suaves sobre superficie clara; texto siempre --text legible.
+   ========================================================================== */
+
 .flash {
     padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
+    border-inline-start-width: 3px;
     font-size: 0.9375rem;
     line-height: var(--line-height-snug);
     margin-bottom: var(--space-md);
     box-shadow: var(--shadow-xs);
+    color: var(--text);
 }
 
 .flash--success {
-    background-color: color-mix(in srgb, var(--success) 10%, var(--surface));
-    border-color: color-mix(in srgb, var(--success) 30%, var(--border));
-    color: var(--text);
+    background-color: color-mix(in srgb, var(--success) 9%, var(--surface));
+    border-color: color-mix(in srgb, var(--success) 28%, var(--border));
+    border-inline-start-color: var(--success);
 }
 
 .flash--error {
-    background-color: color-mix(in srgb, var(--danger) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--danger) 28%, var(--border));
-    color: var(--text);
+    background-color: color-mix(in srgb, var(--danger) 7%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 26%, var(--border));
+    border-inline-start-color: var(--danger);
 }
 
 .flash--warning {
-    background-color: color-mix(in srgb, var(--warning) 10%, var(--surface));
-    border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
-    color: var(--text);
+    background-color: color-mix(in srgb, var(--warning) 9%, var(--surface));
+    border-color: color-mix(in srgb, var(--warning) 28%, var(--border));
+    border-inline-start-color: var(--warning);
 }
 
 .flash--info {
-    background-color: color-mix(in srgb, var(--accent) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
-    color: var(--text);
+    background-color: color-mix(in srgb, var(--accent) 7%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    border-inline-start-color: var(--accent);
 }
 
 .flash ul {
-    margin: 0;
+    margin: var(--space-xs) 0 0;
     padding-left: 1.25rem;
 }
+
+.flash li + li {
+    margin-top: var(--space-2xs);
+}
+
+/* ==========================================================================
+   Pila de mensajes
+   ========================================================================== */
 
 .flash-stack {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.flash-stack .flash {
+    margin-bottom: 0;
 }

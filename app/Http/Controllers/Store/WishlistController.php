@@ -40,11 +40,13 @@ class WishlistController extends Controller
         return back()->with('success', 'Added to wishlist.');
     }
 
-    public function destroy(WishlistItem $wishlistItem): RedirectResponse
+    public function destroy(Request $request, WishlistItem $wishlistItem): RedirectResponse
     {
+        $this->authorizeWishlistItem($request, $wishlistItem);
+
         $this->wishlistService->removeItem($wishlistItem);
 
-        return back()->with('success', 'Removed from wishlist.');
+        return back()->with('success', 'Eliminado de favoritos.');
     }
 
     public function toggle(Request $request): RedirectResponse
@@ -58,5 +60,13 @@ class WishlistController extends Controller
         $added = $this->wishlistService->toggle($wishlist, $product);
 
         return back()->with('success', $added ? 'Added to wishlist.' : 'Removed from wishlist.');
+    }
+
+    private function authorizeWishlistItem(Request $request, WishlistItem $wishlistItem): void
+    {
+        $sessionId = $this->ensureSessionId($request, 'session_wishlist_key');
+        $wishlist = $this->wishlistService->resolveWishlist($request->user(), $sessionId);
+
+        abort_unless($wishlistItem->wishlist_id === $wishlist->id, 403);
     }
 }

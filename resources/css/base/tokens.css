@@ -1,7 +1,14 @@
+/* ==========================================================================
+   Design tokens — paleta, tipografía, espaciado y layout
+   Variables en :root; overrides en [data-theme="dark"].
+   ========================================================================== */
+
 :root {
     color-scheme: light;
 
-    /* Core palette: cool gray + neon green (light base) */
+    /* ------------------------------------------------------------------
+       Paleta base: gris frío + verde neón (tema claro)
+       ------------------------------------------------------------------ */
     --text: rgb(4, 3, 22);
     --text-muted: rgb(100, 98, 118);
     --background: rgb(245, 245, 245);
@@ -23,7 +30,7 @@
     --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--background));
     --accent-contrast: rgb(4, 3, 22);
 
-    /* Dark chrome for utility bar / footer (not neon fills) */
+    /* Chrome oscuro para barra utilitaria / footer (sin rellenos neón) */
     --inverse: rgb(4, 3, 22);
     --inverse-hover: rgb(22, 20, 42);
     --inverse-contrast: rgb(247, 247, 247);
@@ -33,9 +40,14 @@
     --success: rgb(1, 180, 80);
     --warning: rgb(214, 160, 24);
 
-    /* Typography */
-    --font-display: 'Fraunces', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-    --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    /* ------------------------------------------------------------------
+       Tipografía — Futura Book BT (marca Le Cameleon, legacy self-hosted)
+       --font-display: títulos, precios destacados, logotipo tipográfico
+       --font-body:    texto corrido, formularios, UI general
+       Ambos apuntan a Futura; el stack incluye alternativas geométricas del sistema.
+       ------------------------------------------------------------------ */
+    --font-display: 'Futura Book BT', 'Futura', 'Century Gothic', 'Trebuchet MS', system-ui, -apple-system, sans-serif;
+    --font-body: 'Futura Book BT', 'Futura', 'Century Gothic', 'Trebuchet MS', system-ui, -apple-system, sans-serif;
     --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
 
     --line-height-tight: 1.15;
@@ -43,7 +55,9 @@
     --line-height-base: 1.6;
     --line-height-relaxed: 1.75;
 
-    /* Spacing scale */
+    /* ------------------------------------------------------------------
+       Escala de espaciado
+       ------------------------------------------------------------------ */
     --space-2xs: 0.125rem;
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -54,7 +68,9 @@
     --space-3xl: 4rem;
     --space-4xl: 6rem;
 
-    /* Radii */
+    /* ------------------------------------------------------------------
+       Radios de borde
+       ------------------------------------------------------------------ */
     --radius-xs: 0.125rem;
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
@@ -63,29 +79,39 @@
     --radius-2xl: 1.25rem;
     --radius-full: 9999px;
 
-    /* Shadows */
+    /* ------------------------------------------------------------------
+       Sombras
+       ------------------------------------------------------------------ */
     --shadow-xs: 0 1px 2px rgb(4 3 22 / 0.04);
     --shadow-sm: 0 1px 3px rgb(4 3 22 / 0.06), 0 1px 2px rgb(4 3 22 / 0.04);
     --shadow-md: 0 4px 12px rgb(4 3 22 / 0.07), 0 2px 4px rgb(4 3 22 / 0.04);
     --shadow-lg: 0 12px 32px rgb(4 3 22 / 0.09), 0 4px 8px rgb(4 3 22 / 0.04);
     --shadow-inset: inset 0 1px 2px rgb(4 3 22 / 0.05);
 
-    /* Motion */
+    /* ------------------------------------------------------------------
+       Animación y transiciones
+       ------------------------------------------------------------------ */
     --transition-fast: 120ms ease;
     --transition: 180ms ease;
     --transition-slow: 280ms ease;
 
-    /* Focus */
+    /* ------------------------------------------------------------------
+       Foco accesible
+       ------------------------------------------------------------------ */
     --focus-ring: 2px solid var(--accent);
     --focus-ring-offset: 2px;
 
-    /* Layout */
+    /* ------------------------------------------------------------------
+       Layout
+       ------------------------------------------------------------------ */
     --header-height: 4rem;
     --sidebar-width: 16rem;
     --container-max: 72rem;
     --container-wide: 90rem;
 
-    /* Z-index scale */
+    /* ------------------------------------------------------------------
+       Escala z-index
+       ------------------------------------------------------------------ */
     --z-base: 0;
     --z-dropdown: 100;
     --z-sticky: 200;
@@ -94,11 +120,9 @@
     --z-modal: 500;
 }
 
-/* Storefront scope: Fraunces + Source Sans 3 (loaded in store layout) */
-.page {
-    --font-display: 'Fraunces', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-    --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-}
+/* --------------------------------------------------------------------------
+   Tema oscuro — overrides de paleta y sombras
+   -------------------------------------------------------------------------- */
 
 [data-theme="dark"] {
     color-scheme: dark;

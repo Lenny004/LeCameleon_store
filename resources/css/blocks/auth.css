@@ -1,18 +1,59 @@
-/* Guest shell (auth, errors, minimal pages) */
+/* ==========================================================================
+   Invitado — fondo, shell y páginas de autenticación / cuenta
+   Tarjetas claras con acentos neon en bordes, barras y estados activos.
+   ========================================================================== */
+
 .page--guest {
     background:
-        radial-gradient(ellipse 90% 55% at 50% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 50%),
+        radial-gradient(ellipse 90% 55% at 50% -10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 50%),
+        radial-gradient(ellipse 40% 35% at 0% 80%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 45%),
         linear-gradient(180deg, var(--background-top) 0%, var(--background) 48%, var(--background-bottom) 100%);
 }
 
 .guest-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    isolation: isolate;
+}
+
+/* Orbes decorativos de ambiente (solo visual) */
+.guest-shell__ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.guest-shell__orb {
+    position: absolute;
+    border-radius: var(--radius-full);
+    filter: blur(72px);
+    opacity: 0.45;
+}
+
+.guest-shell__orb--primary {
+    top: -6rem;
+    right: -4rem;
+    width: 18rem;
+    height: 18rem;
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.guest-shell__orb--accent {
+    bottom: 10%;
+    left: -6rem;
+    width: 16rem;
+    height: 16rem;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .guest-shell__header {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,12 +74,26 @@
 }
 
 .guest-shell__main {
+    position: relative;
+    z-index: 1;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* Auth pages (login / register) */
+.guest-shell__footer {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Login / registro — tarjeta central
+   ========================================================================== */
+
 .auth-page {
     flex: 1;
     display: flex;
@@ -51,14 +106,18 @@
     width: 100%;
     max-width: 26rem;
     padding: var(--space-xl) var(--space-xl) var(--space-2xl);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--surface) 94%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        var(--shadow-lg),
+        0 0 0 1px color-mix(in srgb, var(--surface) 80%, transparent),
+        0 0 48px color-mix(in srgb, var(--accent) 6%, transparent);
     position: relative;
     overflow: hidden;
 }
 
+/* Barra superior con gradiente neon */
 .auth-card::before {
     content: '';
     position: absolute;
@@ -70,6 +129,54 @@
         var(--accent),
         var(--primary)
     );
+    box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+/* Brillo suave en la esquina superior */
+.auth-card::after {
+    content: '';
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: var(--radius-full);
+    background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--accent) 12%, transparent),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.auth-card__head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.auth-card__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-lg);
+    font-size: 1.25rem;
+    line-height: 1;
+    background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--primary) 18%, var(--surface)),
+        color-mix(in srgb, var(--accent) 12%, var(--surface))
+    );
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+    box-shadow:
+        var(--shadow-xs),
+        0 0 16px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .auth-card__title {
@@ -78,7 +185,7 @@
     font-weight: 700;
     text-align: center;
     color: var(--text);
-    margin: 0 0 var(--space-xs);
+    margin: 0;
     letter-spacing: -0.02em;
 }
 
@@ -86,24 +193,49 @@
     text-align: center;
     font-size: 0.9375rem;
     color: var(--text-muted);
-    margin: 0 0 var(--space-xl);
+    margin: 0;
     line-height: var(--line-height-relaxed);
+    max-width: 20rem;
 }
 
 .auth-card__form {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
 }
 
+/* Foco neon reforzado dentro de la tarjeta de auth */
+.auth-card__form .form-input:focus,
+.auth-card__form .form-select:focus,
+.auth-card__form .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow:
+        var(--shadow-inset),
+        0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent),
+        0 0 12px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
 .auth-card__form .btn--primary {
     margin-top: var(--space-sm);
+    box-shadow:
+        var(--shadow-xs),
+        0 2px 12px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.auth-card__form .btn--primary:hover {
+    box-shadow:
+        0 4px 16px color-mix(in srgb, var(--primary) 32%, transparent),
+        0 0 20px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .auth-card__footer {
+    position: relative;
+    z-index: 1;
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
     text-align: center;
     font-size: 0.875rem;
     color: var(--text-muted);
@@ -113,14 +245,19 @@
     color: var(--accent-hover);
     font-weight: 600;
     text-decoration: none;
+    transition: color var(--transition);
 }
 
 .auth-card__footer a:hover {
     text-decoration: underline;
     color: var(--accent);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
-/* Account area */
+/* ==========================================================================
+   Área de cuenta — navegación y paneles
+   ========================================================================== */
+
 .account-layout {
     display: grid;
     gap: var(--space-xl);
@@ -135,11 +272,29 @@
 }
 
 .account-nav {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--surface) 96%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--border) 75%, var(--accent) 25%);
     border-radius: var(--radius-lg);
     padding: var(--space-sm);
-    box-shadow: var(--shadow-xs);
+    box-shadow:
+        var(--shadow-sm),
+        0 0 32px color-mix(in srgb, var(--accent) 4%, transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+.account-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        transparent
+    );
+    opacity: 0.65;
 }
 
 .account-nav__link {
@@ -152,7 +307,8 @@
     text-decoration: none;
     transition:
         background-color var(--transition),
-        color var(--transition);
+        color var(--transition),
+        box-shadow var(--transition);
 }
 
 .account-nav__link:hover {
@@ -164,6 +320,7 @@
     background-color: var(--accent-soft);
     color: var(--accent-hover);
     font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--accent);
 }
 
 .account-nav__logout {
@@ -206,7 +363,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--text-muted);
+    color: var(--accent-hover);
     margin-bottom: var(--space-sm);
 }
 
@@ -224,10 +381,28 @@
 
 .account-panel {
     padding: var(--space-lg);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--surface) 96%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--border) 75%, var(--accent) 25%);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-xs);
+    box-shadow:
+        var(--shadow-sm),
+        0 0 24px color-mix(in srgb, var(--accent) 4%, transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+.account-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--accent),
+        transparent 80%
+    );
+    opacity: 0.7;
 }
 
 .account-pagination {
@@ -250,19 +425,25 @@
     color: var(--accent);
 }
 
-/* Order cards */
+/* Tarjetas de pedido */
 .order-card {
     padding: var(--space-lg);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--surface) 96%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--border) 80%, var(--accent) 20%);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xs);
-    transition: box-shadow var(--transition), border-color var(--transition);
+    transition:
+        box-shadow var(--transition),
+        border-color var(--transition),
+        transform var(--transition-fast);
 }
 
 .order-card:hover {
-    box-shadow: var(--shadow-sm);
-    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+    box-shadow:
+        var(--shadow-sm),
+        0 0 20px color-mix(in srgb, var(--accent) 8%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    transform: translateY(-1px);
 }
 
 .order-card__header {
@@ -298,7 +479,7 @@
     justify-content: space-between;
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
 }
 
 .order-card__total {
@@ -308,7 +489,7 @@
     color: var(--text);
 }
 
-/* Wishlist page */
+/* Página de favoritos */
 .wishlist-page {
     padding-block: var(--space-xl) var(--space-2xl);
 }
@@ -322,7 +503,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--text-muted);
+    color: var(--accent-hover);
     margin-bottom: var(--space-sm);
 }
 
@@ -332,7 +513,17 @@
     color: var(--text-muted);
 }
 
-/* Tracking helpers */
+.wishlist-page__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.wishlist-page__remove {
+    margin: 0;
+}
+
+/* Seguimiento de envíos */
 .tracking-form__hint {
     font-size: 0.875rem;
     margin-top: var(--space-xs);

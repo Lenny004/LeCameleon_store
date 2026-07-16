@@ -1,10 +1,15 @@
 @extends('layouts.guest')
 
+@section('title', 'Iniciar sesión — Le Cameleon')
+
 @section('content')
 <div class="auth-page">
-    <div class="auth-card">
-        <h1 class="auth-card__title">Iniciar sesión</h1>
-        <p class="auth-card__subtitle">Bienvenido de vuelta a tu cuenta</p>
+    <div class="auth-card auth-card--login">
+        <header class="auth-card__head">
+            <span class="auth-card__badge" aria-hidden="true">&#128274;</span>
+            <h1 class="auth-card__title">Iniciar sesión</h1>
+            <p class="auth-card__subtitle">Bienvenido de vuelta a tu cuenta</p>
+        </header>
 
         <form method="POST" action="{{ Route::has('login') ? route('login') : '#' }}" class="auth-card__form">
             @csrf

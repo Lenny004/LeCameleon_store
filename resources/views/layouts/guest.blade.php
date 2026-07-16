@@ -19,7 +19,12 @@
 </head>
 <body class="page page--guest">
     <div class="guest-shell">
-        <header class="guest-shell__header">
+        <div class="guest-shell__ambient" aria-hidden="true">
+            <span class="guest-shell__orb guest-shell__orb--primary"></span>
+            <span class="guest-shell__orb guest-shell__orb--accent"></span>
+        </div>
+
+        <header class="guest-shell__header" aria-label="Acceso a la tienda">
             @include('components.brand-logo', [
                 'variant' => 'horizontal',
                 'size' => 'md',
@@ -30,9 +35,13 @@
             </div>
         </header>
 
-        <main class="guest-shell__main">
+        <main id="main-content" class="guest-shell__main">
             @yield('content')
         </main>
+
+        <footer class="guest-shell__footer">
+            &copy; {{ date('Y') }} {{ config('app.name', 'Le Cameleon') }}
+        </footer>
     </div>
 </body>
 </html>

@@ -5,26 +5,34 @@
 @section('content')
 <div class="container wishlist-page">
     @php
-        $products = collect($wishlist?->items ?? [])
-            ->map(fn ($item) => $item->product)
-            ->filter()
+        $items = collect($wishlist?->items ?? [])
+            ->filter(fn ($item) => $item->product !== null)
             ->values();
     @endphp
 
     <header class="wishlist-page__header">
         <p class="wishlist-page__eyebrow">Tu selección</p>
         <h1 class="heading-2">Mis favoritos</h1>
-        @if ($products->count())
+        @if ($items->count())
             <p class="wishlist-page__count">
-                {{ $products->count() }} {{ $products->count() === 1 ? 'pieza guardada' : 'piezas guardadas' }}
+                {{ $items->count() }} {{ $items->count() === 1 ? 'pieza guardada' : 'piezas guardadas' }}
             </p>
         @endif
     </header>
 
-    @if ($products->count())
+    @if ($items->count())
         <div class="grid-products">
-            @foreach ($products as $product)
-                @include('components.product-card', ['product' => $product, 'showWishlist' => false])
+            @foreach ($items as $item)
+                <div class="wishlist-page__item">
+                    @include('components.product-card', ['product' => $item->product, 'showWishlist' => false])
+                    @if (Route::has('wishlist.destroy'))
+                        <form action="{{ route('wishlist.destroy', $item) }}" method="POST" class="wishlist-page__remove">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn--ghost btn--sm">Quitar de favoritos</button>
+                        </form>
+                    @endif
+                </div>
             @endforeach
         </div>
     @else
