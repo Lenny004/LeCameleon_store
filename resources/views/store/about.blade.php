@@ -7,7 +7,7 @@
     <header class="content-page__header">
         <p class="content-page__eyebrow">Desde 2020</p>
         <h1 class="content-page__brand">
-            @include('components.brand-logo', ['variant' => 'wide', 'size' => 'lg'])
+            @include('components.brand-logo', ['variant' => 'horizontal', 'size' => 'lg'])
         </h1>
         <p class="content-page__intro">Un refugio para piezas con alma y historias que merecen seguir contándose.</p>
     </header>
