@@ -18,31 +18,42 @@
                 <th>Code</th>
                 <th>Type</th>
                 <th>Value</th>
+                <th>Applies to</th>
                 <th>Uses</th>
                 <th>Expires</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($coupons ?? [
-                ['code' => 'VINTAGE10', 'type' => 'percent', 'value' => '10%', 'uses' => '12/100', 'expires' => '2026-12-31', 'active' => true],
-                ['code' => 'WELCOME20', 'type' => 'fixed', 'value' => '$20', 'uses' => '45/∞', 'expires' => '—', 'active' => true],
-                ['code' => 'SUMMER24', 'type' => 'percent', 'value' => '15%', 'uses' => '89/200', 'expires' => '2026-08-31', 'active' => false],
-            ] as $coupon)
+            @forelse ($coupons as $coupon)
                 <tr>
-                    <td><code>{{ $coupon['code'] }}</code></td>
-                    <td>{{ ucfirst($coupon['type']) }}</td>
-                    <td>{{ $coupon['value'] }}</td>
-                    <td>{{ $coupon['uses'] }}</td>
-                    <td>{{ $coupon['expires'] }}</td>
+                    <td><a href="{{ route('admin.coupons.show', $coupon) }}"><code>{{ $coupon->code }}</code></a></td>
+                    <td>{{ ucfirst($coupon->type->value) }}</td>
+                    <td>{{ $coupon->type->value === 'percent' ? $coupon->value.'%' : '$'.number_format((float) $coupon->value, 2) }}</td>
+                    <td>{{ $coupon->shipping_only ? 'Shipping' : 'Order' }}</td>
+                    <td>{{ $coupon->used_count }} / {{ $coupon->max_uses ?? '∞' }}</td>
+                    <td>{{ $coupon->ends_at?->format('Y-m-d') ?? '—' }}</td>
                     <td>
-                        <span class="badge badge--{{ $coupon['active'] ? 'success' : 'warning' }}">
-                            {{ $coupon['active'] ? 'Active' : 'Expired' }}
+                        <span class="badge badge--{{ $coupon->isValid() ? 'success' : 'warning' }}">
+                            {{ $coupon->isValid() ? 'Active' : 'Inactive' }}
                         </span>
                     </td>
+                    <td>
+                        <a href="{{ route('admin.coupons.edit', $coupon) }}" class="btn btn--ghost btn--sm">Edit</a>
+                        <form method="POST" action="{{ route('admin.coupons.destroy', $coupon) }}" onsubmit="return confirm('Delete this coupon?');" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn--ghost btn--sm">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr><td colspan="8" class="text-muted">No coupons found.</td></tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+{{ $coupons->links() }}
 @endsection

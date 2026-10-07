@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Services\CartService;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer(['layouts.store', 'layouts.admin'], function ($view): void {
+            $storeSettings = [
+                'storeName' => config('app.name', 'Le Cameleon'),
+                'storeContact' => [],
+            ];
+
+            if (Schema::hasTable('settings')) {
+                $settings = Setting::query()
+                    ->whereIn('key', ['store.name', 'store.contact'])
+                    ->get()
+                    ->keyBy('key');
+
+                $storeSettings = [
+                    'storeName' => data_get($settings->get('store.name')?->value, 'en', $storeSettings['storeName']),
+                    'storeContact' => $settings->get('store.contact')?->value ?? [],
+                ];
+            }
+
+            $view->with($storeSettings);
+        });
+
         View::composer('components.store-header', function ($view): void {
             $request = request();
 

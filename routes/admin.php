@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\SvMunicipalityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:admin|staff'])
+Route::middleware(['auth', 'active', 'role:admin|staff'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -52,7 +52,6 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::patch('return-requests/{returnRequest}/deny', [ReturnRequestController::class, 'deny'])->name('return-requests.deny');
         Route::patch('return-requests/{returnRequest}/refund', [ReturnRequestController::class, 'refund'])->name('return-requests.refund');
 
-        Route::resource('users', UserController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('brands', BrandController::class);
         Route::resource('coupons', CouponController::class);
@@ -62,8 +61,10 @@ Route::middleware(['auth', 'role:admin|staff'])
         Route::patch('reviews/{review}/reject', [ReviewController::class, 'reject'])->name('reviews.reject');
         Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+        Route::middleware('role:admin')->group(function () {
+            Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+            Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+        });
 
         Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 
@@ -80,10 +81,10 @@ Route::middleware(['auth', 'role:admin|staff'])
 
             Route::get('zones', [ShippingZoneController::class, 'index'])->name('zones.index');
             Route::post('zones', [ShippingZoneController::class, 'store'])->name('zones.store');
-            Route::put('zones/{zone}', [ShippingZoneController::class, 'update'])->name('zones.update');
-            Route::delete('zones/{zone}', [ShippingZoneController::class, 'destroy'])->name('zones.destroy');
             Route::get('zones/rates-matrix', [ShippingZoneController::class, 'ratesMatrix'])->name('zones.rates-matrix');
             Route::put('zones/rates-matrix', [ShippingZoneController::class, 'updateRatesMatrix'])->name('zones.rates-matrix.update');
+            Route::put('zones/{zone}', [ShippingZoneController::class, 'update'])->whereNumber('zone')->name('zones.update');
+            Route::delete('zones/{zone}', [ShippingZoneController::class, 'destroy'])->whereNumber('zone')->name('zones.destroy');
 
             Route::get('dispatch', [DispatchScheduleController::class, 'index'])->name('dispatch.index');
             Route::post('dispatch', [DispatchScheduleController::class, 'store'])->name('dispatch.store');
@@ -96,3 +97,6 @@ Route::middleware(['auth', 'role:admin|staff'])
             Route::delete('warnings/{warning}', [DeliveryWarningController::class, 'destroy'])->name('warnings.destroy');
         });
     });
+
+Route::middleware(['auth', 'active', 'role:admin'])
+    ->resource('users', UserController::class);

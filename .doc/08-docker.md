@@ -15,6 +15,8 @@ Run the entire stack without installing PHP, Composer, PostgreSQL, Redis, or Nod
 | Service | Image / build | Host port | Role |
 |---------|---------------|-----------|------|
 | `app` | `Dockerfile` (PHP 8.3-FPM) | — | Laravel + Composer + Node tooling |
+| `queue` | `Dockerfile` (PHP 8.3 CLI) | — | Redis queue worker |
+| `scheduler` | `Dockerfile` (PHP 8.3 CLI) | — | Laravel scheduler |
 | `nginx` | nginx:1.27-alpine | `8080` | HTTP front door |
 | `postgres` | postgres:16-alpine | `5433` | Local Postgres (Supabase-compatible) |
 | `redis` | redis:7-alpine | `6379` | Cache / queues |
@@ -56,7 +58,7 @@ docker compose exec app php artisan tinker
 docker compose exec app php artisan test
 docker compose exec app composer require vendor/package
 docker compose exec node npm install
-docker compose logs -f app nginx
+docker compose logs -f app nginx queue scheduler
 docker compose down
 docker compose down -v   # wipe Postgres volume
 
@@ -83,6 +85,7 @@ Keep `database/schema/init.sql` as human-readable DDL documentation; Laravel mig
 ## Files
 
 - `Dockerfile` — PHP-FPM 8.3 + extensions + Composer + Node
+- `Dockerfile.prod` — locked multi-stage production image
 - `compose.yaml` — full stack
 - `docker/nginx/default.conf`
 - `docker/php/*`

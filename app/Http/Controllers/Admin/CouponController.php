@@ -69,16 +69,23 @@ class CouponController extends Controller
         $data = $request->validate([
             'code' => ['required', 'string', 'max:50', Rule::unique('coupons', 'code')->ignore($coupon?->id)],
             'type' => ['required', Rule::enum(CouponType::class)],
-            'value' => ['required', 'numeric', 'min:0'],
+            'value' => [
+                'required',
+                'numeric',
+                'min:0',
+                Rule::when($request->input('type') === CouponType::Percent->value, ['max:100']),
+            ],
             'min_order_amount' => ['nullable', 'numeric', 'min:0'],
             'max_uses' => ['nullable', 'integer', 'min:1'],
             'starts_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'is_active' => ['sometimes', 'boolean'],
+            'shipping_only' => ['sometimes', 'boolean'],
         ]);
 
         $data['code'] = strtoupper($data['code']);
         $data['is_active'] = $request->boolean('is_active', $coupon?->is_active ?? true);
+        $data['shipping_only'] = $request->boolean('shipping_only', $coupon?->shipping_only ?? false);
 
         return $data;
     }

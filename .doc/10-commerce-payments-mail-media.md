@@ -49,15 +49,15 @@ Complete the checkout-to-fulfillment loop with manual-first payments, transactio
 
 ---
 
-## Docker — scheduler
+## Docker — background processes
 
-Run the Laravel scheduler inside the `app` container (alongside `docker compose up`):
+Compose starts the scheduler and queue worker as dedicated services. The scheduler dispatches due jobs; the worker executes them:
 
 ```bash
-docker compose exec app php artisan schedule:work
+docker compose logs -f scheduler queue
 ```
 
-This executes `ReleaseExpiredReservations` every five minutes to free stock held by unpaid pending orders past the TTL.
+`ReleaseExpiredReservations` is scheduled every five minutes to free stock held by unpaid pending orders past the TTL. Do not start another scheduler in the `app` container because duplicate schedulers can dispatch the same task.
 
 ---
 

@@ -17,7 +17,7 @@ case "$cmd" in
     docker compose exec app php artisan migrate --force --seed
     docker compose exec app php artisan storage:link
     echo "Store:   http://localhost:8080"
-    echo "Mailpit: http://localhost:8025"
+    echo "Mailpit: http://localhost:18025"
     echo "Vite:    http://localhost:5173"
     ;;
   artisan) docker compose exec app php artisan "$@" ;;
