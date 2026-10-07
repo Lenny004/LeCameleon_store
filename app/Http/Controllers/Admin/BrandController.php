@@ -12,7 +12,7 @@ class BrandController extends Controller
 {
     public function index(): View
     {
-        $brands = Brand::query()->orderBy('name')->paginate(20);
+        $brands = Brand::query()->withCount('products')->orderBy('name')->paginate(20);
 
         return view('admin.brands.index', compact('brands'));
     }
@@ -25,8 +25,8 @@ class BrandController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:brands,slug'],
+            'name' => ['required', 'string', 'max:150'],
+            'slug' => ['required', 'string', 'max:180', 'unique:brands,slug'],
             'description' => ['nullable', 'string'],
         ]);
 
@@ -50,8 +50,8 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand): RedirectResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:brands,slug,'.$brand->id],
+            'name' => ['required', 'string', 'max:150'],
+            'slug' => ['required', 'string', 'max:180', 'unique:brands,slug,'.$brand->id],
             'description' => ['nullable', 'string'],
         ]);
 

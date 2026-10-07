@@ -8,6 +8,7 @@
     <p><strong>Code:</strong> <code>{{ $coupon->code }}</code></p>
     <p><strong>Type:</strong> {{ ucfirst($coupon->type->value) }}</p>
     <p><strong>Value:</strong> {{ $coupon->type->value === 'percent' ? $coupon->value . '%' : '$' . number_format((float) $coupon->value, 2) }}</p>
+    <p><strong>Applies to:</strong> {{ $coupon->shipping_only ? 'Shipping only' : 'Entire order' }}</p>
     <p><strong>Min order:</strong> {{ $coupon->min_order_amount ? '$' . number_format((float) $coupon->min_order_amount, 2) : '—' }}</p>
     <p><strong>Uses:</strong> {{ $coupon->used_count }}{{ $coupon->max_uses ? ' / ' . $coupon->max_uses : ' / ∞' }}</p>
     <p><strong>Starts:</strong> {{ $coupon->starts_at?->format('Y-m-d H:i') ?? '—' }}</p>

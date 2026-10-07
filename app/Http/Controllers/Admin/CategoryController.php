@@ -12,7 +12,12 @@ class CategoryController extends Controller
 {
     public function index(): View
     {
-        $categories = Category::query()->with('parent')->orderBy('sort_order')->paginate(20);
+        $categories = Category::query()
+            ->with('parent')
+            ->withCount('products')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->paginate(20);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -28,11 +33,11 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'parent_id' => ['nullable', 'exists:categories,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:categories,slug'],
+            'name' => ['required', 'string', 'max:150'],
+            'slug' => ['required', 'string', 'max:180', 'unique:categories,slug'],
             'description' => ['nullable', 'string'],
             'is_active' => ['sometimes', 'boolean'],
-            'sort_order' => ['nullable', 'integer'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:32767'],
         ]);
 
         $category = Category::query()->create([
@@ -62,11 +67,11 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'parent_id' => ['nullable', 'exists:categories,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:categories,slug,'.$category->id],
+            'name' => ['required', 'string', 'max:150'],
+            'slug' => ['required', 'string', 'max:180', 'unique:categories,slug,'.$category->id],
             'description' => ['nullable', 'string'],
             'is_active' => ['sometimes', 'boolean'],
-            'sort_order' => ['nullable', 'integer'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:32767'],
         ]);
 
         $data['is_active'] = $request->boolean('is_active', $category->is_active);

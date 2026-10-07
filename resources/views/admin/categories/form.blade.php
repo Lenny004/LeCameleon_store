@@ -41,6 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">
+                        <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', $category->is_active ?? true) ? 'checked' : '' }}>
                         Active
                     </label>

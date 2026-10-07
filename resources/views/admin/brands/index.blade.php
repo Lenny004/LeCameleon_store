@@ -6,6 +6,7 @@
 @section('content')
 <div class="admin-page-header">
     <h2 class="admin-page-header__title">Vintage brands</h2>
+    <a href="{{ route('admin.brands.create') }}" class="btn btn--primary">Add brand</a>
 </div>
 
 <div class="table-wrap">
@@ -19,23 +20,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($brands ?? [
-                ['name' => "Levi's", 'slug' => 'levis', 'count' => 14],
-                ['name' => 'Adidas', 'slug' => 'adidas', 'count' => 8],
-                ['name' => 'Unknown / No label', 'slug' => 'no-label', 'count' => 42],
-            ] as $brand)
+            @forelse ($brands as $brand)
                 <tr>
-                    <td>{{ $brand['name'] }}</td>
-                    <td>{{ $brand['slug'] }}</td>
-                    <td>{{ $brand['count'] }}</td>
+                    <td><a href="{{ route('admin.brands.show', $brand) }}">{{ $brand->name }}</a></td>
+                    <td><code>{{ $brand->slug }}</code></td>
+                    <td>{{ $brand->products_count }}</td>
                     <td>
-                        @if (Route::has('admin.brands.edit'))
-                            <a href="{{ route('admin.brands.edit', $brand['slug']) }}" class="btn btn--ghost btn--sm">Edit</a>
-                        @endif
+                        <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn--ghost btn--sm">Edit</a>
+                        <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" onsubmit="return confirm('Delete this brand?');" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn--ghost btn--sm">Delete</button>
+                        </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr><td colspan="4" class="text-muted">No brands found.</td></tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+{{ $brands->links() }}
 @endsection
