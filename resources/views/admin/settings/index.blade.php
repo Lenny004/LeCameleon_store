@@ -4,7 +4,7 @@
 @section('page-title', 'Settings')
 
 @section('content')
-<form method="POST" action="{{ Route::has('admin.settings.update') ? route('admin.settings.update') : '#' }}" style="max-width:36rem;display:flex;flex-direction:column;gap:var(--space-xl);">
+<form method="POST" action="{{ route('admin.settings.update') }}" style="max-width:42rem;display:flex;flex-direction:column;gap:var(--space-xl);">
     @csrf
     @method('PUT')
 
@@ -13,33 +13,28 @@
         <div style="display:flex;flex-direction:column;gap:var(--space-md);">
             <div class="form-group">
                 <label class="form-label" for="store_name">Store name</label>
-                <input type="text" id="store_name" name="store_name" class="form-input" value="{{ old('store_name', $settings['store_name'] ?? 'Le Cameleon') }}">
+                <input type="text" id="store_name" name="store_name" class="form-input" value="{{ old('store_name', $settings['store_name']) }}" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="store_email">Contact email</label>
-                <input type="email" id="store_email" name="store_email" class="form-input" value="{{ old('store_email', $settings['store_email'] ?? 'hola@lecameleon.com') }}">
+                <label class="form-label" for="contact_email">Contact email</label>
+                <input type="email" id="contact_email" name="contact_email" class="form-input" value="{{ old('contact_email', $settings['contact_email']) }}">
             </div>
             <div class="form-group">
-                <label class="form-label" for="currency">Currency</label>
-                <select id="currency" name="currency" class="form-select">
-                    <option value="USD" selected>USD</option>
-                    <option value="MXN">MXN</option>
-                </select>
+                <label class="form-label" for="contact_phone">Contact phone</label>
+                <input type="text" id="contact_phone" name="contact_phone" class="form-input" value="{{ old('contact_phone', $settings['contact_phone']) }}">
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Shipping</h2>
+        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Returns</h2>
         <div class="form-group">
-            <label class="form-label" for="flat_rate">Flat rate shipping</label>
-            <input type="number" id="flat_rate" name="flat_rate" class="form-input" step="0.01" value="{{ old('flat_rate', $settings['flat_rate'] ?? 9.99) }}">
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="free_shipping_threshold">Free shipping over</label>
-            <input type="number" id="free_shipping_threshold" name="free_shipping_threshold" class="form-input" step="0.01" value="{{ old('free_shipping_threshold', $settings['free_shipping_threshold'] ?? 150) }}">
+            <label class="form-label" for="returns_policy">Returns policy</label>
+            <textarea id="returns_policy" name="returns_policy" class="form-textarea" rows="10">{{ old('returns_policy', $settings['returns_policy']) }}</textarea>
         </div>
     </div>
+
+    <p class="text-muted">These values come from the settings table and are used by the storefront layout and returns page. Currency, taxes and shipping calculation remain operational configuration in <code>config/store.php</code> and environment variables.</p>
 
     <button type="submit" class="btn btn--primary" style="width:fit-content;">Save settings</button>
 </form>

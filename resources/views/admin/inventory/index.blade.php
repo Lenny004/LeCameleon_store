@@ -8,23 +8,65 @@
 <div class="admin-page-header">
     <div>
         <h2 class="admin-page-header__title">Stock overview</h2>
-        <p class="admin-page-header__subtitle">{{ $lowStockCount ?? '—' }} items below threshold</p>
+        <p class="admin-page-header__subtitle">{{ $lowStockCount }} items below threshold</p>
     </div>
 </div>
 
 <div class="kpi-grid" style="margin-bottom:var(--space-xl);">
     <div class="kpi-card">
         <p class="kpi-card__label">Total SKUs</p>
-        <p class="kpi-card__value">{{ $totalSkus ?? '—' }}</p>
+        <p class="kpi-card__value">{{ $totalSkus }}</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">In stock</p>
-        <p class="kpi-card__value">{{ $inStock ?? '—' }}</p>
+        <p class="kpi-card__value">{{ $inStock }}</p>
     </div>
     <div class="kpi-card">
         <p class="kpi-card__label">Out of stock</p>
-        <p class="kpi-card__value">{{ $outOfStock ?? '—' }}</p>
+        <p class="kpi-card__value">{{ $outOfStock }}</p>
     </div>
+</div>
+
+<div class="card" style="margin-bottom:var(--space-xl);">
+    <div class="card__header">
+        <h2 class="card__title">Current stock</h2>
+    </div>
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Product</th>
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Available</th>
+                    <th>Reserved</th>
+                    <th>Sellable</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($stockProducts as $product)
+                    @php $sellable = $product->quantity_available - $product->quantity_reserved; @endphp
+                    <tr>
+                        <td><code>{{ $product->sku }}</code></td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->brand?->name ?? '—' }}</td>
+                        <td>{{ $product->category?->name ?? '—' }}</td>
+                        <td>{{ $product->quantity_available }}</td>
+                        <td>{{ $product->quantity_reserved }}</td>
+                        <td><span class="badge badge--{{ $sellable > 0 ? ($sellable <= $product->low_stock_threshold ? 'warning' : 'success') : 'danger' }}">{{ $sellable }}</span></td>
+                        <td><a href="{{ route('admin.products.edit', $product) }}" class="btn btn--ghost btn--sm">Edit product</a></td>
+                    </tr>
+                @empty
+                    <tr><td colspan="8" class="text-muted">No products found.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    @if ($stockProducts->hasPages())
+        <div style="margin-top:var(--space-lg);">{{ $stockProducts->links() }}</div>
+    @endif
 </div>
 
 <div class="card" style="margin-bottom:var(--space-xl);">

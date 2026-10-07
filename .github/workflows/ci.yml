@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: lecameleon_test
+          POSTGRES_USER: lecameleon
+          POSTGRES_PASSWORD: ci-only-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lecameleon -d lecameleon_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA=
+      APP_DEBUG: "false"
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: lecameleon_test
+      DB_USERNAME: lecameleon
+      DB_PASSWORD: ci-only-password
+      CACHE_STORE: array
+      MAIL_MAILER: array
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: array
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: bcmath, gd, intl, mbstring, pcntl, pdo_pgsql, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Validate Composer metadata
+        run: composer validate --strict --no-check-publish
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Check PHP formatting
+        env:
+          PINT_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if ! git cat-file -e "${PINT_BASE}^{commit}" 2>/dev/null; then
+            PINT_BASE=$(git rev-parse HEAD^ 2>/dev/null || true)
+          fi
+
+          if [ -n "$PINT_BASE" ]; then
+            vendor/bin/pint --test --diff="$PINT_BASE"
+          else
+            vendor/bin/pint --test
+          fi
+
+      - name: Run tests on PostgreSQL
+        run: |
+          php artisan migrate --force
+          php artisan test
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Audit PHP dependencies
+        run: composer audit --locked --no-interaction
+
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=high

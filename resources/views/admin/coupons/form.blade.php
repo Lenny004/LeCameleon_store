@@ -53,8 +53,16 @@
             </div>
             <div class="form-group">
                 <label class="form-label">
+                    <input type="hidden" name="is_active" value="0">
                     <input type="checkbox" name="is_active" value="1" {{ old('is_active', $coupon->is_active ?? true) ? 'checked' : '' }}>
                     Active
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="hidden" name="shipping_only" value="0">
+                    <input type="checkbox" name="shipping_only" value="1" {{ old('shipping_only', $coupon->shipping_only ?? false) ? 'checked' : '' }}>
+                    Apply discount to shipping only
                 </label>
             </div>
         </div>
@@ -65,4 +73,22 @@
         <a href="{{ route('admin.coupons.index') }}" class="btn btn--ghost">Cancel</a>
     </div>
 </form>
+
+<script>
+    (function () {
+        var type = document.getElementById('type');
+        var value = document.getElementById('value');
+
+        function syncValueLimit() {
+            if (type.value === 'percent') {
+                value.max = '100';
+            } else {
+                value.removeAttribute('max');
+            }
+        }
+
+        type.addEventListener('change', syncValueLimit);
+        syncValueLimit();
+    })();
+</script>
 @endsection

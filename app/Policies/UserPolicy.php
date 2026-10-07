@@ -8,12 +8,12 @@ class UserPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->isStaff();
+        return $user->isAdmin();
     }
 
     public function view(User $user, User $model): bool
     {
-        return $user->isStaff() || $user->id === $model->id;
+        return $user->isAdmin();
     }
 
     public function create(User $user): bool
@@ -23,7 +23,12 @@ class UserPolicy
 
     public function update(User $user, User $model): bool
     {
-        return $user->isAdmin() || $user->id === $model->id;
+        return $user->isAdmin();
+    }
+
+    public function updateProfile(User $user, User $model): bool
+    {
+        return $user->id === $model->id;
     }
 
     public function delete(User $user, User $model): bool

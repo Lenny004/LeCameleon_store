@@ -2,13 +2,19 @@
 
 namespace App\Http\Requests\Store;
 
+use App\Http\Requests\Concerns\NormalizesEmail;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
+    use NormalizesEmail;
+
     public function authorize(): bool
     {
-        return $this->user() !== null;
+        $user = $this->user();
+
+        return $user !== null && $user->can('updateProfile', $user);
     }
 
     /**
@@ -18,7 +24,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$this->user()->id],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user())],
             'phone' => ['nullable', 'string', 'max:30'],
         ];
     }

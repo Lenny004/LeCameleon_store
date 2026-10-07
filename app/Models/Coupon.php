@@ -20,6 +20,7 @@ class Coupon extends Model
         'starts_at',
         'ends_at',
         'is_active',
+        'shipping_only',
     ];
 
     protected function casts(): array
@@ -33,6 +34,7 @@ class Coupon extends Model
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
             'is_active' => 'boolean',
+            'shipping_only' => 'boolean',
         ];
     }
 

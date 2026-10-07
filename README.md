@@ -69,7 +69,7 @@ Equivalent inside Compose:
 ```bash
 docker compose exec app php artisan migrate
 docker compose exec app php artisan test
-docker compose exec app php artisan schedule:work   # reservation TTL + queued jobs
+docker compose logs -f queue scheduler
 docker compose exec app php artisan payment:capture LC-20260715-ABC123
 ```
 
@@ -78,7 +78,11 @@ docker compose exec app php artisan payment:capture LC-20260715-ABC123
 - **Guest checkout** — `/checkout` works without an account; guests must provide an email, and order confirmation is sent via Mailpit locally ([http://localhost:18025](http://localhost:18025)).
 - **Returns** — public policy at `/returns`; logged-in customers can open return requests from account order detail.
 - **Payments (demo)** — orders start as manual pending payments; staff can capture in admin or run `payment:capture {order-number}` in the app container.
-- **Scheduler** — run `schedule:work` in Docker to release expired stock reservations and process queued mail.
+- **Background work** — Compose starts `scheduler` to evaluate scheduled tasks and `queue` to execute queued mail and jobs. Do not run either process inside the web container.
+
+## Operations and deployment
+
+Backup and restore procedures, worker operations, and production image/deployment guidance are in [`docs/operations.md`](docs/operations.md).
 
 ## Architecture docs
 

@@ -4,6 +4,10 @@
 .vscode
 .cursor
 .doc
+.env
+.env.*
+!.env.example
+auth.json
 legacy
 node_modules
 vendor
@@ -15,6 +19,5 @@ bootstrap/cache/*.php
 public/build
 public/hot
 .phpunit.result.cache
-.env.backup
 *.md
 !README.md

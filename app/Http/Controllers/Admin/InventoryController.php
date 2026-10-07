@@ -23,8 +23,21 @@ class InventoryController extends Controller
             'movements' => InventoryMovement::query()
                 ->with(['product', 'user'])
                 ->orderByDesc('created_at')
-                ->paginate(30),
+                ->paginate(30, ['*'], 'movement_page')
+                ->withQueryString(),
+            'stockProducts' => Product::query()
+                ->with(['brand', 'category'])
+                ->orderBy('name')
+                ->paginate(20, ['*'], 'stock_page')
+                ->withQueryString(),
             'products' => Product::query()->orderBy('name')->get(['id', 'name', 'sku']),
+            'totalSkus' => Product::query()->count(),
+            'inStock' => Product::query()->whereColumn('quantity_available', '>', 'quantity_reserved')->count(),
+            'outOfStock' => Product::query()->whereColumn('quantity_available', '<=', 'quantity_reserved')->count(),
+            'lowStockCount' => Product::query()
+                ->whereColumn('quantity_available', '>', 'quantity_reserved')
+                ->whereRaw('(quantity_available - quantity_reserved) <= low_stock_threshold')
+                ->count(),
         ]);
     }
 

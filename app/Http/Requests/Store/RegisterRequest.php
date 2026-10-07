@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Store;
 
+use App\Http\Requests\Concerns\NormalizesEmail;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
+    use NormalizesEmail;
+
     public function authorize(): bool
     {
         return true;

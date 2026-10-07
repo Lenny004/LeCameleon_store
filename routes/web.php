@@ -53,7 +53,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
+    ->middleware(['auth', 'active'])
     ->name('logout');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
@@ -91,7 +91,7 @@ Route::get('/returns', ReturnsController::class)->name('returns');
 Route::get('/privacy', PrivacyController::class)->name('privacy');
 Route::get('/terms', TermsController::class)->name('terms');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'active'])->group(function () {
     Route::post('/shop/{product}/reviews', [ReviewController::class, 'store'])
         ->middleware('throttle:10,1')
         ->name('shop.reviews.store');

@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
     public function index(): View
     {
+        Gate::authorize('viewAny', User::class);
+
         $users = User::query()->orderBy('name')->paginate(20);
 
         return view('admin.users.index', compact('users'));
@@ -22,22 +24,16 @@ class UserController extends Controller
 
     public function create(): View
     {
+        Gate::authorize('create', User::class);
+
         return view('admin.users.create', [
             'roles' => UserRole::cases(),
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $this->authorize('create', User::class);
-
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', Password::defaults()],
-            'role' => ['required', Rule::enum(UserRole::class)],
-            'is_active' => ['sometimes', 'boolean'],
-        ]);
+        $data = $request->validated();
 
         $user = User::query()->create([
             ...$data,
@@ -49,6 +45,8 @@ class UserController extends Controller
 
     public function show(User $user): View
     {
+        Gate::authorize('view', $user);
+
         return view('admin.users.show', [
             'user' => $user->loadCount('orders'),
         ]);
@@ -56,23 +54,17 @@ class UserController extends Controller
 
     public function edit(User $user): View
     {
+        Gate::authorize('update', $user);
+
         return view('admin.users.edit', [
             'user' => $user,
             'roles' => UserRole::cases(),
         ]);
     }
 
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $this->authorize('update', $user);
-
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-            'role' => ['required', Rule::enum(UserRole::class)],
-            'is_active' => ['sometimes', 'boolean'],
-            'password' => ['nullable', Password::defaults()],
-        ]);
+        $data = $request->validated();
 
         if (empty($data['password'])) {
             unset($data['password']);
@@ -87,7 +79,7 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        $this->authorize('delete', $user);
+        Gate::authorize('delete', $user);
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'User deleted.');

@@ -63,6 +63,12 @@
             <div class="footer__col">
                 <p class="footer__heading">Ayuda</p>
                 <ul class="footer__links">
+                    @if (! empty($storeContact['email']))
+                        <li><a href="mailto:{{ $storeContact['email'] }}" class="footer__link">{{ $storeContact['email'] }}</a></li>
+                    @endif
+                    @if (! empty($storeContact['phone']))
+                        <li><a href="tel:{{ preg_replace('/[^+0-9]/', '', $storeContact['phone']) }}" class="footer__link">{{ $storeContact['phone'] }}</a></li>
+                    @endif
                     @if (Route::has('about'))
                         <li><a href="{{ route('about') }}" class="footer__link">Nuestra historia</a></li>
                     @endif
@@ -114,7 +120,7 @@
 
         <div class="footer__bottom">
             <div class="footer__bottom-inner">
-                <p class="footer__copyright">&copy; {{ date('Y') }} Le Cameleon. Todos los derechos reservados.</p>
+                <p class="footer__copyright">&copy; {{ date('Y') }} {{ $storeName }}. Todos los derechos reservados.</p>
                 <nav class="footer__legal" aria-label="Enlaces legales">
                     @if (Route::has('privacy'))
                         <a href="{{ route('privacy') }}" class="footer__link">Privacidad</a>

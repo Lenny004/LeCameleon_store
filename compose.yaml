@@ -1,34 +1,51 @@
+x-app-base: &app-base
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      WWWUSER: "1000"
+      WWWGROUP: "1000"
+  working_dir: /var/www/html
+  volumes:
+    - .:/var/www/html
+  environment:
+    APP_ENV: local
+    APP_DEBUG: "true"
+    DB_CONNECTION: pgsql
+    DB_HOST: postgres
+    DB_PORT: 5432
+    DB_DATABASE: ${DB_DATABASE:-lecameleon}
+    DB_USERNAME: ${DB_USERNAME:-lecameleon}
+    DB_PASSWORD: ${DB_PASSWORD:-secret}
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+  networks:
+    - lecameleon
+
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        WWWUSER: "1000"
-        WWWGROUP: "1000"
+    <<: *app-base
     container_name: lecameleon-app
     restart: unless-stopped
-    working_dir: /var/www/html
-    volumes:
-      - .:/var/www/html
-    environment:
-      APP_ENV: local
-      APP_DEBUG: "true"
-      DB_CONNECTION: pgsql
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_DATABASE: ${DB_DATABASE:-lecameleon}
-      DB_USERNAME: ${DB_USERNAME:-lecameleon}
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_started
-    networks:
-      - lecameleon
+
+  queue:
+    <<: *app-base
+    container_name: lecameleon-queue
+    restart: unless-stopped
+    command: ["php", "artisan", "queue:work", "redis", "--sleep=3", "--tries=3", "--timeout=90", "--max-time=3600"]
+    stop_grace_period: 30s
+
+  scheduler:
+    <<: *app-base
+    container_name: lecameleon-scheduler
+    restart: unless-stopped
+    command: ["php", "artisan", "schedule:work"]
+    stop_grace_period: 30s
 
   nginx:
     image: nginx:1.27-alpine
@@ -73,6 +90,11 @@ services:
       - "${FORWARD_REDIS_PORT:-6379}:6379"
     volumes:
       - lecameleon_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     networks:
       - lecameleon
 
