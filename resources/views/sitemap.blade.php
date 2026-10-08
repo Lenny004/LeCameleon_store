@@ -11,4 +11,16 @@
         <lastmod>{{ $product->updated_at?->toAtomString() }}</lastmod>
     </url>
 @endforeach
+@foreach ($categories as $category)
+    <url>
+        <loc>{{ route('shop.index', ['category' => [$category->slug]]) }}</loc>
+        <lastmod>{{ $category->updated_at?->toAtomString() }}</lastmod>
+    </url>
+@endforeach
+@foreach ($brands as $brand)
+    <url>
+        <loc>{{ route('shop.index', ['brand' => [$brand->slug]]) }}</loc>
+        <lastmod>{{ $brand->updated_at?->toAtomString() }}</lastmod>
+    </url>
+@endforeach
 </urlset>
