@@ -1,35 +1,47 @@
 @extends('layouts.admin')
 
-@section('title', 'Reviews')
-@section('page-title', 'Reviews')
-@section('page-subtitle', 'Moderate customer feedback')
+@section('title', 'Reseñas')
+@section('page-title', 'Reseñas')
+@section('page-subtitle', 'Modera los comentarios de clientes')
 
 @section('content')
 <form method="GET" action="{{ route('admin.reviews.index') }}" class="card admin-filters admin-filters--grid">
     <div class="form-group admin-filters__field">
-        <label class="form-label" for="q">Search</label>
-        <input type="search" id="q" name="q" class="form-input" value="{{ $filters['q'] ?? '' }}" placeholder="Product, customer, text…">
+        <label class="form-label" for="q">Búsqueda</label>
+        <input
+            type="search"
+            id="q"
+            name="q"
+            class="form-input @error('q') form-input--error @enderror"
+            value="{{ old('q', $filters['q'] ?? '') }}"
+            placeholder="Producto, cliente o texto…"
+            maxlength="150"
+            inputmode="search"
+            autocomplete="off"
+            @error('q') aria-invalid="true" aria-describedby="q-error" @enderror
+        >
+        @error('q')<span class="form-error" id="q-error">{{ $message }}</span>@enderror
     </div>
     <div class="form-group admin-filters__field">
-        <label class="form-label" for="status">Status</label>
+        <label class="form-label" for="status">Estado</label>
         <select id="status" name="status" class="form-select">
-            <option value="">All</option>
-            <option value="pending" @selected(($filters['status'] ?? '') === 'pending')>Pending</option>
-            <option value="approved" @selected(($filters['status'] ?? '') === 'approved')>Approved</option>
+            <option value="">Todas</option>
+            <option value="pending" @selected(($filters['status'] ?? '') === 'pending')>Pendientes</option>
+            <option value="approved" @selected(($filters['status'] ?? '') === 'approved')>Aprobadas</option>
         </select>
     </div>
     <div class="form-group admin-filters__field">
-        <label class="form-label" for="rating">Rating</label>
+        <label class="form-label" for="rating">Calificación</label>
         <select id="rating" name="rating" class="form-select">
-            <option value="">All</option>
+            <option value="">Todas</option>
             @for ($i = 5; $i >= 1; $i--)
                 <option value="{{ $i }}" @selected((string) ($filters['rating'] ?? '') === (string) $i)>{{ $i }} ★</option>
             @endfor
         </select>
     </div>
     <div class="admin-actions">
-        <button type="submit" class="btn btn--primary">Filter</button>
-        <a href="{{ route('admin.reviews.index') }}" class="btn btn--ghost">Clear</a>
+        <button type="submit" class="btn btn--primary">Filtrar</button>
+        <a href="{{ route('admin.reviews.index') }}" class="btn btn--ghost">Limpiar</a>
     </div>
 </form>
 
@@ -71,7 +83,7 @@
                     </td>
                     <td>
                         <span class="badge badge--{{ $review->is_approved ? 'success' : 'warning' }}">
-                            {{ $review->is_approved ? 'Approved' : 'Pending' }}
+                            {{ $review->is_approved ? 'Aprobada' : 'Pendiente' }}
                         </span>
                     </td>
                     <td>{{ $review->created_at?->format('Y-m-d') }}</td>
@@ -100,7 +112,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7" class="text-muted">No reviews match these filters.</td>
+                <td colspan="7" class="text-muted">Ninguna reseña coincide con estos filtros.</td>
                 </tr>
             @endforelse
         </tbody>
