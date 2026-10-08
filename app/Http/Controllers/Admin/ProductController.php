@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Brand;
@@ -10,8 +11,11 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Support\RecordsActivity;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -24,6 +28,50 @@ class ProductController extends Controller
             ->paginate(20);
 
         return view('admin.products.index', compact('products'));
+    }
+
+    public function duplicate(Product $product): RedirectResponse
+    {
+        $this->authorize('update', $product);
+        $copy = $product->replicate(['id', 'created_at', 'updated_at', 'deleted_at']);
+        $copy->forceFill([
+            'name' => $product->name.' (copia)',
+            'slug' => $this->uniqueCopyValue('slug', $product->slug, 280),
+            'sku' => $this->uniqueCopyValue('sku', $product->sku, 80),
+            'status' => ProductStatus::Draft,
+            'published_at' => null,
+            'quantity_available' => 0,
+            'quantity_reserved' => 0,
+        ])->save();
+
+        RecordsActivity::log('product.duplicated', $copy, [
+            'source_product_id' => $product->getKey(),
+            'source_slug' => $product->slug,
+        ]);
+
+        return redirect()->route('admin.products.edit', $copy)->with('success', 'Producto duplicado como borrador.');
+    }
+
+    public function bulkStatus(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'product_ids' => ['required', 'array', 'min:1'],
+            'product_ids.*' => ['uuid', 'exists:products,id'],
+            'status' => ['required', Rule::enum(ProductStatus::class)],
+        ]);
+
+        Product::query()->whereIn('id', $data['product_ids'])->each(function (Product $product) use ($data): void {
+            $product->forceFill([
+                'status' => $data['status'],
+                'published_at' => $data['status'] === 'published' ? ($product->published_at ?: now()) : null,
+            ])->save();
+
+            RecordsActivity::log('product.status_changed', $product, [
+                'status' => $data['status'],
+            ]);
+        });
+
+        return back()->with('success', 'Estados de productos actualizados.');
     }
 
     public function create(): View
@@ -138,11 +186,15 @@ class ProductController extends Controller
 
             $this->maybeCreateGdThumbnail($path);
 
+            $dimensions = @getimagesize(Storage::disk('public')->path($path));
+
             $product->images()->create([
                 'path' => $path,
                 'alt' => $product->name,
                 'sort_order' => $existingCount + $index,
                 'is_primary' => ! $hasPrimary && $index === 0,
+                'width' => $dimensions === false ? null : (int) $dimensions[0],
+                'height' => $dimensions === false ? null : (int) $dimensions[1],
             ]);
         }
     }
@@ -212,7 +264,7 @@ class ProductController extends Controller
             return;
         }
 
-        $max = 400;
+        $max = (int) config('store.product_thumbnail_max_side', 400);
         $ratio = min($max / max($width, 1), $max / max($height, 1), 1);
         $newWidth = max(1, (int) round($width * $ratio));
         $newHeight = max(1, (int) round($height * $ratio));
@@ -244,5 +296,19 @@ class ProductController extends Controller
         if ($saved === false) {
             @unlink($thumbFull);
         }
+    }
+
+    private function uniqueCopyValue(string $column, string $value, int $maxLength): string
+    {
+        $base = str_ends_with($value, '-copia') ? $value : $value.'-copia';
+        $candidate = Str::limit($base, $maxLength, '');
+        $suffix = 2;
+
+        while (Product::query()->where($column, $candidate)->exists()) {
+            $ending = '-'.$suffix++;
+            $candidate = Str::limit($base, $maxLength - strlen($ending), '').$ending;
+        }
+
+        return $candidate;
     }
 }
