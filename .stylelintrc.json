@@ -1,0 +1,16 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "ignoreFiles": ["public/**/*.css", "vendor/**/*.css"],
+  "rules": {
+    "selector-class-pattern": "^(?:[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:__(?:[a-z][a-z0-9]*(?:-[a-z0-9]+)*))?(?:--(?:[a-z][a-z0-9]*(?:-[a-z0-9]+)*))?|(?:is|has|js)-[a-z0-9-]+)$",
+    "declaration-no-important": true,
+    "selector-max-id": 0,
+    "selector-max-compound-selectors": 3,
+    "selector-max-universal": 1,
+    "declaration-block-no-duplicate-properties": true,
+    "color-no-invalid-hex": true,
+    "property-no-unknown": true,
+    "no-descending-specificity": null,
+    "comment-empty-line-before": null
+  }
+}
