@@ -87,6 +87,9 @@
                     @if (Route::has('care'))
                         <li><a href="{{ route('care') }}" class="footer__link">Cuidado vintage</a></li>
                     @endif
+                    @if (Route::has('size-guide'))
+                        <li><a href="{{ route('size-guide') }}" class="footer__link">Guía de tallas</a></li>
+                    @endif
                     @if (Route::has('shipping'))
                         <li><a href="{{ route('shipping') }}" class="footer__link">Envíos</a></li>
                     @endif

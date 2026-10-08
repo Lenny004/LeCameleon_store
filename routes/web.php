@@ -11,6 +11,7 @@ use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\Store\ContactController;
 use App\Http\Controllers\Store\EmailVerificationController;
 use App\Http\Controllers\Store\FaqController;
+use App\Http\Controllers\Store\FeedController;
 use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\NewsletterController;
 use App\Http\Controllers\Store\OfferController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Store\ShippingInfoController;
 use App\Http\Controllers\Store\ShippingQuoteController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
+use App\Http\Controllers\Store\SizeGuideController;
 use App\Http\Controllers\Store\StockAlertController;
 use App\Http\Controllers\Store\TermsController;
 use App\Http\Controllers\Store\TrackingController;
@@ -32,6 +34,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/guia-de-tallas', SizeGuideController::class)->name('size-guide');
+Route::get('/feeds/google.xml', [FeedController::class, 'google'])->middleware('throttle:30,1')->name('feeds.google');
+Route::get('/feeds/meta.csv', [FeedController::class, 'meta'])->middleware('throttle:30,1')->name('feeds.meta');
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::post('/shop/{product}/stock-alert', [StockAlertController::class, 'store'])
@@ -112,6 +117,9 @@ Route::get('/tracking/{code}', [TrackingController::class, 'show'])
 Route::post('/newsletter', [NewsletterController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('newsletter.store');
+Route::get('/newsletter/confirm/{token}', [NewsletterController::class, 'confirm'])->name('newsletter.confirm');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+Route::post('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe.post');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:10,1')
@@ -160,5 +168,6 @@ Route::middleware(['auth', 'active', 'verified'])->group(function () {
     Route::patch('/account/addresses/{address}/default', [AddressController::class, 'makeDefault'])->name('account.addresses.default');
     Route::get('/account/saved-searches', [SavedSearchController::class, 'index'])->name('account.saved-searches.index');
     Route::post('/account/saved-searches', [SavedSearchController::class, 'store'])->name('account.saved-searches.store');
+    Route::patch('/account/saved-searches/{savedSearch}/notify', [SavedSearchController::class, 'toggleNotify'])->name('account.saved-searches.notify');
     Route::delete('/account/saved-searches/{savedSearch}', [SavedSearchController::class, 'destroy'])->name('account.saved-searches.destroy');
 });

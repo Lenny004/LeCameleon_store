@@ -51,6 +51,11 @@
     --font-body: 'Futura Book BT', 'Futura', 'Century Gothic', 'Trebuchet MS', system-ui, -apple-system, sans-serif;
     --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
     --font-size-sm: 1.4rem;
+    --font-size-md: 1.6rem;
+    --font-size-lg: 2rem;
+    --font-size-xl: 2.4rem;
+    --font-weight-semibold: 600;
+    --overlay: rgb(4 3 22 / 0.82);
 
     --line-height-tight: 1.15;
     --line-height-snug: 1.35;
