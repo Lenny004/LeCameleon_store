@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\CouponType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CouponRequest;
+use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class CouponController extends Controller
@@ -23,13 +24,17 @@ class CouponController extends Controller
     {
         return view('admin.coupons.create', [
             'types' => CouponType::cases(),
+            'categories' => Category::query()->orderBy('name')->get(),
+            'products' => Product::query()->where('status', 'published')->orderBy('name')->get(['id', 'name', 'sku']),
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(CouponRequest $request): RedirectResponse
     {
         $data = $this->validated($request);
-        $coupon = Coupon::query()->create($data);
+        $coupon = Coupon::query()->create(collect($data)->except(['category_ids', 'product_ids'])->all());
+        $coupon->categories()->sync($data['category_ids'] ?? []);
+        $coupon->products()->sync($data['product_ids'] ?? []);
 
         return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón creado.');
     }
@@ -42,14 +47,22 @@ class CouponController extends Controller
     public function edit(Coupon $coupon): View
     {
         return view('admin.coupons.edit', [
-            'coupon' => $coupon,
+            'coupon' => $coupon->load(['categories', 'products']),
             'types' => CouponType::cases(),
+            'categories' => Category::query()->orderBy('name')->get(),
+            'products' => Product::query()->where('status', 'published')->orderBy('name')->get(['id', 'name', 'sku']),
         ]);
     }
 
-    public function update(Request $request, Coupon $coupon): RedirectResponse
+    public function update(CouponRequest $request, Coupon $coupon): RedirectResponse
     {
-        $coupon->update($this->validated($request, $coupon));
+        $data = $request->validated();
+        $data['code'] = strtoupper($data['code']);
+        $data['is_active'] = $request->boolean('is_active', $coupon->is_active);
+        $data['shipping_only'] = $request->boolean('shipping_only', $coupon->shipping_only);
+        $coupon->forceFill(collect($data)->except(['category_ids', 'product_ids'])->all())->save();
+        $coupon->categories()->sync($data['category_ids'] ?? []);
+        $coupon->products()->sync($data['product_ids'] ?? []);
 
         return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón actualizado.');
     }
@@ -64,29 +77,13 @@ class CouponController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function validated(Request $request, ?Coupon $coupon = null): array
+    private function validated(CouponRequest $request): array
     {
-        $data = $request->validate([
-            'code' => ['required', 'string', 'max:50', Rule::unique('coupons', 'code')->ignore($coupon?->id)],
-            'type' => ['required', 'string', 'max:20', Rule::enum(CouponType::class)],
-            'value' => [
-                'required',
-                'decimal:0,2',
-                'min:0',
-                'max:9999999999.99',
-                Rule::when($request->input('type') === CouponType::Percent->value, ['max:100']),
-            ],
-            'min_order_amount' => ['nullable', 'decimal:0,2', 'min:0', 'max:9999999999.99'],
-            'max_uses' => ['nullable', 'integer', 'min:1', 'max:2147483647'],
-            'starts_at' => ['nullable', 'date'],
-            'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
-            'is_active' => ['sometimes', 'boolean'],
-            'shipping_only' => ['sometimes', 'boolean'],
-        ]);
+        $data = $request->validated();
 
         $data['code'] = strtoupper($data['code']);
-        $data['is_active'] = $request->boolean('is_active', $coupon?->is_active ?? true);
-        $data['shipping_only'] = $request->boolean('shipping_only', $coupon?->shipping_only ?? false);
+        $data['is_active'] = $request->boolean('is_active', true);
+        $data['shipping_only'] = $request->boolean('shipping_only', false);
 
         return $data;
     }
