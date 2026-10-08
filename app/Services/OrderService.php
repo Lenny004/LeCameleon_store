@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\OrderStatus;
 use App\Mail\OrderCancelled;
+use App\Mail\OrderDelivered;
 use App\Mail\OrderPaid;
 use App\Mail\OrderShipped;
 use App\Models\Order;
@@ -134,6 +135,7 @@ class OrderService
         $mailable = match ($status) {
             OrderStatus::Paid => new OrderPaid($order),
             OrderStatus::Shipped => new OrderShipped($order),
+            OrderStatus::Delivered => new OrderDelivered($order),
             OrderStatus::Cancelled => new OrderCancelled($order),
             default => null,
         };
