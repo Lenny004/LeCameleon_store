@@ -40,6 +40,7 @@
         <div class="card__header">
             <h2 class="card__title">Datos del pedido</h2>
             <span class="badge badge--primary">{{ $orderStatusLabels[$order->status->value] ?? $order->status->value }}</span>
+            <a class="btn btn--ghost btn--sm" href="{{ route('admin.orders.print', $order) }}" target="_blank" rel="noopener">Imprimir hoja de empaque</a>
         </div>
         <p class="text-muted">Cliente: {{ $order->customerEmail() ?? $order->user?->email ?? 'Invitado' }}</p>
         @if ($shippingLine)
@@ -100,7 +101,7 @@
                     <tbody>
                         @foreach ($order->payments as $payment)
                             <tr>
-                                <td>{{ $payment->provider }}</td>
+                                <td>{{ \App\Enums\PaymentMethod::tryFrom($payment->provider)?->label() ?? $payment->provider }}</td>
                                 <td>{{ ['pending' => 'Pendiente', 'authorized' => 'Autorizado', 'captured' => 'Capturado', 'failed' => 'Fallido', 'refunded' => 'Reembolsado'][$payment->status->value] ?? $payment->status->value }}</td>
                                 <td>${{ number_format((float) $payment->amount, 2) }}</td>
                             </tr>
@@ -109,7 +110,7 @@
                 </table>
             </div>
 
-            @if ($order->status->value === 'pending' && $order->payments->contains(fn ($payment) => $payment->status->value === 'pending'))
+            @if ($order->status->value === 'pending' && \App\Enums\PaymentMethod::tryFrom($order->paymentMethod())?->isManual() && $order->payments->contains(fn ($payment) => $payment->status->value === 'pending'))
                 <form method="POST" action="{{ route('admin.orders.capture-payment', $order) }}" class="admin-order__payment-form">
                     @csrf
                     <button type="submit" class="btn btn--primary">Marcar pago como capturado</button>
@@ -327,5 +328,59 @@
             <button type="submit" class="btn btn--primary">Actualizar pedido</button>
         </form>
     @endif
+
+    <div class="card">
+        <h2 class="card__title admin-form__title admin-form__title--compact">Comprobantes de pago</h2>
+        @forelse ($order->paymentReceipts as $receipt)
+            <div class="payment-receipt">
+                <div class="payment-receipt__details">
+                    <span class="payment-receipt__name">{{ $receipt->original_name }}</span>
+                    <span class="badge badge--{{ $receipt->status === 'accepted' ? 'success' : ($receipt->status === 'rejected' ? 'error' : 'warning') }}">{{ ['pending' => 'Pendiente', 'accepted' => 'Aceptado', 'rejected' => 'Rechazado'][$receipt->status] ?? $receipt->status }}</span>
+                    <span class="payment-receipt__meta">{{ $receipt->reviewed_at?->format('d/m/Y H:i') ?? $receipt->created_at?->format('d/m/Y H:i') }} · {{ number_format($receipt->size / 1024, 1) }} KB</span>
+                    @if ($receipt->admin_notes)
+                        <span class="payment-receipt__note">{{ $receipt->admin_notes }}</span>
+                    @endif
+                </div>
+                <a class="btn btn--ghost" href="{{ route('admin.orders.receipts.download', [$order, $receipt]) }}">Descargar</a>
+                @if ($receipt->status === 'pending')
+                    <form method="POST" action="{{ route('admin.orders.receipts.accept', [$order, $receipt]) }}" x-data x-on:submit="if (!confirm('¿Aceptar este comprobante?')) $event.preventDefault()">@csrf @method('PATCH')<button class="btn btn--primary" type="submit">Aceptar comprobante</button></form>
+                    <form method="POST" action="{{ route('admin.orders.receipts.reject', [$order, $receipt]) }}" x-data x-on:submit="if (!confirm('¿Rechazar este comprobante?')) $event.preventDefault()">
+                        <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+                        @csrf
+                        @method('PATCH')
+                        <label class="form-label" for="receipt_note_{{ $receipt->id }}">Motivo <span class="form-label__required" aria-hidden="true">*</span></label>
+                        <textarea id="receipt_note_{{ $receipt->id }}" name="admin_notes" maxlength="2000" placeholder="Indica por qué no se acepta el comprobante." class="form-textarea @error('admin_notes') form-textarea--error @enderror" required @error('admin_notes') aria-invalid="true" aria-describedby="receipt-note-error-{{ $receipt->id }}" @enderror>{{ old('admin_notes') }}</textarea>
+                        @error('admin_notes')<span class="form-error" id="receipt-note-error-{{ $receipt->id }}">{{ $message }}</span>@enderror
+                        <button class="btn btn--ghost" type="submit">Rechazar</button>
+                    </form>
+                @endif
+            </div>
+        @empty
+            <p class="text-muted">No hay comprobantes cargados.</p>
+        @endforelse
+    </div>
+
+    <div class="card">
+        <h2 class="card__title admin-form__title admin-form__title--compact">Notas internas</h2>
+        <div class="order-notes">
+            @foreach ($order->notes as $note)
+                <article class="order-note">
+                    <header class="order-note__header">
+                        <strong class="order-note__author">{{ $note->user?->name ?? 'Sistema' }}</strong>
+                        <time class="order-note__date" datetime="{{ $note->created_at?->toIso8601String() }}">{{ $note->created_at?->format('d/m/Y H:i') }}</time>
+                    </header>
+                    <p class="order-note__body">{{ $note->body }}</p>
+                </article>
+            @endforeach
+        </div>
+        <form method="POST" action="{{ route('admin.orders.notes.store', $order) }}">
+            @csrf
+            <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+            <label class="form-label" for="order_note">Nota <span class="form-label__required" aria-hidden="true">*</span></label>
+            <textarea id="order_note" name="body" maxlength="2000" placeholder="Escribe una nota visible solo para el equipo." class="form-textarea @error('body') form-textarea--error @enderror" required @error('body') aria-invalid="true" aria-describedby="order-note-error" @enderror>{{ old('body') }}</textarea>
+            @error('body')<span class="form-error" id="order-note-error">{{ $message }}</span>@enderror
+            <button type="submit" class="btn btn--ghost">Guardar nota</button>
+        </form>
+    </div>
 </div>
 @endsection
