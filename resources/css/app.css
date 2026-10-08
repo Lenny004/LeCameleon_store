@@ -13,6 +13,8 @@
 @import './components/form.css';
 @import './components/brand-logo.css';
 @import './components/product-card.css';
+@import './components/whatsapp-float.css';
+@import './components/product-lightbox.css';
 @import './components/flash.css';
 @import './components/theme-toggle.css';
 @import './components/empty-state.css';
