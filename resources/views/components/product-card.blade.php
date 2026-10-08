@@ -62,6 +62,10 @@
         $condition = $condition->value;
     }
     $imageUrl = $resolveImageUrl($product);
+    $image = data_get($product, 'images.0');
+    $imageThumbUrl = $image instanceof ProductImage ? $image->thumbUrl() : $imageUrl;
+    $imageSrcset = $image instanceof ProductImage ? $image->srcset() : null;
+    [$imageWidth, $imageHeight] = $image instanceof ProductImage ? $image->dimensions() : [null, null];
     $productId = $get($product, 'id', '');
     $url = Route::has('shop.show') && $slug !== '#' ? route('shop.show', $slug) : '#';
     $avgRating = $get($product, 'approved_reviews_avg');
@@ -73,13 +77,16 @@
     <a href="{{ $url }}" class="product-card__link">
         <div class="product-card__media">
             @if ($imageUrl)
-                <img src="{{ $imageUrl }}" alt="{{ $name }}" class="product-card__image" loading="lazy" decoding="async">
+                <img src="{{ $imageThumbUrl }}" srcset="{{ $imageSrcset }}" sizes="(min-width: 60rem) 25vw, 50vw" width="{{ $imageWidth ?: '' }}" height="{{ $imageHeight ?: '' }}" alt="{{ $name }}" class="product-card__image" loading="lazy" decoding="async">
             @else
                 <div class="product-card__placeholder" aria-hidden="true"></div>
             @endif
             <span class="product-card__view-hint" aria-hidden="true">Ver pieza</span>
             @if ($condition)
                 <span class="product-card__badge badge badge--accent">{{ $condition }}</span>
+            @endif
+            @if ($get($product, 'is_unique_piece', false))
+                <span class="product-card__badge product-card__badge--unique badge badge--warning">Pieza única</span>
             @endif
         </div>
         <div class="product-card__body">

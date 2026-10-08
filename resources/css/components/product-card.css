@@ -140,6 +140,10 @@
     letter-spacing: 0.04em;
 }
 
+.product-card__badge--unique {
+    top: calc(var(--space-sm) + 1.8rem);
+}
+
 /* Cuerpo de la tarjeta */
 .product-card__body {
     display: flex;
