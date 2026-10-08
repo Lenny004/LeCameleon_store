@@ -27,7 +27,7 @@ class BrandController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:brands,slug'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
         ]);
 
         $brand = Brand::query()->create($data);
@@ -52,7 +52,7 @@ class BrandController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:brands,slug,'.$brand->id],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
         ]);
 
         $brand->update($data);
