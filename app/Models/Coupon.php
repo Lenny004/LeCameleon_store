@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\CouponType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Promotional discount coupon.
@@ -16,6 +17,8 @@ class Coupon extends Model
         'value',
         'min_order_amount',
         'max_uses',
+        'max_uses_per_user',
+        'first_order_only',
         'used_count',
         'starts_at',
         'ends_at',
@@ -30,6 +33,8 @@ class Coupon extends Model
             'value' => 'decimal:2',
             'min_order_amount' => 'decimal:2',
             'max_uses' => 'integer',
+            'max_uses_per_user' => 'integer',
+            'first_order_only' => 'boolean',
             'used_count' => 'integer',
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
@@ -59,5 +64,15 @@ class Coupon extends Model
         }
 
         return true;
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'coupon_category');
+    }
+
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'coupon_product');
     }
 }

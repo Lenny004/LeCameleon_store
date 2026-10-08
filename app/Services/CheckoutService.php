@@ -60,7 +60,7 @@ class CheckoutService
         $billingAddress['email'] = $email;
         $shippingAddress['email'] = $email;
 
-        $order = DB::transaction(function () use ($cart, $user, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId, $shippingOverride) {
+        $order = DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId, $shippingOverride) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
                 $cartItem->unit_price = $this->offerPricingService->effectivePriceFor($user, $cartItem->product);
@@ -75,10 +75,12 @@ class CheckoutService
             }
 
             $orderSubtotal = $this->cartService->subtotal($cart);
-            $appliedCoupon = $this->resolveCoupon($couponCode, $orderSubtotal);
-            $discountTotal = $this->calculateDiscount($appliedCoupon, $orderSubtotal);
+            $appliedCoupon = $this->resolveCoupon($couponCode, $orderSubtotal, $user, $email, $cart->items);
 
             $shippingTotal = $shippingOverride ?? $this->resolveShippingTotal($destinationMunicipalityId);
+            $eligibleSubtotal = $this->eligibleSubtotal($appliedCoupon, $cart->items);
+            $discountBase = $appliedCoupon?->shipping_only ? $shippingTotal : $eligibleSubtotal;
+            $discountTotal = $this->calculateDiscount($appliedCoupon, $discountBase);
 
             if ($destinationMunicipalityId) {
                 $shippingAddress['sv_municipality_id'] = $destinationMunicipalityId;
@@ -195,7 +197,7 @@ class CheckoutService
         }
     }
 
-    private function resolveCoupon(?string $code, float $subtotal): ?Coupon
+    private function resolveCoupon(?string $code, float $subtotal, ?User $user, string $email, $items): ?Coupon
     {
         if (! $code) {
             return null;
@@ -211,11 +213,63 @@ class CheckoutService
 
         if ($coupon->min_order_amount && $subtotal < (float) $coupon->min_order_amount) {
             throw ValidationException::withMessages([
-                'coupon_code' => 'El pedido no alcanza el monto mínimo para este cupón.',
+                'coupon_code' => 'El cupón no es válido o ha expirado.',
+            ]);
+        }
+
+        $customerOrders = Order::query()
+            ->whereNotIn('status', [OrderStatus::Cancelled->value])
+            ->where(function ($query) use ($user, $email): void {
+                if ($user) {
+                    $query->where('user_id', $user->id)
+                        ->orWhere('shipping_address->email', $email);
+                } else {
+                    $query->where('shipping_address->email', $email);
+                }
+            });
+
+        if ($coupon->first_order_only && (clone $customerOrders)->exists()) {
+            throw ValidationException::withMessages([
+                'coupon_code' => 'El cupón no es válido o ha expirado.',
+            ]);
+        }
+
+        if ($coupon->max_uses_per_user !== null) {
+            $uses = (clone $customerOrders)->where('coupon_code', $coupon->code)->count();
+            if ($uses >= $coupon->max_uses_per_user) {
+                throw ValidationException::withMessages([
+                    'coupon_code' => 'El cupón no es válido o ha expirado.',
+                ]);
+            }
+        }
+
+        if ($this->eligibleSubtotal($coupon, $items) <= 0) {
+            throw ValidationException::withMessages([
+                'coupon_code' => 'El cupón no es válido o ha expirado.',
             ]);
         }
 
         return $coupon;
+    }
+
+    private function eligibleSubtotal(?Coupon $coupon, $items): float
+    {
+        if (! $coupon) {
+            return 0.0;
+        }
+
+        $categoryIds = $coupon->categories()->pluck('categories.id')->map(fn ($id) => (int) $id)->all();
+        $productIds = $coupon->products()->pluck('products.id')->map(fn ($id) => (string) $id)->all();
+
+        return (float) collect($items)->sum(function ($item) use ($categoryIds, $productIds): float {
+            $product = $item->product;
+            $categoryMatches = $categoryIds === [] || in_array((int) $product->category_id, $categoryIds, true);
+            $productMatches = $productIds === [] || in_array((string) $product->id, $productIds, true);
+
+            return $categoryMatches && $productMatches
+                ? (float) $item->unit_price * (int) $item->quantity
+                : 0.0;
+        });
     }
 
     private function calculateDiscount(?Coupon $coupon, float $subtotal): float
