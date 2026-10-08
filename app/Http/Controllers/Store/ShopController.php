@@ -78,6 +78,10 @@ class ShopController extends Controller
     {
         $request->merge(['q' => $request->get('q', $request->get('query'))]);
 
+        $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+        ]);
+
         return $this->index($request);
     }
 
