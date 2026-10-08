@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Municipalities')
-@section('page-title', 'SV municipalities')
+@section('title', 'Municipios')
+@section('page-title', 'Municipios de El Salvador')
 
 @section('content')
 <div class="admin-page-header">
     <div>
-        <h2 class="admin-page-header__title">Municipalities</h2>
-        <p class="admin-page-header__subtitle">14 departments (read-only) · edit base shipping cost and coordinates.</p>
+        <h2 class="admin-page-header__title">Municipios</h2>
+        <p class="admin-page-header__subtitle">14 departamentos (solo lectura) · edita costo base y coordenadas.</p>
     </div>
 </div>
 
@@ -18,11 +18,11 @@
             <table class="table admin-table">
                 <thead>
                     <tr>
-                        <th>Municipality</th>
-                        <th>Code</th>
-                        <th>Base cost</th>
-                        <th>Lat / Lng</th>
-                        <th>Status</th>
+                        <th>Municipio</th>
+                        <th>Código</th>
+                        <th>Costo base</th>
+                        <th>Lat. / long.</th>
+                        <th>Estado</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -41,11 +41,11 @@
                             </td>
                             <td>
                                 <span class="badge badge--{{ $municipality->is_active ? 'success' : 'warning' }}">
-                                    {{ $municipality->is_active ? 'Active' : 'Inactive' }}
+                                    {{ $municipality->is_active ? 'Activo' : 'Inactivo' }}
                                 </span>
                             </td>
                             <td>
-                                <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.municipalities.edit', $municipality) }}">Edit</a>
+                                <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.municipalities.edit', $municipality) }}">Editar</a>
                             </td>
                         </tr>
                     @endforeach

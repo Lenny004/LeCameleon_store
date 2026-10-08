@@ -1,3 +1,14 @@
+@php
+    $globalErrorKeys = ['cart', 'payment', 'checkout', 'stock', 'offer', 'review'];
+    $globalErrors = collect(($errors ?? null)?->getMessages() ?? [])
+        ->only($globalErrorKeys)
+        ->flatten()
+        ->values();
+    $hasFieldErrors = collect(($errors ?? null)?->getMessages() ?? [])
+        ->except($globalErrorKeys)
+        ->isNotEmpty();
+@endphp
+
 @if (session('success') || session('error') || session('warning') || session('info') || ($errors ?? null)?->any())
     <div class="container flash-container">
         <div class="flash-stack">
@@ -13,10 +24,13 @@
             @if (session('info'))
                 <div class="flash flash--info" role="alert">{{ session('info') }}</div>
             @endif
-            @if (($errors ?? null)?->any())
+            @if ($hasFieldErrors)
+                <div class="flash flash--error" role="alert">Revisa los campos marcados.</div>
+            @endif
+            @if ($globalErrors->isNotEmpty())
                 <div class="flash flash--error" role="alert">
                     <ul class="flash__list">
-                        @foreach ($errors->all() as $error)
+                        @foreach ($globalErrors as $error)
                             <li class="flash__list-item">{{ $error }}</li>
                         @endforeach
                     </ul>

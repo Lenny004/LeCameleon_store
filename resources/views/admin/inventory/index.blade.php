@@ -7,7 +7,7 @@
 @section('content')
 <div class="admin-page-header">
     <div>
-        <h2 class="admin-page-header__title">Stock overview</h2>
+        <h2 class="admin-page-header__title">Resumen de inventario</h2>
         <p class="admin-page-header__subtitle">{{ $lowStockCount }} productos por debajo del umbral</p>
     </div>
 </div>
@@ -135,12 +135,12 @@
         <table class="table admin-table">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Product</th>
-                    <th>Type</th>
+                        <th>Fecha</th>
+                        <th>Producto</th>
+                        <th>Tipo</th>
                     <th>Qty</th>
-                    <th>User</th>
-                    <th>Notes</th>
+                        <th>Usuario</th>
+                        <th>Notas</th>
                 </tr>
             </thead>
             <tbody>
@@ -177,7 +177,7 @@
     @endif
 </div>
 
-<script>
+<script nonce="{{ Vite::cspNonce() }}">
     (function () {
         var typeSelect = document.getElementById('type');
         var quantityGroup = document.getElementById('quantity-group');
