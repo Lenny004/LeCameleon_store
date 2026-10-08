@@ -31,6 +31,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->web(append: [SecurityHeaders::class]);
         $middleware->api(append: [SecurityHeaders::class]);
+        $middleware->validateCsrfTokens(except: [
+            'newsletter/unsubscribe/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

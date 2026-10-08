@@ -39,4 +39,12 @@ class SavedSearchController extends Controller
 
         return back()->with('success', 'Búsqueda eliminada.');
     }
+
+    public function toggleNotify(Request $request, SavedSearch $savedSearch): RedirectResponse
+    {
+        abort_unless($savedSearch->user_id === $request->user()->id, 403);
+        $savedSearch->forceFill(['notify' => ! $savedSearch->notify])->save();
+
+        return back()->with('success', $savedSearch->notify ? 'Avisos activados.' : 'Avisos desactivados.');
+    }
 }

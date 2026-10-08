@@ -49,6 +49,12 @@
                         </form>
                     @endif
                 </div>
+                <form method="POST" action="{{ route('account.saved-searches.notify', $savedSearch) }}" class="form-checkbox">
+                    @csrf
+                    @method('PATCH')
+                    <input type="hidden" name="notify" value="{{ $savedSearch->notify ? 0 : 1 }}">
+                    <button type="submit" class="btn btn--ghost btn--sm">{{ $savedSearch->notify ? 'Desactivar avisos' : 'Recibir avisos por correo' }}</button>
+                </form>
                 <p class="order-card__items order-card__note">
                     {{ collect($savedSearch->query_params)->map(fn ($value, $key) => $key.'='.$value)->implode(' · ') }}
                 </p>
