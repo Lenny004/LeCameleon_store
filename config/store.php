@@ -47,6 +47,8 @@ return [
     // Manual-payment reservation lifetime. Zero disables automatic cancellation.
     'manual_payment_ttl_hours' => (int) env('STORE_MANUAL_PAYMENT_TTL_HOURS', 72),
 
+    'offer_acceptance_hours' => (int) env('STORE_OFFER_ACCEPTANCE_HOURS', 48),
+
     // Hours of cart inactivity before sending an abandoned-cart reminder email.
     'abandoned_cart_hours' => (int) env('STORE_ABANDONED_CART_HOURS', 24),
 

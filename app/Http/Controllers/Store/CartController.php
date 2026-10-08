@@ -24,12 +24,14 @@ class CartController extends Controller
     {
         $sessionId = $this->ensureSessionId($request, 'session_cart_key');
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
+        $offerExpired = $this->cartService->syncOfferPrices($cart);
 
         return view('store.cart.index', [
             'cart' => $cart,
             'subtotal' => $this->cartService->subtotal($cart),
             'itemCount' => $this->cartService->itemCount($cart),
             'shipping' => (float) config('store.shipping_flat_rate', 0),
+            'offerExpired' => $offerExpired,
         ]);
     }
 

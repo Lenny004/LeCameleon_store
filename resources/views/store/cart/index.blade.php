@@ -24,6 +24,7 @@
     </header>
 
     @if ($items->count())
+        @if ($offerExpired ?? false)<div class="flash flash--info" role="status">Tu precio acordado venció y se actualizó al precio normal.</div>@endif
         <div class="cart-layout">
             <div class="cart-items">
                 <header class="cart-items__header">
@@ -45,6 +46,7 @@
                                 <p class="cart-item__meta">Talla: {{ $product->size_label }}</p>
                             @endif
                             <p class="cart-item__price">
+                                @if ($product && (float) $item->unit_price < (float) $product->price)<span class="cart-item__original-price"><s>${{ number_format((float) $product->price * $item->quantity, 2) }}</s> · Precio acordado</span>@endif
                                 ${{ number_format((float) $item->unit_price * $item->quantity, 2) }}
                                 @if ($item->quantity > 1)
                                     <span class="cart-item__unit">(${{ number_format((float) $item->unit_price, 2) }} c/u)</span>

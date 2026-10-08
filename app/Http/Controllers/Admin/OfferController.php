@@ -34,6 +34,9 @@ class OfferController extends Controller
 
         $offer->update([
             'status' => OfferStatus::Accepted,
+            'accepted_amount' => $offer->amount,
+            'responded_at' => now(),
+            'expires_at' => now()->addHours((int) config('store.offer_acceptance_hours', 48)),
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
@@ -51,6 +54,7 @@ class OfferController extends Controller
 
         $offer->update([
             'status' => OfferStatus::Declined,
+            'responded_at' => now(),
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
@@ -67,6 +71,8 @@ class OfferController extends Controller
         $offer->update([
             'status' => OfferStatus::Countered,
             'counter_amount' => $request->validated('counter_amount'),
+            'responded_at' => now(),
+            'expires_at' => now()->addHours((int) config('store.offer_acceptance_hours', 48)),
             'admin_notes' => $request->validated('admin_notes'),
         ]);
 
