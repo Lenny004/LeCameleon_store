@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Páginas de error invitado (403 / 404)
+   Tarjeta clara centrada con código en gradiente neon.
+   ========================================================================== */
+
+.error-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md) var(--space-md) var(--space-3xl);
+}
+
+.error-page__card {
+    width: 100%;
+    max-width: 36rem;
+    padding: var(--space-2xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    background-color: color-mix(in srgb, var(--surface) 94%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--border) 75%, var(--accent) 25%);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        var(--shadow-lg),
+        0 0 0 1px color-mix(in srgb, var(--surface) 80%, transparent),
+        0 0 56px color-mix(in srgb, var(--accent) 7%, transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra superior neon */
+.error-page__card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--accent),
+        var(--primary)
+    );
+    box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Línea decorativa inferior */
+.error-page__card::after {
+    content: '';
+    position: absolute;
+    inset: auto var(--space-xl) 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--accent) 40%, transparent),
+        transparent
+    );
+}
+
+.error-page__brand {
+    position: relative;
+    z-index: var(--z-content);
+    margin-bottom: var(--space-xs);
+}
+
+.error-page__brand .brand-logo {
+    max-width: 9rem;
+}
+
+.error-page__code {
+    position: relative;
+    z-index: var(--z-content);
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 12vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 0;
+    user-select: none;
+    background: linear-gradient(
+        155deg,
+        color-mix(in srgb, var(--primary) 65%, var(--text)),
+        color-mix(in srgb, var(--accent) 80%, var(--text))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 28%, transparent));
+}
+
+.error-page__title {
+    position: relative;
+    z-index: var(--z-content);
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 3.5vw, 1.875rem);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    margin: 0;
+    color: var(--text);
+}
+
+.error-page__text {
+    position: relative;
+    z-index: var(--z-content);
+    color: var(--text-muted);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+    max-width: 28rem;
+    font-size: 0.9375rem;
+}
+
+.error-page__actions {
+    position: relative;
+    z-index: var(--z-content);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+    width: 100%;
+}
+
+.error-page__actions .btn--primary {
+    box-shadow:
+        var(--shadow-xs),
+        0 2px 12px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.error-page__actions .btn--primary:hover {
+    box-shadow:
+        0 4px 16px color-mix(in srgb, var(--primary) 32%, transparent),
+        0 0 20px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.error-page__actions .btn--ghost:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    color: var(--accent-hover);
+}

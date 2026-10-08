@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Layout de página — contenedor, secciones y fondo neón claro
+   ========================================================================== */
+
+/* Contenedor centrado con ancho máximo del diseño */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+}
+
+@media (min-width: 48rem) {
+    .container {
+        padding-inline: var(--space-xl);
+    }
+}
+
+/* Shell de página: columna flex a altura completa con degradado ambiental */
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 120% 70% at 50% -15%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 52%),
+        radial-gradient(ellipse 55% 45% at 100% 0%, color-mix(in srgb, var(--primary) 4%, transparent), transparent 48%),
+        radial-gradient(ellipse 40% 35% at 0% 100%, color-mix(in srgb, var(--accent) 3%, transparent), transparent 50%),
+        linear-gradient(
+            180deg,
+            var(--background-top) 0%,
+            var(--background) 42%,
+            var(--background-bottom) 100%
+        );
+    background-attachment: fixed;
+}
+
+/* Alturas de cabecera de tienda (utility, principal, subnav) */
+.page--store {
+    --header-utility-height: 0px;
+    --header-main-height: 3.75rem;
+    --header-subnav-height: 0px;
+    --header-offset: calc(
+        var(--header-utility-height) +
+        var(--header-main-height) +
+        var(--header-subnav-height)
+    );
+    --header-height: var(--header-offset);
+}
+
+@media (min-width: 48rem) {
+    .page--store {
+        --header-utility-height: 2rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .page--store {
+        --header-subnav-height: 2.375rem;
+    }
+}
+
+.page__main {
+    flex: 1;
+}
+
+/* Bloque de sección con espaciado vertical consistente */
+.section {
+    padding-block: var(--space-2xl);
+}
+
+.section__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Título de sección con subrayado neón decorativo */
+.section__title {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.section__title::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    margin-top: var(--space-sm);
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 25%, transparent));
+    border-radius: var(--radius-full);
+}
+
+/* Rejilla de productos responsiva */
+.grid-products {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 48rem) {
+    .grid-products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 64rem) {
+    .grid-products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Migas de pan — navegación contextual */
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.breadcrumb__link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.breadcrumb__link:hover {
+    color: var(--accent-hover);
+}
+
+.breadcrumb__sep {
+    opacity: 0.45;
+    user-select: none;
+}

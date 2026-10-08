@@ -1,0 +1,79 @@
+@extends('layouts.store')
+
+@section('title', 'Mis pedidos — Le Cameleon')
+
+@section('content')
+<div class="container account-layout">
+    <nav class="account-nav" aria-label="Cuenta">
+        @if (Route::has('account.index'))
+            <a href="{{ route('account.index') }}" class="account-nav__link">Perfil</a>
+        @endif
+        @if (Route::has('account.orders.index'))
+            <a href="{{ route('account.orders.index') }}" class="account-nav__link account-nav__link--active">Mis pedidos</a>
+        @endif
+        @if (Route::has('account.offers.index'))
+            <a href="{{ route('account.offers.index') }}" class="account-nav__link">Mis ofertas</a>
+        @endif
+        @if (Route::has('account.saved-searches.index'))
+            <a href="{{ route('account.saved-searches.index') }}" class="account-nav__link">Búsquedas guardadas</a>
+        @endif
+        @if (Route::has('wishlist.index'))
+            <a href="{{ route('wishlist.index') }}" class="account-nav__link">Favoritos</a>
+        @endif
+    </nav>
+
+    <div class="account-content">
+        <header class="account-content__header">
+            <p class="account-content__eyebrow">Historial</p>
+            <h1 class="heading-2 account-content__title">Mis pedidos</h1>
+            <p class="account-content__lead">Consulta el estado y el detalle de tus compras vintage.</p>
+        </header>
+
+        @php
+            $statusLabels = [
+                'pending' => 'Pendiente',
+                'paid' => 'Pagado',
+                'processing' => 'En preparación',
+                'shipped' => 'Enviado',
+                'delivered' => 'Entregado',
+                'cancelled' => 'Cancelado',
+                'refunded' => 'Reembolsado',
+            ];
+        @endphp
+
+        @forelse ($orders as $order)
+            @php
+                $statusValue = $order->status->value;
+                $statusLabel = $statusLabels[$statusValue] ?? ucfirst($statusValue);
+            @endphp
+            <article class="order-card">
+                <div class="order-card__header">
+                    <div>
+                        <p class="order-card__id">Pedido #{{ $order->number }}</p>
+                        <p class="order-card__date">{{ $order->placed_at?->format('d/m/Y H:i') }}</p>
+                    </div>
+                    <span class="badge badge--{{ $statusValue === 'delivered' ? 'success' : 'primary' }}">{{ $statusLabel }}</span>
+                </div>
+                <p class="order-card__items">{{ $order->items_count }} artículo(s)</p>
+                <div class="order-card__footer">
+                    <span class="order-card__total">${{ number_format((float) $order->grand_total, 2) }}</span>
+                    @if (Route::has('account.orders.show'))
+                        <a href="{{ route('account.orders.show', $order) }}" class="btn btn--ghost btn--sm">Ver detalle</a>
+                    @endif
+                </div>
+            </article>
+        @empty
+            @include('components.empty-state', [
+                'title' => 'Sin pedidos aún',
+                'text' => 'Cuando compres algo, aparecerá aquí.',
+                'actionLabel' => 'Ir a la tienda',
+                'actionUrl' => Route::has('shop.index') ? route('shop.index') : '#',
+            ])
+        @endforelse
+
+        @if ($orders instanceof \Illuminate\Contracts\Pagination\Paginator && $orders->hasPages())
+            <div class="pagination">{{ $orders->links() }}</div>
+        @endif
+    </div>
+</div>
+@endsection

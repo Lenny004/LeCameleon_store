@@ -1,0 +1,47 @@
+# Phase 6 — Enterprise Features
+
+**Status:** Completed  
+**Owner:** Full-stack  
+**Depends on:** Core store + admin  
+**Updated:** 2026-07-15
+
+---
+
+## Phase B checklist
+
+- [x] **Reviews on storefront** — POST route, FormRequest, PDP list + form, `is_approved=false` by default
+- [x] **Ratings system** — average + distribution on PDP, stars on product cards, shop `min_rating` + sort by rating
+- [x] **Comment filters** — filter PDP reviews by stars (`review_rating`) and sort (`review_sort`)
+- [x] **Admin moderation** — real Eloquent table + filters (status, rating, search)
+- [x] **Coupons in checkout** — discount flash messaging, success page shows applied coupon
+- [x] **Order status timeline** — `Order::statusTimeline()`, account + admin order show views
+- [x] **SEO** — `@stack('meta')`, PDP meta/OG tags, `/sitemap.xml` for published products
+- [x] **Low-stock UX** — admin products index badge when `quantity_available <= low_stock_threshold`
+
+## Features inspired by modern ecommerce platforms
+
+1. **Wishlist** — persist for guests (session) and users ✅
+2. **Product recommendations** — related + “customers also viewed” ✅
+3. **Advanced filters** — era, condition, size, brand, price range, in-stock, min rating ✅
+4. **Product views analytics** — track + admin charts (real series) ✅
+5. **Low-stock / sold-out alerts** — admin KPI counts ✅
+6. **Coupons & promotions** — checkout apply + admin CRUD ✅
+7. **Reviews & ratings** — storefront submit + filters + admin moderation ✅
+8. **Stock reservations** — during checkout ✅
+9. **Order status timeline** — account + admin order detail ✅
+10. **SEO**: slugs, meta titles, sitemap ✅
+
+## Done in this pass
+
+- Storefront reviews: `POST /shop/{product}/reviews`, PDP approved list + auth form
+- PDP rating summary (average, bars) + comment filters by stars / sort
+- Catalog: `min_rating` filter, sort `rating`, stars on product cards
+- Admin reviews index wired to Eloquent with status/rating/search filters
+- Checkout coupon feedback: session `info` flash + success page discount row
+- `Order::statusTimeline()` with shared `order-timeline` component
+- SEO: layout meta stack, PDP OG tags, `GET /sitemap.xml`
+- Admin products index: low-stock badge on real paginated data
+
+## Commit
+
+`:sparkles: enhance product ratings reviews filters and admin moderation`

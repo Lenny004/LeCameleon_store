@@ -1,0 +1,905 @@
+/* ==========================================================================
+   Admin — shell con acentos neon suaves (sin saturar texto)
+   Superficies alineadas con tokens.css; el verde neon vive en bordes,
+   fondos tenues e indicadores, no en tipografía masiva.
+   ========================================================================== */
+
+.admin {
+    --admin-neon-glow: color-mix(in srgb, var(--accent) 18%, transparent);
+    --admin-neon-line: color-mix(in srgb, var(--accent) 42%, var(--border));
+    --admin-surface-glass: color-mix(in srgb, var(--surface) 94%, transparent);
+
+    font-family: var(--font-body);
+    color: var(--text);
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 110% 70% at 50% -18%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 52%),
+        radial-gradient(ellipse 45% 35% at 100% 0%, color-mix(in srgb, var(--primary) 3%, transparent), transparent 42%),
+        linear-gradient(
+            180deg,
+            var(--background-top) 0%,
+            var(--background) 48%,
+            var(--background-bottom) 100%
+        );
+    background-attachment: fixed;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar — navegación lateral con indicador neon discreto
+   -------------------------------------------------------------------------- */
+
+.admin-sidebar {
+    position: fixed;
+    inset-block: 0;
+    left: 0;
+    z-index: var(--z-overlay);
+    width: var(--sidebar-width);
+    background-color: var(--surface-raised);
+    border-right: 1px solid var(--border);
+    box-shadow:
+        var(--shadow-sm),
+        inset -1px 0 0 color-mix(in srgb, var(--accent) 6%, transparent);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform var(--transition-slow);
+}
+
+.admin-sidebar--open {
+    transform: translateX(0);
+}
+
+@media (min-width: 64rem) {
+    .admin-sidebar {
+        transform: translateX(0);
+    }
+}
+
+.admin-sidebar__brand {
+    display: flex;
+    align-items: center;
+    min-height: var(--header-height);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    background:
+        linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--accent-soft) 35%, var(--surface-raised)) 0%,
+            var(--surface-raised) 100%
+        );
+}
+
+.admin-sidebar__brand .brand-logo {
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-sidebar__brand .brand-logo__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-sidebar__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--border) 80%, transparent) transparent;
+}
+
+.admin-sidebar__section {
+    margin-bottom: var(--space-lg);
+}
+
+.admin-sidebar__section:last-child {
+    margin-bottom: 0;
+}
+
+.admin-sidebar__label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    padding: var(--space-sm) var(--space-sm);
+}
+
+.admin-sidebar__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.625rem var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    border: 1px solid transparent;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin-sidebar__link:focus-visible,
+.admin-topbar__menu-toggle:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
+/* Barra lateral neon solo en estado activo */
+.admin-sidebar__link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    box-shadow: 0 0 8px var(--admin-neon-glow);
+    transform: translateY(-50%);
+    opacity: 0;
+    transition:
+        height var(--transition),
+        opacity var(--transition);
+}
+
+.admin-sidebar__icon {
+    inline-size: var(--icon-size-md);
+    block-size: var(--icon-size-md);
+    flex-shrink: 0;
+    opacity: 0.68;
+    color: var(--text-muted);
+    transition: color var(--transition), opacity var(--transition);
+}
+
+.admin-sidebar__link:hover {
+    background-color: color-mix(in srgb, var(--accent-soft) 70%, var(--surface));
+    border-color: color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.admin-sidebar__link:hover .admin-sidebar__icon {
+    opacity: 0.92;
+    color: var(--text);
+}
+
+.admin-sidebar__link--active {
+    background-color: color-mix(in srgb, var(--accent-soft) 85%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-sidebar__link--active::before {
+    height: 60%;
+    opacity: 1;
+}
+
+.admin-sidebar__link--active .admin-sidebar__icon {
+    opacity: 1;
+    color: var(--accent-hover);
+}
+
+.admin-sidebar__footer {
+    padding: var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+    background-color: color-mix(in srgb, var(--surface) 88%, var(--background));
+}
+
+/* --------------------------------------------------------------------------
+   Columna principal
+   -------------------------------------------------------------------------- */
+
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 100vh;
+}
+
+@media (min-width: 64rem) {
+    .admin-main {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Topbar — barra superior tipo cristal con borde neon sutil
+   -------------------------------------------------------------------------- */
+
+.admin-topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    min-height: var(--header-height);
+    padding-inline: var(--space-lg);
+    background-color: var(--admin-surface-glass);
+    backdrop-filter: blur(14px) saturate(1.15);
+    border-bottom: 1px solid var(--border);
+    box-shadow:
+        var(--shadow-xs),
+        0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.admin-topbar__start {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+}
+
+.admin-topbar__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin-topbar__menu-toggle:hover {
+    background-color: var(--accent-soft);
+    border-color: var(--admin-neon-line);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.admin-topbar__menu-icon {
+    inline-size: var(--icon-size-lg);
+    block-size: var(--icon-size-lg);
+    flex-shrink: 0;
+}
+
+@media (min-width: 64rem) {
+    .admin-topbar__menu-toggle {
+        display: none;
+    }
+}
+
+.admin-topbar__heading {
+    min-width: 0;
+}
+
+.admin-topbar__title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.admin-topbar__subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: var(--space-2xs);
+    line-height: var(--line-height-snug);
+}
+
+.admin-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+}
+
+.admin-topbar__user {
+    display: none;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-muted);
+}
+
+@media (min-width: 40rem) {
+    .admin-topbar__user {
+        display: inline;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Área de contenido y overlay móvil
+   -------------------------------------------------------------------------- */
+
+.admin-content {
+    flex: 1;
+    padding: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+    .admin-content {
+        padding: var(--space-xl);
+    }
+}
+
+.admin-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-overlay) - 5);
+    background-color: color-mix(in srgb, var(--text) 42%, transparent);
+    backdrop-filter: blur(2px);
+}
+
+@media (min-width: 64rem) {
+    .admin-overlay {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Encabezados de página (vistas CRUD)
+   -------------------------------------------------------------------------- */
+
+.admin-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-page-header__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.015em;
+    color: var(--text);
+}
+
+.admin-page-header__subtitle {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+    line-height: var(--line-height-snug);
+}
+
+/* Patrones compartidos de formularios, paneles, filtros y acciones del admin. */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.admin-form--narrow {
+    max-width: 40rem;
+}
+
+.admin-form--medium {
+    max-width: 42rem;
+}
+
+.admin-form--wide {
+    max-width: 48rem;
+}
+
+.admin-form--inventory {
+    display: grid;
+    max-width: 32rem;
+    gap: var(--space-md);
+}
+
+.admin-form__title {
+    margin-bottom: var(--space-lg);
+}
+
+.admin-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.admin-form__actions,
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.admin-actions--spaced {
+    margin-top: var(--space-lg);
+}
+
+.admin-actions--wide {
+    width: 100%;
+}
+
+.admin-form__list {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+}
+
+.admin-form__heading {
+    margin-top: var(--space-md);
+    font-size: 0.9375rem;
+    font-weight: 700;
+}
+
+.admin-form__hint {
+    margin-top: var(--space-xs);
+    font-size: 0.85rem;
+}
+
+.admin-form__hint--bottom {
+    margin-bottom: var(--space-md);
+}
+
+.admin-form__submit {
+    width: fit-content;
+}
+
+.admin-form__submit--spaced {
+    margin-top: var(--space-lg);
+}
+
+.admin-form__image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.admin-form__image-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    max-width: 8rem;
+    font-size: 0.85rem;
+}
+
+.admin-form__image {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.admin-panel--narrow {
+    max-width: 40rem;
+}
+
+.admin-panel {
+    min-width: 0;
+}
+
+.admin-panel--medium {
+    max-width: 48rem;
+}
+
+.admin-panel--spaced {
+    margin-bottom: var(--space-xl);
+}
+
+.admin-panel--top-spaced {
+    margin-top: var(--space-xl);
+}
+
+.admin-panel--compact {
+    margin-bottom: var(--space-lg);
+}
+
+.admin-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.admin-filters--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    align-items: end;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.admin-filters__field {
+    margin: 0;
+}
+
+.admin-table__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.admin-table__actions--stacked {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 12rem;
+}
+
+.admin-offer__input {
+    margin-bottom: var(--space-xs);
+}
+
+.admin-offer__message {
+    margin-top: var(--space-xs);
+}
+
+.admin-table__cell--message {
+    max-width: 24rem;
+    white-space: pre-wrap;
+}
+
+.admin-inline-form {
+    display: inline;
+}
+
+.admin-pagination {
+    margin-top: var(--space-lg);
+}
+
+.admin-order-page {
+    display: grid;
+    max-width: 48rem;
+    gap: var(--space-xl);
+}
+
+.admin-order__meta {
+    margin-top: var(--space-xs);
+}
+
+.admin-order__note {
+    margin-top: var(--space-md);
+}
+
+.admin-order__total {
+    margin-top: var(--space-md);
+    text-align: right;
+    font-weight: 700;
+}
+
+.admin-order__payment-form,
+.admin-form__submit--compact-spaced {
+    margin-top: var(--space-md);
+}
+
+.admin-order__event-form {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+}
+
+.admin-form__title--compact {
+    margin-bottom: var(--space-md);
+}
+
+.admin-form__title--small {
+    font-size: 0.9375rem;
+    margin-bottom: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard y gráficos
+   -------------------------------------------------------------------------- */
+
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.admin-dashboard__recent {
+    margin-top: 0;
+}
+
+.kpi-grid--spaced {
+    margin-top: 0;
+}
+
+.admin-charts {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: 0;
+}
+
+@media (min-width: 48rem) {
+    .admin-charts {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.admin-chart-card {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin-chart-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 18%, var(--border));
+    box-shadow: var(--shadow-sm);
+}
+
+.admin-chart-card__title {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+    color: var(--text);
+}
+
+.admin-chart-card__canvas {
+    max-height: 16rem;
+}
+
+/* --------------------------------------------------------------------------
+   Pulido admin: tarjetas, tablas, KPIs y badges
+   El neon se reserva para acentos estructurales, no para el cuerpo del texto.
+   -------------------------------------------------------------------------- */
+
+.admin .card {
+    background-color: var(--surface-raised);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.admin .card:hover {
+    border-color: color-mix(in srgb, var(--accent) 14%, var(--border));
+}
+
+.admin .card__title {
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+/* Tablas — cabeceras apagadas, filas con hover tenue */
+.admin .table-wrap {
+    border-color: var(--border);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+.admin-table th {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-color: color-mix(in srgb, var(--secondary) 28%, var(--surface));
+    border-bottom: 1px solid var(--border);
+}
+
+.admin-table td {
+    color: var(--text);
+    border-bottom-color: color-mix(in srgb, var(--border) 65%, transparent);
+    transition: background-color var(--transition-fast);
+}
+
+.admin-table__link {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 28%, transparent);
+    text-underline-offset: 0.18em;
+    transition:
+        color var(--transition),
+        text-decoration-color var(--transition);
+}
+
+.admin-table__link:hover {
+    color: var(--accent-hover);
+    text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.admin-table tr:hover td {
+    background-color: color-mix(in srgb, var(--accent-soft) 45%, var(--surface));
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* KPIs — franja superior neon, valores en texto oscuro */
+.admin .kpi-grid {
+    gap: var(--space-md);
+}
+
+.admin .kpi-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-raised);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition-fast);
+}
+
+.admin .kpi-card::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--primary) 70%, var(--accent)),
+        var(--accent)
+    );
+    opacity: 0.55;
+    transition: opacity var(--transition);
+}
+
+.admin .kpi-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    box-shadow:
+        var(--shadow-sm),
+        0 0 0 1px color-mix(in srgb, var(--accent) 6%, transparent);
+    transform: translateY(-1px);
+}
+
+.admin .kpi-card:hover::before {
+    opacity: 0.85;
+}
+
+.admin .kpi-card--alert {
+    border-color: color-mix(in srgb, var(--warning) 32%, var(--border));
+    background: linear-gradient(
+        165deg,
+        color-mix(in srgb, var(--warning) 5%, var(--surface-raised)) 0%,
+        var(--surface-raised) 58%
+    );
+}
+
+.admin .kpi-card--alert::before {
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--warning) 80%, var(--danger)),
+        var(--warning)
+    );
+    opacity: 0.7;
+}
+
+.admin .kpi-card__label {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+}
+
+.admin .kpi-card__value {
+    color: var(--text);
+    font-variation-settings: 'SOFT' 40, 'WONK' 0;
+}
+
+.admin .kpi-card__delta {
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.admin .kpi-card__delta:hover {
+    color: var(--accent-hover);
+}
+
+.admin .kpi-card__delta--warning {
+    color: var(--warning);
+}
+
+.admin .kpi-card__delta--warning:hover {
+    color: color-mix(in srgb, var(--warning) 75%, var(--text));
+}
+
+/* Badges — fondos semánticos suaves, texto legible (no neon puro) */
+.admin .badge {
+    font-weight: 700;
+    border-width: 1px;
+}
+
+.admin .badge--primary {
+    background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
+    border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
+    color: var(--text);
+}
+
+.admin .badge--accent {
+    background-color: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    color: var(--text);
+}
+
+.admin .badge--success {
+    background-color: color-mix(in srgb, var(--success) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--success) 22%, var(--border));
+    color: color-mix(in srgb, var(--success) 72%, var(--text));
+}
+
+.admin .badge--warning {
+    background-color: color-mix(in srgb, var(--warning) 10%, var(--surface));
+    border-color: color-mix(in srgb, var(--warning) 22%, var(--border));
+    color: color-mix(in srgb, var(--warning) 78%, var(--text));
+}
+
+.admin .badge--danger {
+    background-color: color-mix(in srgb, var(--danger) 9%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 20%, var(--border));
+    color: color-mix(in srgb, var(--danger) 75%, var(--text));
+}
+
+.admin .pagination__link--active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-contrast);
+    box-shadow: 0 0 10px var(--admin-neon-glow);
+}
+
+/* --------------------------------------------------------------------------
+   Tema oscuro — refuerzo de contraste sin exceso de brillo
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] .admin {
+    --admin-neon-glow: color-mix(in srgb, var(--accent) 22%, transparent);
+    --admin-surface-glass: color-mix(in srgb, var(--surface) 88%, transparent);
+
+    background-image:
+        radial-gradient(ellipse 95% 65% at 50% -12%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 50%),
+        linear-gradient(180deg, var(--background-top) 0%, var(--background) 50%, var(--background-bottom) 100%);
+}
+
+[data-theme="dark"] .admin-sidebar {
+    box-shadow:
+        var(--shadow-md),
+        inset -1px 0 0 color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+[data-theme="dark"] .admin-sidebar__brand {
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--surface-raised) 80%, var(--primary-muted)) 0%,
+        var(--surface-raised) 100%
+    );
+}
+
+[data-theme="dark"] .admin-topbar {
+    background-color: var(--admin-surface-glass);
+    box-shadow:
+        var(--shadow-xs),
+        0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+[data-theme="dark"] .admin .badge--primary {
+    background-color: color-mix(in srgb, var(--primary) 14%, var(--surface));
+    color: var(--text);
+}

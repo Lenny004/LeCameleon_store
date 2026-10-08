@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Tipografía — Futura Book BT (marca legacy, self-hosted)
+   La fuente se sirve desde /public/fonts/ vía @font-face; no requiere Google Fonts.
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Futura Book BT';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/futura_book_font.ttf') format('truetype');
+}
+
+/* --- Clases de encabezado (usan --font-display) --- */
+
+.heading-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: normal;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.01em;
+}
+
+.heading-1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.015em;
+}
+
+.heading-2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.01em;
+}
+
+.heading-3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: 0;
+}
+
+/* --- Clases de texto (usan --font-body) --- */
+
+.text-lead {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
+    color: var(--text-muted);
+}
+
+.text-small {
+    font-size: 0.875rem;
+    line-height: var(--line-height-base);
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    line-height: var(--line-height-base);
+    letter-spacing: 0.01em;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.text-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+
+.text-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}

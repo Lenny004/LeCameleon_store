@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Estado vacío — placeholder de contenido
+   Tipografía oscura legible; neon solo como halo sutil detrás del icono.
+   ========================================================================== */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl);
+    gap: var(--space-md);
+    background:
+        radial-gradient(
+            ellipse 65% 45% at 50% 0%,
+            color-mix(in srgb, var(--primary) 5%, transparent) 0%,
+            transparent 70%
+        ),
+        var(--surface);
+    border: 1px dashed color-mix(in srgb, var(--border) 85%, var(--text-muted));
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.empty-state--spaced {
+    margin-top: var(--space-xl);
+}
+
+/* ==========================================================================
+   Icono decorativo
+   ========================================================================== */
+
+.empty-state__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.75rem;
+    height: 4.75rem;
+    border-radius: var(--radius-full);
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-sm);
+    box-shadow: var(--shadow-xs);
+}
+
+.empty-state__icon {
+    inline-size: var(--icon-size-2xl);
+    block-size: var(--icon-size-2xl);
+    color: var(--accent-hover);
+}
+
+/* ==========================================================================
+   Texto y acciones
+   ========================================================================== */
+
+.empty-state__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    color: var(--text);
+    max-width: 28rem;
+}
+
+.empty-state__text {
+    max-width: 26rem;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    line-height: var(--line-height-relaxed);
+}
+
+.empty-state__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
+}

@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Punto de entrada CSS — orden de capas del diseño
+   ========================================================================== */
+
+@import './base/tokens.css';
+@import './base/reset.css';
+@import './base/typography.css';
+@import './layout/page.css';
+@import './layout/header.css';
+@import './layout/footer.css';
+@import './layout/admin.css';
+@import './components/button.css';
+@import './components/form.css';
+@import './components/brand-logo.css';
+@import './components/product-card.css';
+@import './components/flash.css';
+@import './components/theme-toggle.css';
+@import './components/empty-state.css';
+@import './components/utilities.css';
+@import './blocks/hero.css';
+@import './blocks/content.css';
+@import './blocks/shop.css';
+@import './blocks/product.css';
+@import './blocks/cart.css';
+@import './blocks/checkout.css';
+@import './blocks/auth.css';
+@import './blocks/logistics.css';
+@import './blocks/faq.css';
+@import './blocks/errors.css';
+@import './blocks/shipping-logistics.css';
