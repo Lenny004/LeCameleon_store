@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Mail\WelcomeMail;
 use App\Models\Setting;
 use App\Services\CartService;
+use App\Services\WhatsAppLinkService;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $storeSettings = [
                 'storeName' => config('app.name', 'Le Cameleon'),
                 'storeContact' => [],
+                'whatsapp' => null,
             ];
 
             if (Schema::hasTable('settings')) {
@@ -47,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
                 $storeSettings = [
                     'storeName' => data_get($settings->get('store.name')?->value, 'en', $storeSettings['storeName']),
                     'storeContact' => $settings->get('store.contact')?->value ?? [],
+                    'whatsapp' => app(WhatsAppLinkService::class)->link(),
                 ];
             }
 
