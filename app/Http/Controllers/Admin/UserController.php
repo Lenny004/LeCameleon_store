@@ -37,6 +37,7 @@ class UserController extends Controller
 
         $user = User::query()->create([
             ...$data,
+            'email_verified_at' => now(),
             'is_active' => $request->boolean('is_active', true),
         ]);
 
