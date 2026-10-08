@@ -23,7 +23,7 @@
 /* Modo claro: tarjeta blanca limpia, sin tintes */
 :root:not([data-theme="dark"]) .product-card {
     --card-surface: var(--surface);
-    --card-media-bg: rgb(244, 244, 246);
+    --card-media-bg: var(--surface-muted);
 }
 
 .product-card:hover {
@@ -135,7 +135,7 @@
     position: absolute;
     top: var(--space-sm);
     left: var(--space-sm);
-    z-index: 1;
+    z-index: var(--z-content);
     font-size: 0.625rem;
     letter-spacing: 0.04em;
 }
@@ -238,7 +238,7 @@
     position: absolute;
     top: var(--space-sm);
     right: var(--space-sm);
-    z-index: 2;
+    z-index: var(--z-raised);
 }
 
 .product-card__wishlist {
@@ -265,12 +265,17 @@
 }
 
 :root:not([data-theme="dark"]) .product-card__wishlist {
-    background: rgb(255 255 255 / 0.92);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
 }
 
-.product-card:hover .product-card__wishlist,
+.product-card:hover .product-card__wishlist {
+    opacity: 1;
+}
+
 .product-card__wishlist:focus-visible {
     opacity: 1;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
 }
 
 .product-card__wishlist:hover,
@@ -283,11 +288,6 @@
 :root:not([data-theme="dark"]) .product-card__wishlist:hover,
 :root:not([data-theme="dark"]) .product-card__wishlist--active {
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 12%, transparent);
-}
-
-.product-card__wishlist:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: var(--focus-ring-offset);
 }
 
 @media (hover: none) {

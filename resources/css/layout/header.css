@@ -13,7 +13,7 @@
     position: sticky;
     top: 0;
     inset-inline: 0;
-    z-index: 100;
+    z-index: var(--z-dropdown);
     width: 100%;
     overflow-x: clip;
     background-color: var(--surface);
@@ -122,25 +122,11 @@ body.has-mobile-nav-open {
 }
 
 /* Colocación explícita: evita que acciones caigan en la columna central sin búsqueda */
-.header__logo {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.header__search {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.header__actions {
-    grid-column: -1;
-    grid-row: 1;
-    justify-self: end;
-}
-
 /* - Ranura del logo (variante horizontal) - */
 
 .header__logo {
+    grid-column: 1;
+    grid-row: 1;
     display: inline-flex;
     align-items: center;
     min-width: 0;
@@ -172,6 +158,8 @@ body.has-mobile-nav-open {
 /* - Búsqueda de escritorio - */
 
 .header__search {
+    grid-column: 2;
+    grid-row: 1;
     display: none;
     min-width: 0;
     width: 100%;
@@ -189,18 +177,6 @@ body.has-mobile-nav-open {
     .header__search {
         max-width: 42rem;
     }
-}
-
-.header__search-label {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
 }
 
 .header__search-field {
@@ -234,8 +210,9 @@ body.has-mobile-nav-open {
     color: var(--text-muted);
 }
 
-.header__search-input:focus {
-    outline: none;
+.header__search-input:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: -2px;
 }
 
 .header__search-btn {
@@ -260,6 +237,9 @@ body.has-mobile-nav-open {
 /* - Acciones (cuenta, carrito, tema, menú) - */
 
 .header__actions {
+    grid-column: -1;
+    grid-row: 1;
+    justify-self: end;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -273,13 +253,27 @@ body.has-mobile-nav-open {
     }
 }
 
-.header__account,
-.header__cart {
+.header__account {
     display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 0.0625rem;
+    min-height: 2.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    white-space: nowrap;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.header__cart {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     min-height: 2.5rem;
     padding: 0.25rem 0.5rem;
     border-radius: var(--radius-sm);
@@ -323,12 +317,6 @@ body.has-mobile-nav-open {
     color: var(--text);
 }
 
-.header__cart {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-xs);
-}
-
 .header__cart-label {
     font-family: var(--font-display);
     font-size: 0.8125rem;
@@ -349,12 +337,12 @@ body.has-mobile-nav-open {
     position: absolute;
     top: -0.375rem;
     right: -0.5rem;
-    min-width: 1.125rem;
-    height: 1.125rem;
+    min-width: var(--icon-size-md);
+    height: var(--icon-size-md);
     padding: 0 0.25rem;
     font-size: 0.625rem;
     font-weight: 700;
-    line-height: 1.125rem;
+    line-height: var(--icon-size-md);
     text-align: center;
     background-color: var(--primary);
     color: var(--primary-contrast);
@@ -462,7 +450,7 @@ body.has-mobile-nav-open {
 .header__overlay {
     position: fixed;
     inset: 0;
-    z-index: 150;
+    z-index: var(--z-menu);
     background-color: color-mix(in srgb, var(--text) 45%, transparent);
     backdrop-filter: blur(2px);
     opacity: 0;
@@ -482,7 +470,7 @@ body.has-mobile-nav-open {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 200;
+    z-index: var(--z-sticky);
     width: min(20rem, 88vw);
     display: flex;
     flex-direction: column;
@@ -573,8 +561,9 @@ body.has-mobile-nav-open {
     color: var(--text-muted);
 }
 
-.mobile-nav__search-input:focus {
-    outline: none;
+.mobile-nav__search-input:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: -2px;
 }
 
 .mobile-nav__search-btn {

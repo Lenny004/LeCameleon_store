@@ -37,7 +37,7 @@
                 <span class="filter-panel__toggle-badge" aria-label="{{ $activeFilterCount }} filtros activos">{{ $activeFilterCount }}</span>
             @endif
         </button>
-        <form method="GET" action="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel filter-panel--mobile-hidden" :class="{ 'filter-panel--open': open }">
+        <form method="GET" action="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel filter-panel--mobile-hidden" :class="{ 'filter-panel--open-mobile': open }">
             <div class="filter-panel__header">
                 <h2 class="filter-panel__title">Filtros</h2>
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel__clear">Limpiar</a>
@@ -55,7 +55,7 @@
                 <div class="filter-panel__options">
                     @forelse ($categories as $cat)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="category[]" value="{{ $cat->slug }}" {{ in_array($cat->slug, $activeCategories, true) ? 'checked' : '' }}>
+                            <input class="filter-panel__option-input" type="checkbox" name="category[]" value="{{ $cat->slug }}" {{ in_array($cat->slug, $activeCategories, true) ? 'checked' : '' }}>
                             {{ $cat->name }}
                         </label>
                     @empty
@@ -69,7 +69,7 @@
                 <div class="filter-panel__options filter-panel__options--grid">
                     @forelse ($eraDecades as $era)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="era_decade[]" value="{{ $era }}" {{ in_array($era, $activeEras, true) ? 'checked' : '' }}>
+                            <input class="filter-panel__option-input" type="checkbox" name="era_decade[]" value="{{ $era }}" {{ in_array($era, $activeEras, true) ? 'checked' : '' }}>
                             {{ $era }}
                         </label>
                     @empty
@@ -83,7 +83,7 @@
                 <div class="filter-panel__options filter-panel__options--grid">
                     @foreach ($conditionGrades as $grade)
                         <label class="filter-panel__option">
-                            <input type="checkbox" name="condition_grade[]" value="{{ $grade->value }}" {{ in_array($grade->value, $activeConditions, true) ? 'checked' : '' }}>
+                            <input class="filter-panel__option-input" type="checkbox" name="condition_grade[]" value="{{ $grade->value }}" {{ in_array($grade->value, $activeConditions, true) ? 'checked' : '' }}>
                             {{ $conditionLabels[$grade->value] ?? ucfirst($grade->value) }}
                         </label>
                     @endforeach
@@ -96,6 +96,7 @@
                     @foreach ([5, 4, 3, 2, 1] as $stars)
                         <label class="filter-panel__option">
                             <input
+                                class="filter-panel__option-input"
                                 type="radio"
                                 name="min_rating"
                                 value="{{ $stars }}"
@@ -114,7 +115,7 @@
     <main class="shop-layout__main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             @if (Route::has('home'))
-                <a href="{{ route('home') }}">Inicio</a>
+                <a class="breadcrumb__link" href="{{ route('home') }}">Inicio</a>
                 <span class="breadcrumb__sep">/</span>
             @endif
             <span aria-current="page">Tienda</span>

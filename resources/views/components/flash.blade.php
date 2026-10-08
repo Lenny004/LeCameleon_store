@@ -15,9 +15,9 @@
             @endif
             @if (($errors ?? null)?->any())
                 <div class="flash flash--error" role="alert">
-                    <ul>
+                    <ul class="flash__list">
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li class="flash__list-item">{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>

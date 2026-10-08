@@ -34,7 +34,7 @@
                 <div class="order-card__header">
                     <div>
                         <p class="order-card__id">
-                            <a href="{{ $savedSearch->shopUrl() }}">{{ $savedSearch->name }}</a>
+                            <a class="order-card__id-link" href="{{ $savedSearch->shopUrl() }}">{{ $savedSearch->name }}</a>
                         </p>
                         <p class="order-card__date">{{ $savedSearch->created_at?->format('Y-m-d H:i') }}</p>
                     </div>

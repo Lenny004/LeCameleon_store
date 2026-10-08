@@ -29,6 +29,5 @@
     </div>
 
     @stack('scripts')
-    <style>[x-cloak] { display: none !important; }</style>
 </body>
 </html>

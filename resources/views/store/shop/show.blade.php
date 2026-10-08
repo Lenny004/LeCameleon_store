@@ -39,15 +39,15 @@
 <div class="container product-page">
     <nav class="breadcrumb product-page__breadcrumb" aria-label="Breadcrumb">
         @if (Route::has('home'))
-            <a href="{{ route('home') }}">Inicio</a>
+            <a class="breadcrumb__link" href="{{ route('home') }}">Inicio</a>
             <span class="breadcrumb__sep" aria-hidden="true">/</span>
         @endif
         @if (Route::has('shop.index'))
-            <a href="{{ route('shop.index') }}">Tienda</a>
+            <a class="breadcrumb__link" href="{{ route('shop.index') }}">Tienda</a>
             <span class="breadcrumb__sep" aria-hidden="true">/</span>
         @endif
         @if ($categoryName && $categorySlug && Route::has('shop.index'))
-            <a href="{{ route('shop.index', ['category' => [$categorySlug]]) }}">{{ $categoryName }}</a>
+            <a class="breadcrumb__link" href="{{ route('shop.index', ['category' => [$categorySlug]]) }}">{{ $categoryName }}</a>
             <span class="breadcrumb__sep" aria-hidden="true">/</span>
         @endif
         <span aria-current="page">{{ $product->name }}</span>
@@ -58,7 +58,7 @@
             <div class="product-gallery">
                 <div class="product-gallery__main">
                     <template x-if="images.length">
-                        <img :src="images[active]" alt="{{ $product->name }}">
+                        <img class="product-gallery__image" :src="images[active]" alt="{{ $product->name }}">
                     </template>
                     <template x-if="!images.length">
                         <div class="product-gallery__placeholder" aria-hidden="true"></div>
@@ -80,7 +80,7 @@
                             :aria-label="'Imagen ' + (i + 1)"
                             :aria-current="active === i ? 'true' : 'false'"
                         >
-                            <img :src="img" alt="">
+                            <img class="product-gallery__thumb-image" :src="img" alt="">
                         </button>
                     </template>
                 </div>
@@ -98,7 +98,7 @@
                     @if ($brandName && Route::has('shop.index'))
                         <span class="product-header__meta-item">
                             Marca:
-                            <a href="{{ route('shop.index', ['brand' => [$brandSlug ?? strtolower($brandName)]]) }}">{{ $brandName }}</a>
+                            <a class="product-header__meta-link" href="{{ route('shop.index', ['brand' => [$brandSlug ?? strtolower($brandName)]]) }}">{{ $brandName }}</a>
                         </span>
                     @elseif ($brandName)
                         <span class="product-header__meta-item">Marca: {{ $brandName }}</span>
@@ -106,7 +106,7 @@
                     @if ($categoryName && $categorySlug && Route::has('shop.index'))
                         <span class="product-header__meta-item">
                             Categoría:
-                            <a href="{{ route('shop.index', ['category' => [$categorySlug]]) }}">{{ $categoryName }}</a>
+                            <a class="product-header__meta-link" href="{{ route('shop.index', ['category' => [$categorySlug]]) }}">{{ $categoryName }}</a>
                         </span>
                     @elseif ($categoryName)
                         <span class="product-header__meta-item">Categoría: {{ $categoryName }}</span>
@@ -171,9 +171,9 @@
                     @if ($stock > 0)
                         <label class="product-buybox__qty-label" for="product-qty">Cantidad</label>
                         <div class="product-buybox__qty" id="product-qty">
-                            <button type="button" @click="decrement()" aria-label="Disminuir cantidad">−</button>
-                            <input type="number" name="quantity" x-model="qty" min="1" :max="max" readonly aria-label="Cantidad">
-                            <button type="button" @click="increment()" aria-label="Aumentar cantidad">+</button>
+                            <button class="product-buybox__qty-btn" type="button" @click="decrement()" aria-label="Disminuir cantidad">−</button>
+                            <input class="product-buybox__qty-input" type="number" name="quantity" x-model="qty" min="1" :max="max" readonly aria-label="Cantidad">
+                            <button class="product-buybox__qty-btn" type="button" @click="increment()" aria-label="Aumentar cantidad">+</button>
                         </div>
                     @endif
 
@@ -230,25 +230,25 @@
                     <h2 class="product-panel__title">Detalles</h2>
                     <dl class="product-specs">
                         @if ($brandName)
-                            <div class="product-specs__row"><dt>Marca</dt><dd>{{ $brandName }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Marca</dt><dd class="product-specs__value">{{ $brandName }}</dd></div>
                         @endif
                         @if ($categoryName)
-                            <div class="product-specs__row"><dt>Categoría</dt><dd>{{ $categoryName }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Categoría</dt><dd class="product-specs__value">{{ $categoryName }}</dd></div>
                         @endif
                         @if ($product->size_label)
-                            <div class="product-specs__row"><dt>Talla</dt><dd>{{ $product->size_label }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Talla</dt><dd class="product-specs__value">{{ $product->size_label }}</dd></div>
                         @endif
                         @if ($era)
-                            <div class="product-specs__row"><dt>Época</dt><dd>{{ $era }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Época</dt><dd class="product-specs__value">{{ $era }}</dd></div>
                         @endif
                         @if ($condition)
-                            <div class="product-specs__row"><dt>Condición</dt><dd>{{ $condition }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Condición</dt><dd class="product-specs__value">{{ $condition }}</dd></div>
                         @endif
                         @if ($product->color)
-                            <div class="product-specs__row"><dt>Color</dt><dd>{{ $product->color }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Color</dt><dd class="product-specs__value">{{ $product->color }}</dd></div>
                         @endif
                         @if ($product->material)
-                            <div class="product-specs__row"><dt>Material</dt><dd>{{ $product->material }}</dd></div>
+                            <div class="product-specs__row"><dt class="product-specs__term">Material</dt><dd class="product-specs__value">{{ $product->material }}</dd></div>
                         @endif
                     </dl>
                 </section>
@@ -274,7 +274,7 @@
                                     @foreach ($measurementLabels as $key => $label)
                                         @if ($measurements->has($key))
                                             <tr>
-                                                <th scope="row">{{ $label }}</th>
+                                                <th class="product-measurements__header" scope="row">{{ $label }}</th>
                                                 <td>{{ number_format((float) $measurements[$key], 1) }}</td>
                                             </tr>
                                         @endif

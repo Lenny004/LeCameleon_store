@@ -37,7 +37,7 @@
 
         <p class="auth-card__footer">
             @if (Route::has('login'))
-                ¿Ya tienes cuenta? <a href="{{ route('login') }}">Inicia sesión</a>
+                ¿Ya tienes cuenta? <a class="auth-card__footer-link" href="{{ route('login') }}">Inicia sesión</a>
             @endif
         </p>
     </div>

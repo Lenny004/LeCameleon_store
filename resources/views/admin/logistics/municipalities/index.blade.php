@@ -15,7 +15,7 @@
     <section class="logistics-department">
         <h3 class="logistics-department__title">{{ $department->name }} <span class="text-muted">({{ $department->code }})</span></h3>
         <div class="table-wrap">
-            <table class="table">
+            <table class="table admin-table">
                 <thead>
                     <tr>
                         <th>Municipality</th>
@@ -45,7 +45,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('admin.logistics.municipalities.edit', $municipality) }}" class="btn btn--ghost btn--sm">Edit</a>
+                                <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.municipalities.edit', $municipality) }}">Edit</a>
                             </td>
                         </tr>
                     @endforeach

@@ -101,17 +101,17 @@
     pointer-events: none;
     box-shadow: var(--shadow-inset);
     border-radius: inherit;
-    z-index: 1;
+    z-index: var(--z-content);
 }
 
-.product-gallery__main img {
+.product-gallery__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity var(--transition);
 }
 
-.product-detail__media:hover .product-gallery__main img {
+.product-detail__media:hover .product-gallery__image {
     transform: scale(1.03);
 }
 
@@ -120,7 +120,7 @@
     position: absolute;
     right: var(--space-md);
     bottom: var(--space-md);
-    z-index: 2;
+    z-index: var(--z-raised);
     padding: 0.3rem 0.65rem;
     font-size: 0.75rem;
     font-weight: 600;
@@ -238,7 +238,7 @@
     opacity: 1;
 }
 
-.product-gallery__thumb img {
+.product-gallery__thumb-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -277,13 +277,13 @@
     color: var(--text-muted);
 }
 
-.product-header__meta-item a {
+.product-header__meta-link {
     color: var(--text);
     text-decoration: underline;
     text-underline-offset: 0.15em;
 }
 
-.product-header__meta-item a:hover {
+.product-header__meta-link:hover {
     color: var(--accent);
 }
 
@@ -495,7 +495,7 @@
     box-shadow: var(--shadow-xs);
 }
 
-.product-buybox__qty button {
+.product-buybox__qty-btn {
     width: 2.75rem;
     height: 2.75rem;
     border: none;
@@ -509,18 +509,18 @@
         color var(--transition);
 }
 
-.product-buybox__qty button:hover {
+.product-buybox__qty-btn:hover {
     background: color-mix(in srgb, var(--accent) 12%, var(--secondary));
     color: var(--accent-hover);
 }
 
-.product-buybox__qty button:focus-visible {
+.product-buybox__qty-btn:focus-visible {
     outline: var(--focus-ring);
     outline-offset: -2px;
-    z-index: 1;
+    z-index: var(--z-content);
 }
 
-.product-buybox__qty input {
+.product-buybox__qty-input {
     width: 3.25rem;
     height: 2.75rem;
     border: none;
@@ -612,18 +612,18 @@
     padding-top: 0;
 }
 
-.product-specs__row dt {
+.product-specs__term {
     color: var(--text-muted);
     font-weight: 500;
 }
 
-.product-specs__row dd {
+.product-specs__value {
     font-weight: 600;
     text-align: right;
     margin: 0;
 }
 
-.product-measurements th {
+.product-measurements__header {
     font-weight: 600;
     color: var(--text-muted);
 }
@@ -1042,11 +1042,11 @@
     border-bottom: none;
 }
 
-.product-info__spec dt {
+.product-info__spec-term {
     color: var(--text-muted);
 }
 
-.product-info__spec dd {
+.product-info__spec-value {
     font-weight: 600;
     text-align: right;
 }

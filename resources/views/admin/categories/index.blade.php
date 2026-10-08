@@ -10,7 +10,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -24,13 +24,13 @@
         <tbody>
             @forelse ($categories as $category)
                 <tr>
-                    <td><a href="{{ route('admin.categories.show', $category) }}">{{ $category->name }}</a></td>
+                    <td><a class="admin-table__link" href="{{ route('admin.categories.show', $category) }}">{{ $category->name }}</a></td>
                     <td>{{ $category->parent?->name ?? '—' }}</td>
                     <td><code>{{ $category->slug }}</code></td>
                     <td>{{ $category->products_count }}</td>
                     <td><span class="badge badge--{{ $category->is_active ? 'success' : 'warning' }}">{{ $category->is_active ? 'Active' : 'Inactive' }}</span></td>
                     <td>
-                        <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn--ghost btn--sm">Edit</a>
+                        <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.categories.edit', $category) }}">Edit</a>
                         <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('Delete this category?');" style="display:inline;">
                             @csrf
                             @method('DELETE')

@@ -34,7 +34,7 @@
 </form>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Product</th>
@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         @if ($review->product)
-                            <a href="{{ route('admin.products.show', $review->product) }}">{{ $review->product->name }}</a>
+                            <a class="admin-table__link" href="{{ route('admin.products.show', $review->product) }}">{{ $review->product->name }}</a>
                         @else
                             —
                         @endif

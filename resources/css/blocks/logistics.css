@@ -96,7 +96,7 @@
     margin: 0;
 }
 
-.logistics-detail__list dt {
+.logistics-detail__term {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -105,7 +105,7 @@
     margin-bottom: var(--space-2xs);
 }
 
-.logistics-detail__list dd {
+.logistics-detail__value {
     margin: 0;
     font-size: 0.9375rem;
     color: var(--text);
@@ -170,36 +170,34 @@
     font-size: 0.875rem;
 }
 
-.logistics-rates-matrix__table th,
-.logistics-rates-matrix__table td {
+.logistics-rates-matrix__cell {
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--border);
     text-align: center;
 }
 
-.logistics-rates-matrix__table tbody tr:nth-child(even) td:not(:first-child) {
-    background-color: color-mix(in srgb, var(--secondary) 45%, var(--surface));
-}
-
-.logistics-rates-matrix__table th {
+.logistics-rates-matrix__header-cell {
     background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
     font-weight: 600;
     white-space: nowrap;
     color: var(--text);
 }
 
-.logistics-rates-matrix__table td:first-child,
-.logistics-rates-matrix__table th:first-child {
+.logistics-rates-matrix__row:nth-child(even) .logistics-rates-matrix__cell:not(:first-child) {
+    background-color: color-mix(in srgb, var(--secondary) 45%, var(--surface));
+}
+
+.logistics-rates-matrix__cell--sticky {
     text-align: left;
     position: sticky;
     left: 0;
     background-color: var(--surface);
-    z-index: 1;
+    z-index: var(--z-content);
     font-weight: 600;
     box-shadow: 1px 0 0 var(--border);
 }
 
-.logistics-rates-matrix__table tbody tr:nth-child(even) td:first-child {
+.logistics-rates-matrix__row:nth-child(even) .logistics-rates-matrix__cell--sticky {
     background-color: var(--surface);
 }
 

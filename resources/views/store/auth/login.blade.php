@@ -24,7 +24,7 @@
                 @error('password')<span class="form-error">{{ $message }}</span>@enderror
             </div>
             <label class="form-checkbox">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                <input type="checkbox" class="form-checkbox__input" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 Recordarme
             </label>
             <button type="submit" class="btn btn--primary btn--block">Entrar</button>
@@ -32,7 +32,7 @@
 
         <p class="auth-card__footer">
             @if (Route::has('register'))
-                ¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate</a>
+                ¿No tienes cuenta? <a class="auth-card__footer-link" href="{{ route('register') }}">Regístrate</a>
             @endif
         </p>
     </div>

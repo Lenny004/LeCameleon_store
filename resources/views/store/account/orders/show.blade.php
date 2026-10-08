@@ -15,7 +15,7 @@
 <div class="container" style="padding-block:var(--space-xl);">
     <nav class="breadcrumb">
         @if (Route::has('account.orders.index'))
-            <a href="{{ route('account.orders.index') }}">Mis pedidos</a>
+            <a class="breadcrumb__link" href="{{ route('account.orders.index') }}">Mis pedidos</a>
             <span class="breadcrumb__sep">/</span>
         @endif
         <span>#{{ $order->number }}</span>
@@ -46,14 +46,14 @@
                     @foreach ($order->shipments as $shipment)
                         <dl class="product-info__specs">
                             @if ($shipment->carrier)
-                                <div class="product-info__spec"><dt>Transportista</dt><dd>{{ $shipment->carrier }}</dd></div>
+                                <div class="product-info__spec"><dt class="product-info__spec-term">Transportista</dt><dd class="product-info__spec-value">{{ $shipment->carrier }}</dd></div>
                             @endif
                             @if ($shipment->tracking_number)
-                                <div class="product-info__spec"><dt>Número de guía</dt><dd>{{ $shipment->tracking_number }}</dd></div>
+                                <div class="product-info__spec"><dt class="product-info__spec-term">Número de guía</dt><dd class="product-info__spec-value">{{ $shipment->tracking_number }}</dd></div>
                             @endif
-                            <div class="product-info__spec"><dt>Estado</dt><dd>{{ ucfirst(str_replace('_', ' ', $shipment->status->value)) }}</dd></div>
+                            <div class="product-info__spec"><dt class="product-info__spec-term">Estado</dt><dd class="product-info__spec-value">{{ ucfirst(str_replace('_', ' ', $shipment->status->value)) }}</dd></div>
                             @if ($shipment->shipped_at)
-                                <div class="product-info__spec"><dt>Enviado</dt><dd>{{ $shipment->shipped_at->format('d/m/Y H:i') }}</dd></div>
+                                <div class="product-info__spec"><dt class="product-info__spec-term">Enviado</dt><dd class="product-info__spec-value">{{ $shipment->shipped_at->format('d/m/Y H:i') }}</dd></div>
                             @endif
                         </dl>
                     @endforeach

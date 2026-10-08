@@ -41,7 +41,7 @@
                 <input type="text" id="name" name="name" class="form-input" value="{{ old('name', $product->name ?? '') }}" required>
             </div>
 
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="slug">Slug</label>
                     <input type="text" id="slug" name="slug" class="form-input" value="{{ old('slug', $product->slug ?? '') }}" required>
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="type">Type</label>
                     <select id="type" name="type" class="form-select" required>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="brand_id">Brand</label>
                     <select id="brand_id" name="brand_id" class="form-select">
@@ -106,7 +106,7 @@
 
     <div class="card">
         <h2 class="card__title" style="margin-bottom:var(--space-lg);">Pricing and stock</h2>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="price">Price</label>
                 <input type="number" id="price" name="price" class="form-input" step="0.01" min="0" value="{{ old('price', $product->price ?? '') }}" required>
@@ -116,7 +116,7 @@
                 <input type="number" id="compare_at_price" name="compare_at_price" class="form-input" step="0.01" min="0" value="{{ old('compare_at_price', $product->compare_at_price ?? '') }}">
             </div>
         </div>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="cost_price">Cost price</label>
                 <input type="number" id="cost_price" name="cost_price" class="form-input" step="0.01" min="0" value="{{ old('cost_price', $product->cost_price ?? '') }}">
@@ -126,7 +126,7 @@
                 <input type="number" id="quantity_available" name="quantity_available" class="form-input" min="0" value="{{ old('quantity_available', $product->quantity_available ?? 1) }}" required>
             </div>
         </div>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="low_stock_threshold">Low stock threshold</label>
                 <input type="number" id="low_stock_threshold" name="low_stock_threshold" class="form-input" min="0" value="{{ old('low_stock_threshold', $product->low_stock_threshold ?? 1) }}">
@@ -142,7 +142,7 @@
 
     <div class="card">
         <h2 class="card__title" style="margin-bottom:var(--space-lg);">Vintage attributes</h2>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="condition_grade">Condition</label>
                 <select id="condition_grade" name="condition_grade" class="form-select" required>
@@ -161,7 +161,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="size_label">Size label</label>
                 <input type="text" id="size_label" name="size_label" class="form-input" value="{{ old('size_label', $product->size_label ?? '') }}" placeholder="M / EU 38">
@@ -189,7 +189,7 @@
             ];
             $existingMeasurements = old('measurements', $product->measurements ?? []);
         @endphp
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             @foreach ($measurementLabels as $measurementKey => $measurementLabel)
                 <div class="form-group">
                     <label class="form-label" for="measurement_{{ $measurementKey }}">{{ $measurementLabel }} (cm)</label>

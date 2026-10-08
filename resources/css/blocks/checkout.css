@@ -46,7 +46,7 @@
         color-mix(in srgb, var(--border) 70%, var(--commerce-accent) 30%),
         var(--border-subtle)
     );
-    z-index: 0;
+    z-index: var(--z-base);
 }
 
 .checkout-step {
@@ -60,7 +60,7 @@
     text-align: center;
     line-height: var(--line-height-snug);
     position: relative;
-    z-index: 1;
+    z-index: var(--z-content);
 }
 
 @media (min-width: 40rem) {
@@ -268,7 +268,7 @@
     background-color: var(--surface-raised);
 }
 
-.checkout-payment .form-radio:has(input:checked) {
+.checkout-payment .form-radio:has(.form-radio__input:checked) {
     border-color: var(--primary);
     background: linear-gradient(
         135deg,
@@ -392,7 +392,7 @@
     border: 1px solid color-mix(in srgb, var(--border) 72%, var(--commerce-accent) 28%);
 }
 
-#billing-fields {
+.checkout-billing__fields {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
@@ -414,7 +414,7 @@
     margin: 0;
 }
 
-.checkout-shipping-quote__lead strong {
+.checkout-shipping-quote__lead-value {
     color: var(--text);
 }
 

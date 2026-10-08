@@ -14,12 +14,12 @@
     color: inherit;
     line-height: 0;
     border-radius: var(--radius-md);
-    background-color: #000;
+    background-color: var(--inverse);
     padding: 0.25rem 0.4rem;
     transition: opacity var(--transition), transform var(--transition);
 }
 
-a.brand-logo:hover {
+.brand-logo:hover {
     opacity: 0.92;
 }
 
@@ -60,14 +60,15 @@ a.brand-logo:hover {
     }
 }
 
+/* Solo la variante auto cambia de asset; brand-logo--auto-{lg,xl} lo genera el Blade. */
 @media (min-width: 80rem) {
-    .brand-logo--auto.brand-logo--lg .brand-logo__img--horizontal,
-    .brand-logo--auto.brand-logo--xl .brand-logo__img--horizontal {
+    .brand-logo--auto-lg .brand-logo__img--horizontal,
+    .brand-logo--auto-xl .brand-logo__img--horizontal {
         display: none;
     }
 
-    .brand-logo--auto.brand-logo--lg .brand-logo__img--wide,
-    .brand-logo--auto.brand-logo--xl .brand-logo__img--wide {
+    .brand-logo--auto-lg .brand-logo__img--wide,
+    .brand-logo--auto-xl .brand-logo__img--wide {
         display: block;
         height: 3.25rem;
     }
@@ -93,23 +94,19 @@ a.brand-logo:hover {
     padding: 0.15rem 0.3rem;
 }
 
-.brand-logo--sm.brand-logo--auto .brand-logo__img--compact,
-.brand-logo--sm.brand-logo--compact .brand-logo__img {
+.brand-logo--sm .brand-logo__img--compact {
     height: 2.125rem;
 }
 
-.brand-logo--sm.brand-logo--auto .brand-logo__img--horizontal,
-.brand-logo--sm.brand-logo--horizontal .brand-logo__img {
+.brand-logo--sm .brand-logo__img--horizontal {
     height: 1.875rem;
 }
 
-.brand-logo--md.brand-logo--auto .brand-logo__img--compact,
-.brand-logo--md.brand-logo--compact .brand-logo__img {
+.brand-logo--md .brand-logo__img--compact {
     height: 2.75rem;
 }
 
-.brand-logo--md.brand-logo--auto .brand-logo__img--horizontal,
-.brand-logo--md.brand-logo--horizontal .brand-logo__img {
+.brand-logo--md .brand-logo__img--horizontal {
     height: 2.5rem;
 }
 
@@ -117,18 +114,15 @@ a.brand-logo:hover {
     padding: 0.35rem 0.55rem;
 }
 
-.brand-logo--lg.brand-logo--auto .brand-logo__img--compact,
-.brand-logo--lg.brand-logo--compact .brand-logo__img {
+.brand-logo--lg .brand-logo__img--compact {
     height: 4.5rem;
 }
 
-.brand-logo--lg.brand-logo--auto .brand-logo__img--horizontal,
-.brand-logo--lg.brand-logo--horizontal .brand-logo__img {
+.brand-logo--lg .brand-logo__img--horizontal {
     height: 3.25rem;
 }
 
-.brand-logo--lg.brand-logo--wide .brand-logo__img,
-.brand-logo--lg.brand-logo--auto .brand-logo__img--wide {
+.brand-logo--lg .brand-logo__img--wide {
     height: 3.75rem;
 }
 
@@ -136,14 +130,12 @@ a.brand-logo:hover {
     padding: 0.5rem 0.75rem;
 }
 
-.brand-logo--xl.brand-logo--auto .brand-logo__img--compact,
-.brand-logo--xl.brand-logo--compact .brand-logo__img {
+.brand-logo--xl .brand-logo__img--compact {
     height: 6rem;
 }
 
-.brand-logo--xl.brand-logo--wide .brand-logo__img,
-.brand-logo--xl.brand-logo--auto .brand-logo__img--wide,
-.brand-logo--xl.brand-logo--horizontal .brand-logo__img {
+.brand-logo--xl .brand-logo__img--wide,
+.brand-logo--xl .brand-logo__img--horizontal {
     height: clamp(3.5rem, 12vw, 6.5rem);
 }
 
@@ -154,12 +146,12 @@ a.brand-logo:hover {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: #fff;
+    color: var(--inverse-contrast);
     line-height: 1.2;
     padding: 0.35rem 0.5rem;
 }
 
-.brand-logo__fallback span {
+.brand-logo__fallback-name {
     color: var(--accent);
 }
 
@@ -198,12 +190,12 @@ a.brand-logo:hover {
 }
 
 .mobile-nav__brand .brand-logo:not(.brand-logo--inverted),
-.brand-logo--ctx-header.brand-logo--sm:not(.brand-logo--inverted) {
+.brand-logo--ctx-header-sm:not(.brand-logo--inverted) {
     padding: 0.15rem 0.3rem;
 }
 
 .mobile-nav__brand .brand-logo:not(.brand-logo--inverted) .brand-logo__img--compact,
-.brand-logo--ctx-header.brand-logo--sm:not(.brand-logo--inverted) .brand-logo__img--compact {
+.brand-logo--ctx-header-sm:not(.brand-logo--inverted) .brand-logo__img--compact {
     height: 2rem;
 }
 

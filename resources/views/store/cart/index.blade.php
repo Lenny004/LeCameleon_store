@@ -106,7 +106,7 @@
                 </div>
                 @if (Route::has('shop.index'))
                     <p class="cart-continue">
-                        <a href="{{ route('shop.index') }}">← Seguir comprando</a>
+                        <a class="cart-continue__link" href="{{ route('shop.index') }}">← Seguir comprando</a>
                     </p>
                 @endif
             </aside>

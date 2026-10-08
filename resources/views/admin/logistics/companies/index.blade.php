@@ -13,7 +13,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Company</th>
@@ -28,13 +28,13 @@
         <tbody>
             @forelse ($companies as $company)
                 <tr>
-                    <td><a href="{{ route('admin.logistics.companies.show', $company) }}" class="logistics-link">{{ $company->name }}</a></td>
+                    <td><a class="admin-table__link logistics-link" href="{{ route('admin.logistics.companies.show', $company) }}">{{ $company->name }}</a></td>
                     <td><code>{{ $company->tax_id ?: '—' }}</code></td>
                     <td>{{ $company->contact_person ?: '—' }}</td>
                     <td>{{ $company->municipality?->name ?? '—' }}</td>
                     <td>{{ $company->workers_count }}</td>
                     <td><span class="badge badge--{{ $company->is_active ? 'success' : 'warning' }}">{{ $company->is_active ? 'Active' : 'Inactive' }}</span></td>
-                    <td><a href="{{ route('admin.logistics.companies.edit', $company) }}" class="btn btn--ghost btn--sm">Edit</a></td>
+                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.companies.edit', $company) }}">Edit</a></td>
                 </tr>
             @empty
                 <tr><td colspan="7" class="text-muted">No logistics companies yet.</td></tr>

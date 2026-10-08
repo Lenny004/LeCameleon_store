@@ -40,6 +40,12 @@
     --header-utility-height: 0px;
     --header-main-height: 3.75rem;
     --header-subnav-height: 0px;
+    --header-offset: calc(
+        var(--header-utility-height) +
+        var(--header-main-height) +
+        var(--header-subnav-height)
+    );
+    --header-height: var(--header-offset);
 }
 
 @media (min-width: 48rem) {
@@ -52,15 +58,6 @@
     .page--store {
         --header-subnav-height: 2.375rem;
     }
-}
-
-.page--store {
-    --header-offset: calc(
-        var(--header-utility-height) +
-        var(--header-main-height) +
-        var(--header-subnav-height)
-    );
-    --header-height: var(--header-offset);
 }
 
 .page__main {
@@ -132,13 +129,13 @@
     margin-bottom: var(--space-lg);
 }
 
-.breadcrumb a {
+.breadcrumb__link {
     color: var(--text-muted);
     text-decoration: none;
     transition: color var(--transition);
 }
 
-.breadcrumb a:hover {
+.breadcrumb__link:hover {
     color: var(--accent-hover);
 }
 

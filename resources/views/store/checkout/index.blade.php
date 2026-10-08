@@ -70,7 +70,7 @@
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Dirección de envío</h2>
                 <div class="checkout-section__body">
-                    <div class="form-row form-row--2">
+                    <div class="form-row form-row--cols-2">
                         <div class="form-group">
                             <label class="form-label" for="shipping_first_name">Nombre</label>
                             <input
@@ -153,7 +153,7 @@
                         >
                     </div>
 
-                    <div class="form-row form-row--2">
+                    <div class="form-row form-row--cols-2">
                         <div class="form-group">
                             <label class="form-label" for="shipping_city">Ciudad</label>
                             <input
@@ -179,7 +179,7 @@
                         </div>
                     </div>
 
-                    <div class="form-row form-row--2">
+                    <div class="form-row form-row--cols-2">
                         <div class="form-group">
                             <label class="form-label" for="shipping_postal_code">Código postal</label>
                             <input
@@ -227,6 +227,7 @@
                     <label class="form-checkbox checkout-billing-toggle">
                         <input
                             type="checkbox"
+                            class="form-checkbox__input"
                             name="same_as_shipping"
                             value="1"
                             checked
@@ -241,8 +242,8 @@
                         Usar la misma dirección para facturación
                     </label>
 
-                    <div id="billing-fields" data-billing-block>
-                        <div class="form-row form-row--2">
+                    <div id="billing-fields" class="checkout-billing__fields" data-billing-block>
+                        <div class="form-row form-row--cols-2">
                             <div class="form-group">
                                 <label class="form-label" for="billing_first_name">Nombre</label>
                                 <input data-billing-field type="text" id="billing_first_name" name="billing_address[first_name]" class="form-input" value="{{ old('billing_address.first_name') }}">
@@ -260,7 +261,7 @@
                             <label class="form-label" for="billing_line2">Línea 2</label>
                             <input data-billing-field type="text" id="billing_line2" name="billing_address[line2]" class="form-input" value="{{ old('billing_address.line2') }}">
                         </div>
-                        <div class="form-row form-row--2">
+                        <div class="form-row form-row--cols-2">
                             <div class="form-group">
                                 <label class="form-label" for="billing_city">Ciudad</label>
                                 <input data-billing-field type="text" id="billing_city" name="billing_address[city]" class="form-input" value="{{ old('billing_address.city') }}">
@@ -270,7 +271,7 @@
                                 <input data-billing-field type="text" id="billing_state" name="billing_address[state]" class="form-input" value="{{ old('billing_address.state') }}">
                             </div>
                         </div>
-                        <div class="form-row form-row--2">
+                        <div class="form-row form-row--cols-2">
                             <div class="form-group">
                                 <label class="form-label" for="billing_postal_code">Código postal</label>
                                 <input data-billing-field type="text" id="billing_postal_code" name="billing_address[postal_code]" class="form-input" value="{{ old('billing_address.postal_code') }}">
@@ -292,14 +293,14 @@
                 <h2 class="checkout-section__title">Método de pago</h2>
                 <div class="checkout-section__body checkout-payment">
                     <label class="form-radio">
-                        <input type="radio" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }}>
+                        <input type="radio" class="form-radio__input" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }}>
                         <span class="form-radio__label">
                             Pago manual
                             <span class="form-radio__hint">Transferencia bancaria o efectivo contra entrega</span>
                         </span>
                     </label>
                     <label class="form-radio">
-                        <input type="radio" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }}>
+                        <input type="radio" class="form-radio__input" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }}>
                         <span class="form-radio__label">
                             Tarjeta de crédito o débito
                             <span class="form-radio__hint">Procesado de forma segura con Stripe</span>
@@ -371,7 +372,7 @@
                 <template x-if="quote && !loading">
                     <div>
                         <p class="checkout-shipping-quote__lead">
-                            Entrega estimada: <strong x-text="formatEta(quote.eta_hours)"></strong>
+                            Entrega estimada: <strong class="checkout-shipping-quote__lead-value" x-text="formatEta(quote.eta_hours)"></strong>
                         </p>
                         <p class="checkout-shipping-quote__eta">
                             Próximo despacho: <span x-text="formatDispatch(quote.next_dispatch_at)"></span>

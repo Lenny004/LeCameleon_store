@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -31,7 +31,7 @@
                     <td>{{ $user['joined'] }}</td>
                     <td>
                         @if (Route::has('admin.users.show'))
-                            <a href="{{ route('admin.users.show', $user['email']) }}" class="btn btn--ghost btn--sm">View</a>
+                            <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.users.show', $user['email']) }}">View</a>
                         @endif
                     </td>
                 </tr>

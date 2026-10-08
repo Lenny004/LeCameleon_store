@@ -34,7 +34,7 @@
                 <label class="form-label" for="description">Description</label>
                 <textarea id="description" name="description" class="form-textarea">{{ old('description', $category->description ?? '') }}</textarea>
             </div>
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="sort_order">Sort order</label>
                     <input type="number" id="sort_order" name="sort_order" class="form-input" value="{{ old('sort_order', $category->sort_order ?? 0) }}">
