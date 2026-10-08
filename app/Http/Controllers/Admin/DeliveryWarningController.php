@@ -53,7 +53,7 @@ class DeliveryWarningController extends Controller
         return $request->validate([
             'code' => ['required', 'string', 'max:50'],
             'title' => ['required', 'string', 'max:200'],
-            'body' => ['required', 'string'],
+            'body' => ['required', 'string', 'max:5000'],
             'severity' => ['required', Rule::enum(WarningSeverity::class)],
             'applies_to' => ['required', Rule::enum(WarningAppliesTo::class)],
             'is_active' => ['sometimes', 'boolean'],

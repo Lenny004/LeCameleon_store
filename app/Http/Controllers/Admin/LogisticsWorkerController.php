@@ -91,7 +91,7 @@ class LogisticsWorkerController extends Controller
             'role' => ['required', Rule::enum(LogisticsWorkerRole::class)],
             'hire_date' => ['nullable', 'date'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 
