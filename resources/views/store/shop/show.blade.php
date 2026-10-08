@@ -445,7 +445,7 @@
                     </div>
                     <div class="product-reviews__sort">
                         <label for="review_sort" class="product-reviews__sort-label">Ordenar</label>
-                        <select id="review_sort" name="review_sort" class="form-select" onchange="this.form.submit()">
+                        <select id="review_sort" name="review_sort" class="form-select" x-on:change="$event.target.form.submit()">
                             <option value="newest" @selected($activeSort === 'newest')>Más recientes</option>
                             <option value="oldest" @selected($activeSort === 'oldest')>Más antiguas</option>
                             <option value="highest" @selected($activeSort === 'highest')>Mejor valoración</option>
