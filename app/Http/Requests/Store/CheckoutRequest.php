@@ -16,22 +16,22 @@ class CheckoutRequest extends FormRequest
      */
     public function rules(): array
     {
+        $contactEmailRules = $this->user() === null
+            ? ['required', 'email', 'max:255']
+            : ['nullable', 'email', 'max:255'];
+
         return [
-            'email' => [
-                \Illuminate\Validation\Rule::requiredIf(fn () => $this->user() === null),
-                'nullable',
-                'email',
-                'max:255',
-            ],
+            'email' => $contactEmailRules,
+            'same_as_shipping' => ['nullable', 'boolean'],
             'billing_address' => ['required', 'array'],
-            'billing_address.first_name' => ['required', 'string', 'max:100'],
-            'billing_address.last_name' => ['required', 'string', 'max:100'],
-            'billing_address.line1' => ['required', 'string', 'max:255'],
+            'billing_address.first_name' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:100'],
+            'billing_address.last_name' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:100'],
+            'billing_address.line1' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:255'],
             'billing_address.line2' => ['nullable', 'string', 'max:255'],
-            'billing_address.city' => ['required', 'string', 'max:100'],
+            'billing_address.city' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:100'],
             'billing_address.state' => ['nullable', 'string', 'max:100'],
-            'billing_address.postal_code' => ['required', 'string', 'max:20'],
-            'billing_address.country' => ['required', 'string', 'size:2'],
+            'billing_address.postal_code' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:20'],
+            'billing_address.country' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'size:2'],
             'billing_address.phone' => ['nullable', 'string', 'max:30'],
             'shipping_address' => ['required', 'array'],
             'shipping_address.first_name' => ['required', 'string', 'max:100'],
@@ -48,5 +48,14 @@ class CheckoutRequest extends FormRequest
             'notes' => ['nullable', 'string', 'max:1000'],
             'payment_method' => ['nullable', 'string', 'in:manual,stripe'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->boolean('same_as_shipping')) {
+            $this->merge([
+                'billing_address' => $this->input('shipping_address', []),
+            ]);
+        }
     }
 }

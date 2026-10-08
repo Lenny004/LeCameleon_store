@@ -39,18 +39,16 @@ class CartController extends Controller
         $cart = $this->cartService->resolveCart($request->user(), $sessionId);
         $product = Product::query()->findOrFail($request->validated('product_id'));
 
-        $this->cartService->addItem($cart, $product, (int) $request->input('quantity', 1));
+        $this->cartService->addItem($cart, $product, (int) $request->validated('quantity'));
 
         return back()->with('success', 'Artículo agregado al carrito.');
     }
 
-    public function update(Request $request, CartItem $cartItem): RedirectResponse
+    public function update(CartItemRequest $request, CartItem $cartItem): RedirectResponse
     {
         $this->authorizeCartItem($request, $cartItem);
 
-        $request->validate(['quantity' => ['required', 'integer', 'min:0', 'max:99']]);
-
-        $this->cartService->updateItem($cartItem, (int) $request->input('quantity'));
+        $this->cartService->updateItem($cartItem, (int) $request->validated('quantity'));
 
         return back()->with('success', 'Carrito actualizado.');
     }
