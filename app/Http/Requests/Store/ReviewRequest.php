@@ -18,7 +18,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'title' => ['required', 'string', 'max:150'],
+            'title' => ['nullable', 'string', 'max:150'],
             'body' => ['required', 'string', 'max:5000'],
         ];
     }

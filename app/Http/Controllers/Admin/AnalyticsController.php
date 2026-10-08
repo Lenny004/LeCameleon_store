@@ -15,6 +15,11 @@ class AnalyticsController extends Controller
 
     public function index(Request $request): View
     {
+        $request->validate([
+            'from' => ['nullable', 'date'],
+            'to' => ['nullable', 'date', 'after_or_equal:from'],
+        ]);
+
         $from = $request->date('from')?->startOfDay() ?? now()->subDays(29)->startOfDay();
         $to = $request->date('to')?->endOfDay() ?? now()->endOfDay();
 

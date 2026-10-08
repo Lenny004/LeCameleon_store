@@ -28,21 +28,21 @@ class DeliveryWarningController extends Controller
     {
         DeliveryWarning::query()->create($this->validated($request));
 
-        return back()->with('success', 'Delivery warning created.');
+        return back()->with('success', 'Advertencia de entrega creada.');
     }
 
     public function update(Request $request, DeliveryWarning $warning): RedirectResponse
     {
         $warning->update($this->validated($request));
 
-        return back()->with('success', 'Delivery warning updated.');
+        return back()->with('success', 'Advertencia de entrega actualizada.');
     }
 
     public function destroy(DeliveryWarning $warning): RedirectResponse
     {
         $warning->delete();
 
-        return back()->with('success', 'Delivery warning removed.');
+        return back()->with('success', 'Advertencia de entrega eliminada.');
     }
 
     /**
@@ -53,7 +53,7 @@ class DeliveryWarningController extends Controller
         return $request->validate([
             'code' => ['required', 'string', 'max:50'],
             'title' => ['required', 'string', 'max:200'],
-            'body' => ['required', 'string'],
+            'body' => ['required', 'string', 'max:5000'],
             'severity' => ['required', Rule::enum(WarningSeverity::class)],
             'applies_to' => ['required', Rule::enum(WarningAppliesTo::class)],
             'is_active' => ['sometimes', 'boolean'],

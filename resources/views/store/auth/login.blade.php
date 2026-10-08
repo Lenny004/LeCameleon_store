@@ -13,15 +13,16 @@
 
         <form method="POST" action="{{ Route::has('login') ? route('login') : '#' }}" class="auth-card__form">
             @csrf
+            <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
             <div class="form-group">
-                <label class="form-label" for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email') }}" required autofocus autocomplete="email">
-                @error('email')<span class="form-error">{{ $message }}</span>@enderror
+                <label class="form-label" for="email">Correo electrónico <span class="form-label__required" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email') }}" placeholder="tu@correo.com" maxlength="255" inputmode="email" required autofocus autocomplete="email" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                @error('email')<span class="form-error" id="email-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
-                <label class="form-label" for="password">Contraseña</label>
-                <input type="password" id="password" name="password" class="form-input @error('password') form-input--error @enderror" required autocomplete="current-password">
-                @error('password')<span class="form-error">{{ $message }}</span>@enderror
+                <label class="form-label" for="password">Contraseña <span class="form-label__required" aria-hidden="true">*</span></label>
+                <input type="password" id="password" name="password" class="form-input @error('password') form-input--error @enderror" placeholder="Tu contraseña" maxlength="255" required autocomplete="current-password" @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>
+                @error('password')<span class="form-error" id="password-error">{{ $message }}</span>@enderror
             </div>
             <label class="form-checkbox">
                 <input type="checkbox" class="form-checkbox__input" name="remember" {{ old('remember') ? 'checked' : '' }}>

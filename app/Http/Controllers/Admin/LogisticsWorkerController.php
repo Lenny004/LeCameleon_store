@@ -38,7 +38,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.show', $worker)
-            ->with('success', 'Worker created.');
+            ->with('success', 'Colaborador creado.');
     }
 
     public function show(LogisticsWorker $worker): View
@@ -63,7 +63,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.show', $worker)
-            ->with('success', 'Worker updated.');
+            ->with('success', 'Colaborador actualizado.');
     }
 
     public function destroy(LogisticsWorker $worker): RedirectResponse
@@ -72,7 +72,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.index')
-            ->with('success', 'Worker removed.');
+            ->with('success', 'Colaborador eliminado.');
     }
 
     /**
@@ -91,7 +91,7 @@ class LogisticsWorkerController extends Controller
             'role' => ['required', Rule::enum(LogisticsWorkerRole::class)],
             'hire_date' => ['nullable', 'date'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 

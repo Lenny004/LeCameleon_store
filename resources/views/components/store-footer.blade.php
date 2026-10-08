@@ -23,21 +23,27 @@
                 @if (Route::has('newsletter.store'))
                     <form method="POST" action="{{ route('newsletter.store') }}" class="footer__newsletter">
                         @csrf
-                        <p class="footer__newsletter-label" id="footer-newsletter-label">Boletín</p>
+                        <p class="form-required-note form-required-note--inverse">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+                        <label class="footer__newsletter-label" id="footer-newsletter-label" for="footer-newsletter-email">Boletín <span class="form-label__required" aria-hidden="true">*</span></label>
                         <p class="footer__newsletter-hint">Novedades vintage y envíos locales. Sin spam.</p>
                         <div class="footer__newsletter-row">
                             <input
                                 type="email"
+                                id="footer-newsletter-email"
                                 name="email"
-                                class="footer__newsletter-input @error('email') form-input--error footer__newsletter-input--error @enderror"
-                                placeholder="Tu correo"
-                                value="{{ old('email') }}"
+                                class="footer__newsletter-input @error('email', 'newsletter') form-input--error footer__newsletter-input--error @enderror"
+                                placeholder="tu@correo.com"
+                                value="{{ $errors->newsletter->any() ? old('email') : '' }}"
+                                maxlength="255"
+                                inputmode="email"
                                 required
                                 autocomplete="email"
                                 aria-labelledby="footer-newsletter-label"
+                                @error('email', 'newsletter') aria-invalid="true" aria-describedby="footer-newsletter-email-error" @enderror
                             >
                             <button type="submit" class="footer__newsletter-submit">Suscribirme</button>
                         </div>
+                        @error('email', 'newsletter')<span class="form-error" id="footer-newsletter-email-error">{{ $message }}</span>@enderror
                     </form>
                 @endif
             </div>

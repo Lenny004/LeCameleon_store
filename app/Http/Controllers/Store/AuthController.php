@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $this->mergeGuestData($request);
 
-        return redirect()->route('home')->with('success', 'Welcome to Le Cameleon.');
+        return redirect()->route('home')->with('success', '¡Bienvenido a Le Cameleon!');
     }
 
     public function logout(Request $request): RedirectResponse

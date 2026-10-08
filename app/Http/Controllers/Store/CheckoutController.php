@@ -83,7 +83,7 @@ class CheckoutController extends Controller
         if ($paymentMethod === 'stripe' && $order->payments()->latest()->first()?->provider === 'manual') {
             $redirect->with(
                 'info',
-                'Stripe is not configured yet; your order will be completed with manual payment.',
+                'Stripe aún no está configurado; tu pedido se completará con pago manual.',
             );
         }
 
@@ -91,7 +91,7 @@ class CheckoutController extends Controller
             $redirect->with(
                 'info',
                 sprintf(
-                    'Coupon %s applied. You saved $%s.',
+                    'Cupón %s aplicado. Ahorraste $%s.',
                     $order->coupon_code,
                     number_format((float) $order->discount_total, 2),
                 ),

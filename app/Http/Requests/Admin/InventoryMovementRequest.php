@@ -21,9 +21,9 @@ class InventoryMovementRequest extends FormRequest
         return [
             'product_id' => ['required', 'uuid', 'exists:products,id'],
             'type' => ['required', Rule::enum(InventoryMovementType::class)],
-            'quantity' => ['required_unless:type,adjust', 'integer', 'min:1'],
+            'quantity' => ['required_unless:type,adjust', 'integer', 'min:1', 'max:2147483647'],
             'notes' => ['nullable', 'string', 'max:500'],
-            'new_quantity_available' => ['required_if:type,adjust', 'integer', 'min:0'],
+            'new_quantity_available' => ['required_if:type,adjust', 'integer', 'min:0', 'max:2147483647'],
         ];
     }
 }

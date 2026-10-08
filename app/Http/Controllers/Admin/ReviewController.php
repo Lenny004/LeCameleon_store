@@ -15,6 +15,12 @@ class ReviewController extends Controller
 {
     public function index(Request $request): View
     {
+        $request->validate([
+            'status' => ['nullable', 'in:pending,approved'],
+            'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
+            'q' => ['nullable', 'string', 'max:150'],
+        ]);
+
         // Optional filters: status (approved|pending), star rating, free-text search.
         $filters = $request->only(['status', 'rating', 'q']);
 

@@ -28,36 +28,42 @@ class ReturnRequestController extends Controller
 
     public function approve(Request $request, ReturnRequest $returnRequest): RedirectResponse
     {
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $returnRequest->update([
             'status' => ReturnRequestStatus::Approved,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('return.approved', $returnRequest->order, [
             'return_request_id' => $returnRequest->id,
         ]);
 
-        return back()->with('success', 'Return request approved.');
+        return back()->with('success', 'Solicitud de devolución aprobada.');
     }
 
     public function deny(Request $request, ReturnRequest $returnRequest): RedirectResponse
     {
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $returnRequest->update([
             'status' => ReturnRequestStatus::Denied,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('return.denied', $returnRequest->order, [
             'return_request_id' => $returnRequest->id,
         ]);
 
-        return back()->with('success', 'Return request denied.');
+        return back()->with('success', 'Solicitud de devolución rechazada.');
     }
 
     public function refund(Request $request, ReturnRequest $returnRequest): RedirectResponse
     {
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         if ($returnRequest->status !== ReturnRequestStatus::Approved) {
-            return back()->with('error', 'Only approved returns can be marked refunded.');
+            return back()->with('error', 'Solo las devoluciones aprobadas pueden marcarse como reembolsadas.');
         }
 
         $returnRequest->load(['order.payments', 'orderItem']);
@@ -65,21 +71,21 @@ class ReturnRequestController extends Controller
         $order = $returnRequest->order;
 
         if (! $order) {
-            return back()->with('error', 'Order not found for this return.');
+            return back()->with('error', 'No se encontró el pedido de esta devolución.');
         }
 
         $amount = $returnRequest->orderItem
             ? (float) $returnRequest->orderItem->line_total
             : (float) $order->grand_total;
 
-        $note = (string) ($request->input('admin_notes')
-            ?: "Return request #{$returnRequest->id} refunded");
+        $note = (string) (($validated['admin_notes'] ?? null)
+            ?: "Solicitud de devolución #{$returnRequest->id} reembolsada");
 
         $this->paymentService->recordRefund($order, $amount, $note);
 
         $returnRequest->update([
             'status' => ReturnRequestStatus::Refunded,
-            'admin_notes' => $request->input('admin_notes') ?? $returnRequest->admin_notes,
+            'admin_notes' => $validated['admin_notes'] ?? $returnRequest->admin_notes,
         ]);
 
         RecordsActivity::log('return.refunded', $order, [
@@ -87,6 +93,6 @@ class ReturnRequestController extends Controller
             'refund_amount' => $amount,
         ]);
 
-        return back()->with('success', 'Return marked as refunded.');
+        return back()->with('success', 'Devolución marcada como reembolsada.');
     }
 }

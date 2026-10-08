@@ -30,30 +30,34 @@ class OfferController extends Controller
     {
         abort_unless($offer->isPending(), 422);
 
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $offer->update([
             'status' => OfferStatus::Accepted,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('offer.accepted', $offer);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Offer accepted.');
+        return back()->with('success', 'Oferta aceptada.');
     }
 
     public function decline(Request $request, Offer $offer): RedirectResponse
     {
         abort_unless($offer->isPending(), 422);
 
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $offer->update([
             'status' => OfferStatus::Declined,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('offer.declined', $offer);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Offer declined.');
+        return back()->with('success', 'Oferta rechazada.');
     }
 
     public function counter(CounterOfferRequest $request, Offer $offer): RedirectResponse
@@ -71,7 +75,7 @@ class OfferController extends Controller
         ]);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Counter offer sent.');
+        return back()->with('success', 'Contraoferta enviada.');
     }
 
     private function notifyBuyer(Offer $offer): void

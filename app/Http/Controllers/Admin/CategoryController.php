@@ -35,7 +35,7 @@ class CategoryController extends Controller
             'parent_id' => ['nullable', 'exists:categories,id'],
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:categories,slug'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
             'is_active' => ['sometimes', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:32767'],
         ]);
@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ]);
 
-        return redirect()->route('admin.categories.show', $category)->with('success', 'Category created.');
+        return redirect()->route('admin.categories.show', $category)->with('success', 'Categoría creada.');
     }
 
     public function show(Category $category): View
@@ -69,7 +69,7 @@ class CategoryController extends Controller
             'parent_id' => ['nullable', 'exists:categories,id'],
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:categories,slug,'.$category->id],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
             'is_active' => ['sometimes', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:32767'],
         ]);
@@ -77,13 +77,13 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active', $category->is_active);
         $category->update($data);
 
-        return redirect()->route('admin.categories.show', $category)->with('success', 'Category updated.');
+        return redirect()->route('admin.categories.show', $category)->with('success', 'Categoría actualizada.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted.');
+        return redirect()->route('admin.categories.index')->with('success', 'Categoría eliminada.');
     }
 }

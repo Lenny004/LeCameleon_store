@@ -27,12 +27,12 @@ class BrandController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:brands,slug'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
         ]);
 
         $brand = Brand::query()->create($data);
 
-        return redirect()->route('admin.brands.show', $brand)->with('success', 'Brand created.');
+        return redirect()->route('admin.brands.show', $brand)->with('success', 'Marca creada.');
     }
 
     public function show(Brand $brand): View
@@ -52,18 +52,18 @@ class BrandController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'slug' => ['required', 'string', 'max:180', 'unique:brands,slug,'.$brand->id],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
         ]);
 
         $brand->update($data);
 
-        return redirect()->route('admin.brands.show', $brand)->with('success', 'Brand updated.');
+        return redirect()->route('admin.brands.show', $brand)->with('success', 'Marca actualizada.');
     }
 
     public function destroy(Brand $brand): RedirectResponse
     {
         $brand->delete();
 
-        return redirect()->route('admin.brands.index')->with('success', 'Brand deleted.');
+        return redirect()->route('admin.brands.index')->with('success', 'Marca eliminada.');
     }
 }

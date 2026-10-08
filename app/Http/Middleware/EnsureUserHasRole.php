@@ -20,7 +20,7 @@ class EnsureUserHasRole
         $user = $request->user();
 
         if (! $user || ! $user->is_active) {
-            abort(403, 'Unauthorized.');
+            abort(403, 'No tienes autorización para realizar esta acción.');
         }
 
         $allowed = collect($roles)
@@ -36,7 +36,7 @@ class EnsureUserHasRole
             }
         }
 
-        abort(403, 'Unauthorized.');
+        abort(403, 'No tienes autorización para realizar esta acción.');
     }
 
     private function userHasRole($user, string $role): bool

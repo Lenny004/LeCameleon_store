@@ -167,14 +167,15 @@
 
                 <div class="product-buybox__divider" aria-hidden="true"></div>
 
-                <div class="product-buybox__actions" x-data="quantityInput(1, {{ max($stock, 1) }})">
+                <div class="product-buybox__actions" x-data="quantityInput({{ (int) old('quantity', 1) }}, {{ max(min($stock, 99), 1) }})">
                     @if ($stock > 0)
-                        <label class="product-buybox__qty-label" for="product-qty">Cantidad</label>
-                        <div class="product-buybox__qty" id="product-qty">
+                        <label class="product-buybox__qty-label" for="product-qty-input">Cantidad</label>
+                        <div class="product-buybox__qty">
                             <button class="product-buybox__qty-btn" type="button" @click="decrement()" aria-label="Disminuir cantidad">−</button>
-                            <input class="product-buybox__qty-input" type="number" name="quantity" x-model="qty" min="1" :max="max" readonly aria-label="Cantidad">
+                            <input class="product-buybox__qty-input @error('quantity') form-input--error @enderror" type="number" id="product-qty-input" name="quantity" x-model="qty" min="1" step="1" max="{{ min($stock, 99) }}" :max="max" readonly aria-label="Cantidad" @error('quantity') aria-invalid="true" aria-describedby="product-quantity-error" @enderror>
                             <button class="product-buybox__qty-btn" type="button" @click="increment()" aria-label="Aumentar cantidad">+</button>
                         </div>
+                        @error('quantity')<span class="form-error" id="product-quantity-error">{{ $message }}</span>@enderror
                     @endif
 
                     @if (Route::has('cart.store') && $stock > 0)
@@ -203,9 +204,11 @@
                         <form action="{{ route('shop.stock-alert', $product) }}" method="POST">
                             @csrf
                             @guest
+                                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                                 <div class="form-group">
-                                    <label class="form-label" for="stock_alert_email">Correo electrónico</label>
-                                    <input type="email" id="stock_alert_email" name="email" class="form-input" value="{{ old('email') }}" required>
+                                    <label class="form-label" for="stock_alert_email">Correo electrónico <span class="form-label__required" aria-hidden="true">*</span></label>
+                                    <input type="email" id="stock_alert_email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email') }}" placeholder="tu@correo.com" maxlength="255" inputmode="email" autocomplete="email" required @error('email') aria-invalid="true" aria-describedby="stock-alert-email-error" @enderror>
+                                    @error('email')<span class="form-error" id="stock-alert-email-error">{{ $message }}</span>@enderror
                                 </div>
                             @endguest
                             <button type="submit" class="btn btn--ghost btn--block">Avisarme</button>
@@ -305,26 +308,31 @@
                         @auth
                             <form method="POST" action="{{ route('shop.offers.store', $product) }}">
                                 @csrf
+                                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                                 <div class="form-group">
-                                    <label class="form-label" for="offer_amount">Tu oferta (USD)</label>
+                                    <label class="form-label" for="offer_amount">Tu oferta (USD) <span class="form-label__required" aria-hidden="true">*</span></label>
                                     <input
                                         type="number"
                                         id="offer_amount"
                                         name="amount"
-                                        class="form-input"
+                                        class="form-input @error('amount') form-input--error @enderror"
                                         step="0.01"
                                         min="1"
-                                        max="{{ max(1, (float) $product->price - 0.01) }}"
+                                        max="{{ min(9999999999.99, max(1, (float) $product->price - 0.01)) }}"
                                         value="{{ old('amount') }}"
+                                        inputmode="decimal"
+                                        placeholder="25.00"
                                         required
+                                        @error('amount') aria-invalid="true" aria-describedby="offer-amount-error" @enderror
                                     >
                                     @error('amount')
-                                        <p class="form-error">{{ $message }}</p>
+                                        <span class="form-error" id="offer-amount-error">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="offer_message">Mensaje (opcional)</label>
-                                    <textarea id="offer_message" name="message" class="form-textarea" rows="3" maxlength="1000">{{ old('message') }}</textarea>
+                                    <textarea id="offer_message" name="message" class="form-textarea @error('message') form-textarea--error @enderror" rows="3" maxlength="1000" placeholder="Ej. Puedo recogerla esta semana." @error('message') aria-invalid="true" aria-describedby="offer-message-error" @enderror>{{ old('message') }}</textarea>
+                                    @error('message')<span class="form-error" id="offer-message-error">{{ $message }}</span>@enderror
                                 </div>
                                 <button type="submit" class="btn btn--ghost">Enviar oferta</button>
                             </form>
@@ -492,22 +500,26 @@
             <form method="POST" action="{{ route('shop.reviews.store', $product) }}" class="product-review-form product-panel">
                 @csrf
                 <h3 class="product-panel__title">Escribe una reseña</h3>
+                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                 <div class="form-group">
-                    <label class="form-label" for="rating">Calificación</label>
-                    <select id="rating" name="rating" class="form-select" required>
+                    <label class="form-label" for="rating">Calificación <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <select id="rating" name="rating" class="form-select @error('rating') form-select--error @enderror" required @error('rating') aria-invalid="true" aria-describedby="rating-error" @enderror>
                         <option value="">Selecciona</option>
                         @for ($i = 5; $i >= 1; $i--)
                             <option value="{{ $i }}" @selected(old('rating') == $i)>{{ $i }} estrella{{ $i > 1 ? 's' : '' }}</option>
                         @endfor
                     </select>
+                    @error('rating')<span class="form-error" id="rating-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="title">Título</label>
-                    <input type="text" id="title" name="title" class="form-input" value="{{ old('title') }}" maxlength="150" required>
+                    <input type="text" id="title" name="title" class="form-input @error('title') form-input--error @enderror" value="{{ old('title') }}" placeholder="Ej. Una pieza especial" maxlength="150" @error('title') aria-invalid="true" aria-describedby="title-error" @enderror>
+                    @error('title')<span class="form-error" id="title-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="body">Comentario</label>
-                    <textarea id="body" name="body" class="form-textarea" rows="4" required>{{ old('body') }}</textarea>
+                    <label class="form-label" for="body">Comentario <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <textarea id="body" name="body" class="form-textarea @error('body') form-textarea--error @enderror" rows="4" maxlength="5000" placeholder="Comparte tu experiencia con esta pieza." required @error('body') aria-invalid="true" aria-describedby="body-error" @enderror>{{ old('body') }}</textarea>
+                    @error('body')<span class="form-error" id="body-error">{{ $message }}</span>@enderror
                 </div>
                 <button type="submit" class="btn btn--primary">Enviar reseña</button>
             </form>

@@ -17,8 +17,10 @@ class CartItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required', 'uuid', 'exists:products,id'],
-            'quantity' => ['sometimes', 'integer', 'min:1', 'max:99'],
+            'product_id' => $this->isMethod('post')
+                ? ['required', 'uuid', 'exists:products,id']
+                : ['nullable', 'uuid', 'exists:products,id'],
+            'quantity' => ['required', 'integer', 'min:1', 'max:99'],
         ];
     }
 }

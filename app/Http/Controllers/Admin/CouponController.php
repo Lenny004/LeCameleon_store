@@ -31,7 +31,7 @@ class CouponController extends Controller
         $data = $this->validated($request);
         $coupon = Coupon::query()->create($data);
 
-        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Coupon created.');
+        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón creado.');
     }
 
     public function show(Coupon $coupon): View
@@ -51,14 +51,14 @@ class CouponController extends Controller
     {
         $coupon->update($this->validated($request, $coupon));
 
-        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Coupon updated.');
+        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón actualizado.');
     }
 
     public function destroy(Coupon $coupon): RedirectResponse
     {
         $coupon->delete();
 
-        return redirect()->route('admin.coupons.index')->with('success', 'Coupon deleted.');
+        return redirect()->route('admin.coupons.index')->with('success', 'Cupón eliminado.');
     }
 
     /**
@@ -68,15 +68,16 @@ class CouponController extends Controller
     {
         $data = $request->validate([
             'code' => ['required', 'string', 'max:50', Rule::unique('coupons', 'code')->ignore($coupon?->id)],
-            'type' => ['required', Rule::enum(CouponType::class)],
+            'type' => ['required', 'string', 'max:20', Rule::enum(CouponType::class)],
             'value' => [
                 'required',
-                'numeric',
+                'decimal:0,2',
                 'min:0',
+                'max:9999999999.99',
                 Rule::when($request->input('type') === CouponType::Percent->value, ['max:100']),
             ],
-            'min_order_amount' => ['nullable', 'numeric', 'min:0'],
-            'max_uses' => ['nullable', 'integer', 'min:1'],
+            'min_order_amount' => ['nullable', 'decimal:0,2', 'min:0', 'max:9999999999.99'],
+            'max_uses' => ['nullable', 'integer', 'min:1', 'max:2147483647'],
             'starts_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'is_active' => ['sometimes', 'boolean'],

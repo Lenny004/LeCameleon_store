@@ -39,7 +39,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.show', $vehicle)
-            ->with('success', 'Vehicle created.');
+            ->with('success', 'Vehículo creado.');
     }
 
     public function show(LogisticsVehicle $vehicle): View
@@ -65,7 +65,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.show', $vehicle)
-            ->with('success', 'Vehicle updated.');
+            ->with('success', 'Vehículo actualizado.');
     }
 
     public function destroy(LogisticsVehicle $vehicle): RedirectResponse
@@ -74,7 +74,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.index')
-            ->with('success', 'Vehicle removed.');
+            ->with('success', 'Vehículo eliminado.');
     }
 
     /**
@@ -91,9 +91,9 @@ class LogisticsVehicleController extends Controller
             'year' => ['nullable', 'integer', 'min:1980', 'max:2100'],
             'color' => ['nullable', 'string', 'max:40'],
             'vehicle_type' => ['required', Rule::enum(VehicleType::class)],
-            'capacity_kg' => ['nullable', 'numeric', 'min:0'],
+            'capacity_kg' => ['nullable', 'decimal:0,2', 'min:0', 'max:999999.99'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 

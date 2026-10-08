@@ -44,7 +44,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.show', $product)
-            ->with('success', 'Product created.');
+            ->with('success', 'Producto creado.');
     }
 
     public function show(Product $product): View
@@ -77,7 +77,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.show', $product)
-            ->with('success', 'Product updated.');
+            ->with('success', 'Producto actualizado.');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.index')
-            ->with('success', 'Product deleted.');
+            ->with('success', 'Producto eliminado.');
     }
 
     /**
