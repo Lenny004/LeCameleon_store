@@ -12,7 +12,7 @@
     ])->filter()->implode(', ');
 @endphp
 
-<div class="container" style="padding-block:var(--space-xl);">
+<div class="container account-page-shell">
     <nav class="breadcrumb">
         @if (Route::has('account.orders.index'))
             <a class="breadcrumb__link" href="{{ route('account.orders.index') }}">Mis pedidos</a>
@@ -21,7 +21,7 @@
         <span>#{{ $order->number }}</span>
     </nav>
 
-    <div class="account-content" style="max-width:40rem;">
+    <div class="account-content account-content--narrow">
         <div class="order-card">
             <div class="order-card__header">
                 <div>
@@ -31,18 +31,18 @@
                 <span class="badge badge--primary">{{ ucfirst($order->status->value) }}</span>
             </div>
 
-            <section style="margin:var(--space-lg) 0;">
-                <h2 class="text-small" style="font-weight:700;margin-bottom:var(--space-sm);">Estado del pedido</h2>
+            <section class="account-order__section">
+                <h2 class="text-small account-order__section-title">Estado del pedido</h2>
                 @include('components.order-timeline', ['timeline' => $order->statusTimeline()])
             </section>
 
             @if ($shippingLine)
-                <p class="text-muted" style="margin:var(--space-md) 0;">Envío a: {{ $shippingLine }}</p>
+                <p class="text-muted account-order__address">Envío a: {{ $shippingLine }}</p>
             @endif
 
             @if ($order->shipments->isNotEmpty())
-                <section style="margin:var(--space-lg) 0;">
-                    <h2 class="text-small" style="font-weight:700;margin-bottom:var(--space-sm);">Seguimiento de envío</h2>
+                <section class="account-order__section">
+                    <h2 class="text-small account-order__section-title">Seguimiento de envío</h2>
                     @foreach ($order->shipments as $shipment)
                         <dl class="product-info__specs">
                             @if ($shipment->carrier)
@@ -84,9 +84,9 @@
         @endphp
 
         @if (Route::has('account.orders.returns.store') && ! $hasPendingReturn)
-            <div class="order-card" style="margin-top:var(--space-lg);">
-                <h2 class="text-small" style="font-weight:700;margin-bottom:var(--space-md);">Solicitar devolución</h2>
-                <p class="text-muted" style="margin-bottom:var(--space-md);">
+            <div class="order-card account-order__return">
+                <h2 class="text-small account-order__return-title">Solicitar devolución</h2>
+                <p class="text-muted account-order__return-description">
                     Consulta nuestra <a href="{{ route('returns') }}">política de devoluciones</a> antes de enviar tu solicitud.
                 </p>
                 <form method="POST" action="{{ route('account.orders.returns.store', $order) }}">
@@ -110,7 +110,7 @@
                 </form>
             </div>
         @elseif ($hasPendingReturn)
-            <p class="text-muted" style="margin-top:var(--space-lg);">Tienes una solicitud de devolución en revisión.</p>
+            <p class="text-muted account-order__pending">Tienes una solicitud de devolución en revisión.</p>
         @endif
     </div>
 </div>

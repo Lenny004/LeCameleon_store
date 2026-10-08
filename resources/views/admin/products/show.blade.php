@@ -8,7 +8,7 @@
     $approvedReviews = $product->reviews->where('is_approved', true);
     $avgRating = $approvedReviews->avg('rating');
 @endphp
-<div class="card" style="max-width:40rem;">
+<div class="card admin-panel admin-panel--narrow">
     <p><strong>SKU:</strong> {{ $product->sku }}</p>
     <p><strong>Status:</strong> {{ $product->status?->value ?? $product->status }}</p>
     <p><strong>Price:</strong> {{ number_format((float) $product->price, 2) }}</p>
@@ -25,7 +25,7 @@
         —
         <a href="{{ route('admin.reviews.index', ['q' => $product->name]) }}">Moderate reviews</a>
     </p>
-    <div style="margin-top:var(--space-lg);display:flex;gap:var(--space-md);">
+    <div class="admin-actions admin-actions--spaced">
         <a href="{{ route('admin.products.edit', $product) }}" class="btn btn--primary">Edit</a>
         <a href="{{ route('admin.products.index') }}" class="btn btn--ghost">Back</a>
     </div>

@@ -39,6 +39,18 @@
         background-color var(--transition);
 }
 
+.form-input--sm,
+.form-select--sm,
+.form-textarea--sm {
+    padding-block: 0.4375rem;
+    padding-inline: 0.6875rem;
+    font-size: 0.8125rem;
+}
+
+.form-input--uppercase {
+    text-transform: uppercase;
+}
+
 .form-input::placeholder,
 .form-textarea::placeholder {
     color: var(--text-muted);

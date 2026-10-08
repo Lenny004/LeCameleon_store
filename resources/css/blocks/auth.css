@@ -354,6 +354,44 @@
     min-width: 0;
 }
 
+.account-content--narrow {
+    max-width: 40rem;
+}
+
+.account-page-shell {
+    padding-block: var(--space-xl);
+}
+
+.account-order__address {
+    margin-block: var(--space-md);
+}
+
+.account-order__section {
+    margin-block: var(--space-lg);
+}
+
+.account-order__section-title {
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+}
+
+.account-order__return {
+    margin-top: var(--space-lg);
+}
+
+.account-order__return-title {
+    margin-bottom: var(--space-md);
+    font-weight: 700;
+}
+
+.account-order__return-description {
+    margin-bottom: var(--space-md);
+}
+
+.account-order__pending {
+    margin-top: var(--space-lg);
+}
+
 .account-content__header {
     margin-bottom: var(--space-xs);
 }

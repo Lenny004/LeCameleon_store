@@ -16,7 +16,7 @@
     method="POST"
     action="{{ $formAction }}"
     enctype="multipart/form-data"
-    style="max-width:48rem;display:flex;flex-direction:column;gap:var(--space-xl);"
+    class="admin-form admin-form--wide"
 >
     @csrf
     @if ($isEditing)
@@ -25,7 +25,7 @@
 
     @if ($errors->any())
         <div class="flash flash--error" role="alert">
-            <ul style="margin:0;padding-left:1.25rem;">
+            <ul class="admin-form__list">
                 @foreach ($errors->all() as $errorMessage)
                     <li>{{ $errorMessage }}</li>
                 @endforeach
@@ -34,8 +34,8 @@
     @endif
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Basic info</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Basic info</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-input" value="{{ old('name', $product->name ?? '') }}" required>
@@ -105,7 +105,7 @@
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Pricing and stock</h2>
+        <h2 class="card__title admin-form__title">Pricing and stock</h2>
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="price">Price</label>
@@ -141,7 +141,7 @@
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Vintage attributes</h2>
+        <h2 class="card__title admin-form__title">Vintage attributes</h2>
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="condition_grade">Condition</label>
@@ -176,8 +176,8 @@
             <input type="text" id="material" name="material" class="form-input" value="{{ old('material', $product->material ?? '') }}">
         </div>
 
-        <h3 class="text-small" style="font-weight:700;margin-top:var(--space-md);">Measurements (cm)</h3>
-        <p class="text-muted" style="font-size:0.85rem;margin-bottom:var(--space-md);">Optional flat-lay garment measurements for the product detail page.</p>
+        <h3 class="text-small admin-form__heading">Measurements (cm)</h3>
+        <p class="text-muted admin-form__hint admin-form__hint--bottom">Optional flat-lay garment measurements for the product detail page.</p>
         @php
             $measurementLabels = [
                 'chest_cm' => 'Chest',
@@ -208,8 +208,8 @@
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Authenticity</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Authenticity</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="is_authenticated">
                     <input type="checkbox" id="is_authenticated" name="is_authenticated" value="1" @checked(old('is_authenticated', $product->is_authenticated ?? false))>
@@ -226,21 +226,21 @@
                     maxlength="2000"
                     placeholder="Serial numbers, expert review, documentation summary…"
                 >{{ old('authenticity_notes', $product->authenticity_notes ?? '') }}</textarea>
-                <p class="text-muted" style="margin-top:var(--space-xs);font-size:0.85rem;">Shown on the product page when verified.</p>
+                <p class="text-muted admin-form__hint">Shown on the product page when verified.</p>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Images</h2>
+        <h2 class="card__title admin-form__title">Images</h2>
 
         @if ($isEditing && $product->images->isNotEmpty())
             <input type="hidden" name="manage_images" value="1">
-            <p class="text-muted" style="margin-bottom:var(--space-md);">Uncheck images to remove them on save.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:var(--space-md);margin-bottom:var(--space-lg);">
+            <p class="text-muted admin-form__hint admin-form__hint--bottom">Uncheck images to remove them on save.</p>
+            <div class="admin-form__image-grid">
                 @foreach ($product->images as $image)
-                    <label style="display:flex;flex-direction:column;gap:var(--space-xs);max-width:8rem;font-size:0.85rem;">
-                        <img src="{{ asset('storage/'.$image->path) }}" alt="{{ $image->alt }}" style="width:8rem;height:8rem;object-fit:cover;border-radius:4px;">
+                    <label class="admin-form__image-field">
+                        <img class="admin-form__image" src="{{ asset('storage/'.$image->path) }}" alt="{{ $image->alt }}">
                         <span>
                             <input
                                 type="checkbox"
@@ -258,12 +258,12 @@
         <div class="form-group">
             <label class="form-label" for="images">Upload images</label>
             <input type="file" id="images" name="images[]" class="form-input" accept="image/*" multiple>
-            <p class="text-muted" style="margin-top:var(--space-xs);font-size:0.85rem;">First uploaded image becomes primary when none exists.</p>
+            <p class="text-muted admin-form__hint">First uploaded image becomes primary when none exists.</p>
         </div>
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">SEO</h2>
+        <h2 class="card__title admin-form__title">SEO</h2>
         <div class="form-group">
             <label class="form-label" for="meta_title">Meta title</label>
             <input type="text" id="meta_title" name="meta_title" class="form-input" value="{{ old('meta_title', $product->meta_title ?? '') }}">
@@ -278,7 +278,7 @@
         </div>
     </div>
 
-    <div style="display:flex;gap:var(--space-sm);">
+    <div class="admin-form__actions">
         <button type="submit" class="btn btn--primary">Save product</button>
         <a href="{{ route('admin.products.index') }}" class="btn btn--ghost">Cancel</a>
     </div>

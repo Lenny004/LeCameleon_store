@@ -47,7 +47,7 @@
 
                 <template x-if="error && !loading">
                     <div class="flash flash--error" role="alert">
-                        <p x-text="error" style="margin:0;"></p>
+                        <p class="shipping-quote__error-message" x-text="error"></p>
                     </div>
                 </template>
 

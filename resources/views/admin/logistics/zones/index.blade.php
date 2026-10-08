@@ -12,7 +12,7 @@
     <a href="{{ route('admin.logistics.zones.rates-matrix') }}" class="btn btn--primary">Rates matrix</a>
 </div>
 
-<div class="card" style="margin-bottom:var(--space-xl);">
+<div class="card admin-panel admin-panel--spaced">
     <h2 class="card__title logistics-form__heading">Add zone</h2>
     <form method="POST" action="{{ route('admin.logistics.zones.store') }}" class="logistics-form__grid">
         @csrf
@@ -57,7 +57,7 @@
                     <td>{{ $zone->municipality?->name ?? '—' }}</td>
                     <td><span class="badge badge--{{ $zone->is_active ? 'success' : 'warning' }}">{{ $zone->is_active ? 'Active' : 'Inactive' }}</span></td>
                     <td>
-                        <form method="POST" action="{{ route('admin.logistics.zones.destroy', $zone) }}" onsubmit="return confirm('Remove zone?');" style="display:inline;">
+                        <form method="POST" action="{{ route('admin.logistics.zones.destroy', $zone) }}" onsubmit="return confirm('Remove zone?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Delete</button>

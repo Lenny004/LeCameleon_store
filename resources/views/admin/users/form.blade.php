@@ -4,15 +4,15 @@
 @section('page-title', isset($user) ? 'Edit user' : 'New user')
 
 @section('content')
-<form method="POST" action="{{ isset($user) ? route('admin.users.update', $user) : route('admin.users.store') }}" style="max-width:40rem;display:flex;flex-direction:column;gap:var(--space-xl);">
+<form method="POST" action="{{ isset($user) ? route('admin.users.update', $user) : route('admin.users.store') }}" class="admin-form admin-form--narrow">
     @csrf
     @if (isset($user))
         @method('PUT')
     @endif
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Account</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Account</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-input" value="{{ old('name', $user->name ?? '') }}" required>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div style="display:flex;gap:var(--space-sm);">
+    <div class="admin-form__actions">
         <button type="submit" class="btn btn--primary">{{ isset($user) ? 'Save user' : 'Create user' }}</button>
         <a href="{{ route('admin.users.index') }}" class="btn btn--ghost">Cancel</a>
     </div>
