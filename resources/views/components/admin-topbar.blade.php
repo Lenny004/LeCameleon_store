@@ -4,7 +4,7 @@
             <svg class="admin-topbar__menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="admin-topbar__heading">
-            <h1 class="admin-topbar__title">@yield('page-title', 'Dashboard')</h1>
+            <h1 class="admin-topbar__title">@yield('page-title', 'Panel principal')</h1>
             @hasSection('page-subtitle')
                 <p class="admin-topbar__subtitle">@yield('page-subtitle')</p>
             @endif

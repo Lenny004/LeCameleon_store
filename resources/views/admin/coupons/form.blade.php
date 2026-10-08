@@ -84,7 +84,7 @@
     </div>
 </form>
 
-<script>
+<script nonce="{{ Vite::cspNonce() }}">
     (function () {
         var type = document.getElementById('type');
         var value = document.getElementById('value');

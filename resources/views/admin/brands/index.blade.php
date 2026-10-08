@@ -27,7 +27,7 @@
                     <td>{{ $brand->products_count }}</td>
                     <td>
                         <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.brands.edit', $brand) }}">Editar</a>
-                        <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" onsubmit="return confirm('¿Eliminar esta marca?');" class="admin-inline-form">
+                        <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" x-on:submit="if (!confirm('¿Eliminar esta marca?')) $event.preventDefault()" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm" aria-label="Eliminar marca {{ $brand->name }}">Eliminar</button>

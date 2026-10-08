@@ -84,7 +84,7 @@
             </span>
         </td>
         <td>
-            <form method="POST" action="{{ route('admin.logistics.zones.destroy', $zone) }}" onsubmit="return confirm('¿Eliminar esta zona?');" class="admin-inline-form">
+            <form method="POST" action="{{ route('admin.logistics.zones.destroy', $zone) }}" x-on:submit="if (!confirm('¿Eliminar esta zona?')) $event.preventDefault()" class="admin-inline-form">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>

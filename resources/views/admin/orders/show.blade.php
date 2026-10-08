@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Order ' . $order->number)
-@section('page-title', 'Order #' . $order->number)
+@section('title', 'Pedido ' . $order->number)
+@section('page-title', 'Pedido #' . $order->number)
 
 @section('content')
 @php
@@ -79,7 +79,7 @@
         </div>
         @if ($order->coupon_code)
             <p class="text-muted admin-order__note">
-                Coupon {{ $order->coupon_code }}: −${{ number_format((float) $order->discount_total, 2) }}
+                Cupón {{ $order->coupon_code }}: −${{ number_format((float) $order->discount_total, 2) }}
             </p>
         @endif
         <p class="admin-order__total">Total: ${{ number_format((float) $order->grand_total, 2) }}</p>
@@ -101,7 +101,7 @@
                         @foreach ($order->payments as $payment)
                             <tr>
                                 <td>{{ $payment->provider }}</td>
-                                <td>{{ ucfirst($payment->status->value) }}</td>
+                                <td>{{ ['pending' => 'Pendiente', 'authorized' => 'Autorizado', 'captured' => 'Capturado', 'failed' => 'Fallido', 'refunded' => 'Reembolsado'][$payment->status->value] ?? $payment->status->value }}</td>
                                 <td>${{ number_format((float) $payment->amount, 2) }}</td>
                             </tr>
                         @endforeach
