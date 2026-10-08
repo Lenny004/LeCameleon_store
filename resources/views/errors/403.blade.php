@@ -10,8 +10,16 @@
         </div>
         <p class="error-page__code" aria-hidden="true">403</p>
         <h1 id="error-title-403" class="error-page__title">No tienes permiso para entrar aquí</h1>
+        @php
+            $forbiddenMessage = isset($exception) ? (string) $exception->getMessage() : '';
+            $hasCustomMessage = $forbiddenMessage !== '' && ! in_array($forbiddenMessage, ['This action is unauthorized.', 'Forbidden', 'Unauthorized'], true);
+        @endphp
         <p class="error-page__text">
-            Esta zona es privada. Si crees que deberías tener acceso, inicia sesión con una cuenta autorizada.
+            @if ($hasCustomMessage)
+                {{ $forbiddenMessage }}
+            @else
+                Esta zona es privada. Si crees que deberías tener acceso, inicia sesión con una cuenta autorizada.
+            @endif
         </p>
         <div class="error-page__actions">
             @if (Route::has('home'))

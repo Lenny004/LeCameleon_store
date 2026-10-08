@@ -75,6 +75,28 @@
                     Aplicar el descuento solo al envío
                 </label>
             </div>
+            <div class="form-group">
+                <label class="form-label" for="max_uses_per_user">Usos máximos por cliente</label>
+        <input type="number" id="max_uses_per_user" name="max_uses_per_user" class="form-input @error('max_uses_per_user') form-input--error @enderror" min="1" max="4294967295" step="1" inputmode="numeric" placeholder="2" value="{{ old('max_uses_per_user', $coupon->max_uses_per_user ?? '') }}" @error('max_uses_per_user') aria-invalid="true" aria-describedby="max-uses-per-user-error" @enderror>
+                @error('max_uses_per_user')<span class="form-error" id="max-uses-per-user-error">{{ $message }}</span>@enderror
+            </div>
+            <label class="form-checkbox"><input type="checkbox" name="first_order_only" value="1" @checked(old('first_order_only', $coupon->first_order_only ?? false))> Solo primera compra</label>
+            <div class="form-group">
+                <label class="form-label" for="category_ids">Categorías elegibles</label>
+        <select id="category_ids" name="category_ids[]" class="form-select" multiple size="5">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" @selected(in_array($category->id, old('category_ids', isset($coupon) ? $coupon->categories->pluck('id')->all() : [])))>{{ $category->name }}</option>
+            @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="product_ids">Productos elegibles</label>
+        <select id="product_ids" name="product_ids[]" class="form-select" multiple size="6">
+            @foreach ($products as $product)
+                <option value="{{ $product->id }}" @selected(in_array($product->id, old('product_ids', isset($coupon) ? $coupon->products->pluck('id')->all() : [])))>{{ $product->sku }} — {{ $product->name }}</option>
+            @endforeach
+                </select>
+            </div>
         </div>
     </div>
 

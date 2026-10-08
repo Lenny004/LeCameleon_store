@@ -11,7 +11,9 @@ class NewsletterSubscriber extends Model
 {
     protected $fillable = [
         'email',
+        'token',
         'subscribed_at',
+        'confirmed_at',
         'unsubscribed_at',
     ];
 
@@ -19,6 +21,7 @@ class NewsletterSubscriber extends Model
     {
         return [
             'subscribed_at' => 'datetime',
+            'confirmed_at' => 'datetime',
             'unsubscribed_at' => 'datetime',
         ];
     }

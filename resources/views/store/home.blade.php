@@ -2,6 +2,20 @@
 
 @section('title', 'Le Cameleon — Vintage con alma')
 
+@push('meta')
+    @php
+        $organizationSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => config('app.name', 'Le Cameleon'),
+        'url' => route('home'),
+        'logo' => asset(config('store.brand_logo_wide')),
+            'sameAs' => [],
+        ];
+    @endphp
+    <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">{!! json_encode($organizationSchema, JSON_UNESCAPED_SLASHES|JSON_HEX_TAG) !!}</script>
+@endpush
+
 @section('content')
     @php
         $heroImage = config('store.hero_image');

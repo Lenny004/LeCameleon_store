@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ReviewFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Review extends Model
 {
-    /** @use HasFactory<\Database\Factories\ReviewFactory> */
+    /** @use HasFactory<ReviewFactory> */
     use HasFactory;
 
     use SoftDeletes;
@@ -25,6 +26,10 @@ class Review extends Model
         'title',
         'body',
         'is_approved',
+        'is_verified_purchase',
+        'store_reply',
+        'store_replied_at',
+        'store_replied_by',
     ];
 
     protected function casts(): array
@@ -32,6 +37,8 @@ class Review extends Model
         return [
             'rating' => 'integer',
             'is_approved' => 'boolean',
+            'is_verified_purchase' => 'boolean',
+            'store_replied_at' => 'datetime',
         ];
     }
 
@@ -43,6 +50,11 @@ class Review extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function storeResponder(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'store_replied_by');
     }
 
     /** Visible on the storefront PDP and included in rating averages. */

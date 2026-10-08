@@ -17,6 +17,7 @@ class SavedSearch extends Model
         'user_id',
         'name',
         'query_params',
+        'notify',
         'last_notified_at',
     ];
 
@@ -25,6 +26,7 @@ class SavedSearch extends Model
         return [
             'query_params' => 'array',
             'last_notified_at' => 'datetime',
+            'notify' => 'boolean',
         ];
     }
 

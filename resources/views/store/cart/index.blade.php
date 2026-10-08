@@ -36,10 +36,13 @@
                 @foreach ($items as $item)
                     @php
                         $product = $item->product;
-                        $imageUrl = ProductImage::urlFor($product?->images->first());
+                        $image = $product?->images->first();
+                        $imageUrl = $image instanceof ProductImage ? $image->thumbUrl() : ProductImage::urlFor($image);
+                        $imageSrcset = $image instanceof ProductImage ? $image->srcset() : '';
+                        [$imageWidth, $imageHeight] = $image instanceof ProductImage ? $image->dimensions() : [null, null];
                     @endphp
                     <article class="cart-item">
-                        <img src="{{ $imageUrl }}" alt="" class="cart-item__image">
+                        <img src="{{ $imageUrl }}" srcset="{{ $imageSrcset }}" sizes="5rem" width="{{ $imageWidth ?: '' }}" height="{{ $imageHeight ?: '' }}" alt="{{ $product?->name ?? 'Producto' }}" class="cart-item__image" loading="lazy" decoding="async">
                         <div class="cart-item__details">
                             <h2 class="cart-item__title">{{ $product?->name ?? 'Producto' }}</h2>
                             @if ($product?->size_label)

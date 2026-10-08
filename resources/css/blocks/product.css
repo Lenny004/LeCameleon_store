@@ -1019,6 +1019,27 @@
     font-size: 0.9375rem;
 }
 
+.product-review__reply {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: var(--product-warm-surface);
+    border-inline-start: 0.2rem solid var(--accent);
+    border-radius: var(--radius-sm);
+}
+
+.product-review__reply-title {
+    margin: 0 0 var(--space-xs);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.product-review__reply-body {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: var(--line-height-relaxed);
+}
+
 .product-review-form {
     margin-top: var(--space-xl);
 }

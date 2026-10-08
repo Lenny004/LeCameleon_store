@@ -80,6 +80,24 @@
                             <strong>{{ $review->title }}</strong><br>
                         @endif
                         <span class="text-muted">{{ Str::limit($review->body, 80) }}</span>
+                        @if ($review->is_verified_purchase)
+                            <br><span class="badge badge--success">Compra verificada</span>
+                        @endif
+                        <form method="POST" action="{{ route('admin.reviews.reply', $review) }}" class="admin-form__reply">
+                            @csrf
+                            @method('PATCH')
+                            <label class="form-label" for="store_reply_{{ $review->id }}">Respuesta de la tienda</label>
+                            <textarea id="store_reply_{{ $review->id }}" name="store_reply" class="form-textarea" rows="2" maxlength="2000" placeholder="Gracias por compartir tu experiencia.">{{ old('store_reply', $review->store_reply) }}</textarea>
+                            <button type="submit" class="btn btn--ghost btn--sm">{{ $review->store_reply ? 'Actualizar respuesta' : 'Responder' }}</button>
+                        </form>
+                        @if ($review->store_reply)
+                            <form method="POST" action="{{ route('admin.reviews.reply', $review) }}" x-on:submit="if (!confirm('¿Eliminar la respuesta de la tienda?')) $event.preventDefault()">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="store_reply" value="">
+                                <button type="submit" class="btn btn--ghost btn--sm">Eliminar respuesta</button>
+                            </form>
+                        @endif
                     </td>
                     <td>
                         <span class="badge badge--{{ $review->is_approved ? 'success' : 'warning' }}">
