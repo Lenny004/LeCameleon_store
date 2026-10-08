@@ -10,7 +10,14 @@
 <div class="container checkout" x-data="shippingQuote({
     calculateUrl: @js($quoteCalculateUrl ?? route('shipping.quote.calculate')),
     flatRate: {{ (float) ($shipping ?? 0) }},
-})">
+    subtotal: {{ (float) ($subtotal ?? 0) }},
+    paymentMethod: @js(old('payment_method', $transferAvailable ? 'transfer' : ($codEnabled ? 'cod' : ($stripeAvailable ? 'stripe' : '')))),
+    transferAvailable: @js($transferAvailable),
+    codEnabled: @js($codEnabled),
+    codMunicipalityIds: @js($codMunicipalityIds),
+    codMaxAmount: @js($codMaxAmount),
+    stripeAvailable: @js($stripeAvailable),
+})" x-init="syncPaymentMethod()">
     <header class="checkout__header">
         <h1 class="heading-2">Finalizar compra</h1>
     </header>
@@ -41,9 +48,23 @@
     @endif
 
     <div class="checkout-layout">
-        <form method="POST" action="{{ route('checkout.store') }}" class="checkout-form">
+        <form method="POST" action="{{ route('checkout.store') }}" class="checkout-form" x-data="addressBook(@js($addresses->map(fn ($address) => ['id' => (string) $address->id, 'label' => $address->label, 'first_name' => $address->first_name, 'last_name' => $address->last_name, 'line1' => $address->line1, 'line2' => $address->line2, 'city' => $address->city, 'state' => $address->state, 'postal_code' => $address->postal_code, 'country' => $address->country, 'phone' => $address->phone, 'municipality_id' => $address->sv_municipality_id, 'is_default' => $address->is_default])->values()))" x-init="fillAddress($el.querySelector('#saved_address_id')?.value)">
             @csrf
             <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+
+            @auth
+                @if ($addresses->isNotEmpty())
+                    <div class="form-group checkout-address-book">
+                        <label class="form-label" for="saved_address_id">Usar una dirección guardada</label>
+                        <select id="saved_address_id" class="form-select" x-on:change="fillAddress($event.target.value)">
+                            <option value="">Escribir una dirección nueva</option>
+                            @foreach ($addresses as $savedAddress)
+                                <option value="{{ $savedAddress->id }}" @selected($savedAddress->is_default)>{{ $savedAddress->label ?: $savedAddress->line1 }}{{ $savedAddress->is_default ? ' (predeterminada)' : '' }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+            @endauth
 
             @guest
             <section class="checkout-section">
@@ -138,7 +159,7 @@
                             class="form-select @error('destination_municipality_id') form-select--error @enderror"
                             @error('destination_municipality_id') aria-invalid="true" aria-describedby="destination_municipality_id-error" @enderror
                             x-model="municipalityId"
-                            @change="fetchQuote()"
+                            x-on:change="fetchQuote()"
                         >
                             <option value="">Selecciona un municipio para cotizar envío…</option>
                             @isset($departments)
@@ -340,23 +361,35 @@
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Método de pago</h2>
                 <div class="checkout-section__body checkout-payment">
+                    @if ($transferAvailable)
+                        <label class="form-radio">
+                            <input type="radio" class="form-radio__input" name="payment_method" value="transfer" x-model="paymentMethod" @checked(old('payment_method') === 'transfer' || (! old('payment_method') && $transferAvailable)) @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
+                            <span class="form-radio__label">Transferencia bancaria <span class="form-radio__hint">Recibirás los datos de la cuenta y el monto exacto.</span></span>
+                        </label>
+                    @endif
+                    @if ($codEnabled)
+                        <label class="form-radio" x-show="codVisible()" x-cloak>
+                            <input type="radio" class="form-radio__input" name="payment_method" value="cod" x-model="paymentMethod" @checked(old('payment_method') === 'cod') @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
+                            <span class="form-radio__label">Pago contra entrega <span class="form-radio__hint">Ten listo el monto al recibir tu pedido.</span></span>
+                        </label>
+                    @endif
                     <label class="form-radio">
-                        <input type="radio" class="form-radio__input" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }} @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
-                        <span class="form-radio__label">
-                            Pago manual
-                            <span class="form-radio__hint">Transferencia bancaria o efectivo contra entrega</span>
-                        </span>
-                    </label>
-                    <label class="form-radio">
-                        <input type="radio" class="form-radio__input" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }} @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
+                        <input type="radio" class="form-radio__input" name="payment_method" value="stripe" x-model="paymentMethod" @checked(old('payment_method') === 'stripe') @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
                         <span class="form-radio__label">
                             Tarjeta de crédito o débito
                             <span class="form-radio__hint">Procesado de forma segura con Stripe</span>
                         </span>
                     </label>
                     @error('payment_method')<span class="form-error" id="payment_method-error">{{ $message }}</span>@enderror
+                    @if (! $transferAvailable && ! $codEnabled && ! $stripeAvailable)
+                        <p class="form-hint" role="status">No hay métodos de pago manual disponibles en este momento.</p>
+                    @endif
                 </div>
             </section>
+
+            @auth
+                <label class="form-checkbox"><input type="checkbox" class="form-checkbox__input" name="save_address" value="1" @checked(old('save_address'))> Guardar esta dirección en mi cuenta</label>
+            @endauth
 
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Cupón y notas</h2>
@@ -377,7 +410,7 @@
             </section>
 
             <div class="checkout-submit">
-                <button type="submit" class="btn btn--primary btn--lg">Confirmar pedido</button>
+                <button type="submit" class="btn btn--primary btn--lg" @disabled(! $transferAvailable && ! $codEnabled && ! $stripeAvailable)>Confirmar pedido</button>
                 <p class="checkout-submit__note">Al confirmar, aceptas nuestros términos de compra. Te enviaremos un correo con los detalles del pedido.</p>
             </div>
         </form>
@@ -396,14 +429,10 @@
                 </ul>
             @endisset
 
-            @php
-                $orderSubtotal = (float) ($subtotal ?? 0);
-                $orderShipping = (float) ($shipping ?? 0);
-            @endphp
             <div class="cart-summary__rows">
                 <div class="cart-summary__row">
                     <span class="cart-summary__row-label">Subtotal</span>
-                    <span class="cart-summary__row-value">${{ number_format($orderSubtotal, 2) }}</span>
+                    <span class="cart-summary__row-value">${{ number_format((float) ($subtotal ?? 0), 2) }}</span>
                 </div>
                 <div class="cart-summary__row">
                     <span class="cart-summary__row-label">Envío</span>
@@ -411,7 +440,7 @@
                 </div>
                 <div class="cart-summary__row cart-summary__row--total">
                     <span class="cart-summary__row-label">Total</span>
-                    <span class="cart-summary__row-value" x-text="formatMoney({{ $orderSubtotal }} + displayFee)"></span>
+                    <span class="cart-summary__row-value" x-text="formatMoney({{ (float) ($subtotal ?? 0) }} + displayFee)"></span>
                 </div>
             </div>
 

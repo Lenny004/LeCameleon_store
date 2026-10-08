@@ -903,3 +903,44 @@
     background-color: color-mix(in srgb, var(--primary) 14%, var(--surface));
     color: var(--text);
 }
+
+.payment-receipt {
+    display: grid;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+    border-block-end: 1px solid var(--border);
+}
+
+.payment-receipt__details {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.payment-receipt__meta,
+.payment-receipt__note {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.order-notes {
+    display: grid;
+    gap: var(--space-md);
+    margin-block-end: var(--space-lg);
+}
+
+.order-note {
+    padding: var(--space-md);
+    border-inline-start: 0.3rem solid var(--primary);
+    background-color: var(--surface-raised);
+}
+
+.order-note__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.order-note__date {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}

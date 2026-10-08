@@ -23,6 +23,7 @@ class CheckoutRequest extends FormRequest
         return [
             'email' => $contactEmailRules,
             'same_as_shipping' => ['nullable', 'boolean'],
+            'save_address' => ['nullable', 'boolean'],
             'billing_address' => ['required', 'array'],
             'billing_address.first_name' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:100'],
             'billing_address.last_name' => ['required_unless:same_as_shipping,1', 'nullable', 'string', 'max:100'],
@@ -46,12 +47,17 @@ class CheckoutRequest extends FormRequest
             'destination_municipality_id' => ['nullable', 'integer', 'exists:sv_municipalities,id'],
             'coupon_code' => ['nullable', 'string', 'max:50'],
             'notes' => ['nullable', 'string', 'max:1000'],
-            'payment_method' => ['nullable', 'string', 'in:manual,stripe'],
+            'payment_method' => ['required', 'string', 'in:transfer,cod,stripe,manual'],
         ];
     }
 
     protected function prepareForValidation(): void
     {
+        if (! $this->filled('payment_method')) {
+            // Compatibility for orders created before the two manual methods existed.
+            $this->merge(['payment_method' => 'manual']);
+        }
+
         if ($this->boolean('same_as_shipping')) {
             $this->merge([
                 'billing_address' => $this->input('shipping_address', []),

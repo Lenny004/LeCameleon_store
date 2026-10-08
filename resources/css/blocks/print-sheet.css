@@ -1,0 +1,39 @@
+/* Block print-sheet — hoja de empaque y comprobante imprimible. */
+
+.print-sheet {
+    max-width: var(--container-max);
+    margin-block: var(--space-xl);
+    margin-inline: auto;
+    color: var(--text);
+    font-family: var(--font-body);
+}
+
+.print-sheet__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding-block-end: var(--space-md);
+    border-block-end: 1px solid var(--border);
+}
+
+.print-sheet__table {
+    width: 100%;
+    margin-block: var(--space-xl);
+    border-collapse: collapse;
+}
+
+.print-sheet__cell {
+    padding: var(--space-sm);
+    border-block-end: 1px solid var(--border);
+    text-align: start;
+}
+
+.print-sheet__total {
+    text-align: end;
+}
+
+@media print {
+    .print-sheet__actions {
+        display: none;
+    }
+}

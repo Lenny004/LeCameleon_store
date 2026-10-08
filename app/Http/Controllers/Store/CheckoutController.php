@@ -9,8 +9,10 @@ use App\Http\Requests\Store\CheckoutRequest;
 use App\Models\Order;
 use App\Services\CartService;
 use App\Services\CheckoutService;
+use App\Services\PaymentSettingsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -22,12 +24,14 @@ class CheckoutController extends Controller
     public function __construct(
         private readonly CartService $cartService,
         private readonly CheckoutService $checkoutService,
+        private readonly PaymentSettingsService $paymentSettingsService,
     ) {}
 
     public function index(Request $request): View|RedirectResponse
     {
         $sessionId = $this->ensureSessionId($request, 'session_cart_key');
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
+        $this->cartService->syncOfferPrices($cart);
 
         if ($cart->items->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Tu carrito está vacío.');
@@ -39,13 +43,21 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->withErrors($e->errors());
         }
 
+        $subtotal = $this->cartService->subtotal($cart);
+
         return view('store.checkout.index', [
             'cart' => $cart,
-            'subtotal' => $this->cartService->subtotal($cart),
+            'subtotal' => $subtotal,
             'shipping' => (float) config('store.shipping_flat_rate', 0),
             'currency' => config('store.currency', 'USD'),
             'departments' => $this->serviceableDepartmentsWithMunicipalities(),
             'quoteCalculateUrl' => route('shipping.quote.calculate'),
+            'transferAvailable' => $this->paymentSettingsService->transferAvailable(),
+            'codEnabled' => $this->paymentSettingsService->codEnabled(),
+            'codMunicipalityIds' => $this->paymentSettingsService->codMunicipalityIds(),
+            'codMaxAmount' => $this->paymentSettingsService->codMaxAmount(),
+            'stripeAvailable' => filled(config('services.stripe.secret')),
+            'addresses' => $request->user()?->addresses()->with('municipality')->orderByDesc('is_default')->get() ?? collect(),
         ]);
     }
 
@@ -53,10 +65,11 @@ class CheckoutController extends Controller
     {
         $sessionId = $this->ensureSessionId($request, 'session_cart_key');
         $cart = $this->cartService->getCartWithItems($request->user(), $sessionId);
+        $this->cartService->syncOfferPrices($cart);
 
         $email = $request->validated('email') ?? $request->user()?->email ?? '';
 
-        $paymentMethod = $request->validated('payment_method') ?? 'manual';
+        $paymentMethod = $request->validated('payment_method') ?? 'transfer';
 
         $destinationMunicipalityId = $request->filled('destination_municipality_id')
             ? (int) $request->validated('destination_municipality_id')
@@ -73,6 +86,22 @@ class CheckoutController extends Controller
             $paymentMethod,
             $destinationMunicipalityId,
         );
+
+        if ($request->user() && $request->boolean('save_address') && $request->user()->addresses()->count() < 10) {
+            $addressData = $request->validated('shipping_address');
+            $addressData['country'] = strtoupper((string) ($addressData['country'] ?? 'SV'));
+            $addressData['sv_municipality_id'] = $destinationMunicipalityId;
+            $addressData['is_default'] = ! $request->user()->addresses()->exists();
+            $alreadySaved = $request->user()->addresses()
+                ->where('line1', $addressData['line1'])
+                ->where('city', $addressData['city'])
+                ->where('sv_municipality_id', $addressData['sv_municipality_id'])
+                ->exists();
+
+            if (! $alreadySaved) {
+                $request->user()->addresses()->create($addressData);
+            }
+        }
 
         $request->session()->put('last_order_id', $order->id);
 
@@ -108,6 +137,15 @@ class CheckoutController extends Controller
 
         abort_unless($ownsOrder || $sessionOrder, 403);
 
-        return view('store.checkout.success', ['order' => $order->load('items')]);
+        $order->load(['items', 'payments', 'paymentReceipts']);
+        $receiptUploadUrl = $ownsOrder
+            ? route('account.orders.receipts.store', $order)
+            : URL::temporarySignedRoute('checkout.receipts.store', now()->addDays(7), ['order' => $order]);
+
+        return view('store.checkout.success', [
+            'order' => $order,
+            'paymentInstructions' => $order->paymentInstructions(),
+            'receiptUploadUrl' => $receiptUploadUrl,
+        ]);
     }
 }

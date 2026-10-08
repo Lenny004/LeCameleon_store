@@ -1,29 +1,32 @@
 <?php
 
+use App\Http\Controllers\Admin\TwoFactorController;
 use App\Http\Controllers\Store\AboutController;
 use App\Http\Controllers\Store\AccountController;
+use App\Http\Controllers\Store\AddressController;
 use App\Http\Controllers\Store\AuthController;
-use App\Http\Controllers\Store\EmailVerificationController;
-use App\Http\Controllers\Store\PasswordResetController;
 use App\Http\Controllers\Store\CareGuideController;
 use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\Store\ContactController;
+use App\Http\Controllers\Store\EmailVerificationController;
 use App\Http\Controllers\Store\FaqController;
 use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\NewsletterController;
+use App\Http\Controllers\Store\OfferController;
+use App\Http\Controllers\Store\PasswordResetController;
+use App\Http\Controllers\Store\PaymentReceiptController;
 use App\Http\Controllers\Store\PrivacyController;
 use App\Http\Controllers\Store\ReturnsController;
 use App\Http\Controllers\Store\ReviewController;
+use App\Http\Controllers\Store\SavedSearchController;
 use App\Http\Controllers\Store\ShippingInfoController;
 use App\Http\Controllers\Store\ShippingQuoteController;
-use App\Http\Controllers\Store\TrackingController;
 use App\Http\Controllers\Store\ShopController;
 use App\Http\Controllers\Store\SitemapController;
-use App\Http\Controllers\Store\OfferController;
-use App\Http\Controllers\Store\SavedSearchController;
 use App\Http\Controllers\Store\StockAlertController;
 use App\Http\Controllers\Store\TermsController;
+use App\Http\Controllers\Store\TrackingController;
 use App\Http\Controllers\Store\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,11 +74,22 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware(['auth', 'active'])
     ->name('logout');
 
+Route::middleware(['auth', 'active', 'verified', 'role:admin|staff'])->group(function () {
+    Route::get('/two-factor-challenge', [TwoFactorController::class, 'challenge'])->name('two-factor.challenge');
+    Route::post('/two-factor-challenge', [TwoFactorController::class, 'verifyChallenge'])->middleware('throttle:5,1')->name('two-factor.challenge.verify');
+});
+
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])
     ->middleware('throttle:20,1')
     ->name('checkout.store');
 Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/pedido/{order}/comprobante', [PaymentReceiptController::class, 'create'])
+    ->middleware(['signed', 'throttle:12,1'])
+    ->name('checkout.receipts.create');
+Route::post('/checkout/success/{order}/receipts', [PaymentReceiptController::class, 'store'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('checkout.receipts.store');
 
 Route::get('/about', AboutController::class)->name('about');
 Route::get('/faq', FaqController::class)->name('faq');
@@ -131,8 +145,19 @@ Route::middleware(['auth', 'active', 'verified'])->group(function () {
         ->name('account.password.update');
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders.index');
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
+    Route::post('/account/orders/{order}/payment-receipts', [PaymentReceiptController::class, 'store'])->middleware('throttle:6,1')->name('account.orders.receipts.store');
     Route::post('/account/orders/{order}/returns', [AccountController::class, 'storeReturn'])->name('account.orders.returns.store');
     Route::get('/account/offers', [AccountController::class, 'offers'])->name('account.offers.index');
+    Route::patch('/account/offers/{offer}/accept', [AccountController::class, 'acceptOffer'])->middleware('throttle:10,1')->name('account.offers.accept');
+    Route::patch('/account/offers/{offer}/decline', [AccountController::class, 'declineOffer'])->middleware('throttle:10,1')->name('account.offers.decline');
+    Route::post('/account/offers/{offer}/cart', [AccountController::class, 'addOfferToCart'])->middleware('throttle:10,1')->name('account.offers.cart');
+    Route::get('/account/addresses', [AddressController::class, 'index'])->name('account.addresses.index');
+    Route::get('/account/addresses/create', [AddressController::class, 'create'])->name('account.addresses.create');
+    Route::post('/account/addresses', [AddressController::class, 'store'])->name('account.addresses.store');
+    Route::get('/account/addresses/{address}/edit', [AddressController::class, 'edit'])->name('account.addresses.edit');
+    Route::put('/account/addresses/{address}', [AddressController::class, 'update'])->name('account.addresses.update');
+    Route::delete('/account/addresses/{address}', [AddressController::class, 'destroy'])->name('account.addresses.destroy');
+    Route::patch('/account/addresses/{address}/default', [AddressController::class, 'makeDefault'])->name('account.addresses.default');
     Route::get('/account/saved-searches', [SavedSearchController::class, 'index'])->name('account.saved-searches.index');
     Route::post('/account/saved-searches', [SavedSearchController::class, 'store'])->name('account.saved-searches.store');
     Route::delete('/account/saved-searches/{savedSearch}', [SavedSearchController::class, 'destroy'])->name('account.saved-searches.destroy');

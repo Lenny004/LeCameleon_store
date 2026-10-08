@@ -27,7 +27,7 @@
                     id="quote_municipality"
                     class="form-input"
                     x-model="municipalityId"
-                    @change="fetchQuote()"
+                    x-on:change="fetchQuote()"
                 >
                     <option value="">Selecciona un municipio…</option>
                     @foreach ($departments as $department)
