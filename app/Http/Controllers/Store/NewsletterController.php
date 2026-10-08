@@ -11,10 +11,15 @@ class NewsletterController extends Controller
 {
     public function store(NewsletterRequest $request): RedirectResponse
     {
-        NewsletterSubscriber::query()->create([
-            'email' => $request->validated('email'),
-            'subscribed_at' => now(),
-        ]);
+        // Respuesta idéntica exista o no la suscripción: no revela qué correos están suscritos.
+        $subscriber = NewsletterSubscriber::query()->firstOrCreate(
+            ['email' => $request->validated('email')],
+            ['subscribed_at' => now()],
+        );
+
+        if ($subscriber->unsubscribed_at !== null) {
+            $subscriber->update(['subscribed_at' => now(), 'unsubscribed_at' => null]);
+        }
 
         return back()->with('success', '¡Gracias! Te avisaremos cuando haya novedades y hallazgos vintage.');
     }

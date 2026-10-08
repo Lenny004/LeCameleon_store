@@ -3,10 +3,15 @@
 namespace App\Http\Requests\Store;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class NewsletterRequest extends FormRequest
 {
+    /**
+     * Bolsa de errores propia: el formulario vive en el footer y no debe
+     * mezclarse con los errores de `email` de login/registro/perfil.
+     */
+    protected $errorBag = 'newsletter';
+
     public function authorize(): bool
     {
         return true;
@@ -18,22 +23,7 @@ class NewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('newsletter_subscribers', 'email'),
-            ],
-        ];
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'email.unique' => 'Este correo ya está suscrito a nuestro boletín.',
+            'email' => ['required', 'email', 'max:255'],
         ];
     }
 }

@@ -81,9 +81,6 @@
                 <p class="tracking-outcome__text">
                     {{ $outcomeLabels[$latestOutcome->recipient_outcome->value] ?? $latestOutcome->recipient_outcome->value }}
                 </p>
-                @if ($latestOutcome->note)
-                    <p class="order-card__note">{{ $latestOutcome->note }}</p>
-                @endif
             </div>
         @endif
 
@@ -109,9 +106,6 @@
                                 <p class="tracking-timeline__note">
                                     {{ $outcomeLabels[$event->recipient_outcome->value] ?? $event->recipient_outcome->value }}
                                 </p>
-                            @endif
-                            @if ($event->note)
-                                <p class="tracking-timeline__note">{{ $event->note }}</p>
                             @endif
                         </li>
                     @endforeach
