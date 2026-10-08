@@ -10,11 +10,13 @@
     'selected' => null,
 ])
 
+@php($errorId = str_replace(['[', ']', '.'], '_', $name).'-error')
 <select
     name="{{ $name }}"
     id="{{ $id }}"
-    class="form-input {{ $attributes->get('class') }}"
+    class="form-select @if ($errors->has($name)) form-select--error @endif {{ $attributes->get('class') }}"
     @if ($required) required @endif
+    @if ($errors->has($name)) aria-invalid="true" aria-describedby="{{ $errorId }}" @endif
     {{ $attributes->except('class') }}
 >
     <option value="">Selecciona un municipio…</option>

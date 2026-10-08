@@ -179,4 +179,57 @@ class AdminCatalogManagementTest extends TestCase
             ->assertOk()
             ->assertSee('Rates matrix', false);
     }
+
+    public function test_creating_a_product_with_empty_fields_returns_spanish_field_errors(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)
+            ->post(route('admin.products.store'), []);
+
+        $response->assertSessionHasErrors([
+            'name',
+            'slug',
+            'sku',
+            'type',
+            'status',
+            'price',
+            'condition_grade',
+            'quantity_available',
+        ]);
+        $this->assertStringContainsString('nombre', session('errors')->get('name')[0]);
+        $this->assertStringContainsString('precio', session('errors')->get('price')[0]);
+    }
+
+    public function test_coupon_code_longer_than_database_column_returns_maximum_error(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)
+            ->post(route('admin.coupons.store'), [
+                'code' => str_repeat('A', 51),
+                'type' => CouponType::Percent->value,
+                'value' => 10,
+            ]);
+
+        $response->assertSessionHasErrors('code');
+        $this->assertStringContainsString('50', session('errors')->get('code')[0]);
+    }
+
+    public function test_creating_a_user_with_a_duplicate_email_returns_an_error(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $existing = User::factory()->create(['email' => 'duplicado@example.com']);
+
+        $response = $this->actingAs($admin)
+            ->post(route('admin.users.store'), [
+                'name' => 'Usuario duplicado',
+                'email' => $existing->email,
+                'password' => 'Password123!',
+                'role' => 'staff',
+            ]);
+
+        $response->assertSessionHasErrors('email');
+        $this->assertStringContainsString('correo electrónico', session('errors')->get('email')[0]);
+    }
 }

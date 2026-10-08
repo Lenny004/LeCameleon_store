@@ -90,7 +90,7 @@ class LogisticsCompanyController extends Controller
             'website' => ['nullable', 'url', 'max:255'],
             'contact_person' => ['nullable', 'string', 'max:150'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 }

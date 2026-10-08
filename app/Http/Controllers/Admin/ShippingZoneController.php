@@ -47,7 +47,7 @@ class ShippingZoneController extends Controller
     {
         $validated = $request->validate([
             'rates' => ['required', 'array'],
-            'rates.*' => ['nullable', 'numeric', 'min:0'],
+            'rates.*' => ['nullable', 'decimal:0,2', 'min:0', 'max:99999999.99'],
         ]);
 
         foreach ($validated['rates'] as $key => $fee) {
@@ -98,9 +98,9 @@ class ShippingZoneController extends Controller
         return $request->validate([
             'code' => ['required', 'string', 'max:30'],
             'name' => ['required', 'string', 'max:150'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:5000'],
             'sv_municipality_id' => ['nullable', 'integer', 'exists:sv_municipalities,id'],
-            'sort_order' => ['nullable', 'integer', 'min:0'],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
             'is_active' => ['sometimes', 'boolean'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
