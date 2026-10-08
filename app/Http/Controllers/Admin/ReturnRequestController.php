@@ -37,7 +37,7 @@ class ReturnRequestController extends Controller
             'return_request_id' => $returnRequest->id,
         ]);
 
-        return back()->with('success', 'Return request approved.');
+        return back()->with('success', 'Solicitud de devolución aprobada.');
     }
 
     public function deny(Request $request, ReturnRequest $returnRequest): RedirectResponse
@@ -51,13 +51,13 @@ class ReturnRequestController extends Controller
             'return_request_id' => $returnRequest->id,
         ]);
 
-        return back()->with('success', 'Return request denied.');
+        return back()->with('success', 'Solicitud de devolución rechazada.');
     }
 
     public function refund(Request $request, ReturnRequest $returnRequest): RedirectResponse
     {
         if ($returnRequest->status !== ReturnRequestStatus::Approved) {
-            return back()->with('error', 'Only approved returns can be marked refunded.');
+            return back()->with('error', 'Solo las devoluciones aprobadas pueden marcarse como reembolsadas.');
         }
 
         $returnRequest->load(['order.payments', 'orderItem']);
@@ -65,7 +65,7 @@ class ReturnRequestController extends Controller
         $order = $returnRequest->order;
 
         if (! $order) {
-            return back()->with('error', 'Order not found for this return.');
+            return back()->with('error', 'No se encontró el pedido de esta devolución.');
         }
 
         $amount = $returnRequest->orderItem
@@ -87,6 +87,6 @@ class ReturnRequestController extends Controller
             'refund_amount' => $amount,
         ]);
 
-        return back()->with('success', 'Return marked as refunded.');
+        return back()->with('success', 'Devolución marcada como reembolsada.');
     }
 }

@@ -28,21 +28,21 @@ class DeliveryWarningController extends Controller
     {
         DeliveryWarning::query()->create($this->validated($request));
 
-        return back()->with('success', 'Delivery warning created.');
+        return back()->with('success', 'Advertencia de entrega creada.');
     }
 
     public function update(Request $request, DeliveryWarning $warning): RedirectResponse
     {
         $warning->update($this->validated($request));
 
-        return back()->with('success', 'Delivery warning updated.');
+        return back()->with('success', 'Advertencia de entrega actualizada.');
     }
 
     public function destroy(DeliveryWarning $warning): RedirectResponse
     {
         $warning->delete();
 
-        return back()->with('success', 'Delivery warning removed.');
+        return back()->with('success', 'Advertencia de entrega eliminada.');
     }
 
     /**

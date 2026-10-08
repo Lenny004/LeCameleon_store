@@ -37,7 +37,7 @@ class LogisticsCompanyController extends Controller
 
         return redirect()
             ->route('admin.logistics.companies.show', $company)
-            ->with('success', "Company {$company->name} created.");
+            ->with('success', "Empresa {$company->name} creada.");
     }
 
     public function show(LogisticsCompany $company): View
@@ -61,7 +61,7 @@ class LogisticsCompanyController extends Controller
 
         return redirect()
             ->route('admin.logistics.companies.show', $company)
-            ->with('success', 'Company updated.');
+            ->with('success', 'Empresa actualizada.');
     }
 
     public function destroy(LogisticsCompany $company): RedirectResponse
@@ -70,7 +70,7 @@ class LogisticsCompanyController extends Controller
 
         return redirect()
             ->route('admin.logistics.companies.index')
-            ->with('success', 'Company removed.');
+            ->with('success', 'Empresa eliminada.');
     }
 
     /**

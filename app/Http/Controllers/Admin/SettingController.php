@@ -52,6 +52,6 @@ class SettingController extends Controller
             ['value' => $data['returns_policy'] ?? ''],
         );
 
-        return back()->with('success', 'Settings saved.');
+        return back()->with('success', 'Configuración guardada.');
     }
 }

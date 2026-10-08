@@ -31,7 +31,7 @@ class CouponController extends Controller
         $data = $this->validated($request);
         $coupon = Coupon::query()->create($data);
 
-        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Coupon created.');
+        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón creado.');
     }
 
     public function show(Coupon $coupon): View
@@ -51,14 +51,14 @@ class CouponController extends Controller
     {
         $coupon->update($this->validated($request, $coupon));
 
-        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Coupon updated.');
+        return redirect()->route('admin.coupons.show', $coupon)->with('success', 'Cupón actualizado.');
     }
 
     public function destroy(Coupon $coupon): RedirectResponse
     {
         $coupon->delete();
 
-        return redirect()->route('admin.coupons.index')->with('success', 'Coupon deleted.');
+        return redirect()->route('admin.coupons.index')->with('success', 'Cupón eliminado.');
     }
 
     /**

@@ -40,7 +40,7 @@ class UserController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ]);
 
-        return redirect()->route('admin.users.show', $user)->with('success', 'User created.');
+        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario creado.');
     }
 
     public function show(User $user): View
@@ -74,7 +74,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.users.show', $user)->with('success', 'User updated.');
+        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario actualizado.');
     }
 
     public function destroy(User $user): RedirectResponse
@@ -82,6 +82,6 @@ class UserController extends Controller
         Gate::authorize('delete', $user);
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('success', 'User deleted.');
+        return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado.');
     }
 }

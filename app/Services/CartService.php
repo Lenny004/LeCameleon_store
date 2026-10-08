@@ -46,7 +46,7 @@ class CartService
 
         if ($newQuantity > $sellable) {
             throw ValidationException::withMessages([
-                'quantity' => "Only {$sellable} unit(s) available.",
+                'quantity' => "Solo hay {$sellable} unidad(es) disponibles.",
             ]);
         }
 
@@ -81,7 +81,7 @@ class CartService
 
         if ($quantity > $sellable) {
             throw ValidationException::withMessages([
-                'quantity' => "Only {$sellable} unit(s) available.",
+                'quantity' => "Solo hay {$sellable} unidad(es) disponibles.",
             ]);
         }
 
@@ -133,13 +133,13 @@ class CartService
     {
         if ($product->status !== ProductStatus::Published) {
             throw ValidationException::withMessages([
-                'product' => 'This product is not available for purchase.',
+                'product' => 'Este producto no está disponible para compra.',
             ]);
         }
 
         if (! $product->isInStock()) {
             throw ValidationException::withMessages([
-                'product' => 'This product is out of stock.',
+                'product' => 'Este producto está agotado.',
             ]);
         }
     }

@@ -39,7 +39,7 @@ class WishlistService
     {
         if ($product->status !== ProductStatus::Published) {
             throw ValidationException::withMessages([
-                'product' => 'This product cannot be added to the wishlist.',
+                'product' => 'Este producto no se puede agregar a favoritos.',
             ]);
         }
 

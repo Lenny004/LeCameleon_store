@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ]);
 
-        return redirect()->route('admin.categories.show', $category)->with('success', 'Category created.');
+        return redirect()->route('admin.categories.show', $category)->with('success', 'Categoría creada.');
     }
 
     public function show(Category $category): View
@@ -77,13 +77,13 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active', $category->is_active);
         $category->update($data);
 
-        return redirect()->route('admin.categories.show', $category)->with('success', 'Category updated.');
+        return redirect()->route('admin.categories.show', $category)->with('success', 'Categoría actualizada.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted.');
+        return redirect()->route('admin.categories.index')->with('success', 'Categoría eliminada.');
     }
 }

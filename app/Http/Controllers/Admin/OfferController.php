@@ -38,7 +38,7 @@ class OfferController extends Controller
         RecordsActivity::log('offer.accepted', $offer);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Offer accepted.');
+        return back()->with('success', 'Oferta aceptada.');
     }
 
     public function decline(Request $request, Offer $offer): RedirectResponse
@@ -53,7 +53,7 @@ class OfferController extends Controller
         RecordsActivity::log('offer.declined', $offer);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Offer declined.');
+        return back()->with('success', 'Oferta rechazada.');
     }
 
     public function counter(CounterOfferRequest $request, Offer $offer): RedirectResponse
@@ -71,7 +71,7 @@ class OfferController extends Controller
         ]);
         $this->notifyBuyer($offer);
 
-        return back()->with('success', 'Counter offer sent.');
+        return back()->with('success', 'Contraoferta enviada.');
     }
 
     private function notifyBuyer(Offer $offer): void
