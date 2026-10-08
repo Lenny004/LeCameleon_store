@@ -307,7 +307,7 @@ CREATE TABLE shipments (
     order_id            UUID NOT NULL REFERENCES orders (id) ON DELETE CASCADE,
     carrier             VARCHAR(100),
     tracking_number     VARCHAR(150),
-    status              VARCHAR(20) NOT NULL DEFAULT 'pending', -- pending|shipped|in_transit|delivered|returned|failed
+    status              VARCHAR(30) NOT NULL DEFAULT 'pending', -- pending|shipped|in_transit|delivered|returned|returned_to_warehouse|failed
     shipped_at          TIMESTAMPTZ,
     delivered_at        TIMESTAMPTZ,
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),

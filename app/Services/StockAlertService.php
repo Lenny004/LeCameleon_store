@@ -47,7 +47,7 @@ class StockAlertService
             ->get();
 
         foreach ($alerts as $alert) {
-            Mail::to($alert->email)->send(new StockAvailable($product));
+            Mail::to($alert->email)->queue((new StockAvailable($product))->afterCommit());
             $alert->update(['notified_at' => now()]);
         }
     }
