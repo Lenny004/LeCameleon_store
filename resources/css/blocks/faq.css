@@ -92,8 +92,8 @@
 /* Icono chevron con fondo suave al abrir */
 .faq__icon {
     flex-shrink: 0;
-    width: var(--icon-size-lg);
-    height: var(--icon-size-lg);
+    inline-size: var(--icon-size-lg);
+    block-size: var(--icon-size-lg);
     padding: 0.125rem;
     color: var(--accent);
     border-radius: var(--radius-full);

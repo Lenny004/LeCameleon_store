@@ -6,7 +6,7 @@
     <div class="header__utility">
         <div class="header__utility-inner">
             <p class="header__utility-text">
-                <svg class="header__utility-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <svg class="header__utility-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
                 Envíos en todo El Salvador
@@ -46,7 +46,7 @@
                             autocomplete="off"
                         >
                         <button type="submit" class="header__search-btn" aria-label="Buscar">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true">
+                            <svg class="header__search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <circle cx="11" cy="11" r="7"/>
                                 <path d="M20 20l-3.5-3.5"/>
                             </svg>
@@ -75,7 +75,7 @@
                 @if (Route::has('cart.index'))
                     <a href="{{ route('cart.index') }}" class="header__cart">
                         <span class="header__cart-icon-wrap">
-                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <svg class="header__cart-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                                 <line x1="3" y1="6" x2="21" y2="6"/>
                                 <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -98,7 +98,7 @@
                 </div>
 
                 <button type="button" class="header__menu-toggle" @click="toggle()" :aria-label="open ? 'Cerrar menú' : 'Abrir menú'" :aria-expanded="open ? 'true' : 'false'" aria-controls="mobile-nav">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="header__menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <line x1="3" y1="12" x2="21" y2="12"/>
                         <line x1="3" y1="6" x2="21" y2="6"/>
                         <line x1="3" y1="18" x2="21" y2="18"/>
@@ -147,7 +147,7 @@
             <div class="mobile-nav__actions">
                 @include('components.theme-toggle')
                 <button type="button" class="mobile-nav__close" @click="close()" aria-label="Cerrar menú">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="mobile-nav__close-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <line x1="18" y1="6" x2="6" y2="18"/>
                         <line x1="6" y1="6" x2="18" y2="18"/>
                     </svg>
@@ -173,7 +173,7 @@
                     autocomplete="off"
                 >
                 <button type="submit" class="mobile-nav__search-btn" aria-label="Buscar">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="mobile-nav__search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <circle cx="11" cy="11" r="7"/>
                         <path d="M20 20l-3.5-3.5"/>
                     </svg>

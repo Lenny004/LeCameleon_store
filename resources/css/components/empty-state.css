@@ -45,8 +45,8 @@
 }
 
 .empty-state__icon {
-    width: 2.25rem;
-    height: 2.25rem;
+    inline-size: var(--icon-size-2xl);
+    block-size: var(--icon-size-2xl);
     color: var(--accent-hover);
 }
 

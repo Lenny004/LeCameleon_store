@@ -179,6 +179,8 @@
 }
 
 .filter-panel__toggle-icon {
+    inline-size: var(--icon-size-md);
+    block-size: var(--icon-size-md);
     flex-shrink: 0;
     color: var(--shop-accent);
 }
@@ -515,6 +517,10 @@
 }
 
 /* Rejilla de resultados */
+.shop-results {
+    min-width: 0;
+}
+
 .shop-results__grid {
     gap: var(--space-md);
 }

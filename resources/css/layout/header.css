@@ -22,7 +22,7 @@
 }
 
 /* Bloquea scroll del documento cuando el menú móvil está abierto */
-body.has-mobile-nav-open {
+.has-mobile-nav-open {
     overflow: hidden;
 }
 
@@ -83,6 +83,8 @@ body.has-mobile-nav-open {
 }
 
 .header__utility-icon {
+    inline-size: var(--icon-size-xs);
+    block-size: var(--icon-size-xs);
     flex-shrink: 0;
     color: var(--accent);
 }
@@ -230,6 +232,13 @@ body.has-mobile-nav-open {
     transition: filter var(--transition);
 }
 
+.header__search-icon,
+.mobile-nav__search-icon {
+    inline-size: var(--icon-size-md);
+    block-size: var(--icon-size-md);
+    flex-shrink: 0;
+}
+
 .header__search-btn:hover {
     filter: brightness(1.06);
 }
@@ -333,6 +342,12 @@ body.has-mobile-nav-open {
     flex-shrink: 0;
 }
 
+.header__cart-icon {
+    inline-size: var(--icon-size-xl);
+    block-size: var(--icon-size-xl);
+    flex-shrink: 0;
+}
+
 .header__cart-count {
     position: absolute;
     top: -0.375rem;
@@ -370,6 +385,13 @@ body.has-mobile-nav-open {
     color: var(--text);
     cursor: pointer;
     transition: border-color var(--transition), background-color var(--transition);
+}
+
+.header__menu-icon,
+.mobile-nav__close-icon {
+    inline-size: var(--icon-size-lg);
+    block-size: var(--icon-size-lg);
+    flex-shrink: 0;
 }
 
 .header__menu-toggle:hover {

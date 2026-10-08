@@ -96,12 +96,13 @@
     --transition: 180ms ease;
     --transition-slow: 280ms ease;
 
-    /* Iconos: 14 / 16 / 18 / 20 / 24 px con base de 16 px. */
+    /* Iconos: 14 / 16 / 18 / 20 / 24 / 36 px con base de 16 px. */
     --icon-size-xs: 0.875rem;
     --icon-size-sm: 1rem;
     --icon-size-md: 1.125rem;
     --icon-size-lg: 1.25rem;
     --icon-size-xl: 1.5rem;
+    --icon-size-2xl: 2.25rem;
 
     /* ------------------------------------------------------------------
        Foco accesible

@@ -29,7 +29,7 @@
 <div class="container shop-layout" x-data="filterPanel()">
     <aside class="shop-layout__sidebar">
         <button type="button" class="filter-panel__toggle" @click="toggle()" :aria-expanded="open">
-            <svg class="filter-panel__toggle-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="filter-panel__toggle-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M4 6h16M4 12h16M4 18h10"/>
             </svg>
             <span x-text="open ? 'Ocultar filtros' : 'Mostrar filtros'"></span>

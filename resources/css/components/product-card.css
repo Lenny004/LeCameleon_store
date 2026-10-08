@@ -264,6 +264,12 @@
         box-shadow var(--transition);
 }
 
+.product-card__wishlist-icon {
+    inline-size: var(--icon-size-md);
+    block-size: var(--icon-size-md);
+    flex-shrink: 0;
+}
+
 :root:not([data-theme="dark"]) .product-card__wishlist {
     background: color-mix(in srgb, var(--surface) 92%, transparent);
 }

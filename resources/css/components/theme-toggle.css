@@ -57,8 +57,9 @@
    ========================================================================== */
 
 .theme-toggle__icon {
-    width: var(--icon-size-md);
-    height: var(--icon-size-md);
+    inline-size: var(--icon-size-md);
+    block-size: var(--icon-size-md);
+    flex-shrink: 0;
 }
 
 .theme-toggle__icon--sun {
