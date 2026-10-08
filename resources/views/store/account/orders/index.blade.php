@@ -11,6 +11,9 @@
         @if (Route::has('account.orders.index'))
             <a href="{{ route('account.orders.index') }}" class="account-nav__link account-nav__link--active">Mis pedidos</a>
         @endif
+        @if (Route::has('account.addresses.index'))
+            <a href="{{ route('account.addresses.index') }}" class="account-nav__link">Direcciones</a>
+        @endif
         @if (Route::has('account.offers.index'))
             <a href="{{ route('account.offers.index') }}" class="account-nav__link">Mis ofertas</a>
         @endif

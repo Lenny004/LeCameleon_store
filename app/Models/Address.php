@@ -14,6 +14,13 @@ class Address extends Model
 {
     use HasUuids;
 
+    protected static function booted(): void
+    {
+        static::creating(function (self $address): void {
+            $address->country = $address->country ?: 'SV';
+        });
+    }
+
     protected $fillable = [
         'user_id',
         'type',
@@ -27,6 +34,7 @@ class Address extends Model
         'state',
         'postal_code',
         'country',
+        'sv_municipality_id',
         'phone',
         'is_default',
     ];
@@ -42,5 +50,10 @@ class Address extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function municipality(): BelongsTo
+    {
+        return $this->belongsTo(SvMunicipality::class, 'sv_municipality_id');
     }
 }
