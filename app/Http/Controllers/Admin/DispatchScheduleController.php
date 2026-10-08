@@ -48,7 +48,7 @@ class DispatchScheduleController extends Controller
             'next_dispatch_at' => ['required', 'date'],
             'cutoff_at' => ['required', 'date'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 }

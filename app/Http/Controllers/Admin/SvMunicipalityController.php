@@ -32,9 +32,9 @@ class SvMunicipalityController extends Controller
     public function update(Request $request, SvMunicipality $svMunicipality): RedirectResponse
     {
         $data = $request->validate([
-            'base_shipping_cost' => ['required', 'numeric', 'min:0'],
-            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
-            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'base_shipping_cost' => ['required', 'decimal:0,2', 'min:0', 'max:99999999.99'],
+            'latitude' => ['nullable', 'decimal:0,7', 'between:-90,90'],
+            'longitude' => ['nullable', 'decimal:0,7', 'between:-180,180'],
             'is_active' => ['sometimes', 'boolean'],
         ]);
 

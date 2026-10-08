@@ -91,9 +91,9 @@ class LogisticsVehicleController extends Controller
             'year' => ['nullable', 'integer', 'min:1980', 'max:2100'],
             'color' => ['nullable', 'string', 'max:40'],
             'vehicle_type' => ['required', Rule::enum(VehicleType::class)],
-            'capacity_kg' => ['nullable', 'numeric', 'min:0'],
+            'capacity_kg' => ['nullable', 'decimal:0,2', 'min:0', 'max:999999.99'],
             'is_active' => ['sometimes', 'boolean'],
-            'notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string', 'max:5000'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 
