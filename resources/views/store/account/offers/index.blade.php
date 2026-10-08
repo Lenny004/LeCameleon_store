@@ -35,7 +35,7 @@
                     <div>
                         <p class="order-card__id">
                             @if ($offer->product && Route::has('shop.show'))
-                                <a href="{{ route('shop.show', $offer->product->slug) }}">{{ $offer->product->name }}</a>
+                                <a class="order-card__id-link" href="{{ route('shop.show', $offer->product->slug) }}">{{ $offer->product->name }}</a>
                             @else
                                 {{ $offer->product?->name ?? 'Producto' }}
                             @endif

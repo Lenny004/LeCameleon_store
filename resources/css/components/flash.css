@@ -39,12 +39,12 @@
     border-inline-start-color: var(--accent);
 }
 
-.flash ul {
+.flash__list {
     margin: var(--space-xs) 0 0;
     padding-left: 1.25rem;
 }
 
-.flash li + li {
+.flash__list-item + .flash__list-item {
     margin-top: var(--space-2xs);
 }
 

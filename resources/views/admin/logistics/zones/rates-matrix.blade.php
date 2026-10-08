@@ -21,20 +21,20 @@
         <div class="logistics-rates-matrix">
             <table class="logistics-rates-matrix__table">
                 <thead>
-                    <tr>
-                        <th>Origin \ Dest</th>
+                    <tr class="logistics-rates-matrix__row">
+                        <th class="logistics-rates-matrix__cell logistics-rates-matrix__header-cell logistics-rates-matrix__cell--sticky">Origin \ Dest</th>
                         @foreach ($zones as $dest)
-                            <th>{{ $dest->code }}</th>
+                            <th class="logistics-rates-matrix__cell logistics-rates-matrix__header-cell">{{ $dest->code }}</th>
                         @endforeach
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($zones as $origin)
-                        <tr>
-                            <th>{{ $origin->code }}</th>
+                        <tr class="logistics-rates-matrix__row">
+                            <th class="logistics-rates-matrix__cell logistics-rates-matrix__header-cell logistics-rates-matrix__cell--sticky">{{ $origin->code }}</th>
                             @foreach ($zones as $dest)
                                 @php $key = "{$origin->id}:{$dest->id}"; @endphp
-                                <td>
+                                <td class="logistics-rates-matrix__cell">
                                     <input type="number" step="0.01" min="0" name="rates[{{ $key }}]" class="form-input logistics-rates-matrix__input" value="{{ old("rates.{$key}", $rates->get($key)?->base_fee) }}">
                                 </td>
                             @endforeach

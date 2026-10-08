@@ -29,7 +29,7 @@
                             <input
                                 type="email"
                                 name="email"
-                                class="footer__newsletter-input @error('email') form-input--error @enderror"
+                                class="footer__newsletter-input @error('email') form-input--error footer__newsletter-input--error @enderror"
                                 placeholder="Tu correo"
                                 value="{{ old('email') }}"
                                 required

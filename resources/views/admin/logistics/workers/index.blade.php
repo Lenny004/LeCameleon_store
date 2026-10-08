@@ -13,7 +13,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -27,12 +27,12 @@
         <tbody>
             @forelse ($workers as $worker)
                 <tr>
-                    <td><a href="{{ route('admin.logistics.workers.show', $worker) }}" class="logistics-link">{{ $worker->fullName() }}</a></td>
+                    <td><a class="admin-table__link logistics-link" href="{{ route('admin.logistics.workers.show', $worker) }}">{{ $worker->fullName() }}</a></td>
                     <td><code>{{ $worker->document_id ?: '—' }}</code></td>
                     <td>{{ ucfirst($worker->role->value) }}</td>
                     <td>{{ $worker->company?->name ?? '—' }}</td>
                     <td><span class="badge badge--{{ $worker->is_active ? 'success' : 'warning' }}">{{ $worker->is_active ? 'Active' : 'Inactive' }}</span></td>
-                    <td><a href="{{ route('admin.logistics.workers.edit', $worker) }}" class="btn btn--ghost btn--sm">Edit</a></td>
+                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.workers.edit', $worker) }}">Edit</a></td>
                 </tr>
             @empty
                 <tr><td colspan="6" class="text-muted">No workers yet.</td></tr>

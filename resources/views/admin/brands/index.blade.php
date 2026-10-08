@@ -10,7 +10,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Brand</th>
@@ -22,11 +22,11 @@
         <tbody>
             @forelse ($brands as $brand)
                 <tr>
-                    <td><a href="{{ route('admin.brands.show', $brand) }}">{{ $brand->name }}</a></td>
+                    <td><a class="admin-table__link" href="{{ route('admin.brands.show', $brand) }}">{{ $brand->name }}</a></td>
                     <td><code>{{ $brand->slug }}</code></td>
                     <td>{{ $brand->products_count }}</td>
                     <td>
-                        <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn--ghost btn--sm">Edit</a>
+                        <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.brands.edit', $brand) }}">Edit</a>
                         <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" onsubmit="return confirm('Delete this brand?');" style="display:inline;">
                             @csrf
                             @method('DELETE')

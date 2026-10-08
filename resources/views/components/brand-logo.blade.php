@@ -32,12 +32,20 @@
     $contextClass = in_array($context, ['header', 'guest', 'hero'], true)
         ? 'brand-logo--ctx-'.$context
         : null;
+    $autoSizeClass = $variant === 'auto' && in_array($size, ['lg', 'xl'], true)
+        ? 'brand-logo--auto-'.$size
+        : null;
+    $contextSizeClass = $contextClass && in_array($size, ['sm', 'md', 'lg', 'xl'], true)
+        ? $contextClass.'-'.$size
+        : null;
 
     $classes = trim(implode(' ', array_filter([
         'brand-logo',
         'brand-logo--'.$variant,
         'brand-logo--'.$size,
+        $autoSizeClass,
         $contextClass,
+        $contextSizeClass,
         $inverted ? 'brand-logo--inverted' : null,
         $attributes->get('class'),
     ])));
@@ -84,7 +92,7 @@
             >
         @endif
         @unless ($hasCompact || $hasHorizontal || $hasWide)
-            <span class="brand-logo__fallback">Le <span>Cameleon</span></span>
+            <span class="brand-logo__fallback">Le <span class="brand-logo__fallback-name">Cameleon</span></span>
         @endunless
     @elseif ($variant === 'compact' && $hasCompact)
         <img
@@ -114,6 +122,6 @@
             height="58"
         >
     @else
-        <span class="brand-logo__fallback">Le <span>Cameleon</span></span>
+        <span class="brand-logo__fallback">Le <span class="brand-logo__fallback-name">Cameleon</span></span>
     @endif
 </{{ $tag }}>

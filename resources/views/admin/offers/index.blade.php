@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Product</th>
@@ -22,7 +22,7 @@
             @forelse ($offers as $offer)
                 <tr>
                     <td>
-                        <a href="{{ $offer->product ? url('/shop/'.$offer->product->slug) : '#' }}">
+                        <a class="admin-table__link" href="{{ $offer->product ? url('/shop/'.$offer->product->slug) : '#' }}">
                             {{ $offer->product?->name ?? '—' }}
                         </a>
                         @if ($offer->product)

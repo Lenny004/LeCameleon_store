@@ -16,7 +16,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>SKU</th>
@@ -57,7 +57,7 @@
                     <td>
                         <div class="table__actions">
                             @if (Route::has('admin.products.edit'))
-                                <a href="{{ route('admin.products.edit', $product) }}" class="btn btn--ghost btn--sm">Edit</a>
+                                <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.products.edit', $product) }}">Edit</a>
                             @endif
                         </div>
                     </td>

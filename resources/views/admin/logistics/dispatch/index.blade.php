@@ -34,7 +34,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Name</th>

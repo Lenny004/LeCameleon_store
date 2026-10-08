@@ -10,7 +10,7 @@
 @endif
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>From</th>
@@ -25,7 +25,7 @@
                 <tr @class(['table__row--muted' => $message->read_at])>
                     <td>
                         <strong>{{ $message->name }}</strong>
-                        <br><a href="mailto:{{ $message->email }}">{{ $message->email }}</a>
+                        <br><a class="admin-table__link" href="mailto:{{ $message->email }}">{{ $message->email }}</a>
                     </td>
                     <td style="max-width:24rem;white-space:pre-wrap;">{{ Str::limit($message->message, 200) }}</td>
                     <td>

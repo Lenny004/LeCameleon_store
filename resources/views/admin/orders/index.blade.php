@@ -13,7 +13,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Order</th>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         @if (Route::has('admin.orders.show'))
-                            <a href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
+                            <a class="admin-table__link" href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
                         @else
                             {{ $order->number }}
                         @endif
@@ -42,7 +42,7 @@
                     <td>{{ $order->placed_at?->format('Y-m-d') ?? '—' }}</td>
                     <td>
                         @if (Route::has('admin.orders.show'))
-                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn--ghost btn--sm">View</a>
+                            <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.orders.show', $order) }}">View</a>
                         @endif
                     </td>
                 </tr>

@@ -60,16 +60,16 @@
 
                         <dl class="shipping-quote__meta">
                             <div class="shipping-quote__meta-row">
-                                <dt>Entrega estimada</dt>
-                                <dd x-text="formatEta(quote.eta_hours)"></dd>
+                                <dt class="shipping-quote__meta-term">Entrega estimada</dt>
+                                <dd class="shipping-quote__meta-value" x-text="formatEta(quote.eta_hours)"></dd>
                             </div>
                             <div class="shipping-quote__meta-row">
-                                <dt>Próximo despacho</dt>
-                                <dd x-text="formatDispatch(quote.next_dispatch_at)"></dd>
+                                <dt class="shipping-quote__meta-term">Próximo despacho</dt>
+                                <dd class="shipping-quote__meta-value" x-text="formatDispatch(quote.next_dispatch_at)"></dd>
                             </div>
                             <div class="shipping-quote__meta-row" x-show="quote.distance_km">
-                                <dt>Distancia aprox.</dt>
-                                <dd x-text="quote.distance_km + ' km'"></dd>
+                                <dt class="shipping-quote__meta-term">Distancia aprox.</dt>
+                                <dd class="shipping-quote__meta-value" x-text="quote.distance_km + ' km'"></dd>
                             </div>
                         </dl>
 

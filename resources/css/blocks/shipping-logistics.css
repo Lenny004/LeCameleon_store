@@ -89,12 +89,12 @@
     line-height: var(--line-height-snug);
 }
 
-.shipping-quote__meta-row dt {
+.shipping-quote__meta-term {
     color: var(--text-muted);
     font-weight: 500;
 }
 
-.shipping-quote__meta-row dd {
+.shipping-quote__meta-value {
     margin: 0;
     font-weight: 600;
     text-align: right;
@@ -401,9 +401,4 @@
     color: var(--text-muted);
     margin-top: var(--space-xs);
     font-size: 0.8125rem;
-}
-
-/* Alpine.js: ocultar hasta hidratar */
-[x-cloak] {
-    display: none !important;
 }

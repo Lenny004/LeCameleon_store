@@ -12,7 +12,7 @@
 </div>
 
 <div class="table-wrap">
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
                 <th>Code</th>
@@ -28,7 +28,7 @@
         <tbody>
             @forelse ($coupons as $coupon)
                 <tr>
-                    <td><a href="{{ route('admin.coupons.show', $coupon) }}"><code>{{ $coupon->code }}</code></a></td>
+                    <td><a class="admin-table__link" href="{{ route('admin.coupons.show', $coupon) }}"><code>{{ $coupon->code }}</code></a></td>
                     <td>{{ ucfirst($coupon->type->value) }}</td>
                     <td>{{ $coupon->type->value === 'percent' ? $coupon->value.'%' : '$'.number_format((float) $coupon->value, 2) }}</td>
                     <td>{{ $coupon->shipping_only ? 'Shipping' : 'Order' }}</td>
@@ -40,7 +40,7 @@
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('admin.coupons.edit', $coupon) }}" class="btn btn--ghost btn--sm">Edit</a>
+                        <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.coupons.edit', $coupon) }}">Edit</a>
                         <form method="POST" action="{{ route('admin.coupons.destroy', $coupon) }}" onsubmit="return confirm('Delete this coupon?');" style="display:inline;">
                             @csrf
                             @method('DELETE')
