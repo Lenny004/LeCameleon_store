@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Order cancelled</title>
+<meta charset="utf-8">
+<title>Pedido cancelado</title>
 </head>
 <body style="font-family: sans-serif; line-height: 1.5; color: #222;">
-    <h1>Order cancelled</h1>
-    <p>Order <strong>{{ $order->number }}</strong> has been cancelled.</p>
-    <p>If you have questions, please contact our support team.</p>
+<h1>Pedido cancelado</h1>
+<p>Tu pedido <strong>{{ $order->number }}</strong> fue cancelado.</p>
+<p>Si tienes preguntas, responde a este correo o escríbenos desde la página de contacto.</p>
 </body>
 </html>

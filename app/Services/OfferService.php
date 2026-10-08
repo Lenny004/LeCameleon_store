@@ -33,7 +33,7 @@ class OfferService
 
         $offer->load(['product', 'user']);
 
-        Mail::to(config('mail.from.address'))->send(new OfferReceived($offer));
+        Mail::to(config('mail.from.address'))->queue((new OfferReceived($offer))->afterCommit());
 
         return $offer;
     }
