@@ -39,7 +39,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.show', $vehicle)
-            ->with('success', 'Vehicle created.');
+            ->with('success', 'Vehículo creado.');
     }
 
     public function show(LogisticsVehicle $vehicle): View
@@ -65,7 +65,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.show', $vehicle)
-            ->with('success', 'Vehicle updated.');
+            ->with('success', 'Vehículo actualizado.');
     }
 
     public function destroy(LogisticsVehicle $vehicle): RedirectResponse
@@ -74,7 +74,7 @@ class LogisticsVehicleController extends Controller
 
         return redirect()
             ->route('admin.logistics.vehicles.index')
-            ->with('success', 'Vehicle removed.');
+            ->with('success', 'Vehículo eliminado.');
     }
 
     /**

@@ -73,7 +73,7 @@ class TrackingPageTest extends TestCase
             ->assertSee($trackingCode, false)
             ->assertSee('San Salvador Centro', false)
             ->assertSee('En tránsito', false)
-            ->assertSee('Salió de bodega.', false);
+            ->assertDontSee('Salió de bodega.', false);
     }
 
     public function test_tracking_show_shows_not_found_for_unknown_code(): void

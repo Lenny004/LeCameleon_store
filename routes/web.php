@@ -76,6 +76,7 @@ Route::post('/tracking', [TrackingController::class, 'lookup'])
     ->middleware('throttle:30,1')
     ->name('tracking.lookup');
 Route::get('/tracking/{code}', [TrackingController::class, 'show'])
+    ->middleware('throttle:30,1')
     ->where('code', '[A-Za-z0-9\-]+')
     ->name('tracking.show');
 

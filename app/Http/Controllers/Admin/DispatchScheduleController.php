@@ -21,21 +21,21 @@ class DispatchScheduleController extends Controller
     {
         DispatchSchedule::query()->create($this->validated($request));
 
-        return back()->with('success', 'Dispatch schedule created.');
+        return back()->with('success', 'Horario de despacho creado.');
     }
 
     public function update(Request $request, DispatchSchedule $schedule): RedirectResponse
     {
         $schedule->update($this->validated($request));
 
-        return back()->with('success', 'Dispatch schedule updated.');
+        return back()->with('success', 'Horario de despacho actualizado.');
     }
 
     public function destroy(DispatchSchedule $schedule): RedirectResponse
     {
         $schedule->delete();
 
-        return back()->with('success', 'Dispatch schedule removed.');
+        return back()->with('success', 'Horario de despacho eliminado.');
     }
 
     /**

@@ -26,7 +26,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email', 'max:255'],
-            'password' => ['required', 'string'],
+            'password' => ['required', 'string', 'max:255'],
             'remember' => ['sometimes', 'boolean'],
         ];
     }
@@ -46,7 +46,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => 'Credenciales incorrectas.',
+                'email' => __('auth.failed'),
             ]);
         }
 
@@ -67,7 +67,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => "Demasiados intentos. Intenta de nuevo en {$seconds} segundos.",
+            'email' => __('auth.throttle', ['seconds' => $seconds]),
         ]);
     }
 

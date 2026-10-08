@@ -45,7 +45,7 @@ class InventoryService
             function (Product $locked) use ($quantity, $fromReservation) {
                 if ($locked->quantity_available < $quantity) {
                     throw ValidationException::withMessages([
-                        'quantity' => 'Insufficient stock available.',
+                        'quantity' => 'No hay existencias suficientes.',
                     ]);
                 }
 
@@ -54,7 +54,7 @@ class InventoryService
                 if ($fromReservation) {
                     if ($locked->quantity_reserved < $quantity) {
                         throw ValidationException::withMessages([
-                            'quantity' => 'Insufficient reserved stock.',
+                            'quantity' => 'No hay existencias reservadas suficientes.',
                         ]);
                     }
 
@@ -85,7 +85,7 @@ class InventoryService
 
                 if ($quantity > $sellable) {
                     throw ValidationException::withMessages([
-                        'quantity' => "Only {$sellable} unit(s) available for {$locked->name}.",
+                        'quantity' => "Solo hay {$sellable} unidad(es) disponibles de {$locked->name}.",
                     ]);
                 }
 
@@ -113,7 +113,7 @@ class InventoryService
             function (Product $locked) use ($quantity) {
                 if ($locked->quantity_reserved < $quantity) {
                     throw ValidationException::withMessages([
-                        'quantity' => 'Cannot release more than reserved quantity.',
+                        'quantity' => 'No se puede liberar más que la cantidad reservada.',
                     ]);
                 }
 
@@ -169,7 +169,7 @@ class InventoryService
     ): InventoryMovement {
         if ($quantity <= 0) {
             throw ValidationException::withMessages([
-                'quantity' => 'Quantity must be greater than zero.',
+                'quantity' => 'La cantidad debe ser mayor que cero.',
             ]);
         }
 

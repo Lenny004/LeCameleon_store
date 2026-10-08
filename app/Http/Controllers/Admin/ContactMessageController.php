@@ -23,6 +23,6 @@ class ContactMessageController extends Controller
     {
         $message->markAsRead();
 
-        return back()->with('success', 'Message marked as read.');
+        return back()->with('success', 'Mensaje marcado como leído.');
     }
 }

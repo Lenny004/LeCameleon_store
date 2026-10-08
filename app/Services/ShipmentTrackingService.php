@@ -80,7 +80,7 @@ class ShipmentTrackingService
             'destination_municipality_id' => $destinationMunicipalityId,
         ]);
 
-        $this->appendEvent($shipment, ShipmentStatus::Pending, note: 'Shipment created.');
+        $this->appendEvent($shipment, ShipmentStatus::Pending, note: 'Envío creado.');
 
         return $shipment->load('events');
     }

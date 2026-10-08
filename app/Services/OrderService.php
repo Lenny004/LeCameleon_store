@@ -38,7 +38,7 @@ class OrderService
 
         if (! in_array($newStatus->value, self::TRANSITIONS[$current] ?? [], true)) {
             throw ValidationException::withMessages([
-                'status' => "Cannot transition from {$current} to {$newStatus->value}.",
+                'status' => "No se puede cambiar el estado de {$current} a {$newStatus->value}.",
             ]);
         }
 

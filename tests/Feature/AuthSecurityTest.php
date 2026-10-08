@@ -66,7 +66,7 @@ class AuthSecurityTest extends TestCase
         $this->post('/login', [
             'email' => ' CUSTOMER@EXAMPLE.COM ',
             'password' => 'wrong-password',
-        ])->assertSessionHasErrors('email');
+        ])->assertSessionHasErrors(['email' => 'Las credenciales no son correctas.']);
 
         $this->post('/login', [
             'email' => ' CUSTOMER@EXAMPLE.COM ',
@@ -86,7 +86,9 @@ class AuthSecurityTest extends TestCase
             'email' => ' EXISTING@Example.COM ',
             'password' => 'valid-password',
             'password_confirmation' => 'valid-password',
-        ])->assertSessionHasErrors('email');
+        ])->assertSessionHasErrors([
+            'email' => 'No pudimos crear la cuenta con este correo. Si ya tienes una cuenta, inicia sesión.',
+        ]);
 
         $this->assertDatabaseCount('users', 1);
     }
@@ -126,7 +128,7 @@ class AuthSecurityTest extends TestCase
         $this->post('/login', [
             'email' => 'inactive@example.com',
             'password' => 'correct-password',
-        ])->assertSessionHasErrors('email');
+        ])->assertSessionHasErrors(['email' => 'Las credenciales no son correctas.']);
 
         $this->assertGuest();
 
@@ -135,6 +137,49 @@ class AuthSecurityTest extends TestCase
             ->assertRedirect(route('login'));
 
         $this->assertGuest();
+    }
+
+    public function test_login_uses_the_same_generic_message_for_missing_and_wrong_credentials(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'known@example.com',
+            'password' => 'correct-password',
+        ]);
+
+        $missingUserResponse = $this->post('/login', [
+            'email' => 'missing@example.com',
+            'password' => 'wrong-password',
+        ]);
+
+        $wrongPasswordResponse = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
+
+        $missingUserResponse->assertSessionHasErrors(['email' => 'Las credenciales no son correctas.']);
+        $wrongPasswordResponse->assertSessionHasErrors(['email' => 'Las credenciales no son correctas.']);
+    }
+
+    public function test_registration_empty_fields_are_named_in_spanish(): void
+    {
+        $this->post('/register', [])->assertSessionHasErrors([
+            'name' => 'El campo nombre es obligatorio.',
+            'email' => 'El campo correo electrónico es obligatorio.',
+            'password' => 'El campo contraseña es obligatorio.',
+            'password_confirmation' => 'El campo confirmación de contraseña es obligatorio.',
+        ]);
+    }
+
+    public function test_registration_rejects_a_name_longer_than_the_database_column(): void
+    {
+        $this->post('/register', [
+            'name' => str_repeat('A', 256),
+            'email' => 'long-name@example.com',
+            'password' => 'valid-password',
+            'password_confirmation' => 'valid-password',
+        ])->assertSessionHasErrors([
+            'name' => 'El campo nombre no debe tener más de 255 caracteres.',
+        ]);
     }
 
     public function test_admin_can_manage_user_security_fields(): void
