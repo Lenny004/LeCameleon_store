@@ -1,47 +1,47 @@
 @extends('layouts.admin')
 
-@section('title', 'Inventory')
-@section('page-title', 'Inventory')
-@section('page-subtitle', 'Stock levels and movements')
+@section('title', 'Inventario')
+@section('page-title', 'Inventario')
+@section('page-subtitle', 'Niveles y movimientos de existencias')
 
 @section('content')
 <div class="admin-page-header">
     <div>
         <h2 class="admin-page-header__title">Stock overview</h2>
-        <p class="admin-page-header__subtitle">{{ $lowStockCount }} items below threshold</p>
+        <p class="admin-page-header__subtitle">{{ $lowStockCount }} productos por debajo del umbral</p>
     </div>
 </div>
 
 <div class="kpi-grid admin-panel admin-panel--spaced">
     <div class="kpi-card">
-        <p class="kpi-card__label">Total SKUs</p>
+        <p class="kpi-card__label">SKU totales</p>
         <p class="kpi-card__value">{{ $totalSkus }}</p>
     </div>
     <div class="kpi-card">
-        <p class="kpi-card__label">In stock</p>
+        <p class="kpi-card__label">En existencia</p>
         <p class="kpi-card__value">{{ $inStock }}</p>
     </div>
     <div class="kpi-card">
-        <p class="kpi-card__label">Out of stock</p>
+        <p class="kpi-card__label">Agotados</p>
         <p class="kpi-card__value">{{ $outOfStock }}</p>
     </div>
 </div>
 
 <div class="card admin-panel admin-panel--spaced">
     <div class="card__header">
-        <h2 class="card__title">Current stock</h2>
+        <h2 class="card__title">Existencias actuales</h2>
     </div>
     <div class="table-wrap">
         <table class="table admin-table">
             <thead>
                 <tr>
                     <th>SKU</th>
-                    <th>Product</th>
-                    <th>Brand</th>
-                    <th>Category</th>
-                    <th>Available</th>
-                    <th>Reserved</th>
-                    <th>Sellable</th>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Categoría</th>
+                    <th>Disponible</th>
+                    <th>Reservado</th>
+                    <th>Vendible</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,10 +56,10 @@
                         <td>{{ $product->quantity_available }}</td>
                         <td>{{ $product->quantity_reserved }}</td>
                         <td><span class="badge badge--{{ $sellable > 0 ? ($sellable <= $product->low_stock_threshold ? 'warning' : 'success') : 'danger' }}">{{ $sellable }}</span></td>
-                        <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.products.edit', $product) }}">Edit product</a></td>
+                        <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.products.edit', $product) }}">Editar producto</a></td>
                     </tr>
                 @empty
-                    <tr><td colspan="8" class="text-muted">No products found.</td></tr>
+                    <tr><td colspan="8" class="text-muted">No se encontraron productos.</td></tr>
                 @endforelse
             </tbody>
         </table>
@@ -71,10 +71,11 @@
 
 <div class="card admin-panel admin-panel--spaced">
     <div class="card__header">
-        <h2 class="card__title">Adjust stock</h2>
+        <h2 class="card__title">Ajustar existencias</h2>
     </div>
     <form method="POST" action="{{ route('admin.inventory.store') }}" class="admin-form admin-form--inventory">
         @csrf
+        <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
         @if ($errors->any())
             <div class="flash flash--error" role="alert">
                 <ul class="admin-form__list">
@@ -85,38 +86,44 @@
             </div>
         @endif
         <div class="form-group">
-            <label class="form-label" for="product_id">Product</label>
-            <select id="product_id" name="product_id" class="form-select" required>
-                <option value="">Select product</option>
+            <label class="form-label" for="product_id">Producto <span class="form-label__required" aria-hidden="true">*</span></label>
+            <select id="product_id" name="product_id" class="form-select @error('product_id') form-select--error @enderror" required @error('product_id') aria-invalid="true" aria-describedby="product_id-error" @enderror>
+                <option value="" disabled {{ old('product_id') ? '' : 'selected' }}>Selecciona un producto</option>
                 @foreach ($products as $p)
                     <option value="{{ $p->id }}" @selected(old('product_id') === $p->id)>{{ $p->name }} ({{ $p->sku }})</option>
                 @endforeach
             </select>
+            @error('product_id')<span class="form-error" id="product_id-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-row form-row--cols-2">
             <div class="form-group" id="quantity-group">
-                <label class="form-label" for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" class="form-input" min="1" value="{{ old('quantity') }}" required>
+                <label class="form-label" for="quantity">Cantidad <span class="form-label__required" aria-hidden="true">*</span></label>
+                <input type="number" id="quantity" name="quantity" class="form-input @error('quantity') form-input--error @enderror" min="1" max="2147483647" step="1" inputmode="numeric" placeholder="1" value="{{ old('quantity') }}" required @error('quantity') aria-invalid="true" aria-describedby="quantity-error" @enderror>
+                @error('quantity')<span class="form-error" id="quantity-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
-                <label class="form-label" for="type">Type</label>
-                <select id="type" name="type" class="form-select" required>
-                    <option value="stock_in" @selected(old('type') === 'stock_in')>Stock in</option>
-                    <option value="stock_out" @selected(old('type') === 'stock_out')>Stock out</option>
-                    <option value="adjust" @selected(old('type') === 'adjust')>Adjustment</option>
+                <label class="form-label" for="type">Tipo <span class="form-label__required" aria-hidden="true">*</span></label>
+                <select id="type" name="type" class="form-select @error('type') form-select--error @enderror" required @error('type') aria-invalid="true" aria-describedby="type-error" @enderror>
+                    <option value="" disabled {{ old('type') ? '' : 'selected' }}>Selecciona un tipo</option>
+                    <option value="stock_in" @selected(old('type') === 'stock_in')>Entrada</option>
+                    <option value="stock_out" @selected(old('type') === 'stock_out')>Salida</option>
+                    <option value="adjust" @selected(old('type') === 'adjust')>Ajuste</option>
                 </select>
+                @error('type')<span class="form-error" id="type-error">{{ $message }}</span>@enderror
             </div>
         </div>
         <div class="form-group is-hidden" id="new-quantity-group">
-            <label class="form-label" for="new_quantity_available">New available quantity</label>
-            <input type="number" id="new_quantity_available" name="new_quantity_available" class="form-input" min="0" value="{{ old('new_quantity_available') }}">
-            <p class="text-muted admin-form__hint">Sets the product stock to this exact value.</p>
+            <label class="form-label" for="new_quantity_available">Nueva cantidad disponible <span class="form-label__required" aria-hidden="true">*</span></label>
+            <input type="number" id="new_quantity_available" name="new_quantity_available" class="form-input @error('new_quantity_available') form-input--error @enderror" min="0" max="2147483647" step="1" inputmode="numeric" placeholder="0" value="{{ old('new_quantity_available') }}" @error('new_quantity_available') aria-invalid="true" aria-describedby="new_quantity_available-error" @enderror>
+            @error('new_quantity_available')<span class="form-error" id="new_quantity_available-error">{{ $message }}</span>@enderror
+            <p class="text-muted admin-form__hint">Establece las existencias del producto en este valor exacto.</p>
         </div>
         <div class="form-group">
-            <label class="form-label" for="notes">Notes</label>
-            <input type="text" id="notes" name="notes" class="form-input" value="{{ old('notes') }}">
+            <label class="form-label" for="notes">Notas</label>
+            <input type="text" id="notes" name="notes" class="form-input @error('notes') form-input--error @enderror" maxlength="500" placeholder="Motivo del movimiento" value="{{ old('notes') }}" @error('notes') aria-invalid="true" aria-describedby="notes-error" @enderror>
+            @error('notes')<span class="form-error" id="notes-error">{{ $message }}</span>@enderror
         </div>
-        <button type="submit" class="btn btn--primary admin-form__submit">Record movement</button>
+        <button type="submit" class="btn btn--primary admin-form__submit">Registrar movimiento</button>
     </form>
 </div>
 
@@ -157,7 +164,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6">No movements recorded yet.</td>
+                        <td colspan="6">Aún no hay movimientos registrados.</td>
                     </tr>
                 @endforelse
             </tbody>

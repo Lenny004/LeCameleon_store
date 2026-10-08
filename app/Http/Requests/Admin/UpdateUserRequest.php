@@ -31,9 +31,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
-            'role' => ['required', Rule::enum(UserRole::class)],
+            'role' => ['required', 'string', 'max:20', Rule::enum(UserRole::class)],
             'is_active' => ['sometimes', 'boolean'],
-            'password' => ['nullable', Password::defaults()],
+            'password' => ['nullable', 'max:255', Password::defaults()],
         ];
     }
 }
