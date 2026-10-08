@@ -80,7 +80,7 @@ class TrackingPageTest extends TestCase
     {
         $this->get(route('tracking.show', ['code' => 'LC-SV-NOTFOUND']))
             ->assertOk()
-            ->assertSee('No encontramos ese código', false)
+            ->assertSee('No encontramos un envío con ese código.', false)
             ->assertSee('LC-SV-NOTFOUND', false);
     }
 }
