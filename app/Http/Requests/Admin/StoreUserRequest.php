@@ -26,8 +26,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
-            'password' => ['required', Password::defaults()],
-            'role' => ['required', Rule::enum(UserRole::class)],
+            'password' => ['required', 'max:255', Password::defaults()],
+            'role' => ['required', 'string', 'max:20', Rule::enum(UserRole::class)],
             'is_active' => ['sometimes', 'boolean'],
         ];
     }
