@@ -52,7 +52,7 @@ class AdminCatalogManagementTest extends TestCase
             ->get(route('admin.coupons.index'))
             ->assertOk()
             ->assertSee('REAL20', false)
-            ->assertSee('Shipping', false)
+            ->assertSee('Envío', false)
             ->assertSee(route('admin.coupons.show', $coupon), false)
             ->assertViewHas('coupons', fn ($items) => $items instanceof LengthAwarePaginator);
     }

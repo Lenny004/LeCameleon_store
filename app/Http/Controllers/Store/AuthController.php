@@ -7,12 +7,15 @@ use App\Http\Controllers\Concerns\ResolvesStoreSession;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\LoginRequest;
 use App\Http\Requests\Store\RegisterRequest;
+use App\Mail\AccountAlreadyExists;
 use App\Models\User;
 use App\Services\CartService;
 use App\Services\WishlistService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -47,18 +50,28 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request): RedirectResponse
     {
-        $user = User::query()->create([
-            ...$request->validated(),
-            'role' => UserRole::Customer,
-            'is_active' => true,
-        ]);
+        $data = $request->validated();
+        $email = $data['email'];
+        $user = User::query()->where('email', $email)->first();
 
-        Auth::login($user);
-        $request->session()->regenerate();
+        if ($user) {
+            Mail::to($email)->queue((new AccountAlreadyExists($email))->afterCommit());
+        } else {
+            $user = User::query()->create([
+                'name' => $data['name'],
+                'email' => $email,
+                'password' => $data['password'],
+                'role' => UserRole::Customer,
+                'is_active' => true,
+            ]);
 
-        $this->mergeGuestData($request);
+            event(new Registered($user));
+        }
 
-        return redirect()->route('home')->with('success', '¡Bienvenido a Le Cameleon!');
+        return redirect()->route('login')->with(
+            'success',
+            'Te enviamos un correo para continuar. Revisa tu bandeja de entrada.',
+        );
     }
 
     public function logout(Request $request): RedirectResponse
