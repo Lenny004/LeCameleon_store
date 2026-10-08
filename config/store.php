@@ -55,6 +55,13 @@ return [
     // Public-disk path used when a product image is missing or not found.
     'product_image_placeholder' => 'placeholders/vintage-product.jpg',
 
+    'product_thumbnail_max_side' => (int) env('PRODUCT_THUMBNAIL_MAX_SIDE', 400),
+
+    'feeds' => [
+        'enabled' => (bool) env('PRODUCT_FEEDS_ENABLED', true),
+        'token' => env('PRODUCT_FEEDS_TOKEN'),
+    ],
+
     // Static brand logos from legacy/LeCameleon/recursos/img (via LegacyPublicAssetsSeeder).
     // compact (logo_icon) → narrow; horizontal (logo) → header; wide (logo3) → hero/large.
     'brand_logo' => 'images/brand/logo.png',

@@ -33,6 +33,8 @@ Route::middleware(['auth', 'active', 'verified', 'role:admin|staff', 'two-factor
         Route::post('two-factor/regenerate', [TwoFactorController::class, 'regenerate'])->name('two-factor.regenerate');
         Route::post('two-factor/disable', [TwoFactorController::class, 'disable'])->name('two-factor.disable');
 
+        Route::post('products/{product}/duplicate', [ProductController::class, 'duplicate'])->name('products.duplicate');
+        Route::patch('products/bulk-status', [ProductController::class, 'bulkStatus'])->name('products.bulk-status');
         Route::resource('products', ProductController::class);
         Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
         Route::post('inventory', [InventoryController::class, 'store'])->name('inventory.store');
@@ -72,6 +74,7 @@ Route::middleware(['auth', 'active', 'verified', 'role:admin|staff', 'two-factor
         Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
         Route::patch('reviews/{review}/approve', [ReviewController::class, 'approve'])->name('reviews.approve');
         Route::patch('reviews/{review}/reject', [ReviewController::class, 'reject'])->name('reviews.reject');
+        Route::patch('reviews/{review}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
         Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
         Route::middleware('role:admin')->group(function () {

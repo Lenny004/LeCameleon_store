@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Vintage catalog product — apparel, object, or accessory.
@@ -20,6 +21,12 @@ class Product extends Model
 {
     /** @use HasFactory<ProductFactory> */
     use HasFactory, HasUuids, SoftDeletes;
+
+    protected static function booted(): void
+    {
+        static::saved(fn (): bool => Cache::forget('product-feeds:published-in-stock'));
+        static::deleted(fn (): bool => Cache::forget('product-feeds:published-in-stock'));
+    }
 
     protected $fillable = [
         'brand_id',
