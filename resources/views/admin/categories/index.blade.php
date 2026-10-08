@@ -1,23 +1,23 @@
 @extends('layouts.admin')
 
-@section('title', 'Categories')
-@section('page-title', 'Categories')
+@section('title', 'Categorías')
+@section('page-title', 'Categorías')
 
 @section('content')
 <div class="admin-page-header">
-    <h2 class="admin-page-header__title">Product categories</h2>
-    <a href="{{ route('admin.categories.create') }}" class="btn btn--primary">Add category</a>
+    <h2 class="admin-page-header__title">Categorías de productos</h2>
+    <a href="{{ route('admin.categories.create') }}" class="btn btn--primary">Añadir categoría</a>
 </div>
 
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Parent</th>
+                <th>Nombre</th>
+                <th>Superior</th>
                 <th>Slug</th>
-                <th>Products</th>
-                <th>Status</th>
+                <th>Productos</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,18 +28,18 @@
                     <td>{{ $category->parent?->name ?? '—' }}</td>
                     <td><code>{{ $category->slug }}</code></td>
                     <td>{{ $category->products_count }}</td>
-                    <td><span class="badge badge--{{ $category->is_active ? 'success' : 'warning' }}">{{ $category->is_active ? 'Active' : 'Inactive' }}</span></td>
+                        <td><span class="badge badge--{{ $category->is_active ? 'success' : 'warning' }}">{{ $category->is_active ? 'Activa' : 'Inactiva' }}</span></td>
                     <td>
-                        <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.categories.edit', $category) }}">Edit</a>
-                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('Delete this category?');" class="admin-inline-form">
+                        <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.categories.edit', $category) }}">Editar</a>
+                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('¿Eliminar esta categoría?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn--ghost btn--sm">Delete</button>
+                            <button type="submit" class="btn btn--ghost btn--sm" aria-label="Eliminar categoría {{ $category->name }}">Eliminar</button>
                         </form>
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-muted">No categories found.</td></tr>
+                <tr><td colspan="6" class="text-muted">No se encontraron categorías.</td></tr>
             @endforelse
         </tbody>
     </table>

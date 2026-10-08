@@ -68,15 +68,16 @@ class CouponController extends Controller
     {
         $data = $request->validate([
             'code' => ['required', 'string', 'max:50', Rule::unique('coupons', 'code')->ignore($coupon?->id)],
-            'type' => ['required', Rule::enum(CouponType::class)],
+            'type' => ['required', 'string', 'max:20', Rule::enum(CouponType::class)],
             'value' => [
                 'required',
-                'numeric',
+                'decimal:0,2',
                 'min:0',
+                'max:9999999999.99',
                 Rule::when($request->input('type') === CouponType::Percent->value, ['max:100']),
             ],
-            'min_order_amount' => ['nullable', 'numeric', 'min:0'],
-            'max_uses' => ['nullable', 'integer', 'min:1'],
+            'min_order_amount' => ['nullable', 'decimal:0,2', 'min:0', 'max:9999999999.99'],
+            'max_uses' => ['nullable', 'integer', 'min:1', 'max:2147483647'],
             'starts_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'is_active' => ['sometimes', 'boolean'],
