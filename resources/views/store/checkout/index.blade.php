@@ -1,6 +1,6 @@
 @extends('layouts.store')
 
-@section('title', 'Checkout — Le Cameleon')
+@section('title', 'Finalizar compra — Le Cameleon')
 
 @section('content')
 {{--
@@ -12,7 +12,7 @@
     flatRate: {{ (float) ($shipping ?? 0) }},
 })">
     <header class="checkout__header">
-        <h1 class="heading-2">Checkout</h1>
+        <h1 class="heading-2">Finalizar compra</h1>
     </header>
 
     <nav class="checkout-steps" aria-label="Pasos del checkout">
@@ -43,24 +43,29 @@
     <div class="checkout-layout">
         <form method="POST" action="{{ route('checkout.store') }}" class="checkout-form">
             @csrf
+            <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
 
             @guest
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Contacto</h2>
                 <div class="checkout-section__body">
                     <div class="form-group">
-                        <label class="form-label" for="email">Correo electrónico</label>
+                        <label class="form-label" for="email">Correo electrónico <span class="form-label__required" aria-hidden="true">*</span></label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             class="form-input @error('email') form-input--error @enderror"
                             value="{{ old('email') }}"
+                            placeholder="tu@correo.com"
+                            maxlength="255"
+                            inputmode="email"
                             required
                             autocomplete="email"
+                            @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
                         >
                         @error('email')
-                            <p class="form-error">{{ $message }}</p>
+                            <span class="form-error" id="email-error">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -72,45 +77,57 @@
                 <div class="checkout-section__body">
                     <div class="form-row form-row--cols-2">
                         <div class="form-group">
-                            <label class="form-label" for="shipping_first_name">Nombre</label>
+                            <label class="form-label" for="shipping_first_name">Nombre <span class="form-label__required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="shipping_first_name"
                                 name="shipping_address[first_name]"
                                 class="form-input @error('shipping_address.first_name') form-input--error @enderror"
                                 value="{{ old('shipping_address.first_name', auth()->user()->name ?? '') }}"
+                                placeholder="María"
+                                maxlength="100"
                                 required
                                 autocomplete="given-name"
+                                @error('shipping_address.first_name') aria-invalid="true" aria-describedby="shipping_address_first_name-error" @enderror
                             >
                             @error('shipping_address.first_name')
-                                <p class="form-error">{{ $message }}</p>
+                                <span class="form-error" id="shipping_address_first_name-error">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="shipping_last_name">Apellido</label>
+                            <label class="form-label" for="shipping_last_name">Apellido <span class="form-label__required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="shipping_last_name"
                                 name="shipping_address[last_name]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.last_name') form-input--error @enderror"
                                 value="{{ old('shipping_address.last_name') }}"
+                                placeholder="López"
+                                maxlength="100"
                                 required
                                 autocomplete="family-name"
+                                @error('shipping_address.last_name') aria-invalid="true" aria-describedby="shipping_address_last_name-error" @enderror
                             >
+                            @error('shipping_address.last_name')<span class="form-error" id="shipping_address_last_name-error">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
+
                     <div class="form-group">
-                        <label class="form-label" for="shipping_line1">Dirección</label>
+                        <label class="form-label" for="shipping_line1">Dirección <span class="form-label__required" aria-hidden="true">*</span></label>
                         <input
                             type="text"
                             id="shipping_line1"
                             name="shipping_address[line1]"
-                            class="form-input"
+                            class="form-input @error('shipping_address.line1') form-input--error @enderror"
                             value="{{ old('shipping_address.line1') }}"
+                            placeholder="Calle Principal 123"
+                            maxlength="255"
                             required
                             autocomplete="address-line1"
+                            @error('shipping_address.line1') aria-invalid="true" aria-describedby="shipping_address_line1-error" @enderror
                         >
+                        @error('shipping_address.line1')<span class="form-error" id="shipping_address_line1-error">{{ $message }}</span>@enderror
                     </div>
 
                     <div class="form-group">
@@ -118,7 +135,8 @@
                         <input type="hidden" name="destination_municipality_id" :value="municipalityId || ''">
                         <select
                             id="destination_municipality_id"
-                            class="form-select"
+                            class="form-select @error('destination_municipality_id') form-select--error @enderror"
+                            @error('destination_municipality_id') aria-invalid="true" aria-describedby="destination_municipality_id-error" @enderror
                             x-model="municipalityId"
                             @change="fetchQuote()"
                         >
@@ -138,6 +156,7 @@
                                 @endforeach
                             @endisset
                         </select>
+                        @error('destination_municipality_id')<span class="form-error" id="destination_municipality_id-error">{{ $message }}</span>@enderror
                         <p class="form-hint">Sin municipio seleccionado se aplica la tarifa plana de envío.</p>
                     </div>
 
@@ -147,24 +166,32 @@
                             type="text"
                             id="shipping_line2"
                             name="shipping_address[line2]"
-                            class="form-input"
+                            class="form-input @error('shipping_address.line2') form-input--error @enderror"
                             value="{{ old('shipping_address.line2') }}"
+                            placeholder="Apartamento, referencia o punto cercano"
+                            maxlength="255"
                             autocomplete="address-line2"
+                            @error('shipping_address.line2') aria-invalid="true" aria-describedby="shipping_address_line2-error" @enderror
                         >
+                        @error('shipping_address.line2')<span class="form-error" id="shipping_address_line2-error">{{ $message }}</span>@enderror
                     </div>
 
                     <div class="form-row form-row--cols-2">
                         <div class="form-group">
-                            <label class="form-label" for="shipping_city">Ciudad</label>
+                            <label class="form-label" for="shipping_city">Ciudad <span class="form-label__required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="shipping_city"
                                 name="shipping_address[city]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.city') form-input--error @enderror"
                                 value="{{ old('shipping_address.city') }}"
+                                placeholder="San Salvador"
+                                maxlength="100"
                                 required
                                 autocomplete="address-level2"
+                                @error('shipping_address.city') aria-invalid="true" aria-describedby="shipping_address_city-error" @enderror
                             >
+                            @error('shipping_address.city')<span class="form-error" id="shipping_address_city-error">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="shipping_state">Estado / provincia</label>
@@ -172,38 +199,51 @@
                                 type="text"
                                 id="shipping_state"
                                 name="shipping_address[state]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.state') form-input--error @enderror"
                                 value="{{ old('shipping_address.state') }}"
+                                placeholder="San Salvador"
+                                maxlength="100"
                                 autocomplete="address-level1"
+                                @error('shipping_address.state') aria-invalid="true" aria-describedby="shipping_address_state-error" @enderror
                             >
+                            @error('shipping_address.state')<span class="form-error" id="shipping_address_state-error">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="form-row form-row--cols-2">
                         <div class="form-group">
-                            <label class="form-label" for="shipping_postal_code">Código postal</label>
+                            <label class="form-label" for="shipping_postal_code">Código postal <span class="form-label__required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="shipping_postal_code"
                                 name="shipping_address[postal_code]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.postal_code') form-input--error @enderror"
                                 value="{{ old('shipping_address.postal_code') }}"
+                                placeholder="1101"
+                                maxlength="20"
+                                inputmode="numeric"
                                 required
                                 autocomplete="postal-code"
+                                @error('shipping_address.postal_code') aria-invalid="true" aria-describedby="shipping_address_postal_code-error" @enderror
                             >
+                            @error('shipping_address.postal_code')<span class="form-error" id="shipping_address_postal_code-error">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="shipping_country">País (ISO-2)</label>
+                            <label class="form-label" for="shipping_country">País (ISO-2) <span class="form-label__required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="shipping_country"
                                 name="shipping_address[country]"
-                                class="form-input"
+                                class="form-input @error('shipping_address.country') form-input--error @enderror"
                                 maxlength="2"
                                 value="{{ old('shipping_address.country', 'SV') }}"
+                                placeholder="SV"
+                                inputmode="text"
                                 required
                                 autocomplete="country"
+                                @error('shipping_address.country') aria-invalid="true" aria-describedby="shipping_address_country-error" @enderror
                             >
+                            @error('shipping_address.country')<span class="form-error" id="shipping_address_country-error">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
@@ -213,15 +253,20 @@
                             type="tel"
                             id="shipping_phone"
                             name="shipping_address[phone]"
-                            class="form-input"
+                            class="form-input @error('shipping_address.phone') form-input--error @enderror"
                             value="{{ old('shipping_address.phone') }}"
+                            placeholder="7777-7777"
+                            maxlength="30"
+                            inputmode="tel"
                             autocomplete="tel"
+                            @error('shipping_address.phone') aria-invalid="true" aria-describedby="shipping_address_phone-error" @enderror
                         >
+                        @error('shipping_address.phone')<span class="form-error" id="shipping_address_phone-error">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </section>
 
-            <section class="checkout-section">
+            <section class="checkout-section" x-data="{ sameAsShipping: @js(session()->hasOldInput() ? (bool) old('same_as_shipping') : true) }">
                 <h2 class="checkout-section__title">Facturación</h2>
                 <div class="checkout-section__body">
                     <label class="form-checkbox checkout-billing-toggle">
@@ -230,60 +275,63 @@
                             class="form-checkbox__input"
                             name="same_as_shipping"
                             value="1"
-                            checked
-                            x-data
-                            x-on:change="
-                                const billingFields = document.querySelectorAll('[data-billing-field]');
-                                billingFields.forEach((field) => {
-                                    field.closest('.form-group').style.display = $event.target.checked ? 'none' : '';
-                                });
-                            "
+                            @checked(session()->hasOldInput() ? (bool) old('same_as_shipping') : true)
+                            x-model="sameAsShipping"
                         >
                         Usar la misma dirección para facturación
                     </label>
 
-                    <div id="billing-fields" class="checkout-billing__fields" data-billing-block>
+                    <div id="billing-fields" class="checkout-billing__fields" data-billing-block x-show="!sameAsShipping" x-cloak>
                         <div class="form-row form-row--cols-2">
                             <div class="form-group">
-                                <label class="form-label" for="billing_first_name">Nombre</label>
-                                <input data-billing-field type="text" id="billing_first_name" name="billing_address[first_name]" class="form-input" value="{{ old('billing_address.first_name') }}">
+                                <label class="form-label" for="billing_first_name">Nombre <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input data-billing-field type="text" id="billing_first_name" name="billing_address[first_name]" class="form-input @error('billing_address.first_name') form-input--error @enderror" value="{{ old('billing_address.first_name') }}" placeholder="María" maxlength="100" autocomplete="given-name" x-bind:required="!sameAsShipping" @error('billing_address.first_name') aria-invalid="true" aria-describedby="billing_address_first_name-error" @enderror>
+                                @error('billing_address.first_name')<span class="form-error" id="billing_address_first_name-error">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="billing_last_name">Apellido</label>
-                                <input data-billing-field type="text" id="billing_last_name" name="billing_address[last_name]" class="form-input" value="{{ old('billing_address.last_name') }}">
+                                <label class="form-label" for="billing_last_name">Apellido <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input data-billing-field type="text" id="billing_last_name" name="billing_address[last_name]" class="form-input @error('billing_address.last_name') form-input--error @enderror" value="{{ old('billing_address.last_name') }}" placeholder="López" maxlength="100" autocomplete="family-name" x-bind:required="!sameAsShipping" @error('billing_address.last_name') aria-invalid="true" aria-describedby="billing_address_last_name-error" @enderror>
+                                @error('billing_address.last_name')<span class="form-error" id="billing_address_last_name-error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="billing_line1">Dirección</label>
-                            <input data-billing-field type="text" id="billing_line1" name="billing_address[line1]" class="form-input" value="{{ old('billing_address.line1') }}">
+                            <label class="form-label" for="billing_line1">Dirección <span class="form-label__required" aria-hidden="true">*</span></label>
+                            <input data-billing-field type="text" id="billing_line1" name="billing_address[line1]" class="form-input @error('billing_address.line1') form-input--error @enderror" value="{{ old('billing_address.line1') }}" placeholder="Calle Principal 123" maxlength="255" autocomplete="address-line1" x-bind:required="!sameAsShipping" @error('billing_address.line1') aria-invalid="true" aria-describedby="billing_address_line1-error" @enderror>
+                            @error('billing_address.line1')<span class="form-error" id="billing_address_line1-error">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="billing_line2">Línea 2</label>
-                            <input data-billing-field type="text" id="billing_line2" name="billing_address[line2]" class="form-input" value="{{ old('billing_address.line2') }}">
+                            <input data-billing-field type="text" id="billing_line2" name="billing_address[line2]" class="form-input @error('billing_address.line2') form-input--error @enderror" value="{{ old('billing_address.line2') }}" placeholder="Apartamento, referencia o punto cercano" maxlength="255" autocomplete="address-line2" @error('billing_address.line2') aria-invalid="true" aria-describedby="billing_address_line2-error" @enderror>
+                            @error('billing_address.line2')<span class="form-error" id="billing_address_line2-error">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-row form-row--cols-2">
                             <div class="form-group">
-                                <label class="form-label" for="billing_city">Ciudad</label>
-                                <input data-billing-field type="text" id="billing_city" name="billing_address[city]" class="form-input" value="{{ old('billing_address.city') }}">
+                                <label class="form-label" for="billing_city">Ciudad <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input data-billing-field type="text" id="billing_city" name="billing_address[city]" class="form-input @error('billing_address.city') form-input--error @enderror" value="{{ old('billing_address.city') }}" placeholder="San Salvador" maxlength="100" autocomplete="address-level2" x-bind:required="!sameAsShipping" @error('billing_address.city') aria-invalid="true" aria-describedby="billing_address_city-error" @enderror>
+                                @error('billing_address.city')<span class="form-error" id="billing_address_city-error">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="billing_state">Estado</label>
-                                <input data-billing-field type="text" id="billing_state" name="billing_address[state]" class="form-input" value="{{ old('billing_address.state') }}">
+                                <input data-billing-field type="text" id="billing_state" name="billing_address[state]" class="form-input @error('billing_address.state') form-input--error @enderror" value="{{ old('billing_address.state') }}" placeholder="San Salvador" maxlength="100" autocomplete="address-level1" @error('billing_address.state') aria-invalid="true" aria-describedby="billing_address_state-error" @enderror>
+                                @error('billing_address.state')<span class="form-error" id="billing_address_state-error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="form-row form-row--cols-2">
                             <div class="form-group">
-                                <label class="form-label" for="billing_postal_code">Código postal</label>
-                                <input data-billing-field type="text" id="billing_postal_code" name="billing_address[postal_code]" class="form-input" value="{{ old('billing_address.postal_code') }}">
+                                <label class="form-label" for="billing_postal_code">Código postal <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input data-billing-field type="text" id="billing_postal_code" name="billing_address[postal_code]" class="form-input @error('billing_address.postal_code') form-input--error @enderror" value="{{ old('billing_address.postal_code') }}" placeholder="1101" maxlength="20" inputmode="numeric" autocomplete="postal-code" x-bind:required="!sameAsShipping" @error('billing_address.postal_code') aria-invalid="true" aria-describedby="billing_address_postal_code-error" @enderror>
+                                @error('billing_address.postal_code')<span class="form-error" id="billing_address_postal_code-error">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="billing_country">País (ISO-2)</label>
-                                <input data-billing-field type="text" id="billing_country" name="billing_address[country]" class="form-input" maxlength="2" value="{{ old('billing_address.country', 'SV') }}">
+                                <label class="form-label" for="billing_country">País (ISO-2) <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input data-billing-field type="text" id="billing_country" name="billing_address[country]" class="form-input @error('billing_address.country') form-input--error @enderror" maxlength="2" value="{{ old('billing_address.country', 'SV') }}" placeholder="SV" inputmode="text" autocomplete="country" x-bind:required="!sameAsShipping" @error('billing_address.country') aria-invalid="true" aria-describedby="billing_address_country-error" @enderror>
+                                @error('billing_address.country')<span class="form-error" id="billing_address_country-error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="billing_phone">Teléfono</label>
-                            <input data-billing-field type="tel" id="billing_phone" name="billing_address[phone]" class="form-input" value="{{ old('billing_address.phone') }}">
+                            <input data-billing-field type="tel" id="billing_phone" name="billing_address[phone]" class="form-input @error('billing_address.phone') form-input--error @enderror" value="{{ old('billing_address.phone') }}" placeholder="7777-7777" maxlength="30" inputmode="tel" autocomplete="tel" @error('billing_address.phone') aria-invalid="true" aria-describedby="billing_address_phone-error" @enderror>
+                            @error('billing_address.phone')<span class="form-error" id="billing_address_phone-error">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>
@@ -293,19 +341,20 @@
                 <h2 class="checkout-section__title">Método de pago</h2>
                 <div class="checkout-section__body checkout-payment">
                     <label class="form-radio">
-                        <input type="radio" class="form-radio__input" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }}>
+                        <input type="radio" class="form-radio__input" name="payment_method" value="manual" {{ old('payment_method', 'manual') === 'manual' ? 'checked' : '' }} @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
                         <span class="form-radio__label">
                             Pago manual
                             <span class="form-radio__hint">Transferencia bancaria o efectivo contra entrega</span>
                         </span>
                     </label>
                     <label class="form-radio">
-                        <input type="radio" class="form-radio__input" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }}>
+                        <input type="radio" class="form-radio__input" name="payment_method" value="stripe" {{ old('payment_method') === 'stripe' ? 'checked' : '' }} @error('payment_method') aria-invalid="true" aria-describedby="payment_method-error" @enderror>
                         <span class="form-radio__label">
                             Tarjeta de crédito o débito
                             <span class="form-radio__hint">Procesado de forma segura con Stripe</span>
                         </span>
                     </label>
+                    @error('payment_method')<span class="form-error" id="payment_method-error">{{ $message }}</span>@enderror
                 </div>
             </section>
 
@@ -314,14 +363,15 @@
                 <div class="checkout-section__body">
                     <div class="form-group">
                         <label class="form-label" for="coupon_code">Código de cupón</label>
-                        <input type="text" id="coupon_code" name="coupon_code" class="form-input @error('coupon_code') form-input--error @enderror" value="{{ old('coupon_code') }}" placeholder="Opcional">
+                        <input type="text" id="coupon_code" name="coupon_code" class="form-input @error('coupon_code') form-input--error @enderror" value="{{ old('coupon_code') }}" placeholder="Ej. BIENVENIDA10" maxlength="50" autocomplete="off" @error('coupon_code') aria-invalid="true" aria-describedby="coupon_code-error" @enderror>
                         @error('coupon_code')
-                            <p class="form-error">{{ $message }}</p>
+                            <span class="form-error" id="coupon_code-error">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="notes">Notas del pedido</label>
-                        <textarea id="notes" name="notes" class="form-textarea" rows="3" placeholder="Instrucciones especiales de entrega, horarios preferidos…">{{ old('notes') }}</textarea>
+                        <textarea id="notes" name="notes" class="form-textarea @error('notes') form-textarea--error @enderror" rows="3" maxlength="1000" placeholder="Ej. Entregar después de las 5 p. m." @error('notes') aria-invalid="true" aria-describedby="notes-error" @enderror>{{ old('notes') }}</textarea>
+                        @error('notes')<span class="form-error" id="notes-error">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </section>

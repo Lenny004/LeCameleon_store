@@ -30,20 +30,24 @@
         </header>
 
         <div class="account-panel">
-            <form method="POST" action="{{ Route::has('account.update') ? route('account.update') : '#' }}" class="auth-card__form">
+            <form method="POST" action="{{ Route::has('account.profile.update') ? route('account.profile.update') : '#' }}" class="auth-card__form">
                 @csrf
                 @method('PUT')
+                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                 <div class="form-group">
-                    <label class="form-label" for="name">Nombre</label>
-                    <input type="text" id="name" name="name" class="form-input" value="{{ old('name', auth()->user()->name ?? '') }}">
+                    <label class="form-label" for="name">Nombre <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <input type="text" id="name" name="name" class="form-input @error('name') form-input--error @enderror" value="{{ old('name', auth()->user()->name ?? '') }}" placeholder="María López" maxlength="255" required autocomplete="name" @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                    @error('name')<span class="form-error" id="name-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" class="form-input" value="{{ old('email', auth()->user()->email ?? '') }}">
+                    <label class="form-label" for="email">Correo electrónico <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <input type="email" id="email" name="email" class="form-input @error('email') form-input--error @enderror" value="{{ old('email', auth()->user()->email ?? '') }}" placeholder="tu@correo.com" maxlength="255" inputmode="email" required autocomplete="email" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                    @error('email')<span class="form-error" id="email-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" value="{{ old('phone', auth()->user()->phone ?? '') }}">
+                    <input type="tel" id="phone" name="phone" class="form-input @error('phone') form-input--error @enderror" value="{{ old('phone', auth()->user()->phone ?? '') }}" placeholder="7777-7777" maxlength="30" inputmode="tel" autocomplete="tel" @error('phone') aria-invalid="true" aria-describedby="phone-error" @enderror>
+                    @error('phone')<span class="form-error" id="phone-error">{{ $message }}</span>@enderror
                 </div>
                 <button type="submit" class="btn btn--primary">Guardar cambios</button>
             </form>

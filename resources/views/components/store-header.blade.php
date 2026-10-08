@@ -42,7 +42,8 @@
                             name="q"
                             class="header__search-input"
                             placeholder="Buscar piezas vintage, marcas, épocas…"
-                            value="{{ request('q') }}"
+                            value="{{ old('q', request('q')) }}"
+                            maxlength="100"
                             autocomplete="off"
                         >
                         <button type="submit" class="header__search-btn" aria-label="Buscar">
@@ -169,7 +170,8 @@
                     name="q"
                     class="mobile-nav__search-input"
                     placeholder="Buscar piezas vintage…"
-                    value="{{ request('q') }}"
+                    value="{{ old('q', request('q')) }}"
+                    maxlength="100"
                     autocomplete="off"
                 >
                 <button type="submit" class="mobile-nav__search-btn" aria-label="Buscar">

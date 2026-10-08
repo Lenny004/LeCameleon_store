@@ -55,18 +55,22 @@
                             <form action="{{ route('cart.update', $item) }}" method="POST" class="cart-item__qty-form">
                                 @csrf
                                 @method('PATCH')
+                                <label class="sr-only" for="qty-{{ $item->id }}">Cantidad de {{ $product?->name ?? 'producto' }}</label>
                                 <input
                                     type="number"
                                     id="qty-{{ $item->id }}"
                                     name="quantity"
-                                    value="{{ $item->quantity }}"
-                                    min="0"
+                                    value="{{ old('quantity', $item->quantity) }}"
+                                    min="1"
+                                    step="1"
                                     max="99"
                                     class="form-input cart-item__qty-input @error('quantity') form-input--error @enderror"
                                     aria-label="Cantidad de {{ $product?->name ?? 'producto' }}"
+                                    required
+                                    @error('quantity') aria-invalid="true" aria-describedby="quantity-{{ $item->id }}-error" @enderror
                                 >
                                 @error('quantity')
-                                    <p class="form-error">{{ $message }}</p>
+                                    <span class="form-error" id="quantity-{{ $item->id }}-error">{{ $message }}</span>
                                 @enderror
                                 <button type="submit" class="btn btn--secondary btn--sm">Actualizar</button>
                             </form>
