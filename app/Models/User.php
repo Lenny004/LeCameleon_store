@@ -11,7 +11,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmailNotification;
 use Illuminate\Support\Str;
 
 /**
@@ -25,7 +28,7 @@ use Illuminate\Support\Str;
  */
 #[Fillable(['name', 'email', 'password', 'role', 'phone', 'avatar_path', 'is_active'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasUuids, Notifiable;
@@ -95,5 +98,15 @@ class User extends Authenticatable
     public function isStaff(): bool
     {
         return $this->role === UserRole::Staff || $this->isAdmin();
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify((new ResetPasswordNotification($token))->afterCommit());
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify((new VerifyEmailNotification())->afterCommit());
     }
 }

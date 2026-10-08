@@ -210,7 +210,7 @@
 
             <div class="shop-toolbar__sort">
                 <label for="sort" class="shop-toolbar__sort-label">Ordenar por</label>
-                <select id="sort" name="sort" class="shop-toolbar__sort-select" onchange="if(this.value) window.location.href=this.value">
+                <select id="sort" name="sort" class="shop-toolbar__sort-select" x-on:change="if ($event.target.value) window.location.href = $event.target.value">
                     @php
                         $base = Route::has('shop.index') ? route('shop.index') : '#';
                         $sortQuery = collect($filters ?? request()->only(['q', 'category', 'brand', 'era_decade', 'condition_grade', 'size_label', 'color', 'price_min', 'price_max', 'in_stock', 'min_rating']))

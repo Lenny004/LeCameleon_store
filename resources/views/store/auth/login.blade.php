@@ -32,6 +32,11 @@
         </form>
 
         <p class="auth-card__footer">
+            @if (Route::has('password.request'))
+                <a class="auth-card__footer-link" href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+            @endif
+        </p>
+        <p class="auth-card__footer">
             @if (Route::has('register'))
                 ¿No tienes cuenta? <a class="auth-card__footer-link" href="{{ route('register') }}">Regístrate</a>
             @endif

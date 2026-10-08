@@ -458,7 +458,7 @@
 @endsection
 
 @push('scripts')
-<script>
+<script nonce="{{ Vite::cspNonce() }}">
     document.addEventListener('DOMContentLoaded', () => {
         const checkoutRoot = document.querySelector('.checkout[x-data]');
         if (!checkoutRoot || !window.Alpine) {

@@ -57,6 +57,29 @@
                 </div>
                 <button type="submit" class="btn btn--primary">Guardar cambios</button>
             </form>
+
+            <form method="POST" action="{{ route('account.password.update') }}" class="auth-card__form">
+                @csrf
+                @method('PUT')
+                <h2 class="heading-3">Cambiar contraseña</h2>
+                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+                <div class="form-group">
+                    <label class="form-label" for="current_password">Contraseña actual <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <input type="password" id="current_password" name="current_password" class="form-input @error('current_password') form-input--error @enderror" placeholder="Tu contraseña actual" maxlength="255" autocomplete="current-password" required @error('current_password') aria-invalid="true" aria-describedby="current_password-error" @enderror>
+                    @error('current_password')<span class="form-error" id="current_password-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="account_password">Nueva contraseña <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <input type="password" id="account_password" name="password" class="form-input @error('password') form-input--error @enderror" placeholder="Mínimo 8 caracteres" minlength="8" maxlength="255" autocomplete="new-password" required @error('password') aria-invalid="true" aria-describedby="account-password-error" @enderror>
+                    @error('password')<span class="form-error" id="account-password-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="account_password_confirmation">Confirmar contraseña <span class="form-label__required" aria-hidden="true">*</span></label>
+                    <input type="password" id="account_password_confirmation" name="password_confirmation" class="form-input @error('password_confirmation') form-input--error @enderror" placeholder="Repite tu contraseña" maxlength="255" autocomplete="new-password" required @error('password_confirmation') aria-invalid="true" aria-describedby="account-password-confirmation-error" @enderror>
+                    @error('password_confirmation')<span class="form-error" id="account-password-confirmation-error">{{ $message }}</span>@enderror
+                </div>
+                <button type="submit" class="btn btn--ghost">Actualizar contraseña</button>
+            </form>
         </div>
     </div>
 </div>
