@@ -21,21 +21,34 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ShippingZoneController;
 use App\Http\Controllers\Admin\SvMunicipalityController;
+use App\Http\Controllers\Admin\TwoFactorController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'active', 'verified', 'role:admin|staff'])
+Route::middleware(['auth', 'active', 'verified', 'role:admin|staff', 'two-factor'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('two-factor', [TwoFactorController::class, 'setup'])->name('two-factor.setup');
+        Route::post('two-factor/confirm', [TwoFactorController::class, 'confirm'])->middleware('throttle:5,1')->name('two-factor.confirm');
+        Route::post('two-factor/regenerate', [TwoFactorController::class, 'regenerate'])->name('two-factor.regenerate');
+        Route::post('two-factor/disable', [TwoFactorController::class, 'disable'])->name('two-factor.disable');
 
         Route::resource('products', ProductController::class);
         Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
         Route::post('inventory', [InventoryController::class, 'store'])->name('inventory.store');
 
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
+        Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
+        Route::post('orders/create', [OrderController::class, 'storeManual'])->name('orders.store-manual');
+        Route::get('orders/{order}/print', [OrderController::class, 'print'])->name('orders.print');
         Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
         Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
         Route::post('orders/{order}/capture-payment', [OrderController::class, 'capturePayment'])->name('orders.capture-payment');
+        Route::get('orders/{order}/receipts/{receipt}/download', [OrderController::class, 'downloadReceipt'])->name('orders.receipts.download');
+        Route::patch('orders/{order}/receipts/{receipt}/accept', [OrderController::class, 'acceptReceipt'])->name('orders.receipts.accept');
+        Route::patch('orders/{order}/receipts/{receipt}/reject', [OrderController::class, 'rejectReceipt'])->name('orders.receipts.reject');
+        Route::post('orders/{order}/notes', [OrderController::class, 'storeNote'])->name('orders.notes.store');
         Route::patch('orders/{order}/shipment', [OrderController::class, 'updateShipment'])->name('orders.shipment');
         Route::post('orders/{order}/shipment-events', [OrderController::class, 'storeShipmentEvent'])->name('orders.shipment-events');
 

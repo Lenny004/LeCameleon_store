@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use App\Services\PaymentSettingsService;
 use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -78,6 +79,36 @@ class Order extends Model
         return $this->hasMany(ReturnRequest::class);
     }
 
+    public function paymentReceipts(): HasMany
+    {
+        return $this->hasMany(PaymentReceipt::class);
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(OrderNote::class);
+    }
+
+    public function paymentMethod(): string
+    {
+        $payment = $this->payments
+            ->filter(fn (Payment $payment): bool => $payment->status !== PaymentStatus::Refunded)
+            ->sortByDesc('created_at')
+            ->first();
+
+        return (string) ($payment?->provider ?? 'manual');
+    }
+
+    public function paymentInstructions(): ?array
+    {
+        $method = $this->paymentMethod();
+        if (! in_array($method, ['transfer', 'cod'], true)) {
+            return null;
+        }
+
+        return app(PaymentSettingsService::class)->instructions($method, (float) $this->grand_total, $this->number);
+    }
+
     /**
      * Fulfillment steps with completed flags for the current status.
      *
@@ -101,7 +132,7 @@ class Order extends Model
         foreach ($flow as $index => $status) {
             $timeline[] = [
                 'status' => $status->value,
-                'label' => ucfirst($status->value),
+                'label' => $status->label(),
                 'completed' => $currentIndex !== false && $index <= $currentIndex,
                 'current' => $this->status === $status,
             ];
@@ -110,7 +141,7 @@ class Order extends Model
         if ($isTerminal) {
             $timeline[] = [
                 'status' => $this->status->value,
-                'label' => ucfirst($this->status->value),
+                'label' => $this->status->label(),
                 'completed' => true,
                 'current' => true,
             ];
@@ -154,6 +185,10 @@ class Order extends Model
 
         $onlineProviders = array_map('strtolower', (array) config('store.online_payment_providers', ['stripe']));
         $provider = strtolower((string) $payment->provider);
+
+        if ($provider === 'cod') {
+            return null;
+        }
 
         if (in_array($provider, $onlineProviders, true)) {
             return $payment->created_at?->copy()->addMinutes((int) config('store.reservation_ttl_minutes', 30));
