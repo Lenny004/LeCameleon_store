@@ -32,6 +32,23 @@
     </div>
 
     <div class="card">
+        <h2 class="card__title admin-form__title">Contacto</h2>
+        <div class="admin-form__fields">
+            <div class="form-group">
+                <label class="form-label" for="whatsapp_number">Número de WhatsApp</label>
+                <input type="tel" id="whatsapp_number" name="whatsapp[number]" class="form-input @error('whatsapp.number') form-input--error @enderror" value="{{ old('whatsapp.number', $settings['whatsapp']['number'] ?? '') }}" placeholder="+50377777777" maxlength="16" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{8,15}" @error('whatsapp.number') aria-invalid="true" aria-describedby="whatsapp-number-error" @enderror>
+                @error('whatsapp.number')<span class="form-error" id="whatsapp-number-error">{{ $message }}</span>@enderror
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="whatsapp_message">Saludo por defecto</label>
+                <textarea id="whatsapp_message" name="whatsapp[message]" class="form-textarea @error('whatsapp.message') form-textarea--error @enderror" rows="3" maxlength="300" placeholder="Hola, quisiera consultar por una pieza." @error('whatsapp.message') aria-invalid="true" aria-describedby="whatsapp-message-error" @enderror>{{ old('whatsapp.message', $settings['whatsapp']['message'] ?? '') }}</textarea>
+                @error('whatsapp.message')<span class="form-error" id="whatsapp-message-error">{{ $message }}</span>@enderror
+            </div>
+        </div>
+        <p class="text-muted">Deja ambos campos vacíos para ocultar WhatsApp en la tienda.</p>
+    </div>
+
+    <div class="card">
         <h2 class="card__title admin-form__title">Devoluciones</h2>
         <div class="form-group">
             <label class="form-label" for="returns_policy">Política de devoluciones</label>

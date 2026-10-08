@@ -44,10 +44,57 @@ Alpine.data('filterPanel', () => ({
 }));
 
 Alpine.data('productGallery', (images = []) => ({
-    images,
+    images: images.map((image) => typeof image === 'string' ? { url: image } : image),
     active: 0,
+    lightbox: false,
+    zoomed: false,
+    previousFocus: null,
     select(index) {
         this.active = index;
+    },
+    open() {
+        if (!this.images.length) return;
+        this.previousFocus = document.activeElement;
+        this.lightbox = true;
+        this.zoomed = false;
+        this.$nextTick(() => this.$refs.dialog?.focus());
+    },
+    close() {
+        this.lightbox = false;
+        this.zoomed = false;
+        this.$nextTick(() => this.previousFocus?.focus?.());
+    },
+    next() {
+        if (this.images.length > 1) this.active = (this.active + 1) % this.images.length;
+    },
+    previous() {
+        if (this.images.length > 1) this.active = (this.active - 1 + this.images.length) % this.images.length;
+    },
+    toggleZoom() {
+        this.zoomed = !this.zoomed;
+    },
+    moveZoom(event) {
+        if (!this.zoomed) return;
+        const bounds = event.currentTarget.getBoundingClientRect();
+        event.currentTarget.style.setProperty('--zoom-x', `${((event.clientX - bounds.left) / bounds.width) * 100}%`);
+        event.currentTarget.style.setProperty('--zoom-y', `${((event.clientY - bounds.top) / bounds.height) * 100}%`);
+    },
+    trapFocus(event) {
+        if (event.key === 'Escape') return this.close();
+        if (event.key === 'ArrowRight') return this.next();
+        if (event.key === 'ArrowLeft') return this.previous();
+        if (event.key !== 'Tab') return;
+        const focusable = [...this.$refs.dialog.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')];
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
     },
 }));
 

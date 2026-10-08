@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\ShippingZone;
 use App\Services\PaymentSettingsService;
+use App\Services\WhatsAppLinkService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -27,6 +28,7 @@ class SettingController extends Controller
                 'contact_email' => data_get($stored->get('store.contact')?->value, 'email'),
                 'contact_phone' => data_get($stored->get('store.contact')?->value, 'phone'),
                 'returns_policy' => $stored->get('returns_policy')?->value,
+                'whatsapp' => app(WhatsAppLinkService::class)->settings(),
             ],
             'transfer' => $this->paymentSettingsService->transfer(),
             'cod' => $this->paymentSettingsService->cod(),
@@ -52,6 +54,8 @@ class SettingController extends Controller
             'cod.zone_ids.*' => ['integer', 'exists:shipping_zones,id'],
             'cod.max_amount' => ['nullable', 'numeric', 'min:0', 'max:9999999999.99'],
             'cod.note' => ['nullable', 'string', 'max:1000'],
+            'whatsapp.number' => ['nullable', 'string', 'regex:/^\+?[0-9]{8,15}$/'],
+            'whatsapp.message' => ['nullable', 'string', 'max:300'],
         ]);
 
         Setting::query()->updateOrCreate(
@@ -84,6 +88,15 @@ class SettingController extends Controller
             ['key' => 'returns_policy'],
             ['value' => $data['returns_policy'] ?? ''],
         );
+        if ($request->has('whatsapp')) {
+            Setting::query()->updateOrCreate(
+                ['key' => 'store.whatsapp'],
+                ['value' => [
+                    'number' => preg_replace('/\D+/', '', (string) data_get($data, 'whatsapp.number', '')),
+                    'message' => (string) data_get($data, 'whatsapp.message', ''),
+                ]],
+            );
+        }
 
         return back()->with('success', 'Configuración guardada.');
     }

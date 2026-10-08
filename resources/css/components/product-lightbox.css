@@ -1,0 +1,107 @@
+/* Galería ampliada accesible del detalle de producto. */
+.product-gallery__main {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: zoom-in;
+}
+
+.product-gallery__main:focus-visible,
+.product-lightbox__close:focus-visible,
+.product-lightbox__previous:focus-visible,
+.product-lightbox__next:focus-visible,
+.product-lightbox__zoom:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
+.product-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal, 1000);
+    display: grid;
+    place-items: center;
+    padding: var(--space-lg);
+    background: var(--overlay);
+}
+
+.product-lightbox__panel {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(100%, 70rem);
+    max-height: 100%;
+}
+
+.product-lightbox__zoom {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    cursor: zoom-in;
+}
+
+.product-lightbox__image {
+    max-height: 80vh;
+    object-fit: contain;
+    transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
+    transition: transform var(--transition);
+}
+
+.product-lightbox__zoom--active {
+    cursor: zoom-out;
+}
+
+.product-lightbox__zoom--active .product-lightbox__image {
+    transform: scale(2);
+}
+
+.product-lightbox__close,
+.product-lightbox__previous,
+.product-lightbox__next {
+    position: absolute;
+    z-index: var(--z-raised);
+    display: grid;
+    place-items: center;
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
+    color: var(--inverse-contrast);
+    background: var(--inverse-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.product-lightbox__close {
+    top: var(--space-sm);
+    right: var(--space-sm);
+    font-size: var(--font-size-xl);
+}
+
+.product-lightbox__previous,
+.product-lightbox__next {
+    top: 50%;
+    font-size: var(--font-size-xl);
+    transform: translateY(-50%);
+}
+
+.product-lightbox__previous {
+    left: var(--space-sm);
+}
+
+.product-lightbox__next {
+    right: var(--space-sm);
+}
+
+.product-lightbox__counter {
+    margin: var(--space-sm) 0 0;
+    color: var(--inverse-contrast);
+    font-size: var(--font-size-sm);
+}

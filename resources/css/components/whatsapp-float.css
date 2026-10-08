@@ -1,0 +1,39 @@
+/* WhatsApp flotante de la tienda. */
+.whatsapp-float {
+    position: fixed;
+    right: var(--space-md);
+    bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+    z-index: var(--z-raised);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--inverse-contrast);
+    background-color: var(--success);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+}
+
+.whatsapp-float__icon {
+    width: var(--font-size-lg);
+    height: var(--font-size-lg);
+    flex: none;
+}
+
+.whatsapp-float__label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+    background-color: var(--success);
+    transform: translateY(-0.1rem);
+}
+
+@media print {
+    .whatsapp-float {
+        display: none;
+    }
+}

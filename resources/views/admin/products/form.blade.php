@@ -429,7 +429,7 @@
             <div class="admin-form__image-grid">
                 @foreach ($product->images as $image)
                     <label class="admin-form__image-field">
-                        <img class="admin-form__image" src="{{ asset('storage/'.$image->path) }}" alt="{{ $image->alt }}">
+                        <img class="admin-form__image" src="{{ $image->thumbUrl() }}" srcset="{{ $image->srcset() }}" sizes="8rem" width="{{ $image->width ?: '' }}" height="{{ $image->height ?: '' }}" alt="{{ $image->alt ?: $product->name }}" loading="lazy" decoding="async">
                         <span>
                             <input
                                 type="checkbox"
