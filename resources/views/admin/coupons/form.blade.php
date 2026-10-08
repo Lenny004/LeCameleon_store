@@ -17,7 +17,7 @@
                 <label class="form-label" for="code">Code</label>
                 <input type="text" id="code" name="code" class="form-input" value="{{ old('code', $coupon->code ?? '') }}" required style="text-transform:uppercase;">
             </div>
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="type">Type</label>
                     <select id="type" name="type" class="form-select" required>
@@ -31,7 +31,7 @@
                     <input type="number" id="value" name="value" class="form-input" step="0.01" min="0" value="{{ old('value', $coupon->value ?? '') }}" required>
                 </div>
             </div>
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="min_order_amount">Min order amount</label>
                     <input type="number" id="min_order_amount" name="min_order_amount" class="form-input" step="0.01" min="0" value="{{ old('min_order_amount', $coupon->min_order_amount ?? '') }}">
@@ -41,7 +41,7 @@
                     <input type="number" id="max_uses" name="max_uses" class="form-input" min="1" value="{{ old('max_uses', $coupon->max_uses ?? '') }}">
                 </div>
             </div>
-            <div class="form-row form-row--2">
+            <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="starts_at">Starts at</label>
                     <input type="datetime-local" id="starts_at" name="starts_at" class="form-input" value="{{ old('starts_at', isset($coupon->starts_at) ? $coupon->starts_at->format('Y-m-d\TH:i') : '') }}">

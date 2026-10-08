@@ -60,14 +60,14 @@
     <div class="admin-charts">
         <div class="admin-chart-card">
             <h2 class="admin-chart-card__title">Revenue trend</h2>
-            <canvas id="chart-sales"
+            <canvas class="admin-chart-card__canvas" id="chart-sales"
                 data-labels='@json($salesLabels ?? [])'
                 data-values='@json($salesValues ?? [])'>
             </canvas>
         </div>
         <div class="admin-chart-card">
             <h2 class="admin-chart-card__title">Orders by day</h2>
-            <canvas id="chart-orders"
+            <canvas class="admin-chart-card__canvas" id="chart-orders"
                 data-labels='@json($ordersLabels ?? [])'
                 data-values='@json($ordersValues ?? [])'>
             </canvas>
@@ -82,7 +82,7 @@
             @endif
         </div>
         <div class="table-wrap">
-            <table class="table">
+            <table class="table admin-table">
                 <thead>
                     <tr>
                         <th>Order</th>
@@ -97,7 +97,7 @@
                         <tr>
                             <td>
                                 @if (Route::has('admin.orders.show'))
-                                    <a href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
+                                    <a class="admin-table__link" href="{{ route('admin.orders.show', $order) }}">{{ $order->number }}</a>
                                 @else
                                     {{ $order->number }}
                                 @endif

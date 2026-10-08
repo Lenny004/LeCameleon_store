@@ -32,7 +32,7 @@
         <h2 class="card__title">Current stock</h2>
     </div>
     <div class="table-wrap">
-        <table class="table">
+        <table class="table admin-table">
             <thead>
                 <tr>
                     <th>SKU</th>
@@ -56,7 +56,7 @@
                         <td>{{ $product->quantity_available }}</td>
                         <td>{{ $product->quantity_reserved }}</td>
                         <td><span class="badge badge--{{ $sellable > 0 ? ($sellable <= $product->low_stock_threshold ? 'warning' : 'success') : 'danger' }}">{{ $sellable }}</span></td>
-                        <td><a href="{{ route('admin.products.edit', $product) }}" class="btn btn--ghost btn--sm">Edit product</a></td>
+                        <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.products.edit', $product) }}">Edit product</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="8" class="text-muted">No products found.</td></tr>
@@ -93,7 +93,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-row form-row--2">
+        <div class="form-row form-row--cols-2">
             <div class="form-group" id="quantity-group">
                 <label class="form-label" for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" class="form-input" min="1" value="{{ old('quantity') }}" required>
@@ -125,7 +125,7 @@
         <h2 class="card__title">Movement log</h2>
     </div>
     <div class="table-wrap">
-        <table class="table">
+        <table class="table admin-table">
             <thead>
                 <tr>
                     <th>Date</th>

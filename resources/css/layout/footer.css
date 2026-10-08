@@ -188,14 +188,15 @@
     border-color: color-mix(in srgb, var(--inverse-contrast) 28%, transparent);
 }
 
-.footer__newsletter-input:focus {
-    outline: none;
+.footer__newsletter-input:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
     border-color: color-mix(in srgb, var(--accent) 55%, var(--inverse-contrast));
     background-color: color-mix(in srgb, var(--inverse-contrast) 9%, transparent);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
-.footer__newsletter-input.form-input--error {
+.footer__newsletter-input--error {
     border-color: color-mix(in srgb, var(--danger) 65%, var(--inverse-contrast));
 }
 

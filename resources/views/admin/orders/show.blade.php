@@ -34,7 +34,7 @@
     <div class="card">
         <h2 class="card__title" style="margin-bottom:var(--space-md);">Line items</h2>
         <div class="table-wrap">
-            <table class="table">
+            <table class="table admin-table">
                 <thead>
                     <tr>
                         <th>SKU</th>
@@ -67,7 +67,7 @@
         <div class="card">
             <h2 class="card__title" style="margin-bottom:var(--space-md);">Payments</h2>
             <div class="table-wrap">
-                <table class="table">
+                <table class="table admin-table">
                     <thead>
                         <tr>
                             <th>Provider</th>

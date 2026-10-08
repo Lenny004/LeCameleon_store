@@ -36,7 +36,7 @@
             @enderror
             <p id="tracking_code_hint" class="tracking-form__hint">
                 También puedes consultar el estado en
-                <a href="{{ route('account.orders.index') }}">Mis pedidos</a> si iniciaste sesión.
+                <a class="tracking-form__hint-link" href="{{ route('account.orders.index') }}">Mis pedidos</a> si iniciaste sesión.
             </p>
         </div>
     </form>

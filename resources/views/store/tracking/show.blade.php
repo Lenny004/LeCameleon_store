@@ -37,7 +37,7 @@
 
 <div class="container tracking">
     <nav class="breadcrumb">
-        <a href="{{ route('tracking.index') }}">Rastrear envío</a>
+        <a class="breadcrumb__link" href="{{ route('tracking.index') }}">Rastrear envío</a>
         <span class="breadcrumb__sep">/</span>
         <span>{{ $code }}</span>
     </nav>

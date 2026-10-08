@@ -39,14 +39,14 @@
 <div class="admin-charts">
     <div class="admin-chart-card">
         <h2 class="admin-chart-card__title">Daily revenue</h2>
-        <canvas id="chart-sales"
+        <canvas class="admin-chart-card__canvas" id="chart-sales"
             data-labels='@json($salesLabels ?? [])'
             data-values='@json($salesValues ?? [])'>
         </canvas>
     </div>
     <div class="admin-chart-card">
         <h2 class="admin-chart-card__title">Daily orders</h2>
-        <canvas id="chart-orders"
+        <canvas class="admin-chart-card__canvas" id="chart-orders"
             data-labels='@json($ordersLabels ?? [])'
             data-values='@json($ordersValues ?? [])'>
         </canvas>
@@ -56,7 +56,7 @@
 <div class="card" style="margin-top:var(--space-xl);">
     <h2 class="card__title" style="margin-bottom:var(--space-md);">Top products</h2>
     <div class="table-wrap">
-        <table class="table">
+        <table class="table admin-table">
             <thead>
                 <tr>
                     <th>Product</th>

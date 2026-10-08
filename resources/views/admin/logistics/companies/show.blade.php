@@ -14,10 +14,10 @@
 
 <div class="card logistics-detail">
     <dl class="logistics-detail__list">
-        <div><dt>Contact</dt><dd>{{ $company->contact_person ?: '—' }}</dd></div>
-        <div><dt>Email</dt><dd>{{ $company->email ?: '—' }}</dd></div>
-        <div><dt>Phone</dt><dd>{{ $company->phone ?: '—' }}</dd></div>
-        <div><dt>Municipality</dt><dd>{{ $company->municipality?->name ?? '—' }}</dd></div>
+        <div><dt class="logistics-detail__term">Contact</dt><dd class="logistics-detail__value">{{ $company->contact_person ?: '—' }}</dd></div>
+        <div><dt class="logistics-detail__term">Email</dt><dd class="logistics-detail__value">{{ $company->email ?: '—' }}</dd></div>
+        <div><dt class="logistics-detail__term">Phone</dt><dd class="logistics-detail__value">{{ $company->phone ?: '—' }}</dd></div>
+        <div><dt class="logistics-detail__term">Municipality</dt><dd class="logistics-detail__value">{{ $company->municipality?->name ?? '—' }}</dd></div>
     </dl>
 </div>
 @endsection
