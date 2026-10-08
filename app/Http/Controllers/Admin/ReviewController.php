@@ -90,4 +90,20 @@ class ReviewController extends Controller
 
         return back()->with('success', 'Reseña eliminada.');
     }
+
+    public function reply(Request $request, Review $review): RedirectResponse
+    {
+        $data = $request->validate([
+            'store_reply' => ['nullable', 'string', 'max:2000'],
+        ]);
+        $reply = trim((string) ($data['store_reply'] ?? ''));
+
+        $review->forceFill([
+            'store_reply' => $reply !== '' ? $reply : null,
+            'store_replied_at' => $reply !== '' ? now() : null,
+            'store_replied_by' => $reply !== '' ? $request->user()->id : null,
+        ])->save();
+
+        return back()->with('success', $reply !== '' ? 'Respuesta guardada.' : 'Respuesta eliminada.');
+    }
 }
