@@ -1,26 +1,27 @@
 @extends('layouts.admin')
 
-@section('title', 'Workers')
-@section('page-title', 'Logistics workers')
+@section('title', 'Personal')
+@section('page-title', 'Personal de logística')
 
 @section('content')
+@php $roleLabels = ['driver' => 'Conductor', 'courier' => 'Mensajero', 'dispatcher' => 'Despachador']; @endphp
 <div class="admin-page-header">
     <div>
-        <h2 class="admin-page-header__title">Workers</h2>
-        <p class="admin-page-header__subtitle">Couriers and drivers with DUI and company assignment.</p>
+        <h2 class="admin-page-header__title">Personal</h2>
+        <p class="admin-page-header__subtitle">Mensajeros y conductores con DUI y empresa asignada.</p>
     </div>
-    <a href="{{ route('admin.logistics.workers.create') }}" class="btn btn--primary">Add worker</a>
+    <a href="{{ route('admin.logistics.workers.create') }}" class="btn btn--primary">Agregar personal</a>
 </div>
 
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nombre</th>
                 <th>DUI</th>
-                <th>Role</th>
-                <th>Company</th>
-                <th>Status</th>
+                <th>Rol</th>
+                <th>Empresa</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,13 +30,13 @@
                 <tr>
                     <td><a class="admin-table__link logistics-link" href="{{ route('admin.logistics.workers.show', $worker) }}">{{ $worker->fullName() }}</a></td>
                     <td><code>{{ $worker->document_id ?: '—' }}</code></td>
-                    <td>{{ ucfirst($worker->role->value) }}</td>
+                    <td>{{ $roleLabels[$worker->role->value] ?? $worker->role->value }}</td>
                     <td>{{ $worker->company?->name ?? '—' }}</td>
-                    <td><span class="badge badge--{{ $worker->is_active ? 'success' : 'warning' }}">{{ $worker->is_active ? 'Active' : 'Inactive' }}</span></td>
-                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.workers.edit', $worker) }}">Edit</a></td>
+                    <td><span class="badge badge--{{ $worker->is_active ? 'success' : 'warning' }}">{{ $worker->is_active ? 'Activo' : 'Inactivo' }}</span></td>
+                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.workers.edit', $worker) }}">Editar</a></td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-muted">No workers yet.</td></tr>
+                <tr><td colspan="6" class="text-muted">Aún no hay personal.</td></tr>
             @endforelse
         </tbody>
     </table>

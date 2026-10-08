@@ -49,12 +49,12 @@
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Customer</th>
-                <th>Rating</th>
-                <th>Comment</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>Producto</th>
+                <th>Cliente</th>
+                <th>Calificación</th>
+                <th>Comentario</th>
+                <th>Estado</th>
+                <th>Fecha</th>
                 <th></th>
             </tr>
         </thead>
@@ -93,19 +93,19 @@
                                 <form method="POST" action="{{ route('admin.reviews.approve', $review) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn--ghost btn--sm">Approve</button>
+                                    <button type="submit" class="btn btn--ghost btn--sm">Aprobar</button>
                                 </form>
                             @else
                                 <form method="POST" action="{{ route('admin.reviews.reject', $review) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn--ghost btn--sm">Reject</button>
+                                    <button type="submit" class="btn btn--ghost btn--sm">Rechazar</button>
                                 </form>
                             @endunless
-                            <form method="POST" action="{{ route('admin.reviews.destroy', $review) }}" onsubmit="return confirm('Delete this review?');">
+                            <form method="POST" action="{{ route('admin.reviews.destroy', $review) }}" x-on:submit="if (!confirm('¿Eliminar esta reseña?')) $event.preventDefault()">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn--ghost btn--sm">Delete</button>
+                                <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>
                             </form>
                         </div>
                     </td>

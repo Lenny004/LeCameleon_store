@@ -10,9 +10,9 @@
         <thead>
             <tr>
                 <th>From</th>
-                <th>Message</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>Mensaje</th>
+                <th>Estado</th>
+                <th>Fecha</th>
                 <th></th>
             </tr>
         </thead>

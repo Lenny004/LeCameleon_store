@@ -87,7 +87,7 @@
                         </span>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('admin.logistics.dispatch.destroy', $schedule) }}" onsubmit="return confirm('¿Eliminar este horario?');" class="admin-inline-form">
+            <form method="POST" action="{{ route('admin.logistics.dispatch.destroy', $schedule) }}" x-on:submit="if (!confirm('¿Eliminar este horario?')) $event.preventDefault()" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>

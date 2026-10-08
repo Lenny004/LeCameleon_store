@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Settings')
-@section('page-title', 'Settings')
+@section('title', 'Configuración')
+@section('page-title', 'Configuración')
 
 @section('content')
 <form method="POST" action="{{ route('admin.settings.update') }}" class="admin-form admin-form--medium">

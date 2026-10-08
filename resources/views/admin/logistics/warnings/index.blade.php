@@ -121,7 +121,7 @@
                     <td>{{ ['info' => 'Información', 'warning' => 'Advertencia', 'danger' => 'Peligro'][$warning->severity->value] }}</td>
                     <td>{{ ['checkout' => 'Checkout', 'tracking' => 'Seguimiento', 'admin' => 'Administración'][$warning->applies_to->value] }}</td>
                     <td>
-                        <form method="POST" action="{{ route('admin.logistics.warnings.destroy', $warning) }}" onsubmit="return confirm('¿Eliminar esta advertencia?');" class="admin-inline-form">
+                        <form method="POST" action="{{ route('admin.logistics.warnings.destroy', $warning) }}" x-on:submit="if (!confirm('¿Eliminar esta advertencia?')) $event.preventDefault()" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Eliminar</button>

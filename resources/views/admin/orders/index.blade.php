@@ -1,14 +1,25 @@
 @extends('layouts.admin')
 
-@section('title', 'Orders')
-@section('page-title', 'Orders')
-@section('page-subtitle', 'Order pipeline and fulfillment')
+@section('title', 'Pedidos')
+@section('page-title', 'Pedidos')
+@section('page-subtitle', 'Flujo y preparación de pedidos')
 
 @section('content')
+@php
+    $statusLabels = [
+        'pending' => 'Pendiente',
+        'paid' => 'Pagado',
+        'processing' => 'En preparación',
+        'shipped' => 'Enviado',
+        'delivered' => 'Entregado',
+        'cancelled' => 'Cancelado',
+        'refunded' => 'Reembolsado',
+    ];
+@endphp
 <div class="admin-page-header">
     <div>
-        <h2 class="admin-page-header__title">All orders</h2>
-        <p class="admin-page-header__subtitle">{{ $orders->total() }} orders</p>
+        <h2 class="admin-page-header__title">Todos los pedidos</h2>
+        <p class="admin-page-header__subtitle">{{ $orders->total() }} pedidos</p>
     </div>
 </div>
 
@@ -16,12 +27,12 @@
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Order</th>
-                <th>Customer</th>
-                <th>Items</th>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Artículos</th>
                 <th>Total</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>Estado</th>
+                <th>Fecha</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,17 +49,17 @@
                     <td>{{ $order->customerEmail() ?? $order->user?->email ?? '—' }}</td>
                     <td>{{ $order->items_count }}</td>
                     <td>${{ number_format((float) $order->grand_total, 2) }}</td>
-                    <td><span class="badge badge--primary">{{ ucfirst($order->status->value) }}</span></td>
+                    <td><span class="badge badge--primary">{{ $statusLabels[$order->status->value] ?? $order->status->value }}</span></td>
                     <td>{{ $order->placed_at?->format('Y-m-d') ?? '—' }}</td>
                     <td>
                         @if (Route::has('admin.orders.show'))
-                            <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.orders.show', $order) }}">View</a>
+                            <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.orders.show', $order) }}">Ver</a>
                         @endif
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7">No orders yet.</td>
+                    <td colspan="7">Aún no hay pedidos.</td>
                 </tr>
             @endforelse
         </tbody>

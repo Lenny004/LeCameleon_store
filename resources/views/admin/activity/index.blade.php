@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Activity log')
-@section('page-title', 'Activity log')
-@section('page-subtitle', 'Latest admin actions')
+@section('title', 'Registro de actividad')
+@section('page-title', 'Registro de actividad')
+@section('page-subtitle', 'Últimas acciones administrativas')
 
 @section('content')
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>When</th>
-                <th>User</th>
-                <th>Action</th>
-                <th>Subject</th>
+                <th>Cuándo</th>
+                <th>Usuario</th>
+                <th>Acción</th>
+                <th>Elemento</th>
                 <th>IP</th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No activity recorded yet.</td>
+                    <td colspan="5">Aún no hay actividad registrada.</td>
                 </tr>
             @endforelse
         </tbody>
