@@ -42,7 +42,7 @@
                         @php
                             $statusBadge = match ($offer->status->value) {
                                 'accepted' => 'success',
-                                'declined' => 'error',
+                                'declined' => 'danger',
                                 'countered' => 'primary',
                                 default => 'warning',
                             };
@@ -54,12 +54,12 @@
                     <td>{{ $offer->created_at?->format('Y-m-d') }}</td>
                     <td>
                         @if ($offer->status->value === 'pending')
-                            <div class="table__actions" style="display:flex;flex-direction:column;gap:var(--space-xs);min-width:12rem;">
+                            <div class="admin-table__actions admin-table__actions--stacked">
                                 @if (Route::has('admin.offers.accept'))
                                     <form method="POST" action="{{ route('admin.offers.accept', $offer) }}">
                                         @csrf
                                         @method('PATCH')
-                                        <input type="text" name="admin_notes" class="form-input form-input--sm" placeholder="Notes (optional)" style="margin-bottom:var(--space-xs);">
+                                        <input type="text" name="admin_notes" class="form-input form-input--sm admin-offer__input" placeholder="Notes (optional)">
                                         <button type="submit" class="btn btn--ghost btn--sm">Accept</button>
                                     </form>
                                 @endif
@@ -74,8 +74,8 @@
                                     <form method="POST" action="{{ route('admin.offers.counter', $offer) }}">
                                         @csrf
                                         @method('PATCH')
-                                        <input type="number" name="counter_amount" class="form-input form-input--sm" step="0.01" min="1" placeholder="Counter $" required style="margin-bottom:var(--space-xs);">
-                                        <input type="text" name="admin_notes" class="form-input form-input--sm" placeholder="Notes (optional)" style="margin-bottom:var(--space-xs);">
+                                        <input type="number" name="counter_amount" class="form-input form-input--sm admin-offer__input" step="0.01" min="1" placeholder="Counter $" required>
+                                        <input type="text" name="admin_notes" class="form-input form-input--sm admin-offer__input" placeholder="Notes (optional)">
                                         <button type="submit" class="btn btn--ghost btn--sm">Counter</button>
                                     </form>
                                 @endif
@@ -84,7 +84,7 @@
                             <span class="text-muted text-small">{{ Str::limit($offer->admin_notes, 40) }}</span>
                         @endif
                         @if ($offer->message)
-                            <p class="text-muted text-small" style="margin-top:var(--space-xs);">"{{ Str::limit($offer->message, 60) }}"</p>
+                            <p class="text-muted text-small admin-offer__message">"{{ Str::limit($offer->message, 60) }}"</p>
                         @endif
                     </td>
                 </tr>
@@ -98,7 +98,7 @@
 </div>
 
 @if ($offers->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $offers->links() }}
     </div>
 @endif

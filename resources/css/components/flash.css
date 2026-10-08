@@ -59,6 +59,10 @@
     margin-bottom: var(--space-md);
 }
 
+.flash-container {
+    padding-top: var(--space-md);
+}
+
 .flash-stack .flash {
     margin-bottom: 0;
 }

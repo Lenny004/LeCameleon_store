@@ -4,18 +4,18 @@
 @section('page-title', isset($coupon) ? 'Edit coupon' : 'New coupon')
 
 @section('content')
-<form method="POST" action="{{ isset($coupon) ? route('admin.coupons.update', $coupon) : route('admin.coupons.store') }}" style="max-width:40rem;display:flex;flex-direction:column;gap:var(--space-xl);">
+<form method="POST" action="{{ isset($coupon) ? route('admin.coupons.update', $coupon) : route('admin.coupons.store') }}" class="admin-form admin-form--narrow">
     @csrf
     @if (isset($coupon))
         @method('PUT')
     @endif
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Coupon details</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Coupon details</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="code">Code</label>
-                <input type="text" id="code" name="code" class="form-input" value="{{ old('code', $coupon->code ?? '') }}" required style="text-transform:uppercase;">
+                <input type="text" id="code" name="code" class="form-input form-input--uppercase" value="{{ old('code', $coupon->code ?? '') }}" required>
             </div>
             <div class="form-row form-row--cols-2">
                 <div class="form-group">
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <div style="display:flex;gap:var(--space-sm);">
+    <div class="admin-form__actions">
         <button type="submit" class="btn btn--primary">{{ isset($coupon) ? 'Save coupon' : 'Create coupon' }}</button>
         <a href="{{ route('admin.coupons.index') }}" class="btn btn--ghost">Cancel</a>
     </div>

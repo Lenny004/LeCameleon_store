@@ -31,7 +31,7 @@
                     <td><span class="badge badge--{{ $category->is_active ? 'success' : 'warning' }}">{{ $category->is_active ? 'Active' : 'Inactive' }}</span></td>
                     <td>
                         <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.categories.edit', $category) }}">Edit</a>
-                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('Delete this category?');" style="display:inline;">
+                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('Delete this category?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Delete</button>

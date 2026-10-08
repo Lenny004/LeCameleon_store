@@ -1,7 +1,7 @@
 <header class="admin-topbar">
     <div class="admin-topbar__start">
-        <button type="button" class="admin-topbar__menu-toggle" @click="toggle()" aria-label="Toggle sidebar">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <button type="button" class="admin-topbar__menu-toggle" @click="toggle()" aria-label="Toggle sidebar" :aria-expanded="open ? 'true' : 'false'" aria-controls="admin-sidebar">
+            <svg class="admin-topbar__menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="admin-topbar__heading">
             <h1 class="admin-topbar__title">@yield('page-title', 'Dashboard')</h1>

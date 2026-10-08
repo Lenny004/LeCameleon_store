@@ -10,7 +10,7 @@
 
     <div class="card">
         <h2 class="card__title logistics-form__heading">{{ $municipality->name }}</h2>
-        <p class="text-muted" style="margin-bottom:var(--space-lg);">Department: {{ $municipality->department->name }}</p>
+        <p class="text-muted admin-form__hint admin-form__hint--bottom">Department: {{ $municipality->department->name }}</p>
         <div class="logistics-form__grid">
             <div class="form-group">
                 <label class="form-label" for="base_shipping_cost">Base shipping cost ($)</label>

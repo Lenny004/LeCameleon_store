@@ -13,7 +13,7 @@
     ])->filter()->implode(', ');
 @endphp
 
-<div style="display:grid;gap:var(--space-xl);max-width:48rem;">
+<div class="admin-order-page">
     <div class="card">
         <div class="card__header">
             <h2 class="card__title">Order details</h2>
@@ -21,18 +21,18 @@
         </div>
         <p class="text-muted">Customer: {{ $order->customerEmail() ?? $order->user?->email ?? 'Guest' }}</p>
         @if ($shippingLine)
-            <p class="text-muted" style="margin-top:var(--space-xs);">Ship to: {{ $shippingLine }}</p>
+            <p class="text-muted admin-order__meta">Ship to: {{ $shippingLine }}</p>
         @endif
-        <p class="text-muted" style="margin-top:var(--space-xs);">Placed: {{ $order->placed_at?->format('Y-m-d H:i') }}</p>
+        <p class="text-muted admin-order__meta">Placed: {{ $order->placed_at?->format('Y-m-d H:i') }}</p>
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-md);">Status timeline</h2>
+        <h2 class="card__title admin-form__title admin-form__title--compact">Status timeline</h2>
         @include('components.order-timeline', ['timeline' => $order->statusTimeline()])
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-md);">Line items</h2>
+        <h2 class="card__title admin-form__title admin-form__title--compact">Line items</h2>
         <div class="table-wrap">
             <table class="table admin-table">
                 <thead>
@@ -56,16 +56,16 @@
             </table>
         </div>
         @if ($order->coupon_code)
-            <p class="text-muted" style="margin-top:var(--space-md);">
+            <p class="text-muted admin-order__note">
                 Coupon {{ $order->coupon_code }}: −${{ number_format((float) $order->discount_total, 2) }}
             </p>
         @endif
-        <p style="text-align:right;margin-top:var(--space-md);font-weight:700;">Total: ${{ number_format((float) $order->grand_total, 2) }}</p>
+        <p class="admin-order__total">Total: ${{ number_format((float) $order->grand_total, 2) }}</p>
     </div>
 
     @if ($order->payments->isNotEmpty())
         <div class="card">
-            <h2 class="card__title" style="margin-bottom:var(--space-md);">Payments</h2>
+            <h2 class="card__title admin-form__title admin-form__title--compact">Payments</h2>
             <div class="table-wrap">
                 <table class="table admin-table">
                     <thead>
@@ -88,7 +88,7 @@
             </div>
 
             @if ($order->status->value === 'pending' && $order->payments->contains(fn ($payment) => $payment->status->value === 'pending'))
-                <form method="POST" action="{{ route('admin.orders.capture-payment', $order) }}" style="margin-top:var(--space-md);">
+                <form method="POST" action="{{ route('admin.orders.capture-payment', $order) }}" class="admin-order__payment-form">
                     @csrf
                     <button type="submit" class="btn btn--primary">Mark payment captured</button>
                 </form>
@@ -101,7 +101,7 @@
             $shipment = $shipment ?? $order->shipments->first();
         @endphp
         <div class="card logistics-shipment-panel">
-            <h2 class="card__title" style="margin-bottom:var(--space-md);">Shipment tracking</h2>
+            <h2 class="card__title admin-form__title admin-form__title--compact">Shipment tracking</h2>
 
             <form method="POST" action="{{ route('admin.orders.shipment', $order) }}">
                 @csrf
@@ -162,12 +162,12 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn--primary" style="margin-top:var(--space-md);">Save assignment</button>
+                <button type="submit" class="btn btn--primary admin-form__submit admin-form__submit--compact-spaced">Save assignment</button>
             </form>
 
             @if ($shipment?->events?->isNotEmpty())
                 <div class="logistics-shipment-panel__events">
-                    <h3 class="card__title" style="font-size:0.9375rem;margin-bottom:var(--space-sm);">Event timeline</h3>
+                    <h3 class="card__title admin-form__title admin-form__title--small">Event timeline</h3>
                     <div class="logistics-timeline">
                         @foreach ($shipment->events->sortByDesc('happened_at') as $event)
                             <div class="logistics-timeline__item">
@@ -186,9 +186,9 @@
             @endif
 
             @if (Route::has('admin.orders.shipment-events'))
-                <form method="POST" action="{{ route('admin.orders.shipment-events', $order) }}" style="margin-top:var(--space-lg);padding-top:var(--space-lg);border-top:1px solid var(--border);">
+                <form method="POST" action="{{ route('admin.orders.shipment-events', $order) }}" class="admin-order__event-form">
                     @csrf
-                    <h3 class="card__title" style="font-size:0.9375rem;margin-bottom:var(--space-md);">Append event</h3>
+                    <h3 class="card__title admin-form__title admin-form__title--small admin-form__title--compact">Append event</h3>
                     <div class="logistics-form__grid">
                         <div class="form-group">
                             <label class="form-label" for="event_status">Status</label>
@@ -212,7 +212,7 @@
                             <input type="text" id="note" name="note" class="form-input" maxlength="500">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn--ghost" style="margin-top:var(--space-md);">Record event</button>
+                    <button type="submit" class="btn btn--ghost admin-form__submit admin-form__submit--compact-spaced">Record event</button>
                 </form>
             @endif
         </div>
@@ -222,7 +222,7 @@
         <form method="POST" action="{{ route('admin.orders.status', $order) }}" class="card">
             @csrf
             @method('PATCH')
-            <h2 class="card__title" style="margin-bottom:var(--space-md);">Update status</h2>
+            <h2 class="card__title admin-form__title admin-form__title--compact">Update status</h2>
             <div class="form-group">
                 <label class="form-label" for="status">Status</label>
                 <select id="status" name="status" class="form-select">

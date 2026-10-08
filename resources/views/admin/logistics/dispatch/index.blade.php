@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="card" style="margin-bottom:var(--space-xl);">
+<div class="card admin-panel admin-panel--spaced">
     <h2 class="card__title logistics-form__heading">Add schedule</h2>
     <form method="POST" action="{{ route('admin.logistics.dispatch.store') }}" class="logistics-form__grid">
         @csrf
@@ -52,7 +52,7 @@
                     <td>{{ $schedule->cutoff_at?->format('Y-m-d H:i') }}</td>
                     <td><span class="badge badge--{{ $schedule->is_active ? 'success' : 'warning' }}">{{ $schedule->is_active ? 'Active' : 'Inactive' }}</span></td>
                     <td>
-                        <form method="POST" action="{{ route('admin.logistics.dispatch.destroy', $schedule) }}" onsubmit="return confirm('Remove?');" style="display:inline;">
+                        <form method="POST" action="{{ route('admin.logistics.dispatch.destroy', $schedule) }}" onsubmit="return confirm('Remove?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Delete</button>

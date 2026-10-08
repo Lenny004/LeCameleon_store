@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.coupons.edit', $coupon) }}">Edit</a>
-                        <form method="POST" action="{{ route('admin.coupons.destroy', $coupon) }}" onsubmit="return confirm('Delete this coupon?');" style="display:inline;">
+                        <form method="POST" action="{{ route('admin.coupons.destroy', $coupon) }}" onsubmit="return confirm('Delete this coupon?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Delete</button>

@@ -5,7 +5,7 @@
 @section('page-subtitle', 'Sales and traffic reports')
 
 @section('content')
-<form method="GET" action="{{ route('admin.analytics.index') }}" class="admin-filters" style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-xl);align-items:end;">
+<form method="GET" action="{{ route('admin.analytics.index') }}" class="admin-filters">
     <label>
         <span class="form-label">From</span>
         <input type="date" name="from" class="form-input" value="{{ $from->toDateString() }}">
@@ -53,8 +53,8 @@
     </div>
 </div>
 
-<div class="card" style="margin-top:var(--space-xl);">
-    <h2 class="card__title" style="margin-bottom:var(--space-md);">Top products</h2>
+<div class="card admin-panel admin-panel--top-spaced">
+    <h2 class="card__title admin-form__title">Top products</h2>
     <div class="table-wrap">
         <table class="table admin-table">
             <thead>

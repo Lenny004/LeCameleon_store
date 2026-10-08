@@ -5,12 +5,12 @@
 @section('page-subtitle', 'Moderate customer feedback')
 
 @section('content')
-<form method="GET" action="{{ route('admin.reviews.index') }}" class="card" style="margin-bottom:var(--space-lg);display:grid;gap:var(--space-md);grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));align-items:end;">
-    <div class="form-group" style="margin:0;">
+<form method="GET" action="{{ route('admin.reviews.index') }}" class="card admin-filters admin-filters--grid">
+    <div class="form-group admin-filters__field">
         <label class="form-label" for="q">Search</label>
         <input type="search" id="q" name="q" class="form-input" value="{{ $filters['q'] ?? '' }}" placeholder="Product, customer, text…">
     </div>
-    <div class="form-group" style="margin:0;">
+    <div class="form-group admin-filters__field">
         <label class="form-label" for="status">Status</label>
         <select id="status" name="status" class="form-select">
             <option value="">All</option>
@@ -18,7 +18,7 @@
             <option value="approved" @selected(($filters['status'] ?? '') === 'approved')>Approved</option>
         </select>
     </div>
-    <div class="form-group" style="margin:0;">
+    <div class="form-group admin-filters__field">
         <label class="form-label" for="rating">Rating</label>
         <select id="rating" name="rating" class="form-select">
             <option value="">All</option>
@@ -27,7 +27,7 @@
             @endfor
         </select>
     </div>
-    <div style="display:flex;gap:var(--space-sm);">
+    <div class="admin-actions">
         <button type="submit" class="btn btn--primary">Filter</button>
         <a href="{{ route('admin.reviews.index') }}" class="btn btn--ghost">Clear</a>
     </div>
@@ -76,7 +76,7 @@
                     </td>
                     <td>{{ $review->created_at?->format('Y-m-d') }}</td>
                     <td>
-                        <div class="table__actions" style="display:flex;flex-wrap:wrap;gap:var(--space-xs);">
+                        <div class="admin-table__actions">
                             @unless ($review->is_approved)
                                 <form method="POST" action="{{ route('admin.reviews.approve', $review) }}">
                                     @csrf
@@ -108,7 +108,7 @@
 </div>
 
 @if ($reviews->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $reviews->links() }}
     </div>
 @endif

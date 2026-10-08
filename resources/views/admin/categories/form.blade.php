@@ -4,15 +4,15 @@
 @section('page-title', isset($category) ? 'Edit category' : 'New category')
 
 @section('content')
-<form method="POST" action="{{ isset($category) ? route('admin.categories.update', $category) : route('admin.categories.store') }}" style="max-width:40rem;display:flex;flex-direction:column;gap:var(--space-xl);">
+<form method="POST" action="{{ isset($category) ? route('admin.categories.update', $category) : route('admin.categories.store') }}" class="admin-form admin-form--narrow">
     @csrf
     @if (isset($category))
         @method('PUT')
     @endif
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Category info</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Category info</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="parent_id">Parent category</label>
                 <select id="parent_id" name="parent_id" class="form-select">
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div style="display:flex;gap:var(--space-sm);">
+    <div class="admin-form__actions">
         <button type="submit" class="btn btn--primary">{{ isset($category) ? 'Save category' : 'Create category' }}</button>
         <a href="{{ route('admin.categories.index') }}" class="btn btn--ghost">Cancel</a>
     </div>

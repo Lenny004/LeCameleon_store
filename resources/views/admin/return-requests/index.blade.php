@@ -28,7 +28,7 @@
                     <td>
                         <span class="badge badge--{{ match ($returnRequest->status->value) {
                             'approved' => 'success',
-                            'denied' => 'error',
+                            'denied' => 'danger',
                             'refunded' => 'success',
                             default => 'warning',
                         } }}">
@@ -38,16 +38,16 @@
                     <td>{{ $returnRequest->created_at?->format('Y-m-d') }}</td>
                     <td>
                         @if ($returnRequest->status->value === 'pending')
-                            <div class="table__actions" style="display:flex;gap:var(--space-xs);">
+                            <div class="admin-table__actions">
                                 @if (Route::has('admin.return-requests.approve'))
-                                    <form method="POST" action="{{ route('admin.return-requests.approve', $returnRequest) }}" style="display:inline;">
+                                    <form method="POST" action="{{ route('admin.return-requests.approve', $returnRequest) }}" class="admin-inline-form">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn--ghost btn--sm">Approve</button>
                                     </form>
                                 @endif
                                 @if (Route::has('admin.return-requests.deny'))
-                                    <form method="POST" action="{{ route('admin.return-requests.deny', $returnRequest) }}" style="display:inline;">
+                                    <form method="POST" action="{{ route('admin.return-requests.deny', $returnRequest) }}" class="admin-inline-form">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn--ghost btn--sm">Deny</button>
@@ -55,7 +55,7 @@
                                 @endif
                             </div>
                         @elseif ($returnRequest->status->value === 'approved' && Route::has('admin.return-requests.refund'))
-                            <form method="POST" action="{{ route('admin.return-requests.refund', $returnRequest) }}" style="display:inline;">
+                            <form method="POST" action="{{ route('admin.return-requests.refund', $returnRequest) }}" class="admin-inline-form">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="btn btn--ghost btn--sm">Mark refunded</button>
@@ -73,7 +73,7 @@
 </div>
 
 @if ($returnRequests->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $returnRequests->links() }}
     </div>
 @endif

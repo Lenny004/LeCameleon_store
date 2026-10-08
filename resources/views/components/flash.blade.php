@@ -1,5 +1,5 @@
 @if (session('success') || session('error') || session('warning') || session('info') || ($errors ?? null)?->any())
-    <div class="container" style="padding-top: var(--space-md);">
+    <div class="container flash-container">
         <div class="flash-stack">
             @if (session('success'))
                 <div class="flash flash--success" role="alert">{{ session('success') }}</div>

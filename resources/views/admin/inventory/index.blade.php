@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="kpi-grid" style="margin-bottom:var(--space-xl);">
+<div class="kpi-grid admin-panel admin-panel--spaced">
     <div class="kpi-card">
         <p class="kpi-card__label">Total SKUs</p>
         <p class="kpi-card__value">{{ $totalSkus }}</p>
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div class="card" style="margin-bottom:var(--space-xl);">
+<div class="card admin-panel admin-panel--spaced">
     <div class="card__header">
         <h2 class="card__title">Current stock</h2>
     </div>
@@ -65,19 +65,19 @@
         </table>
     </div>
     @if ($stockProducts->hasPages())
-        <div style="margin-top:var(--space-lg);">{{ $stockProducts->links() }}</div>
+        <div class="admin-pagination">{{ $stockProducts->links() }}</div>
     @endif
 </div>
 
-<div class="card" style="margin-bottom:var(--space-xl);">
+<div class="card admin-panel admin-panel--spaced">
     <div class="card__header">
         <h2 class="card__title">Adjust stock</h2>
     </div>
-    <form method="POST" action="{{ route('admin.inventory.store') }}" style="display:grid;gap:var(--space-md);max-width:32rem;">
+    <form method="POST" action="{{ route('admin.inventory.store') }}" class="admin-form admin-form--inventory">
         @csrf
         @if ($errors->any())
             <div class="flash flash--error" role="alert">
-                <ul style="margin:0;padding-left:1.25rem;">
+                <ul class="admin-form__list">
                     @foreach ($errors->all() as $errorMessage)
                         <li>{{ $errorMessage }}</li>
                     @endforeach
@@ -107,16 +107,16 @@
                 </select>
             </div>
         </div>
-        <div class="form-group" id="new-quantity-group" style="display:none;">
+        <div class="form-group is-hidden" id="new-quantity-group">
             <label class="form-label" for="new_quantity_available">New available quantity</label>
             <input type="number" id="new_quantity_available" name="new_quantity_available" class="form-input" min="0" value="{{ old('new_quantity_available') }}">
-            <p class="text-muted" style="margin-top:var(--space-xs);font-size:0.875rem;">Sets the product stock to this exact value.</p>
+            <p class="text-muted admin-form__hint">Sets the product stock to this exact value.</p>
         </div>
         <div class="form-group">
             <label class="form-label" for="notes">Notes</label>
             <input type="text" id="notes" name="notes" class="form-input" value="{{ old('notes') }}">
         </div>
-        <button type="submit" class="btn btn--primary" style="width:fit-content;">Record movement</button>
+        <button type="submit" class="btn btn--primary admin-form__submit">Record movement</button>
     </form>
 </div>
 
@@ -164,7 +164,7 @@
         </table>
     </div>
     @if ($movements->hasPages())
-        <div style="margin-top:var(--space-lg);">
+        <div class="admin-pagination">
             {{ $movements->links() }}
         </div>
     @endif
@@ -180,8 +180,8 @@
 
         function syncAdjustFields() {
             var isAdjust = typeSelect.value === 'adjust';
-            quantityGroup.style.display = isAdjust ? 'none' : '';
-            newQuantityGroup.style.display = isAdjust ? '' : 'none';
+            quantityGroup.classList.toggle('is-hidden', isAdjust);
+            newQuantityGroup.classList.toggle('is-hidden', !isAdjust);
             quantityInput.required = !isAdjust;
             newQuantityInput.required = isAdjust;
         }

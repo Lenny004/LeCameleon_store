@@ -5,10 +5,6 @@
 @section('page-subtitle', 'Contact form inbox')
 
 @section('content')
-@if (session('success'))
-    <div class="alert alert--success" style="margin-bottom:var(--space-md);">{{ session('success') }}</div>
-@endif
-
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
@@ -27,7 +23,7 @@
                         <strong>{{ $message->name }}</strong>
                         <br><a class="admin-table__link" href="mailto:{{ $message->email }}">{{ $message->email }}</a>
                     </td>
-                    <td style="max-width:24rem;white-space:pre-wrap;">{{ Str::limit($message->message, 200) }}</td>
+                    <td class="admin-table__cell admin-table__cell--message">{{ Str::limit($message->message, 200) }}</td>
                     <td>
                         @if ($message->read_at)
                             <span class="badge">Read</span>
@@ -58,7 +54,7 @@
 </div>
 
 @if ($messages->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $messages->links() }}
     </div>
 @endif

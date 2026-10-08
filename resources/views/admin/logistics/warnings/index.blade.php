@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="card" style="margin-bottom:var(--space-xl);">
+<div class="card admin-panel admin-panel--spaced">
     <h2 class="card__title logistics-form__heading">Add warning</h2>
     <form method="POST" action="{{ route('admin.logistics.warnings.store') }}" class="logistics-form__grid">
         @csrf
@@ -68,7 +68,7 @@
                     <td>{{ ucfirst($warning->severity->value) }}</td>
                     <td>{{ ucfirst($warning->applies_to->value) }}</td>
                     <td>
-                        <form method="POST" action="{{ route('admin.logistics.warnings.destroy', $warning) }}" onsubmit="return confirm('Remove?');" style="display:inline;">
+                        <form method="POST" action="{{ route('admin.logistics.warnings.destroy', $warning) }}" onsubmit="return confirm('Remove?');" class="admin-inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn--ghost btn--sm">Delete</button>

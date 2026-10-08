@@ -56,7 +56,7 @@
 </div>
 
 @if ($orders->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $orders->links() }}
     </div>
 @endif
