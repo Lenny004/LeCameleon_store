@@ -1,0 +1,44 @@
+/* Block two-factor — configuración y desafío de seguridad administrativa. */
+
+.two-factor {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.two-factor__status-message {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.two-factor__qr {
+    max-width: 22rem;
+    margin-block: var(--space-md);
+}
+
+.two-factor__code-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+    padding: 0;
+    list-style: none;
+}
+
+.two-factor__code {
+    padding: var(--space-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+}
+
+.two-factor__management {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+    .two-factor__code-list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

@@ -37,6 +37,7 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $request->session()->forget('two_factor_passed');
 
         $this->mergeGuestData($request);
 
