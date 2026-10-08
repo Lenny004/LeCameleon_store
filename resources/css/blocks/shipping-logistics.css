@@ -37,6 +37,10 @@
     color: var(--text-muted);
 }
 
+.shipping-quote__error-message {
+    margin: 0;
+}
+
 .shipping-quote__details {
     display: flex;
     flex-direction: column;

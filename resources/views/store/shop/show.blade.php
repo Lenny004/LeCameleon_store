@@ -341,7 +341,7 @@
 </div>
 
 @if (($related ?? collect())->isNotEmpty())
-    <section class="container section product-recs product-recs--related" aria-labelledby="product-recs-related">
+    <section class="container section product-recs" aria-labelledby="product-recs-related">
         <div class="section__header product-recs__header">
             <h2 class="section__title" id="product-recs-related">También te puede gustar</h2>
             <p class="product-recs__lead">Piezas seleccionadas de la misma época y estilo.</p>
@@ -355,7 +355,7 @@
 @endif
 
 @if (($alsoViewed ?? collect())->isNotEmpty())
-    <section class="container section product-recs product-recs--viewed" aria-labelledby="product-recs-viewed">
+    <section class="container section product-recs" aria-labelledby="product-recs-viewed">
         <div class="section__header product-recs__header">
             <h2 class="section__title" id="product-recs-viewed">Clientes también vieron</h2>
             <p class="product-recs__lead">Exploraciones recientes de otros compradores.</p>
@@ -407,7 +407,8 @@
                                 {{ $stars }} ★
                             </a>
                             <div class="product-reviews__bar-track" aria-hidden="true">
-                                <span class="product-reviews__bar-fill" style="width: {{ $pct }}%;"></span>
+                                {{-- Dynamic width stays as a custom property; CSS owns the presentation. --}}
+                                <span class="product-reviews__bar-fill" style="--progress: {{ $pct }}%;"></span>
                             </div>
                             <span class="product-reviews__bar-count">{{ $total }}</span>
                         </li>

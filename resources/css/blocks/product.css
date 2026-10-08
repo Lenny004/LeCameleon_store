@@ -628,6 +628,15 @@
     color: var(--text-muted);
 }
 
+.product-measurements {
+    width: 100%;
+}
+
+.product-header__meta-item {
+    display: inline-flex;
+    align-items: center;
+}
+
 /* — Valoraciones con estrellas — */
 
 .product-rating {
@@ -635,6 +644,11 @@
     gap: 0.08em;
     color: color-mix(in srgb, var(--border) 90%, var(--text-muted));
     letter-spacing: 0.02em;
+}
+
+.product-rating__star {
+    display: inline-block;
+    color: currentColor;
 }
 
 .product-rating--lg {
@@ -821,6 +835,7 @@
     display: block;
     height: 100%;
     min-width: 0;
+    width: var(--progress);
     background: linear-gradient(
         90deg,
         color-mix(in srgb, var(--product-star-on) 80%, var(--accent)),

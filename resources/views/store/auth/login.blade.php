@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="auth-page">
-    <div class="auth-card auth-card--login">
+    <div class="auth-card">
         <header class="auth-card__head">
             <span class="auth-card__badge" aria-hidden="true">&#128274;</span>
             <h1 class="auth-card__title">Iniciar sesión</h1>

@@ -17,7 +17,7 @@
     ];
 @endphp
 
-<div class="container" style="padding-block:var(--space-xl);">
+<div class="container account-page-shell">
     <nav class="breadcrumb">
         @if (Route::has('account.orders.index'))
             <a class="breadcrumb__link" href="{{ route('account.orders.index') }}">Mis pedidos</a>
@@ -26,7 +26,7 @@
         <span>#{{ $order->id }}</span>
     </nav>
 
-    <div class="account-content" style="max-width:40rem;">
+    <div class="account-content account-content--narrow">
         <div class="order-card">
             <div class="order-card__header">
                 <div>
@@ -35,7 +35,7 @@
                 </div>
                 <span class="badge badge--success">{{ $order->status }}</span>
             </div>
-            <p class="text-muted" style="margin:var(--space-md) 0;">Envío a: {{ $order->shipping_address }}</p>
+            <p class="text-muted account-order__address">Envío a: {{ $order->shipping_address }}</p>
 
             @foreach ($order->items as $item)
                 <div class="checkout-review-item">
