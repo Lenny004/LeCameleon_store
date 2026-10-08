@@ -4,13 +4,13 @@
 @section('page-title', 'Settings')
 
 @section('content')
-<form method="POST" action="{{ route('admin.settings.update') }}" style="max-width:42rem;display:flex;flex-direction:column;gap:var(--space-xl);">
+<form method="POST" action="{{ route('admin.settings.update') }}" class="admin-form admin-form--medium">
     @csrf
     @method('PUT')
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Store</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+        <h2 class="card__title admin-form__title">Store</h2>
+        <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="store_name">Store name</label>
                 <input type="text" id="store_name" name="store_name" class="form-input" value="{{ old('store_name', $settings['store_name']) }}" required>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="card">
-        <h2 class="card__title" style="margin-bottom:var(--space-lg);">Returns</h2>
+        <h2 class="card__title admin-form__title">Returns</h2>
         <div class="form-group">
             <label class="form-label" for="returns_policy">Returns policy</label>
             <textarea id="returns_policy" name="returns_policy" class="form-textarea" rows="10">{{ old('returns_policy', $settings['returns_policy']) }}</textarea>
@@ -36,6 +36,6 @@
 
     <p class="text-muted">These values come from the settings table and are used by the storefront layout and returns page. Currency, taxes and shipping calculation remain operational configuration in <code>config/store.php</code> and environment variables.</p>
 
-    <button type="submit" class="btn btn--primary" style="width:fit-content;">Save settings</button>
+    <button type="submit" class="btn btn--primary admin-form__submit">Save settings</button>
 </form>
 @endsection

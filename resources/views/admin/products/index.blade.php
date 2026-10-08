@@ -55,7 +55,7 @@
                         @endif
                     </td>
                     <td>
-                        <div class="table__actions">
+                        <div class="admin-table__actions">
                             @if (Route::has('admin.products.edit'))
                                 <a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.products.edit', $product) }}">Edit</a>
                             @endif
@@ -72,7 +72,7 @@
 </div>
 
 @if ($products->hasPages())
-    <div style="margin-top:var(--space-lg);">
+    <div class="admin-pagination">
         {{ $products->links() }}
     </div>
 @endif

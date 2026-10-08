@@ -43,7 +43,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn btn--primary" style="margin-top:var(--space-lg);">Save matrix</button>
+        <button type="submit" class="btn btn--primary admin-form__submit admin-form__submit--spaced">Save matrix</button>
     </form>
 @endif
 @endsection

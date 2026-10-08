@@ -9,6 +9,10 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
+.is-hidden {
+    display: none;
+}
+
 /* ==========================================================================
    Badges — etiquetas compactas
    Fondos atenuados; color semántico en texto, no rellenos neon grandes.
@@ -107,6 +111,10 @@
     font-size: 0.875rem;
 }
 
+.table__row--muted {
+    color: var(--text-muted);
+}
+
 .table th,
 .table td {
     padding: 0.8125rem 1rem;
@@ -127,12 +135,6 @@
 
 .table tr:hover td {
     background-color: color-mix(in srgb, var(--primary) 3%, var(--surface));
-}
-
-.table__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
 }
 
 /* ==========================================================================

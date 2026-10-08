@@ -28,7 +28,7 @@
     ];
 @endphp
 
-<aside class="admin-sidebar" :class="{ 'admin-sidebar--open': open }">
+<aside id="admin-sidebar" class="admin-sidebar" :class="{ 'admin-sidebar--open': open }">
     <div class="admin-sidebar__brand">
         @include('components.brand-logo', [
             'variant' => 'compact',
@@ -43,8 +43,8 @@
             <p class="admin-sidebar__label">Main</p>
             @foreach (array_slice($navItems, 0, 7) as $item)
                 @if (Route::has($item['route']))
-                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) || request()->routeIs($item['route']) ? 'admin-sidebar__link--active' : '' }}">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
+                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) || request()->routeIs($item['route']) ? 'admin-sidebar__link--active' : '' }}" @if (request()->routeIs(str_replace('.index', '.*', $item['route'])) || request()->routeIs($item['route'])) aria-current="page" @endif>
+                        <svg class="admin-sidebar__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="{{ $item['icon'] }}"/></svg>
                         {{ $item['label'] }}
                     </a>
                 @endif
@@ -56,8 +56,8 @@
                 <p class="admin-sidebar__label">Logistics</p>
                 @foreach ($logisticsNav as $item)
                     @if (Route::has($item['route']))
-                        <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs('admin.logistics.' . explode('.', str_replace('admin.logistics.', '', $item['route']))[0] . '.*') ? 'admin-sidebar__link--active' : '' }}">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
+                        <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs('admin.logistics.' . explode('.', str_replace('admin.logistics.', '', $item['route']))[0] . '.*') ? 'admin-sidebar__link--active' : '' }}" @if (request()->routeIs('admin.logistics.' . explode('.', str_replace('admin.logistics.', '', $item['route']))[0] . '.*')) aria-current="page" @endif>
+                            <svg class="admin-sidebar__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="{{ $item['icon'] }}"/></svg>
                             {{ $item['label'] }}
                         </a>
                     @endif
@@ -69,8 +69,8 @@
             <p class="admin-sidebar__label">Catalog</p>
             @foreach (array_slice($navItems, 7, 4) as $item)
                 @if (Route::has($item['route']))
-                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
+                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}" @if (request()->routeIs(str_replace('.index', '.*', $item['route']))) aria-current="page" @endif>
+                        <svg class="admin-sidebar__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="{{ $item['icon'] }}"/></svg>
                         {{ $item['label'] }}
                     </a>
                 @endif
@@ -81,8 +81,8 @@
             @foreach (array_slice($navItems, 11) as $item)
                 @continue(($item['admin_only'] ?? false) && ! auth()->user()?->isAdmin())
                 @if (Route::has($item['route']))
-                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="{{ $item['icon'] }}"/></svg>
+                    <a href="{{ route($item['route']) }}" class="admin-sidebar__link {{ request()->routeIs(str_replace('.index', '.*', $item['route'])) ? 'admin-sidebar__link--active' : '' }}" @if (request()->routeIs(str_replace('.index', '.*', $item['route']))) aria-current="page" @endif>
+                        <svg class="admin-sidebar__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="{{ $item['icon'] }}"/></svg>
                         {{ $item['label'] }}
                     </a>
                 @endif
@@ -93,7 +93,7 @@
     <div class="admin-sidebar__footer">
         @if (Route::has('home'))
             <a href="{{ route('home') }}" class="admin-sidebar__link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                <svg class="admin-sidebar__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 View Store
             </a>
         @endif
