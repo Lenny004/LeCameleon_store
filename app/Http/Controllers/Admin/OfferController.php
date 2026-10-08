@@ -30,9 +30,11 @@ class OfferController extends Controller
     {
         abort_unless($offer->isPending(), 422);
 
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $offer->update([
             'status' => OfferStatus::Accepted,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('offer.accepted', $offer);
@@ -45,9 +47,11 @@ class OfferController extends Controller
     {
         abort_unless($offer->isPending(), 422);
 
+        $validated = $request->validate(['admin_notes' => ['nullable', 'string', 'max:2000']]);
+
         $offer->update([
             'status' => OfferStatus::Declined,
-            'admin_notes' => $request->input('admin_notes'),
+            'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
         RecordsActivity::log('offer.declined', $offer);

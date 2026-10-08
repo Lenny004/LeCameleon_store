@@ -40,19 +40,52 @@
         <div class="admin-form__fields">
             <div class="form-group">
                 <label class="form-label" for="name">Nombre <span class="form-label__required" aria-hidden="true">*</span></label>
-                <input type="text" id="name" name="name" class="form-input @error('name') form-input--error @enderror" value="{{ old('name', $product?->name ?? '') }}" placeholder="Vestido floral de los años 70" maxlength="255" required autocomplete="off" @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input @error('name') form-input--error @enderror"
+                    value="{{ old('name', $product?->name ?? '') }}"
+                    placeholder="Vestido floral de los años 70"
+                    maxlength="255"
+                    required
+                    autocomplete="off"
+                    @error('name') aria-invalid="true" aria-describedby="name-error" @enderror
+                >
                 @error('name')<span class="form-error" id="name-error">{{ $message }}</span>@enderror
             </div>
 
             <div class="form-row form-row--cols-2">
                 <div class="form-group">
                     <label class="form-label" for="slug">Slug <span class="form-label__required" aria-hidden="true">*</span></label>
-                    <input type="text" id="slug" name="slug" class="form-input @error('slug') form-input--error @enderror" value="{{ old('slug', $product->slug ?? '') }}" placeholder="vestido-floral-anos-70" maxlength="280" required autocomplete="off" @error('slug') aria-invalid="true" aria-describedby="slug-error" @enderror>
+                    <input
+                        type="text"
+                        id="slug"
+                        name="slug"
+                        class="form-input @error('slug') form-input--error @enderror"
+                        value="{{ old('slug', $product->slug ?? '') }}"
+                        placeholder="vestido-floral-anos-70"
+                        maxlength="280"
+                        required
+                        autocomplete="off"
+                        @error('slug') aria-invalid="true" aria-describedby="slug-error" @enderror
+                    >
                     @error('slug')<span class="form-error" id="slug-error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="sku">SKU <span class="form-label__required" aria-hidden="true">*</span></label>
-                    <input type="text" id="sku" name="sku" class="form-input @error('sku') form-input--error @enderror" value="{{ old('sku', $product->sku ?? '') }}" placeholder="VST-1970-001" maxlength="80" required autocomplete="off" @error('sku') aria-invalid="true" aria-describedby="sku-error" @enderror>
+                    <input
+                        type="text"
+                        id="sku"
+                        name="sku"
+                        class="form-input @error('sku') form-input--error @enderror"
+                        value="{{ old('sku', $product->sku ?? '') }}"
+                        placeholder="VST-1970-001"
+                        maxlength="80"
+                        required
+                        autocomplete="off"
+                        @error('sku') aria-invalid="true" aria-describedby="sku-error" @enderror
+                    >
                     @error('sku')<span class="form-error" id="sku-error">{{ $message }}</span>@enderror
                 </div>
             </div>
@@ -63,7 +96,9 @@
                     <select id="type" name="type" class="form-select @error('type') form-select--error @enderror" required @error('type') aria-invalid="true" aria-describedby="type-error" @enderror>
                         <option value="" disabled {{ old('type', $product?->type?->value ?? 'apparel') === '' ? 'selected' : '' }}>Selecciona un tipo</option>
                         @foreach (['apparel' => 'Apparel', 'object' => 'Object', 'accessory' => 'Accessory'] as $typeValue => $typeLabel)
-                            <option value="{{ $typeValue }}" @selected(old('type', $product?->type?->value ?? 'apparel') === $typeValue)>{{ ['apparel' => 'Ropa', 'object' => 'Objeto', 'accessory' => 'Accesorio'][$typeValue] }}</option>
+                            <option value="{{ $typeValue }}" @selected(old('type', $product?->type?->value ?? 'apparel') === $typeValue)>
+                                {{ ['apparel' => 'Ropa', 'object' => 'Objeto', 'accessory' => 'Accesorio'][$typeValue] }}
+                            </option>
                         @endforeach
                     </select>
                     @error('type')<span class="form-error" id="type-error">{{ $message }}</span>@enderror
@@ -73,7 +108,9 @@
                     <select id="status" name="status" class="form-select @error('status') form-select--error @enderror" required @error('status') aria-invalid="true" aria-describedby="status-error" @enderror>
                         <option value="" disabled {{ old('status', $product?->status?->value ?? 'draft') === '' ? 'selected' : '' }}>Selecciona un estado</option>
                         @foreach (['draft' => 'Draft', 'published' => 'Published', 'archived' => 'Archived', 'sold_out' => 'Sold out'] as $statusValue => $statusLabel)
-                            <option value="{{ $statusValue }}" @selected(old('status', $product?->status?->value ?? 'draft') === $statusValue)>{{ ['draft' => 'Borrador', 'published' => 'Publicado', 'archived' => 'Archivado', 'sold_out' => 'Agotado'][$statusValue] }}</option>
+                            <option value="{{ $statusValue }}" @selected(old('status', $product?->status?->value ?? 'draft') === $statusValue)>
+                                {{ ['draft' => 'Borrador', 'published' => 'Publicado', 'archived' => 'Archivado', 'sold_out' => 'Agotado'][$statusValue] }}
+                            </option>
                         @endforeach
                     </select>
                     @error('status')<span class="form-error" id="status-error">{{ $message }}</span>@enderror
@@ -93,10 +130,17 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="category_id">Categoría</label>
-                    <select id="category_id" name="category_id" class="form-select @error('category_id') form-select--error @enderror" @error('category_id') aria-invalid="true" aria-describedby="category_id-error" @enderror>
+                    <select
+                        id="category_id"
+                        name="category_id"
+                        class="form-select @error('category_id') form-select--error @enderror"
+                        @error('category_id') aria-invalid="true" aria-describedby="category_id-error" @enderror
+                    >
                         <option value="">— Ninguna —</option>
                         @foreach ($categories ?? [] as $category)
-                            <option value="{{ $category->id }}" @selected((string) old('category_id', $product?->category_id ?? '') === (string) $category->id)>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" @selected((string) old('category_id', $product?->category_id ?? '') === (string) $category->id)>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')<span class="form-error" id="category_id-error">{{ $message }}</span>@enderror
@@ -105,13 +149,30 @@
 
             <div class="form-group">
                 <label class="form-label" for="short_description">Descripción corta</label>
-                <input type="text" id="short_description" name="short_description" class="form-input @error('short_description') form-input--error @enderror" maxlength="500" value="{{ old('short_description', $product->short_description ?? '') }}" placeholder="Vestido estampado en excelente estado" @error('short_description') aria-invalid="true" aria-describedby="short_description-error" @enderror>
+                <input
+                    type="text"
+                    id="short_description"
+                    name="short_description"
+                    class="form-input @error('short_description') form-input--error @enderror"
+                    maxlength="500"
+                    value="{{ old('short_description', $product->short_description ?? '') }}"
+                    placeholder="Vestido estampado en excelente estado"
+                    @error('short_description') aria-invalid="true" aria-describedby="short_description-error" @enderror
+                >
                 @error('short_description')<span class="form-error" id="short_description-error">{{ $message }}</span>@enderror
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="description">Descripción</label>
-                <textarea id="description" name="description" class="form-textarea @error('description') form-textarea--error @enderror" rows="5" maxlength="5000" placeholder="Describe la pieza, sus detalles y su historia." @error('description') aria-invalid="true" aria-describedby="description-error" @enderror>{{ old('description', $product->description ?? '') }}</textarea>
+                <textarea
+                    id="description"
+                    name="description"
+                    class="form-textarea @error('description') form-textarea--error @enderror"
+                    rows="5"
+                    maxlength="5000"
+                    placeholder="Describe la pieza, sus detalles y su historia."
+                    @error('description') aria-invalid="true" aria-describedby="description-error" @enderror
+                >{{ old('description', $product->description ?? '') }}</textarea>
                 @error('description')<span class="form-error" id="description-error">{{ $message }}</span>@enderror
             </div>
         </div>
@@ -122,31 +183,93 @@
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="price">Precio <span class="form-label__required" aria-hidden="true">*</span></label>
-                <input type="number" id="price" name="price" class="form-input @error('price') form-input--error @enderror" step="0.01" min="0" max="9999999999.99" inputmode="decimal" placeholder="25.00" value="{{ old('price', $product->price ?? '') }}" required @error('price') aria-invalid="true" aria-describedby="price-error" @enderror>
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    class="form-input @error('price') form-input--error @enderror"
+                    step="0.01"
+                    min="0"
+                    max="9999999999.99"
+                    inputmode="decimal"
+                    placeholder="25.00"
+                    value="{{ old('price', $product->price ?? '') }}"
+                    required
+                    @error('price') aria-invalid="true" aria-describedby="price-error" @enderror
+                >
                 @error('price')<span class="form-error" id="price-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="compare_at_price">Precio anterior</label>
-                <input type="number" id="compare_at_price" name="compare_at_price" class="form-input @error('compare_at_price') form-input--error @enderror" step="0.01" min="0" max="9999999999.99" inputmode="decimal" placeholder="35.00" value="{{ old('compare_at_price', $product->compare_at_price ?? '') }}" @error('compare_at_price') aria-invalid="true" aria-describedby="compare_at_price-error" @enderror>
+                <input
+                    type="number"
+                    id="compare_at_price"
+                    name="compare_at_price"
+                    class="form-input @error('compare_at_price') form-input--error @enderror"
+                    step="0.01"
+                    min="0"
+                    max="9999999999.99"
+                    inputmode="decimal"
+                    placeholder="35.00"
+                    value="{{ old('compare_at_price', $product->compare_at_price ?? '') }}"
+                    @error('compare_at_price') aria-invalid="true" aria-describedby="compare_at_price-error" @enderror
+                >
                 @error('compare_at_price')<span class="form-error" id="compare_at_price-error">{{ $message }}</span>@enderror
             </div>
         </div>
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="cost_price">Precio de costo</label>
-                <input type="number" id="cost_price" name="cost_price" class="form-input @error('cost_price') form-input--error @enderror" step="0.01" min="0" max="9999999999.99" inputmode="decimal" placeholder="12.50" value="{{ old('cost_price', $product->cost_price ?? '') }}" @error('cost_price') aria-invalid="true" aria-describedby="cost_price-error" @enderror>
+                <input
+                    type="number"
+                    id="cost_price"
+                    name="cost_price"
+                    class="form-input @error('cost_price') form-input--error @enderror"
+                    step="0.01"
+                    min="0"
+                    max="9999999999.99"
+                    inputmode="decimal"
+                    placeholder="12.50"
+                    value="{{ old('cost_price', $product->cost_price ?? '') }}"
+                    @error('cost_price') aria-invalid="true" aria-describedby="cost_price-error" @enderror
+                >
                 @error('cost_price')<span class="form-error" id="cost_price-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="quantity_available">Cantidad disponible <span class="form-label__required" aria-hidden="true">*</span></label>
-                <input type="number" id="quantity_available" name="quantity_available" class="form-input @error('quantity_available') form-input--error @enderror" min="0" max="2147483647" step="1" inputmode="numeric" placeholder="1" value="{{ old('quantity_available', $product->quantity_available ?? 1) }}" required @error('quantity_available') aria-invalid="true" aria-describedby="quantity_available-error" @enderror>
+                <input
+                    type="number"
+                    id="quantity_available"
+                    name="quantity_available"
+                    class="form-input @error('quantity_available') form-input--error @enderror"
+                    min="0"
+                    max="2147483647"
+                    step="1"
+                    inputmode="numeric"
+                    placeholder="1"
+                    value="{{ old('quantity_available', $product->quantity_available ?? 1) }}"
+                    required
+                    @error('quantity_available') aria-invalid="true" aria-describedby="quantity_available-error" @enderror
+                >
                 @error('quantity_available')<span class="form-error" id="quantity_available-error">{{ $message }}</span>@enderror
             </div>
         </div>
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="low_stock_threshold">Umbral de inventario bajo</label>
-                <input type="number" id="low_stock_threshold" name="low_stock_threshold" class="form-input @error('low_stock_threshold') form-input--error @enderror" min="0" max="32767" step="1" inputmode="numeric" placeholder="1" value="{{ old('low_stock_threshold', $product->low_stock_threshold ?? 1) }}" @error('low_stock_threshold') aria-invalid="true" aria-describedby="low_stock_threshold-error" @enderror>
+                <input
+                    type="number"
+                    id="low_stock_threshold"
+                    name="low_stock_threshold"
+                    class="form-input @error('low_stock_threshold') form-input--error @enderror"
+                    min="0"
+                    max="32767"
+                    step="1"
+                    inputmode="numeric"
+                    placeholder="1"
+                    value="{{ old('low_stock_threshold', $product->low_stock_threshold ?? 1) }}"
+                    @error('low_stock_threshold') aria-invalid="true" aria-describedby="low_stock_threshold-error" @enderror
+                >
                 @error('low_stock_threshold')<span class="form-error" id="low_stock_threshold-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
@@ -163,10 +286,18 @@
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                 <label class="form-label" for="condition_grade">Condición <span class="form-label__required" aria-hidden="true">*</span></label>
-                <select id="condition_grade" name="condition_grade" class="form-select @error('condition_grade') form-select--error @enderror" required @error('condition_grade') aria-invalid="true" aria-describedby="condition_grade-error" @enderror>
+                <select
+                    id="condition_grade"
+                    name="condition_grade"
+                    class="form-select @error('condition_grade') form-select--error @enderror"
+                    required
+                    @error('condition_grade') aria-invalid="true" aria-describedby="condition_grade-error" @enderror
+                >
                     <option value="" disabled {{ old('condition_grade', $product?->condition_grade?->value ?? 'good') === '' ? 'selected' : '' }}>Selecciona una condición</option>
                     @foreach (['mint' => 'Mint', 'excellent' => 'Excellent', 'good' => 'Good', 'fair' => 'Fair', 'poor' => 'Poor'] as $gradeValue => $gradeLabel)
-                        <option value="{{ $gradeValue }}" @selected(old('condition_grade', $product?->condition_grade?->value ?? 'good') === $gradeValue)>{{ ['mint' => 'Impecable', 'excellent' => 'Excelente', 'good' => 'Buena', 'fair' => 'Regular', 'poor' => 'Deficiente'][$gradeValue] }}</option>
+                        <option value="{{ $gradeValue }}" @selected(old('condition_grade', $product?->condition_grade?->value ?? 'good') === $gradeValue)>
+                            {{ ['mint' => 'Impecable', 'excellent' => 'Excelente', 'good' => 'Buena', 'fair' => 'Regular', 'poor' => 'Deficiente'][$gradeValue] }}
+                        </option>
                     @endforeach
                 </select>
                 @error('condition_grade')<span class="form-error" id="condition_grade-error">{{ $message }}</span>@enderror
@@ -185,18 +316,45 @@
         <div class="form-row form-row--cols-2">
             <div class="form-group">
                     <label class="form-label" for="size_label">Talla</label>
-                    <input type="text" id="size_label" name="size_label" class="form-input @error('size_label') form-input--error @enderror" value="{{ old('size_label', $product->size_label ?? '') }}" placeholder="M / EU 38" maxlength="50" @error('size_label') aria-invalid="true" aria-describedby="size_label-error" @enderror>
+                    <input
+                        type="text"
+                        id="size_label"
+                        name="size_label"
+                        class="form-input @error('size_label') form-input--error @enderror"
+                        value="{{ old('size_label', $product->size_label ?? '') }}"
+                        placeholder="M / EU 38"
+                        maxlength="50"
+                        @error('size_label') aria-invalid="true" aria-describedby="size_label-error" @enderror
+                    >
                     @error('size_label')<span class="form-error" id="size_label-error">{{ $message }}</span>@enderror
             </div>
             <div class="form-group">
                 <label class="form-label" for="color">Color</label>
-                <input type="text" id="color" name="color" class="form-input @error('color') form-input--error @enderror" value="{{ old('color', $product->color ?? '') }}" placeholder="Azul marino" maxlength="80" @error('color') aria-invalid="true" aria-describedby="color-error" @enderror>
+                <input
+                    type="text"
+                    id="color"
+                    name="color"
+                    class="form-input @error('color') form-input--error @enderror"
+                    value="{{ old('color', $product->color ?? '') }}"
+                    placeholder="Azul marino"
+                    maxlength="80"
+                    @error('color') aria-invalid="true" aria-describedby="color-error" @enderror
+                >
                 @error('color')<span class="form-error" id="color-error">{{ $message }}</span>@enderror
             </div>
         </div>
         <div class="form-group">
             <label class="form-label" for="material">Material</label>
-            <input type="text" id="material" name="material" class="form-input @error('material') form-input--error @enderror" value="{{ old('material', $product->material ?? '') }}" placeholder="Algodón y lino" maxlength="150" @error('material') aria-invalid="true" aria-describedby="material-error" @enderror>
+            <input
+                type="text"
+                id="material"
+                name="material"
+                class="form-input @error('material') form-input--error @enderror"
+                value="{{ old('material', $product->material ?? '') }}"
+                placeholder="Algodón y lino"
+                maxlength="150"
+                @error('material') aria-invalid="true" aria-describedby="material-error" @enderror
+            >
             @error('material')<span class="form-error" id="material-error">{{ $message }}</span>@enderror
         </div>
 
@@ -288,8 +446,18 @@
 
         <div class="form-group">
             <label class="form-label" for="images">Subir imágenes</label>
-            <input type="file" id="images" name="images[]" class="form-input" accept="image/*" multiple>
-            <p class="text-muted admin-form__hint">La primera imagen subida será principal si no existe una.</p>
+            <input
+                type="file"
+                id="images"
+                name="images[]"
+                class="form-input @error('images.*') form-input--error @enderror"
+                accept="image/*"
+                multiple
+                aria-describedby="images-hint @error('images.*')images-error @enderror"
+                @error('images.*') aria-invalid="true" @enderror
+            >
+            <p id="images-hint" class="text-muted admin-form__hint">La primera imagen subida será principal si no existe una.</p>
+            @error('images.*')<span class="form-error" id="images-error">{{ $message }}</span>@enderror
         </div>
     </div>
 
@@ -297,17 +465,41 @@
         <h2 class="card__title admin-form__title">SEO</h2>
         <div class="form-group">
             <label class="form-label" for="meta_title">Título SEO</label>
-            <input type="text" id="meta_title" name="meta_title" class="form-input @error('meta_title') form-input--error @enderror" maxlength="255" value="{{ old('meta_title', $product->meta_title ?? '') }}" placeholder="Vestido floral vintage" @error('meta_title') aria-invalid="true" aria-describedby="meta_title-error" @enderror>
+            <input
+                type="text"
+                id="meta_title"
+                name="meta_title"
+                class="form-input @error('meta_title') form-input--error @enderror"
+                maxlength="255"
+                value="{{ old('meta_title', $product->meta_title ?? '') }}"
+                placeholder="Vestido floral vintage"
+                @error('meta_title') aria-invalid="true" aria-describedby="meta_title-error" @enderror
+            >
             @error('meta_title')<span class="form-error" id="meta_title-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
             <label class="form-label" for="meta_description">Descripción SEO</label>
-            <textarea id="meta_description" name="meta_description" class="form-textarea @error('meta_description') form-textarea--error @enderror" rows="2" maxlength="500" placeholder="Resumen breve para buscadores." @error('meta_description') aria-invalid="true" aria-describedby="meta_description-error" @enderror>{{ old('meta_description', $product->meta_description ?? '') }}</textarea>
+            <textarea
+                id="meta_description"
+                name="meta_description"
+                class="form-textarea @error('meta_description') form-textarea--error @enderror"
+                rows="2"
+                maxlength="500"
+                placeholder="Resumen breve para buscadores."
+                @error('meta_description') aria-invalid="true" aria-describedby="meta_description-error" @enderror
+            >{{ old('meta_description', $product->meta_description ?? '') }}</textarea>
             @error('meta_description')<span class="form-error" id="meta_description-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
             <label class="form-label" for="published_at">Fecha de publicación</label>
-            <input type="datetime-local" id="published_at" name="published_at" class="form-input @error('published_at') form-input--error @enderror" value="{{ old('published_at', isset($product) && $product->published_at ? $product->published_at->format('Y-m-d\TH:i') : '') }}" @error('published_at') aria-invalid="true" aria-describedby="published_at-error" @enderror>
+            <input
+                type="datetime-local"
+                id="published_at"
+                name="published_at"
+                class="form-input @error('published_at') form-input--error @enderror"
+                value="{{ old('published_at', isset($product) && $product->published_at ? $product->published_at->format('Y-m-d\TH:i') : '') }}"
+                @error('published_at') aria-invalid="true" aria-describedby="published_at-error" @enderror
+            >
             @error('published_at')<span class="form-error" id="published_at-error">{{ $message }}</span>@enderror
         </div>
     </div>

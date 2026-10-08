@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Messages')
-@section('page-title', 'Messages')
-@section('page-subtitle', 'Contact form inbox')
+@section('title', 'Mensajes')
+@section('page-title', 'Mensajes')
+@section('page-subtitle', 'Bandeja del formulario de contacto')
 
 @section('content')
 <div class="table-wrap">
@@ -26,9 +26,9 @@
                     <td class="admin-table__cell admin-table__cell--message">{{ Str::limit($message->message, 200) }}</td>
                     <td>
                         @if ($message->read_at)
-                            <span class="badge">Read</span>
+                            <span class="badge">Leído</span>
                         @else
-                            <span class="badge badge--warning">Unread</span>
+                            <span class="badge badge--warning">No leído</span>
                         @endif
                     </td>
                     <td>{{ $message->created_at?->format('Y-m-d H:i') }}</td>
@@ -37,7 +37,7 @@
                             <form method="POST" action="{{ route('admin.messages.read', $message) }}">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn--ghost btn--sm">Mark read</button>
+                                <button type="submit" class="btn btn--ghost btn--sm">Marcar como leído</button>
                             </form>
                         @else
                             —
@@ -46,7 +46,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No messages yet.</td>
+                    <td colspan="5">Aún no hay mensajes.</td>
                 </tr>
             @endforelse
         </tbody>
