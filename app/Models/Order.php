@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
 use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * Customer order with immutable address snapshots.
@@ -129,5 +131,38 @@ class Order extends Model
         }
 
         return $this->user?->email;
+    }
+
+    /**
+     * Return the reservation expiry based on the latest pending payment.
+     */
+    public function reservationExpiresAt(): ?Carbon
+    {
+        $payment = $this->relationLoaded('payments')
+            ? $this->payments
+                ->filter(fn (Payment $payment): bool => $payment->status === PaymentStatus::Pending)
+                ->sortByDesc('created_at')
+                ->first()
+            : $this->payments()
+                ->where('status', PaymentStatus::Pending->value)
+                ->latest()
+                ->first();
+
+        if (! $payment) {
+            return null;
+        }
+
+        $onlineProviders = array_map('strtolower', (array) config('store.online_payment_providers', ['stripe']));
+        $provider = strtolower((string) $payment->provider);
+
+        if (in_array($provider, $onlineProviders, true)) {
+            return $payment->created_at?->copy()->addMinutes((int) config('store.reservation_ttl_minutes', 30));
+        }
+
+        $manualHours = (int) config('store.manual_payment_ttl_hours', 72);
+
+        return $manualHours > 0
+            ? $payment->created_at?->copy()->addHours($manualHours)
+            : null;
     }
 }
