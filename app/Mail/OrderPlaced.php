@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class OrderPlaced extends Mailable implements ShouldQueue
 {
@@ -29,6 +30,9 @@ class OrderPlaced extends Mailable implements ShouldQueue
     {
         return new Content(
             view: 'mail.order-placed',
+            with: $this->order->paymentMethod() === 'transfer'
+                ? ['receiptUploadUrl' => URL::temporarySignedRoute('checkout.receipts.create', now()->addDays(7), ['order' => $this->order])]
+                : [],
         );
     }
 }

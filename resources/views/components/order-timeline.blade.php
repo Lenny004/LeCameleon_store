@@ -1,4 +1,4 @@
-<ol class="order-timeline checkout-steps" aria-label="Order status">
+<ol class="order-timeline checkout-steps" aria-label="Estado del pedido">
     @foreach ($timeline as $step)
         <li class="checkout-step {{ $step['current'] ? 'checkout-step--active' : ($step['completed'] ? 'checkout-step--done' : '') }}">
             <span class="checkout-step__num">{{ $loop->iteration }}</span>

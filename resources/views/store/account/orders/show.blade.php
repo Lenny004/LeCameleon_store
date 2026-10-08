@@ -39,6 +39,39 @@
             @if ($shippingLine)
                 <p class="text-muted account-order__address">Envío a: {{ $shippingLine }}</p>
             @endif
+            <p class="text-muted account-order__address">Método de pago: {{ \App\Enums\PaymentMethod::tryFrom($order->paymentMethod())?->label() ?? $order->paymentMethod() }}</p>
+
+            @if ($order->paymentInstructions())
+                <section class="account-order__section">
+                    <h2 class="text-small account-order__section-title">{{ $order->paymentInstructions()['title'] }}</h2>
+                    <ul>@foreach ($order->paymentInstructions()['lines'] as $line)<li>{{ $line }}</li>@endforeach</ul>
+                    @if ($order->paymentInstructions()['extra'])<p class="text-muted">{{ $order->paymentInstructions()['extra'] }}</p>@endif
+                    @if ($order->paymentMethod() === 'transfer')
+                        <form method="POST" action="{{ route('account.orders.receipts.store', $order) }}" enctype="multipart/form-data">
+                            @csrf
+                            <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+                            <div class="form-group">
+                                <label class="form-label" for="account_receipt">Comprobante de transferencia <span class="form-label__required" aria-hidden="true">*</span></label>
+                                <input type="file" id="account_receipt" name="receipt" accept=".jpg,.jpeg,.png,.webp,.pdf" required class="form-input @error('receipt') form-input--error @enderror" @error('receipt') aria-invalid="true" aria-describedby="account-receipt-error" @enderror>
+                                <span class="form-hint">JPG, PNG, WEBP o PDF, máximo 5 MB.</span>
+                                @error('receipt')<span class="form-error" id="account-receipt-error">{{ $message }}</span>@enderror
+                            </div>
+                            <button type="submit" class="btn btn--ghost">Enviar comprobante</button>
+                        </form>
+                    @endif
+                </section>
+            @endif
+
+            @if ($order->paymentReceipts->isNotEmpty())
+                <section class="account-order__section">
+                    <h2 class="text-small account-order__section-title">Comprobantes enviados</h2>
+                    <ul class="checkout-payment__instructions">
+                        @foreach ($order->paymentReceipts as $receipt)
+                            <li>{{ $receipt->original_name }} — {{ ['pending' => 'Pendiente', 'accepted' => 'Aceptado', 'rejected' => 'Rechazado'][$receipt->status] ?? $receipt->status }}</li>
+                        @endforeach
+                    </ul>
+                </section>
+            @endif
 
             @if ($order->shipments->isNotEmpty())
                 <section class="account-order__section">
