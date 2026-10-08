@@ -19,11 +19,15 @@
     $activeEras = array_values(array_filter((array) ($filters['era_decade'] ?? request('era_decade', []))));
     $activeConditions = array_values(array_filter((array) ($filters['condition_grade'] ?? request('condition_grade', []))));
     $activeMinRating = $filters['min_rating'] ?? request('min_rating');
+    $activePriceMin = $filters['price_min'] ?? request('price_min');
+    $activePriceMax = $filters['price_max'] ?? request('price_max');
 
     $activeFilterCount = count($activeCategories)
         + count($activeEras)
         + count($activeConditions)
         + ($activeMinRating !== null && $activeMinRating !== '' ? 1 : 0)
+        + ($activePriceMin !== null && $activePriceMin !== '' ? 1 : 0)
+        + ($activePriceMax !== null && $activePriceMax !== '' ? 1 : 0)
         + (filled($filters['q'] ?? request('q')) ? 1 : 0);
 @endphp
 <div class="container shop-layout" x-data="filterPanel()">
@@ -43,12 +47,27 @@
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="filter-panel__clear">Limpiar</a>
             </div>
 
-            @if (filled($filters['q'] ?? request('q')))
-                <input type="hidden" name="q" value="{{ $filters['q'] ?? request('q') }}">
-            @endif
             @if (filled($filters['sort'] ?? request('sort')))
                 <input type="hidden" name="sort" value="{{ $filters['sort'] ?? request('sort') }}">
             @endif
+
+            <div class="form-group">
+                <label class="form-label" for="shop-search">Buscar</label>
+                <input type="search" id="shop-search" name="q" class="form-input" value="{{ old('q', $filters['q'] ?? request('q')) }}" placeholder="Ej. chaqueta de cuero" maxlength="100" inputmode="search" autocomplete="off">
+            </div>
+
+            <div class="form-row form-row--cols-2">
+                <div class="form-group">
+                    <label class="form-label" for="price_min">Precio mínimo</label>
+                    <input type="number" id="price_min" name="price_min" class="form-input @error('price_min') form-input--error @enderror" value="{{ old('price_min', $activePriceMin) }}" placeholder="25.00" min="0" max="9999999999.99" step="0.01" inputmode="decimal" @error('price_min') aria-invalid="true" aria-describedby="price_min-error" @enderror>
+                    @error('price_min')<span class="form-error" id="price_min-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="price_max">Precio máximo</label>
+                    <input type="number" id="price_max" name="price_max" class="form-input @error('price_max') form-input--error @enderror" value="{{ old('price_max', $activePriceMax) }}" placeholder="100.00" min="0" max="9999999999.99" step="0.01" inputmode="decimal" @error('price_max') aria-invalid="true" aria-describedby="price_max-error" @enderror>
+                    @error('price_max')<span class="form-error" id="price_max-error">{{ $message }}</span>@enderror
+                </div>
+            </div>
 
             <details class="filter-panel__group" open>
                 <summary class="filter-panel__label">Categoría</summary>
@@ -145,6 +164,12 @@
                 @if ($activeMinRating !== null && $activeMinRating !== '')
                     <span class="shop-active-filters__chip">{{ $activeMinRating }} ★+</span>
                 @endif
+                @if ($activePriceMin !== null && $activePriceMin !== '')
+                    <span class="shop-active-filters__chip">Desde ${{ number_format((float) $activePriceMin, 2) }}</span>
+                @endif
+                @if ($activePriceMax !== null && $activePriceMax !== '')
+                    <span class="shop-active-filters__chip">Hasta ${{ number_format((float) $activePriceMax, 2) }}</span>
+                @endif
                 <a href="{{ Route::has('shop.index') ? route('shop.index') : '#' }}" class="shop-active-filters__clear">Limpiar todo</a>
             </div>
         @endif
@@ -164,6 +189,7 @@
                 @if (($hasActiveFilters ?? false) && Route::has('account.saved-searches.store'))
                     <form method="POST" action="{{ route('account.saved-searches.store') }}" class="shop-toolbar__save">
                         @csrf
+                        <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                         @foreach ($filters ?? [] as $key => $value)
                             @if (is_array($value))
                                 @foreach ($value as $entry)
@@ -173,7 +199,10 @@
                                 <input type="hidden" name="query_params[{{ $key }}]" value="{{ $value }}">
                             @endif
                         @endforeach
-                        <input type="text" name="name" class="form-input shop-toolbar__save-input" placeholder="Nombre de la búsqueda" maxlength="120" required>
+                        @error('query_params')<span class="form-error" id="query-params-error">{{ $message }}</span>@enderror
+                        <label class="sr-only" for="saved-search-name">Nombre de la búsqueda <span class="form-label__required" aria-hidden="true">*</span></label>
+                        <input type="text" id="saved-search-name" name="name" class="form-input shop-toolbar__save-input @error('name') form-input--error @enderror" value="{{ old('name') }}" placeholder="Ej. Chaquetas de los años 80" maxlength="255" required @error('name') aria-invalid="true" aria-describedby="saved-search-name-error" @enderror>
+                        @error('name')<span class="form-error" id="saved-search-name-error">{{ $message }}</span>@enderror
                         <button type="submit" class="btn btn--ghost btn--sm">Guardar búsqueda</button>
                     </form>
                 @endif

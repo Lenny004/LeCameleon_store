@@ -44,8 +44,8 @@
 
     @unless ($shipment)
         @include('components.empty-state', [
-            'title' => 'No encontramos ese código',
-            'text' => 'Verifica que el código ' . $code . ' sea correcto e inténtalo de nuevo.',
+            'title' => 'No encontramos un envío con ese código.',
+            'text' => 'Verifica el formato del código e inténtalo de nuevo.',
             'actionLabel' => 'Volver a buscar',
             'actionUrl' => route('tracking.index'),
         ])
