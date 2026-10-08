@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
@@ -104,6 +105,15 @@ class ProductReviewTest extends TestCase
     {
         $customer = User::factory()->create();
         $product = Product::factory()->create();
+        $order = Order::factory()->delivered()->for($customer)->create();
+        $order->items()->create([
+            'product_id' => $product->id,
+            'name' => $product->name,
+            'sku' => $product->sku,
+            'quantity' => 1,
+            'unit_price' => $product->price,
+            'line_total' => $product->price,
+        ]);
 
         $response = $this->actingAs($customer)->post(route('shop.reviews.store', $product), [
             'rating' => 4,

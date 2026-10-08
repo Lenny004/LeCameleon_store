@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatus;
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
@@ -12,6 +14,14 @@ use Illuminate\Support\Collection;
  */
 class ReviewService
 {
+    public function canReview(User $user, Product $product): bool
+    {
+        return $user->orders()
+            ->where('status', OrderStatus::Delivered->value)
+            ->whereHas('items', fn (Builder $query) => $query->where('product_id', $product->id))
+            ->exists();
+    }
+
     /**
      * Build PDP rating summary: average score, total count, and 5→1 star histogram.
      *
@@ -56,7 +66,7 @@ class ReviewService
     public function approvedForProduct(Product $product, array $filters = []): Collection
     {
         $query = Review::query()
-            ->with('user')
+            ->with(['user', 'storeResponder'])
             ->where('product_id', $product->id)
             ->where('is_approved', true);
 

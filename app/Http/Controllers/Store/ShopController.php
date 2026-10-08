@@ -77,6 +77,7 @@ class ShopController extends Controller
             'reviews' => $this->reviewService->approvedForProduct($product, $reviewFilters),
             'reviewSummary' => $this->reviewService->summaryForProduct($product),
             'reviewFilters' => $reviewFilters,
+            'canReview' => $request->user() ? $this->reviewService->canReview($request->user(), $product) : false,
         ]);
     }
 

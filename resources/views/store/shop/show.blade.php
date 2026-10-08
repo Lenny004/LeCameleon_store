@@ -8,18 +8,34 @@
 
 @section('title', $metaTitle . ' — Le Cameleon')
 @section('meta_description', $metaDescription)
+@section('og_image', \App\Support\PublicUrl::absolute(optional($product->images->first())->url() ?: asset(config('store.brand_logo_wide'))))
 
 @push('meta')
     <meta property="og:title" content="{{ $metaTitle }}">
     <meta property="og:description" content="{{ $metaDescription }}">
 @endpush
 
+@section('og_type', 'product')
+
 @section('content')
 @php
     use App\Models\ProductImage;
 
     $images = collect($product->images ?? [])
-        ->map(fn ($img) => $img instanceof ProductImage ? $img->url() : ProductImage::urlFor(is_string($img) ? $img : ($img->path ?? null)))
+        ->map(function ($img, $index) use ($product) {
+            $image = $img instanceof ProductImage ? $img : null;
+            $url = $image?->url() ?? ProductImage::urlFor(is_string($img) ? $img : ($img->path ?? null));
+            [$width, $height] = $image?->dimensions() ?? [null, null];
+
+            return [
+                'url' => $url,
+                'thumb' => $image?->thumbUrl() ?? $url,
+                'srcset' => $image?->srcset() ?? '',
+                'width' => $width,
+                'height' => $height,
+                'alt' => $product->name.' — foto '.($index + 1).' de '.count($product->images),
+            ];
+        })
         ->filter()
         ->values()
         ->all();
@@ -34,7 +50,51 @@
     $avgRating = $reviewSummary['average'] ?? ($product->approved_reviews_avg ? round((float) $product->approved_reviews_avg, 1) : null);
     $reviewsCount = $reviewSummary['count'] ?? (int) ($product->approved_reviews_count ?? 0);
     $isLowStock = $stock > 0 && $stock <= (int) ($product->low_stock_threshold ?? 3);
+    $primaryImage = $images[0]['url'] ?? asset(config('store.brand_logo_wide'));
+    $availability = $stock > 0
+        ? 'https://schema.org/InStock'
+        : (($product->status?->value ?? $product->status) === 'sold_out' ? 'https://schema.org/SoldOut' : 'https://schema.org/OutOfStock');
+    $whatsappProductLink = app(\App\Services\WhatsAppLinkService::class)->productLink($product);
 @endphp
+
+@push('meta')
+    @php
+        $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product->name,
+        'description' => strip_tags($product->description ?: $product->short_description ?: $product->name),
+        'image' => collect($images)->pluck('url')->map(fn ($url) => \App\Support\PublicUrl::absolute($url))->all(),
+        'sku' => $product->sku,
+        'brand' => ['@type' => 'Brand', 'name' => $brandName ?: config('app.name', 'Le Cameleon')],
+        'itemCondition' => 'https://schema.org/UsedCondition',
+        'offers' => [
+            '@type' => 'Offer',
+            'price' => number_format((float) $product->price, 2, '.', ''),
+            'priceCurrency' => 'USD',
+            'availability' => $availability,
+            'url' => route('shop.show', $product->slug),
+        ],
+        ...($reviewsCount > 0 ? ['aggregateRating' => [
+            '@type' => 'AggregateRating',
+            'ratingValue' => $avgRating,
+            'reviewCount' => $reviewsCount,
+        ]] : []),
+        ];
+        $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => array_values(array_filter([
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Inicio', 'item' => route('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Tienda', 'item' => route('shop.index')],
+            $categoryName && $categorySlug ? ['@type' => 'ListItem', 'position' => 3, 'name' => $categoryName, 'item' => route('shop.index', ['category' => [$categorySlug]])] : null,
+            ['@type' => 'ListItem', 'position' => $categoryName && $categorySlug ? 4 : 3, 'name' => $product->name, 'item' => route('shop.show', $product->slug)],
+        ])),
+        ];
+    @endphp
+    <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES|JSON_HEX_TAG) !!}</script>
+    <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES|JSON_HEX_TAG) !!}</script>
+@endpush
 
 <div class="container product-page">
     <nav class="breadcrumb product-page__breadcrumb" aria-label="Breadcrumb">
@@ -56,9 +116,9 @@
     <div class="product-detail">
         <div class="product-detail__media" x-data="productGallery({{ json_encode($images) }})">
             <div class="product-gallery">
-                <div class="product-gallery__main">
+                <button class="product-gallery__main" type="button" x-on:click="open()" x-on:keydown.enter="open()" aria-label="Ampliar galería de {{ $product->name }}">
                     <template x-if="images.length">
-                        <img class="product-gallery__image" :src="images[active]" alt="{{ $product->name }}">
+                        <img class="product-gallery__image" :src="images[active].url" :srcset="images[active].srcset || null" sizes="(min-width: 60rem) 50vw, 100vw" :width="images[active].width || null" :height="images[active].height || null" :alt="images[active].alt" fetchpriority="high">
                     </template>
                     <template x-if="!images.length">
                         <div class="product-gallery__placeholder" aria-hidden="true"></div>
@@ -69,7 +129,7 @@
                         x-text="(active + 1) + ' / ' + images.length"
                         aria-live="polite"
                     ></span>
-                </div>
+                </button>
                 <div class="product-gallery__thumbs" x-show="images.length > 1" x-cloak>
                     <template x-for="(img, i) in images" :key="i">
                         <button
@@ -80,9 +140,32 @@
                             :aria-label="'Imagen ' + (i + 1)"
                             :aria-current="active === i ? 'true' : 'false'"
                         >
-                            <img class="product-gallery__thumb-image" :src="img" alt="">
+                            <img class="product-gallery__thumb-image" :src="img.thumb || img.url" :srcset="img.srcset || null" sizes="5rem" :width="img.width || null" :height="img.height || null" :alt="img.alt" loading="lazy" decoding="async">
                         </button>
                     </template>
+                </div>
+                <div
+                    class="product-lightbox"
+                    x-show="lightbox"
+                    x-cloak
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="product-lightbox-title"
+                    @keydown="trapFocus($event)"
+                    @click.self="close()"
+                    x-ref="dialog"
+                    tabindex="-1"
+                >
+                    <div class="product-lightbox__panel">
+                        <h2 id="product-lightbox-title" class="sr-only">Galería ampliada de {{ $product->name }}</h2>
+                        <button type="button" class="product-lightbox__close" @click="close()" aria-label="Cerrar galería">×</button>
+                        <button type="button" class="product-lightbox__previous" @click="previous()" aria-label="Imagen anterior">‹</button>
+                        <button type="button" class="product-lightbox__next" @click="next()" aria-label="Imagen siguiente">›</button>
+                        <button type="button" class="product-lightbox__zoom" @click="toggleZoom()" @mousemove="moveZoom($event)" :class="{ 'product-lightbox__zoom--active': zoomed }" aria-label="Ampliar imagen">
+                            <img class="product-lightbox__image" :src="images[active]?.url" :alt="images[active]?.alt">
+                        </button>
+                        <p class="product-lightbox__counter" x-text="(active + 1) + ' / ' + images.length" aria-live="polite"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -196,6 +279,9 @@
                             <button type="submit" class="btn btn--ghost btn--block">Guardar en favoritos</button>
                         </form>
                     @endif
+                    @if ($whatsappProductLink)
+                        <a href="{{ $whatsappProductLink }}" class="btn btn--ghost btn--block" target="_blank" rel="noopener">Preguntar por esta pieza</a>
+                    @endif
                 </div>
 
                 @if ($stock <= 0 && Route::has('shop.stock-alert'))
@@ -270,7 +356,12 @@
 
                 @if ($measurements->isNotEmpty())
                     <section class="product-panel">
-                        <h2 class="product-panel__title">Medidas (cm)</h2>
+                        <div class="product-panel__heading">
+                            <h2 class="product-panel__title">Medidas (cm)</h2>
+                            @if (Route::has('size-guide'))
+                                <a href="{{ route('size-guide') }}" class="product-panel__link">Guía de tallas</a>
+                            @endif
+                        </div>
                         <div class="table-wrap">
                             <table class="table product-measurements">
                                 <tbody>
@@ -475,11 +566,20 @@
                                             <span class="product-rating__star {{ $i <= $review->rating ? 'product-rating__star--on' : '' }}" aria-hidden="true">★</span>
                                         @endfor
                                     </span>
+                                    @if ($review->is_verified_purchase)
+                                        <span class="badge badge--success">Compra verificada</span>
+                                    @endif
                                 </div>
                                 @if ($review->title)
                                     <h3 class="product-review__title">{{ $review->title }}</h3>
                                 @endif
                                 <p class="product-review__body">{{ $review->body }}</p>
+                                @if ($review->store_reply)
+                                    <div class="product-review__reply">
+                                        <h4 class="product-review__reply-title">Respuesta de Le Cameleon</h4>
+                                        <p class="product-review__reply-body">{{ $review->store_reply }}</p>
+                                    </div>
+                                @endif
                             </article>
                         @endforeach
                     </div>
@@ -496,7 +596,7 @@
     @endif
 
     @auth
-        @if (Route::has('shop.reviews.store'))
+        @if (Route::has('shop.reviews.store') && $canReview)
             <form method="POST" action="{{ route('shop.reviews.store', $product) }}" class="product-review-form product-panel">
                 @csrf
                 <h3 class="product-panel__title">Escribe una reseña</h3>
@@ -523,6 +623,8 @@
                 </div>
                 <button type="submit" class="btn btn--primary">Enviar reseña</button>
             </form>
+        @elseif (! $canReview)
+            <p class="text-muted product-reviews__login">Solo quienes compraron esta pieza pueden reseñarla.</p>
         @endif
     @else
         <p class="text-muted product-reviews__login">
