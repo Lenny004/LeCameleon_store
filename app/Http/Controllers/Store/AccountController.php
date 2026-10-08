@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\ProfileUpdateRequest;
+use App\Http\Requests\Store\PasswordUpdateRequest;
 use App\Http\Requests\Store\ReturnRequestFormRequest;
 use App\Enums\ReturnRequestStatus;
 use App\Models\Order;
 use App\Models\ReturnRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AccountController extends Controller
@@ -23,9 +25,36 @@ class AccountController extends Controller
 
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->update($request->validated());
+        $user = $request->user();
+        $data = $request->validated();
+        $emailChanged = $user->email !== $data['email'];
 
-        return back()->with('success', 'Perfil actualizado.');
+        if ($emailChanged) {
+            $data['email_verified_at'] = null;
+        }
+
+        $user->forceFill($data)->save();
+
+        if ($emailChanged) {
+            $user->sendEmailVerificationNotification();
+        }
+
+        return back()->with(
+            'success',
+            $emailChanged
+                ? 'Perfil actualizado. Te enviamos un correo para verificar tu nueva dirección.'
+                : 'Perfil actualizado.',
+        );
+    }
+
+    public function updatePassword(PasswordUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->update([
+            'password' => $request->validated('password'),
+            'remember_token' => Str::random(60),
+        ]);
+
+        return back()->with('success', 'Contraseña actualizada.');
     }
 
     public function orders(Request $request): View

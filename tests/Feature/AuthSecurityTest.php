@@ -3,11 +3,13 @@
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
+use App\Mail\AccountAlreadyExists;
 use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use Tests\TestCase;
 
@@ -77,8 +79,9 @@ class AuthSecurityTest extends TestCase
         $this->assertSame(0, RateLimiter::attempts('customer@example.com|127.0.0.1'));
     }
 
-    public function test_registration_normalizes_email_before_unique_validation(): void
+    public function test_registration_with_existing_email_is_neutral_and_does_not_create_a_user(): void
     {
+        Mail::fake();
         User::factory()->create(['email' => 'existing@example.com']);
 
         $this->post('/register', [
@@ -86,11 +89,11 @@ class AuthSecurityTest extends TestCase
             'email' => ' EXISTING@Example.COM ',
             'password' => 'valid-password',
             'password_confirmation' => 'valid-password',
-        ])->assertSessionHasErrors([
-            'email' => 'No pudimos crear la cuenta con este correo. Si ya tienes una cuenta, inicia sesión.',
-        ]);
+        ])->assertRedirect(route('login'))
+            ->assertSessionHas('success', 'Te enviamos un correo para continuar. Revisa tu bandeja de entrada.');
 
         $this->assertDatabaseCount('users', 1);
+        Mail::assertQueued(AccountAlreadyExists::class);
     }
 
     public function test_login_is_rate_limited_by_normalized_email_and_ip(): void

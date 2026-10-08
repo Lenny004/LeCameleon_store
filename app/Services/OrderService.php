@@ -139,7 +139,7 @@ class OrderService
         };
 
         if ($mailable) {
-            Mail::to($email)->send($mailable);
+            Mail::to($email)->queue($mailable->afterCommit());
         }
     }
 }

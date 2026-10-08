@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\SvMunicipalityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'active', 'role:admin|staff'])
+Route::middleware(['auth', 'active', 'verified', 'role:admin|staff'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -98,5 +98,5 @@ Route::middleware(['auth', 'active', 'role:admin|staff'])
         });
     });
 
-Route::middleware(['auth', 'active', 'role:admin'])
+Route::middleware(['auth', 'active', 'verified', 'role:admin'])
     ->resource('users', UserController::class);

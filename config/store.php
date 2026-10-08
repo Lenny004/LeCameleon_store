@@ -38,6 +38,15 @@ return [
     // Minutes before unpaid pending order reservations are released.
     'reservation_ttl_minutes' => (int) env('STORE_RESERVATION_TTL_MINUTES', 30),
 
+    // Payment providers whose pending reservations use the short online TTL.
+    'online_payment_providers' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('STORE_ONLINE_PAYMENT_PROVIDERS', 'stripe')),
+    ), static fn (string $provider): bool => $provider !== '')),
+
+    // Manual-payment reservation lifetime. Zero disables automatic cancellation.
+    'manual_payment_ttl_hours' => (int) env('STORE_MANUAL_PAYMENT_TTL_HOURS', 72),
+
     // Hours of cart inactivity before sending an abandoned-cart reminder email.
     'abandoned_cart_hours' => (int) env('STORE_ABANDONED_CART_HOURS', 24),
 

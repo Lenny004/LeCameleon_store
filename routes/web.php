@@ -3,6 +3,8 @@
 use App\Http\Controllers\Store\AboutController;
 use App\Http\Controllers\Store\AccountController;
 use App\Http\Controllers\Store\AuthController;
+use App\Http\Controllers\Store\EmailVerificationController;
+use App\Http\Controllers\Store\PasswordResetController;
 use App\Http\Controllers\Store\CareGuideController;
 use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
@@ -49,8 +51,21 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register'])
+        ->middleware('throttle:10,1');
+    Route::get('/forgot-password', [PasswordResetController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetController::class, 'email'])
+        ->middleware('throttle:5,1')
+        ->name('password.email');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'show'])->name('password.reset');
+    Route::post('/reset-password', [PasswordResetController::class, 'update'])
+        ->middleware('throttle:5,1')
+        ->name('password.update');
 });
+
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware(['auth', 'active'])
@@ -93,6 +108,13 @@ Route::get('/privacy', PrivacyController::class)->name('privacy');
 Route::get('/terms', TermsController::class)->name('terms');
 
 Route::middleware(['auth', 'active'])->group(function () {
+    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
+});
+
+Route::middleware(['auth', 'active', 'verified'])->group(function () {
     Route::post('/shop/{product}/reviews', [ReviewController::class, 'store'])
         ->middleware('throttle:10,1')
         ->name('shop.reviews.store');
@@ -104,6 +126,9 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/account', [AccountController::class, 'profile'])->name('account.index');
     Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');
     Route::put('/account/profile', [AccountController::class, 'updateProfile'])->name('account.profile.update');
+    Route::put('/account/password', [AccountController::class, 'updatePassword'])
+        ->middleware('throttle:6,1')
+        ->name('account.password.update');
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders.index');
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
     Route::post('/account/orders/{order}/returns', [AccountController::class, 'storeReturn'])->name('account.orders.returns.store');

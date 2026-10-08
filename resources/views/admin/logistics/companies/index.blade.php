@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Logistics companies')
-@section('page-title', 'Logistics companies')
+@section('title', 'Empresas logísticas')
+@section('page-title', 'Empresas logísticas')
 
 @section('content')
 <div class="admin-page-header">
@@ -9,19 +9,19 @@
         <h2 class="admin-page-header__title">Carrier companies</h2>
         <p class="admin-page-header__subtitle">Local delivery partners with NIT and base municipality.</p>
     </div>
-    <a href="{{ route('admin.logistics.companies.create') }}" class="btn btn--primary">Add company</a>
+    <a href="{{ route('admin.logistics.companies.create') }}" class="btn btn--primary">Agregar empresa</a>
 </div>
 
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Company</th>
+                <th>Empresa</th>
                 <th>NIT</th>
                 <th>Contact</th>
                 <th>Municipality</th>
-                <th>Workers</th>
-                <th>Status</th>
+                <th>Personal</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,11 +33,11 @@
                     <td>{{ $company->contact_person ?: '—' }}</td>
                     <td>{{ $company->municipality?->name ?? '—' }}</td>
                     <td>{{ $company->workers_count }}</td>
-                    <td><span class="badge badge--{{ $company->is_active ? 'success' : 'warning' }}">{{ $company->is_active ? 'Active' : 'Inactive' }}</span></td>
-                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.companies.edit', $company) }}">Edit</a></td>
+                    <td><span class="badge badge--{{ $company->is_active ? 'success' : 'warning' }}">{{ $company->is_active ? 'Activo' : 'Inactivo' }}</span></td>
+                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.companies.edit', $company) }}">Editar</a></td>
                 </tr>
             @empty
-                <tr><td colspan="7" class="text-muted">No logistics companies yet.</td></tr>
+                <tr><td colspan="7" class="text-muted">Aún no hay empresas logísticas.</td></tr>
             @endforelse
         </tbody>
     </table>

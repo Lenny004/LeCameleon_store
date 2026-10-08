@@ -52,7 +52,7 @@ class CheckoutService
         $billingAddress['email'] = $email;
         $shippingAddress['email'] = $email;
 
-        return DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId) {
+        $order = DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
                 $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
@@ -141,12 +141,14 @@ class CheckoutService
 
             $order = $order->load('items');
 
-            if ($email) {
-                Mail::to($email)->send(new OrderPlaced($order));
-            }
-
             return $order;
         });
+
+        if ($email) {
+            Mail::to($email)->queue((new OrderPlaced($order))->afterCommit());
+        }
+
+        return $order;
     }
 
     public function validateCartForCheckout(Cart $cart): void

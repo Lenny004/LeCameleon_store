@@ -22,21 +22,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'email', 'max:255'],
             'password' => ['required', 'string', 'confirmed', 'max:255', Password::defaults()],
             'password_confirmation' => ['required', 'string', 'max:255'],
-        ];
-    }
-
-    /**
-     * Keep account-existence details out of registration responses.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'email.unique' => 'No pudimos crear la cuenta con este correo. Si ya tienes una cuenta, inicia sesión.',
         ];
     }
 }

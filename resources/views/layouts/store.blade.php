@@ -7,7 +7,7 @@
     <title>@yield('title', $storeName)</title>
     <meta name="description" content="@yield('meta_description', 'Le Cameleon — curated vintage fashion and unique pieces.')">
     @stack('meta')
-    <script>
+    <script nonce="{{ Vite::cspNonce() }}">
         (function () {
             var k = 'lecameleon-theme-v2';
             var t = localStorage.getItem(k);

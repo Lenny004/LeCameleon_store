@@ -1,26 +1,26 @@
 @extends('layouts.admin')
 
-@section('title', 'Vehicles')
-@section('page-title', 'Logistics vehicles')
+@section('title', 'Vehículos')
+@section('page-title', 'Vehículos de logística')
 
 @section('content')
 <div class="admin-page-header">
     <div>
-        <h2 class="admin-page-header__title">Vehicles</h2>
-        <p class="admin-page-header__subtitle">Fleet plates, types, and assigned workers.</p>
+        <h2 class="admin-page-header__title">Vehículos</h2>
+        <p class="admin-page-header__subtitle">Placas, tipos y personal asignado.</p>
     </div>
-    <a href="{{ route('admin.logistics.vehicles.create') }}" class="btn btn--primary">Add vehicle</a>
+    <a href="{{ route('admin.logistics.vehicles.create') }}" class="btn btn--primary">Agregar vehículo</a>
 </div>
 
 <div class="table-wrap">
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>Plate</th>
-                <th>Type</th>
-                <th>Company</th>
-                <th>Worker</th>
-                <th>Status</th>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Empresa</th>
+                <th>Personal</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
         </thead>
@@ -31,11 +31,11 @@
                     <td>{{ ucfirst($vehicle->vehicle_type->value) }}</td>
                     <td>{{ $vehicle->company?->name ?? '—' }}</td>
                     <td>{{ $vehicle->driver?->fullName() ?? '—' }}</td>
-                    <td><span class="badge badge--{{ $vehicle->is_active ? 'success' : 'warning' }}">{{ $vehicle->is_active ? 'Active' : 'Inactive' }}</span></td>
-                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.vehicles.edit', $vehicle) }}">Edit</a></td>
+                    <td><span class="badge badge--{{ $vehicle->is_active ? 'success' : 'warning' }}">{{ $vehicle->is_active ? 'Activo' : 'Inactivo' }}</span></td>
+                    <td><a class="admin-table__link btn btn--ghost btn--sm" href="{{ route('admin.logistics.vehicles.edit', $vehicle) }}">Editar</a></td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-muted">No vehicles yet.</td></tr>
+                <tr><td colspan="6" class="text-muted">Aún no hay vehículos.</td></tr>
             @endforelse
         </tbody>
     </table>
