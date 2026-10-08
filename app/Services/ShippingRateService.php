@@ -40,7 +40,7 @@ class ShippingRateService
 
         if (! $destination) {
             throw ValidationException::withMessages([
-                'destination_municipality_id' => 'Invalid destination municipality.',
+                'destination_municipality_id' => 'El municipio de destino no es válido.',
             ]);
         }
 

@@ -63,6 +63,6 @@ class InventoryController extends Controller
             InventoryMovementType::Return => $this->inventoryService->stockIn($product, $quantity, $user, $notes ?? 'Return'),
         };
 
-        return back()->with('success', 'Inventory movement recorded.');
+        return back()->with('success', 'Movimiento de inventario registrado.');
     }
 }

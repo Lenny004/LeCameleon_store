@@ -38,7 +38,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.show', $worker)
-            ->with('success', 'Worker created.');
+            ->with('success', 'Colaborador creado.');
     }
 
     public function show(LogisticsWorker $worker): View
@@ -63,7 +63,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.show', $worker)
-            ->with('success', 'Worker updated.');
+            ->with('success', 'Colaborador actualizado.');
     }
 
     public function destroy(LogisticsWorker $worker): RedirectResponse
@@ -72,7 +72,7 @@ class LogisticsWorkerController extends Controller
 
         return redirect()
             ->route('admin.logistics.workers.index')
-            ->with('success', 'Worker removed.');
+            ->with('success', 'Colaborador eliminado.');
     }
 
     /**

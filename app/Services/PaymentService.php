@@ -36,7 +36,7 @@ class PaymentService
     {
         if ($order->status !== OrderStatus::Pending) {
             throw ValidationException::withMessages([
-                'payment' => 'Only pending orders can have payments captured.',
+                'payment' => 'Solo se pueden capturar pagos de pedidos pendientes.',
             ]);
         }
 
@@ -47,7 +47,7 @@ class PaymentService
 
         if (! $payment) {
             throw ValidationException::withMessages([
-                'payment' => 'No pending payment found for this order.',
+                'payment' => 'No se encontró un pago pendiente para este pedido.',
             ]);
         }
 
@@ -93,7 +93,7 @@ class PaymentService
 
         if (! $payment) {
             throw ValidationException::withMessages([
-                'payment' => 'No pending payment found for this order.',
+                'payment' => 'No se encontró un pago pendiente para este pedido.',
             ]);
         }
 

@@ -51,7 +51,7 @@ class TrustAndDashboardTest extends TestCase
         ]);
     }
 
-    public function test_newsletter_rejects_duplicate_email(): void
+    public function test_newsletter_duplicate_email_gets_the_same_neutral_response(): void
     {
         NewsletterSubscriber::query()->create([
             'email' => 'vintage@example.com',
@@ -63,7 +63,18 @@ class TrustAndDashboardTest extends TestCase
                 'email' => 'vintage@example.com',
             ])
             ->assertRedirect(route('home'))
-            ->assertSessionHasErrors('email');
+            ->assertSessionHasNoErrors()
+            ->assertSessionHas('success', '¡Gracias! Te avisaremos cuando haya novedades y hallazgos vintage.');
+
+        $this->assertDatabaseCount('newsletter_subscribers', 1);
+    }
+
+    public function test_newsletter_errors_use_their_own_error_bag(): void
+    {
+        $this->from(route('home'))
+            ->post(route('newsletter.store'), ['email' => 'no-es-un-correo'])
+            ->assertRedirect(route('home'))
+            ->assertSessionHasErrorsIn('newsletter', ['email' => 'El campo correo electrónico debe ser una dirección de correo válida.']);
     }
 
     public function test_contact_form_stores_message(): void

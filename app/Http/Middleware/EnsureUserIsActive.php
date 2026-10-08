@@ -20,7 +20,7 @@ class EnsureUserIsActive
             $request->session()->regenerateToken();
 
             if ($request->expectsJson()) {
-                abort(403, 'Account disabled.');
+                abort(403, 'La cuenta está desactivada.');
             }
 
             return redirect()->route('login')

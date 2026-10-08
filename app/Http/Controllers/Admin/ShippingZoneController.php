@@ -66,28 +66,28 @@ class ShippingZoneController extends Controller
             );
         }
 
-        return back()->with('success', 'Zone rates matrix saved.');
+        return back()->with('success', 'Matriz de tarifas de zona guardada.');
     }
 
     public function store(Request $request): RedirectResponse
     {
         ShippingZone::query()->create($this->validated($request));
 
-        return back()->with('success', 'Shipping zone created.');
+        return back()->with('success', 'Zona de envío creada.');
     }
 
     public function update(Request $request, ShippingZone $zone): RedirectResponse
     {
         $zone->update($this->validated($request));
 
-        return back()->with('success', 'Shipping zone updated.');
+        return back()->with('success', 'Zona de envío actualizada.');
     }
 
     public function destroy(ShippingZone $zone): RedirectResponse
     {
         $zone->delete();
 
-        return back()->with('success', 'Shipping zone removed.');
+        return back()->with('success', 'Zona de envío eliminada.');
     }
 
     /**

@@ -42,6 +42,6 @@ class SvMunicipalityController extends Controller
 
         return redirect()
             ->route('admin.logistics.municipalities.index')
-            ->with('success', "Municipality {$svMunicipality->name} updated.");
+            ->with('success', "Municipio {$svMunicipality->name} actualizado.");
     }
 }

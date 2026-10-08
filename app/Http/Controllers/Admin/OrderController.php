@@ -79,7 +79,7 @@ class OrderController extends Controller
             $request->user(),
         );
 
-        return back()->with('success', 'Order status updated.');
+        return back()->with('success', 'Estado del pedido actualizado.');
     }
 
     public function capturePayment(Order $order): RedirectResponse
@@ -90,7 +90,7 @@ class OrderController extends Controller
 
         RecordsActivity::log('payment.captured', $order);
 
-        return back()->with('success', 'Payment captured and order marked as paid.');
+        return back()->with('success', 'Pago capturado y pedido marcado como pagado.');
     }
 
     public function updateShipment(ShipmentRequest $request, Order $order): RedirectResponse
@@ -121,7 +121,7 @@ class OrderController extends Controller
 
         $shipment->save();
 
-        return back()->with('success', 'Shipment assignment saved.');
+        return back()->with('success', 'Asignación de envío guardada.');
     }
 
     public function storeShipmentEvent(ShipmentEventRequest $request, Order $order): RedirectResponse
@@ -154,6 +154,6 @@ class OrderController extends Controller
             $shipment->update(['delivered_at' => now()]);
         }
 
-        return back()->with('success', 'Shipment event recorded.');
+        return back()->with('success', 'Evento de envío registrado.');
     }
 }

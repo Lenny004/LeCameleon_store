@@ -37,7 +37,7 @@ class WishlistController extends Controller
 
         $this->wishlistService->addItem($wishlist, $product);
 
-        return back()->with('success', 'Added to wishlist.');
+        return back()->with('success', 'Agregado a favoritos.');
     }
 
     public function destroy(Request $request, WishlistItem $wishlistItem): RedirectResponse
@@ -59,7 +59,7 @@ class WishlistController extends Controller
 
         $added = $this->wishlistService->toggle($wishlist, $product);
 
-        return back()->with('success', $added ? 'Added to wishlist.' : 'Removed from wishlist.');
+        return back()->with('success', $added ? 'Agregado a favoritos.' : 'Eliminado de favoritos.');
     }
 
     private function authorizeWishlistItem(Request $request, WishlistItem $wishlistItem): void

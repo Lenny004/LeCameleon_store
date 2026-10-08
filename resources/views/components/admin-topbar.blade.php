@@ -1,6 +1,6 @@
 <header class="admin-topbar">
     <div class="admin-topbar__start">
-        <button type="button" class="admin-topbar__menu-toggle" @click="toggle()" aria-label="Toggle sidebar" :aria-expanded="open ? 'true' : 'false'" aria-controls="admin-sidebar">
+        <button type="button" class="admin-topbar__menu-toggle" @click="toggle()" aria-label="Alternar barra lateral" :aria-expanded="open ? 'true' : 'false'" aria-controls="admin-sidebar">
             <svg class="admin-topbar__menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="admin-topbar__heading">
@@ -18,7 +18,7 @@
             @if (Route::has('logout'))
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn--ghost btn--sm">Logout</button>
+                    <button type="submit" class="btn btn--ghost btn--sm">Cerrar sesión</button>
                 </form>
             @endif
         @endauth

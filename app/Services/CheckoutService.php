@@ -45,7 +45,7 @@ class CheckoutService
 
         if ($cart->items->isEmpty()) {
             throw ValidationException::withMessages([
-                'cart' => 'Your cart is empty.',
+                'cart' => 'Tu carrito está vacío.',
             ]);
         }
 
@@ -59,7 +59,7 @@ class CheckoutService
 
                 if ($cartItem->quantity > $sellableQuantity) {
                     throw ValidationException::withMessages([
-                        'cart' => "Insufficient stock for {$cartItem->product->name}.",
+                        'cart' => "No hay existencias suficientes de {$cartItem->product->name}.",
                     ]);
                 }
             }
@@ -155,7 +155,7 @@ class CheckoutService
 
         if ($cart->items->isEmpty()) {
             throw ValidationException::withMessages([
-                'cart' => 'Your cart is empty.',
+                'cart' => 'Tu carrito está vacío.',
             ]);
         }
 
@@ -164,7 +164,7 @@ class CheckoutService
 
             if ($item->quantity > $sellable) {
                 throw ValidationException::withMessages([
-                    'cart' => "Insufficient stock for {$item->product->name}.",
+                    'cart' => "No hay existencias suficientes de {$item->product->name}.",
                 ]);
             }
         }
@@ -180,13 +180,13 @@ class CheckoutService
 
         if (! $coupon || ! $coupon->isValid()) {
             throw ValidationException::withMessages([
-                'coupon_code' => 'Invalid or expired coupon.',
+                'coupon_code' => 'El cupón no es válido o ha expirado.',
             ]);
         }
 
         if ($coupon->min_order_amount && $subtotal < (float) $coupon->min_order_amount) {
             throw ValidationException::withMessages([
-                'coupon_code' => 'Order does not meet the minimum amount for this coupon.',
+                'coupon_code' => 'El pedido no alcanza el monto mínimo para este cupón.',
             ]);
         }
 
