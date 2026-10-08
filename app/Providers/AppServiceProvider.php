@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Mail\WelcomeMail;
 use App\Models\Setting;
 use App\Services\CartService;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(Verified::class, function (Verified $event): void {
+            if ($event->user?->email) {
+                Mail::to($event->user->email)->queue((new WelcomeMail($event->user))->afterCommit());
+            }
+        });
         View::composer(['layouts.store', 'layouts.admin'], function ($view): void {
             $storeSettings = [
                 'storeName' => config('app.name', 'Le Cameleon'),

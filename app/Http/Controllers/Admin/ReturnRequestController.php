@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ReturnRequestStatus;
 use App\Http\Controllers\Controller;
+use App\Mail\ReturnRequestApproved;
+use App\Mail\ReturnRequestDenied;
+use App\Mail\ReturnRequestRefunded;
 use App\Models\ReturnRequest;
 use App\Services\PaymentService;
 use App\Support\RecordsActivity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class ReturnRequestController extends Controller
@@ -16,6 +20,7 @@ class ReturnRequestController extends Controller
     public function __construct(
         private readonly PaymentService $paymentService,
     ) {}
+
     public function index(): View
     {
         $returnRequests = ReturnRequest::query()
@@ -34,6 +39,7 @@ class ReturnRequestController extends Controller
             'status' => ReturnRequestStatus::Approved,
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
+        $this->notifyCustomer($returnRequest, ReturnRequestApproved::class);
 
         RecordsActivity::log('return.approved', $returnRequest->order, [
             'return_request_id' => $returnRequest->id,
@@ -50,6 +56,7 @@ class ReturnRequestController extends Controller
             'status' => ReturnRequestStatus::Denied,
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
+        $this->notifyCustomer($returnRequest, ReturnRequestDenied::class);
 
         RecordsActivity::log('return.denied', $returnRequest->order, [
             'return_request_id' => $returnRequest->id,
@@ -87,6 +94,7 @@ class ReturnRequestController extends Controller
             'status' => ReturnRequestStatus::Refunded,
             'admin_notes' => $validated['admin_notes'] ?? $returnRequest->admin_notes,
         ]);
+        $this->notifyCustomer($returnRequest, ReturnRequestRefunded::class);
 
         RecordsActivity::log('return.refunded', $order, [
             'return_request_id' => $returnRequest->id,
@@ -94,5 +102,14 @@ class ReturnRequestController extends Controller
         ]);
 
         return back()->with('success', 'Devolución marcada como reembolsada.');
+    }
+
+    private function notifyCustomer(ReturnRequest $returnRequest, string $mailClass): void
+    {
+        $returnRequest->loadMissing(['order', 'user']);
+        $email = $returnRequest->order?->customerEmail() ?? $returnRequest->user?->email;
+        if ($email) {
+            Mail::to($email)->queue((new $mailClass($returnRequest))->afterCommit());
+        }
     }
 }
