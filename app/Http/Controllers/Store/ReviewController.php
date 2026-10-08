@@ -6,6 +6,7 @@ use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\ReviewRequest;
 use App\Models\Product;
+use App\Services\ReviewService;
 use Illuminate\Http\RedirectResponse;
 
 /**
@@ -13,12 +14,16 @@ use Illuminate\Http\RedirectResponse;
  */
 class ReviewController extends Controller
 {
+    public function __construct(private readonly ReviewService $reviewService) {}
+
     public function store(ReviewRequest $request, Product $product): RedirectResponse
     {
         abort_unless(
             $product->status === ProductStatus::Published && $product->published_at,
             404,
         );
+
+        abort_unless($this->reviewService->canReview($request->user(), $product), 403, 'Solo quienes compraron esta pieza pueden reseñarla.');
 
         // Block duplicate active reviews from the same customer.
         $alreadyReviewed = $product->reviews()
@@ -36,6 +41,7 @@ class ReviewController extends Controller
             'title' => $request->validated('title'),
             'body' => $request->validated('body'),
             'is_approved' => false,
+            'is_verified_purchase' => true,
         ]);
 
         return back()->with(

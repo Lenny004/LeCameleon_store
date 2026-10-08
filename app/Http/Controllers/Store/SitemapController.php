@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Services\CatalogService;
 use Illuminate\Http\Response;
 
@@ -18,6 +20,11 @@ class SitemapController extends Controller
     public function __invoke(): Response
     {
         $products = $this->catalogService->publishedForSitemap();
+        $publishedConstraint = static function ($query): void {
+            $query->where('status', 'published')
+                ->whereNotNull('published_at')
+                ->where('published_at', '<=', now());
+        };
 
         // Static marketing and trust pages that should be crawlable.
         $staticPaths = [
@@ -31,12 +38,15 @@ class SitemapController extends Controller
             route('privacy'),
             route('terms'),
             route('contact.show'),
+            route('size-guide'),
         ];
 
         return response()
             ->view('sitemap', [
                 'products' => $products,
                 'staticUrls' => $staticPaths,
+                'categories' => Category::query()->whereHas('products', $publishedConstraint)->get(['slug', 'updated_at']),
+                'brands' => Brand::query()->whereHas('products', $publishedConstraint)->get(['slug', 'updated_at']),
             ])
             ->header('Content-Type', 'application/xml');
     }

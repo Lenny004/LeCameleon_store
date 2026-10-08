@@ -2,6 +2,27 @@
 
 @section('title', 'Tienda — Le Cameleon')
 
+@if (filled(request('category')))
+    @php
+        $categorySlugs = (array) request('category');
+        $categoryForSchema = collect($filterOptions['categories'] ?? [])->firstWhere('slug', $categorySlugs[0] ?? null);
+    @endphp
+    @push('meta')
+        @php
+            $catalogBreadcrumbSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Inicio', 'item' => route('home')],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Tienda', 'item' => route('shop.index')],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => $categoryForSchema?->name ?? $categorySlugs[0], 'item' => route('shop.index', ['category' => $categorySlugs])],
+            ],
+            ];
+        @endphp
+        <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">{!! json_encode($catalogBreadcrumbSchema, JSON_UNESCAPED_SLASHES|JSON_HEX_TAG) !!}</script>
+    @endpush
+@endif
+
 @section('content')
 @php
     $categories = $filterOptions['categories'] ?? collect();
