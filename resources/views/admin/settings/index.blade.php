@@ -40,6 +40,24 @@
         </div>
     </div>
 
+    <div class="card">
+        <h2 class="card__title admin-form__title">Pagos</h2>
+        <h3 class="admin-form__title admin-form__title--small">Transferencia bancaria</h3>
+        <label class="form-checkbox"><input type="checkbox" class="form-checkbox__input" name="transfer[enabled]" value="1" @checked(old('transfer.enabled', $transfer['enabled']))> Habilitada</label>
+        <div class="admin-form__fields">
+            <div class="form-group"><label class="form-label" for="transfer_bank">Banco</label><input type="text" id="transfer_bank" name="transfer[bank]" value="{{ old('transfer.bank', $transfer['bank']) }}" placeholder="Banco Agrícola" maxlength="150" class="form-input"></div>
+            <div class="form-group"><label class="form-label" for="transfer_account_holder">Titular</label><input type="text" id="transfer_account_holder" name="transfer[account_holder]" value="{{ old('transfer.account_holder', $transfer['account_holder']) }}" placeholder="Le Cameleon, S. A." maxlength="150" class="form-input"></div>
+            <div class="form-group"><label class="form-label" for="transfer_account_number">Número de cuenta</label><input type="text" id="transfer_account_number" name="transfer[account_number]" value="{{ old('transfer.account_number', $transfer['account_number']) }}" placeholder="0000-0000-0000" maxlength="100" class="form-input"></div>
+            <div class="form-group"><label class="form-label" for="transfer_account_type">Tipo de cuenta</label><select id="transfer_account_type" name="transfer[account_type]" class="form-select"><option value="savings" @selected(old('transfer.account_type', $transfer['account_type']) === 'savings')>Ahorro</option><option value="checking" @selected(old('transfer.account_type', $transfer['account_type']) === 'checking')>Corriente</option></select></div>
+            <div class="form-group"><label class="form-label" for="transfer_instructions">Instrucciones adicionales</label><textarea id="transfer_instructions" name="transfer[instructions]" maxlength="1000" rows="4" placeholder="Envía el comprobante con tu número de pedido." class="form-textarea">{{ old('transfer.instructions', $transfer['instructions']) }}</textarea></div>
+        </div>
+        <h3 class="admin-form__title admin-form__title--small">Pago contra entrega</h3>
+        <label class="form-checkbox"><input type="checkbox" class="form-checkbox__input" name="cod[enabled]" value="1" @checked(old('cod.enabled', $cod['enabled']))> Habilitado</label>
+        <div class="form-group"><label class="form-label" for="cod_max_amount">Monto máximo opcional</label><input type="number" id="cod_max_amount" name="cod[max_amount]" value="{{ old('cod.max_amount', $cod['max_amount']) }}" placeholder="250.00" min="0" max="9999999999.99" step="0.01" inputmode="decimal" class="form-input"></div>
+        <fieldset class="form-group"><legend class="form-label">Zonas permitidas</legend><p class="form-hint">Si no seleccionas ninguna, se permitirá en todos los municipios.</p>@foreach ($shippingZones as $zone)<label class="form-checkbox"><input type="checkbox" class="form-checkbox__input" name="cod[zone_ids][]" value="{{ $zone->id }}" @checked(in_array($zone->id, old('cod.zone_ids', $cod['zone_ids'] ?? []), true))>{{ $zone->name }}{{ $zone->municipality ? ' · '.$zone->municipality->name : '' }}</label>@endforeach</fieldset>
+        <div class="form-group"><label class="form-label" for="cod_note">Nota para el cliente</label><textarea id="cod_note" name="cod[note]" maxlength="1000" rows="4" placeholder="Ten el monto exacto listo al recibir tu pedido." class="form-textarea">{{ old('cod.note', $cod['note']) }}</textarea></div>
+    </div>
+
     <p class="text-muted">Estos valores provienen de la tabla de configuración y se usan en la tienda y la página de devoluciones. La moneda, los impuestos y el cálculo del envío siguen configurados en <code>config/store.php</code> y en las variables de entorno.</p>
 
     <button type="submit" class="btn btn--primary admin-form__submit">Guardar configuración</button>

@@ -11,6 +11,9 @@
         @if (Route::has('account.orders.index'))
             <a href="{{ route('account.orders.index') }}" class="account-nav__link">Mis pedidos</a>
         @endif
+        @if (Route::has('account.addresses.index'))
+            <a href="{{ route('account.addresses.index') }}" class="account-nav__link">Direcciones</a>
+        @endif
         @if (Route::has('account.offers.index'))
             <a href="{{ route('account.offers.index') }}" class="account-nav__link account-nav__link--active">Mis ofertas</a>
         @endif
@@ -50,7 +53,7 @@
                             default => 'warning',
                         };
                     @endphp
-                    <span class="badge badge--{{ $statusBadge }}">{{ ucfirst($offer->status->value) }}</span>
+                    <span class="badge badge--{{ $statusBadge }}">{{ $offer->status->label() }}</span>
                 </div>
                 <p class="order-card__items">
                     Tu oferta: ${{ number_format((float) $offer->amount, 2) }}
@@ -66,6 +69,13 @@
                 @endif
                 @if ($offer->admin_notes)
                     <p class="order-card__note">Notas: {{ $offer->admin_notes }}</p>
+                @endif
+                @if ($offer->status->value === 'countered' && $offer->expires_at?->isFuture())
+                    <p class="order-card__note">Vigente hasta {{ $offer->expires_at->format('d/m/Y H:i') }}.</p>
+                    <div class="account-actions"><form method="POST" action="{{ route('account.offers.accept', $offer) }}">@csrf @method('PATCH')<button class="btn btn--primary" type="submit">Aceptar contraoferta</button></form><form method="POST" action="{{ route('account.offers.decline', $offer) }}">@csrf @method('PATCH')<button class="btn btn--ghost" type="submit">Rechazar</button></form></div>
+                @elseif ($offer->status->value === 'accepted' && $offer->expires_at?->isFuture() && ! $offer->order_id)
+                    <p class="order-card__note">Precio acordado vigente hasta {{ $offer->expires_at->format('d/m/Y H:i') }}.</p>
+                    <form method="POST" action="{{ route('account.offers.cart', $offer) }}">@csrf<button class="btn btn--primary" type="submit">Agregar al carrito con precio acordado</button></form>
                 @endif
             </article>
         @empty

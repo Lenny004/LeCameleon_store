@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\ExpireOffers;
+use App\Jobs\OfferExpiringSoon;
 use App\Jobs\ReleaseExpiredReservations;
 use App\Jobs\SendAbandonedCartReminders;
 use Illuminate\Foundation\Inspiring;
@@ -12,3 +14,5 @@ Artisan::command('inspire', function () {
 
 Schedule::job(new ReleaseExpiredReservations)->everyFiveMinutes();
 Schedule::job(new SendAbandonedCartReminders)->daily();
+Schedule::job(new ExpireOffers)->hourly();
+Schedule::job(new OfferExpiringSoon)->hourly();

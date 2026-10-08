@@ -34,6 +34,44 @@
                 </div>
             </section>
 
+            @if ($paymentInstructions)
+                <section class="checkout-section">
+                    <h2 class="checkout-section__title">{{ $paymentInstructions['title'] }}</h2>
+                    <div class="checkout-section__body">
+                        <ul class="checkout-payment__instructions">
+                            @foreach ($paymentInstructions['lines'] as $line)<li>{{ $line }}</li>@endforeach
+                        </ul>
+                        @if ($paymentInstructions['extra'])<p class="form-hint">{{ $paymentInstructions['extra'] }}</p>@endif
+                        @if ($order->paymentMethod() === 'transfer')
+                            <form method="POST" action="{{ $receiptUploadUrl }}" enctype="multipart/form-data">
+                                @csrf
+                                <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
+                                <div class="form-group">
+                                    <label class="form-label" for="success_receipt">Comprobante de transferencia <span class="form-label__required" aria-hidden="true">*</span></label>
+                                    <input type="file" id="success_receipt" name="receipt" accept=".jpg,.jpeg,.png,.webp,.pdf" required class="form-input @error('receipt') form-input--error @enderror" @error('receipt') aria-invalid="true" aria-describedby="success-receipt-error" @enderror>
+                                    <span class="form-hint" id="success-receipt-help">JPG, PNG, WEBP o PDF, máximo 5 MB.</span>
+                                    @error('receipt')<span class="form-error" id="success-receipt-error">{{ $message }}</span>@enderror
+                                </div>
+                                <button type="submit" class="btn btn--ghost">Enviar comprobante</button>
+                            </form>
+                        @endif
+                    </div>
+                </section>
+            @endif
+
+            @if ($order->paymentReceipts->isNotEmpty())
+                <section class="checkout-section">
+                    <h2 class="checkout-section__title">Comprobantes enviados</h2>
+                    <div class="checkout-section__body">
+                        <ul class="checkout-payment__instructions">
+                            @foreach ($order->paymentReceipts as $receipt)
+                                <li>{{ $receipt->original_name }} — {{ ['pending' => 'Pendiente', 'accepted' => 'Aceptado', 'rejected' => 'Rechazado'][$receipt->status] ?? $receipt->status }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+            @endif
+
             <section class="checkout-section">
                 <h2 class="checkout-section__title">Artículos</h2>
                 @foreach ($order->items as $item)

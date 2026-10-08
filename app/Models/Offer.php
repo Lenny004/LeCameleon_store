@@ -24,8 +24,12 @@ class Offer extends Model
         'message',
         'status',
         'counter_amount',
+        'accepted_amount',
         'admin_notes',
         'expires_at',
+        'responded_at',
+        'order_id',
+        'expiry_notified_at',
     ];
 
     protected function casts(): array
@@ -33,8 +37,11 @@ class Offer extends Model
         return [
             'amount' => 'decimal:2',
             'counter_amount' => 'decimal:2',
+            'accepted_amount' => 'decimal:2',
             'status' => OfferStatus::class,
             'expires_at' => 'datetime',
+            'responded_at' => 'datetime',
+            'expiry_notified_at' => 'datetime',
         ];
     }
 
@@ -46,6 +53,11 @@ class Offer extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 
     public function isPending(): bool

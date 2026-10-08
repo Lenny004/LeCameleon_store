@@ -16,6 +16,10 @@ use Illuminate\Validation\ValidationException;
  */
 class CartService
 {
+    public function __construct(
+        private readonly OfferPricingService $offerPricingService,
+    ) {}
+
     public function resolveCart(?User $user, ?string $sessionId): Cart
     {
         if ($user) {
@@ -32,8 +36,9 @@ class CartService
     public function getCartWithItems(?User $user, ?string $sessionId): Cart
     {
         $cart = $this->resolveCart($user, $sessionId);
+        $cart->load(['items.product.images', 'items.product.brand']);
 
-        return $cart->load(['items.product.images', 'items.product.brand']);
+        return $cart;
     }
 
     public function addItem(Cart $cart, Product $product, int $quantity = 1): CartItem
@@ -50,10 +55,12 @@ class CartService
             ]);
         }
 
+        $unitPrice = $this->effectivePrice($cart, $product);
+
         if ($existing) {
             $existing->update([
                 'quantity' => $newQuantity,
-                'unit_price' => $product->price,
+                'unit_price' => $unitPrice,
             ]);
 
             return $existing->fresh();
@@ -62,7 +69,7 @@ class CartService
         return $cart->items()->create([
             'product_id' => $product->id,
             'quantity' => $quantity,
-            'unit_price' => $product->price,
+            'unit_price' => $unitPrice,
         ]);
     }
 
@@ -87,7 +94,7 @@ class CartService
 
         $item->update([
             'quantity' => $quantity,
-            'unit_price' => $product->price,
+            'unit_price' => $this->effectivePrice($item->cart, $product),
         ]);
 
         return $item->fresh();
@@ -111,6 +118,28 @@ class CartService
     public function itemCount(Cart $cart): int
     {
         return (int) $cart->items->sum('quantity');
+    }
+
+    /** Reprices authenticated cart lines and returns whether an old offer was removed. */
+    public function syncOfferPrices(Cart $cart): bool
+    {
+        $cart->loadMissing(['user', 'items.product']);
+        if (! $cart->user) {
+            return false;
+        }
+
+        $expired = false;
+        foreach ($cart->items as $item) {
+            $effective = $this->offerPricingService->effectivePriceFor($cart->user, $item->product);
+            if ((float) $item->unit_price !== $effective) {
+                if ($effective === (float) $item->product->price && (float) $item->unit_price < $effective) {
+                    $expired = true;
+                }
+                $item->update(['unit_price' => $effective]);
+            }
+        }
+
+        return $expired;
     }
 
     public function mergeGuestCartIntoUser(Cart $guestCart, User $user): Cart
@@ -142,5 +171,10 @@ class CartService
                 'product' => 'Este producto está agotado.',
             ]);
         }
+    }
+
+    private function effectivePrice(Cart $cart, Product $product): float
+    {
+        return $this->offerPricingService->effectivePriceFor($cart->user, $product);
     }
 }

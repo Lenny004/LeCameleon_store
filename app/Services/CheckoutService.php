@@ -24,6 +24,8 @@ class CheckoutService
         private readonly PaymentService $paymentService,
         private readonly ShippingRateService $shippingRateService,
         private readonly ShipmentTrackingService $shipmentTrackingService,
+        private readonly OfferPricingService $offerPricingService,
+        private readonly PaymentSettingsService $paymentSettingsService,
     ) {}
 
     /**
@@ -40,6 +42,8 @@ class CheckoutService
         ?string $notes = null,
         string $paymentMethod = 'manual',
         ?int $destinationMunicipalityId = null,
+        bool $sendEmail = true,
+        ?float $shippingOverride = null,
     ): Order {
         $cart->load(['items.product']);
 
@@ -49,12 +53,18 @@ class CheckoutService
             ]);
         }
 
+        if (! in_array($paymentMethod, ['transfer', 'cod', 'stripe', 'manual'], true)) {
+            throw ValidationException::withMessages(['payment_method' => 'Selecciona un método de pago válido.']);
+        }
+
         $billingAddress['email'] = $email;
         $shippingAddress['email'] = $email;
 
-        $order = DB::transaction(function () use ($cart, $user, $email, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId) {
+        $order = DB::transaction(function () use ($cart, $user, $billingAddress, $shippingAddress, $couponCode, $notes, $paymentMethod, $destinationMunicipalityId, $shippingOverride) {
             // Validate sellable stock before creating the order.
             foreach ($cart->items as $cartItem) {
+                $cartItem->unit_price = $this->offerPricingService->effectivePriceFor($user, $cartItem->product);
+                $cartItem->save();
                 $sellableQuantity = $cartItem->product->quantity_available - $cartItem->product->quantity_reserved;
 
                 if ($cartItem->quantity > $sellableQuantity) {
@@ -68,7 +78,7 @@ class CheckoutService
             $appliedCoupon = $this->resolveCoupon($couponCode, $orderSubtotal);
             $discountTotal = $this->calculateDiscount($appliedCoupon, $orderSubtotal);
 
-            $shippingTotal = $this->resolveShippingTotal($destinationMunicipalityId);
+            $shippingTotal = $shippingOverride ?? $this->resolveShippingTotal($destinationMunicipalityId);
 
             if ($destinationMunicipalityId) {
                 $shippingAddress['sv_municipality_id'] = $destinationMunicipalityId;
@@ -77,6 +87,13 @@ class CheckoutService
             $taxableAmount = max($orderSubtotal - $discountTotal, 0);
             $taxTotal = round($taxableAmount * $taxRate, 2);
             $grandTotal = $taxableAmount + $shippingTotal + $taxTotal;
+
+            if ($paymentMethod === 'transfer' && ! $this->paymentSettingsService->transferAvailable()) {
+                throw ValidationException::withMessages(['payment_method' => 'La transferencia bancaria no está disponible en este momento.']);
+            }
+            if ($paymentMethod === 'cod' && ! $this->paymentSettingsService->codAvailable($destinationMunicipalityId, $grandTotal)) {
+                throw ValidationException::withMessages(['payment_method' => 'El pago contra entrega no está disponible para tu zona.']);
+            }
 
             // Create the order first so reservations can reference it.
             $order = Order::query()->create([
@@ -97,7 +114,8 @@ class CheckoutService
             ]);
 
             foreach ($cart->items as $cartItem) {
-                $order->items()->create([
+                $offer = $this->offerPricingService->offerFor($user, $cartItem->product);
+                $orderItem = $order->items()->create([
                     'product_id' => $cartItem->product_id,
                     'name' => $cartItem->product->name,
                     'sku' => $cartItem->product->sku,
@@ -107,8 +125,13 @@ class CheckoutService
                     'meta' => [
                         'slug' => $cartItem->product->slug,
                         'condition_grade' => $cartItem->product->condition_grade?->value,
+                        ...($offer ? ['offer_id' => $offer->id, 'original_price' => (float) $cartItem->product->price] : []),
                     ],
                 ]);
+
+                if ($offer) {
+                    $offer->update(['order_id' => $order->id]);
+                }
 
                 // Hold stock against this order to prevent overselling unique pieces.
                 $this->inventoryService->reserve(
@@ -144,7 +167,7 @@ class CheckoutService
             return $order;
         });
 
-        if ($email) {
+        if ($email && $sendEmail) {
             Mail::to($email)->queue((new OrderPlaced($order))->afterCommit());
         }
 
@@ -234,6 +257,9 @@ class CheckoutService
             return 'manual';
         }
 
-        return $paymentMethod === 'stripe' ? 'stripe' : 'manual';
+        return match ($paymentMethod) {
+            'transfer', 'cod', 'manual' => $paymentMethod,
+            default => 'stripe',
+        };
     }
 }
