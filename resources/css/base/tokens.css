@@ -16,6 +16,7 @@
     --background-bottom: rgb(237, 237, 237);
     --surface: rgb(255, 255, 255);
     --surface-raised: rgb(255, 255, 255);
+    --surface-muted: rgb(244, 244, 246);
     --border: rgb(224, 224, 224);
     --border-subtle: color-mix(in srgb, var(--border) 55%, transparent);
 
@@ -95,6 +96,13 @@
     --transition: 180ms ease;
     --transition-slow: 280ms ease;
 
+    /* Iconos: 14 / 16 / 18 / 20 / 24 px con base de 16 px. */
+    --icon-size-xs: 0.875rem;
+    --icon-size-sm: 1rem;
+    --icon-size-md: 1.125rem;
+    --icon-size-lg: 1.25rem;
+    --icon-size-xl: 1.5rem;
+
     /* ------------------------------------------------------------------
        Foco accesible
        ------------------------------------------------------------------ */
@@ -113,7 +121,11 @@
        Escala z-index
        ------------------------------------------------------------------ */
     --z-base: 0;
+    --z-background: -1;
+    --z-content: 1;
+    --z-raised: 2;
     --z-dropdown: 100;
+    --z-menu: 150;
     --z-sticky: 200;
     --z-header: 300;
     --z-overlay: 400;
@@ -134,6 +146,7 @@
     --background-bottom: rgb(12, 12, 12);
     --surface: rgb(28, 28, 28);
     --surface-raised: rgb(36, 36, 36);
+    --surface-muted: rgb(45, 45, 48);
     --border: rgb(56, 56, 56);
     --border-subtle: color-mix(in srgb, var(--border) 45%, transparent);
 

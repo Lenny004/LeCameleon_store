@@ -51,7 +51,7 @@ body {
     content: '';
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: var(--z-background);
     pointer-events: none;
     opacity: 0.35;
     background-image:
@@ -143,4 +143,24 @@ p {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* Alpine.js requiere esta excepción global para evitar el parpadeo antes de hidratar. */
+[x-cloak] {
+    /* stylelint-disable-next-line declaration-no-important -- patrón oficial de Alpine */
+    display: none !important;
+}
+
+/* Una única política global de movimiento reducido para todos los bloques. */
+@media (prefers-reduced-motion: reduce) {
+    html:root {
+        scroll-behavior: auto;
+    }
+
+    html:root *,
+    html:root *::before,
+    html:root *::after {
+        animation: none;
+        transition: none;
+    }
 }
