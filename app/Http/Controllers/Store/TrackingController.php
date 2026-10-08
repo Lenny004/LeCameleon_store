@@ -25,7 +25,7 @@ class TrackingController extends Controller
   public function lookup(Request $request): RedirectResponse
   {
     $validated = $request->validate([
-      'code' => ['required', 'string', 'max:50'],
+      'code' => ['required', 'string', 'max:150'],
     ]);
 
     return redirect()->route('tracking.show', [
