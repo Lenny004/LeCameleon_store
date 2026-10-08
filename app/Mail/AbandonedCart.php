@@ -4,12 +4,13 @@ namespace App\Mail;
 
 use App\Models\Cart;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AbandonedCart extends Mailable
+class AbandonedCart extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -20,7 +21,7 @@ class AbandonedCart extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You left items in your cart — Le Cameleon',
+            subject: 'Dejaste artículos en tu carrito — Le Cameleon',
         );
     }
 

@@ -83,7 +83,7 @@ class OfferController extends Controller
         $offer->loadMissing(['product', 'user']);
 
         if ($offer->user?->email) {
-            Mail::to($offer->user->email)->send(new OfferResponded($offer));
+            Mail::to($offer->user->email)->queue((new OfferResponded($offer))->afterCommit());
         }
     }
 }

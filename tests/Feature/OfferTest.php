@@ -45,7 +45,7 @@ class OfferTest extends TestCase
         ]);
 
         $offer = Offer::query()->first();
-        Mail::assertSent(OfferReceived::class, function (OfferReceived $mail) use ($offer): bool {
+        Mail::assertQueued(OfferReceived::class, function (OfferReceived $mail) use ($offer): bool {
             return $mail->offer->is($offer);
         });
     }

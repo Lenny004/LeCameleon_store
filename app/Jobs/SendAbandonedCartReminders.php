@@ -37,7 +37,7 @@ class SendAbandonedCartReminders implements ShouldQueue
             }
 
             try {
-                Mail::to($email)->send(new AbandonedCart($cart));
+                Mail::to($email)->queue((new AbandonedCart($cart))->afterCommit());
                 $cart->update(['reminded_at' => now()]);
             } catch (\Throwable $exception) {
                 Log::warning("Abandoned cart reminder failed for cart {$cart->id}: {$exception->getMessage()}");
