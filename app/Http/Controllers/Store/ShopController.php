@@ -25,6 +25,7 @@ class ShopController extends Controller
 
     public function index(Request $request): View
     {
+        $this->validateCatalogFilters($request);
         $filters = $this->catalogFilters($request);
 
         return view('store.shop.index', [
@@ -40,6 +41,11 @@ class ShopController extends Controller
 
     public function show(Request $request, string $slug): View
     {
+        $request->validate([
+            'review_rating' => ['nullable', 'integer', 'min:1', 'max:5'],
+            'review_sort' => ['nullable', 'string', 'in:newest,oldest,highest,lowest'],
+        ]);
+
         $product = $this->catalogService->findPublishedBySlug($slug);
 
         abort_unless($product, 404);
@@ -78,10 +84,6 @@ class ShopController extends Controller
     {
         $request->merge(['q' => $request->get('q', $request->get('query'))]);
 
-        $request->validate([
-            'q' => ['nullable', 'string', 'max:100'],
-        ]);
-
         return $this->index($request);
     }
 
@@ -101,5 +103,16 @@ class ShopController extends Controller
         }
 
         return $filters;
+    }
+
+    private function validateCatalogFilters(Request $request): void
+    {
+        $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'price_min' => ['nullable', 'numeric', 'min:0', 'max:9999999999.99'],
+            'price_max' => ['nullable', 'numeric', 'min:0', 'max:9999999999.99'],
+            'min_rating' => ['nullable', 'integer', 'min:1', 'max:5'],
+            'sort' => ['nullable', 'string', 'in:new,newest,price_asc,price_desc,name,rating'],
+        ]);
     }
 }

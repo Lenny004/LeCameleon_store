@@ -91,20 +91,23 @@
                 </p>
                 <form method="POST" action="{{ route('account.orders.returns.store', $order) }}">
                     @csrf
+                    <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
                     @if ($order->items->count() > 1)
                         <div class="form-group">
                             <label class="form-label" for="order_item_id">Artículo (opcional)</label>
-                            <select id="order_item_id" name="order_item_id" class="form-select">
+                            <select id="order_item_id" name="order_item_id" class="form-select @error('order_item_id') form-select--error @enderror" @error('order_item_id') aria-invalid="true" aria-describedby="order_item_id-error" @enderror>
                                 <option value="">Todo el pedido</option>
                                 @foreach ($order->items as $item)
                                     <option value="{{ $item->id }}" @selected(old('order_item_id') == $item->id)>{{ $item->name }} × {{ $item->quantity }}</option>
                                 @endforeach
                             </select>
+                            @error('order_item_id')<span class="form-error" id="order_item_id-error">{{ $message }}</span>@enderror
                         </div>
                     @endif
                     <div class="form-group">
-                        <label class="form-label" for="reason">Motivo</label>
-                        <textarea id="reason" name="reason" class="form-textarea" rows="4" required>{{ old('reason') }}</textarea>
+                        <label class="form-label" for="reason">Motivo y detalles <span class="form-label__required" aria-hidden="true">*</span></label>
+                        <textarea id="reason" name="reason" class="form-textarea @error('reason') form-textarea--error @enderror" rows="4" maxlength="2000" placeholder="Describe el motivo de tu solicitud y los detalles relevantes." required @error('reason') aria-invalid="true" aria-describedby="reason-error" @enderror>{{ old('reason') }}</textarea>
+                        @error('reason')<span class="form-error" id="reason-error">{{ $message }}</span>@enderror
                     </div>
                     <button type="submit" class="btn btn--ghost">Enviar solicitud</button>
                 </form>

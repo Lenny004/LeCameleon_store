@@ -13,8 +13,9 @@
 
     <form method="POST" action="{{ route('tracking.lookup') }}" class="tracking-form">
         @csrf
+        <p class="form-required-note">Los campos con <span class="form-label__required" aria-hidden="true">*</span> son obligatorios.</p>
         <div class="form-group tracking-form__field">
-            <label class="form-label" for="tracking_code">Código de rastreo</label>
+            <label class="form-label" for="tracking_code">Código de rastreo <span class="form-label__required" aria-hidden="true">*</span></label>
             <div class="tracking-form__row">
                 <input
                     type="text"
@@ -23,16 +24,18 @@
                     class="form-input @error('code') form-input--error @enderror"
                     value="{{ old('code') }}"
                     placeholder="LC-SV-ABC123"
+                    maxlength="150"
+                    inputmode="text"
                     autocomplete="off"
                     autocapitalize="characters"
                     spellcheck="false"
                     required
-                    aria-describedby="tracking_code_hint"
+                    aria-describedby="tracking_code_hint @error('code')tracking_code-error @enderror"
                 >
                 <button type="submit" class="btn btn--primary">Buscar</button>
             </div>
             @error('code')
-                <p class="form-error" role="alert">{{ $message }}</p>
+                <span class="form-error" id="tracking_code-error" role="alert">{{ $message }}</span>
             @enderror
             <p id="tracking_code_hint" class="tracking-form__hint">
                 También puedes consultar el estado en
